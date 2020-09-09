@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
+import {Route} from 'react-router-dom';
+import VolunteerForm from './components/volunteerForm';
 
 function App() {
 	return (
 		<div className="App">
-			<header className="App-header"></header>
+			<Route path="/voluntarios" component={VolunteerForm} />
 		</div>
 	);
 }
