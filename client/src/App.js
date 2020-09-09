@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Route} from 'react-router-dom';
-import VolunteerForm from './components/volunteerForm';
+import VolunteerForm from './components/volunteerForm/volunteerForm';
 
 function App() {
 	return (
