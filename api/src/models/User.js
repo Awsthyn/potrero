@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const { DataTypes } = require("sequelize");
+var bcrypt = require('bcrypt');
 
 module.exports = (sequelize) => {
     const User = sequelize.define('user', {
@@ -23,7 +24,7 @@ module.exports = (sequelize) => {
         },
         rol: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
     });
     User.createInstanceFromBody = function ({ email, password, rol }) {
@@ -33,5 +34,34 @@ module.exports = (sequelize) => {
             rol
         });
     };
-}
 
+    // debe ser function para que funcione this.password
+    User.prototype.isPasswordValid = function ( password ) {
+        return bcrypt.compare(password, this.password)
+        .then(isValid => isValid)
+        .catch(err => {
+            console.error('isPasswordValid:', err)
+            return false
+        })
+    }
+    const hashPassword = password => {
+        return new Promise( (resolve, reject) => {
+            bcrypt.hash(password, 8)
+            .then(hash => resolve(hash))
+            .catch(err=> reject(err))
+        })
+    }
+
+    User.addHook('beforeCreate', (user, options, cb) => {
+        // console.info("en el hook beforeCreate", user)
+        return hashPassword(user.password).then(hash => user.password = hash)}
+    )
+
+    User.addHook('beforeUpdate', (user, options, cb) =>
+    {
+        // console.info("en el hook beforeUpdate:", user)
+        return hashPassword(user.password).then(hash => user.password = hash)}
+    )
+
+    return User
+}
