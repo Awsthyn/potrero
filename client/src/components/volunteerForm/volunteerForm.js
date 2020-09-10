@@ -8,7 +8,6 @@ import {connect} from 'react-redux';
 class VolunteerForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
       this.state = {}
       this.handleOnChange = this.handleOnChange.bind(this);
   }
@@ -19,8 +18,6 @@ class VolunteerForm extends React.Component {
    }
   render() {
     var control;
-
-    console.log(this.postVoluntary)
     return (
       <div className="Formm" style={{justifyContent:'center', display: 'flex'}}>
 			<form >
