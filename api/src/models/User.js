@@ -1,9 +1,8 @@
-var Sequelize = require("sequelize");
+const Sequelize = require("sequelize");
 const { DataTypes } = require("sequelize");
-var bcrypt = require('bcrypt');
 
 module.exports = (sequelize) => {
-    const Usuario = sequelize.define('user', {
+    const User = sequelize.define('user', {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -18,13 +17,21 @@ module.exports = (sequelize) => {
             validate: {
                 is: {
                     args: ["(.)"],
-                    msg: 'Campo description - Debe ser una palabra'
+                    msg: 'Inserte un valor dentro del password.'
                 }
             }
         },
         rol: {
             type: DataTypes.STRING,
-            allowNull: "voluntario",
+            allowNull: true
         },
-    }),
+    });
+    User.createInstanceFromBody = function ({ email, password, rol }) {
+        return User.create({
+            email,
+            password,
+            rol
+        });
+    };
 }
+

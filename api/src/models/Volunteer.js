@@ -1,8 +1,8 @@
-var Sequelize = require("sequelize");
+const Sequelize = require("sequelize");
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('volunteer', {
+  const Volunteer = sequelize.define('volunteer', {
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -30,10 +30,27 @@ module.exports = (sequelize) => {
     linkedin: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isUrl: true
+      }
     },
     adviser: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },
   });
+  Volunteer.createInstanceFromBody = function ({ firstName, lastName, birthday, phone, email, linkedin, adviser }) {
+    return User.create({
+      firstName,
+      lastName,
+      birthday,
+      phone,
+      email,
+      linkedin,
+      adviser
+    });
 };
+};
+
+
+//// 
