@@ -5,9 +5,9 @@ import {POST_VOLUNTARY} from '../constants';
 export function postVoluntary(voluntary) {
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
+			.post(`http://localhost:3001/volunteers`, voluntary, {withCredentials: true})
 			.then(res => {
-				dispatch({type: POST_VOLUNTARY, voluntary});
+				dispatch({type: POST_VOLUNTARY, voluntary: res.data});
 			})
 			.catch(err => console.log(err));
 	};

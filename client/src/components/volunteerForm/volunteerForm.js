@@ -6,8 +6,9 @@ import {postVoluntary} from '../../redux/actions/voluntary';
 import {connect} from 'react-redux';
 
 class VolunteerForm extends React.Component {
-  constructor({postVoluntary}) {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(this.props)
       this.state = {}
       this.handleOnChange = this.handleOnChange.bind(this);
   }
@@ -16,20 +17,18 @@ class VolunteerForm extends React.Component {
        [e.target.name] : e.target.value
      })
    }
-   handleOnClick(){
-       postVoluntary(this.state)
-   }
-
   render() {
     var control;
+
+    console.log(this.postVoluntary)
     return (
       <div className="Formm" style={{justifyContent:'center', display: 'flex'}}>
-			<form>
+			<form >
 				<div className="form-group">
         <small>Nombre</small>
 					<TextField
-					  style={{width:'60%', marginTop: '1%', display: 'block'}}
-						name="nombre"
+					  style={{width:'80%', marginTop: '1%', display: 'block'}}
+						name="firstName"
 						//label="Nombre"
 						type="text"
 						id="standard-basic1"
@@ -37,8 +36,8 @@ class VolunteerForm extends React.Component {
 					/>
           <small>Apellido</small>
 					<TextField
-					  style={{width:'60%', marginTop: '1%', display: 'block'}}
-						name="apellido"
+					  style={{width:'80%', marginTop: '1%', display: 'block'}}
+						name="lastName"
 						//label="Apellido"
 						type="text"
 						id="standard-basic2"
@@ -47,7 +46,7 @@ class VolunteerForm extends React.Component {
           <small>Fecha de nacimiento</small>
 					<TextField
 					  style={{width:'80%', marginTop: '1%', display: 'block'}}
-						name="fechaDeNacimiento"
+						name="birthday"
 						//label="Fecha de nacimiento"
             placeholder="fecha de nacimiento"
 						type="date"
@@ -56,7 +55,7 @@ class VolunteerForm extends React.Component {
 					/>
           <small>E-mail</small>
 					<TextField
-					  style={{width:'60%', marginTop: '1%', display: 'block'}}
+					  style={{width:'80%', marginTop: '1%', display: 'block'}}
 						name="email"
 						//label="E-mail"
 						type="email"
@@ -66,8 +65,8 @@ class VolunteerForm extends React.Component {
 					/>
           <small>Telefono</small>
 					<TextField
-					  style={{width:'60%', marginTop: '1%', display: 'block'}}
-						name="telefono"
+					  style={{width:'80%', marginTop: '1%', display: 'block'}}
+						name="phone"
 						//label="Telefono"
 						type="number"
 						id="standard-basic5"
@@ -75,7 +74,7 @@ class VolunteerForm extends React.Component {
 					/>
           <small>Linkedin</small>
 					<TextField
-					  style={{width:'60%', marginTop: '1%', display: 'block'}}
+					  style={{width:'80%', marginTop: '1%', display: 'block'}}
 						name="linkedin"
 						//label="Linkedin"
 						type="url"
@@ -84,11 +83,11 @@ class VolunteerForm extends React.Component {
 					/>
 				</div>
         {
-          !this.state.nombre ||
-					!this.state.apellido ||
-					!this.state.fechaDeNacimiento ||
+          !this.state.firstName ||
+					!this.state.lastName ||
+					!this.state.birthday ||
 					!this.state.email ||
-					!this.state.telefono ||
+					!this.state.phone ||
 					!this.state.linkedin
 					? (control = true)
 					: false
@@ -98,7 +97,7 @@ class VolunteerForm extends React.Component {
 					 className='skere'
 					 type='submit'
 					 value="Submit"
-					 onClick={() => this.handleOnClick()}>
+					 onClick={() => this.props.postVoluntary(this.state)}>
 						Submit
 					</Button>
 			</form>
@@ -107,10 +106,4 @@ class VolunteerForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-	return {
-		voluntary: state.voluntary,
-	};
-}
-
-export default connect(mapStateToProps, {postVoluntary})(VolunteerForm);
+export default connect(null, {postVoluntary})(VolunteerForm);
