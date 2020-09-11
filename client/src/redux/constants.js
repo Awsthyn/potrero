@@ -1,0 +1,1 @@
+export const POST_VOLUNTARY = 'POST_VOLUNTARY';

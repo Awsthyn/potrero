@@ -14,8 +14,12 @@ const studentRouter = require('./students.js');
 // IMPORT DE LA RUTA DE TYPE-OF-DIFFICULTY
 const typeOfDificulty = require('./typeOfDifficulty.js');
 
-const router = Router();
+// IMPORT DE LA RUTA DE Autenticación
+const authenticateRouter = require('./authenticate.js');
 
+
+
+const router = Router();
 
 // ROUTES
 
@@ -23,7 +27,11 @@ const router = Router();
 router.use('/users', usersRouter);
 
 // RUTA DE VOLUNTARIOS
-router.use('/volunteers', volunteersRouter);
+router.use('/volunteers', authenticateRouter);
+
+// Ruta de autenticacion
+router.use('/auth', authenticateRouter);
+
 
 // RUTA DE STUDENTS
 router.use('/students', studentRouter);
@@ -32,3 +40,4 @@ router.use('/students', studentRouter);
 router.use('/typeofdifficulty', typeOfDificulty);
 
 module.exports = router;
+

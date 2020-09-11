@@ -37,6 +37,7 @@ module.exports = (sequelize) => {
     adviser: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
     },
   });
   Volunteer.createInstanceFromBody = function ({ firstName, lastName, birthday, phone, email, linkedin, adviser }) {
@@ -53,4 +54,4 @@ module.exports = (sequelize) => {
 };
 
 
-//// 
+////
