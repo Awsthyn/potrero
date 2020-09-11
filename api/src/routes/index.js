@@ -23,6 +23,8 @@ const resetPassword = require('./resetPassword.js');
 // IMPORT DE LA RUTA DE Mail de Admisión
 const mailAdmission = require('./mailAdmission.js');
 
+// IMPORT DE LA RUTA DE Mail de Bienvenida o Rechazo de Voluntario
+const mailWelcomeRejection = require('./mailWelcomeRejection.js');
 
 const router = Router();
 
@@ -42,6 +44,9 @@ router.use('/resetPassword', resetPassword);
 
 //Ruta del mail de bienvenida al nuevo asesor
 router.use('/mailAdmission', mailAdmission);
+
+//Ruta del mail de bienvenida al nuevo asesor
+router.use('/mailWelcomeRejection', mailWelcomeRejection);
 
 // RUTA DE STUDENTS
 router.use('/students', studentRouter);
