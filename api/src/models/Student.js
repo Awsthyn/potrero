@@ -52,7 +52,6 @@ module.exports = (sequelize) => {
             email,
             tutor,
             difficulty,
-            typeOfDifficulty,
             weakness,
             strengths,
             interests,
