@@ -1,4 +1,4 @@
-import {POST_VOLUNTARY} from './constants';
+import {POST_VOLUNTARY} from '../constants';
 
 const initialState = {
 	volunteers:[],
