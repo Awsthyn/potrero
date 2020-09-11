@@ -22,15 +22,14 @@ server.get('/', ( req , res ) => {
 
 server.post('/', ( req , res ) => {
     // CREA UN VOLUNTARIO.
-
     // RECIBE POR BODY TODA LA INFORMACIÓN DEL VOLUNTARIO.
  const voluntario = req.body;
     Volunteer.create(voluntario)
-    .then( volunteerCreated => { 
+    .then( volunteerCreated => {
         // DEVUELVE EL VOLUNTARIO CREADO.
         res.send( volunteerCreated )
     })
-    .catch( err => { 
+    .catch( err => {
         // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
         console.log( err )
         res.send( err )
