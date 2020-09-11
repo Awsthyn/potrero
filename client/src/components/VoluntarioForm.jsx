@@ -1,9 +1,10 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import './volunteerForm.css';
-import {postVoluntary} from '../../redux/actions/voluntary';
+import style from './VoluntarioForm.module.css';
+import {postVoluntary} from '../redux/actions/voluntary.js';
 import {connect} from 'react-redux';
+
 
 class VolunteerForm extends React.Component {
   constructor(props) {
@@ -19,8 +20,8 @@ class VolunteerForm extends React.Component {
   render() {
     var control;
     return (
-      <div className="Formm" style={{justifyContent:'center', display: 'flex'}}>
-			<form >
+      <div className={style.Formm} style={{justifyContent:'center', display: 'flex'}}>
+			<form>
 				<div className="form-group">
         <small>Nombre</small>
 					<TextField
@@ -30,6 +31,7 @@ class VolunteerForm extends React.Component {
 						type="text"
 						id="standard-basic1"
 						onChange={e => this.handleOnChange(e)}
+						
 					/>
           <small>Apellido</small>
 					<TextField
@@ -91,11 +93,11 @@ class VolunteerForm extends React.Component {
         }
 					<Button  disabled={control ? true : false}
 					 variant="contained"
-					 className='skere'
+					 className={style.skere}
 					 type='submit'
 					 value="Submit"
 					 onClick={() => this.props.postVoluntary(this.state)}>
-						Submit
+						Enviar
 					</Button>
 			</form>
 		</div>
