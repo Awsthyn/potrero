@@ -24,30 +24,36 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
         validate: {
-            isEmail: true
+          isEmail: true
         }
     },
     linkedin: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         isUrl: true
       }
     },
+    cv: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     adviser: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: false,
     },
   });
-  Volunteer.createInstanceFromBody = function ({ firstName, lastName, birthday, phone, email, linkedin, adviser }) {
-    return User.create({
+  Volunteer.createInstanceFromBody = function ({ firstName, lastName, birthday, phone, email, linkedin, cv, adviser }) {
+    return Volunteer.create({ // Preguntar si esta bien que sea User.create o tiene que ser Volunteer.create???
       firstName,
       lastName,
       birthday,
       phone,
       email,
       linkedin,
+      cv,
       adviser
     });
-};
+  };
 };
