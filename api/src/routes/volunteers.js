@@ -12,11 +12,11 @@ server.get('/', ( req , res ) => {
     .then( volunteers => {
         // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "VOLUNTEERS" ESTÁ VACÍO. ASÍ
         // RESPONDE CON UN MENSAJE, O SINO, DEVUELVE EL ARRAY CON LOS VOLUNTARIOS DENTRO.
-    !volunteers.length ? res.json("No hay voluntarios todavía.") : res.json( volunteers )
+    !volunteers.length ? res.send("No hay voluntarios todavía.") : res.send( volunteers )
     })
     .catch( err => {
         // ENVÍA UN ERROR EN CASO DE QUE HAYA INCONVENIENTES.
-        res.json( err )
+        res.send( err )
     })
 })
 
@@ -28,12 +28,12 @@ server.post('/', ( req , res ) => {
     Volunteer.create(voluntario)
     .then( volunteerCreated => { 
         // DEVUELVE EL VOLUNTARIO CREADO.
-        res.json( volunteerCreated )
+        res.send( volunteerCreated )
     })
     .catch( err => { 
         // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
         console.log( err )
-        res.json( err )
+        res.send( err )
     })
 })
 
@@ -47,11 +47,11 @@ server.get('/:id', ( req, res ) => {
     })
     .then( volunteerFound => {
         // SI ENCUENTRA AL VOLUNTARIO, ENVÍA SUS DATOS. O SINO, ENVÍA UN MENSAJE DE ERROR.
-        !volunteerFound ? res.json('El voluntario no existe.') : res.json( volunteerFound )
+        !volunteerFound ? res.send('El voluntario no existe.') : res.send( volunteerFound )
     })
     .catch( err => {
         // SI HAY UN ERROR, LO ENVÍA.
-        res.json( err )
+        res.send( err )
     })
 })
 
@@ -69,13 +69,14 @@ server.put('/:id', ( req, res ) => {
                id: req.params.id
            }
        })
-       // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
        .then( volunteerWithChanges => {
-            res.json( volunteerWithChanges )
+            // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
+            res.send( volunteerWithChanges )
        })
+       .catch(err => res.send(err));
     })
     .catch( err => {
-        res.json( err )
+        res.send( err )
     })
 })
 
