@@ -8,6 +8,12 @@ const usersRouter = require('./users.js');
 // IMPORT DE LA RUTA DE VOLUNTARIOS
 const volunteersRouter = require('./volunteers.js');
 
+// IMPORT DE LA RUTA DE STUDENTS - ALUMNOS
+const studentRouter = require('./students.js');
+
+// IMPORT DE LA RUTA DE TYPE-OF-DIFFICULTY
+const typeOfDificulty = require('./typeOfDifficulty.js');
+
 // IMPORT DE LA RUTA DE Autenticación
 const authenticateRouter = require('./authenticate.js');
 
@@ -16,6 +22,7 @@ const resetPassword = require('./resetPassword.js');
 
 // IMPORT DE LA RUTA DE Mail de Admisión
 const mailAdmission = require('./mailAdmission.js');
+
 
 const router = Router();
 
@@ -35,5 +42,11 @@ router.use('/resetPassword', resetPassword);
 
 //Ruta del mail de bienvenida al nuevo asesor
 router.use('/mailAdmission', mailAdmission);
+
+// RUTA DE STUDENTS
+router.use('/students', studentRouter);
+
+// RUTA DE TYPEOFDIFFICULTY
+router.use('/typeofdifficulty', typeOfDificulty);
 
 module.exports = router;
