@@ -11,10 +11,10 @@ server.get('/', (req, res) => {
     .then( users => {
         // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "USERS" ESTÁ VACÍO. ASÍ
         // RESPONDE CON UN MENSAJE, O SINO, DEVUELVE EL ARRAY CON LOS USUARIOS DENTRO.
-        !users.length ? res.json("No hay usuarios disponibles.") : res.json(users)
+        !users.length ? res.send("No hay usuarios disponibles.") : res.send(users)
     })
     .catch( err => {
-        res.json(err)
+        res.send(err)
     })
 
 })
@@ -25,11 +25,11 @@ server.post('/', ( req, res ) => {
  const usuario = req.body;
     User.createInstanceFromBody(usuario)
     .then( userCreated => { // USUARIO CREADO
-        res.json( userCreated )
+        res.send( userCreated )
     })
     .catch( err => { 
         // SI HAY UN ERROR, LO DEVUELVE. POR SI FALTÓ UN CAMPO POR COMPLETAR O MISMO LOS DATOS NO SON VÁLIDOS.         
-        res.json( err )
+        res.send( err )
     })
 })
 
@@ -43,10 +43,10 @@ server.get('/:id', ( req, res ) => {
     })
     .then( userFound => {       
         // SI ENCUENTRA AL USUARIO, LO ENVÍA. SINO, ENVÍA UN MENSAJE DE ERROR.
-        !userFound ? res.json("El usuario no existe.") : res.json( userFound ) 
+        !userFound ? res.send("El usuario no existe.") : res.send( userFound ) 
     })
     .catch( err => {
-        res.json( err )
+        res.send( err )
     })
 })
 
@@ -66,11 +66,14 @@ server.put('/:id', ( req, res ) => {
            }
        })
        .then( userWithChanges => {
-            res.json( userWithChanges )
+            res.send( userWithChanges )
        })
+       .catch( err => {
+        res.send( err )
+    })
     })
     .catch( err => {
-        res.json( err )
+        res.send( err )
     })
 })
 
