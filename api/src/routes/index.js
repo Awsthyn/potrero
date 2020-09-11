@@ -27,7 +27,7 @@ const router = Router();
 router.use('/users', usersRouter);
 
 // RUTA DE VOLUNTARIOS
-router.use('/volunteers', authenticateRouter);
+router.use('/volunteers', volunteersRouter);
 
 // Ruta de autenticacion
 router.use('/auth', authenticateRouter);
