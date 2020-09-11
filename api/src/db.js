@@ -33,6 +33,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { User, Volunteer, Student, TypeOfDifficulty, Materia } = sequelize.models;
 
+
 // Aca vendrian las relaciones
 
 
