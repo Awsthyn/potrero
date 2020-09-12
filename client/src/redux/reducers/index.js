@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import volunteersReducer from "./volunteersReducer";
-import studentReducer from "./studentReducer"
-
+import studentReducer from "./studentReducer";
+import sessionReducer from "./sessionReducer";
 
 export default combineReducers({
     volunteers: volunteersReducer,
-    students: studentReducer
+    students: studentReducer,
+    sessions: sessionReducer
     });
-
