@@ -2,6 +2,9 @@ const server = require("express").Router();
 const { User } = require("../db.js");
 const passport = require('passport');
 
+server.get('/', function(req, res) {
+    res.json({ user: req.user });
+});
 
 server.post('/login',
     passport.authenticate('local'),

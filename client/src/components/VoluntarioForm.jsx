@@ -31,7 +31,7 @@ class VolunteerForm extends React.Component {
 						type="text"
 						id="standard-basic1"
 						onChange={e => this.handleOnChange(e)}
-						
+
 					/>
           <small>Apellido</small>
 					<TextField
@@ -96,7 +96,7 @@ class VolunteerForm extends React.Component {
 					 className={style.skere}
 					 type='submit'
 					 value="Submit"
-					 onClick={() => this.props.postVoluntary(this.state)}>
+					 onClick={(e) => { e.preventDefault(); this.props.postVoluntary(this.state);}}>
 						Enviar
 					</Button>
 			</form>
