@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import IconButton from '@material-ui/core/IconButton';
 
-export default function Horarios({de, hasta, id, handleTime}) {
+export default function Horarios({de, hasta, id, handleTime, handleDelete}) {
 	console.log(de);
 	const [horaDe, setHoraDe] = useState();
 	const [horaHasta, setHoraHasta] = useState();
@@ -36,19 +36,22 @@ export default function Horarios({de, hasta, id, handleTime}) {
 
 	return (
 		<div>
-			<IconButton aria-label="delete" onClick={() => handleTime('aumentar', id, 'de')}>
+			<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', id, 'de')}>
 				<span className="material-icons">expand_less</span>
 			</IconButton>
-			<IconButton aria-label="delete" onClick={() => handleTime('disminuir', id, 'de')}>
+			<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir', id, 'de')}>
 				<span className="material-icons">expand_more</span>
 			</IconButton>
 			<span> de: {horaDe} hs</span>
 			<span> a {horaHasta} hs</span>
-			<IconButton aria-label="delete" onClick={() => handleTime('aumentar', id, 'hasta')}>
+			<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', id, 'hasta')}>
 				<span className="material-icons">expand_less</span>
 			</IconButton>
-			<IconButton aria-label="delete" onClick={() => handleTime('disminuir', id, 'hasta')}>
+			<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir', id, 'hasta')}>
 				<span className="material-icons">expand_more</span>
+			</IconButton>
+			<IconButton aria-label="delete" onClick={() => handleDelete(id)}>
+				<span className="material-icons">delete</span>
 			</IconButton>
 		</div>
 	);

@@ -5,11 +5,12 @@ export default class CheckBox extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			[this.props.dia]: [{de: 12, hasta: 14}],
+			[this.props.dia]: [],
 			checked: false,
 		};
 		this.handleOnClick = this.handleOnClick.bind(this);
 		this.handleTime = this.handleTime.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
 	}
 
 	handleOnClick(e) {
@@ -47,6 +48,28 @@ export default class CheckBox extends React.Component {
 			};
 		});
 	}
+	handleDelete(idx) {
+		this.setState(function (state) {
+			return state[this.props.dia].splice(idx, 1);
+		});
+	}
+	handleCheked(e) {
+		this.setState({checked: e.target.checked});
+		if (e.target.checked) {
+			this.setState(function () {
+				return {
+					[this.props.dia]: [{de: 12, hasta: 14}],
+				};
+			});
+		} else {
+			this.setState(function () {
+				return {
+					[this.props.dia]: [],
+				};
+			});
+		}
+	}
+
 	render() {
 		let dia = this.state[this.props.dia];
 		let checked = this.state.checked;
@@ -54,19 +77,20 @@ export default class CheckBox extends React.Component {
 		console.log(dia);
 		return (
 			<div>
-				<input
-					type="checkbox"
-					name="moday"
-					value="lunes"
-					onClick={e => this.setState({checked: e.target.checked})}
-				/>
+				<input type="checkbox" name="moday" value="lunes" onClick={e => this.handleCheked(e)} />
 				<label htmlFor="lunes">{this.props.dia} </label>
 				{checked ? (
 					<div>
-						{' '}
 						{dia.map((h, i) => {
 							return (
-								<Horarios de={h.de} hasta={h.hasta} key={i} handleTime={this.handleTime} id={i} />
+								<Horarios
+									de={h.de}
+									hasta={h.hasta}
+									key={i}
+									id={i}
+									handleTime={this.handleTime}
+									handleDelete={this.handleDelete}
+								/>
 							);
 						})}
 						<button onClick={e => this.handleOnClick(e)}> + </button>

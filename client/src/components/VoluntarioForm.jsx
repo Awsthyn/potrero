@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import style from './VoluntarioForm.module.css';
-import {postVoluntary} from '../redux/actions/voluntary.js';
+import {postVoluntary, addSchedule} from '../redux/actions/voluntary.js';
 import {connect} from 'react-redux';
 import CheckBox from './CheckBox';
 
@@ -13,16 +13,19 @@ class VolunteerForm extends React.Component {
 			info: {},
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
+		this.handleOnClick = this.handleOnClick.bind(this);
 	}
 	handleOnChange(e) {
 		this.setState({
 			info: {...this.state.info, [e.target.name]: e.target.value},
 		});
 	}
-
+	handleOnClick() {
+		this.props.postVoluntary(this.state.info);
+		this.props.addSchedule();
+	}
 	render() {
 		var control;
-		console.log(this.state);
 		let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
 		return (
 			<div className={style.Formm} style={{justifyContent: 'center', display: 'flex'}}>
@@ -84,6 +87,12 @@ class VolunteerForm extends React.Component {
 							id="standard-basic6"
 							onChange={e => this.handleOnChange(e)}
 						/>
+						<br></br>
+						<small> El horario establecido para las clases es de 8:00 hs a 18:00 hs.</small>
+						<br></br>
+						<small>
+							Escoge tu disponibilidad horaria (el rango horario no debe ser inferior a 1 hora)
+						</small>
 						{dias.map((dia, idx) => (
 							<CheckBox dia={dia} key={idx} />
 						))}
@@ -102,7 +111,7 @@ class VolunteerForm extends React.Component {
 						className={style.skere}
 						type="submit"
 						value="Submit"
-						onClick={() => this.props.postVoluntary(this.state.info)}>
+						onClick={() => this.handleOnClick()}>
 						Enviar
 					</Button>
 				</form>
@@ -111,4 +120,4 @@ class VolunteerForm extends React.Component {
 	}
 }
 
-export default connect(null, {postVoluntary})(VolunteerForm);
+export default connect(null, {postVoluntary, addSchedule})(VolunteerForm);
