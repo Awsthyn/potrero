@@ -34,20 +34,40 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Class, DataSheet, Role, Student, Subject, TypeOfDifficulty, User, Volunteer } = sequelize.models;
 
 // Aca vendrian las relaciones
+
+//BelongsTo(...) -> Escribe el id referente en la entidad entre ()
+
 Class.belongsTo(DataSheet);
 Class.belongsTo(User);
 Class.belongsTo(Student);
 Class.belongsTo(Subject);
-Volunteer.belongsToMany(Subject, { through: 'SubjectXVolunteer', timestamps: false } );
-Subject.belongsToMany(Volunteer, { through: 'SubjectXVolunteer', timestamps: false } );
+
+Subject.belongsToMany(Volunteer, { through: 'SubjectXVolunteer' });
 Subject.hasOne(DataSheet);
-Student.belongsToMany(TypeOfDifficulty, { through: 'TODXStudent', timestamps: false } );
-TypeOfDifficulty.belongsToMany(Student, { through: 'TODXStudent', timestamps: false } );
-// Subject.belongsToMany(DataSheet, { through: 'Class', timestamps: false } );
-// DataSheet.belongsToMany(Subject, { through: 'Class', timestamps: false } );
-// Student.belongsToMany(DataSheet, { through: 'Class', timestamps: false } );
-// DataSheet.belongsToMany(Student, { through: 'Class', timestamps: false } );
-// Role.hasMany(User);
+Subject.hasOne(Class)
+
+Volunteer.belongsToMany(Subject, { through: 'SubjectXVolunteer' });
+Volunteer.hasOne(User);
+
+Student.belongsToMany(TypeOfDifficulty, { through: 'TODXStudent' });
+Student.belongsToMany(User, { through: 'StudentXUser' });
+Student.hasMany(DataSheet);
+Student.hasOne(Class)
+
+TypeOfDifficulty.belongsToMany(Student, { through: 'TODXStudent' });
+
+User.belongsToMany(Student, { through: 'StudentXUser' });
+User.belongsTo(Role);
+User.hasMany(DataSheet);
+User.belongsTo(Volunteer);
+
+Role.hasOne(User);
+
+DataSheet.hasOne(Class)
+DataSheet.belongsTo(Subject);
+DataSheet.belongsTo(User);
+DataSheet.belongsTo(Student);
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
