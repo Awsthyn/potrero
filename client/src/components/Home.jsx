@@ -1,8 +1,16 @@
-import React from 'react'
 import {useHistory} from 'react-router-dom'
+import React, {useEffect} from 'react'
+import { connect } from 'react-redux'
 
-const Home = () => {
-    const history = useHistory()
+import {getStudents} from "../redux/actions/student"
+
+export const Home = ({getStudents}) => {
+const history = useHistory() 
+useEffect(()=>{
+    console.log('entra')
+    getStudents()
+}, [])   
+
     return (
 <>
 <div className="jumbotron">
@@ -14,11 +22,18 @@ const Home = () => {
 <button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/voluntarios/formulario')}>Postularse como voluntario</button>
 <button type="button" className="btn btn-primary" onClick={()=> history.push('/usuario/login')}>Iniciar sesión</button>
 
-
-
-
 </>
     )
 }
 
-export default Home
+const mapStateToProps = (state) => ({
+    students: state.students.students
+})
+
+const mapDispatchToProps = dispatch => {
+    return {
+    getStudents: () => dispatch(getStudents())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
