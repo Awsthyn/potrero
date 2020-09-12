@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const { userInfo } = require('os');
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
@@ -31,42 +32,65 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Class, DataSheet, Role, Student, Subject, TypeOfDifficulty, User, Volunteer } = sequelize.models;
+const { Class, DataSheet, Role, Student, StudentSchedule, Subject, TypeOfDifficulty, User, UserSchedule, Volunteer, Weekday } = sequelize.models;
 
 // Aca vendrian las relaciones
 
 //BelongsTo(...) -> Escribe el id referente en la entidad entre ()
 
+//CLASE
 Class.belongsTo(DataSheet);
 Class.belongsTo(User);
 Class.belongsTo(Student);
 Class.belongsTo(Subject);
 
+//MATERIA
 Subject.belongsToMany(Volunteer, { through: 'SubjectXVolunteer' });
 Subject.hasOne(DataSheet);
 Subject.hasOne(Class)
 
+//VOLUNTARIO
 Volunteer.belongsToMany(Subject, { through: 'SubjectXVolunteer' });
 Volunteer.hasOne(User);
 
+//ALUMNO
 Student.belongsToMany(TypeOfDifficulty, { through: 'TODXStudent' });
 Student.belongsToMany(User, { through: 'StudentXUser' });
 Student.hasMany(DataSheet);
 Student.hasOne(Class)
+Student.hasMany(StudentSchedule)
 
+//TIPO DE DIFICULTAD DEL ALUMNO
 TypeOfDifficulty.belongsToMany(Student, { through: 'TODXStudent' });
 
+//VOLUNTARIO ACEPTADO O ADMIN DEL SISTEMA
 User.belongsToMany(Student, { through: 'StudentXUser' });
 User.belongsTo(Role);
 User.hasMany(DataSheet);
 User.belongsTo(Volunteer);
+User.hasMany(UserSchedule)
 
+
+//ROL DEL USUARIO
 Role.hasOne(User);
 
+//CALIFICACION POR CLASE
 DataSheet.hasOne(Class)
 DataSheet.belongsTo(Subject);
 DataSheet.belongsTo(User);
 DataSheet.belongsTo(Student);
+
+//HORARIO ALUMNO
+StudentSchedule.belongsTo(Student);
+StudentSchedule.belongsToMany(Weekday, { through: 'StudentScheduleXWeekday' });
+
+//HORARIO PROFESOR
+UserSchedule.belongsTo(User);
+UserSchedule.belongsToMany(Weekday, { through: 'UserScheduleXWeekday' });
+
+//DIAS DE LA SEMANA
+Weekday.belongsToMany(StudentSchedule, { through: 'StudentScheduleXWeekday' });
+Weekday.belongsToMany(UserSchedule, { through: 'UserScheduleXWeekday' });
 
 
 module.exports = {
