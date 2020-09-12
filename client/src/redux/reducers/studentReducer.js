@@ -22,13 +22,15 @@ export default function studentReducer(state = initialState, action) {
 				...state,
 				students: state.students.concat(action.payload)}
 		case EDIT_STUDENT:
-			return state.map((student) => {
+			return {
+				...state,
+				students: state.student.map((student) => {
 				if(student.id === action.payload.id) {
 				  return action.payload
 				}
 				return student;
-			  });
-			
+			  })
+			}
 		default:
 			return state;
 	}
