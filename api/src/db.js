@@ -82,15 +82,15 @@ DataSheet.belongsTo(Student);
 
 //HORARIO ALUMNO
 StudentSchedule.belongsTo(Student);
-StudentSchedule.belongsToMany(Weekday, { through: 'StudentScheduleXWeekday' });
+StudentSchedule.belongsTo(Weekday);
 
 //HORARIO PROFESOR
 UserSchedule.belongsTo(User);
-UserSchedule.belongsToMany(Weekday, { through: 'UserScheduleXWeekday' });
+UserSchedule.belongsTo(Weekday);
 
 //DIAS DE LA SEMANA
-Weekday.belongsToMany(StudentSchedule, { through: 'StudentScheduleXWeekday' });
-Weekday.belongsToMany(UserSchedule, { through: 'UserScheduleXWeekday' });
+Weekday.hasMany(StudentSchedule);
+Weekday.hasMany(UserSchedule);
 
 
 module.exports = {
