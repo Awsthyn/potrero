@@ -36,7 +36,6 @@ export default function Horarios({de, hasta, id, handleTime}) {
 
 	return (
 		<div>
-			{/* <label htmlFor="hora">Hora</label> */}
 			<IconButton aria-label="delete" onClick={() => handleTime('aumentar', id, 'de')}>
 				<span className="material-icons">expand_less</span>
 			</IconButton>
@@ -51,8 +50,6 @@ export default function Horarios({de, hasta, id, handleTime}) {
 			<IconButton aria-label="delete" onClick={() => handleTime('disminuir', id, 'hasta')}>
 				<span className="material-icons">expand_more</span>
 			</IconButton>
-			{/* <button>Hora</button>
-         <button>Minutos</button> */}
 		</div>
 	);
 }

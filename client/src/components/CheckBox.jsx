@@ -6,6 +6,7 @@ export default class CheckBox extends React.Component {
 		super(props);
 		this.state = {
 			[this.props.dia]: [{de: 12, hasta: 14}],
+			checked: false,
 		};
 		this.handleOnClick = this.handleOnClick.bind(this);
 		this.handleTime = this.handleTime.bind(this);
@@ -18,45 +19,59 @@ export default class CheckBox extends React.Component {
 		});
 	}
 	handleTime(type, idx, clase) {
-		// if (type === 'aumentarDe') {
 		this.setState(function (state) {
-			console.log(type);
 			var newState = state[this.props.dia].map((h, i) => {
-				console.log(h);
-				console.log(h[clase]);
 				if (i === idx) {
-					if (type === 'aumentar' && clase === 'de' && h[clase] >= 8 && h[clase] < 17) {
+					if (type === 'aumentar' && clase === 'de' && h.de >= 8 && h.de < 17) {
+						if (h.hasta - 1.5 < h.de) h.hasta = h.de + 1.5;
+						return (h.de = h.de + 0.5);
+					} else if (type === 'aumentar' && clase === 'hasta' && h.hasta < 18 && h.hasta >= 9) {
 						return (h[clase] = h[clase] + 0.5);
-					} else if (type === 'aumentar' && clase === 'hasta' && h[clase] < 18 && h[clase] >= 9) {
-						return (h[clase] = h[clase] + 0.5);
-					} else if (type === 'disminuir' && clase === 'de' && h[clase] <= 17 && h[clase] > 8) {
+					} else if (type === 'disminuir' && clase === 'de' && h.de <= 17 && h.de > 8) {
 						return (h[clase] = h[clase] - 0.5);
-					} else if (type === 'disminuir' && clase === 'hasta' && h[clase] <= 18 && h[clase] > 9) {
-						console.log(h[clase] - 0.5);
+					} else if (
+						type === 'disminuir' &&
+						clase === 'hasta' &&
+						h.hasta <= 18 &&
+						h.hasta > 9 &&
+						h.hasta >= h.de + 1.5
+					) {
 						return (h[clase] = h[clase] - 0.5);
 					}
 				} else {
 					return h;
 				}
 			});
-			console.log(newState);
 			return {
 				newState,
 			};
 		});
-		// }
 	}
 	render() {
 		let dia = this.state[this.props.dia];
+		let checked = this.state.checked;
 		console.log(this.props);
+		console.log(dia);
 		return (
 			<div>
-				<input type="checkbox" name="moday" value="lunes" />
+				<input
+					type="checkbox"
+					name="moday"
+					value="lunes"
+					onClick={e => this.setState({checked: e.target.checked})}
+				/>
 				<label htmlFor="lunes">{this.props.dia} </label>
-				{dia.map((h, i) => {
-					return <Horarios de={h.de} hasta={h.hasta} key={i} handleTime={this.handleTime} id={i} />;
-				})}
-				<button onClick={e => this.handleOnClick(e)}> + </button>
+				{checked ? (
+					<div>
+						{' '}
+						{dia.map((h, i) => {
+							return (
+								<Horarios de={h.de} hasta={h.hasta} key={i} handleTime={this.handleTime} id={i} />
+							);
+						})}
+						<button onClick={e => this.handleOnClick(e)}> + </button>
+					</div>
+				) : null}
 				<br></br>
 			</div>
 		);
