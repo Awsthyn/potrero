@@ -11,7 +11,7 @@ server.get('/', (req, res) => {
         .then(materia => {
             // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "SUBJECT" ESTÁ VACÍO. ASÍ
             // RESPONDE CON UN MENSAJE, O SINO, DEVUELVE EL ARRAY CON LAS MATERIAS DENTRO.
-            !materia.length ? res.json("No hay tipos de dificultades disponibles.") : res.json(materia)
+            !materia.length ? res.json("No hay materias disponibles.") : res.json(materia)
         })
         .catch(err => {
             res.json(err)
@@ -43,7 +43,7 @@ server.get('/:id', (req, res) => {
     })
         .then(materiaFound => {
             // SI ENCUENTRA LA MATERIA, LO ENVÍA. SINO, ENVÍA UN MENSAJE DE ERROR.
-            !materiaFound ? res.json("La dificultad no existe.") : res.json(materiaFound)
+            !materiaFound ? res.json("La materia no existe.") : res.json(materiaFound)
         })
         .catch(err => {
             res.json(err)
