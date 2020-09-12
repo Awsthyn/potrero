@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import {useHistory} from "react-router-dom"
 
 import {getStudents} from '../../redux/actions/student'
 
 export const StudentCrud = ({getStudents, students}) => {
+  const history = useHistory()
     useEffect(()=>{
         getStudents()
         
@@ -36,7 +38,7 @@ export const StudentCrud = ({getStudents, students}) => {
     )}
   </tbody>
 </table>
-<button className="mt-4 btn btn-success">Agregar alumno</button>
+<button className="mt-4 btn btn-success" onClick={() => history.push('/admin/student/post')}>Agregar alumno</button>
         </div>
     )
 }
