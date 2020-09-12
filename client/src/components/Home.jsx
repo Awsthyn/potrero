@@ -2,13 +2,14 @@ import {useHistory} from 'react-router-dom'
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 
-import {getStudents} from "../redux/actions/student"
+import { getStudents } from "../redux/actions/student"
 
 export const Home = ({getStudents}) => {
-const history = useHistory() 
-useEffect(()=>{
+const history = useHistory()
+
+useEffect(() => {
     getStudents()
-}, [getStudents])   
+}, [getStudents])
 
     return (
 <>
