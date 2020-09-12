@@ -14,6 +14,9 @@ const studentRouter = require('./students.js');
 // IMPORT DE LA RUTA DE TYPE-OF-DIFFICULTY
 const typeOfDificulty = require('./typeOfDifficulty.js');
 
+// IMPORT DE LA RUTA DE SUBJECT
+const subjectsRouter = require('./subject.js');
+
 // IMPORT DE LA RUTA DE Autenticación
 const authenticateRouter = require('./authenticate.js');
 
@@ -53,5 +56,8 @@ router.use('/students', studentRouter);
 
 // RUTA DE TYPEOFDIFFICULTY
 router.use('/typeofdifficulty', typeOfDificulty);
+
+// RUTA DE SUBJECTS
+router.use('/subjects', subjectsRouter);
 
 module.exports = router;
