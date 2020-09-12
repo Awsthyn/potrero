@@ -46,10 +46,10 @@ export function putSubject(subject) {
 	};
 }
 
-export function deleteSubject(subject) {
+export function deleteSubject(subjectId) {
 	return function (dispatch) {
 		return axios
-			.delete(`http://localhost:3001/subjects/${subject.id}`, subject, {withCredentials: true})
+			.delete(`http://localhost:3001/subjects/${subjectId}`, {withCredentials: true})
 			.then(res => {
 				
 				dispatch({type: DELETE_SUBJECT, payload: res.data})
