@@ -93,7 +93,10 @@ class VolunteerForm extends React.Component {
 						className={style.skere}
 						type="submit"
 						value="Submit"
-						onClick={() => this.props.postVoluntary(this.state)}>
+						onClick={e => {
+							e.preventDefault();
+							this.props.postVoluntary(this.state);
+						}}>
 						Enviar
 					</Button>
 				</form>

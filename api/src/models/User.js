@@ -21,17 +21,12 @@ module.exports = (sequelize) => {
                     msg: 'Inserte un valor dentro del password.'
                 }
             }
-        },
-        rol: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
+        }
     });
-    User.createInstanceFromBody = function ({ email, password, rol }) {
+    User.createInstanceFromBody = function ({ email, password }) {
         return User.create({
             email,
-            password,
-            rol
+            password
         });
     };
 
