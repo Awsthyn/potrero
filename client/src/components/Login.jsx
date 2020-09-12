@@ -26,18 +26,17 @@ export class Login extends React.Component {
     handleInputChange(e) {
         const { name, value } = e.target
         this.setState( prevState => {
-            return {
-                ...prevState,
-                loginData: {
-                    ...prevState.loginData,
-                    [name]: value
-                },
-                errors: this.validate({
-                    ...prevState.errors,
-                    [name]: value,
-                })
-            }
-        })
+            return  {
+            ...prevState,
+            loginData: {
+                ...prevState.loginData,
+                [name]: value
+            },
+            errors: this.validate({
+                ...prevState.loginData,
+                [name]: value,
+            })
+        }})
     }
 
     resetState() {
@@ -46,21 +45,19 @@ export class Login extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
         const errores = this.validate({...this.state.loginData})
-        if (errores) {
-            this.setState(prevState => ({
-                ...prevState,
-                errors: {
-                    ...prevState.errors,
-                    ...errores
-                }
-            }))
+        if (errores === {}) {
             swal('Datos incorrectos')
         } else {
             this.props.sessionLogin(this.state.loginData)
-            .then(this.resetState)
+            .then(() =>{
+                swal('Bienvenido')
+                this.resetState()
+            })
             .catch((err) => {
-                console.info('errore de validacions', err)
+                console.info('errores de validacion', err)
+                swal('No se pudo autenticar. Verifique los datos')
             });
         }
     }
