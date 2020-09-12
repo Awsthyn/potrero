@@ -45,3 +45,15 @@ export function putSubject(subject) {
 			.catch(err => console.log(err));
 	};
 }
+
+export function deleteSubject(subject) {
+	return function (dispatch) {
+		return axios
+			.delete(`http://localhost:3001/subjects/${subject.id}`, subject, {withCredentials: true})
+			.then(res => {
+				
+				dispatch({type: DELETE_SUBJECT, payload: res.data})
+			})
+			.catch(err => console.log(err));
+	};
+}
