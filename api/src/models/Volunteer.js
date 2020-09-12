@@ -43,6 +43,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: false,
     },
+    state:{
+        type: DataTypes.ENUM(['pending', 'acepted', 'rejected']),
+        defaultValue: 'pending',
+    }
   });
   Volunteer.createInstanceFromBody = function ({ firstName, lastName, birthday, phone, email, linkedin, cv, adviser }) {
     return Volunteer.create({ // Preguntar si esta bien que sea User.create o tiene que ser Volunteer.create???
