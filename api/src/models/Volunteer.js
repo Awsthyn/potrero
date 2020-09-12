@@ -22,36 +22,42 @@ module.exports = (sequelize) => {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        //unique: true,
+        unique: true,
         validate: {
-            isEmail: true
+          isEmail: true
         }
     },
     linkedin: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         isUrl: true
       }
+    },
+    cv: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     adviser: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
     },
+    state:{
+        type: DataTypes.ENUM(['pending', 'acepted', 'rejected']),
+        defaultValue: 'pending',
+    }
   });
-  Volunteer.createInstanceFromBody = function ({ firstName, lastName, birthday, phone, email, linkedin, adviser }) {
-    return User.create({
+  Volunteer.createInstanceFromBody = function ({ firstName, lastName, birthday, phone, email, linkedin, cv, adviser }) {
+    return Volunteer.create({ // Preguntar si esta bien que sea User.create o tiene que ser Volunteer.create???
       firstName,
       lastName,
       birthday,
       phone,
       email,
       linkedin,
+      cv,
       adviser
     });
+  };
 };
-};
-
-
-////

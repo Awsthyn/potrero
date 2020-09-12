@@ -12,7 +12,7 @@ server.post('/setPassword', function(req, res, next) {
         token = buf.toString('hex');
         return token
     })
-console.log('BODY', req.body)
+
         Volunteer.findOne({ where: {email: req.body.email}})
         .then(usuario => {
             usuario.update({resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000 })
@@ -32,10 +32,11 @@ console.log('BODY', req.body)
                 subject: 'Fundación El Potrero',
                 html:
                 `<h3>Hola ${usuario.firstName} ${usuario.lastName} !!</h3>
-                <p>Desde la fundación El Potrero, estamos muy felices de comunicarte que fuiste admitido como Asesor de nuestra fundación, para dar ayuda escolar a los niños y niñas de El Potrero.</p>
+                <p>Desde la fundación El Potrero te comunicamos que fuiste elegido como Asesor para dar apoyo escolar a los niños y niñas de El Potrero.</p>
                 <p>Para continuar con el proceso, debes hacer click en el siguiente Link, o en su defecto copiar y pegar en el navegador:</p>
                 <p>http://localhost:3000/resetPassword/${token}</p>
-                <p>Estamos muy felices de que te sumes a esta gran causa. Un abrazo</p>`
+                <p>Estamos muy Felices de que te sumes a esta gran Causa.</p>
+                <p>Un abrazo</p>`
             };
 
             transporter.sendMail(mailOptions, (error, info) => {
@@ -49,39 +50,5 @@ console.log('BODY', req.body)
     })
     .catch(err => console.log(err))
 });
-
-
-//---------- Crea token, lo setea al usuario, y se lo envia por email -------
-/*server.get('/reset/:token', function(req, res, next) {
-    var token = req.params.token
-    console.log('TOKEN', token)
-    User.findOne({where: {resetPasswordToken: token} })
-    .then(usuario => {
-        res.json(usuario)
-        console.log(usuario)
-    })
-    .catch(err => console.log(err))
-})
-
-//-------- Actualiza la contraseña ----------------
-server.put('/reset/:token', function(req, res, next) {
-
-    try {
-        const { token } = req.params;
-        const { password } = req.body;
-        User.findOne({where: {resetPasswordToken: token}}).then(user => {
-            if (user) {
-                user.password = password
-                return user.save()
-            }
-        })
-        .then( () => {
-            res.sendStatus(200);
-        });
-    } catch (error) {
-        console.error(error.message);
-    }
-
-})*/
 
 module.exports = server;

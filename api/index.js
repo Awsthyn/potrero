@@ -18,20 +18,26 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn, User, Volunteer, Student, TypeOfDifficulty } = require('./src/db.js');
-const {initialVolunteers, initialUsers, initialClasses} = require("./src/seed");
+const { conn, User, Volunteer, Student, TypeOfDifficulty, Subject } = require('./src/db.js');
+const { initialVolunteers, initialUsers, initialSubjects, initialStudents } = require("./src/seed");
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-server.listen(3001, () => {
-console.log('%s listening at 3001'); // eslint-disable-line no-console
-    });
+  server.listen(3001, () => {
+    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  });
 })
-.then(() => {
+  .then(() => {
     Volunteer.bulkCreate(initialVolunteers);
   })
- .then(() => {
-    const users = initialUsers.map(u => User.create(u, {individualHooks: true}))
-  Promise.all(users)
+  .then(() => {
+    Subject.bulkCreate(initialSubjects);
   })
-.catch((error) => console.log(error))
+  .then(() => {
+    Student.bulkCreate(initialStudents);
+  })
+  .then(() => {
+    const users = initialUsers.map(u => User.create(u, { individualHooks: true }))
+    Promise.all(users)
+  })
+  .catch((error) => console.log(error))
