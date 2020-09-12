@@ -2,7 +2,9 @@ const server = require("express").Router();
 const nodemailer = require("nodemailer");
 const { Volunteer } = require("../db.js");
 
-server.post('/mailWelcomeRejection', function(req, res, next) {
+//cuando se crea un voluntario o cuando cambia el state a rejected se envía un mail con asunto
+//según el caso
+server.post('/mail', function(req, res, next) {
 Volunteer.findOne({ where: {email: req.body.email}})
 .then(volunteer => {
     const transporter = nodemailer.createTransport({
@@ -12,7 +14,7 @@ Volunteer.findOne({ where: {email: req.body.email}})
             pass: 'Henryelpotrero'
         }
     });
-    if(volunteer.adviser === "pending"){
+    if(volunteer.state === "pending"){
         var mailOptions = {
             from: "El Potrero",
             to: volunteer.email,
