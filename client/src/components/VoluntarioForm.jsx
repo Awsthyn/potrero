@@ -4,20 +4,26 @@ import Button from '@material-ui/core/Button';
 import style from './VoluntarioForm.module.css';
 import {postVoluntary} from '../redux/actions/voluntary.js';
 import {connect} from 'react-redux';
+import CheckBox from './CheckBox';
 
 class VolunteerForm extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			info: {},
+		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 	}
 	handleOnChange(e) {
 		this.setState({
-			[e.target.name]: e.target.value,
+			info: {...this.state.info, [e.target.name]: e.target.value},
 		});
 	}
+
 	render() {
 		var control;
+		console.log(this.state);
+		let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
 		return (
 			<div className={style.Formm} style={{justifyContent: 'center', display: 'flex'}}>
 				<form>
@@ -78,13 +84,16 @@ class VolunteerForm extends React.Component {
 							id="standard-basic6"
 							onChange={e => this.handleOnChange(e)}
 						/>
+						{dias.map((dia, idx) => (
+							<CheckBox dia={dia} key={idx} />
+						))}
 					</div>
-					{!this.state.firstName ||
-					!this.state.lastName ||
-					!this.state.birthday ||
-					!this.state.email ||
-					!this.state.phone ||
-					!this.state.linkedin
+					{!this.state.info.firstName ||
+					!this.state.info.lastName ||
+					!this.state.info.birthday ||
+					!this.state.info.email ||
+					!this.state.info.phone ||
+					!this.state.info.linkedin
 						? (control = true)
 						: false}
 					<Button
@@ -93,7 +102,7 @@ class VolunteerForm extends React.Component {
 						className={style.skere}
 						type="submit"
 						value="Submit"
-						onClick={() => this.props.postVoluntary(this.state)}>
+						onClick={() => this.props.postVoluntary(this.state.info)}>
 						Enviar
 					</Button>
 				</form>
