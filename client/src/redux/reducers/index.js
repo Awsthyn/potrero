@@ -8,6 +8,6 @@ import sessionReducer from "./sessionReducer";
 export default combineReducers({
     volunteers: volunteersReducer,
     students: studentReducer,
-    subjects: subjectReducer
-    sessions: sessionReducer
-    });
+    subjects: subjectReducer,
+    sessions: sessionReducer,
+});
