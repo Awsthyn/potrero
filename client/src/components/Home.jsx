@@ -7,9 +7,8 @@ import {getStudents} from "../redux/actions/student"
 export const Home = ({getStudents}) => {
 const history = useHistory() 
 useEffect(()=>{
-    console.log('entra')
     getStudents()
-}, [])   
+}, [getStudents])   
 
     return (
 <>
