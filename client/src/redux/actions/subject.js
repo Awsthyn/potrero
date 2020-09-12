@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ADD_SUBJECT, EDIT_SUBJECT, DELETE_SUBJECT, GET_SUBJECTS, GET_SUBJECT_DETAIL} from '../constants';
+import {ADD_SUBJECT, PUT_SUBJECT, DELETE_SUBJECT, GET_SUBJECTS, GET_SUBJECT_DETAIL} from '../constants';
 
 export function getSubjects() {
 	return function (dispatch) {
@@ -40,7 +40,7 @@ export function putSubject(subject) {
 			.put(`http://localhost:3001/subjects/${subject.id}`, subject, {withCredentials: true})
 			.then(res => {
 				
-				dispatch({type: EDIT_SUBJECT, payload: res.data})
+				dispatch({type: PUT_SUBJECT, payload: res.data})
 			})
 			.catch(err => console.log(err));
 	};

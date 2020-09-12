@@ -1,4 +1,4 @@
-import {ADD_SUBJECT, EDIT_SUBJECT, GET_SUBJECTS, GET_SUBJECT_DETAIL, DELETE_SUBJECT} from '../constants';
+import {ADD_SUBJECT, PUT_SUBJECT, GET_SUBJECTS, GET_SUBJECT_DETAIL, DELETE_SUBJECT} from '../constants';
 
 const initialState = {
 	subjects:[],
@@ -21,7 +21,7 @@ export default function subjectReducer(state = initialState, action) {
 			return {
 				...state,
 				students: state.students.concat(action.payload)}
-		case EDIT_SUBJECT:
+		case PUT_SUBJECT:
 			return {
 				...state,
 				subjects: state.subjects.map((subject) => {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_STUDENTS, GET_STUDENT_DETAIL, ADD_STUDENT, PUT_STUDENT} from '../constants';
+import {ADD_DIFFICULTY, PUT_DIFFICULTY, GET_DIFFICULTIES, GET_DIFFICULTY_DETAIL,DELETE_DIFFICULTY} from '../constants';
 
 export function getStudents() {
 	return function (dispatch) {
@@ -40,7 +40,7 @@ export function putStudent(student) {
 			.put(`http://localhost:3001/students/${student.id}`, student, {withCredentials: true})
 			.then(res => {
 				console.log(res)
-				dispatch({type: PUT_STUDENT, payload: res.data})
+				dispatch({type: EDIT_STUDENT, payload: res.data})
 			})
 			.catch(err => console.log(err));
 	};
