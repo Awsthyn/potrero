@@ -1,4 +1,4 @@
-import {POST_VOLUNTARY} from '../constants';
+import {ADD_VOLUNTARY} from '../constants';
 
 const initialState = {
 	volunteers:[],
@@ -6,7 +6,7 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action) {
 	switch (action.type) {
-		case POST_VOLUNTARY:
+		case ADD_VOLUNTARY:
 			return {
 				...state,
 				volunteers: action.voluntary,
