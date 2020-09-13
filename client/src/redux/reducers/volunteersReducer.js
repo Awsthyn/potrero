@@ -1,4 +1,4 @@
-import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS} from '../constants';
+import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER} from '../constants';
 
 const initialState = {
 	volunteers: [],
@@ -18,6 +18,8 @@ export default function rootReducer(state = initialState, action) {
 				schedule: [...state.schedule, action.schedule],
 			};
 		case GET_VOLUNTEERS:
+			console.log(action.volunteers instanceof String)
+				
 			return {
 				...state,
 				volunteers: action.volunteers,
