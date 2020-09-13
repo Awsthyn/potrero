@@ -44,7 +44,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
     });
-    Student.createInstanceFromBody = function ({ firstName, lastName, phone, email, tutor, difficulty, typeOfDifficulty, weakness, strengths, interests, motivations}) {
+    Student.createInstanceFromBody = function ({ firstName, lastName, phone, email, tutor, difficulty, weakness, strengths, interests, motivations}) {
         return Student.create({
             firstName,
             lastName,
