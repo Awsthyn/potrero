@@ -5,19 +5,23 @@ module.exports = (sequelize) => {
     const DataSheet = sequelize.define('dataSheet', {
         concentration: {
             type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+            allowNull: true
+        },
+        assistance: {
+            type: DataTypes.ENUM("ausente", "tardanza", "presente"),
             allowNull: false
         },
         internetConnection: {
             type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
-            allowNull: false
+            allowNull: true
         },
         performance: {
             type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
-            allowNull: false
+            allowNull: true
         },
         someoneAccompaniesHim: {
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
         companionName: {
             type: DataTypes.STRING,
@@ -29,7 +33,7 @@ module.exports = (sequelize) => {
         },
         hadExam: {
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            allowNull: true
         },
         qualification: {
             type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
@@ -38,11 +42,16 @@ module.exports = (sequelize) => {
         duration: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        attitude: {
+            type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+            allowNull: true
         }
     });
-    DataSheet.createInstanceFromBody = function ({ concentration, internetConnection, performance, someoneAccompaniesHim, companionName, comments, hadExam, qualification, duration }) {
+    DataSheet.createInstanceFromBody = function ({ concentration, assistance, internetConnection, performance, someoneAccompaniesHim, companionName, comments, hadExam, qualification, duration, attitude }) {
         return DataSheet.create({
             concentration,
+            assistance,
             internetConnection,
             performance,
             someoneAccompaniesHim,
@@ -50,7 +59,8 @@ module.exports = (sequelize) => {
             comments,
             hadExam,
             qualification,
-            duration
+            duration,
+            attitude
         });
     };
 };

@@ -9,6 +9,7 @@ export function sessionLogin(data){
 			.then(res =>{
 				dispatch({type: LOGIN , payload: res.data});
 			})
+			.then(() => window.history.go(-1)) // Te regresa a la sección en la que estabas antes de logguearte
 			.catch(err => {
 				throw new Error('Error al autenticar, verifique los datos ingresados')
 			})

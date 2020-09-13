@@ -10,6 +10,10 @@ module.exports = (sequelize) => {
         endTime: {
             type: DataTypes.TIME,
             allowNull: false,
+        },
+        nameWeekDay: {
+            type: DataTypes.ENUM("Lunes", "Martes", "Miercoles", "Jueves", "Viernes"),
+            allowNull: false
         }
     })
 }
