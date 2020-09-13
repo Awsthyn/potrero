@@ -28,26 +28,26 @@ conn.sync({ force: true }).then(() => {
   });
 })
 
-  .then(() => {
-    TypeOfDifficulty.bulkCreate(initialTypeOfDifficulty);
-  })
-  .then(() => {
-    Role.bulkCreate(initialRoles);
-  })
-  .then(() => {
-    Volunteer.bulkCreate(initialVolunteers);
-  })
-  .then(() => {
-    Subject.bulkCreate(initialSubjects);
-  })
-  .then(() => {
-    Student.bulkCreate(initialStudents);
-  })
-  .then(() => {
-    TODXStudent.bulkCreate(initialTODXStudent);
-  })
-  .then(() => {
-    const users = initialUsers.map(u => User.create(u, { individualHooks: true }))
-    Promise.all(users)
-  })
-  .catch((error) => console.log(error))
+  // .then(() => {
+  //   TypeOfDifficulty.bulkCreate(initialTypeOfDifficulty);
+  // })
+  // .then(() => {
+  //   Role.bulkCreate(initialRoles);
+  // })
+  // .then(() => {
+  //   Volunteer.bulkCreate(initialVolunteers);
+  // })
+  // .then(() => {
+  //   Subject.bulkCreate(initialSubjects);
+  // })
+  // .then(() => {
+  //   Student.bulkCreate(initialStudents);
+  // })
+  // .then(() => {
+  //   TODXStudent.bulkCreate(initialTODXStudent);
+  // })
+  // .then(() => {
+  //   const users = initialUsers.map(u => User.create(u, { individualHooks: true }))
+  //   Promise.all(users)
+  // })
+  // .catch((error) => console.log(error))
