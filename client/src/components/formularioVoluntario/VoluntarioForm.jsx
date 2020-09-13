@@ -2,9 +2,10 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import style from './VoluntarioForm.module.css';
-import {postVoluntary, addSchedule} from '../redux/actions/voluntary.js';
+import {postVoluntary, addSchedule} from '../../redux/actions/voluntary.js';
 import {connect} from 'react-redux';
 import CheckBox from './CheckBox';
+import swal from 'sweetalert';
 
 class VolunteerForm extends React.Component {
 	constructor(props) {
@@ -20,16 +21,36 @@ class VolunteerForm extends React.Component {
 			info: {...this.state.info, [e.target.name]: e.target.value},
 		});
 	}
-	handleOnClick() {
-		this.props.postVoluntary(this.state.info);
-		this.props.addSchedule();
+	handleOnClick(e) {
+		e.preventDefault();
+		swal({
+			title: "¿Estas seguro?",
+			text: "Antes de enviar tu solicitud verifica que tus datos sean correctos!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		  })
+		  .then((willDelete) => {
+			console.log(this.state.info)
+			if (willDelete) {
+				console.log(this.state.info)
+			  this.props.postVoluntary(this.state.info);
+		      //this.props.addSchedule();
+			  swal("Tu solicitud ha sido enviada!", {
+				icon: "success",
+			  });
+			} else {
+			  swal("Solicitud no enviada");
+			}
+		  });
 	}
+
 	render() {
 		var control;
 		let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
 		return (
 			<div className={style.Formm} style={{justifyContent: 'center', display: 'flex'}}>
-				<form>
+				<form method = "post">
 					<div className="form-group">
 						<small>Nombre</small>
 						<TextField
@@ -82,9 +103,18 @@ class VolunteerForm extends React.Component {
 						<TextField
 							style={{width: '80%', marginTop: '1%', display: 'block'}}
 							name="linkedin"
-							//label="Linkedin"
-							type="url"
+							label="ej: www.linkedin.com/tu_cuenta/"
+							type="text"
 							id="standard-basic6"
+							onChange={e => this.handleOnChange(e)}
+						/>
+						<small>CV</small>
+						<TextField
+							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							name="cv"
+							//label="CV"
+							type="file"
+							id="standard-basic7"
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<br></br>
@@ -102,7 +132,7 @@ class VolunteerForm extends React.Component {
 					!this.state.info.birthday ||
 					!this.state.info.email ||
 					!this.state.info.phone ||
-					!this.state.info.linkedin
+					(!this.state.info.linkedin && !this.state.info.cv)
 						? (control = true)
 						: false}
 					<Button
@@ -111,7 +141,7 @@ class VolunteerForm extends React.Component {
 						className={style.skere}
 						type="submit"
 						value="Submit"
-						onClick={() => this.handleOnClick()}>
+						onClick={(e) => this.handleOnClick(e)}>
 						Enviar
 					</Button>
 				</form>

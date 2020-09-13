@@ -2,6 +2,7 @@ import axios from 'axios';
 import {ADD_VOLUNTARY, ADD_SCHEDULE} from '../constants';
 
 export function postVoluntary(voluntary) {
+	console.log(voluntary)
 	return function (dispatch) {
 		return axios
 			.post(`http://localhost:3001/volunteers`, voluntary, {withCredentials: true})
