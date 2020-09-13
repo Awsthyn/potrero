@@ -5,7 +5,7 @@ const path = require('path');
 const { userInfo } = require('os');
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env; 
+} = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/potrero`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -48,6 +48,7 @@ Class.belongsTo(Subject);
 Subject.belongsToMany(Volunteer, { through: 'SubjectXVolunteer' });
 Subject.hasOne(DataSheet);
 Subject.hasOne(Class)
+Subject.belongsToMany(Student, { through: 'SubjectXStudent' });
 
 //VOLUNTARIO
 Volunteer.belongsToMany(Subject, { through: 'SubjectXVolunteer' });
@@ -59,6 +60,7 @@ Student.belongsToMany(User, { through: 'StudentXUser' });
 Student.hasMany(DataSheet);
 Student.hasOne(Class)
 Student.hasMany(StudentSchedule)
+Student.belongsToMany(Subject, { through: 'SubjectXStudent' })
 
 //TIPO DE DIFICULTAD DEL ALUMNO
 TypeOfDifficulty.belongsToMany(Student, { through: 'TODXStudent' });
