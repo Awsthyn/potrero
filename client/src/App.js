@@ -6,6 +6,8 @@ import Login from './components/Login';
 import MiPerfil from './components/MiPerfil';
 import Home from "./components/Home"
 import NavBar from "./components/NavBar"
+import StudentCrud from './components/student/StudentCrud'
+import CreateStudentForm from "./components/student/CreateStudentForm"
 
 
 
@@ -17,6 +19,9 @@ function App() {
 			<Route path="/voluntarios/formulario" component={VolunteerForm} />
 			<Route exact path="/usuario/login" component={Login} />
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
+			<Route exact path="/admin/student" component={StudentCrud} />
+			<Route exact path="/admin/student/post" component={CreateStudentForm} />
+
 		</div>
 	);
 }
