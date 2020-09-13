@@ -65,8 +65,8 @@ server.put('/:id', (req, res) => {
                     id: req.params.id
                 }
             })
-                .then(todWithChanges => {
-                    res.json(todWithChanges)
+                .then( todWithChanges => {
+                    res.json( todWithChanges )
                 })
         })
         .catch(err => {

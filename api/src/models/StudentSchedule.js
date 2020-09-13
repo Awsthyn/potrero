@@ -14,6 +14,16 @@ module.exports = (sequelize) => {
         nameWeekDay: {
             type: DataTypes.ENUM("Lunes", "Martes", "Miercoles", "Jueves", "Viernes"),
             allowNull: false
-        }
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: new Date()
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: new Date()
+        },
     })
 }
