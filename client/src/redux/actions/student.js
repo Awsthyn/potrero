@@ -28,7 +28,9 @@ export function postStudent(student) {
 		return axios
 			.post(`http://localhost:3001/students`, student, {withCredentials: true})
 			.then(res => {
+				console.log(res.data)
 				dispatch({type: ADD_STUDENT, payload: res.data})
+				window.location= "/admin/student"
 			})
 			.catch(err => console.log(err));
 	};
