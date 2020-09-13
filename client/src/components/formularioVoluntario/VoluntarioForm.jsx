@@ -47,7 +47,7 @@ class VolunteerForm extends React.Component {
 
 	render() {
 		var control;
-		let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
+
 		return (
 			<div className={style.Formm} style={{justifyContent: 'center', display: 'flex'}}>
 				<form method = "post">
@@ -99,40 +99,12 @@ class VolunteerForm extends React.Component {
 							id="standard-basic5"
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Linkedin</small>
-						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
-							name="linkedin"
-							label="ej: www.linkedin.com/tu_cuenta/"
-							type="text"
-							id="standard-basic6"
-							onChange={e => this.handleOnChange(e)}
-						/>
-						<small>CV</small>
-						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
-							name="cv"
-							//label="CV"
-							type="file"
-							id="standard-basic7"
-							onChange={e => this.handleOnChange(e)}
-						/>
-						<br></br>
-						<small> El horario establecido para las clases es de 8:00 hs a 18:00 hs.</small>
-						<br></br>
-						<small>
-							Escoge tu disponibilidad horaria (el rango horario no debe ser inferior a 1 hora)
-						</small>
-						{dias.map((dia, idx) => (
-							<CheckBox dia={dia} key={idx} />
-						))}
 					</div>
 					{!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
 					!this.state.info.email ||
-					!this.state.info.phone ||
-					(!this.state.info.linkedin && !this.state.info.cv)
+					!this.state.info.phone 
 						? (control = true)
 						: false}
 					<Button
@@ -141,8 +113,8 @@ class VolunteerForm extends React.Component {
 						className={style.skere}
 						type="submit"
 						value="Submit"
-						onClick={(e) => this.handleOnClick(e)}>
-						Enviar
+						onClick={() => this.handleOnClick()}>
+						Continuar
 					</Button>
 				</form>
 			</div>
