@@ -10,7 +10,7 @@ export const NavBar = () => {
     <span className="navbar-toggler-icon"></span>
   </button>
   <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <span role="button" className="navbar-brand">El potrero</span>
+    <span role="button" className="navbar-brand" onClick={()=> history.push('/')}>El potrero</span>
     <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
       <li className="nav-item active">
         <span role="button" className="nav-link" onClick={()=> history.push('/')}>Inicio <span className="sr-only">(current)</span></span>

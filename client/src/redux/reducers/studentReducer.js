@@ -1,4 +1,4 @@
-import {ADD_STUDENT, EDIT_STUDENT, GET_STUDENTS, GET_STUDENT_DETAIL} from '../constants';
+import {ADD_STUDENT, PUT_STUDENT, GET_STUDENTS, GET_STUDENT_DETAIL} from '../constants';
 
 const initialState = {
 	students:[],
@@ -21,7 +21,7 @@ export default function studentReducer(state = initialState, action) {
 			return {
 				...state,
 				students: state.students.concat(action.payload)}
-		case EDIT_STUDENT:
+		case PUT_STUDENT:
 			return {
 				...state,
 				students: state.student.map((student) => {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_STUDENTS, GET_STUDENT_DETAIL, ADD_STUDENT, EDIT_STUDENT} from '../constants';
+import {GET_STUDENTS, GET_STUDENT_DETAIL, ADD_STUDENT, PUT_STUDENT} from '../constants';
 
 export function getStudents() {
 	return function (dispatch) {
@@ -28,7 +28,9 @@ export function postStudent(student) {
 		return axios
 			.post(`http://localhost:3001/students`, student, {withCredentials: true})
 			.then(res => {
+				console.log(res.data)
 				dispatch({type: ADD_STUDENT, payload: res.data})
+				window.location= "/admin/student"
 			})
 			.catch(err => console.log(err));
 	};
@@ -40,7 +42,7 @@ export function putStudent(student) {
 			.put(`http://localhost:3001/students/${student.id}`, student, {withCredentials: true})
 			.then(res => {
 				console.log(res)
-				dispatch({type: EDIT_STUDENT, payload: res.data})
+				dispatch({type: PUT_STUDENT, payload: res.data})
 			})
 			.catch(err => console.log(err));
 	};
