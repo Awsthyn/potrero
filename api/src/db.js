@@ -32,7 +32,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Class, DataSheet, Role, Student, StudentSchedule, Subject, TypeOfDifficulty, User, UserSchedule, Volunteer, Weekday } = sequelize.models;
+const { Class, DataSheet, Role, Student, StudentSchedule, Subject, TypeOfDifficulty, User, UserSchedule, Volunteer, Weekday,TODXStudent,SubjectXVolunteer,SubjectXStudent,StudentXUser} = sequelize.models;
 
 // Aca vendrian las relaciones
 

@@ -18,8 +18,8 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn, User, Volunteer, Student, TypeOfDifficulty, Subject } = require('./src/db.js');
-const { initialVolunteers, initialUsers, initialSubjects, initialStudents } = require("./src/seed");
+const { conn, User, Volunteer, Student, TypeOfDifficulty, Subject, Role, TODXStudent,SubjectXVolunteer,SubjectXStudent,StudentXUser} = require('./src/db.js');
+const { initialVolunteers, initialUsers, initialSubjects, initialStudents,initialRoles,initialTypeOfDifficulty,initialTODXStudent} = require("./src/seed");
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
@@ -27,6 +27,13 @@ conn.sync({ force: true }).then(() => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 })
+
+  .then(() => {
+    TypeOfDifficulty.bulkCreate(initialTypeOfDifficulty);
+  })
+  .then(() => {
+    Role.bulkCreate(initialRoles);
+  })
   .then(() => {
     Volunteer.bulkCreate(initialVolunteers);
   })
@@ -35,6 +42,9 @@ conn.sync({ force: true }).then(() => {
   })
   .then(() => {
     Student.bulkCreate(initialStudents);
+  })
+  .then(() => {
+    TODXStudent.bulkCreate(initialTODXStudent);
   })
   .then(() => {
     const users = initialUsers.map(u => User.create(u, { individualHooks: true }))
