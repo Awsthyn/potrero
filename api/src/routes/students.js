@@ -1,14 +1,22 @@
 const server = require('express').Router();
 
 // TRAEMOS LOS STUDENTS DE LA BASE DE DATOS
-const { Student } = require('../db.js');
+const { Student, TypeOfDifficulty, Subject } = require('../db.js');
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require('sequelize');
 
 server.get('/', (req, res) => {
     // BUSCA TODOS LOS STUDENTS Y LOS DEVUELVE COMO JSON (ARRAY DE OBJETOS)
-    Student.findAll()
+    Student.findAll(
+        { include: [
+            {
+                model: TypeOfDifficulty
+            },
+            {
+                model: Subject
+            }
+        ] })
         .then(students => {
             // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "STUDENTS" ESTÁ VACÍO. ASÍ
             // RESPONDE CON UN MENSAJE, O SINO, DEVUELVE EL ARRAY CON LOS STUDENTS DENTRO.
