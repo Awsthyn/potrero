@@ -103,7 +103,7 @@ server.get('/subject/:id', (req, res) => {
 server.post('/', (req,res) => {
     // RECIBE TODA LA INFORMACIÓN POR BODY.
     const newClass = req.body;
-    Class.createInstanceFromBody(newClass) 
+    Class.create(newClass) 
     .then(createdClass => {
         // DEVUELVE LA CLASE CREADA.
         res.json( createdClass )
