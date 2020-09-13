@@ -10,8 +10,8 @@ export default () =>
                     <p>De todas maneras, podemos encontrar funcionando la administración pertinente a:</p>
                     <div className="container-fluid">
                         <Link to='/admin/voluntarios/' type="button" className="btn btn-primary border"> Voluntarios/Postulantes </Link>
-                        <Link to='/admin/usuarios/' type="button" className="btn btn-warning border"> Docentes </Link>
-                        <Link to='/admin/materias/' type="button" className="btn btn-danger border"> Materias </Link>
+                        <Link to='/admin' type="button" className="btn btn-warning border"> Docentes </Link>
+                        <Link to='/admin' type="button" className="btn btn-danger border"> Materias </Link>
                     </div>
                 </div>
         
