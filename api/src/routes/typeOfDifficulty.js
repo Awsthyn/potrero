@@ -8,15 +8,14 @@ const Sequelize = require('sequelize');
 
 server.get('/', (req, res) => {
     TypeOfDifficulty.findAll()
-        .then(tod => {
-            // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "TYPEOFDIFFICULTY" ESTÁ VACÍO. ASÍ
-            // RESPONDE CON UN MENSAJE, O SINO, DEVUELVE EL ARRAY CON LOS USUARIOS DENTRO.
-            !tod.length ? res.json("No hay tipos de dificultades disponibles.") : res.json(tod)
-        })
-        .catch(err => {
-            res.json(err)
-        })
-
+    .then(tod => {
+        // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "TYPEOFDIFFICULTY" ESTÁ VACÍO. ASÍ
+        // RESPONDE CON UN MENSAJE, O SINO, DEVUELVE EL ARRAY CON LOS USUARIOS DENTRO.
+        !tod.length ? res.json("No hay tipos de dificultades disponibles.") : res.json(tod)
+    })
+    .catch(err => {
+        res.json(err)
+    })
 })
 
 // CREA UNA DIFICULTAD
@@ -24,13 +23,13 @@ server.post('/', (req, res) => {
     // RECIBE LOS DATOS DEL USUARIO POR BODY
     const tod = req.body;
     TypeOfDifficulty.createInstanceFromBody(tod)
-        .then(todCreated => { // USUARIO CREADO
-            res.json(todCreated)
-        })
-        .catch(err => {
-            // SI HAY UN ERROR, LO DEVUELVE. POR SI FALTÓ UN CAMPO POR COMPLETAR O MISMO LOS DATOS NO SON VÁLIDOS.         
-            res.json(err)
-        })
+    .then(todCreated => { // USUARIO CREADO
+        res.json(todCreated)
+    })
+    .catch(err => {
+        // SI HAY UN ERROR, LO DEVUELVE. POR SI FALTÓ UN CAMPO POR COMPLETAR O MISMO LOS DATOS NO SON VÁLIDOS.         
+        res.json(err)
+    })
 })
 
 // BUSCA UN TOD EN ESPECÍFICO Y MUESTRA SUS DATOS.
@@ -41,13 +40,13 @@ server.get('/:id', (req, res) => {
             id: req.params.id
         }
     })
-        .then(todFound => {
-            // SI ENCUENTRA AL USUARIO, LO ENVÍA. SINO, ENVÍA UN MENSAJE DE ERROR.
-            !todFound ? res.json("La dificultad no existe.") : res.json(todFound)
-        })
-        .catch(err => {
-            res.json(err)
-        })
+    .then(todFound => {
+        // SI ENCUENTRA AL USUARIO, LO ENVÍA. SINO, ENVÍA UN MENSAJE DE ERROR.
+        !todFound ? res.json("La dificultad no existe.") : res.json(todFound)
+    })
+    .catch(err => {
+        res.json(err)
+    })
 })
 
 // BUSCA UN TOD Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
@@ -58,20 +57,23 @@ server.put('/:id', (req, res) => {
             id: req.params.id
         }
     })
-        // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
-        .then(() => {
-            TypeOfDifficulty.findOne({
-                where: {
-                    id: req.params.id
-                }
-            })
-                .then(todWithChanges => {
-                    res.json(todWithChanges)
-                })
+    // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
+    .then(() => {
+        TypeOfDifficulty.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(todWithChanges => {
+            res.json(todWithChanges)
         })
         .catch(err => {
             res.json(err)
         })
+    })
+    .catch(err => {
+        res.json(err)
+    })
 })
 
 //ELIMINA EL TIPO DE DIFICULTAD
@@ -82,14 +84,14 @@ server.delete('/:id', (req, res, next) => {
             id: req.params.id
         }
     })
-        //UNA VEZ ELIMINADO DEVUELVE UN MENSAJE
-        .then(() => {
-            res.status(200)
-            res.send("Type of Difficulty eliminado")
-        })
-        .catch(err => {
-            res.json(err)
-        })
+    //UNA VEZ ELIMINADO DEVUELVE UN MENSAJE
+    .then(() => {
+        res.status(200)
+        res.send("Type of Difficulty eliminado")
+    })
+    .catch(err => {
+        res.json(err)
+    })
 })
 
 module.exports = server;
