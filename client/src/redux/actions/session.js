@@ -10,7 +10,8 @@ export function sessionLogin(data){
 				dispatch({type: LOGIN , payload: res.data});
 			})
 			.catch(err => {
-                console.log(err)});
+				throw new Error('Error al autenticar, verifique los datos ingresados')
+			})
 	}
 }
 
