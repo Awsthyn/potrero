@@ -46,7 +46,17 @@ module.exports = (sequelize) => {
         isActive: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
-        }
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: new Date()
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: new Date()
+        },
     });
     Student.createInstanceFromBody = function ({ firstName, lastName, phone, email, tutor, difficulty, typeOfDifficulty, weakness, strengths, interests, motivations, isActive}) {
         return Student.create({

@@ -23,31 +23,7 @@ const { initialVolunteers, initialUsers, initialSubjects, initialStudents,initia
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-  });
+server.listen(3001, () => {
+console.log('%s listening at 3001'); // eslint-disable-line no-console
+    });
 })
-
-  // .then(() => {
-  //   TypeOfDifficulty.bulkCreate(initialTypeOfDifficulty);
-  // })
-  // .then(() => {
-  //   Role.bulkCreate(initialRoles);
-  // })
-  // .then(() => {
-  //   Volunteer.bulkCreate(initialVolunteers);
-  // })
-  // .then(() => {
-  //   Subject.bulkCreate(initialSubjects);
-  // })
-  // .then(() => {
-  //   Student.bulkCreate(initialStudents);
-  // })
-  // .then(() => {
-  //   TODXStudent.bulkCreate(initialTODXStudent);
-  // })
-  // .then(() => {
-  //   const users = initialUsers.map(u => User.create(u, { individualHooks: true }))
-  //   Promise.all(users)
-  // })
-  // .catch((error) => console.log(error))
