@@ -8,4 +8,11 @@ module.exports = (sequelize) => {
             allowNull: true
         }
     });
+    Class.createInstanceFromBody = function ({ userId, studentId, subjectId }) {
+        return Class.create({
+            userId,
+            studentId,
+            subjectId,
+        });
+    }
 };

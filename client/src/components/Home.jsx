@@ -2,14 +2,14 @@ import {useHistory} from 'react-router-dom'
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
 
-import {getStudents} from "../redux/actions/student"
+import { getStudents } from "../redux/actions/student"
 
 export const Home = ({getStudents}) => {
-const history = useHistory() 
-useEffect(()=>{
-    console.log('entra')
+const history = useHistory()
+
+useEffect(() => {
     getStudents()
-}, [])   
+}, [getStudents])
 
     return (
 <>
@@ -20,7 +20,8 @@ useEffect(()=>{
   <hr className="my-4" />
 </div>
 <button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/voluntarios/formulario')}>Postularse como voluntario</button>
-<button type="button" className="btn btn-primary" onClick={()=> history.push('/usuario/login')}>Iniciar sesión</button>
+<button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/usuario/login')}>Iniciar sesión</button>
+<button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/admin/student')}>Alumnos</button>
 
 </>
     )

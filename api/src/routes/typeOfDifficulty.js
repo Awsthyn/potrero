@@ -74,4 +74,22 @@ server.put('/:id', (req, res) => {
         })
 })
 
+//ELIMINA EL TIPO DE DIFICULTAD
+server.delete('/:id', (req, res, next) => {
+    //Busca TOD por id y la destruye
+    TypeOfDifficulty.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        //UNA VEZ ELIMINADO DEVUELVE UN MENSAJE
+        .then(() => {
+            res.status(200)
+            res.send("Type of Difficulty eliminado")
+        })
+        .catch(err => {
+            res.json(err)
+        })
+})
+
 module.exports = server;
