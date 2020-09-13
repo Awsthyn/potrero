@@ -9,6 +9,10 @@ import NavBar from "./components/NavBar"
 import AdminPanel from "./components/admin/AdminPanel"
 import TablaUsuarios from "./components/admin/TablaUsuarios"
 import TablaVoluntarios from "./components/admin/TablaVoluntarios"
+import StudentCrud from './components/student/StudentCrud'
+import CreateStudentForm from "./components/student/CreateStudentForm"
+
+
 
 function App() {
 	return (
@@ -22,6 +26,9 @@ function App() {
 			<Route exact path="/voluntarios/formulario" component={VolunteerForm} />
 			<Route exact path="/usuario/login" component={Login} />
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
+			<Route exact path="/admin/student" component={StudentCrud} />
+			<Route exact path="/admin/student/post" component={CreateStudentForm} />
+
 		</div>
 	);
 }
