@@ -1,6 +1,8 @@
 // Voluntarios - DELETE se representa con deshabilitado.
 export const ADD_VOLUNTARY = 'ADD_VOLUNTARY';
 export const ADD_SCHEDULE = 'ADD_SCHEDULE';
+export const GET_VOLUNTEERS = 'GET_VOLUNTEERS';
+
 
 // Alumnos - DELETE se representa con deshabilitado.
 export const GET_STUDENTS = 'GET_STUDENTS';

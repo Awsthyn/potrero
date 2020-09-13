@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ADD_VOLUNTARY, ADD_SCHEDULE} from '../constants';
+import {ADD_VOLUNTARY, ADD_SCHEDULE,GET_VOLUNTEERS} from '../constants';
 
 export function postVoluntary(voluntary) {
 	return function (dispatch) {
@@ -12,6 +12,18 @@ export function postVoluntary(voluntary) {
 			.catch(err => console.log(err));
 	};
 }
+
+export function getVolunteers() {
+	return function (dispatch) {
+		return axios
+			.get(`http://localhost:3001/volunteers`, {withCredentials: true})
+			.then(res => {
+				dispatch({type: GET_VOLUNTEERS, volunteers: res.data});
+			})
+			.catch(err => console.log(err));
+	};
+}
+
 export function addSchedule(schedule) {
 	return function (dispatch) {
 		return axios

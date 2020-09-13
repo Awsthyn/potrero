@@ -1,4 +1,4 @@
-import {ADD_VOLUNTARY, ADD_SCHEDULE} from '../constants';
+import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS} from '../constants';
 
 const initialState = {
 	volunteers: [],
@@ -17,6 +17,12 @@ export default function rootReducer(state = initialState, action) {
 				...state,
 				schedule: [...state.schedule, action.schedule],
 			};
+		case GET_VOLUNTEERS:
+			return {
+				...state,
+				volunteers: action.volunteers,
+			};
+
 		default:
 			return state;
 	}
