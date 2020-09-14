@@ -45,21 +45,21 @@ Class.belongsTo(Student);
 Class.belongsTo(Subject);
 
 //MATERIA
-Subject.belongsToMany(User, { through: 'SubjectXUser' });
+Subject.belongsToMany(User, { through: 'SubjectXUser', timestamps: false });
 Subject.hasMany(Class);
-Subject.belongsToMany(Student, { through: 'SubjectXStudent' });
+Subject.belongsToMany(Student, { through: 'SubjectXStudent', timestamps: false });
 
 //ALUMNO
-Student.belongsToMany(TypeOfDifficulty, { through: 'TODXStudent' });
+Student.belongsToMany(TypeOfDifficulty, { through: 'TODXStudent', timestamps: false });
 Student.hasMany(Class);
 Student.hasMany(StudentSchedule);
-Student.belongsToMany(Subject, { through: 'SubjectXStudent' });
+Student.belongsToMany(Subject, { through: 'SubjectXStudent', timestamps: false });
 
 //TIPO DE DIFICULTAD DEL ALUMNO
-TypeOfDifficulty.belongsToMany(Student, { through: 'TODXStudent' });
+TypeOfDifficulty.belongsToMany(Student, { through: 'TODXStudent', timestamps: false });
 
 //USER ACEPTADO O ADMIN DEL SISTEMA
-User.belongsToMany(Subject, { through: 'SubjectXUser' });
+User.belongsToMany(Subject, { through: 'SubjectXUser', timestamps: false });
 User.hasMany(UserSchedule);
 
 //CALIFICACION POR CLASE
