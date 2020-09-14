@@ -1,11 +1,11 @@
 const server = require("express").Router();
 const nodemailer = require("nodemailer");
-const { Volunteer } = require("../db.js");
+const { User } = require("../db.js");
 
 //cuando se crea un voluntario o cuando cambia el state a rejected se envía un mail con asunto
 //según el caso
 server.post('/mail', function(req, res, next) {
-Volunteer.findOne({ where: {email: req.body.email}})
+User.findOne({ where: {email: req.body.email}})
 .then(volunteer => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
