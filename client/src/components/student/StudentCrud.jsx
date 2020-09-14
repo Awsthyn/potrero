@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import {useHistory} from "react-router-dom"
-
+import { Link, useHistory } from "react-router-dom"
 import {getStudents} from '../../redux/actions/student'
 
 export const StudentCrud = ({getStudents, students}) => {
@@ -20,22 +19,23 @@ export const StudentCrud = ({getStudents, students}) => {
       <th>#</th>
       <th>Nombre</th>
       <th>Apellido</th>
-      <th>Detalles</th>
-      <th>Editar</th>
+      <th>Ver / Editar</th>
       <th>Dar de baja</th>
     </tr>
   </thead>
   <tbody>
-    {students.map(student => 
+    {students.length > 0 ? students.map(student => 
     <tr key={student.id}>
       <th>{student.id}</th>
       <td>{student.firstName}</td>
       <td>{student.lastName}</td>
-      <td><button className="btn btn-primary mt-n3 mb-n3" onClick={() => history.push(`/admin/student/details/${student.id}`)}>Detalles</button></td>
-      <td><button className="btn btn-success mt-n3 mb-n3">Editar</button></td>
+      <td><Link
+            to={{pathname: `/admin/student/details/${student.id}`, state: { props : student }}}>
+            <button className="btn btn-success mt-n3 mb-n3" >Detalles</button>
+          </Link></td>
       <td><button className="btn btn-danger mt-n3 mb-n3">Dar de baja</button></td>
     </tr>
-    )}
+    ) : <h2>No hay alumnos en la base de datos</h2>}
   </tbody>
 </table>
 <button className="mt-4 btn btn-success" onClick={() => history.push('/admin/student/post')}>Agregar alumno</button>
