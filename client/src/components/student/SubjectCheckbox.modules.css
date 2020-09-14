@@ -1,0 +1,4 @@
+input:checked ~ label {
+    background: #8CC63E;
+    color: white;
+  }
