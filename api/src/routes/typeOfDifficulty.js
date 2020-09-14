@@ -58,15 +58,14 @@ server.put('/:id', (req, res) => {
         }
     })
         // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
-        .then(() => {
-            TypeOfDifficulty.findOne({
-                where: {
-                    id: req.params.id
-                }
-            })
-                .then( todWithChanges => {
-                    res.json( todWithChanges )
-                })
+    .then(() => {
+        TypeOfDifficulty.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then( todWithChanges => {
+            res.json( todWithChanges )
         })
         .catch(err => {
             res.json(err)
@@ -75,7 +74,7 @@ server.put('/:id', (req, res) => {
     .catch(err => {
         res.json(err)
     })
-})
+});
 
 //ELIMINA EL TIPO DE DIFICULTAD
 server.delete('/:id', (req, res, next) => {

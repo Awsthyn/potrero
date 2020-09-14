@@ -33,16 +33,29 @@ server.post('/', (req, res) => {
     // CREA UN STUDENT.
     // RECIBE POR BODY TODA LA INFORMACIÓN DEL STUDENT.
     const student = req.body;
+    let sc = null;
     Student.create(student)
-        .then(studentCreated => {
-            // DEVUELVE EL STUDENT CREADO.
-            res.json(studentCreated)
+    .then(studentCreated => {
+        sc = studentCreated;
+        // Se espera un arreglo con Id's de Subjects
+        req.body.subjectsId.split(',').forEach(idSub => {
+            studentCreated.addSubject(idSub)
+            .then(() => console.log('Ok1'))
+        });
+        req.body.TODId.split(',').forEach(idTOD => {
+            studentCreated.addTypeOfDifficulty(idTOD)
+            .then(() => console.log('Ok2'))
         })
-        .catch(err => {
-            // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
-            console.log(err)
-            res.json(err)
-        })
+    })
+    .then(() => {
+        // DEVUELVE EL STUDENT CREADO.
+        res.json('Usuario creado exitosamente')
+    })
+    .catch(err => {
+        // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
+        console.log(err)
+        res.json(err)
+    })
 });
 
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
