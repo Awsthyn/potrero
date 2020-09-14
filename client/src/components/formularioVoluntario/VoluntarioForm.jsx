@@ -50,7 +50,7 @@ class VolunteerForm extends React.Component {
 
 		return (
 			<div className={style.Formm} style={{justifyContent: 'center', display: 'flex'}}>
-				<form method = "post">
+				<form>
 					<div className="form-group">
 						<small>Nombre</small>
 						<TextField
