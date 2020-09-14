@@ -1,4 +1,5 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import style from './VoluntarioForm.module.css';
@@ -10,6 +11,7 @@ class VolunteerForm extends React.Component {
 		super(props);
 		this.state = {
 			info: {},
+			redirect: false,
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleOnClick = this.handleOnClick.bind(this);
@@ -20,12 +22,18 @@ class VolunteerForm extends React.Component {
 		});
 	}
 	handleOnClick() {
-		this.props.postVoluntary(this.state.info);
-		this.props.addSchedule();
+		localStorage.setItem('datos', JSON.stringify(this.state.info));
+		this.setState(function () {
+			return {redirect: true};
+		});
+		// this.props.postVoluntary(this.state.info);
+		// this.props.addSchedule();
 	}
 	render() {
 		var control;
-
+		if (this.state.redirect) {
+			return <Redirect to="/voluntarios/horarios" />;
+		}
 		return (
 			<div className={style.Formm} style={{justifyContent: 'center', display: 'flex'}}>
 				<form>
@@ -58,6 +66,15 @@ class VolunteerForm extends React.Component {
 							id="standard-basic3"
 							onChange={e => this.handleOnChange(e)}
 						/>
+						<small>Telefono</small>
+						<TextField
+							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							name="phone"
+							//label="Telefono"
+							type="number"
+							id="standard-basic5"
+							onChange={e => this.handleOnChange(e)}
+						/>
 						<small>E-mail</small>
 						<TextField
 							style={{width: '80%', marginTop: '1%', display: 'block'}}
@@ -66,15 +83,6 @@ class VolunteerForm extends React.Component {
 							type="email"
 							id="standard-basic4"
 							aria-describedby="emailHelp"
-							onChange={e => this.handleOnChange(e)}
-						/>
-						<small>Telefono</small>
-						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
-							name="phone"
-							//label="Telefono"
-							type="number"
-							id="standard-basic5"
 							onChange={e => this.handleOnChange(e)}
 						/>
 						{/* <br></br>
@@ -87,14 +95,13 @@ class VolunteerForm extends React.Component {
 							<CheckBox dia={dia} key={idx} />
 						))} */}
 					</div>
-					{!this.state.info.firstName ||
+					{/* {!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
 					!this.state.info.email ||
-					!this.state.info.phone ||
-					!this.state.info.linkedin
+					!this.state.info.phone
 						? (control = true)
-						: false}
+						: false} */}
 					<Button
 						disabled={control ? true : false}
 						variant="contained"

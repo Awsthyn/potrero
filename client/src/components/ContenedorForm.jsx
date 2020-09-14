@@ -1,10 +1,15 @@
-import React from 'react';
-import {Route} from 'react-router-dom';
+import React, {useState} from 'react';
+import {Route, Redirect} from 'react-router-dom';
 import VolunteerForm from './VoluntarioForm';
 import Checkbox from './CheckBox';
 
 export default function ContenedorForm() {
+	const [redirect, setRedirect] = useState(false);
 	let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
+
+	if (redirect) {
+		return <Redirect to="/voluntarios/materias" />;
+	}
 	return (
 		<div style={{width: '80%', display: 'flex', justifyContent: 'center'}}>
 			<img
@@ -25,6 +30,22 @@ export default function ContenedorForm() {
 					exact
 					path="/voluntarios/horarios"
 					render={() => dias.map((dia, idx) => <Checkbox dia={dia} key={idx} />)}
+				/>
+				<Route
+					exact
+					path="/voluntarios/horarios"
+					render={() => (
+						<button
+							variant="contained"
+							className=""
+							type="submit"
+							value="Submit"
+							onClick={() => {
+								setRedirect(true);
+							}}>
+							Continuar
+						</button>
+					)}
 				/>
 			</div>
 		</div>

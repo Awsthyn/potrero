@@ -18,7 +18,6 @@ function App() {
 			<Route path="/" component={NavBar} />
 			<Route exact path="/" component={Home} />
 			<Route path="/voluntarios" component={ContenedorForm} />
-			<Route exact path="/" component={Home} />
 			<Route exact path="/admin" component={AdminPanel} />
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
 			<Route exact path="/admin/usuarios" component={TablaUsuarios} />
