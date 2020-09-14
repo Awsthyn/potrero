@@ -27,7 +27,9 @@ function App() {
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
 			<Route exact path="/admin/student" component={StudentCrud} />
 			<Route exact path="/admin/student/post" component={CreateStudentForm} />
-			<Route exact path="/admin/student/details/:id" component={StudentFile} />
+			<Route exact path="/admin/student/details/:id" 
+			render={props => <StudentFile student={props.location.state.props} />} />
+
 		</div>
 	);
 }
