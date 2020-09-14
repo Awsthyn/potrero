@@ -25,5 +25,14 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: new Date()
         },
-    })
+    });
+
+    StudentSchedule.createInstanceFromBody = function ({ startTime, endTime, nameWeekDay}) {
+        return StudentSchedule.create({
+            startTime,
+            endTime,
+            nameWeekDay,
+            studentId
+        });
+    };
 }

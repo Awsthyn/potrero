@@ -1,7 +1,7 @@
 const server = require('express').Router();
 
 // TRAEMOS LOS STUDENTS DE LA BASE DE DATOS
-const { Student, TypeOfDifficulty, Subject, TODXStudent, SubjectXStudent } = require('../db.js');
+const { Student, TypeOfDifficulty, Subject, TODXStudent, SubjectXStudent, StudentSchedule } = require('../db.js');
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require('sequelize');
@@ -28,35 +28,6 @@ server.get('/', (req, res) => {
             res.json(err)
         })
 })
-
-server.post('/', (req, res) => {
-    // CREA UN STUDENT.
-    // RECIBE POR BODY TODA LA INFORMACIÓN DEL STUDENT.
-    const student = req.body;
-    let sc = null;
-    Student.create(student)
-    .then(studentCreated => {
-        sc = studentCreated;
-        // Se espera un arreglo con Id's de Subjects
-        req.body.subjectsId.split(',').forEach(idSub => {
-            studentCreated.addSubject(idSub)
-            .then(() => console.log('Ok1'))
-        });
-        req.body.TODId.split(',').forEach(idTOD => {
-            studentCreated.addTypeOfDifficulty(idTOD)
-            .then(() => console.log('Ok2'))
-        })
-    })
-    .then(() => {
-        // DEVUELVE EL STUDENT CREADO.
-        res.json('Usuario creado exitosamente')
-    })
-    .catch(err => {
-        // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
-        console.log(err)
-        res.json(err)
-    })
-});
 
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
 server.get('/:id', (req, res) => {
@@ -89,7 +60,54 @@ server.get('/:id', (req, res) => {
         })
 })
 
-// MODIFICAR LA INFORMACIÓN DE UN STUDENT.
+server.post('/', (req, res) => {
+    // CREA UN STUDENT.
+    // RECIBE POR BODY TODA LA INFORMACIÓN DEL STUDENT.
+    const student = req.body;
+    console.log("student")
+    console.log(student)
+    console.log("fin student")
+    let sc = null;
+    Student.create(student)
+    .then(studentCreated => {
+        sc = studentCreated;
+        // Se espera un arreglo con Id's de Subjects
+        req.body.subjectsId.split(',').forEach(idSub => {
+            studentCreated.addSubject(idSub)
+            .then(() => console.log('Ok1'))
+            .catch(err => {
+                // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
+                console.log(err)
+                res.json(err)
+            })
+        });
+        req.body.TODId.split(',').forEach(idTOD => {
+            studentCreated.addTypeOfDifficulty(idTOD)
+            .then(() => console.log('Ok2'))
+            .catch(err => {
+                // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
+                console.log(err)
+                res.json(err)
+            })
+        })
+        var {startTime,endTime,nameWeekDay}= req.body.scheduleStudent.split('; ')
+        console.log(startTime,endTime,nameWeekDay)
+        console.log("indicador", sc.id)
+             studentCreated.addStudentSchedule({startTime, endTime, nameWeekDay, studentId: sc.id})
+//         })
+    })
+    .then(() => {
+        // DEVUELVE EL STUDENT CREADO.
+        res.json('Usuario creado exitosamente')
+    })
+    .catch(err => {
+        // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
+        console.log(err)
+        res.json(err)
+    })
+});
+
+// MODIFICAR LOS TIPOS DE DIFICULTAD DE UN ESTUDIANTE DE UN STUDENT.
 server.put('/tod/:id', (req, res) => {
     // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
     TODXStudent.update(req.body, {
@@ -119,6 +137,7 @@ server.put('/tod/:id', (req, res) => {
     })
 });
 
+// MODIFICAR LAS MATERIAS DE UN ESTUDIANTE DE UN STUDENT.
 server.put('/subject/:id', (req, res) => {
     // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
     SubjectXStudent.update(req.body, {
@@ -148,6 +167,7 @@ server.put('/subject/:id', (req, res) => {
     })
 });
 
+//BORRADO LÓGICO
 // En lugar de eliminar un estudiante lo que hacemos es cambiarle el status a false
 // Y así poder filtrar solamente por estudiantes activos y no perder la info por si
 // mas adelante vulelve a la fundación.

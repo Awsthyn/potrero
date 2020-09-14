@@ -5,11 +5,14 @@ const { Router } = require('express');
 // IMPORT DE LA RUTA DE USUARIOS
 const usersRouter = require('./users.js');
 
-// IMPORT DE LA RUTA DE VOLUNTARIOS
-const volunteersRouter = require('./volunteers.js');
+// // IMPORT DE LA RUTA DE VOLUNTARIOS
+// const volunteersRouter = require('./volunteers.js');
 
 // IMPORT DE LA RUTA DE STUDENTS - ALUMNOS
 const studentRouter = require('./students.js');
+
+// IMPORT DE LA RUTA DE STUDENTS - ALUMNOS
+const studentScheduleRouter = require('./stundentSchedule.js');
 
 // IMPORT DE LA RUTA DE TYPE-OF-DIFFICULTY
 const typeOfDificulty = require('./typeOfDifficulty.js');
@@ -39,8 +42,8 @@ const router = Router();
 // RUTAS DE USUARIOS
 router.use('/users', usersRouter);
 
-// RUTA DE VOLUNTARIOS
-router.use('/volunteers', volunteersRouter);
+// // RUTA DE VOLUNTARIOS
+// router.use('/volunteers', volunteersRouter);
 
 // Ruta de autenticacion
 router.use('/auth', authenticateRouter);
@@ -56,6 +59,9 @@ router.use('/mailWelcomeRejection', mailWelcomeRejection);
 
 // RUTA DE STUDENTS
 router.use('/students', studentRouter);
+
+// RUTA DE STUDENTSSCHEDULE
+router.use('/studentschedule', studentScheduleRouter);
 
 // RUTA DE TYPEOFDIFFICULTY
 router.use('/typeofdifficulty', typeOfDificulty);
