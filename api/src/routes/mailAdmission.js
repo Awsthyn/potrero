@@ -1,6 +1,6 @@
 const server = require("express").Router();
 const nodemailer = require("nodemailer")
-const { Volunteer } = require("../db.js");
+const { User } = require("../db.js");
 const crypto = require('crypto');
 
 
@@ -13,11 +13,10 @@ server.post('/setPassword', function(req, res, next) {
         return token
     })
 
-        Volunteer.findOne({ where: {email: req.body.email}})
+        User.findOne({ where: {email: req.body.email}})
         .then(usuario => {
             usuario.update({resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000 })
             //Configurar mail remitente
-            console.info("Soy el usuario",usuario)
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth:{
