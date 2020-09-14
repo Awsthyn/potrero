@@ -1,10 +1,9 @@
 import React from 'react';
-import {postVoluntary, addSchedule} from '../../redux/actions/voluntary.js';
+import {postVoluntary} from '../../redux/actions/voluntary.js';
 import {connect} from 'react-redux';
 import Materias from './Materias';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import style from './VoluntarioForm.module.css';
 
 class ContenedorMaterias extends React.Component {
 	constructor(props) {

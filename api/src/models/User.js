@@ -59,17 +59,7 @@ module.exports = (sequelize) => {
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: new Date()
-  },
-  updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: new Date()
-  },
+    }
   });
   User.createInstanceFromBody = function ({ email, password, firstName, lastName, address, birthday, phone, linkedin, cv, isActive, state }) {
     return User.create({ // Preguntar si esta bien que sea User.create o tiene que ser Volunteer.create???
