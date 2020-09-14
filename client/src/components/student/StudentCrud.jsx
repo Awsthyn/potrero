@@ -26,7 +26,7 @@ export const StudentCrud = ({getStudents, students}) => {
     </tr>
   </thead>
   <tbody>
-    {students.map(student => 
+    {students.length > 0 ? students.map(student => 
     <tr key={student.id}>
       <th>{student.id}</th>
       <td>{student.firstName}</td>
@@ -35,7 +35,7 @@ export const StudentCrud = ({getStudents, students}) => {
       <td><button className="btn btn-success mt-n3 mb-n3">Editar</button></td>
       <td><button className="btn btn-danger mt-n3 mb-n3">Dar de baja</button></td>
     </tr>
-    )}
+    ) : <h2>No hay alumnos en la base de datos</h2>}
   </tbody>
 </table>
 <button className="mt-4 btn btn-success" onClick={() => history.push('/admin/student/post')}>Agregar alumno</button>

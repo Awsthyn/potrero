@@ -58,19 +58,19 @@ export class CreateStudentForm extends Component {
 	render() {
 		return (
             <>
-            <h1 className="mb-3">Formulario para alta de alumno</h1>
+            <h1 className="mb-3 mt-2">Formulario para alta de alumno</h1>
 			<form className="mx-auto" style={{ width: '80vw' }} onSubmit={this.submitHandler}>
-				<div className="form-group">
+				<div className="mb-n1 d-flex flex-row form-group">
 					<input
+						style={{width: "550px"}}
 						className="form-control"
 						type="text"
 						name="firstName"
 						placeholder="Nombre del alumno..."
 						onChange={this.onChangeHandler}
 					/>
-				</div>
-				<div className="form-group">
 					<input
+						style={{width: "550px"}}
 						className="form-control"
 						type="text"
 						name="lastName"
@@ -105,6 +105,33 @@ export class CreateStudentForm extends Component {
 						onChange={this.onChangeHandler}
 					/>
 				</div>
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="strengths"
+						placeholder="Fortalezas..."
+						onChange={this.onChangeHandler}
+					/>
+				</div>
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="weakness"
+						placeholder="Aspectos que requieren atención..."
+						onChange={this.onChangeHandler}
+					/>
+				</div>
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="motivations"
+						placeholder="Motivaciones..."
+						onChange={this.onChangeHandler}
+					/>
+				</div>
 				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
                     {this.props.subjects.map( subject => {
                         return (
@@ -112,7 +139,7 @@ export class CreateStudentForm extends Component {
                         )}
                     )}
                 </div>
-				<input className="btn btn-info" value="Agregar" type="submit" />
+				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Agregar" type="submit" />
 			</form>
             </>
 		);
