@@ -1,13 +1,17 @@
 .botonMateria{
     display: inline-block;
     width: 110px;
-    height: 25px;
+    height: 28px;
     background-color: white;
     border-radius: 20px;
-    border: solid 0.5px gray;
+    border: solid 0.1px gray;
     margin-top: 5px;
 }
 
 .botonMateria:hover{
     cursor:pointer;
+}
+
+.botonMateria:active{
+    color:white;
 }

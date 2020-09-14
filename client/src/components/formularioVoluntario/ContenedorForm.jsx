@@ -2,6 +2,7 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import VolunteerForm from './VoluntarioForm';
 import Checkbox from './CheckBox';
+import ContenedorMaterias from './ContenedorMaterias';
 
 export default function ContenedorForm() {
 	let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
@@ -26,6 +27,7 @@ export default function ContenedorForm() {
 					path="/voluntarios/horarios"
 					render={() => dias.map((dia, idx) => <Checkbox dia={dia} key={idx} />)}
 				/>
+				<Route exact path="/voluntarios/materias" component={ContenedorMaterias} />
 			</div>
 		</div>
 	);
