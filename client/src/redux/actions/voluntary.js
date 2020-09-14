@@ -4,9 +4,9 @@ import {ADD_VOLUNTARY, ADD_SCHEDULE,GET_VOLUNTEERS,DELETE_VOLUNTEER} from '../co
 export function postVoluntary(voluntary) {
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/volunteers`, voluntary, {withCredentials: true})
+			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
-				//dispatch({type: ADD_VOLUNTARY, voluntary: res.data});
+				console.info('postVoluntary.then', res)
 				dispatch(postMailWelcome(res.data));
 			})
 			.catch(err => console.log(err));
@@ -16,7 +16,7 @@ export function postVoluntary(voluntary) {
 export function getVolunteers() {
 	return function (dispatch) {
 		return axios
-			.get(`http://localhost:3001/volunteers`, {withCredentials: true})
+			.get(`http://localhost:3001/users`, {withCredentials: true})
 			.then(res => {
 				dispatch({type: GET_VOLUNTEERS, volunteers: res.data});
 			})
@@ -26,7 +26,7 @@ export function getVolunteers() {
 export function deleteVolunteer(id) {
 	return function (dispatch) {
 		return axios
-			.put(`http://localhost:3001/volunteers/${id}`,{disabled:true} ,{withCredentials: true})
+			.put(`http://localhost:3001/users/${id}`,{disabled:true} ,{withCredentials: true})
 			.then(() => {
 				dispatch(getVolunteers())
 			})
@@ -37,7 +37,7 @@ export function deleteVolunteer(id) {
 export function addSchedule(schedule) {
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/volunteers`, schedule, {withCredentials: true})
+			.post(`http://localhost:3001/users`, schedule, {withCredentials: true})
 			.then(res => {
 				dispatch({type: ADD_SCHEDULE, schedule: res.data});
 			})
@@ -50,8 +50,9 @@ export function postMailWelcome(voluntary) {
 		return axios
 			.post(`http://localhost:3001/mailWelcomeRejection/mail`, voluntary, {withCredentials: true})
 			.then(res => {
+				console.info('postMailWelcome.then', res)
 				dispatch({type: ADD_VOLUNTARY, voluntary: res.data});
 			})
-			.catch(err => console.log(err));
+			.catch(err => console.error('postMailWelcome.catch', err));
 	};
 }

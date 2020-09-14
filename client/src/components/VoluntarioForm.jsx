@@ -20,7 +20,8 @@ class VolunteerForm extends React.Component {
 			info: {...this.state.info, [e.target.name]: e.target.value},
 		});
 	}
-	handleOnClick() {
+	handleOnClick(e) {
+		e.preventDefault()
 		this.props.postVoluntary(this.state.info);
 		this.props.addSchedule();
 	}
@@ -111,7 +112,7 @@ class VolunteerForm extends React.Component {
 						className={style.skere}
 						type="submit"
 						value="Submit"
-						onClick={() => this.handleOnClick()}>
+						onClick={(e) => this.handleOnClick(e)}>
 						Enviar
 					</Button>
 				</form>
