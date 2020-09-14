@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { getSubjects } from '../../redux/actions/subject'
 import { postStudent } from '../../redux/actions/student';
+
+import SubjectCheckbox from "./SubjectCheckbox"
 
 export class CreateStudentForm extends Component {
 	constructor(props) {
@@ -13,11 +16,16 @@ export class CreateStudentForm extends Component {
 			email: null,
 			tutor: null,
 			difficulty: false,
+			subject: [],
             weakness: 'lorem ipsum',
             interests: "lorem ipsum",
 			strengths: 'lorem ipsum',
 			motivations: 'lorem ipsum',
 		};
+		this.subjects = this.props.subjects
+		this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
+		this.onChangeHandler = this.onChangeHandler.bind(this);
+		this.submitHandler = this.submitHandler.bind(this);
 	}
 	onChangeHandler = (event) => {
 		let name = event.target.name;
@@ -30,11 +38,28 @@ export class CreateStudentForm extends Component {
         
 		
 	};
+
+	onCheckboxClicked(subject, isChecked) {
+        if(isChecked){
+            this.setState({
+                subject: [...this.state.subject, subject.id]
+            })
+        } else {
+            this.setState({
+                subject: this.state.subject.filter(s => s !== subject.id)
+            })
+        }
+    }
+
+    componentDidMount() {
+        this.props.getSubjects();
+    }
+
 	render() {
 		return (
             <>
             <h1 className="mb-3">Formulario para alta de alumno</h1>
-			<form className="mx-auto" style={{ width: '800px' }} onSubmit={this.submitHandler}>
+			<form className="mx-auto" style={{ width: '80vw' }} onSubmit={this.submitHandler}>
 				<div className="form-group">
 					<input
 						className="form-control"
@@ -80,6 +105,13 @@ export class CreateStudentForm extends Component {
 						onChange={this.onChangeHandler}
 					/>
 				</div>
+				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
+                    {this.props.subjects.map( subject => {
+                        return (
+                        <SubjectCheckbox key = {subject.id} initialState={false} subject={subject} onChange={this.onCheckboxClicked} required/>
+                        )}
+                    )}
+                </div>
 				<input className="btn btn-info" value="Agregar" type="submit" />
 			</form>
             </>
@@ -87,10 +119,13 @@ export class CreateStudentForm extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+	subjects: state.subjects.subjects
+});
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		getSubjects: () => dispatch(getSubjects()),
 		postStudent: (student) => dispatch(postStudent(student)),
 	};
 };
