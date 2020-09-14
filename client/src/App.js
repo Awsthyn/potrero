@@ -25,7 +25,6 @@ function App() {
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios}/>
 			<Route exact path="/admin/usuarios" component={TablaUsuarios}/>
 			<Route exact path="/admin/materias" component={TablaVoluntarios}/>
-			<Route exact path="/voluntarios/formulario" component={VolunteerForm} />
 			<Route exact path="/usuario/login" component={Login} />
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
 			<Route exact path="/admin/student" component={StudentCrud} />
