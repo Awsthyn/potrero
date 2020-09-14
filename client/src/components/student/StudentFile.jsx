@@ -10,6 +10,7 @@ export class StudentFile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+            id: props.student.id,
 			firstName: props.student.firstName,
 			lastName: props.student.lastName,
 			phone: props.student.phone,
