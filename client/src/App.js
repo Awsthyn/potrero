@@ -11,7 +11,7 @@ import TablaUsuarios from './components/admin/TablaUsuarios';
 import TablaVoluntarios from './components/admin/TablaVoluntarios';
 import StudentCrud from './components/student/StudentCrud';
 import CreateStudentForm from './components/student/CreateStudentForm';
-
+import StudentFile from './components/student/StudentFile';
 
 function App() {
 	return (
@@ -27,6 +27,7 @@ function App() {
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
 			<Route exact path="/admin/student" component={StudentCrud} />
 			<Route exact path="/admin/student/post" component={CreateStudentForm} />
+			<Route exact path="/admin/student/details/:id" component={StudentFile} />
 		</div>
 	);
 }
