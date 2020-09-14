@@ -41,9 +41,9 @@ export default class CheckBox extends React.Component {
 					) {
 						return (h[clase] = h[clase] - 0.5);
 					}
-				} else {
-					return h;
 				}
+			return h;
+				
 			});
 			return {
 				newState,

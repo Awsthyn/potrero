@@ -59,19 +59,9 @@ module.exports = (sequelize) => {
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: new Date()
-  },
-  updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: new Date()
-  },
+    }
   });
-  User.createInstanceFromBody = function ({ email, password, firstName, lastName, address, birthday, phone, linkedin, cv, isActive, state }) {
+  User.createInstanceFromBody = function ({ email, password, firstName, lastName, address, birthday, phone, linkedin, cv, state, isActive}) {
     return User.create({ // Preguntar si esta bien que sea User.create o tiene que ser Volunteer.create???
       email,
       password,
@@ -82,8 +72,8 @@ module.exports = (sequelize) => {
       phone,
       linkedin,
       cv,
-      isActive,
-      state
+      state,
+      isActive
     });
   };
   // debe ser function para que funcione this.password
@@ -103,10 +93,10 @@ module.exports = (sequelize) => {
     })
   }
 
-  User.addHook('beforeCreate', (user, options, cb) => {
+  /*User.addHook('beforeCreate', (user, options, cb) => {
     // console.info("en el hook beforeCreate", user)
     return hashPassword(user.password).then(hash => user.password = hash)}
-  )
+)*/
 
   User.addHook('beforeUpdate', (user, options, cb) =>
   {

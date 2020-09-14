@@ -32,7 +32,7 @@ export default function Horarios({de, hasta, id, handleTime, handleDelete}) {
 	useEffect(() => {
 		renderTimeDe();
 		renderTimeHasta();
-	}, [de, hasta]);
+	}, [de, hasta, renderTimeDe, renderTimeHasta]);
 
 	return (
 		<div>
