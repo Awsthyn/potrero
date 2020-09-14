@@ -25,9 +25,9 @@ function App() {
 			<Route exact path="/admin/materias" component={TablaVoluntarios} />
 			<Route exact path="/usuario/login" component={Login} />
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
-			<Route exact path="/admin/student" component={StudentCrud} />
-			<Route exact path="/admin/student/post" component={CreateStudentForm} />
-			<Route exact path="/admin/student/details/:id" 
+			<Route exact path="/admin/estudiantes" component={StudentCrud} />
+			<Route exact path="/admin/estudiantes/agregar" component={CreateStudentForm} />
+			<Route exact path="/admin/estudiantes/detalles/:id" 
 			render={props => <StudentFile student={props.location.state.props} />} />
 
 		</div>
