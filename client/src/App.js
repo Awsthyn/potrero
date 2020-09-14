@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Route} from 'react-router-dom';
-import ContenedorForm from './components/ContenedorForm';
+import ContenedorForm from './components/formularioVoluntario/ContenedorForm';
 import Login from './components/Login';
 import MiPerfil from './components/MiPerfil';
 import Home from './components/Home';
@@ -11,6 +11,7 @@ import TablaUsuarios from './components/admin/TablaUsuarios';
 import TablaVoluntarios from './components/admin/TablaVoluntarios';
 import StudentCrud from './components/student/StudentCrud';
 import CreateStudentForm from './components/student/CreateStudentForm';
+
 
 function App() {
 	return (

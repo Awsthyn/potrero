@@ -3,10 +3,8 @@ import {Redirect} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import style from './VoluntarioForm.module.css';
-import {postVoluntary, addSchedule} from '../redux/actions/voluntary.js';
-import {connect} from 'react-redux';
 
-class VolunteerForm extends React.Component {
+export default class VolunteerForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -26,17 +24,41 @@ class VolunteerForm extends React.Component {
 		this.setState(function () {
 			return {redirect: true};
 		});
-		// this.props.postVoluntary(this.state.info);
+
 		// this.props.addSchedule();
+		// handleOnClick(e) {
+		// 	e.preventDefault();
+		// 	swal({
+		// 		title: "¿Estas seguro?",
+		// 		text: "Antes de enviar tu solicitud verifica que tus datos sean correctos!",
+		// 		icon: "warning",
+		// 		buttons: true,
+		// 		dangerMode: true,
+		// 	  })
+		// 	  .then((willDelete) => {
+		// 		console.log(this.state.info)
+		// 		if (willDelete) {
+		// 			console.log(this.state.info)
+		// 		  this.props.postVoluntary(this.state.info);
+		// 	      //this.props.addSchedule();
+		// 		  swal("Tu solicitud ha sido enviada!", {
+		// 			icon: "success",
+		// 		  });
+		// 		} else {
+		// 		  swal("Solicitud no enviada");
+		// 		}
+		// 	  });
 	}
+
 	render() {
+		// localStorage.clear();
 		var control;
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;
 		}
 		return (
 			<div className={style.Formm} style={{justifyContent: 'center', display: 'flex'}}>
-				<form>
+				<form method="post">
 					<div className="form-group">
 						<small>Nombre</small>
 						<TextField
@@ -85,21 +107,12 @@ class VolunteerForm extends React.Component {
 							aria-describedby="emailHelp"
 							onChange={e => this.handleOnChange(e)}
 						/>
-						{/* <br></br>
-						<small> El horario establecido para las clases es de 8:00 hs a 18:00 hs.</small>
-						<br></br>
-						<small>
-							Escoge tu disponibilidad horaria (el rango horario no debe ser inferior a 1 hora)
-						</small> */}
-						{/* {dias.map((dia, idx) => (
-							<CheckBox dia={dia} key={idx} />
-						))} */}
 					</div>
 					{/* {!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
 					!this.state.info.email ||
-					!this.state.info.phone
+					!this.state.info.phone 
 						? (control = true)
 						: false} */}
 					<Button
@@ -116,5 +129,3 @@ class VolunteerForm extends React.Component {
 		);
 	}
 }
-
-export default connect(null, {postVoluntary, addSchedule})(VolunteerForm);

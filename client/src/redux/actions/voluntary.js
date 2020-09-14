@@ -1,10 +1,11 @@
 import axios from 'axios';
-import {ADD_VOLUNTARY, ADD_SCHEDULE,GET_VOLUNTEERS,DELETE_VOLUNTEER} from '../constants';
+import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER} from '../constants';
 
 export function postVoluntary(voluntary) {
+	console.log(voluntary);
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/volunteers`, voluntary, {withCredentials: true})
+			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
 				//dispatch({type: ADD_VOLUNTARY, voluntary: res.data});
 				dispatch(postMailWelcome(res.data));
@@ -26,9 +27,9 @@ export function getVolunteers() {
 export function deleteVolunteer(id) {
 	return function (dispatch) {
 		return axios
-			.put(`http://localhost:3001/volunteers/${id}`,{disabled:true} ,{withCredentials: true})
+			.put(`http://localhost:3001/volunteers/${id}`, {disabled: true}, {withCredentials: true})
 			.then(() => {
-				dispatch(getVolunteers())
+				dispatch(getVolunteers());
 			})
 			.catch(err => console.log(err));
 	};
