@@ -50,7 +50,15 @@ server.get('/:id', (req, res) => {
     Student.findOne({
         where: {
             id: req.params.id
-        }
+        },
+        include: [
+            {
+                model: TypeOfDifficulty
+            },
+            {
+                model: Subject
+            }
+        ]
     })
         .then(studentFound => {
             // SI ENCUENTRA AL STUDENT, ENVÍA SUS DATOS. O SINO, ENVÍA UN MENSAJE DE ERROR.

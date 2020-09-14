@@ -11,8 +11,39 @@ export const StudentFile = ({getStudentDetail, studentDetail}) => {
     },[getStudentDetail])
 
     return (
-        <div>
-        {studentDetail.firstName}    
+        <div className="mt-4">
+        <h2>{studentDetail.firstName + ' ' + studentDetail.lastName}</h2>
+        <table className="table">
+        <thead>
+            <tr>
+                <th>Dato</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>Email</td>
+                <td>{studentDetail.email}</td>
+            </tr>
+            <tr>
+                <td>Tutor</td>
+                <td>{studentDetail.tutor}</td>
+            </tr>
+            <tr>
+                <td>Teléfono</td>
+                <td>{studentDetail.phone}</td>
+            </tr>
+            <tr>
+                <td>Materias</td>
+                <td>{studentDetail.subjects ? studentDetail.subjects.map(e => e.name).join(', ') : null}</td>
+            </tr>
+            <tr>
+                <td>Dificultades</td>
+                <td>{studentDetail.typeOfDifficulties ? studentDetail.typeOfDifficulties.map(e => e.name).join(', ') : null}</td>
+            </tr>
+        </tbody>    
+        </table>
         </div>
     )
 }
