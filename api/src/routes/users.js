@@ -3,6 +3,9 @@ const server = require('express').Router();
 // TRAEMOS LOS USUARIOS DE LA BASE DE DATOS
 const { User } = require('../db.js');
 
+// TRAEMOS LOS SUBJECTS DE LA BASE DE DATOS
+const { Subject } = require('../db.js');
+
 // TRAEMOS SEQUELIZE
 const Sequelize = require('sequelize');
 
@@ -75,6 +78,28 @@ server.put('/:id', ( req, res ) => {
     .catch( err => {
         res.send( err )
     })
+})
+
+// RELACIONA LAS MATERIAS CON USUARIOS 
+server.post("/:id/materias", (req, res) => {
+    var id = req.params.id;
+    var materia = req.body.materia;
+    var user = User.findByPk(id);
+    var subject = Subject.findOne({
+        where: {
+            name: materia,
+        }
+    })
+    Promise.all([user, subject])
+    .then(values => {
+        var user = values[0];
+        var subject = values[1];
+        user.addSubject(subject);
+        res.send(user)
+    })
+    .catch(err => {
+        res.send(err)
+    })  
 })
 
 module.exports = server;

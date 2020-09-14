@@ -8,10 +8,12 @@
     margin-top: 5px;
     align-items: center;
     justify-content: center;
+    
 }
 
 .botonMateria:hover{
     cursor:pointer;
+
 }
 
 .botonMateria:active{
@@ -24,3 +26,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }    
+
+.botonEnviar {
+    background-color: #492BC4;
+}
