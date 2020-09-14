@@ -43,8 +43,22 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false
         },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: new Date()
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: new Date()
+        },
     });
-    Student.createInstanceFromBody = function ({ firstName, lastName, phone, email, tutor, difficulty, typeOfDifficulty, weakness, strengths, interests, motivations}) {
+    Student.createInstanceFromBody = function ({ firstName, lastName, phone, email, tutor, difficulty, typeOfDifficulty, weakness, strengths, interests, motivations, isActive}) {
         return Student.create({
             firstName,
             lastName,
@@ -55,7 +69,8 @@ module.exports = (sequelize) => {
             weakness,
             strengths,
             interests,
-            motivations
+            motivations,
+            isActive
         });
     };
 }

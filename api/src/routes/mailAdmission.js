@@ -1,13 +1,13 @@
 const server = require("express").Router();
 const nodemailer = require("nodemailer")
 const { Volunteer } = require("../db.js");
-var crypto = require('crypto');
+const crypto = require('crypto');
+
 
 
 
 //---------- Crea token, lo setea al usuario, y se lo envia por email -------
 server.post('/setPassword', function(req, res, next) {
-
     crypto.randomBytes(20, function(err, buf) {
         token = buf.toString('hex');
         return token

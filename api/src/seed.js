@@ -13,32 +13,66 @@ const initialVolunteers = [
     phone: "3794 65-9956",
     birthday: Date(),
     email: "elebeatrizgonzalez@gmail.com",
+    state: "acepted",
     linkedin: "https://www.linkedin.com/in/ele-gonzalez/",
-    adviser: false },
+    adviser: true },
     { 
     firstName: "Germán",
     lastName: "Moren",
     phone: "3442 67-0833",
     birthday: Date(),
+    state: "acepted",
     email: "ingenieriamg91@gmail.com",
     linkedin: "https://www.linkedin.com/in/germanmoren/",
-    adviser: false },
+    adviser: true },
+    { 
+    firstName: "Leandro",
+    lastName: "Alvarez",
+    phone: "341 5967027",
+    birthday: Date(),
+    state: "acepted",
+    email: "elefantenegro64@gmail.com",
+    linkedin: "https://www.linkedin.com/in/leandro-agustin-alvarez/",
+    adviser: true },
+
   ];
 
 const initialUsers = [
     {
-    email: "alfredoromano@romano-group.com",
+    email: "elefantenegro64@gmail.com",
     password: "1234",
-    rol: "Administrador"
+    roleId: 1,
+    volunteerId: 4
+    },
+    {
+    email: "ingenieriamg91@gmail.com",
+    password: "1234",
+    roleId: 1,
+    volunteerId: 3
+    },
+
+    {
+    email: "elebeatrizgonzalez@gmail.com",
+    password: "1234",
+    roleId: 1,
+    volunteerId: 2
     },
     {
     email: "martinborchandt@soyhenry.com",
     password: "1234",
-    rol: "Administrador"
+    roleId: 1,
     },
     
 ]
-
+const initialTypeOfDifficulty = [
+    {name: "Dislexia",},
+    {name: "Discalculia",},
+    {name: "Disgrafía",},
+    {name: "TEA",},
+    {name: "TEL",},
+    {name: "TANV",},
+    {name: "TDAH",}, 
+]
 const initialSubjects = [
     {name: "Biología"}, 
     {name: "Matemática"}, 
@@ -47,15 +81,31 @@ const initialSubjects = [
     {name: "Física"}, 
     {name: "Historia"}
 ]
+const initialRoles =
+[
+    {name: "Administrador"}, 
+    {name: "Voluntario"}
+]
+const initialTODXStudent =
+[
+    {studentId: 2,typeOfDifficultyId:2}, 
+    {studentId: 2,typeOfDifficultyId:3},
+    {studentId: 2,typeOfDifficultyId:4}, 
+    {studentId: 1,typeOfDifficultyId:5}, 
+    {studentId: 1,typeOfDifficultyId:6},
+    {studentId: 1,typeOfDifficultyId:7}, 
+    {studentId: 1,typeOfDifficultyId:1}, 
+    
+]
 
 const initialStudents = [
     {
-        firstName: "Lorem",
-        lastName: "Ipsum",
+        firstName: "Maria",
+        lastName: "DificultTrue",
         phone: "11 54121144",
         email: "loremipsum@gmail.com",
         tutor: "Et Ipsum",
-        difficulty: false,
+        difficulty: true,
         weakness: "lorem ipsum",
         strengths: "lorem ipsum",
         interests: "lorem ipsum",
@@ -63,11 +113,11 @@ const initialStudents = [
     },
     {
         firstName: "José",
-        lastName: "Lorem",
+        lastName: "DificultTrue",
         phone: "11 541222144",
         email: "joselorem@lorem.com",
         tutor: "Et Lorem",
-        difficulty: false,
+        difficulty: true,
         weakness: "lorem ipsum",
         strengths: "lorem ipsum",
         interests: "lorem ipsum",
@@ -88,6 +138,9 @@ const initialStudents = [
 ]
 
 module.exports = {
+    initialTODXStudent,
+    initialTypeOfDifficulty,
+    initialRoles,
     initialUsers,
     initialVolunteers,
     initialSubjects,
