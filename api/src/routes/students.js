@@ -61,6 +61,7 @@ server.post('/', (req, res) => {
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
 server.get('/:id', (req, res) => {
     // BUSCA AL STUDENT.
+
     Student.findOne(
         {
             where: 
