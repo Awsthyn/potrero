@@ -3,6 +3,7 @@ import Materias from "./Materias";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import style from './VoluntarioForm.module.css';
+import style1 from './Materias.module.css';
 
 export default class ContenedorMaterias extends React.Component {
     constructor(){
@@ -15,13 +16,13 @@ export default class ContenedorMaterias extends React.Component {
         this.handleOnChange = this.handleOnChange.bind(this);
     }
     handleOnClick(id, e){
-        if(e.target.style.backgroundColor === "rgb(167, 255, 167)"){
+        if(e.target.style.backgroundColor === "rgb(61, 243, 70)"){
             e.target.style.backgroundColor = "white";
             this.setState(function (state) {
                 return {mat: state.mat.filter(m => m !== id)};
             });
         } else {
-            e.target.style.backgroundColor = "rgb(167, 255, 167)";
+            e.target.style.backgroundColor = "rgb(61, 243, 70)";
             this.setState ({
                 mat: [...this.state.mat, id],
             }) 
@@ -39,7 +40,7 @@ export default class ContenedorMaterias extends React.Component {
         return(
            <div>
                <h4>¿En qué áreas podrías ayudar?</h4>  
-                { materias.map((m,i) => <Materias materia={m} key={i} handleOnClick={this.handleOnClick}/>) }
+                <div className={style1.contenedorMateria}>{ materias.map((m,i) => <Materias materia={m} key={i} handleOnClick={this.handleOnClick}/>) }</div>
                 <br></br>
                 <small>Linkedin</small>
                 <TextField
