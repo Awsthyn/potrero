@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import { getSubjects } from '../../redux/actions/subject'
-import { getStudentDetail, putStudent } from '../../redux/actions/student';
+import { putStudent } from '../../redux/actions/student';
 
 import SubjectCheckbox from "./SubjectCheckbox"
 
@@ -140,7 +140,7 @@ export class StudentFile extends Component {
                         )}
                     )}
                 </div>
-				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Agregar" type="submit" />
+				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Confirmar cambios" type="submit" />
 			</form>
             </>
 		);
@@ -149,13 +149,11 @@ export class StudentFile extends Component {
 
 const mapStateToProps = (state) => ({
     subjects: state.subjects.subjects,
-    studentDetail: state.students.studentDetail
 });
 
 const mapDispatchToProps = (dispatch) => {
 	return {
         getSubjects: () => dispatch(getSubjects()),
-        getStudentDetail: (id) => dispatch(getStudentDetail(id)),
 		putStudent: (student) => dispatch(putStudent(student)),
 	};
 };
