@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import {useHistory} from "react-router-dom"
-
+import {useHistory, Link} from "react-router-dom"
 import {getStudents} from '../../redux/actions/student'
 
 export const StudentCrud = ({getStudents, students}) => {
@@ -32,7 +31,11 @@ export const StudentCrud = ({getStudents, students}) => {
       <td>{student.firstName}</td>
       <td>{student.lastName}</td>
       <td><button className="btn btn-primary mt-n3 mb-n3" onClick={() => history.push(`/admin/student/details/${student.id}`)}>Detalles</button></td>
-      <td><button className="btn btn-success mt-n3 mb-n3">Editar</button></td>
+      <td><button className="btn btn-success mt-n3 mb-n3" ><Link
+                                to={{
+                                  pathname: `/admin/student/details/${student.id}`,
+                                   state: { props : student }
+                                }}>Editar</Link></button></td>
       <td><button className="btn btn-danger mt-n3 mb-n3">Dar de baja</button></td>
     </tr>
     ) : <h2>No hay alumnos en la base de datos</h2>}

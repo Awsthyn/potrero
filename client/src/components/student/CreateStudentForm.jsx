@@ -132,6 +132,7 @@ export class CreateStudentForm extends Component {
 						onChange={this.onChangeHandler}
 					/>
 				</div>
+				<h3 className="text-center d-block mb-3">Materias que necesita cursar</h3>
 				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
                     {this.props.subjects.map( subject => {
                         return (
