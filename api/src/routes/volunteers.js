@@ -12,7 +12,7 @@ server.get('/', ( req , res ) => {
     .then( volunteers => {
         // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "VOLUNTEERS" ESTÁ VACÍO. ASÍ
         // RESPONDE CON UN MENSAJE, O SINO, DEVUELVE EL ARRAY CON LOS VOLUNTARIOS DENTRO.
-    !volunteers.length ? res.send("No hay voluntarios todavía.") : res.send( volunteers )
+    !volunteers.length ? res.send([]) : res.send( volunteers )
     })
     .catch( err => {
         // ENVÍA UN ERROR EN CASO DE QUE HAYA INCONVENIENTES.
@@ -57,6 +57,12 @@ server.get('/:id', ( req, res ) => {
 // MODIFICAR LA INFORMACIÓN DE UN VOLUNTARIO.
 server.put('/:id', ( req, res ) => {
     // BUSCA Y MODIFICA AL VOLUNTARIO ENCONTRADO.
+   req.body.disabled ? 
+   Volunteer.findByPk (req.params.id).then(volunteer=>{
+       const destruido = volunteer;
+       volunteer.destroy();
+   }) : '';
+
     Volunteer.update(req.body, {
         where: {
             id: req.params.id
