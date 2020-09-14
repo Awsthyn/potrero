@@ -21,7 +21,7 @@ export class Login extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this)
         this.validate = this.validate.bind(this)
         this.resetState = this.resetState.bind(this)
-	}
+    }
 
     handleInputChange(e) {
         const { name, value } = e.target
@@ -46,9 +46,11 @@ export class Login extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        const errores = this.validate({...this.state.loginData})
-        if (errores === {}) {
-            swal('Datos incorrectos')
+        const errores = this.validate(this.state.loginData)
+        const hayErrores = Object.entries(errores).length > 0
+
+        if (hayErrores) {
+            swal('No se pudo autenticar. Verifique los datos')
         } else {
             this.props.sessionLogin(this.state.loginData)
             .then(() =>{
@@ -56,7 +58,6 @@ export class Login extends React.Component {
                 this.resetState()
             })
             .catch((err) => {
-                console.info('errores de validacion', err)
                 swal('No se pudo autenticar. Verifique los datos')
             });
         }

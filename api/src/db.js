@@ -32,7 +32,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Class, DataSheet, Role, Student, StudentSchedule, Subject, TypeOfDifficulty, User, UserSchedule, Volunteer, Weekday } = sequelize.models;
+const { Class, DataSheet, Student, StudentSchedule, Subject, TypeOfDifficulty, User, UserSchedule } = sequelize.models;
 
 // Aca vendrian las relaciones
 
@@ -45,53 +45,31 @@ Class.belongsTo(Student);
 Class.belongsTo(Subject);
 
 //MATERIA
-Subject.belongsToMany(Volunteer, { through: 'SubjectXVolunteer' });
-Subject.hasOne(DataSheet);
-Subject.hasOne(Class)
-
-//VOLUNTARIO
-Volunteer.belongsToMany(Subject, { through: 'SubjectXVolunteer' });
-Volunteer.hasOne(User);
+Subject.belongsToMany(User, { through: 'SubjectXUser', timestamps: false });
+Subject.hasMany(Class);
+Subject.belongsToMany(Student, { through: 'SubjectXStudent', timestamps: false });
 
 //ALUMNO
-Student.belongsToMany(TypeOfDifficulty, { through: 'TODXStudent' });
-Student.belongsToMany(User, { through: 'StudentXUser' });
-Student.hasMany(DataSheet);
-Student.hasOne(Class)
-Student.hasMany(StudentSchedule)
+Student.belongsToMany(TypeOfDifficulty, { through: 'TODXStudent', timestamps: false });
+Student.hasMany(Class);
+Student.hasMany(StudentSchedule);
+Student.belongsToMany(Subject, { through: 'SubjectXStudent', timestamps: false });
 
 //TIPO DE DIFICULTAD DEL ALUMNO
-TypeOfDifficulty.belongsToMany(Student, { through: 'TODXStudent' });
+TypeOfDifficulty.belongsToMany(Student, { through: 'TODXStudent', timestamps: false });
 
-//VOLUNTARIO ACEPTADO O ADMIN DEL SISTEMA
-User.belongsToMany(Student, { through: 'StudentXUser' });
-User.belongsTo(Role);
-User.hasMany(DataSheet);
-User.belongsTo(Volunteer);
-User.hasMany(UserSchedule)
-
-
-//ROL DEL USUARIO
-Role.hasOne(User);
+//USER ACEPTADO O ADMIN DEL SISTEMA
+User.belongsToMany(Subject, { through: 'SubjectXUser', timestamps: false });
+User.hasMany(UserSchedule);
 
 //CALIFICACION POR CLASE
-DataSheet.hasOne(Class)
-DataSheet.belongsTo(Subject);
-DataSheet.belongsTo(User);
-DataSheet.belongsTo(Student);
+DataSheet.hasOne(Class);
 
 //HORARIO ALUMNO
 StudentSchedule.belongsTo(Student);
-StudentSchedule.belongsTo(Weekday);
 
 //HORARIO PROFESOR
 UserSchedule.belongsTo(User);
-UserSchedule.belongsTo(Weekday);
-
-//DIAS DE LA SEMANA
-Weekday.hasMany(StudentSchedule);
-Weekday.hasMany(UserSchedule);
-
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

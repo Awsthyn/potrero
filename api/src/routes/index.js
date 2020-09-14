@@ -29,6 +29,9 @@ const mailAdmission = require('./mailAdmission.js');
 // IMPORT DE LA RUTA DE Mail de Bienvenida o Rechazo de Voluntario
 const mailWelcomeRejection = require('./mailWelcomeRejection.js');
 
+// IMPORT DE LA RUTA DE CLASS
+const classRouter = require('./class.js');
+
 const router = Router();
 
 // ROUTES
@@ -59,5 +62,8 @@ router.use('/typeofdifficulty', typeOfDificulty);
 
 // RUTA DE SUBJECTS
 router.use('/subjects', subjectsRouter);
+
+// RUTA DE CLASS
+router.use('/class', classRouter);
 
 module.exports = router;
