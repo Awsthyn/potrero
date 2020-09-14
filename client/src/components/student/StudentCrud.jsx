@@ -31,7 +31,7 @@ export const StudentCrud = ({getStudents, students}) => {
       <th>{student.id}</th>
       <td>{student.firstName}</td>
       <td>{student.lastName}</td>
-      <td><button className="btn btn-primary mt-n3 mb-n3">Detalles</button></td>
+      <td><button className="btn btn-primary mt-n3 mb-n3" onClick={() => history.push(`/admin/student/details/${student.id}`)}>Detalles</button></td>
       <td><button className="btn btn-success mt-n3 mb-n3">Editar</button></td>
       <td><button className="btn btn-danger mt-n3 mb-n3">Dar de baja</button></td>
     </tr>
