@@ -14,7 +14,7 @@ User.findOne({ where: {email: req.body.email}})
             pass: 'Henryelpotrero'
         }
     });
-    if(volunteer.state === "pending"){
+    if(volunteer.state === "pendiente"){
         var mailOptions = {
             from: "El Potrero",
             to: volunteer.email,
