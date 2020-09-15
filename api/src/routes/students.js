@@ -81,7 +81,7 @@ server.post("/", (req, res) => {
       // Se espera valores de Id's de Subjects Ejemplo: 1,2
       // Recorre SubjectId los prepara en un array y los recorre 
       // entonces agrega la materia relacionado con el id del estudiante
-      req.body.subjectsId.split(",").forEach((idSub) => {
+      req.body.subjectsId.forEach((idSub) => {
         studentCreated
           .addSubject(idSub)
           .then(() => console.log("Ok1"))
@@ -94,7 +94,7 @@ server.post("/", (req, res) => {
 
       // Recorre TODId los prepara en un array y los recorre 
       // entonces agrega la materia relacionado con el id del estudiante
-      req.body.TODId.split(",").forEach((idTOD) => {
+      req.body.TODId.forEach((idTOD) => {
         studentCreated
           .addTypeOfDifficulty(idTOD)
           .then(() => console.log("Ok2"))
@@ -202,13 +202,13 @@ server.put("/subject/:id", (req, res) => {
 // En lugar de eliminar un estudiante lo que hacemos es cambiarle el status a false
 // Y así poder filtrar solamente por estudiantes activos y no perder la info por si
 // mas adelante vulelve a la fundación.
-server.put("/:id", (req, res) => {
-  // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
-  Student.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  })
+
+server.put('/:id', (req, res) => {
+    const {subjectsId} = req.body
+    // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
+    SubjectXStudent.destroy({ where: { studentId: req.params.id } })
+    .then(() => SubjectXStudent.bulkCreate(subjectsId.map(s => {return {subjectId: s, studentId: req.params.id}})))
+    .then(() => Student.update(req.body, {where: {id: req.params.id}}))
     .then(() => {
       Student.findOne({
         where: {
@@ -233,4 +233,33 @@ server.put("/:id", (req, res) => {
     });
 });
 
+
+server.put('/:id/changestatus', (req, res)=>{
+    Student.update({isActive: req.body.isActive},{where: {id: req.params.id}})
+    .then(() => {
+        Student.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: 
+            [
+                {
+                    model: TypeOfDifficulty
+                },
+                {
+                    model: Subject
+                }
+            ]
+        })
+        // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
+        .then(studentWithChanges => {
+            res.json(studentWithChanges)
+        })
+    })
+    .catch(err => {
+        res.json(err)
+    })
+})
+
 module.exports = server;
+
