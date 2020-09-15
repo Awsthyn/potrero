@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { getSubjects } from '../../redux/actions/subject'
 import { postStudent } from '../../redux/actions/student';
+
+import SubjectCheckbox from "./SubjectCheckbox"
 
 export class CreateStudentForm extends Component {
 	constructor(props) {
@@ -13,11 +16,16 @@ export class CreateStudentForm extends Component {
 			email: null,
 			tutor: null,
 			difficulty: false,
+			subject: [],
             weakness: 'lorem ipsum',
             interests: "lorem ipsum",
 			strengths: 'lorem ipsum',
 			motivations: 'lorem ipsum',
 		};
+		this.subjects = this.props.subjects
+		this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
+		this.onChangeHandler = this.onChangeHandler.bind(this);
+		this.submitHandler = this.submitHandler.bind(this);
 	}
 	onChangeHandler = (event) => {
 		let name = event.target.name;
@@ -30,22 +38,39 @@ export class CreateStudentForm extends Component {
         
 		
 	};
+
+	onCheckboxClicked(subject, isChecked) {
+        if(isChecked){
+            this.setState({
+                subject: [...this.state.subject, subject.id]
+            })
+        } else {
+            this.setState({
+                subject: this.state.subject.filter(s => s !== subject.id)
+            })
+        }
+    }
+
+    componentDidMount() {
+        this.props.getSubjects();
+    }
+
 	render() {
 		return (
             <>
-            <h1 className="mb-3">Formulario para alta de alumno</h1>
-			<form className="mx-auto" style={{ width: '800px' }} onSubmit={this.submitHandler}>
-				<div className="form-group">
+            <h1 className="mb-3 mt-2">Formulario para alta de alumno</h1>
+			<form className="mx-auto" style={{ width: '80vw' }} onSubmit={this.submitHandler}>
+				<div className="mb-n1 d-flex flex-row form-group">
 					<input
+						style={{width: "550px"}}
 						className="form-control"
 						type="text"
 						name="firstName"
 						placeholder="Nombre del alumno..."
 						onChange={this.onChangeHandler}
 					/>
-				</div>
-				<div className="form-group">
 					<input
+						style={{width: "550px"}}
 						className="form-control"
 						type="text"
 						name="lastName"
@@ -80,17 +105,55 @@ export class CreateStudentForm extends Component {
 						onChange={this.onChangeHandler}
 					/>
 				</div>
-				<input className="btn btn-info" value="Agregar" type="submit" />
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="strengths"
+						placeholder="Fortalezas..."
+						onChange={this.onChangeHandler}
+					/>
+				</div>
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="weakness"
+						placeholder="Aspectos que requieren atención..."
+						onChange={this.onChangeHandler}
+					/>
+				</div>
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="motivations"
+						placeholder="Motivaciones..."
+						onChange={this.onChangeHandler}
+					/>
+				</div>
+				<h3 className="text-center d-block mb-3">Materias que necesita cursar</h3>
+				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
+                    { Array.isArray(this.props.subjects)&& this.props.subjects.length > 0 ? this.props.subjects.map( subject => {
+                        return (
+                        <SubjectCheckbox key = {subject.id} initialState={false} subject={subject} onChange={this.onCheckboxClicked} required/>
+                        )}
+                    ) : null}
+                </div>
+				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Agregar" type="submit" />
 			</form>
             </>
 		);
 	}
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+	subjects: state.subjects.subjects
+});
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		getSubjects: () => dispatch(getSubjects()),
 		postStudent: (student) => dispatch(postStudent(student)),
 	};
 };

@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import {useHistory} from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
+import {getStudents, putStudent} from '../../redux/actions/student'
 
-import {getStudents} from '../../redux/actions/student'
-
-export const StudentCrud = ({getStudents, students}) => {
+export const StudentCrud = ({getStudents, putStudent, students}) => {
   const history = useHistory()
     useEffect(()=>{
         getStudents()
@@ -20,25 +19,28 @@ export const StudentCrud = ({getStudents, students}) => {
       <th>#</th>
       <th>Nombre</th>
       <th>Apellido</th>
-      <th>Detalles</th>
-      <th>Editar</th>
-      <th>Dar de baja</th>
+      <th>Ver / Editar</th>
+      <th colSpan="2">Estado</th>
     </tr>
   </thead>
   <tbody>
-    {students.map(student => 
+    {students.length > 0  && Array.isArray(students) ? students.map(student => 
     <tr key={student.id}>
       <th>{student.id}</th>
       <td>{student.firstName}</td>
       <td>{student.lastName}</td>
-      <td><button className="btn btn-primary mt-n3 mb-n3" onClick={() => history.push(`/admin/student/details/${student.id}`)}>Detalles</button></td>
-      <td><button className="btn btn-success mt-n3 mb-n3">Editar</button></td>
-      <td><button className="btn btn-danger mt-n3 mb-n3">Dar de baja</button></td>
+      <td><Link
+            to={{pathname: `/admin/estudiantes/detalles/${student.id}`, state: { props : student }}}>
+            <button className="btn btn-success mt-n3 mb-n3" >Detalles</button>
+          </Link></td>
+          {student.isActive ? <td>Activo</td> : <td>Inactivo</td>}  
+    <td>{student.isActive ? <button className="btn btn-danger mt-n3 mb-n3" onClick={()=> putStudent({id:student.id, isActive: false}).then(()=> alert("El alumno fue dado de baja")) }>Dar de baja</button> :
+    <button className="btn btn-success mt-n3 mb-n3" onClick={()=> putStudent({id:student.id, isActive: true}).then(()=> alert("El alumno fue dado de baja")) }>Dar de alta</button>}</td>
     </tr>
-    )}
+    ) :<tr><td className="text-center mt-4">No hay alumnos en la base de datos</td></tr>}
   </tbody>
 </table>
-<button className="mt-4 btn btn-success" onClick={() => history.push('/admin/student/post')}>Agregar alumno</button>
+<button className="mt-4 btn btn-success" onClick={() => history.push('/admin/estudiantes/agregar')}>Agregar alumno</button>
         </div>
     )
 }
@@ -49,7 +51,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        getStudents: () => dispatch(getStudents())
+        getStudents: () => dispatch(getStudents()),
+        putStudent: (student) => dispatch(putStudent(student)),
         }
 }
 

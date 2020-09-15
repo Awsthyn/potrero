@@ -15,9 +15,11 @@ export default class CheckBox extends React.Component {
 
 	handleOnClick(e) {
 		e.preventDefault();
+		if(this.state[this.props.dia].length < 2){
 		this.setState({
 			[this.props.dia]: [...this.state[this.props.dia], {de: 12, hasta: 14}],
 		});
+		}
 	}
 	handleTime(type, idx, clase) {
 		this.setState(function (state) {
@@ -39,9 +41,9 @@ export default class CheckBox extends React.Component {
 					) {
 						return (h[clase] = h[clase] - 0.5);
 					}
-				} else {
-					return h;
 				}
+			return h;
+				
 			});
 			return {
 				newState,
@@ -71,10 +73,9 @@ export default class CheckBox extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.go)
 		let dia = this.state[this.props.dia];
 		let checked = this.state.checked;
-		console.log(this.props);
-		console.log(dia);
 		return (
 			<div>
 				<input type="checkbox" name="moday" value="lunes" onClick={e => this.handleCheked(e)} />
