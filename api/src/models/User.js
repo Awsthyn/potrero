@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const { DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize) => {
   const User = sequelize.define('user', {
@@ -59,9 +60,15 @@ module.exports = (sequelize) => {
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    }
+  },
+    resetPasswordToken: {
+        type: DataTypes.STRING
+    },
+    resetPasswordExpires: {
+        type: DataTypes.DATE
+    },
   });
-  User.createInstanceFromBody = function ({ email, password, firstName, lastName, address, birthday, phone, linkedin, cv, state, isActive}) {
+  User.createInstanceFromBody = function ({ email, password, firstName, lastName, address, birthday, phone, linkedin, cv, state, isActive, resetPasswordToken, resetPasswordExpires }) {
     return User.create({ // Preguntar si esta bien que sea User.create o tiene que ser Volunteer.create???
       email,
       password,
@@ -85,7 +92,9 @@ module.exports = (sequelize) => {
         return false
     })
   }
+
   const hashPassword = password => {
+      console.info('hashPassword.password', password)
     return new Promise( (resolve, reject) => {
       bcrypt.hash(password, 8)
       .then(hash => resolve(hash))
@@ -93,16 +102,22 @@ module.exports = (sequelize) => {
     })
   }
 
-  /*User.addHook('beforeCreate', (user, options, cb) => {
-    // console.info("en el hook beforeCreate", user)
-    return hashPassword(user.password).then(hash => user.password = hash)}
-)*/
+    User.addHook('beforeCreate', (user, options, cb) => {
+        if (user.password) {
+            return hashPassword(user.password).then(hash => user.password = hash)
+        } else {
+            return user.password
+        }
+    })
 
-  User.addHook('beforeUpdate', (user, options, cb) =>
-  {
-    // console.info("en el hook beforeUpdate:", user)
-    return hashPassword(user.password).then(hash => user.password = hash)}
-  )
+    User.addHook('beforeUpdate', (user, options, cb) =>{
+        console.info("en el hook beforeUpdate:", user)
+        if(user.password){
+            return hashPassword(user.password).then(hash => user.password = hash)
+        } else {
+            return user.password
+        }
+    })
 
   return User;
 };
