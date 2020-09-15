@@ -1,11 +1,11 @@
 .botonMateria{
     display: inline-flex;
-    width: 110px;
+    width: 150px;
     height: 40px;
     background-color: white;
     border-radius: 5px;
     border: solid 0.1px gray;
-    margin-top: 5px;
+    margin-top: 25px;
     align-items: center;
     justify-content: center;
     
@@ -21,12 +21,13 @@
 }
 
 .contenedorMateria{
-    width: 300px;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }    
 
 .botonEnviar {
-    background-color: #492BC4;
+    background-color: #492BC4 !important;
+    color: white !important;
 }

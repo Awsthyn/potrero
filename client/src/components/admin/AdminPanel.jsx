@@ -12,7 +12,7 @@ export default () =>
                         <Link to='/admin/estudiantes' type="button" className="ml-3 btn btn-primary border"> Alumnos </Link>
                         <Link to='/admin/voluntarios/' type="button" className="ml-3 btn btn-primary border"> Voluntarios/Postulantes </Link>
                         <Link to='/admin/usuarios' type="button" className="ml-3 btn btn-warning border"> Docentes </Link>
-                        <Link to='/admin' type="button" className="ml-3 btn btn-danger border"> Materias </Link>
+                        <Link to='/admin/materias' type="button" className="ml-3 btn btn-danger border"> Materias </Link>
                     </div>
                 </div>
         

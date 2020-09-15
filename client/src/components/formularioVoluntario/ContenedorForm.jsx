@@ -3,12 +3,13 @@ import {Route} from 'react-router-dom';
 import VolunteerForm from './VoluntarioForm';
 import ContenedorMaterias from './ContenedorMaterias';
 import ContenedorCheckbox from './ContenedorCheckbox';
+import style from './VoluntarioForm.module.css';
 
 export default function ContenedorForm() {
 	return (
-		<div style={{width: '80%', display: 'flex', justifyContent: 'center'}}>
+		<div className={style.Contenedor}> 
 			<img
-				style={{marginRight: '50px'}}
+				className={style.img}
 				src="https://image.freepik.com/foto-gratis/accion-jugador-futbol-estadio_1150-14608.jpg"
 				alt="Jugador de fútbol"
 			/>

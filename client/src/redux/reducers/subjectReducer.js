@@ -8,10 +8,10 @@ const initialState = {
 export default function subjectReducer(state = initialState, action) {
 	switch (action.type) {
 		case GET_SUBJECTS:
-			return {
-				...state,
-				subjects: action.payload,
-			};
+			if (typeof action.payload === 'string') 
+			return {...state, subjects: []}
+			return {...state, subjects: action.payload}
+		
 		case GET_SUBJECT_DETAIL:
 			return {
 				...state,
@@ -20,7 +20,7 @@ export default function subjectReducer(state = initialState, action) {
 		case ADD_SUBJECT:
 			return {
 				...state,
-				students: state.students.concat(action.payload)}
+				subjects: state.subjects.concat(action.payload)}
 		case PUT_SUBJECT:
 			return {
 				...state,

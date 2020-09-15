@@ -1,33 +1,38 @@
-/* .Formm {
-	width: 80%;
+
+.Formm {
 	display: flex;
 	justify-content: center;
 	align-content: center;
-} */
-/* .danger {
+	margin-top: 35px;
+}
+.formgroup{
+	margin-bottom: 3rem;
+}
+.danger {
 	border: red 1px solid;
-} */
+}
+.Contenedor{
+	width: 80%;
+	margin-top: 50px;
+	display: flex; 
+	justify-content: center;
+	margin-left: 10%
+}
+.img{
+	margin-right: 50px;
+	width: 50%;
+	height: 600px;
+}
 .skere:hover {
 	box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-	background-color: #00e676 !important;
+	background-color: #492BC4 !important;
 	outline: none;
 	border: none;
 	color: white !important;
 }
 .skere {
-	background-color: #00e676 !important;
+	background-color: #492BC4 !important;
 	color: white !important;
 }
 
-/* input:invalid + span:after {
-	position: absolute;
-	content: '✖';
-	padding-left: 5px;
-}
-
-input:valid + span:after {
-	position: absolute;
-	content: '✓';
-	padding-left: 5px;
-} */
