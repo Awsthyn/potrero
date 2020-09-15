@@ -51,8 +51,7 @@ export function deleteSubject(subjectId) {
 		return axios
 			.delete(`http://localhost:3001/subjects/${subjectId}`, {withCredentials: true})
 			.then(res => {
-				
-				dispatch({type: DELETE_SUBJECT, payload: res.data})
+				dispatch(getSubjects())
 			})
 			.catch(err => console.log(err));
 	};
