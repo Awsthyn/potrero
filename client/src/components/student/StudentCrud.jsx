@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link, useHistory } from "react-router-dom"
-import {getStudents, putStudent} from '../../redux/actions/student'
+import {getStudents, putStudentIsActive} from '../../redux/actions/student'
 
-export const StudentCrud = ({getStudents, putStudent, students}) => {
+export const StudentCrud = ({getStudents, putStudentIsActive, students}) => {
   const history = useHistory()
     useEffect(()=>{
         getStudents()
@@ -34,8 +34,8 @@ export const StudentCrud = ({getStudents, putStudent, students}) => {
             <button className="btn btn-success mt-n3 mb-n3" >Detalles</button>
           </Link></td>
           {student.isActive ? <td>Activo</td> : <td>Inactivo</td>}  
-    <td>{student.isActive ? <button className="btn btn-danger mt-n3 mb-n3" onClick={()=> putStudent({id:student.id, isActive: false}).then(()=> alert("El alumno fue dado de baja")) }>Dar de baja</button> :
-    <button className="btn btn-success mt-n3 mb-n3" onClick={()=> putStudent({id:student.id, isActive: true}).then(()=> alert("El alumno fue dado de baja")) }>Dar de alta</button>}</td>
+    <td>{student.isActive ? <button className="btn btn-danger mt-n3 mb-n3" onClick={()=> putStudentIsActive({id:student.id, isActive: false}).then(()=> alert("El alumno fue dado de baja")) }>Dar de baja</button> :
+    <button className="btn btn-success mt-n3 mb-n3" onClick={()=> putStudentIsActive({id:student.id, isActive: true}).then(()=> alert("El alumno fue dado de baja")) }>Dar de alta</button>}</td>
     </tr>
     ) :<tr><td className="text-center mt-4">No hay alumnos en la base de datos</td></tr>}
   </tbody>
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
     return {
         getStudents: () => dispatch(getStudents()),
-        putStudent: (student) => dispatch(putStudent(student)),
+        putStudentIsActive: (student) => dispatch(putStudentIsActive(student)),
         }
 }
 

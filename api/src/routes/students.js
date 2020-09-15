@@ -182,4 +182,32 @@ server.put('/:id', (req, res) => {
     })
 });
 
+
+server.put('/:id/changestatus', (req, res)=>{
+    Student.update({isActive: req.body.isActive},{where: {id: req.params.id}})
+    .then(() => {
+        Student.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: 
+            [
+                {
+                    model: TypeOfDifficulty
+                },
+                {
+                    model: Subject
+                }
+            ]
+        })
+        // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
+        .then(studentWithChanges => {
+            res.json(studentWithChanges)
+        })
+    })
+    .catch(err => {
+        res.json(err)
+    })
+})
+
 module.exports = server;
