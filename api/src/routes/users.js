@@ -52,12 +52,21 @@ server.get('/:id', ( req, res ) => {
 
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
 server.put('/:id', ( req, res ) => {
+    if(req.body.disabled) {
+        User.findByPk(req.params.id)
+    .then(user => {
+        user.state = 'rechazado';
+        user.save();
+        res.json(user); 
+    })
+    }
     // BUSCA Y MODIFICA AL USUARIO ENCONTRADO.
     User.update(req.body, {
         where: {
             id: req.params.id
         }
     })
+
     // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
     .then(() => {
        User.findOne({
