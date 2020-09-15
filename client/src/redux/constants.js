@@ -1,6 +1,7 @@
 // Voluntarios - DELETE se representa con deshabilitado.
 export const ADD_VOLUNTARY = 'ADD_VOLUNTARY';
 export const ADD_SCHEDULE = 'ADD_SCHEDULE';
+export const ADD_SUBJECTS_VOLUNTEER = 'ADD_SUBJECTS_VOLUNTEER';
 export const GET_VOLUNTEERS = 'GET_VOLUNTEERS';
 export const DELETE_VOLUNTEER = 'DELETE_VOLUNTEER';
 

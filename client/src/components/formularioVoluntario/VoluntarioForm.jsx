@@ -51,14 +51,14 @@ export default class VolunteerForm extends React.Component {
 	}
 
 	render() {
-		// localStorage.clear();
+	    //localStorage.clear();
 		var control;
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;
 		}
 		return (
 			<div className={style.Formm} style={{justifyContent: 'center', display: 'flex'}}>
-				<form method="post">
+				<form>
 					<div className="form-group">
 						<small>Nombre</small>
 						<TextField
