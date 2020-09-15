@@ -44,3 +44,37 @@ export function getCurrentUser() {
     })
     }
 }
+
+// ------------- Envia email con token ---------------
+export function sendForgotMail(email) {
+    return function(dispatch) {
+        return fetch(`http://localhost:3001/auth/setPassword`, {
+            method: 'POST',
+            body: JSON.stringify(email),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+}
+
+//------------ Ejecuta el cambio de contraseña ---------------
+export function changePassword(token, password) {
+    return function(dispatch) {
+        return fetch(`http://localhost:3001/resetPassword/reset/${token}`, {
+            method: 'PUT',
+            body: JSON.stringify(password),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    }
+}
