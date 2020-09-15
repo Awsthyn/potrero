@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 // // ----> passport --->
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
+const passport = require('passport');
+const Strategy = require('passport-local').Strategy;
+const path = require('path');
 
 const {User} = require('./db.js');
 require('./db.js');
@@ -83,6 +84,7 @@ server.use((req, res, next) => {
 	next();
 });
 
+server.use(`/uploads`, express.static(path.join(__dirname, '/routes/uploads')));
 server.use('/', routes);
 
 // Error catching endware.

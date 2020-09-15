@@ -6,6 +6,10 @@ const { User } = require('../db.js');
 // TRAEMOS SEQUELIZE
 const Sequelize = require('sequelize');
 
+// USAMOS ESTE MIDDLEWARE PARA GUARDAR ARCHIVOS
+const multer = require('multer');
+const upload = multer({ dest: `${__dirname}/uploads` });
+
 server.get('/', (req, res) => {
     User.findAll()
     .then( users => {
@@ -20,11 +24,18 @@ server.get('/', (req, res) => {
 })
 
 // CREA UN USUARIO
-server.post('/', ( req, res ) => {
+server.post('/', upload.single('cv'), ( req, res ) => {
 // RECIBE LOS DATOS DEL USUARIO POR BODY
- const usuario = req.body;
+console.log('BODY FILE',req.file)
+    let usuario;
+    if (!req.file) {
+        usuario = req.body
+    } else {
+        usuario = { ...req.body, cv: `${req.file.filename}`}
+    }
     User.createInstanceFromBody(usuario)
     .then( userCreated => { // USUARIO CREADO
+        console.log('userCreated ',userCreated)
         res.send( userCreated )
     })
     .catch( err => { 
