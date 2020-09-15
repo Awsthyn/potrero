@@ -38,11 +38,11 @@ server.post('/', (req, res) => {
     .then(studentCreated => {
         sc = studentCreated;
         // Se espera un arreglo con Id's de Subjects
-        req.body.subjectsId.split(',').forEach(idSub => {
+        req.body.subjectsId.forEach(idSub => {
             studentCreated.addSubject(idSub)
             .then(() => console.log('Ok1'))
         });
-        req.body.TODId.split(',').forEach(idTOD => {
+        req.body.TODId.forEach(idTOD => {
             studentCreated.addTypeOfDifficulty(idTOD)
             .then(() => console.log('Ok2'))
         })
@@ -152,12 +152,11 @@ server.put('/subject/:id', (req, res) => {
 // Y así poder filtrar solamente por estudiantes activos y no perder la info por si
 // mas adelante vulelve a la fundación.
 server.put('/:id', (req, res) => {
+    const {subjectsId} = req.body
     // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
-    Student.update(req.body, {
-        where: {
-            id: req.params.id
-        }
-    })
+    SubjectXStudent.destroy({ where: { studentId: req.params.id } })
+    .then(() => SubjectXStudent.bulkCreate(subjectsId.map(s => {return {subjectId: s, studentId: req.params.id}})))
+    .then(() => Student.update(req.body, {where: {id: req.params.id}}))
     .then(() => {
         Student.findOne({
             where: {
