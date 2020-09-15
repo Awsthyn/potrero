@@ -131,7 +131,7 @@ server.post("/", (req, res) => {
       res.json("Usuario creado exitosamente");
     })
     .catch((err) => {
-      // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
+      // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR. 
       console.log(err);
       res.json(err);
     });
