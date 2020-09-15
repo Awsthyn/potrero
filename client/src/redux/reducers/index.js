@@ -3,6 +3,7 @@ import volunteersReducer from "./volunteersReducer";
 import studentReducer from "./studentReducer";
 import subjectReducer from "./subjectReducer"
 import sessionReducer from "./sessionReducer";
+import userReducer from "./userReducer";
 
 
 export default combineReducers({
@@ -10,4 +11,5 @@ export default combineReducers({
     students: studentReducer,
     subjects: subjectReducer,
     sessions: sessionReducer,
+    users: userReducer
 });
