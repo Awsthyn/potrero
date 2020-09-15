@@ -51,7 +51,7 @@ export default class VolunteerForm extends React.Component {
 	}
 
 	render() {
-		// localStorage.clear();
+	    //localStorage.clear();
 		var control;
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;

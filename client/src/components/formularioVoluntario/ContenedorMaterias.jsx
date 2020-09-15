@@ -39,8 +39,16 @@ class ContenedorMaterias extends React.Component {
 	handleSend() {
 		let data = JSON.parse(localStorage.getItem('datos'));
 		let allData = Object.assign(this.state.info, data);
-		console.log(allData);
-		this.props.postVoluntary(allData);
+		var materiasConcatenadas = {materias: ""};
+		this.state.materia.map((m,i) => {
+			if(i !== this.state.materia.length - 1) {
+                return materiasConcatenadas.materias = materiasConcatenadas.materias + m + "-";
+			} else {
+                return materiasConcatenadas.materias = materiasConcatenadas.materias + m;
+			}
+		})
+		
+		this.props.postVoluntary(allData, materiasConcatenadas);
 	}
 	render() {
 		var control;
