@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux";
-import { getVolunteers, postMailWelcome,deleteVolunteer, acceptVolunteer } from "../../redux/actions/voluntary"
+import { getVolunteers, deleteVolunteer, acceptVolunteer} from "../../redux/actions/voluntary"
 import moment from 'moment';
 import 'moment/locale/es';
 import swal from 'sweetalert';
@@ -19,6 +19,7 @@ class TablaVoluntarios extends React.Component {
     componentDidMount(){
         this.props.getVolunteers();
     }
+
     handleDeletion(id){
   
         swal({
@@ -41,9 +42,9 @@ class TablaVoluntarios extends React.Component {
           });
     
     }
-    handleStatusChange(name){
+    handleStatusChange(volunteer){
         swal({
-          title: `Estás por dar de alta a ${name.firstName} ${name.lastName} como voluntario.`,
+          title: `Estás por dar de alta a ${volunteer.firstName} ${volunteer.lastName} como voluntario.`,
           text: "¿Está seguro? Si confirma esta acción, el voluntario se convertirá en asesor.",
           icon: "warning",
           buttons: true,
@@ -51,7 +52,7 @@ class TablaVoluntarios extends React.Component {
         })
         .then((confirm) => {
           if (confirm) {
-          this.props.acceptVolunteer(Number(name.id))
+          this.props.acceptVolunteer(volunteer)
             swal("El usuario se convirtió en asesor.", {
               icon: "success",
             });
@@ -61,6 +62,7 @@ class TablaVoluntarios extends React.Component {
         });
         
     }
+
     render() { 
     
          return(   
@@ -94,15 +96,15 @@ class TablaVoluntarios extends React.Component {
                                                                     <p>Fecha de postulación:  {moment(volunteer.createdAt).format('LLL')}hs </p>
                                                                 </div>
                                                             </div>
-                                                        <div>
-                                                            <button className="btn btn-primary border" type="button" data-toggle="collapse" data-target={`#collapse${volunteer.id}`} aria-expanded="false" aria-controls="collapseExample">
+                                                        <div key={volunteer.id}>
+                                                            <button key={`detalles${volunteer.id}`} className="btn btn-primary border" type="button" data-toggle="collapse" data-target={`#collapse${volunteer.id}`} aria-expanded="false" aria-controls="collapseExample">
                                                                 Detalles
                                                             </button> 
-                                                            <button className={`${volunteer.state =='pendiente'? "btn-warning ":"btn-success"} btn border`}  onClick={() => this.handleStatusChange({firstName : volunteer.firstName, lastName: volunteer.lastName, id: volunteer.id})}>
-                                                                 <i className={`${volunteer.state =='pendiente'? "fa fa-toggle-off":"fa fa-toggle-on"}`}>Estado</i>                                                                 
+                                                            <button key={`aceptar${volunteer.id}`} className={`${volunteer.state =='pendiente'? "btn-warning":"btn-success "} btn border`}  onClick={() => this.handleStatusChange(volunteer)}>
+                                                                 <i className={`${volunteer.state =='pendiente'? "fa fa-toggle-off":"fa fa-toggle-on"}`}></i>                                                                 
                                                             </button>
-                                                            <button name={volunteer.id} className="btn btn-danger border" onClick={e => this.handleDeletion(e.target.name)}>
-                                                                 <i name={volunteer.id} className="fa fa-trash"></i>                                                                   
+                                                            <button key={`rechazar${volunteer.id}`} name={volunteer.id} className="btn btn-danger border" onClick={e => this.handleDeletion(e.target.name)}>
+                                                                 <i name={volunteer.id} className="fa fa-trash">Rechazar</i>                                                                   
                                                             </button>
                                                             
                                                         </div>
@@ -126,7 +128,7 @@ function mapStateToProps(state) {
     return {
        getVolunteers:() => dispatch(getVolunteers()),
        deleteVolunteer:(id) => dispatch(deleteVolunteer(id)),
-       acceptVolunteer: (id) => dispatch(acceptVolunteer(id))
+       acceptVolunteer: (id) => dispatch(acceptVolunteer(id)),
     };
   }
   export default connect(mapStateToProps, mapDispatchToProps)(TablaVoluntarios);
