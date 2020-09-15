@@ -67,6 +67,9 @@ server.get("/:id", (req, res) => {
     });
 });
 
+
+
+
 server.post("/", (req, res) => {
   // CREA UN STUDENT.
   // RECIBE POR BODY TODA LA INFORMACIÓN DEL STUDENT.
@@ -75,7 +78,9 @@ server.post("/", (req, res) => {
   Student.create(student)
     .then((studentCreated) => {
       sc = studentCreated;
-      // Se espera un arreglo con Id's de Subjects
+      // Se espera valores de Id's de Subjects Ejemplo: 1,2
+      // Recorre SubjectId los prepara en un array y los recorre 
+      // entonces agrega la materia relacionado con el id del estudiante
       req.body.subjectsId.split(",").forEach((idSub) => {
         studentCreated
           .addSubject(idSub)
@@ -86,6 +91,9 @@ server.post("/", (req, res) => {
             res.json(err);
           });
       });
+
+      // Recorre TODId los prepara en un array y los recorre 
+      // entonces agrega la materia relacionado con el id del estudiante
       req.body.TODId.split(",").forEach((idTOD) => {
         studentCreated
           .addTypeOfDifficulty(idTOD)
@@ -96,7 +104,9 @@ server.post("/", (req, res) => {
             res.json(err);
           });
       });
+      
       //AGREGA HORARIOS AL ESTUDIANTE
+      // Recorre scheduleStudent los prepara en un objeto hasta 3 lugares con los numeros incrementando cuando llega a 3 se resetea la variable numero a 1 y vuelve a preparar el objeto, crea una StudentSchedule cada 3 posiciones de dias
 
       var dias = req.body.scheduleStudent.split("-");
       var separado = dias;
@@ -115,21 +125,9 @@ server.post("/", (req, res) => {
           StudentSchedule.create(obj);
           numero = 1;
         }
-      }
-
-      //   var element = req.body.scheduleStudent.split(";");
-
-      //   var objectoto = {
-      //     startTime: parseFloat(element[0]),
-      //     endTime: parseFloat(element[1]),
-      //     nameWeekDay: element[2],
-      //     studentId: sc.id,
-      //   };
-
-      //   StudentSchedule.create(objectoto);
+      } 
     })
     .then(() => {
-      // DEVUELVE EL STUDENT CREADO.
       res.json("Usuario creado exitosamente");
     })
     .catch((err) => {
@@ -138,6 +136,7 @@ server.post("/", (req, res) => {
       res.json(err);
     });
 });
+
 
 // MODIFICAR LOS TIPOS DE DIFICULTAD DE UN ESTUDIANTE DE UN STUDENT.
 server.put("/tod/:id", (req, res) => {
@@ -167,6 +166,8 @@ server.put("/tod/:id", (req, res) => {
       res.json(err);
     });
 });
+
+
 
 // MODIFICAR LAS MATERIAS DE UN ESTUDIANTE DE UN STUDENT.
 server.put("/subject/:id", (req, res) => {
