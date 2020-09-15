@@ -101,7 +101,7 @@ class ContenedorMaterias extends React.Component {
 					id="standard-basic7"
 					onChange={e => this.handleOnChange(e)}
 				/>
-				{!this.state.info.linkedin && !this.state.info.cv ? (control = true) : false}
+				{!this.state.info.linkedin && !this.state.info.cv || this.state.materia.length === 0 ? (control = true) : false}
 				<Button
 					disabled={control ? true : false}
 					variant="contained"
