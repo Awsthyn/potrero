@@ -21,7 +21,6 @@ useEffect(() => {
 </div>
 <button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/voluntarios/formulario')}>Postularse como voluntario</button>
 <button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/usuario/login')}>Iniciar sesión</button>
-<button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/admin/student')}>Alumnos</button>
 <button type="button" className="mr-4 btn btn-warning" onClick={()=> history.push('/admin')}>Panel de Admin</button>
 </>
     )

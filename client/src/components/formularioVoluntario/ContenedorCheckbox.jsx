@@ -12,7 +12,7 @@ export default function ContenedorCheckbox() {
 	return (
 		<div>
 			{dias.map((dia, idx) => (
-				<Checkbox dia={dia} key={idx} />
+				<Checkbox dia={dia} key={idx} go={redirect}/>
 			))}
 			<button
 				variant="contained"

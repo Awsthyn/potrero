@@ -15,7 +15,7 @@ export default class CheckBox extends React.Component {
 
 	handleOnClick(e) {
 		e.preventDefault();
-		if(this.state[this.props.dia].length < 9){
+		if(this.state[this.props.dia].length < 2){
 		this.setState({
 			[this.props.dia]: [...this.state[this.props.dia], {de: 12, hasta: 14}],
 		});
@@ -73,6 +73,7 @@ export default class CheckBox extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.go)
 		let dia = this.state[this.props.dia];
 		let checked = this.state.checked;
 		return (

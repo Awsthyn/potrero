@@ -24,7 +24,7 @@ export default function studentReducer(state = initialState, action) {
 		case PUT_STUDENT:
 			return {
 				...state,
-				students: state.student.map((student) => {
+				students: state.students.map((student) => {
 				if(student.id === action.payload.id) {
 				  return action.payload
 				}

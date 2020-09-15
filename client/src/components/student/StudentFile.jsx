@@ -35,7 +35,8 @@ export class StudentFile extends Component {
 	};
 	submitHandler = (event) => {
         event.preventDefault();
-        this.props.putStudent(this.state)
+		this.props.putStudent(this.state)
+		.then(()=> window.location='/admin/estudiantes')
         
 		
 	};

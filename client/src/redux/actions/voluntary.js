@@ -1,14 +1,16 @@
 import axios from 'axios';
-import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VOLUNTEER} from '../constants';
+import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VOLUNTEER, ADD_SUBJECTS_VOLUNTEER} from '../constants';
 
-export function postVoluntary(voluntary) {
-	console.log(voluntary);
+export function postVoluntary(voluntary, subjects) {
 	return function (dispatch) {
 		return axios
 			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
 				console.info('postVoluntary.then', res)
+				console.log(subjects)
+				dispatch(postSubjectVoluntary(subjects, res.data.id));
 				dispatch(postMailWelcome(res.data));
+				
 			})
 			.catch(err => console.log(err));
 	};
@@ -68,5 +70,15 @@ export function acceptVolunteer(id) {
 				dispatch({type: ACCEPT_VOLUNTEER, accepted: res.data});
 			})
 			.catch(err => console.log(err));
+	};
+}
+export function postSubjectVoluntary(subjects, userId) {
+	return function (dispatch) {
+		return axios
+			.post(`http://localhost:3001/users/${userId}/subjects`, subjects, {withCredentials: true})
+			.then(res => {
+				dispatch({type: ADD_SUBJECTS_VOLUNTEER, subjects: res.data});
+			})
+			.catch(err => console.error(err));
 	};
 }

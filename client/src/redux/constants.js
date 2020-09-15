@@ -1,6 +1,7 @@
 // Voluntarios - DELETE se representa con deshabilitado.
 export const ADD_VOLUNTARY = 'ADD_VOLUNTARY';
 export const ADD_SCHEDULE = 'ADD_SCHEDULE';
+export const ADD_SUBJECTS_VOLUNTEER = 'ADD_SUBJECTS_VOLUNTEER';
 export const GET_VOLUNTEERS = 'GET_VOLUNTEERS';
 export const DELETE_VOLUNTEER = 'DELETE_VOLUNTEER';
 export const ACCEPT_VOLUNTEER = 'ACCEPT_VOLUNTEER';
@@ -27,3 +28,6 @@ export const PUT_DIFFICULTY = 'PUT_DIFFICULTY';
 export const GET_DIFFICULTIES = 'GET_DIFFICULTIES';
 export const GET_DIFFICULTY_DETAIL = 'GET_DIFFICULTY_DETAIL';
 export const DELETE_DIFFICULTY = 'DELETE_DIFFICULTY';
+
+
+export const GET_USERS = "GET_USERS"
