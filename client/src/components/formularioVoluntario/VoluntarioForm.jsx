@@ -20,46 +20,24 @@ export default class VolunteerForm extends React.Component {
 		});
 	}
 	handleOnClick() {
-		localStorage.setItem('datos', JSON.stringify(this.state.info));
+		if(this.state.info){
+			localStorage.setItem('datos', JSON.stringify(this.state.info));
+		}
 		this.setState(function () {
 			return {redirect: true};
-		});
-
-		// this.props.addSchedule();
-		// handleOnClick(e) {
-		// 	e.preventDefault();
-		// 	swal({
-		// 		title: "¿Estas seguro?",
-		// 		text: "Antes de enviar tu solicitud verifica que tus datos sean correctos!",
-		// 		icon: "warning",
-		// 		buttons: true,
-		// 		dangerMode: true,
-		// 	  })
-		// 	  .then((willDelete) => {
-		// 		console.log(this.state.info)
-		// 		if (willDelete) {
-		// 			console.log(this.state.info)
-		// 		  this.props.postVoluntary(this.state.info);
-		// 	      //this.props.addSchedule();
-		// 		  swal("Tu solicitud ha sido enviada!", {
-		// 			icon: "success",
-		// 		  });
-		// 		} else {
-		// 		  swal("Solicitud no enviada");
-		// 		}
-		// 	  });
+		});	
 	}
 
 	render() {
-	    //localStorage.clear();
+	   //localStorage.clear();
 		var control;
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;
 		}
 		return (
-			<div className={style.Formm} style={{justifyContent: 'center', display: 'flex'}}>
+			<div className={style.Formm} >
 				<form>
-					<div className="form-group">
+					<div className={style.formgroup}>
 						<small>Nombre</small>
 						<TextField
 							style={{width: '80%', marginTop: '1%', display: 'block'}}
@@ -108,13 +86,13 @@ export default class VolunteerForm extends React.Component {
 							onChange={e => this.handleOnChange(e)}
 						/>
 					</div>
-					{/* {!this.state.info.firstName ||
+					{!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
 					!this.state.info.email ||
 					!this.state.info.phone 
 						? (control = true)
-						: false} */}
+						: false}
 					<Button
 						disabled={control ? true : false}
 						variant="contained"
