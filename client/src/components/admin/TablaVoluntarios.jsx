@@ -106,9 +106,10 @@ class TablaVoluntarios extends React.Component {
                                                                 Detalles
                                                             </button> 
                                                             <button key={`aceptar${volunteer.id}`} className={`${volunteer.state =='pendiente'? "btn-warning":"btn-success "} btn border`}  onClick={() => this.handleStatusChange(volunteer)}>
-                                                                 <i className={`${volunteer.state =='pendiente'? "fa fa-toggle-off":"fa fa-toggle-on"}`}></i>                                                                 
+                                                                 <i className={`${volunteer.state =='pendiente'? "fa fa-toggle-off":"fa fa-toggle-on"}`}></i> 
+                                                                 {volunteer.state =='pendiente'? 'Aceptar':'Activo'}                                                                
                                                             </button>
-                                                            <button key={`rechazar${volunteer.id}`} name={volunteer.id} className="btn btn-danger border" onClick={e => this.handleDeletion(e.target.name)}>
+                                                            <button key={`rechazar${volunteer.id}`} name={volunteer.id} className="btn btn-danger border" onClick={e => this.handleDeletion(volunteer.id)}>
                                                                  <i name={volunteer.id} className="fa fa-trash">Rechazar</i>                                                                   
                                                             </button>
                                                             
