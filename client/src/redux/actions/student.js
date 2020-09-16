@@ -46,3 +46,15 @@ export function putStudent(student) {
 			.catch(err => console.log(err));
 	};
 }
+
+export function putStudentIsActive(student) {
+	return function (dispatch) {
+		console.log(student)
+		return axios
+			.put(`http://localhost:3001/students/${student.id}/changestatus`, student, {withCredentials: true})
+			.then(res => {
+				dispatch({type: PUT_STUDENT, payload: res.data})
+			})
+			.catch(err => console.log(err));
+	};
+}

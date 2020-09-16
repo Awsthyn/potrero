@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from "react-redux";
-import { getSubjects,deleteSubject,postSubject} from "../../redux/actions/subject"
+import { getSubjects,deleteSubject,postSubject,putSubject} from "../../redux/actions/subject"
 import moment from 'moment';
 import 'moment/locale/es';
+import Swal from 'sweetalert2';
 import swal from 'sweetalert';
 import {Link} from 'react-router-dom'
 moment.locale('es');
@@ -20,7 +21,6 @@ class TablaMaterias extends React.Component {
     }
 
     handleDeletion(id){
-  
         swal({
             title: "¡¡ Cuidado !!",
             text: "Confirmando esta acción, eliminarás una materia para siempre",
@@ -31,7 +31,6 @@ class TablaMaterias extends React.Component {
           .then((willDelete) => {
             if (willDelete) {
             this.props.deleteSubject(Number(id))
-            console.log(id);
               swal("El registro fue destruido con éxito", {
                 icon: "success",
               });
@@ -41,28 +40,31 @@ class TablaMaterias extends React.Component {
           });
     
     }
-    handleAddition(subject){
-        swal({
-          title: `Estás por dar de alta una Materia: ${subject.name}.`,
-          text: "¿Está seguro? Si confirma esta acción, la materia estará disponible.",
-          icon: "warning",
-          buttons: true,
-          dangerMode: false,
-        })
-        .then((confirm) => {
-          if (confirm) {
-            this.props.postSubject(subject)
-            swal("La Materia fue creada con éxito.", {
-              icon: "success",
-            });
-          } else {
-            swal("La Materia no fue creada.");
-          }
-        });   
+    async handleAddition(){
+      const { value: materia } = await Swal.fire({
+        title: 'Ingresa el nombre de la Materia',
+        input: 'text',
+        inputPlaceholder: 'Por ejemplo: computación'
+      })
+      
+      if (materia) {
+        Swal.fire(`Se agregará a los registros la materia: ${materia}`)
+        this.props.postSubject({name: materia})
+      }
     }
 
-    handleRename(idSubject){
-      swal('Modificaremos el nombre de la Materia aquì') 
+    async handleRename(subject){
+      const { value: rename } = await Swal.fire({
+        title: 'Ingresa el nombre nuevo',
+        input: 'text',
+        inputPlaceholder: `Por ejemplo: ${subject.name}002`
+      })
+      
+      if (rename) {
+        Swal.fire(`Se reemplazará el nombre de ${subject.name} por  ${rename}`)
+        this.props.putSubject({id: subject.id, name:rename})
+      }
+   
   }
   
     render() { 
@@ -70,7 +72,7 @@ class TablaMaterias extends React.Component {
          return(   
                 <div className='container ' >
                   <div>
-                  <button key={`AgregarMateria`} className="btn btn-success border" onClick={e => this.handleAddition({name:'Matematicaaa'})}>
+                  <button key={`AgregarMateria`} className="btn btn-success border" onClick={e => this.handleAddition()}>
                   <i class="fa fa-plus-square" aria-hidden="true"> Agregar Materia</i>
                                                                                   
                    </button>
@@ -83,7 +85,7 @@ class TablaMaterias extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                            {this.props.subjects && this.props.subjects.map(subject => 
+                                            {this.props.subjects.length && this.props.subjects.map(subject => 
                                                  <tr key={subject.id}>
                                                     <th scope="row">{subject.id}</th>
                                                     <td>{subject.name}</td>
@@ -93,10 +95,12 @@ class TablaMaterias extends React.Component {
                                                         <div key={subject.id}>
                                                            {/* Detalles de materias*/}
                                                             <button key={`Renombrar${subject.id}`} className={`btn btn-warning border`}  onClick={() => this.handleRename(subject)}>
-                                                                 <i className={``}>Renombrar</i>                                                                 
+                                                                 <i name={subject.id} disabled className={``}></i> 
+                                                                 Renombrar                                                                
                                                             </button>
-                                                            <button key={`Eliminar${subject.id}`} name={subject.id} className="btn btn-danger border" onClick={e => this.handleDeletion(e.target.name)}>
-                                                                 <i className="fa fa-trash">Eliminar</i>                                                                   
+                                                            <button key={`Eliminar${subject.id}`} name={subject.id} className="btn btn-danger border" onClick={() => this.handleDeletion(subject.id)}>
+                                                                 <i name={subject.id}  className="fa fa-trash" disabled></i>   
+                                                                 Eliminar                                                                
                                                             </button>
                                                             
                                                             
@@ -120,8 +124,9 @@ function mapStateToProps(state) {
   function mapDispatchToProps(dispatch) {
     return {
         getSubjects:() => dispatch(getSubjects()),
-       deleteSubject:(subjectId) => dispatch(deleteSubject(subjectId)),
-       postSubject: (subject) => dispatch(postSubject(subject)),
+        deleteSubject:(subjectId) => dispatch(deleteSubject(subjectId)),
+        postSubject: (subject) => dispatch(postSubject(subject)),
+        putSubject: subject => dispatch(putSubject(subject))
     };
   }
   export default connect(mapStateToProps, mapDispatchToProps)(TablaMaterias);
