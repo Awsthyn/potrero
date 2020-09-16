@@ -71,6 +71,7 @@ export default class VolunteerForm extends React.Component {
 							type="date"
 							// defaultValue="date"
 							id="standard-basic3"
+							
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<TextField
@@ -93,13 +94,13 @@ export default class VolunteerForm extends React.Component {
 							onChange={e => this.handleOnChange(e)}
 						/>
 					</div>
-					{!this.state.info.firstName ||
+					{/* {!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
 					!this.state.info.email ||
 					!this.state.info.phone 
 						? (control = true)
-						: false}
+						: false} */}
 					<Button
 						disabled={control ? true : false}
 						variant="contained"

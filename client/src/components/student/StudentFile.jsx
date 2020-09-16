@@ -17,7 +17,7 @@ export class StudentFile extends Component {
 			email: props.student.email,
 			tutor: props.student.tutor,
 			difficulty: false,
-			subject: props.student.subjects.map(s => s.id),
+			subjectsId: props.student.subjects.map(s => s.id),
             weakness: props.student.weakness,
             interests: props.student.interests,
 			strengths: props.student.strengths,
@@ -44,11 +44,11 @@ export class StudentFile extends Component {
 	onCheckboxClicked(subject, isChecked) {
         if(isChecked){
             this.setState({
-                subject: [...this.state.subject, subject.id]
+                subjectsId: [...this.state.subjectsId, subject.id]
             })
         } else {
             this.setState({
-                subject: this.state.subject.filter(s => s !== subject.id)
+                subjectsId: this.state.subjectsId.filter(s => s !== subject.id)
             })
         }
     }
@@ -138,7 +138,7 @@ export class StudentFile extends Component {
 				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
                     {this.props.subjects.map( subject => {
                         return (
-                        <SubjectCheckbox key = {subject.id} initialState={this.state.subject.includes(subject.id)? "checked" : false} subject={subject} onChange={this.onCheckboxClicked} required/>
+                        <SubjectCheckbox key = {subject.id} initialState={this.state.subjectsId.includes(subject.id)? "checked" : false} subject={subject} onChange={this.onCheckboxClicked} required/>
                         )}
                     )}
                 </div>

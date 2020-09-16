@@ -6,19 +6,23 @@ import IconButton from '@material-ui/core/IconButton';
 import style from './VoluntarioForm.module.css';
 // import styles from './ContenedorCheckbox.module.css';
 
-export default function ContenedorCheckbox({history}) {
+export default function ContenedorCheckbox({history, active}) {
 	const [redirect, setRedirect] = useState(false);
+	const [expandedAll, setExpandedAll] = useState(false);
 
 	if (redirect) {
 		return <Redirect to="/voluntarios/materias" />;
 	}
 	let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
-
+	
+	const handleChange = (panel) => (event, isExpanded) => {
+      setExpandedAll(isExpanded ? panel : false) 
+  };
 	
 	return (
 		<div>
 			<div className={style.circles}>
-			  <div className={style.circleGray}>1</div><div className={style.lineGray}></div> <div className={style.circleLila}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div>
+				<div className={style.circleGray}>1</div><div className={style.lineGray}></div> <div className={style.circleLila}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div>
 			</div>
 			<div className={`${style.checkboxMaterias}`}>
 			<IconButton aria-label="ir atrás" onClick={() => history.push('/voluntarios/formulario')}>
@@ -26,7 +30,9 @@ export default function ContenedorCheckbox({history}) {
 			</IconButton>
 			<ul className={style.containerListDays}>
 			{ dias && dias.map((dia, idx) => (
-				<li className={style.itemList}><Acordeon className={style.inlineCheck} dia={dia} key={idx} /></li>
+				<li className={style.itemList}><Acordeon className={style.inlineCheck} dia={dia} key={idx} 
+				handleChange={handleChange} expandedAll={expandedAll}
+				/></li>
 				))}
 				</ul>
 			<Button
@@ -39,6 +45,7 @@ export default function ContenedorCheckbox({history}) {
 					setRedirect(true);
 				}}>
 				Continuar
+				<span className="material-icons">trending_flat</span>
 			</Button>
 				</div>
 		</div>

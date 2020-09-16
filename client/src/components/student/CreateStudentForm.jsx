@@ -16,7 +16,7 @@ export class CreateStudentForm extends Component {
 			email: null,
 			tutor: null,
 			difficulty: false,
-			subject: [],
+			subjectsId: [],
             weakness: 'lorem ipsum',
             interests: "lorem ipsum",
 			strengths: 'lorem ipsum',
@@ -42,11 +42,11 @@ export class CreateStudentForm extends Component {
 	onCheckboxClicked(subject, isChecked) {
         if(isChecked){
             this.setState({
-                subject: [...this.state.subject, subject.id]
+                subjectsId: [...this.state.subjectsId, subject.id]
             })
         } else {
             this.setState({
-                subject: this.state.subject.filter(s => s !== subject.id)
+                subjectsId: this.state.subjectsId.filter(s => s !== subject.id)
             })
         }
     }

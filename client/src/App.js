@@ -13,6 +13,7 @@ import StudentCrud from './components/student/StudentCrud';
 import CreateStudentForm from './components/student/CreateStudentForm';
 import StudentFile from './components/student/StudentFile';
 import ResetPassword from './components/formularioVoluntario/PasswordForgot';
+import TablaMaterias from './components/admin/TablaMaterias';
 
 function App() {
 	return (
@@ -23,7 +24,7 @@ function App() {
 			<Route exact path="/admin" component={AdminPanel} />
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
 			<Route exact path="/admin/usuarios" component={TablaUsuarios} />
-			<Route exact path="/admin/materias" component={TablaVoluntarios} />
+			<Route exact path="/admin/materias" component={TablaMaterias} />
 			<Route exact path="/usuario/login" component={Login} />
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
 			<Route exact path="/admin/estudiantes" component={StudentCrud} />
