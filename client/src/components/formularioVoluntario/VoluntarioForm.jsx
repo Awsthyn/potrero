@@ -5,18 +5,6 @@ import style from './VoluntarioForm.module.css';
 // import styled from 'styled-components';
 import { TextField, NoSsr } from '@material-ui/core';
 
-// const StyledTextField = styled(TextField)
-//   label.Mui-focused {
-//     color: gray;
-//   }
-//   .MuiOutlinedInput-root {
-  
-//     .Mui-focused fieldset {
-//       border-color: gray;
-//     }
-//   }
-// ;
-
 export default class VolunteerForm extends React.Component {
 	constructor(props) {
 		super(props);
@@ -56,7 +44,7 @@ export default class VolunteerForm extends React.Component {
 				<form className={style.formInput}>
 					<div className={style.formgroup}>
 						<TextField
-							style={{width: '100%', marginTop: '1%', display: 'flex'}}
+							className={style.nombreVolunteer}
 							name="firstName"
 							label="Nombre"
 							type="text"
@@ -64,7 +52,7 @@ export default class VolunteerForm extends React.Component {
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<TextField
-							style={{width: '100%', marginTop: '1%', display: 'flex'}}
+							className={style.lastName}
 							name="lastName"
 							label="Apellido"
 							type="text"
@@ -72,22 +60,24 @@ export default class VolunteerForm extends React.Component {
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<TextField
-							style={{width: '100%', marginTop: '1%', display: 'flex'}}
+							className={style.dateText}
 							name="birthday"
 							label="Fecha de nacimiento"
-							placeholder="fecha de nacimiento"
+							// placeholder="fecha de nacimiento"
+							InputLabelProps = { { encoger :  true } } 
 							type="date"
+							// defaultValue="date"
 							id="standard-basic3"
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<TextField
-							style={{width: '100%', marginTop: '1%', display: 'flex'}}
+							className={style.phoneVolunteer}
 							name="phone"
 							label="Telefono"
 							type="number"
 							id="standard-basic5"
 							onChange={e => this.handleOnChange(e)}
-						/>
+						/> 
 						<TextField
 							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="email"
