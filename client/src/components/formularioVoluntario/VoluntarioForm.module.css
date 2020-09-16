@@ -2,6 +2,7 @@
 
 .Formm {
 	display: flex;
+	width: 680px;
 	justify-content: center;
 	align-content: center;
 	margin-top: 35px;
@@ -20,13 +21,14 @@
 	border: red 1px solid;
 }
 .Contenedor{
-	width: 80%;
+	width: 90%;
 	margin-top: 30px;
 	display: flex; 
 	justify-content: center;
-	margin-left: 10%
+	margin-left: 5%
 }
 .img{
+
 	margin-right: 50px;
 	width: 100%;
 	height: 500px;
@@ -64,6 +66,7 @@
 	height: 50px;
 	margin-top:30px;
 	justify-content: space-around;
+	
 }
 
 .circleLila {
@@ -149,7 +152,8 @@
 .conteiner{
     position: relative;
     display: inline-block;
-    text-align: center;
+	text-align: center;
+	width: 50%;
 }
 
 .imgTxt{
@@ -179,5 +183,20 @@
 }
 
 .checkboxMaterias{
-	width: 600px;
+	
+	width: 680px;
+	margin-top: 35px;
+}
+
+.itemList{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	list-style: none;
+}
+
+.containerListDays{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 }
