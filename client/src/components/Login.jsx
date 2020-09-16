@@ -73,9 +73,7 @@ export class Login extends React.Component {
 
        if (!input.password) {
            errors.password = 'Contraseña es obligatoria';
-       } else if (!/(?=.*[0-9])/.test(input.password)) {
-           errors.password = 'Contraseña inválida';
-       }
+       } 
 
        return errors;
    };
