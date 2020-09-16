@@ -3,6 +3,7 @@ import {Route} from 'react-router-dom';
 import VolunteerForm from './VoluntarioForm';
 import ContenedorMaterias from './ContenedorMaterias';
 import ContenedorCheckbox from './ContenedorCheckbox';
+import Niveles from './Niveles';
 import Confirmacion from './Confirmacion';
 import style from './VoluntarioForm.module.css';
 
@@ -33,6 +34,7 @@ export default function ContenedorForm() {
 				/>
 				<Route exact path="/voluntarios/formulario" component={VolunteerForm} />
 				<Route exact path="/voluntarios/horarios" component={ContenedorCheckbox} />
+				<Route exact path="/voluntarios/niveles" component={Niveles} />
 				<Route exact path="/voluntarios/materias" component={ContenedorMaterias} />
 				<Route exact path="/voluntarios/confirmacion" component={Confirmacion} />
 			</div>
