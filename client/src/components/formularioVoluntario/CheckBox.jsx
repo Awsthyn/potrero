@@ -43,13 +43,18 @@ export default class CheckBox extends React.Component {
 					}
 				}
 			return h;
-				
 			});
 			return {
 				newState,
 			};
 		});
+		
+			localStorage.setItem(this.props.dia, JSON.stringify(this.state[this.props.dia]))
 	}
+    //handleStorage() {
+		//this.state.dia
+		//localStorage.setItem(this.props.dia, JSON.stringify(this.state[this.props.dia]))
+	//}
 	handleDelete(idx) {
 		this.setState(function (state) {
 			return state[this.props.dia].splice(idx, 1);
