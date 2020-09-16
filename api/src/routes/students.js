@@ -105,10 +105,10 @@ server.post("/", (req, res) => {
       //AGREGA HORARIOS AL ESTUDIANTE
       // Recorre scheduleStudent los prepara en un objeto hasta 3 lugares con los numeros incrementando cuando llega a 3 se resetea la variable numero a 1 y vuelve a preparar el objeto, crea una StudentSchedule cada 3 posiciones de dias
 
-      var dias = req.body.scheduleStudent.split("-");
-      var separado = dias;
-      var numero = 1;
-      var obj = {};
+      let dias = req.body.scheduleStudent.split("-");
+      let separado = dias;
+      let numero = 1;
+      let obj = {};
       for (let i = 0; i < separado.length; i++) {
         if (numero === 1) {
           obj.startTime = separado[i];
@@ -125,7 +125,7 @@ server.post("/", (req, res) => {
       }
     })
     .then(() => {
-      res.json("Usuario creado exitosamente");
+      res.json("Alumno creado exitosamente");
     })
     .catch((err) => {
       // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.

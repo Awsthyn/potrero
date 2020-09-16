@@ -97,6 +97,7 @@ module.exports = (sequelize) => {
       cv,
       state,
       isActive,
+
       resetPasswordToken,
       resetPasswordExpires
     });

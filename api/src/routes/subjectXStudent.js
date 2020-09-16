@@ -1,14 +1,7 @@
 const server = require("express").Router();
 
 // TRAEMOS LOS STUDENTS DE LA BASE DE DATOS
-const {
-  Student,
-  TypeOfDifficulty,
-  Subject,
-  TODXStudent,
-  SubjectXStudent,
-  StudentSchedule,
-} = require("../db.js");
+const { Student, SubjectXStudent } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
