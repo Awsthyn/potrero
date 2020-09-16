@@ -4,8 +4,9 @@ import Button from '@material-ui/core/Button';
 import Checkbox from './CheckBox';
 import IconButton from '@material-ui/core/IconButton';
 import style from './VoluntarioForm.module.css';
+// import styles from './ContenedorCheckbox.module.css';
 
-export default function ContenedorCheckbox({history}) {
+export default function ContenedorCheckbox({history, active}) {
 	const [redirect, setRedirect] = useState(false);
 
 	if (redirect) {
@@ -16,15 +17,17 @@ export default function ContenedorCheckbox({history}) {
 	return (
 		<div>
 			<div className={style.circles}>
-			  <div className={style.circleLila}>1</div><div className={style.lineGray}></div> <div className={style.circleGray}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div>
+				<div className={style.circleGray}>1</div><div className={style.lineGray}></div> <div className={style.circleLila}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div>
 			</div>
 			<div className={`${style.checkboxMaterias}`}>
 			<IconButton aria-label="ir atrás" onClick={() => history.push('/voluntarios/formulario')}>
 				<span className="material-icons">arrow_back</span>
 			</IconButton>
-			{dias.map((dia, idx) => (
-				<Checkbox dia={dia} key={idx} />
+			<ul className={style.containerListDays}>
+			{ dias && dias.map((dia, idx) => (
+				<li className={style.itemList}><Checkbox className={style.inlineCheck} dia={dia} key={idx} /></li>
 				))}
+				</ul>
 			<Button
 				variant="contained"
 				style={{marginTop: '3rem'}}
@@ -40,4 +43,10 @@ export default function ContenedorCheckbox({history}) {
 				</div>
 		</div>
 	);
+}
+
+function mapStateToProps(state){
+	return {
+		active: state.active
+	}
 }
