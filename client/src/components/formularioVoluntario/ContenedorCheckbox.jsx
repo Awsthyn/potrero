@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import Checkbox from './CheckBox';
+import Acordeon from './Acordeon';
 import IconButton from '@material-ui/core/IconButton';
 import style from './VoluntarioForm.module.css';
 // import styles from './ContenedorCheckbox.module.css';
@@ -13,6 +13,7 @@ export default function ContenedorCheckbox({history, active}) {
 		return <Redirect to="/voluntarios/materias" />;
 	}
 	let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
+
 	
 	return (
 		<div>
@@ -25,7 +26,7 @@ export default function ContenedorCheckbox({history, active}) {
 			</IconButton>
 			<ul className={style.containerListDays}>
 			{ dias && dias.map((dia, idx) => (
-				<li className={style.itemList}><Checkbox className={style.inlineCheck} dia={dia} key={idx} /></li>
+				<li className={style.itemList}><Acordeon className={style.inlineCheck} dia={dia} key={idx} /></li>
 				))}
 				</ul>
 			<Button
