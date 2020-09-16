@@ -55,19 +55,6 @@ export default class VolunteerForm extends React.Component {
 			<div className={style.Formm} >
 				<form className={style.formInput}>
 					<div className={style.formgroup}>
-						{/* <small>Nombre</small>
-						<input placeholder="Nombre" className={style.input}></input>
-						<div  placeholder="Apellido" className={style.lineInput}></div>
-						<input placeholder="Apellido" className={style.input}></input>
-						<div className={style.lineInput}></div>
-						<input className={style.input}></input>
-						<div className={style.lineInput}></div>
-						<input className={style.input}></input>
-						<div className={style.lineInput}></div>
-						<input className={style.input}></input>
-						<div className={style.lineInput}></div>
-						<input className={style.input}></input>
-						<div className={style.lineInput}></div> */}
 						<TextField
 							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="firstName"
@@ -76,7 +63,6 @@ export default class VolunteerForm extends React.Component {
 							id="standard-basic1"
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Apellido</small>
 						<TextField
 							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="lastName"
@@ -85,7 +71,6 @@ export default class VolunteerForm extends React.Component {
 							id="standard-basic2"
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Fecha de nacimiento</small>
 						<TextField
 							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="birthday"
@@ -95,7 +80,6 @@ export default class VolunteerForm extends React.Component {
 							id="standard-basic3"
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Telefono</small>
 						<TextField
 							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="phone"
@@ -104,7 +88,6 @@ export default class VolunteerForm extends React.Component {
 							id="standard-basic5"
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>E-mail</small>
 						<TextField
 							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="email"
@@ -125,11 +108,12 @@ export default class VolunteerForm extends React.Component {
 					<Button
 						disabled={control ? true : false}
 						variant="contained"
-						className={style.skere}
+						id={style.skere}
 						type="submit"
 						value="Submit"
 						onClick={() => this.handleOnClick()}>
 						Continuar
+						<span style={{margin:"10px"}} className="material-icons">trending_flat</span>
 					</Button>
 				</form>
 			</div>

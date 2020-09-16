@@ -16,7 +16,7 @@ export default function ContenedorForm() {
 			<div>
 				<img
 					id="comp-jgasx8rqimgimage"
-					style={{objectPosition: '50% 50%', width: '106px', height: '80px', objectFit: 'cover'}}
+					className={style.imgSize}
 					alt="Fundacion El Potrero"
 					data-type="image"
 					itemProp="image"
