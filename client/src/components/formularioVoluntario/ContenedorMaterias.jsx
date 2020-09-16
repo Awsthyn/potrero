@@ -78,7 +78,7 @@ class ContenedorMaterias extends React.Component {
 			<div>
 				<IconButton aria-label="ir atrás" onClick={this.goBack}>
 				<span className="material-icons">arrow_back</span>
-			</IconButton>
+				</IconButton>
 				<h4>¿En qué áreas podrías ayudar?</h4>
 				<div className={style1.contenedorMateria}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
 				<br></br>
