@@ -29,7 +29,7 @@ export default function Acordeon({dia, key}) {
       console.log(event)
       setExpanded(isExpanded ? panel : false) 
   };
-
+  
 
   const handleOnClick = (e) => {
       console.log("hi")
