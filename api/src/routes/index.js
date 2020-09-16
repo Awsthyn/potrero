@@ -11,6 +11,12 @@ const studentRouter = require('./students.js');
 // IMPORT DE LA RUTA DE STUDENTS - ALUMNOS
 const studentScheduleRouter = require('./stundentSchedule.js');
 
+// IMPORT DE LA RUTA DE STUDENTS - TYPE OF DIFF
+const typeofdifxstudentRouter = require('./TypeOfDifXStudent.js');
+
+// IMPORT DE LA RUTA DE STUDENTS - SUBJECT
+const subjectxstudentRouter = require('./subjectXStudent');
+
 // IMPORT DE LA RUTA DE TYPE-OF-DIFFICULTY
 const typeOfDificulty = require('./typeOfDifficulty.js');
 
@@ -56,6 +62,12 @@ router.use('/students', studentRouter);
 
 // RUTA DE STUDENTSSCHEDULE
 router.use('/studentschedule', studentScheduleRouter);
+
+// RUTA DE STUDENT TOD X STUDENT
+router.use('/typeofdifxstudent', typeofdifxstudentRouter);
+
+// RUTA DE STUDENT TOD X STUDENT
+router.use('/subjectxstudent', subjectxstudentRouter);
 
 // RUTA DE TYPEOFDIFFICULTY
 router.use('/typeofdifficulty', typeOfDificulty);

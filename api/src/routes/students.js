@@ -67,9 +67,6 @@ server.get("/:id", (req, res) => {
     });
 });
 
-
-
-
 server.post("/", (req, res) => {
   // CREA UN STUDENT.
   // RECIBE POR BODY TODA LA INFORMACIÓN DEL STUDENT.
@@ -79,7 +76,7 @@ server.post("/", (req, res) => {
     .then((studentCreated) => {
       sc = studentCreated;
       // Se espera valores de Id's de Subjects Ejemplo: 1,2
-      // Recorre SubjectId los prepara en un array y los recorre 
+      // Recorre SubjectId los prepara en un array y los recorre
       // entonces agrega la materia relacionado con el id del estudiante
       req.body.subjectsId.split(",").forEach((idSub) => {
         studentCreated
@@ -92,7 +89,7 @@ server.post("/", (req, res) => {
           });
       });
 
-      // Recorre TODId los prepara en un array y los recorre 
+      // Recorre TODId los prepara en un array y los recorre
       // entonces agrega la materia relacionado con el id del estudiante
       req.body.TODId.split(",").forEach((idTOD) => {
         studentCreated
@@ -104,7 +101,7 @@ server.post("/", (req, res) => {
             res.json(err);
           });
       });
-      
+
       //AGREGA HORARIOS AL ESTUDIANTE
       // Recorre scheduleStudent los prepara en un objeto hasta 3 lugares con los numeros incrementando cuando llega a 3 se resetea la variable numero a 1 y vuelve a preparar el objeto, crea una StudentSchedule cada 3 posiciones de dias
 
@@ -125,75 +122,14 @@ server.post("/", (req, res) => {
           StudentSchedule.create(obj);
           numero = 1;
         }
-      } 
+      }
     })
     .then(() => {
       res.json("Usuario creado exitosamente");
     })
     .catch((err) => {
-      // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR. 
+      // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
       console.log(err);
-      res.json(err);
-    });
-});
-
-
-// MODIFICAR LOS TIPOS DE DIFICULTAD DE UN ESTUDIANTE DE UN STUDENT.
-server.put("/tod/:id", (req, res) => {
-  // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
-  TODXStudent.update(req.body, {
-    where: {
-      studentId: req.params.id,
-    },
-  })
-    .then(() => {
-      Student.findOne({
-        where: {
-          id: req.params.id,
-        },
-        include: [
-          {
-            model: TypeOfDifficulty,
-          },
-        ],
-      })
-        // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
-        .then((studentWithChanges) => {
-          res.json(studentWithChanges);
-        });
-    })
-    .catch((err) => {
-      res.json(err);
-    });
-});
-
-
-
-// MODIFICAR LAS MATERIAS DE UN ESTUDIANTE DE UN STUDENT.
-server.put("/subject/:id", (req, res) => {
-  // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
-  SubjectXStudent.update(req.body, {
-    where: {
-      studentId: req.params.id,
-    },
-  })
-    .then(() => {
-      Student.findOne({
-        where: {
-          id: req.params.id,
-        },
-        include: [
-          {
-            model: Subject,
-          },
-        ],
-      })
-        // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
-        .then((studentWithChanges) => {
-          res.json(studentWithChanges);
-        });
-    })
-    .catch((err) => {
       res.json(err);
     });
 });
@@ -232,5 +168,6 @@ server.put("/:id", (req, res) => {
       res.json(err);
     });
 });
+
 
 module.exports = server;
