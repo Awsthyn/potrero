@@ -1,9 +1,10 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import style from './VoluntarioForm.module.css';
+import styles from './VoluntarioForm.module.css';
 // import styled from 'styled-components';
 import { TextField, NoSsr } from '@material-ui/core';
+
 
 export default class VolunteerForm extends React.Component {
 	constructor(props) {
@@ -37,14 +38,14 @@ export default class VolunteerForm extends React.Component {
 		}
 		return (
 			<div>
-			<div className={style.circles}>
-			  <div className={style.circleLila}>1</div><div className={style.lineGray}></div> <div className={style.circleGray}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div>
+			<div className={styles.circles}>
+			  <div className={styles.circleLila}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div>
 			</div>
-			<div className={style.Formm} >
-				<form className={style.formInput}>
-					<div className={style.formgroup}>
+			<div className={styles.Formm} >
+				<form className={styles.formInput}>
+					<div className={styles.formgroup}>
 						<TextField
-							className={style.nombreVolunteer}
+							className={styles.nombreVolunteer}
 							name="firstName"
 							label="Nombre"
 							type="text"
@@ -53,7 +54,7 @@ export default class VolunteerForm extends React.Component {
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<TextField
-							className={style.lastName}
+							className={styles.lastName}
 							name="lastName"
 							label="Apellido"
 							type="text"
@@ -62,7 +63,7 @@ export default class VolunteerForm extends React.Component {
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<TextField
-							className={style.dateText}
+							className={styles.dateText}
 							name="birthday"
 							label="Fecha de nacimiento"
 							// placeholder="fecha de nacimiento"
@@ -73,7 +74,7 @@ export default class VolunteerForm extends React.Component {
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<TextField
-							className={style.phoneVolunteer}
+							className={styles.phoneVolunteer}
 							name="phone"
 							label="Telefono"
 							type="number"
@@ -102,7 +103,8 @@ export default class VolunteerForm extends React.Component {
 					<Button
 						disabled={control ? true : false}
 						variant="contained"
-						id={style.skere}
+						className={styles.testButton}
+						id={styles.skere}
 						type="submit"
 						value="Submit"
 						onClick={() => this.handleOnClick()}>

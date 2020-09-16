@@ -1,5 +1,6 @@
 import React from 'react';
 import Horarios from './Horarios';
+import style from './VoluntarioForm.module.css';
 
 export default class CheckBox extends React.Component {
 	constructor(props) {
@@ -80,7 +81,7 @@ export default class CheckBox extends React.Component {
 		let dia = this.state[this.props.dia];
 		let checked = this.state.checked;
 		return (
-			<div>
+			<div className={style.checkBox}>
 				<input type="checkbox" name="moday" value="lunes" onClick={e => this.handleCheked(e)} />
 				<label htmlFor="lunes">{this.props.dia} </label>
 				{checked ? (

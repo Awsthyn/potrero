@@ -25,7 +25,7 @@ export default function ContenedorCheckbox({history}) {
 			</IconButton>
 			<ul className={style.containerListDays}>
 			{ dias && dias.map((dia, idx) => (
-				<li className={style.itemList}><Checkbox dia={dia} key={idx} /></li>
+				<li className={style.itemList}><Checkbox className={style.inlineCheck} dia={dia} key={idx} /></li>
 				))}
 				</ul>
 			<Button
