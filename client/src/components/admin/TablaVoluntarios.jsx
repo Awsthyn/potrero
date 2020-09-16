@@ -93,6 +93,11 @@ class TablaVoluntarios extends React.Component {
                                                                 <div className="card card-body">
                                                                     <p className={'card-text text'}>email: {volunteer.email} </p>
                                                                     <a href={`${volunteer.linkedin}`} className={'card-text text'}>Visitar LinkedIn</a>
+                                                                    {/* <iframe src={`http://localhost:3001/uploads/${volunteer.cv}.pdf`} style={{width:'600px', height:'500px'}} frameborder="0" onClick={() => <a target='_blank'>View CV</a>}></iframe> */}
+                                                                    <object data={`http://localhost:3001/uploads/${volunteer.cv}`} 
+                                                                      type='application/pdf' 
+                                                                      width='100%' 
+                                                                      height='700px'/>
                                                                     <p>Fecha de postulación:  {moment(volunteer.createdAt).format('LLL')}hs </p>
                                                                 </div>
                                                             </div>
