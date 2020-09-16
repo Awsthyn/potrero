@@ -1,81 +1,93 @@
-const { Router } = require('express');
+const { Router } = require("express");
 
 // IMPORT ALL ROUTES
 
 // IMPORT DE LA RUTA DE USUARIOS
-const usersRouter = require('./users.js');
+const usersRouter = require("./users.js");
 
 // IMPORT DE LA RUTA DE STUDENTS - ALUMNOS
-const studentRouter = require('./students.js');
+const studentRouter = require("./students.js");
 
 // IMPORT DE LA RUTA DE STUDENTS - ALUMNOS
-const studentScheduleRouter = require('./stundentSchedule.js');
+const studentScheduleRouter = require("./stundentSchedule.js");
 
 // IMPORT DE LA RUTA DE STUDENTS - TYPE OF DIFF
-const typeofdifxstudentRouter = require('./TypeOfDifXStudent.js');
+const typeofdifxstudentRouter = require("./TypeOfDifXStudent.js");
 
 // IMPORT DE LA RUTA DE STUDENTS - SUBJECT
-const subjectxstudentRouter = require('./subjectXStudent');
+const subjectxstudentRouter = require("./subjectXStudent");
 
 // IMPORT DE LA RUTA DE TYPE-OF-DIFFICULTY
-const typeOfDificulty = require('./typeOfDifficulty.js');
+const typeOfDificulty = require("./typeOfDifficulty.js");
 
 // IMPORT DE LA RUTA DE SUBJECT
-const subjectsRouter = require('./subject.js');
+const subjectsRouter = require("./subject.js");
 
 // IMPORT DE LA RUTA DE Autenticación
-const authenticateRouter = require('./authenticate.js');
+const authenticateRouter = require("./authenticate.js");
 
 // IMPORT DE LA RUTA DE Reseteo de Password
-const resetPassword = require('./resetPassword.js');
+const resetPassword = require("./resetPassword.js");
 
 // IMPORT DE LA RUTA DE Mail de Admisión
-const mailAdmission = require('./mailAdmission.js');
+const mailAdmission = require("./mailAdmission.js");
 
 // IMPORT DE LA RUTA DE Mail de Bienvenida o Rechazo de Voluntario
-const mailWelcomeRejection = require('./mailWelcomeRejection.js');
+const mailWelcomeRejection = require("./mailWelcomeRejection.js");
 
 // IMPORT DE LA RUTA DE CLASS
-const classRouter = require('./class.js');
+const classRouter = require("./class.js");
+
+//IMPORT DEL AÑO DEL AÑO ESCOLAR
+const academicLevelRouter = require("./academicLevel.js");
+
+//IMPORT DEL AÑO DEL AÑO ESCOLAR
+const academicLevelXSubjectRouter = require("./academicLevelXSubject.js");
 
 const router = Router();
 
 // ROUTES
 
 // RUTAS DE USUARIOS
-router.use('/users', usersRouter);
+router.use("/users", usersRouter);
 
 // Ruta de autenticacion
-router.use('/auth', authenticateRouter);
+router.use("/auth", authenticateRouter);
 
 //Ruta de reseteo de password
-router.use('/resetPassword', resetPassword);
+router.use("/resetPassword", resetPassword);
 
 //Ruta del mail de bienvenida al nuevo asesor
-router.use('/mailAdmission', mailAdmission);
+router.use("/mailAdmission", mailAdmission);
 
 //Ruta del mail de bienvenida al nuevo asesor
-router.use('/mailWelcomeRejection', mailWelcomeRejection);
+router.use("/mailWelcomeRejection", mailWelcomeRejection);
 
 // RUTA DE STUDENTS
-router.use('/students', studentRouter);
+router.use("/students", studentRouter);
 
 // RUTA DE STUDENTSSCHEDULE
-router.use('/studentschedule', studentScheduleRouter);
+router.use("/studentschedule", studentScheduleRouter);
 
 // RUTA DE STUDENT TOD X STUDENT
-router.use('/typeofdifxstudent', typeofdifxstudentRouter);
+router.use("/typeofdifxstudent", typeofdifxstudentRouter);
 
 // RUTA DE STUDENT TOD X STUDENT
-router.use('/subjectxstudent', subjectxstudentRouter);
+router.use("/subjectxstudent", subjectxstudentRouter);
 
 // RUTA DE TYPEOFDIFFICULTY
-router.use('/typeofdifficulty', typeOfDificulty);
+router.use("/typeofdifficulty", typeOfDificulty);
 
 // RUTA DE SUBJECTS
-router.use('/subjects', subjectsRouter);
+router.use("/subjects", subjectsRouter);
 
 // RUTA DE CLASS
-router.use('/class', classRouter);
+router.use("/academiclevel", academicLevelRouter);
+
+// RUTA DE AÑO ESCOLAR
+router.use("/class", classRouter);
+
+// RUTA DE AÑO ESCOLAR X SUBJECT
+router.use("/academiclevelxsubject", academicLevelXSubjectRouter);
 
 module.exports = router;
