@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap");
 
 .Formm {
 	display: flex;
@@ -6,26 +7,29 @@
 	margin-top: 35px;
 }
 .formInput{
-	width: 100%
+	width: 100%;
+	box-shadow: 0px 3px 3px 3px rgba(219, 216, 216, 0.623);
+	border-radius: 20px;
 }
 .formgroup{
 	width: 80%;
 	margin-bottom: 3rem;
+	margin: auto;
 }
 .danger {
 	border: red 1px solid;
 }
 .Contenedor{
-	width: 90%;
-	margin-top: 50px;
+	width: 80%;
+	margin-top: 30px;
 	display: flex; 
 	justify-content: center;
 	margin-left: 10%
 }
 .img{
 	margin-right: 50px;
-	width: 50%;
-	height: 600px;
+	width: 100%;
+	height: 500px;
 }
 .skere:hover {
 	box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
@@ -35,9 +39,23 @@
 	border: none;
 	color: white !important;
 }
-.skere {
-	background-color: #492BC4 !important;
-	color: white !important;
+#skere {
+	display:flex;
+	background-color: #492BC4;
+	color: white;
+	border-radius: 5em;
+	margin-top: 15px;
+	margin-left: 32px;
+	margin-bottom: 30px;
+	text-transform: capitalize;
+	padding: 5px;
+	width:160px;
+	height: 40px;
+	font-size: 15px;
+}
+#skere button{
+	justify-content: center;
+	
 }
 
 .circles {
@@ -60,7 +78,7 @@
 }
 
 .circleGray {
-	background-color: gray;
+	background-color: #CAD2D9;
 	color: white;
 	font-size: 1.4rem;
 	width: 35px;
@@ -70,7 +88,7 @@
 }
 
 .lineGray {
-	background-color: gray;
+	background-color: #CAD2D9;
 	width: 130px;
 	height: 2px;
 	align-self: center; 
@@ -95,4 +113,72 @@
     color: green; 
 }
 
+.imgSize {
+	position: relative;
+	width: 80px; 
+	height: 60px; 
+}
 
+.dateText{
+	/* display: flex;
+	flex-direction: column;
+	justify-content: flex-end; */
+	width: 100%; 
+	/* margin-top: 0px;
+	margin-bottom: 0px;  */
+}
+
+.nombreVolunteer{
+	display: flex;
+	width: 100%; 
+	margin-top: 1%; 
+}
+
+.lastName{
+	display: flex;
+	width: 100%; 
+	margin-top: 1%; 
+	
+}
+
+.phoneVolunteer{
+	display: flex;
+	width: 100%;
+	margin-top: 1%; 
+}
+
+.conteiner{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.imgTxt{
+    position: absolute;
+    top: 52%;
+	left: 56%;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+	font-size: 50px;
+	font-family: 'Poppins' ;
+	transform: translate(-80%, -110%);
+	/* z-index: 1; */
+	/* margin-bottom: 0px; */
+	padding-bottom: 20px;
+}
+
+.imgContainText{
+
+	position: absolute;
+	width: 60%;
+	color: rgb(255, 255, 255);
+	font-size: 15px;
+	font-family: 'Poppins' ;
+	top: 54%;
+	left: 60%;
+	transform: translate(-70%, -50%);
+}
+
+.checkboxMaterias{
+	width: 600px;
+}

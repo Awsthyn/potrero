@@ -8,16 +8,24 @@ import style from './VoluntarioForm.module.css';
 
 export default function ContenedorForm() {
 	return (
-		<div className={style.Contenedor}> 
+		<div className={style.Contenedor}>
+			<div className={style.conteiner}>
 			<img
 				className={style.img}
 				src="https://image.freepik.com/foto-gratis/accion-jugador-futbol-estadio_1150-14608.jpg"
 				alt="Jugador de fútbol"
-			/>
+				/>
+				<div className={style.imgTxt}><b>Sumáte!</b></div>
+					<div className={style.imgContainText}>
+						Trabajemos juntos por la inclusión social y el 
+						desarrollo humano de niños y adolescentes en estado de vulnerabilidad
+					</div>
+				</div>
+				
 			<div>
 				<img
 					id="comp-jgasx8rqimgimage"
-					style={{objectPosition: '50% 50%', width: '106px', height: '80px', objectFit: 'cover'}}
+					className={style.imgSize}
 					alt="Fundacion El Potrero"
 					data-type="image"
 					itemProp="image"

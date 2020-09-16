@@ -5,18 +5,6 @@ import style from './VoluntarioForm.module.css';
 // import styled from 'styled-components';
 import { TextField, NoSsr } from '@material-ui/core';
 
-// const StyledTextField = styled(TextField)
-//   label.Mui-focused {
-//     color: gray;
-//   }
-//   .MuiOutlinedInput-root {
-  
-//     .Mui-focused fieldset {
-//       border-color: gray;
-//     }
-//   }
-// ;
-
 export default class VolunteerForm extends React.Component {
 	constructor(props) {
 		super(props);
@@ -55,57 +43,42 @@ export default class VolunteerForm extends React.Component {
 			<div className={style.Formm} >
 				<form className={style.formInput}>
 					<div className={style.formgroup}>
-						{/* <small>Nombre</small>
-						<input placeholder="Nombre" className={style.input}></input>
-						<div  placeholder="Apellido" className={style.lineInput}></div>
-						<input placeholder="Apellido" className={style.input}></input>
-						<div className={style.lineInput}></div>
-						<input className={style.input}></input>
-						<div className={style.lineInput}></div>
-						<input className={style.input}></input>
-						<div className={style.lineInput}></div>
-						<input className={style.input}></input>
-						<div className={style.lineInput}></div>
-						<input className={style.input}></input>
-						<div className={style.lineInput}></div> */}
 						<TextField
-							style={{width: '100%', marginTop: '1%', display: 'flex'}}
+							className={style.nombreVolunteer}
 							name="firstName"
 							label="Nombre"
 							type="text"
 							id="standard-basic1"
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Apellido</small>
 						<TextField
-							style={{width: '100%', marginTop: '1%', display: 'flex'}}
+							className={style.lastName}
 							name="lastName"
 							label="Apellido"
 							type="text"
 							id="standard-basic2"
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Fecha de nacimiento</small>
 						<TextField
-							style={{width: '100%', marginTop: '1%', display: 'flex'}}
+							className={style.dateText}
 							name="birthday"
 							label="Fecha de nacimiento"
-							placeholder="fecha de nacimiento"
+							// placeholder="fecha de nacimiento"
+							InputLabelProps = { { encoger :  true } } 
 							type="date"
+							// defaultValue="date"
 							id="standard-basic3"
 							
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Telefono</small>
 						<TextField
-							style={{width: '100%', marginTop: '1%', display: 'flex'}}
+							className={style.phoneVolunteer}
 							name="phone"
 							label="Telefono"
 							type="number"
 							id="standard-basic5"
 							onChange={e => this.handleOnChange(e)}
-						/>
-						<small>E-mail</small>
+						/> 
 						<TextField
 							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="email"
@@ -126,11 +99,12 @@ export default class VolunteerForm extends React.Component {
 					<Button
 						disabled={control ? true : false}
 						variant="contained"
-						className={style.skere}
+						id={style.skere}
 						type="submit"
 						value="Submit"
 						onClick={() => this.handleOnClick()}>
 						Continuar
+						<span style={{margin:"10px"}} className="material-icons">trending_flat</span>
 					</Button>
 				</form>
 			</div>

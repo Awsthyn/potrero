@@ -15,12 +15,16 @@ export default function ContenedorCheckbox({history}) {
 	
 	return (
 		<div>
+			<div className={style.circles}>
+			  <div className={style.circleLila}>1</div><div className={style.lineGray}></div> <div className={style.circleGray}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div>
+			</div>
+			<div className={`${style.checkboxMaterias}`}>
 			<IconButton aria-label="ir atrás" onClick={() => history.push('/voluntarios/formulario')}>
 				<span className="material-icons">arrow_back</span>
 			</IconButton>
 			{dias.map((dia, idx) => (
 				<Checkbox dia={dia} key={idx} />
-			))}
+				))}
 			<Button
 				variant="contained"
 				style={{marginTop: '3rem'}}
@@ -33,6 +37,7 @@ export default function ContenedorCheckbox({history}) {
 				Continuar
 				<span className="material-icons">trending_flat</span>
 			</Button>
+				</div>
 		</div>
 	);
 }
