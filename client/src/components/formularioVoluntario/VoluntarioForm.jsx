@@ -40,7 +40,7 @@ export default class VolunteerForm extends React.Component {
 					<div className={style.formgroup}>
 						<small>Nombre</small>
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="firstName"
 							//label="Nombre"
 							type="text"
@@ -49,7 +49,7 @@ export default class VolunteerForm extends React.Component {
 						/>
 						<small>Apellido</small>
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="lastName"
 							//label="Apellido"
 							type="text"
@@ -58,17 +58,18 @@ export default class VolunteerForm extends React.Component {
 						/>
 						<small>Fecha de nacimiento</small>
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="birthday"
 							//label="Fecha de nacimiento"
 							placeholder="fecha de nacimiento"
 							type="date"
 							id="standard-basic3"
+							
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<small>Telefono</small>
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="phone"
 							//label="Telefono"
 							type="number"
@@ -77,7 +78,7 @@ export default class VolunteerForm extends React.Component {
 						/>
 						<small>E-mail</small>
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							style={{width: '100%', marginTop: '1%', display: 'flex', justifySelf: 'center'}}
 							name="email"
 							//label="E-mail"
 							type="email"
@@ -86,13 +87,13 @@ export default class VolunteerForm extends React.Component {
 							onChange={e => this.handleOnChange(e)}
 						/>
 					</div>
-					{!this.state.info.firstName ||
+					{/* {!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
 					!this.state.info.email ||
 					!this.state.info.phone 
 						? (control = true)
-						: false}
+						: false} */}
 					<Button
 						disabled={control ? true : false}
 						variant="contained"

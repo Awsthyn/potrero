@@ -31,3 +31,17 @@
     background-color: #492BC4 !important;
     color: white !important;
 }
+
+
+.confirmacion{
+    width: 70px;
+    height: 70px;
+    margin-top: 20px;
+    border-radius: 50%;
+    background-color: rgb(140, 198, 62);
+}
+
+.check{
+    font-size: 3rem;
+    color: white;
+}

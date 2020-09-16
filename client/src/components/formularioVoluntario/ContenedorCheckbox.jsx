@@ -31,6 +31,7 @@ export default function ContenedorCheckbox({history}) {
 					setRedirect(true);
 				}}>
 				Continuar
+				<span className="material-icons">trending_flat</span>
 			</Button>
 		</div>
 	);
