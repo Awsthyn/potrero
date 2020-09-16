@@ -49,6 +49,7 @@ export default class VolunteerForm extends React.Component {
 							label="Nombre"
 							type="text"
 							id="standard-basic1"
+							InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<TextField
@@ -57,6 +58,7 @@ export default class VolunteerForm extends React.Component {
 							label="Apellido"
 							type="text"
 							id="standard-basic2"
+							InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<TextField
@@ -64,7 +66,7 @@ export default class VolunteerForm extends React.Component {
 							name="birthday"
 							label="Fecha de nacimiento"
 							// placeholder="fecha de nacimiento"
-							InputLabelProps = { { encoger :  true } } 
+							InputLabelProps={{ shrink: true }}
 							type="date"
 							// defaultValue="date"
 							id="standard-basic3"
@@ -76,6 +78,7 @@ export default class VolunteerForm extends React.Component {
 							label="Telefono"
 							type="number"
 							id="standard-basic5"
+							InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/> 
 						<TextField
@@ -84,6 +87,7 @@ export default class VolunteerForm extends React.Component {
 							label="E-mail"
 							type="email"
 							id="standard-basic4"
+							InputLabelProps={{ shrink: true }}
 							aria-describedby="emailHelp"
 							onChange={e => this.handleOnChange(e)}
 						/>
