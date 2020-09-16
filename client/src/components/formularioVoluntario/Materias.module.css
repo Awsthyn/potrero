@@ -8,7 +8,7 @@
     margin-top: 25px;
     align-items: center;
     justify-content: center;
-    
+    box-shadow: 0px 3px 3px 3px rgba(175, 174, 174, 0.623);
 }
 
 .botonMateria:hover{
@@ -30,4 +30,47 @@
 .botonEnviar {
     background-color: #492BC4 !important;
     color: white !important;
+}
+
+.circles {
+	display: flex;
+	width: 100%;
+	height: 50px;
+	margin:30px;
+	justify-content: space-around;
+}
+
+.circleLila {
+	background-color: #492BC4;
+	color: white;
+	font-size: 1.4rem;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	align-self: center;
+}
+
+.circleGray {
+	background-color: #CAD2D9;
+	color: white;
+	font-size: 1.4rem;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	align-self: center;
+}
+
+.lineGray {
+	background-color: #CAD2D9;
+	width: 130px;
+	height: 2px;
+	align-self: center; 
+}
+
+.title {
+    margin:20px;
+}
+
+.volver {
+    display: block;
 }
