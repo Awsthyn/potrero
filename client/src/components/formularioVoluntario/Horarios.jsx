@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import IconButton from '@material-ui/core/IconButton';
+import style from './VoluntarioForm.module.css'
 
 export default function Horarios({de, hasta, id, handleTime, handleDelete}) {
-	console.log(de);
 	const [horaDe, setHoraDe] = useState();
 	const [horaHasta, setHoraHasta] = useState();
 
@@ -35,22 +35,26 @@ export default function Horarios({de, hasta, id, handleTime, handleDelete}) {
 	}, [de, hasta]);
 
 	return (
-		<span>
-			<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', id, 'de')}>
-				<span className="material-icons">expand_less</span>
-			</IconButton>
-			<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir', id, 'de')}>
-				<span className="material-icons">expand_more</span>
-			</IconButton>
-			<span> de: {horaDe} hs</span>
-			<span> a {horaHasta} hs</span>
-			<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', id, 'hasta')}>
-				<span className="material-icons">expand_less</span>
-			</IconButton>
-			<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir', id, 'hasta')}>
-				<span className="material-icons">expand_more</span>
-			</IconButton>
-			<IconButton aria-label="delete" onClick={() => handleDelete(id)}>
+		<span className={style.containerHorarios} >
+			<span className={style.botonesMasyMenos}> 
+				<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', id, 'de')}>
+					<span className="material-icons">expand_less</span>
+				</IconButton>
+				<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir', id, 'de')}>
+					<span className="material-icons">expand_more</span>
+				</IconButton>
+			</span>
+			<span style={{alignSelf:'center'}}> de: {horaDe} hs</span>
+			<span style={{alignSelf:'center'}}> a {horaHasta} hs</span>
+			<span className={style.botonesMasyMenos}> 
+				<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', id, 'hasta')}>
+					<span className="material-icons">expand_less</span>
+				</IconButton>
+				<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir', id, 'hasta')}>
+					<span className="material-icons">expand_more</span>
+				</IconButton>
+			</span>
+			<IconButton style={{alignSelf:'center'}} aria-label="delete" onClick={() => handleDelete(id)}>
 				<span className="material-icons">delete</span>
 			</IconButton>
 		</span>

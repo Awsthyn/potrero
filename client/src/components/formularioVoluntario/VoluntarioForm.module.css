@@ -209,3 +209,12 @@
 	flex-direction: row;
 	justify-content: flexstar;
 }
+.botonesMasyMenos{
+	display: flex;
+	flex-direction: column;
+	width: 20px;
+}
+
+.containerHorarios{
+	display: flex;
+}

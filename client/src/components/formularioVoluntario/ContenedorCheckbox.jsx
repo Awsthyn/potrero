@@ -21,13 +21,13 @@ export default function ContenedorCheckbox({history, active}) {
 	
 	return (
 		<div>
+			<IconButton aria-label="ir atrás" onClick={() => history.push('/voluntarios/formulario')}>
+				<span className="material-icons">arrow_back</span>
+			</IconButton>
 			<div className={style.circles}>
 				<div className={style.circleGray}>1</div><div className={style.lineGray}></div> <div className={style.circleLila}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div>
 			</div>
 			<div className={`${style.checkboxMaterias}`}>
-			<IconButton aria-label="ir atrás" onClick={() => history.push('/voluntarios/formulario')}>
-				<span className="material-icons">arrow_back</span>
-			</IconButton>
 			<ul className={style.containerListDays}>
 			{ dias && dias.map((dia, idx) => (
 				<li className={style.itemList}><Acordeon className={style.inlineCheck} dia={dia} key={idx} 

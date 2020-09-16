@@ -33,29 +33,31 @@ export default function Acordeon({dia, expandedAll, handleChange}) {
       }
   }
   const handleTime = (type, idx, clase) => {
-  //   let newDays = days[dia].map((h, i) => {
-  //     if (i === idx) {
-  //       if (type === 'aumentar' && clase === 'de' && h.de >= 8 && h.de < 17) {
-  //         if (h.hasta - 1.5 < h.de) h.hasta = h.de + 1.5;
-  //         return (h.de = h.de + 0.5);
-  //       } else if (type === 'aumentar' && clase === 'hasta' && h.hasta < 18 && h.hasta >= 9) {
-  //         return (h[clase] = h[clase] + 0.5);
-  //       } else if (type === 'disminuir' && clase === 'de' && h.de <= 17 && h.de > 8) {
-  //         return (h[clase] = h[clase] - 0.5);
-  //       } else if (
-  //         type === 'disminuir' &&
-  //         clase === 'hasta' &&
-  //         h.hasta <= 18 &&
-  //         h.hasta > 9 &&
-  //         h.hasta >= h.de + 1.5
-  //       ) {
-  //         return (h[clase] = h[clase] - 0.5);
-  //       }
-  //     }
-  //   return h;
-  // }
-  
-  // return  setDays({[dia]: newDays})
+    console.log(clase)
+    let newDays = days[dia].map((h,i) => {
+      if(i === idx){
+        if (type === 'aumentar' && clase === 'de' && h.de >= 8 && h.de < 17) {
+          console.log(h.de)
+          console.log(h.hasta)
+          if (h.hasta - 1.5 < h.de) h.hasta = h.de + 1.5;
+          return (h.de = {de: h.de + 0.5, hasta: h.hasta});
+      }else if (type === 'aumentar' && clase === 'hasta' && h.hasta < 18 && h.hasta >= 9) {
+                return (h[clase] = {hasta: h[clase] + 0.5, de: h.de});
+              } else if (type === 'disminuir' && clase === 'de' && h.de <= 17 && h.de > 8) {
+                return (h[clase] ={de: h[clase] - 0.5, hasta: h.hasta});
+              } else if (
+                type === 'disminuir' &&
+                clase === 'hasta' &&
+                h.hasta <= 18 &&
+                h.hasta > 9 &&
+                h.hasta >= h.de + 1.5
+              ) {
+                return (h[clase] = {hasta: h[clase] - 0.5, de: h.de});
+              }
+            }
+          return h;
+    })
+  return  setDays({[dia]: newDays})
 	
 }
   
@@ -63,6 +65,7 @@ export default function Acordeon({dia, expandedAll, handleChange}) {
     if(days[dia].length === 1){
       return setDays('Agregar rango horario')
     }
+    console.log(days[dia].splice(idx, 1))
 		return setDays({[dia]: days[dia].splice(idx, 1)});
 		
 	}
