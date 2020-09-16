@@ -168,7 +168,7 @@ server.put('/:id', (req, res) => {
       res.json(err);
     });
 });
-
+ 
 server.put('/:id/changestatus', (req, res)=>{
     Student.update({isActive: req.body.isActive},{where: {id: req.params.id}})
     .then(() => {
