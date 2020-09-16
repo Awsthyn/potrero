@@ -20,7 +20,7 @@ export default function Niveles() {
     }
 		return (
 			<div>
-                <h4>¿Cual es el nivel superior en el cual podrias ayudar?</h4>
+                <h4>¿Cual es el nivel superior en el cual podrías ayudar?</h4>
                 <div>
                     <div
                         className={style.botonMateria}
@@ -34,7 +34,7 @@ export default function Niveles() {
                     </div>
                 </div>
                 {
-                    primario ? <div>
+                    primario && !secundario ? <div>
                                     <div className={style.botonMateria} onClick={() => handlePrimario()}>Primer grado</div>
                                     <div className={style.botonMateria} onClick={() => handlePrimario()}>Segundo grado</div>
                                     <div className={style.botonMateria} onClick={() => handlePrimario()}>Tercer grado</div>
@@ -45,7 +45,7 @@ export default function Niveles() {
                              : null  
                 }
                  {
-                    secundario ? <div>
+                    secundario && !primario ?  <div>
                                     <div className={style.botonMateria} onClick={() => handlePrimario()}>Primer año</div>
                                     <div className={style.botonMateria} onClick={() => handlePrimario()}>Segundo año</div>
                                     <div className={style.botonMateria} onClick={() => handlePrimario()}>Tercer año</div>
