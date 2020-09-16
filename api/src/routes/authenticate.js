@@ -1,6 +1,7 @@
 const server = require("express").Router();
 const { User } = require("../db.js");
 const passport = require('passport');
+const bcrypt = require('bcrypt');
 
 server.get('/', function(req, res) {
     res.json({ user: req.user });
@@ -8,7 +9,7 @@ server.get('/', function(req, res) {
 
 server.post('/login',
     passport.authenticate('local'),
-    function(req, res) {
+    function(req, res, next) {
         console.log('inicio de sesion exitoso')
         res.json(req.user)
     // res.redirect('/');

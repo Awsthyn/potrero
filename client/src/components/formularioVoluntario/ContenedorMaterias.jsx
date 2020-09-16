@@ -1,33 +1,37 @@
 import React from 'react';
 import {postVoluntary} from '../../redux/actions/voluntary.js';
+import {getSubjects} from '../../redux/actions/subject.js';
 import {connect} from 'react-redux';
 import Materias from './Materias';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import style1 from './Materias.module.css';
+import swal from 'sweetalert'
 
 class ContenedorMaterias extends React.Component {
 	constructor(props) {
 		super();
 		this.state = {
-			mat: [],
+			materia: [],
 			info: new FormData(),
 		};
 		this.handleOnClick = this.handleOnClick.bind(this);
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSend = this.handleSend.bind(this);
 		this.handleOnFileChange = this.handleOnFileChange.bind(this);
-		this.fileInput = React.createRef();
+		this.goBack = this.goBack.bind(this);
 	}
 	handleOnClick(id, e) {
-		if (e.target.style.backgroundColor === 'rgb(167, 255, 167)') {
+		if (e.target.style.backgroundColor === 'rgb(140, 198, 62)') {
 			e.target.style.backgroundColor = 'white';
 			this.setState(function (state) {
-				return {mat: state.mat.filter(m => m !== id)};
+				return {materia: state.materia.filter(m => m !== id)};
 			});
 		} else {
-			e.target.style.backgroundColor = 'rgb(167, 255, 167)';
+			e.target.style.backgroundColor = 'rgb(140, 198, 62)';
 			this.setState({
-				mat: [...this.state.mat, id],
+				materia: [...this.state.materia, id],
 			});
 		}
 	}
@@ -46,24 +50,56 @@ class ContenedorMaterias extends React.Component {
 
 		this.setState({ ...this.state, info: this.state.info});
 	}
-	handleSend() {
-		let data = JSON.parse(localStorage.getItem('datos'));
+	
+	handleSend(e) {
+		e.preventDefault();
+			swal({
+				title: "¿Estas seguro?",
+				text: "Antes de enviar tu solicitud verifica que tus datos sean correctos!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+			.then((willSend) => {
+				if (willSend) {
+					let data = JSON.parse(localStorage.getItem('datos'));
 
-		Object.entries(data).forEach(dato => {
-			this.state.info.append(dato[0], dato[1])
-		});
+					Object.entries(data).forEach(dato => {
+						this.state.info.append(dato[0], dato[1])
+					});
 
-		this.props.postVoluntary(this.state.info);
+					this.state.info.append("materias", this.state.materia);
+
+					this.props.postVoluntary(this.state.info);
+					
+					localStorage.removeItem('datos')
+			      //this.props.addSchedule();
+					swal("Tu solicitud ha sido enviada!", {
+						icon: "success",
+					});
+				} else {
+				swal("Solicitud no enviada");
+				}
+			});
+		
+	}
+	goBack(){
+		this.props.history.push('/voluntarios/horarios');
+	}
+	componentDidMount(){
+	this.props.getSubjects()
 	}
 	render() {
 		var control;
-		var materias = ['Matemática', 'Idiomas', 'Biología', 'Tecnología', 'Artes', 'Computación'];
+		var materias = this.props.subjects.subjects
+		//['Matemática', 'Idiomas', 'Biología', 'Tecnología', 'Artes', 'Computación'];
 		return (
 			<div>
+				<IconButton aria-label="ir atrás" onClick={this.goBack}>
+				<span className="material-icons">arrow_back</span>
+			</IconButton>
 				<h4>¿En qué áreas podrías ayudar?</h4>
-				{materias.map((m, i) => (
-					<Materias materia={m} key={i} handleOnClick={this.handleOnClick} />
-				))}
+				<div className={style1.contenedorMateria}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
 				<br></br>
 				<TextField
 					style={{width: '80%', marginTop: '1%', display: 'block'}}
@@ -89,7 +125,8 @@ class ContenedorMaterias extends React.Component {
 				<Button
 					disabled={control ? true : false}
 					variant="contained"
-					//className={style.skere}
+					style={{marginTop: '3rem'}}
+					className={style1.botonEnviar}
 					type="submit"
 					value="Submit"
 					onClick={e => this.handleSend(e)}>
@@ -99,5 +136,9 @@ class ContenedorMaterias extends React.Component {
 		);
 	}
 }
-
-export default connect(null, {postVoluntary})(ContenedorMaterias);
+function mapStateToProps(state){
+	return {
+		subjects: state.subjects
+	}
+}
+export default connect(mapStateToProps, {postVoluntary, getSubjects})(ContenedorMaterias);

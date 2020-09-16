@@ -19,10 +19,10 @@ useEffect(() => {
   <p>Hecho por Henrys</p>
   <hr className="my-4" />
 </div>
-<button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/voluntarios/formulario')}>Postularse como voluntario</button>
-<button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/usuario/login')}>Iniciar sesión</button>
-<button type="button" className="mr-4 btn btn-primary" onClick={()=> history.push('/admin/estudiantes')}>Alumnos</button>
-<button type="button" className="mr-4 btn btn-warning" onClick={()=> history.push('/admin')}>Panel de Admin</button>
+<button type="button" className="mr-4 btn btn-primary waves-effect btn-rounded" onClick={()=> history.push('/voluntarios/formulario')}><i className="fas fa-rocket" aria-hidden="true"></i>Postularse como voluntario</button>
+<button type="button" className="mr-4 btn btn-success waves-effect btn-rounded" onClick={()=> history.push('/usuario/login')}><i className="far fa-user pr-2" aria-hidden="true"></i> Iniciar sesión</button>
+<button type="button" className="mr-4 btn btn-warning waves-effect btn-rounded" onClick={()=> history.push('/admin')}><i className="fas fa-cogs pr-2"
+        aria-hidden="true"></i>Panel de Admin</button>
 </>
     )
 }

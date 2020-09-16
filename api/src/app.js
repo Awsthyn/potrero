@@ -8,6 +8,8 @@ const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const path = require('path');
 
+// const cors = require('cors');
+
 const {User} = require('./db.js');
 require('./db.js');
 const server = express();
@@ -83,6 +85,12 @@ server.use((req, res, next) => {
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 	next();
 });
+
+// const corsOptions = {
+// 	origin: 'http://localhost:3000',
+// 	credentials : true
+// }
+// server.use(cors(corsOptions));
 
 server.use(`/uploads`, express.static(path.join(__dirname, '/routes/uploads')));
 server.use('/', routes);

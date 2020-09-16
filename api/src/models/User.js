@@ -38,11 +38,11 @@ module.exports = (sequelize) => {
     },
     birthday: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     linkedin: {
       type: DataTypes.STRING,
