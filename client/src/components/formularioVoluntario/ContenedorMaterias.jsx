@@ -1,11 +1,13 @@
 import React from 'react';
 import {postVoluntary} from '../../redux/actions/voluntary.js';
+import {getSubjects} from '../../redux/actions/subject.js';
 import {connect} from 'react-redux';
 import Materias from './Materias';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import style from './VoluntarioForm.module.css';
+import IconButton from '@material-ui/core/IconButton';
 import style1 from './Materias.module.css';
+import swal from 'sweetalert'
 
 class ContenedorMaterias extends React.Component {
 	constructor(props) {
@@ -17,6 +19,7 @@ class ContenedorMaterias extends React.Component {
 		this.handleOnClick = this.handleOnClick.bind(this);
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSend = this.handleSend.bind(this);
+		this.goBack = this.goBack.bind(this);
 	}
 	handleOnClick(id, e) {
 		if (e.target.style.backgroundColor === 'rgb(140, 198, 62)') {
@@ -36,27 +39,48 @@ class ContenedorMaterias extends React.Component {
 			info: {...this.state.info, [e.target.name]: e.target.value},
 		});
 	}
-	handleSend() {
-		let data = JSON.parse(localStorage.getItem('datos'));
-		let allData = Object.assign(this.state.info, data);
-		var materiasConcatenadas = {materias: ""};
-		this.state.materia.map((m,i) => {
-			if(i !== this.state.materia.length - 1) {
-                return materiasConcatenadas.materias = materiasConcatenadas.materias + m + "-";
-			} else {
-                return materiasConcatenadas.materias = materiasConcatenadas.materias + m;
-			}
-		})
+	handleSend(e) {
+		e.preventDefault();
+			swal({
+				title: "¿Estas seguro?",
+				text: "Antes de enviar tu solicitud verifica que tus datos sean correctos!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+			.then((willSend) => {
+				if (willSend) {
+					let data = JSON.parse(localStorage.getItem('datos'));
+					let allData = Object.assign(this.state.info, data);
+					this.props.postVoluntary(allData, {materias: this.state.materia});
+					localStorage.removeItem('datos')
+			      //this.props.addSchedule();
+				swal("Tu solicitud ha sido enviada!", {
+					icon: "success",
+				});
+				} else {
+				swal("Solicitud no enviada");
+				}
+			});
 		
-		this.props.postVoluntary(allData, materiasConcatenadas);
+	}
+	goBack(){
+		this.props.history.push('/voluntarios/horarios');
+	}
+	componentDidMount(){
+	this.props.getSubjects()
 	}
 	render() {
 		var control;
-		var materias = ['Matemática', 'Idiomas', 'Biología', 'Tecnología', 'Artes', 'Computación'];
+		var materias = this.props.subjects.subjects
+		//['Matemática', 'Idiomas', 'Biología', 'Tecnología', 'Artes', 'Computación'];
 		return (
 			<div>
+				<IconButton aria-label="ir atrás" onClick={this.goBack}>
+				<span className="material-icons">arrow_back</span>
+			</IconButton>
 				<h4>¿En qué áreas podrías ayudar?</h4>
-				<div className={style1.contenedorMateria}>{ materias.map((m,i) => <Materias materia={m} key={i} handleOnClick={this.handleOnClick}/>) }</div>
+				<div className={style1.contenedorMateria}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
 				<br></br>
 				<small>Linkedin</small>
 				<TextField
@@ -77,10 +101,11 @@ class ContenedorMaterias extends React.Component {
 					id="standard-basic7"
 					onChange={e => this.handleOnChange(e)}
 				/>
-				{!this.state.info.linkedin && !this.state.info.cv ? (control = true) : false}
+				{!this.state.info.linkedin && !this.state.info.cv || this.state.materia.length === 0 ? (control = true) : false}
 				<Button
 					disabled={control ? true : false}
 					variant="contained"
+					style={{marginTop: '3rem'}}
 					className={style1.botonEnviar}
 					type="submit"
 					value="Submit"
@@ -91,5 +116,9 @@ class ContenedorMaterias extends React.Component {
 		);
 	}
 }
-
-export default connect(null, {postVoluntary})(ContenedorMaterias);
+function mapStateToProps(state){
+	return {
+		subjects: state.subjects
+	}
+}
+export default connect(mapStateToProps, {postVoluntary, getSubjects})(ContenedorMaterias);
