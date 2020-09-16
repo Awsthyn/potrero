@@ -8,12 +8,16 @@ import style from './VoluntarioForm.module.css';
 
 export default function ContenedorCheckbox({history, active}) {
 	const [redirect, setRedirect] = useState(false);
+	const [expandedAll, setExpandedAll] = useState(false);
 
 	if (redirect) {
 		return <Redirect to="/voluntarios/materias" />;
 	}
 	let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
-
+	
+	const handleChange = (panel) => (event, isExpanded) => {
+      setExpandedAll(isExpanded ? panel : false) 
+  };
 	
 	return (
 		<div>
@@ -26,7 +30,9 @@ export default function ContenedorCheckbox({history, active}) {
 			</IconButton>
 			<ul className={style.containerListDays}>
 			{ dias && dias.map((dia, idx) => (
-				<li className={style.itemList}><Acordeon className={style.inlineCheck} dia={dia} key={idx} /></li>
+				<li className={style.itemList}><Acordeon className={style.inlineCheck} dia={dia} key={idx} 
+				handleChange={handleChange} expandedAll={expandedAll}
+				/></li>
 				))}
 				</ul>
 			<Button
@@ -44,10 +50,4 @@ export default function ContenedorCheckbox({history, active}) {
 				</div>
 		</div>
 	);
-}
-
-function mapStateToProps(state){
-	return {
-		active: state.active
-	}
 }
