@@ -1,8 +1,10 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import style from './VoluntarioForm.module.css';
+import styles from './VoluntarioForm.module.css';
+// import styled from 'styled-components';
+import { TextField, NoSsr } from '@material-ui/core';
+
 
 export default class VolunteerForm extends React.Component {
 	constructor(props) {
@@ -35,53 +37,59 @@ export default class VolunteerForm extends React.Component {
 			return <Redirect to="/voluntarios/horarios" />;
 		}
 		return (
-			<div className={style.Formm} >
-				<form>
-					<div className={style.formgroup}>
-						<small>Nombre</small>
+			<div>
+			<div className={styles.circles}>
+			  <div className={styles.circleLila}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div>
+			</div>
+			<div className={styles.Formm} >
+				<form className={styles.formInput}>
+					<div className={styles.formgroup}>
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							className={styles.nombreVolunteer}
 							name="firstName"
-							//label="Nombre"
+							label="Nombre"
 							type="text"
 							id="standard-basic1"
+							InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Apellido</small>
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							className={styles.lastName}
 							name="lastName"
-							//label="Apellido"
+							label="Apellido"
 							type="text"
 							id="standard-basic2"
+							InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Fecha de nacimiento</small>
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							className={styles.dateText}
 							name="birthday"
-							//label="Fecha de nacimiento"
-							placeholder="fecha de nacimiento"
+							label="Fecha de nacimiento"
+							// placeholder="fecha de nacimiento"
+							InputLabelProps={{ shrink: true }}
 							type="date"
+							// defaultValue="date"
 							id="standard-basic3"
+							
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<small>Telefono</small>
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							className={styles.phoneVolunteer}
 							name="phone"
-							//label="Telefono"
+							label="Telefono"
 							type="number"
 							id="standard-basic5"
+							InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
-						/>
-						<small>E-mail</small>
+						/> 
 						<TextField
-							style={{width: '80%', marginTop: '1%', display: 'block'}}
+							style={{width: '100%', marginTop: '1%', display: 'flex'}}
 							name="email"
-							//label="E-mail"
+							label="E-mail"
 							type="email"
 							id="standard-basic4"
+							InputLabelProps={{ shrink: true }}
 							aria-describedby="emailHelp"
 							onChange={e => this.handleOnChange(e)}
 						/>
@@ -96,13 +104,16 @@ export default class VolunteerForm extends React.Component {
 					<Button
 						disabled={control ? true : false}
 						variant="contained"
-						className={style.skere}
+						className={styles.testButton}
+						id={styles.skere}
 						type="submit"
 						value="Submit"
 						onClick={() => this.handleOnClick()}>
 						Continuar
+						<span style={{margin:"10px"}} className="material-icons">trending_flat</span>
 					</Button>
 				</form>
+			</div>
 			</div>
 		);
 	}

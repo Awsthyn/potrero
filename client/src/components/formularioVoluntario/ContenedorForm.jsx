@@ -3,20 +3,30 @@ import {Route} from 'react-router-dom';
 import VolunteerForm from './VoluntarioForm';
 import ContenedorMaterias from './ContenedorMaterias';
 import ContenedorCheckbox from './ContenedorCheckbox';
+import Niveles from './Niveles';
+import Confirmacion from './Confirmacion';
 import style from './VoluntarioForm.module.css';
 
 export default function ContenedorForm() {
 	return (
-		<div className={style.Contenedor}> 
+		<div className={style.Contenedor}>
+			<div className={style.conteiner}>
 			<img
 				className={style.img}
 				src="https://image.freepik.com/foto-gratis/accion-jugador-futbol-estadio_1150-14608.jpg"
 				alt="Jugador de fútbol"
-			/>
+				/>
+				<div className={style.imgTxt}><b>Sumáte!</b></div>
+					<div className={style.imgContainText}>
+						Trabajemos juntos por la inclusión social y el 
+						desarrollo humano de niños y adolescentes en estado de vulnerabilidad
+					</div>
+				</div>
+				
 			<div>
 				<img
 					id="comp-jgasx8rqimgimage"
-					style={{objectPosition: '50% 50%', width: '106px', height: '80px', objectFit: 'cover'}}
+					className={style.imgSize}
 					alt="Fundacion El Potrero"
 					data-type="image"
 					itemProp="image"
@@ -24,7 +34,9 @@ export default function ContenedorForm() {
 				/>
 				<Route exact path="/voluntarios/formulario" component={VolunteerForm} />
 				<Route exact path="/voluntarios/horarios" component={ContenedorCheckbox} />
+				<Route exact path="/voluntarios/niveles" component={Niveles} />
 				<Route exact path="/voluntarios/materias" component={ContenedorMaterias} />
+				<Route exact path="/voluntarios/confirmacion" component={Confirmacion} />
 			</div>
 		</div>
 	);
