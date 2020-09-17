@@ -44,52 +44,60 @@ export default class VolunteerForm extends React.Component {
 			<div className={styles.Formm} >
 				<form className={styles.formInput}>
 					<div className={styles.formgroup}>
-						<TextField
-							className={styles.nombreVolunteer}
+					{/* <input spellcheck="false" 
+					autocomplete="off" type="text" 
+					name="email" id="email" className={style.input}
+
+                                        onChange={this.handleInputChange}
+                                        value={this.state.loginData.email} /> */}
+						<input
+							spellcheck="false"
+							autocomplete="off"
+							type="text"
 							name="firstName"
-							label="Nombre"
-							type="text"
-							id="standard-basic1"
+							className={styles.input}
+							placeholder="Nombre"
 							InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<TextField
-							className={styles.lastName}
+						<input
+							spellcheck="false"
+							autocomplete="off"
+							type="text"
 							name="lastName"
-							label="Apellido"
-							type="text"
-							id="standard-basic2"
+							className={styles.input}
+							placeholder="Apellido"
 							InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<TextField
-							className={styles.dateText}
+						<input
+							spellcheck="false"
+							autocomplete="off"
+							type="date"
 							name="birthday"
-							label="Fecha de nacimiento"
+							className={styles.input}
 							// placeholder="fecha de nacimiento"
 							InputLabelProps={{ shrink: true }}
-							type="date"
-							// defaultValue="date"
-							id="standard-basic3"
-							
 							onChange={e => this.handleOnChange(e)}
 						/>
-						<TextField
-							className={styles.phoneVolunteer}
-							name="phone"
-							label="Telefono"
+						<input
+							spellcheck="false"
+							autocomplete="off"
 							type="number"
-							id="standard-basic5"
-							InputLabelProps={{ shrink: true }}
+							name="phone"
+							className={styles.input}
+							placeholder="Telefono"
+							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/> 
-						<TextField
-							style={{width: '100%', marginTop: '1%', display: 'flex'}}
-							name="email"
-							label="E-mail"
+						<input
+							spellcheck="false"
+							autocomplete="off"
 							type="email"
-							id="standard-basic4"
-							InputLabelProps={{ shrink: true }}
+							name="email"
+							className={styles.input}
+							placeholder="E-mail"
+							// InputLabelProps={{ shrink: true }}
 							aria-describedby="emailHelp"
 							onChange={e => this.handleOnChange(e)}
 						/>

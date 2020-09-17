@@ -1,10 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap");
 
+.input{
+    font-size: 14px;
+    color: #3333339f;
+    font-weight: 600;
+    padding: 0px 0px 7px 0px;
+    width: 400px;
+    margin: 25px auto;
+    border: none;
+	border-bottom: 2px solid #3333331f;
+	text-align: left;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 2px solid #8bc63ebe;
+}
+
+
 .Formm {
 	display: flex;
 	width: 680px;
-	justify-content: center;
-	align-content: center;
+	/* justify-content: center; */
+	/* align-content: center; */
 	margin-top: 35px;
 }
 .formInput{
@@ -14,8 +32,8 @@
 }
 .formgroup{
 	width: 80%;
-	margin-bottom: 3rem;
-	margin: auto;
+	/* margin-bottom: 3rem; */
+	/* margin: auto; */
 }
 .danger {
 	border: red 1px solid;
@@ -58,9 +76,9 @@
 	height: 40px;
 	font-size: 15px;
 }
+
 #skere button{
-	justify-content: center;
-	
+	margin-left: 100px;
 }
 
 .circles {
