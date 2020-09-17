@@ -14,6 +14,8 @@ import CreateStudentForm from './components/student/CreateStudentForm';
 import StudentFile from './components/student/StudentFile';
 import ResetPassword from './components/formularioVoluntario/PasswordForgot';
 import TablaMaterias from './components/admin/TablaMaterias';
+import AdminNavBar from './components/admin/AdminNavBar';
+import AdminDrawer from './components/admin/AdminDrawer';
 import PasswordRecovery from './components/PasswordRecovery';
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
 			component={NavBar} />
 			<Route exact path="/" component={Home} />
 			<Route path="/voluntarios" component={ContenedorForm} />
+			<Route path="/admin" component={AdminNavBar} />
+			<Route path="/admin" component={AdminDrawer} />
 			<Route exact path="/admin" component={AdminPanel} />
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
 			<Route exact path="/admin/usuarios" component={TablaUsuarios} />
