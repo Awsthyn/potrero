@@ -28,17 +28,14 @@ export default function Acordeon({dia, expandedAll, handleChange}) {
   const handleOnClick = (e) => {
       if(typeof days === 'string'){
         return setDays({[dia]:[{de: 12, hasta: 14}]});
-      }else{
+      }else if(days[dia].length < 2){
         return setDays({[dia]: [...days[dia], {de: 12, hasta: 14}]});
       }
   }
   const handleTime = (type, idx, clase) => {
-    console.log(clase)
     let newDays = days[dia].map((h,i) => {
       if(i === idx){
         if (type === 'aumentar' && clase === 'de' && h.de >= 8 && h.de < 17) {
-          console.log(h.de)
-          console.log(h.hasta)
           if (h.hasta - 1.5 < h.de) h.hasta = h.de + 1.5;
           return (h.de = {de: h.de + 0.5, hasta: h.hasta});
       }else if (type === 'aumentar' && clase === 'hasta' && h.hasta < 18 && h.hasta >= 9) {
@@ -65,8 +62,11 @@ export default function Acordeon({dia, expandedAll, handleChange}) {
     if(days[dia].length === 1){
       return setDays('Agregar rango horario')
     }
-    console.log(days[dia].splice(idx, 1))
-		return setDays({[dia]: days[dia].splice(idx, 1)});
+    if(idx === 1 ){
+      console.log(days)
+      setDays({[dia]: days[dia][0]})
+    }
+		setDays({[dia]: days[dia].splice(idx, 1)});
 		
 	}
 

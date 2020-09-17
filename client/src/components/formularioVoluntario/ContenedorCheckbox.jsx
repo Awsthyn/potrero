@@ -30,7 +30,7 @@ export default function ContenedorCheckbox({history, active}) {
 			<div className={`${style.checkboxMaterias}`}>
 			<ul className={style.containerListDays}>
 			{ dias && dias.map((dia, idx) => (
-				<li className={style.itemList}><Acordeon className={style.inlineCheck} dia={dia} key={idx} 
+				<li className={style.itemList} key={idx}><Acordeon className={style.inlineCheck} dia={dia} key={idx} 
 				handleChange={handleChange} expandedAll={expandedAll}
 				/></li>
 				))}
