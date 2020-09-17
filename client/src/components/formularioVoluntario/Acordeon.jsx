@@ -62,11 +62,7 @@ export default function Acordeon({dia, expandedAll, handleChange}) {
     if(days[dia].length === 1){
       return setDays('Agregar rango horario')
     }
-    if(idx === 1 ){
-      console.log(days)
-      setDays({[dia]: days[dia][0]})
-    }
-		setDays({[dia]: days[dia].splice(idx, 1)});
+		setDays({[dia]: days[dia].filter((h, i) => i !== idx)});
 		
 	}
 
