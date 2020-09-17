@@ -77,21 +77,20 @@ export class Login extends React.Component {
 
 
     validate(input) {
-        let errors = {};
-        if (!input.email) {
-            errors.email = 'Email es obligatorio';
-        } else if (!/\S+@\S+\.\S+/.test(input.email)) {
-            errors.email = 'Email inválido';
-        }
 
-        if (!input.password) {
-            errors.password = 'Contraseña es obligatoria';
-        } else if (!/(?=.*[0-9])/.test(input.password)) {
-            errors.password = 'Contraseña inválida';
-        }
+       let errors = {};
+       if (!input.email) {
+           errors.email = 'Email es obligatorio';
+       } else if (!/\S+@\S+\.\S+/.test(input.email)) {
+           errors.email = 'Email inválido';
+       }
 
-        return errors;
-    };
+       if (!input.password) {
+           errors.password = 'Contraseña es obligatoria';
+       } 
+
+       return errors;
+   };
 
 
     render() {

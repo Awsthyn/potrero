@@ -14,11 +14,12 @@ class ContenedorMaterias extends React.Component {
 		super();
 		this.state = {
 			materia: [],
-			info: {},
+			info: new FormData(),
 		};
 		this.handleOnClick = this.handleOnClick.bind(this);
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSend = this.handleSend.bind(this);
+		this.handleOnFileChange = this.handleOnFileChange.bind(this);
 		this.goBack = this.goBack.bind(this);
 	}
 	handleOnClick(id, e) {
@@ -35,10 +36,21 @@ class ContenedorMaterias extends React.Component {
 		}
 	}
 	handleOnChange(e) {
-		this.setState({
-			info: {...this.state.info, [e.target.name]: e.target.value},
-		});
+		const field = e.target;
+
+		this.state.info.append(field.name, field.value);
+
+		this.setState({...this.state, info: this.state.info});
 	}
+
+	handleOnFileChange = (e) => {
+		const field = e.target;
+
+		this.state.info.append(field.name, field.files[0]);
+
+		this.setState({ ...this.state, info: this.state.info});
+	}
+	
 	handleSend(e) {
 		e.preventDefault();
 			swal({
@@ -51,13 +63,20 @@ class ContenedorMaterias extends React.Component {
 			.then((willSend) => {
 				if (willSend) {
 					let data = JSON.parse(localStorage.getItem('datos'));
-					let allData = Object.assign(this.state.info, data);
-					this.props.postVoluntary(allData, {materias: this.state.materia});
+
+					Object.entries(data).forEach(dato => {
+						this.state.info.append(dato[0], dato[1])
+					});
+
+					this.state.info.append("materias", this.state.materia);
+
+					this.props.postVoluntary(this.state.info);
+					
 					localStorage.removeItem('datos')
 			      //this.props.addSchedule();
-				swal("Tu solicitud ha sido enviada!", {
-					icon: "success",
-				});
+					swal("Tu solicitud ha sido enviada!", {
+						icon: "success",
+					});
 				} else {
 				swal("Solicitud no enviada");
 				}
@@ -82,6 +101,17 @@ class ContenedorMaterias extends React.Component {
 				<h4>¿En qué áreas podrías ayudar?</h4>
 				<div className={style1.contenedorMateria}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
 				<br></br>
+				<TextField
+					style={{width: '80%', marginTop: '1%', display: 'block'}}
+					name="cv"
+					//label="CV"
+					type="file"
+					accept=".pdf"
+					id="standard-basic7"
+					onChange={e => this.handleOnFileChange(e)}
+				/>
+				<br></br>
+				<small>CV</small>
 				<small>Linkedin</small>
 				<TextField
 					style={{width: '80%', marginTop: '1%', display: 'block'}}
@@ -91,17 +121,7 @@ class ContenedorMaterias extends React.Component {
 					id="standard-basic6"
 					onChange={e => this.handleOnChange(e)}
 				/>
-				<br></br>
-				<small>CV</small>
-				<TextField
-					style={{width: '80%', marginTop: '1%', display: 'block'}}
-					name="cv"
-					//label="CV"
-					type="file"
-					id="standard-basic7"
-					onChange={e => this.handleOnChange(e)}
-				/>
-				{!this.state.info.linkedin && !this.state.info.cv || this.state.materia.length === 0 ? (control = true) : false}
+				{/* {!this.state.info.linkedin && !this.state.info.cv ? (control = true) : false} */}
 				<Button
 					disabled={control ? true : false}
 					variant="contained"
