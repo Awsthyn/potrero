@@ -151,33 +151,6 @@ export class CreateStudentForm extends Component {
 					/>
 				</div>
 				<div className="form-group">
-					<input
-						className="mt-4 form-control"
-						type="text"
-						name="strengths"
-						placeholder="Fortalezas del alumno..."
-						onChange={this.onChangeHandler}
-					/>
-				</div>
-				<div className="form-group">
-					<input
-						className="form-control"
-						type="text"
-						name="weakness"
-						placeholder="Aspectos del alumno que requieren atención..."
-						onChange={this.onChangeHandler}
-					/>
-				</div>
-				<div className="form-group">
-					<input
-						className="form-control"
-						type="text"
-						name="motivations"
-						placeholder="Motivaciones del alumno..."
-						onChange={this.onChangeHandler}
-					/>
-				</div>
-				<div className="form-group">
     			<label style={{fontSize: "1.7em"}} htmlFor="nivelEducativo">Nivel educativo</label>
     			<select className="form-control" id="nivelEducativo">
 					<option>1er grado</option>
@@ -188,7 +161,7 @@ export class CreateStudentForm extends Component {
 					</select>
 				</div>
 				<h3 className="text-center d-block mb-3">Materias que necesita cursar</h3>
-				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
+				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap justify-content-center form-check form-check-inline">
                     { Array.isArray(this.props.subjects)&& this.props.subjects.length > 0 ? this.props.subjects.map( subject => {
                         return (
                         <SubjectCheckbox key = {subject.id} initialState={false} subject={subject} onChange={this.onCheckboxClicked} required/>
@@ -196,25 +169,42 @@ export class CreateStudentForm extends Component {
                     ) : null}
                 </div>
 				<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene FACILIDAD</h3>
-				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
+				<div style={{minHeight: "150px",width: "80vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
                     { Array.isArray(this.state.subjectsId)&& this.state.subjectsId.length > 0 ? this.state.subjectsId.map( subject => {
                     if(this.state.weakness.includes(subject) === false) return (
                         <StrengthCheckbox key = {subject+'strength'} initialState={false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onStrengthCheckboxClicked} required/>
 					)}
 					
-                    ) : null}	
+                    ) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}	
                 </div>
 				<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene DIFICULTAD</h3>
-				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
+				<div style={{minHeight: "150px",width: "80vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
                     { Array.isArray(this.state.subjectsId)&& this.state.subjectsId.length > 0 ? this.state.subjectsId.map( subject => {
                     if(this.state.strengths.includes(subject) === false) return (
                         <WeakCheckbox key = {subject+'weak'} initialState={false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onWeakCheckboxClicked} required/>
 					)
 					else return null}
 					
-                    ) : null}	
+                    ) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}	
                 </div>
-
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="motivations"
+						placeholder="Motivaciones del alumno..."
+						onChange={this.onChangeHandler}
+					/>
+				</div>
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="interests"
+						placeholder="Intereses del alumno..."
+						onChange={this.onChangeHandler}
+					/>
+				</div>
 
 				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Agregar" type="submit" />
 			</form>

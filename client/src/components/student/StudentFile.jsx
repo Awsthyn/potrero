@@ -5,6 +5,8 @@ import { getSubjects } from '../../redux/actions/subject'
 import { putStudent } from '../../redux/actions/student';
 
 import SubjectCheckbox from "./SubjectCheckbox"
+import StrengthCheckbox from "./StrengthCheckbox";
+import WeakCheckbox from "./WeaknessCheckbox";
 
 export class StudentFile extends Component {
 	constructor(props) {
@@ -25,6 +27,8 @@ export class StudentFile extends Component {
 		};
 		this.subjects = this.props.subjects
 		this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
+		this.onWeakCheckboxClicked = this.onWeakCheckboxClicked.bind(this);
+		this.onStrengthCheckboxClicked = this.onStrengthCheckboxClicked.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.submitHandler = this.submitHandler.bind(this);
 	}
@@ -53,6 +57,29 @@ export class StudentFile extends Component {
         }
     }
 
+	onStrengthCheckboxClicked(subject, isChecked) {
+        if(isChecked){
+            this.setState({
+                strengths: [...this.state.strengths, subject.id]
+            })
+        } else {
+            this.setState({
+                strengths: this.state.strengths.filter(s => s !== subject.id)
+            })
+        }
+	}
+	onWeakCheckboxClicked(subject, isChecked) {
+        if(isChecked){
+            this.setState({
+                weakness: [...this.state.weakness, subject.id]
+            })
+        } else {
+            this.setState({
+                weakness: this.state.weakness.filter(s => s !== subject.id)
+            })
+        }
+	}
+	
     componentDidMount() {
         this.props.getSubjects()
     }
@@ -108,31 +135,14 @@ export class StudentFile extends Component {
 					/>
 				</div>
 				<div className="form-group">
-					<input
-						className="form-control"
-						type="text"
-						name="strengths"
-						value={this.state.strengths}
-						onChange={this.onChangeHandler}
-					/>
-				</div>
-				<div className="form-group">
-					<input
-						className="form-control"
-						type="text"
-						name="weakness"
-						value={this.state.weakness}
-						onChange={this.onChangeHandler}
-					/>
-				</div>
-				<div className="form-group">
-					<input
-						className="form-control"
-						type="text"
-						name="motivations"
-						value={this.state.motivations}
-						onChange={this.onChangeHandler}
-					/>
+    			<label style={{fontSize: "1.7em"}} htmlFor="nivelEducativo">Nivel educativo</label>
+    			<select className="form-control" id="nivelEducativo">
+					<option>1er grado</option>
+					<option>2do grado</option>
+					<option>3er grado</option>
+					<option>4to grado</option>
+					<option>5to grado</option>
+					</select>
 				</div>
 				<h3 className="text-center d-block mb-3">Materias que necesita cursar</h3>
 				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
@@ -142,6 +152,43 @@ export class StudentFile extends Component {
                         )}
                     )}
                 </div>
+				<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene FACILIDAD</h3>
+				<div style={{minHeight: "150px",width: "80vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
+                    { Array.isArray(this.state.subjectsId)&& this.state.subjectsId.length > 0 ? this.state.subjectsId.map( subject => {
+                    if(this.state.weakness.includes(subject) === false) return (
+                        <StrengthCheckbox key = {subject+'strength'} initialState={this.state.strengths.includes(subject.id)? "checked" : false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onStrengthCheckboxClicked} required/>
+					)}
+					
+                    ) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}	
+                </div>
+				<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene DIFICULTAD</h3>
+				<div style={{minHeight: "150px",width: "80vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
+                    { Array.isArray(this.state.subjectsId)&& this.state.subjectsId.length > 0 ? this.state.subjectsId.map( subject => {
+                    if(this.state.strengths.includes(subject) === false) return (
+                        <WeakCheckbox key = {subject+'weak'} initialState={this.state.weakness.includes(subject.id)? "checked" : false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onWeakCheckboxClicked} required/>
+					)
+					else return null}
+					
+                    ) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}	
+                </div>
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="motivations"
+						value={this.state.motivations}
+						onChange={this.onChangeHandler}
+					/>
+				</div>
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						name="interests"
+						placeholder="Intereses del alumno..."
+						onChange={this.onChangeHandler}
+					/>
+				</div>
 				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Confirmar cambios" type="submit" />
 			</form>
             </>
