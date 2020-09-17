@@ -14,6 +14,10 @@ import CreateStudentForm from './components/student/CreateStudentForm';
 import StudentFile from './components/student/StudentFile';
 import ResetPassword from './components/formularioVoluntario/PasswordForgot';
 import TablaMaterias from './components/admin/TablaMaterias';
+import AdminNavBar from './components/admin/AdminNavBar';
+import AdminDrawer from './components/admin/AdminDrawer';
+import PasswordRecovery from './components/PasswordRecovery';
+import DetalleVoluntario from './components/admin/DetalleVoluntario';
 
 function App() {
 	return (
@@ -25,20 +29,29 @@ function App() {
 			component={NavBar} />
 			<Route exact path="/" component={Home} />
 			<Route path="/voluntarios" component={ContenedorForm} />
+
+			<Route path="/admin" component={AdminNavBar} />
+			<Route path="/admin" component={AdminDrawer} />
 			<Route exact path="/admin" component={AdminPanel} />
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
+			<Route exact path="/admin/voluntarios/:id"  render={({match}) => <DetalleVoluntario  id={match.params.id}/>} />
 			<Route exact path="/admin/usuarios" component={TablaUsuarios} />
 			<Route exact path="/admin/materias" component={TablaMaterias} />
-			<Route exact path="/usuario/login" component={Login} />
-			<Route exact path="/usuario/perfil" component={MiPerfil} />
 			<Route exact path="/admin/estudiantes" component={StudentCrud} />
 			<Route exact path="/admin/estudiantes/agregar" component={CreateStudentForm} />
 			<Route exact path="/admin/estudiantes/detalles/:id" 
-
 			render={props => <StudentFile student={props.location.state.props} />} />
+
+			<Route exact path="/usuario/login" component={Login} />
+			<Route exact path="/usuario/perfil" component={MiPerfil} />
+			<Route exact path="/usuario/recuperar" component={PasswordRecovery} />
+		
+
 			<Route exact path="/formularioVoluntario/PasswordForgot/:token" component={ResetPassword} />
 		</div>
 	);
 }
+
+
 
 export default App;

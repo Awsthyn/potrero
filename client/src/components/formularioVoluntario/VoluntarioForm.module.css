@@ -32,6 +32,7 @@ input:focus {
 }
 .formInput{
 	width: 100%;
+	padding: 15px;
 	box-shadow: 0px 3px 3px 3px rgba(219, 216, 216, 0.623);
 	border-radius: 20px;
 }

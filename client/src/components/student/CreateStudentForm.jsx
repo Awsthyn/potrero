@@ -88,13 +88,14 @@ export class CreateStudentForm extends Component {
 
 	render() {
 		return (
+			<div style={{marginLeft:250,marginTop:50,marginBottom:50,marginRight:50}}>
             <>
             <h1 className="mb-3 mt-2">Formulario para alta de alumno</h1>
-			<form className="mx-auto" style={{ width: '80vw' }} onSubmit={this.submitHandler}>
-				<div className="mb-n1 d-flex flex-row form-group">
+			<form className="card p-4 shadow mx-auto" style={{ width: '85vw' }} onSubmit={this.submitHandler}>
+				<div className="d-flex flex-row form-group">
 					<input
 						style={{width: "40vw"}}
-						className="form-control"
+						className="form-control mr-4"
 						type="text"
 						name="firstName"
 						placeholder="Nombre del alumno..."
@@ -109,9 +110,9 @@ export class CreateStudentForm extends Component {
 						onChange={this.onChangeHandler}
 					/>
 				</div>
-				<div className="mb-4 d-flex flex-row form-group">
+				<div className="mt-n2 mb-4 d-flex flex-row form-group">
 					<input style={{width: "40vw"}}
-						className="form-control"
+						className="form-control mr-4"
 						type="text"
 						name="phone"
 						placeholder="Teléfono del alumno..."
@@ -136,7 +137,7 @@ export class CreateStudentForm extends Component {
 				</div>
 				<div className="mt-n2 mb-4 d-flex flex-row form-group">
 					<input style={{width: "40vw"}}
-						className="form-control"
+						className="form-control mr-4"
 						type="text"
 						name="tutorPhone"
 						placeholder="Teléfono del tutor"
@@ -206,9 +207,10 @@ export class CreateStudentForm extends Component {
 					/>
 				</div>
 
-				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Agregar" type="submit" />
+				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="align-self-center text-white btn btn-lg" value="Agregar" type="submit" />
 			</form>
             </>
+			</div>
 		);
 	}
 }

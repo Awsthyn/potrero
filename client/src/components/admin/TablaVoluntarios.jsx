@@ -4,7 +4,7 @@ import { getVolunteers, deleteVolunteer, acceptVolunteer} from "../../redux/acti
 import moment from 'moment';
 import 'moment/locale/es';
 import swal from 'sweetalert';
-import {Link} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 moment.locale('es');
 
 class TablaVoluntarios extends React.Component {
@@ -66,28 +66,26 @@ class TablaVoluntarios extends React.Component {
     render() { 
     
          return(   
-                <div className='container ' >
+                <div className='container' style={{marginLeft:220, marginTop: 40}} >
                        {this.props.volunteers.length ? <table className="table table-striped border">
                             <thead>
                                 <tr>
-                                <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellido</th>
-                                <th scope="col">Teléfono</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">CV</th>
-                                <th scope="col">Estado</th>
+                                <th scope="col">Fecha de Postulación</th>
                                 <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                             {this.props.volunteers && this.props.volunteers.map(volunteer => 
                                                  <tr key={volunteer.id}>
-                                                    <th scope="row">{volunteer.id}</th>
                                                     <td>{volunteer.firstName}</td>
                                                     <td>{volunteer.lastName}</td>
-                                                    <td>{volunteer.phone}</td>
+                                                    <td>{volunteer.email}</td>
                                                     <td>{volunteer.cv? 'Si':'No'}</td>
-                                                    <td>{volunteer.state}</td>
+                                                    <td>{moment(volunteer.createdAt).format('LLL')}hs</td>
                                                     <td>
                                                             <div className="collapse" id={`collapse${volunteer.id}`}>
                                                                 <div className="card card-body">
@@ -102,12 +100,13 @@ class TablaVoluntarios extends React.Component {
                                                                 </div>
                                                             </div>
                                                         <div key={volunteer.id}>
-                                                            <button key={`detalles${volunteer.id}`} className="btn btn-primary border" type="button" data-toggle="collapse" data-target={`#collapse${volunteer.id}`} aria-expanded="false" aria-controls="collapseExample">
-                                                                Detalles
-                                                            </button> 
-                                                            <button key={`aceptar${volunteer.id}`} className={`${volunteer.state =='pendiente'? "btn-warning":"btn-success "} btn border`}  onClick={() => this.handleStatusChange(volunteer)}>
-                                                                 <i className={`${volunteer.state =='pendiente'? "fa fa-toggle-off":"fa fa-toggle-on"}`}></i> 
-                                                                 {volunteer.state =='pendiente'? 'Aceptar':'Activo'}                                                                
+                                                          <Link to={`/admin/voluntarios/${volunteer.id}`} key={`detalles${volunteer.id}`} className="btn btn-primary border" type="button">
+                                                            Detalles 
+                                                          </Link>
+
+                                                            <button key={`aceptar${volunteer.id}`} className={`${volunteer.state ==='pendiente'? "btn-warning":"btn-success "} btn border`}  onClick={() => this.handleStatusChange(volunteer)}>
+                                                                 <i className={`${volunteer.state === 'pendiente'? "fa fa-toggle-off":"fa fa-toggle-on"}`}></i> 
+                                                                 {volunteer.state ==='pendiente'? 'Aceptar':'Activo'}                                                                
                                                             </button>
                                                             <button key={`rechazar${volunteer.id}`} name={volunteer.id} className="btn btn-danger border" onClick={e => this.handleDeletion(volunteer.id)}>
                                                                  <i name={volunteer.id} className="fa fa-trash">Rechazar</i>                                                                   
@@ -118,7 +117,7 @@ class TablaVoluntarios extends React.Component {
                                                 
                                                 </tr>)}
                             </tbody>
-                        </table> : <div className='container-flud'><p className='card-text'>En este momento no hay postulaciones </p> <Link to='/admin' type="button" className="btn btn-danger border"> Regresar al panel de Admin </Link> </div>}         
+                        </table> : <div className='container-flud'><h6 className='card-text'>En este momento no hay postulaciones pendientes </h6> <Link to='/admin' type="button" className="btn btn-danger border"> Regresar al panel de Admin </Link> </div>}         
                 </div>
                 )
             }

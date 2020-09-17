@@ -46,6 +46,7 @@ export default function Niveles({history}) {
                 <div className={styles.circles}>
 			        <div className={styles.circleGray}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleLila}>3</div><div className={styles.lineGray}></div><div className={styles.circleGray}>4</div>
 			    </div>
+                <div className={styles.formInput}>
                 <h4>¿Cuál es el nivel educativo en el que podrías ayudar?</h4>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
                     { !secundario ? 
@@ -108,6 +109,7 @@ export default function Niveles({history}) {
                 {
                     primario || secundario ? null : <h5>Para continuar debes especificar el máximo nivel en el cual te gustaría ayudar</h5>
                 }
+            </div>
 			</div>
 		);
 }
