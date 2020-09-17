@@ -17,6 +17,10 @@ const typeofdifxstudentRouter = require("./TypeOfDifXStudent.js");
 // IMPORT DE LA RUTA DE STUDENTS - SUBJECT
 const subjectxstudentRouter = require("./subjectXStudent");
 
+// IMPORT DE LA RUTA DE STUDENTS - SUBJECT
+const subjectxuserRouter = require("./subjectXUser");
+
+
 // IMPORT DE LA RUTA DE TYPE-OF-DIFFICULTY
 const typeOfDificulty = require("./typeOfDifficulty.js");
 
@@ -74,6 +78,9 @@ router.use("/typeofdifxstudent", typeofdifxstudentRouter);
 
 // RUTA DE STUDENT TOD X STUDENT
 router.use("/subjectxstudent", subjectxstudentRouter);
+
+// RUTA DE STUDENT TOD X STUDENT
+router.use("/subjectxuser", subjectxuserRouter);
 
 // RUTA DE TYPEOFDIFFICULTY
 router.use("/typeofdifficulty", typeOfDificulty);

@@ -53,7 +53,7 @@ server.get("/:id", (req, res) => {
       },
       {
         model: Subject,
-      },
+      }
     ],
   })
     .then((studentFound) => {
