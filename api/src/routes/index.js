@@ -94,10 +94,10 @@ router.use("/typeofdifficulty", typeOfDificulty);
 // RUTA DE SUBJECTS
 router.use("/subjects", subjectsRouter);
 
-// RUTA DE CLASS
+// RUTA DE AÑO ESCOLAR
 router.use("/academiclevel", academicLevelRouter);
 
-// RUTA DE AÑO ESCOLAR
+// RUTA DE CLASS
 router.use("/class", classRouter);
 
 // RUTA DE AÑO ESCOLAR X SUBJECT

@@ -8,9 +8,15 @@ const Sequelize = require("sequelize");
 
 server.get("/", (req, res) => {
   AcademicLevel.findAll({
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
     include: [
       {
         model: Subject,
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "academicLeveltXSubject"],
+        },
       },
     ],
   })
@@ -31,9 +37,15 @@ server.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
     include: [
       {
         model: Subject,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       },
     ],
   })
@@ -48,44 +60,42 @@ server.get("/:id", (req, res) => {
     });
 });
 
-
 // CREA UNA GRADO
-server.post('/', (req, res) => {
-    // RECIBE LOS DATOS DEL GRADO POR BODY
-    const materia = req.body;
-    AcademicLevel.createInstanceFromBody(materia)
-        .then(yearCreated => { // MATERIA CREADA
-            res.json(yearCreated)
-        })
-        .catch(err => {
-            // SI HAY UN ERROR, LO DEVUELVE. POR SI FALTÓ UN CAMPO POR COMPLETAR O MISMO LOS DATOS NO SON VÁLIDOS.         
-            res.json(err)
-        })
-})
+server.post("/", (req, res) => {
+  // RECIBE LOS DATOS DEL GRADO POR BODY
+  const materia = req.body;
+  AcademicLevel.createInstanceFromBody(materia)
+    .then((yearCreated) => {
+      // MATERIA CREADA
+      res.json(yearCreated);
+    })
+    .catch((err) => {
+      // SI HAY UN ERROR, LO DEVUELVE. POR SI FALTÓ UN CAMPO POR COMPLETAR O MISMO LOS DATOS NO SON VÁLIDOS.
+      res.json(err);
+    });
+});
 
 // BUSCA UNA GRADO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put('/:id', (req, res) => {
-    // BUSCA Y MODIFICA LA MATERIA ENCONTRADA.
-    AcademicLevel.update(req.body, {
+server.put("/:id", (req, res) => {
+  // BUSCA Y MODIFICA LA MATERIA ENCONTRADA.
+  AcademicLevel.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  })
+    // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
+    .then(() => {
+      AcademicLevel.findOne({
         where: {
-            id: req.params.id
-        }
+          id: req.params.id,
+        },
+      }).then((yearWithChanges) => {
+        res.json(yearWithChanges);
+      });
     })
-        // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
-        .then(() => {
-            AcademicLevel.findOne({
-                where: {
-                    id: req.params.id
-                }
-            })
-                .then(yearWithChanges => {
-                    res.json(yearWithChanges)
-                })
-        })
-        .catch(err => {
-            res.json(err)
-        })
-})
-
+    .catch((err) => {
+      res.json(err);
+    });
+});
 
 module.exports = server;
