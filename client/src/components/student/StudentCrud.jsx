@@ -2,12 +2,14 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link, useHistory } from "react-router-dom"
 import {getStudents, putStudentIsActive} from '../../redux/actions/student'
+import {getSubjects} from '../../redux/actions/subject'
 
-export const StudentCrud = ({getStudents, putStudentIsActive, students}) => {
+
+export const StudentCrud = ({getStudents, getSubjects, putStudentIsActive, students}) => {
   const history = useHistory()
     useEffect(()=>{
         getStudents()
-        
+        getSubjects()
     },[getStudents])
 
     return (
@@ -52,6 +54,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
     return {
         getStudents: () => dispatch(getStudents()),
+        getSubjects: () => dispatch(getSubjects()),
         putStudentIsActive: (student) => dispatch(putStudentIsActive(student)),
         }
 }
