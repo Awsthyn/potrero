@@ -136,7 +136,7 @@ export class Login extends React.Component {
                         <form className='container' onSubmit={this.handleSubmit}>
                             <div className='container'>
                                 <h2 className={`${style.title}`}>Hola!</h2>
-                                <label className={style.label}>Tu email o usuario</label>
+                                <label className={style.label}>Ingresá tus datos</label>
                                 <div>
 
                                     <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Tu email o usuario" className={style.input}
