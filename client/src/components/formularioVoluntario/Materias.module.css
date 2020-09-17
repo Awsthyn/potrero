@@ -20,6 +20,46 @@
     color:white;
 }
 
+.botonNiveles{
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border: solid 0.1px gray;
+    margin-top: 25px;
+    align-self: center;
+    justify-content: center;
+    box-shadow: 0px 3px 3px 3px rgba(175, 174, 174, 0.623);
+}
+.botonNiveles:hover{
+    cursor:pointer;
+
+}
+.botonNiveles:active{
+    color:white;
+}
+
+.botonPyS {
+    display: inline-flex;
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+    border: solid 0.1px gray;
+    margin: 30px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 3px 3px 3px rgba(175, 174, 174, 0.623);
+}
+.botonPyS:hover{
+    cursor:pointer;
+
+}
+.botonPyS:active{
+    color:white;
+}
+
+
 .contenedorMateria{
     width: 100%;
     display: flex;
@@ -77,4 +117,35 @@
 
 .contenedor {
     width: 50%;
+}
+
+.contenedorPrimaria {
+    justify-content: left;
+}
+
+.contenedorSecundaria {
+    justify-content: right;
+}
+
+.skere {
+	display:flex;
+	background-color: #492BC4;
+	color: white;
+	outline: none;
+	border: none;
+	border-radius: 5em;
+	margin-top: 15px;
+	outline: none;
+	border: none;
+	margin-left: 32px;
+	margin-bottom: 30px;
+	text-transform: capitalize;
+	padding: 5px;
+	width:160px;
+	height: 40px;
+	font-size: 15px;
+}
+.skere button{
+	justify-content: center;
+	
 }
