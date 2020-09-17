@@ -70,7 +70,7 @@ class TablaMaterias extends React.Component {
     render() { 
         
          return(   
-                <div className='container ' >
+                <div className='container ' style={{marginLeft:220, marginTop:30}} >
                   <div>
                   <button key={`AgregarMateria`} className="btn btn-success border" onClick={e => this.handleAddition()}>
                   <i class="fa fa-plus-square" aria-hidden="true"> Agregar Materia</i>

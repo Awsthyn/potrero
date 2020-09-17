@@ -66,7 +66,7 @@ class TablaVoluntarios extends React.Component {
     render() { 
     
          return(   
-                <div className='container ' >
+                <div className='container' style={{marginLeft:220}} >
                        {this.props.volunteers.length ? <table className="table table-striped border">
                             <thead>
                                 <tr>
