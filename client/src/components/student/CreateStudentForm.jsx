@@ -160,7 +160,7 @@ export class CreateStudentForm extends Component {
 					<option>5to grado</option>
 					</select>
 				</div>
-				<h3 className="text-center d-block mb-3">Materias que necesita cursar</h3>
+				<h3 className="text-center d-block mb-3">Materias que tiene que aprender</h3>
 				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap justify-content-center form-check form-check-inline">
                     { Array.isArray(this.props.subjects)&& this.props.subjects.length > 0 ? this.props.subjects.map( subject => {
                         return (

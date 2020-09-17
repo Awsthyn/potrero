@@ -90,49 +90,77 @@ export class StudentFile extends Component {
             <h1 className="mb-3 mt-2">Datos del alumno</h1>
 			<form className="mx-auto" style={{ width: '80vw' }} onSubmit={this.submitHandler}>
 				<div className="mb-n1 d-flex flex-row form-group">
+				<label>Nombre del alumno
 					<input
-						style={{width: "550px"}}
+						style={{width: "40vw"}}
 						className="form-control"
 						type="text"
 						name="firstName"
 						value={this.state.firstName}
 						onChange={this.onChangeHandler}
 					/>
+					</label>
+					<label>Apellido del alumno
 					<input
-						style={{width: "550px"}}
+						style={{width: "40vw"}}
 						className="form-control"
 						type="text"
 						name="lastName"
 						value={this.state.lastName}
 						onChange={this.onChangeHandler}
 					/>
+					</label>
 				</div>
-				<div className="form-group">
-					<input
+				<div className="mb-4 d-flex flex-row form-group">
+				<label>Teléfono del alumno
+					<input style={{width: "40vw"}}
 						className="form-control"
 						type="text"
 						name="phone"
 						value={this.state.phone}
 						onChange={this.onChangeHandler}
 					/>
-				</div>
-				<div className="form-group">
-					<input
+				</label>	
+				<label>Email del alumno
+					<input style={{width: "40vw"}}
 						className="form-control"
 						type="text"
 						name="email"
 						value={this.state.email}
 						onChange={this.onChangeHandler}
 					/>
+				</label>	
 				</div>
-				<div className="form-group">
-					<input
+				<div className="mt-4 form-group">
+				<label>Nombre y apellido del tutor
+					<input style={{width: "81.5vw"}}
 						className="form-control"
 						type="text"
 						name="tutor"
 						value={this.state.tutor}
 						onChange={this.onChangeHandler}
 					/>
+				</label>
+				</div>
+				<div className="mt-n2 mb-4 d-flex flex-row form-group">
+				<label>Teléfono del tutor
+					<input style={{width: "40vw"}}
+						className="form-control"
+						type="text"
+						name="tutorPhone"
+						placeholder="Teléfono del tutor"
+						onChange={this.onChangeHandler}
+					/>
+				</label>	
+				<label>Email del tutor
+					<input style={{width: "40vw"}}
+						className="form-control"
+						type="text"
+						name="tutorEmail"
+						placeholder="Email del tutor"
+						onChange={this.onChangeHandler}
+					/>
+				</label>	
 				</div>
 				<div className="form-group">
     			<label style={{fontSize: "1.7em"}} htmlFor="nivelEducativo">Nivel educativo</label>
@@ -144,7 +172,7 @@ export class StudentFile extends Component {
 					<option>5to grado</option>
 					</select>
 				</div>
-				<h3 className="text-center d-block mb-3">Materias que necesita cursar</h3>
+				<h3 className="text-center d-block mb-3">Materias que tiene que aprender</h3>
 				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline">
                     {this.props.subjects.map( subject => {
                         return (
@@ -156,7 +184,7 @@ export class StudentFile extends Component {
 				<div style={{minHeight: "150px",width: "80vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
                     { Array.isArray(this.state.subjectsId)&& this.state.subjectsId.length > 0 ? this.state.subjectsId.map( subject => {
                     if(this.state.weakness.includes(subject) === false) return (
-                        <StrengthCheckbox key = {subject+'strength'} initialState={this.state.strengths.includes(subject.id)? "checked" : false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onStrengthCheckboxClicked} required/>
+                        <StrengthCheckbox key = {subject+'strength'} initialState={this.state.strengths.includes(subject)? "checked" : false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onStrengthCheckboxClicked} required/>
 					)}
 					
                     ) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}	
@@ -165,29 +193,33 @@ export class StudentFile extends Component {
 				<div style={{minHeight: "150px",width: "80vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
                     { Array.isArray(this.state.subjectsId)&& this.state.subjectsId.length > 0 ? this.state.subjectsId.map( subject => {
                     if(this.state.strengths.includes(subject) === false) return (
-                        <WeakCheckbox key = {subject+'weak'} initialState={this.state.weakness.includes(subject.id)? "checked" : false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onWeakCheckboxClicked} required/>
+                        <WeakCheckbox key = {subject+'weak'} initialState={this.state.weakness.includes(subject)? "checked" : false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onWeakCheckboxClicked} required/>
 					)
 					else return null}
 					
                     ) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}	
                 </div>
 				<div className="form-group">
-					<input
+				<label>Motivaciones del alumno				
+					<input style={{width: "80vw"}}
 						className="form-control"
 						type="text"
 						name="motivations"
 						value={this.state.motivations}
 						onChange={this.onChangeHandler}
 					/>
+				</label>	
 				</div>
 				<div className="form-group">
-					<input
+				<label>Intereses del alumno
+					<input style={{width: "80vw"}}
 						className="form-control"
 						type="text"
 						name="interests"
 						placeholder="Intereses del alumno..."
 						onChange={this.onChangeHandler}
 					/>
+				</label>	
 				</div>
 				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Confirmar cambios" type="submit" />
 			</form>
