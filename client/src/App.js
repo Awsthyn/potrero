@@ -16,6 +16,7 @@ import ResetPassword from './components/formularioVoluntario/PasswordForgot';
 import TablaMaterias from './components/admin/TablaMaterias';
 import AdminNavBar from './components/admin/AdminNavBar';
 import AdminDrawer from './components/admin/AdminDrawer';
+import PasswordRecovery from './components/PasswordRecovery';
 
 function App() {
 	return (
@@ -35,6 +36,7 @@ function App() {
 			<Route exact path="/admin/materias" component={TablaMaterias} />
 			<Route exact path="/usuario/login" component={Login} />
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
+			<Route exact path="/usuario/recuperar" component={PasswordRecovery} />
 			<Route exact path="/admin/estudiantes" component={StudentCrud} />
 			<Route exact path="/admin/estudiantes/agregar" component={CreateStudentForm} />
 			<Route exact path="/admin/estudiantes/detalles/:id" 
