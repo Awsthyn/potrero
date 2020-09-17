@@ -11,7 +11,7 @@ export default function ContenedorCheckbox({history, active}) {
 	const [expandedAll, setExpandedAll] = useState(false);
 
 	if (redirect) {
-		return <Redirect to="/voluntarios/materias" />;
+		return <Redirect to="/voluntarios/niveles" />;
 	}
 	let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
 	
