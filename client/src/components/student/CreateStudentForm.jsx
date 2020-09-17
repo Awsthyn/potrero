@@ -88,6 +88,7 @@ export class CreateStudentForm extends Component {
 
 	render() {
 		return (
+			<div style={{marginLeft:250,marginTop:50,marginBottom:50,marginRight:50}}>
             <>
             <h1 className="mb-3 mt-2">Formulario para alta de alumno</h1>
 			<form className="mx-auto" style={{ width: '80vw' }} onSubmit={this.submitHandler}>
@@ -209,6 +210,7 @@ export class CreateStudentForm extends Component {
 				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Agregar" type="submit" />
 			</form>
             </>
+			</div>
 		);
 	}
 }

@@ -11,7 +11,7 @@ export const StudentCrud = ({getStudents, putStudentIsActive, students}) => {
     },[getStudents])
 
     return (
-        <div>
+        <div className='container' style={{marginLeft:250,marginTop:50,marginBottom:50,marginRight:50}}>
             <h1 className="mt-2 mb-4">Lista de alumnos</h1>
            <table className="table table-hover">
   <thead>
