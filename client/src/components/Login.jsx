@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import style from './Login.module.css';
 import swal from 'sweetalert';
 import { sessionLogin } from "../redux/actions/session.js";
@@ -23,7 +24,11 @@ export class Login extends React.Component {
         this.validate = this.validate.bind(this)
         this.resetState = this.resetState.bind(this)
         this.setPasswordVisibility = this.setPasswordVisibility.bind(this)
+        this.isNotEmpty = this.isNotEmpty.bind(this)
+        
     }
+
+   
 
     setPasswordVisibility() {
         this.setState(prevState => {
@@ -50,6 +55,7 @@ export class Login extends React.Component {
             }
         })
     }
+    
 
     resetState() {
         this.setState({ loginData: { email: '', password: '' }, errors: {} })
@@ -92,14 +98,22 @@ export class Login extends React.Component {
        return errors;
    };
 
+    // Para chequear si hay errores de validación y habilitar o deshabilitar botón //
+    isNotEmpty(obj) {
+        return Object.keys(obj).length !== 0;
+      }
+
+
+
 
     render() {
+        
         const { errors } = this.state
         return (
             <div className={style.container}>
-                <a href="http://localhost:3000/"><svg viewBox="0 0 16 16" class={style.leftArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+               <svg viewBox="0 0 16 16" class={style.leftArrow} onClick={()=> this.props.history.push('/')} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-                </svg></a>
+                </svg>
                 <div className={style.formContainer}>
                     <img className={style.logo} src={logo} alt="" />
                     <div className={style.form}>
@@ -125,7 +139,7 @@ export class Login extends React.Component {
                                 <label className={style.label}>Tu email o usuario</label>
                                 <div>
 
-                                    <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" className={style.input}
+                                    <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Tu email o usuario" className={style.input}
 
                                         onChange={this.handleInputChange}
                                         value={this.state.loginData.email} />
@@ -144,12 +158,14 @@ export class Login extends React.Component {
 
                             </div><br />
 
-                            <button className={style.button} type="submit">Iniciar Sesión
-                <svg viewBox="0 0 16 16" className={style.rightArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                                </svg>
+                            <button className={this.isNotEmpty(this.state.errors) ? style.disButton :style.button} disabled = {this.isNotEmpty(this.state.errors)} type="submit">Iniciar Sesión
+                            <svg viewBox="0 0 16 16" className={style.rightArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                            </svg>
                             </button>
-                            <a href="http://localhost:3000/usuario/forgottenPass" className={style.resetPassword} >¿Olvidaste tu contraseña?</a>
+                            <Link to = "/usuario/recuperar">
+                            <p className={style.resetPassword} >¿Olvidaste tu contraseña?</p>
+                            </Link>
 
                         </form>
                     </div>
