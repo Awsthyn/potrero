@@ -88,12 +88,12 @@ export class StudentFile extends Component {
 		return (
             <>
             <h1 className="mb-3 mt-2">Datos del alumno</h1>
-			<form className="mx-auto" style={{ width: '80vw' }} onSubmit={this.submitHandler}>
+			<form className="card p-4 mx-auto" style={{ width: '85vw' }} onSubmit={this.submitHandler}>
 				<div className="mb-n1 d-flex flex-row form-group">
 				<label>Nombre del alumno
 					<input
 						style={{width: "40vw"}}
-						className="form-control"
+						className="form-control mr-4"
 						type="text"
 						name="firstName"
 						value={this.state.firstName}
@@ -114,7 +114,7 @@ export class StudentFile extends Component {
 				<div className="mb-4 d-flex flex-row form-group">
 				<label>Teléfono del alumno
 					<input style={{width: "40vw"}}
-						className="form-control"
+						className="form-control mr-4"
 						type="text"
 						name="phone"
 						value={this.state.phone}
@@ -145,7 +145,7 @@ export class StudentFile extends Component {
 				<div className="mt-n2 mb-4 d-flex flex-row form-group">
 				<label>Teléfono del tutor
 					<input style={{width: "40vw"}}
-						className="form-control"
+						className="form-control mr-4"
 						type="text"
 						name="tutorPhone"
 						placeholder="Teléfono del tutor"
@@ -221,7 +221,7 @@ export class StudentFile extends Component {
 					/>
 				</label>	
 				</div>
-				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="text-white btn btn-lg" value="Confirmar cambios" type="submit" />
+				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="align-self-center text-white btn btn-lg" value="Confirmar cambios" type="submit" />
 			</form>
             </>
 		);
