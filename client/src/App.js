@@ -18,7 +18,11 @@ import TablaMaterias from './components/admin/TablaMaterias';
 function App() {
 	return (
 		<div className="App">
-			<Route path="/" component={NavBar} />
+			 {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
+			<Route exact path={['/', '/voluntarios', '/voluntarios/formulario', '/admin', '/admin/voluntarios',
+			'/admin/usuarios', '/admin/materias', '/usuario/perfil', '/admin/estudiantes',
+			'/admin/estudiantes/agregar', '/admin/estudiantes/detalles/:id']}
+			component={NavBar} />
 			<Route exact path="/" component={Home} />
 			<Route path="/voluntarios" component={ContenedorForm} />
 			<Route exact path="/admin" component={AdminPanel} />
