@@ -50,7 +50,7 @@ server.post('/time/:idStudent', (req, res) => {
     // .catch( err => {
     //     res.json( err )
     // })
-
+    POST
         })
         .catch(err => {
             res.json(err)

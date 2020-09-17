@@ -5,6 +5,7 @@ const {
   Student,
   TypeOfDifficulty,
   Subject,
+  AcademicLevel,
   TODXStudent,
   SubjectXStudent,
   StudentSchedule,
@@ -22,7 +23,7 @@ server.get("/", (req, res) => {
       },
       {
         model: Subject,
-      },
+      }
     ],
   })
     .then((students) => {
@@ -52,7 +53,7 @@ server.get("/:id", (req, res) => {
       },
       {
         model: Subject,
-      },
+      }
     ],
   })
     .then((studentFound) => {
