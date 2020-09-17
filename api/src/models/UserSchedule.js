@@ -4,11 +4,11 @@ const {DataTypes} = require('sequelize');
 module.exports = sequelize => {
 	const UserSchedule = sequelize.define('userSchedule', {
 		startTime: {
-			type: DataTypes.TIME,
+			type: DataTypes.STRING,
 			allowNull: true,
 		},
 		endTime: {
-			type: DataTypes.TIME,
+			type: DataTypes.STRING,
 			allowNull: true,
 		},
 		nameWeekDay: {

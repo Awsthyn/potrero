@@ -2,16 +2,18 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link, useHistory } from "react-router-dom"
 import {getStudents, putStudentIsActive} from '../../redux/actions/student'
+import {getSubjects} from '../../redux/actions/subject'
 
-export const StudentCrud = ({getStudents, putStudentIsActive, students}) => {
+
+export const StudentCrud = ({getStudents, getSubjects, putStudentIsActive, students}) => {
   const history = useHistory()
     useEffect(()=>{
         getStudents()
-        
+        getSubjects()
     },[getStudents])
 
     return (
-        <div>
+        <div className='container' style={{marginLeft:250,marginTop:50,marginBottom:50,marginRight:50}}>
             <h1 className="mt-2 mb-4">Lista de alumnos</h1>
            <table className="table table-hover">
   <thead>
@@ -52,6 +54,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
     return {
         getStudents: () => dispatch(getStudents()),
+        getSubjects: () => dispatch(getSubjects()),
         putStudentIsActive: (student) => dispatch(putStudentIsActive(student)),
         }
 }
