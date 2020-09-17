@@ -84,7 +84,7 @@ class ContenedorMaterias extends React.Component {
 		
 	}
 	goBack(){
-		this.props.history.push('/voluntarios/horarios');
+		this.props.history.push('/voluntarios/niveles');
 	}
 	componentDidMount(){
 	this.props.getSubjects()
@@ -97,8 +97,12 @@ class ContenedorMaterias extends React.Component {
 			<div>
 				<IconButton aria-label="ir atrás" onClick={this.goBack}>
 				<span className="material-icons">arrow_back</span>
-			</IconButton>
-				<h4>¿En qué áreas podrías ayudar?</h4>
+				</IconButton>
+			<div className={style1.circles}>
+			  <div className={style1.circleGray}>1</div><div className={style1.lineGray}></div> <div className={style1.circleGray}>2</div><div className={style1.lineGray}></div><div className={style1.circleLila}>3</div>
+			</div>
+			
+				<h4 className={style1.title}>¿En qué áreas podrías ayudar?</h4>
 				<div className={style1.contenedorMateria}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
 				<br></br>
 				<TextField
