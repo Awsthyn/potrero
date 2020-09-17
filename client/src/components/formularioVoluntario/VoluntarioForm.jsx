@@ -39,17 +39,11 @@ export default class VolunteerForm extends React.Component {
 		return (
 			<div>
 			<div className={styles.circles}>
-			  <div className={styles.circleLila}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div>
+			  <div className={styles.circleLila}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div><div className={styles.lineGray}></div><div className={styles.circleGray}>4</div>
 			</div>
 			<div className={styles.Formm} >
 				<form className={styles.formInput}>
 					<div className={styles.formgroup}>
-					{/* <input spellcheck="false" 
-					autocomplete="off" type="text" 
-					name="email" id="email" className={style.input}
-
-                                        onChange={this.handleInputChange}
-                                        value={this.state.loginData.email} /> */}
 						<input
 							spellcheck="false"
 							autocomplete="off"

@@ -73,7 +73,7 @@ export default function Acordeon({dia, expandedAll, handleChange}) {
   return(
         <Accordion expanded={expandedAll === dia} onChange={handleChange(dia)}>
 				<AccordionSummary
-					expandIcon={<span className="material-icons">expand_more</span>}
+					expandIcon={<span className="material-icons ">expand_more</span>}
 					aria-controls="panel1bh-content"
 					id="panel1bh-header"
 				>
