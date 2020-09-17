@@ -52,15 +52,13 @@ server.post("/", upload.single("cv"), (req, res) => {
   }
   User.create(usuario)
     .then((userCreated) => {
-      console.log("Usuario creado", userCreated);
       // Se espera valores de Id's de Subjects Ejemplo: 1,2
       // Recorre SubjectId los prepara en un array y los recorre
       // entonces agrega la materia relacionado con el id del profesor
-      console.log(req.body.subjectsId);
       req.body.subjectsId.forEach((idSub) => {
         userCreated
           .addSubjects(idSub)
-          .then((idSub) => console.log("materias del profe", idSub))
+          .then(() => send.json("Materias agregadas al profesor"))
           .catch((err) => {
             // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
             console.log(err);
@@ -69,25 +67,20 @@ server.post("/", upload.single("cv"), (req, res) => {
       });
       //AGREGA HORARIOS AL PROFESOR
       // Recorre scheduleStudent los prepara en un objeto hasta 3 lugares con los numeros incrementando cuando llega a 3 se resetea la variable numero a 1 y vuelve a preparar el objeto, crea un UserSchedule cada 3 posiciones de dias
-      console.log("HOrariso profe", req.body.scheduleUser)
       let dias = req.body.scheduleUser.split("-");
       let separado = dias;
       let numero = 1;
       let obj = {};
       for (let i = 0; i < separado.length; i++) {
         if (numero === 1) {
-            console.log("Ciclo 1")
           obj.startTime = separado[i];
           numero = numero + 1;
         } else if (numero === 2) {
-            console.log("Ciclo 2")
           obj.endTime = separado[i];
           numero = numero + 1;
         } else if (numero === 3) {
-            console.log("Cicle 3")
           obj.nameWeekDay = separado[i];
           obj.userId = userCreated.id;
-          console.log("horario creado", obj);
           UserSchedule.create(obj);
           numero = 1;
         }

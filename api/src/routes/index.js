@@ -5,6 +5,9 @@ const { Router } = require("express");
 // IMPORT DE LA RUTA DE USUARIOS
 const usersRouter = require("./users.js");
 
+// IMPORT DE LA RUTA DE USUARIOS
+const userScheduleRouter = require("./userSchedule.js");
+
 // IMPORT DE LA RUTA DE STUDENTS - ALUMNOS
 const studentRouter = require("./students.js");
 
@@ -54,6 +57,9 @@ const router = Router();
 
 // RUTAS DE USUARIOS
 router.use("/users", usersRouter);
+
+// RUTAS DE HORARIOS USUARIOS
+router.use("/userschedule", userScheduleRouter);
 
 // Ruta de autenticacion
 router.use("/auth", authenticateRouter);
