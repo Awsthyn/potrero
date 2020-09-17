@@ -6,7 +6,8 @@ export function postVoluntary(voluntary, subjects) {
 		return axios
 			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
-				dispatch(postSubjectVoluntary(subjects, res.data.id));
+				// console.log(subjects)
+				// dispatch(postSubjectVoluntary(subjects, res.data.id));
 				dispatch(postMailWelcome(res.data));
 				
 			})
