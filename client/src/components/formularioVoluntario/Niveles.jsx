@@ -29,9 +29,19 @@ export default function Niveles({history}) {
     }
     const handleOnClick = (e, nivel) => {
         setState({
-             [nivel] : e.target.id
-        })
+            [nivel] : e.target.id
+       })
+       e.target.style.backgroundColor = 'green';
+       var primaria = ["Primer grado","Segundo grado","Tercer grado","Cuarto grado","Quinto Grado","Sexto grado","Septimo grado"];
+       for(let i = 0; i < primaria.length; i++ ) {
+           console.log(primaria[i])
+        primaria[i] !== e.target.id ?
+            e.target.style.backgroundColor = 'white'
+            : e.target.style.backgroundColor = 'green';
+        }
+       
     }
+
     var primaria = ["Primer grado","Segundo grado","Tercer grado","Cuarto grado","Quinto Grado","Sexto grado","Septimo grado"];
     var secundaria = ["Primer año","Segundo año","Tercer año","Cuarto año","Quinto año"];
     if (redirect) {
@@ -76,12 +86,12 @@ export default function Niveles({history}) {
                 <div>
                 {
                     primario && !secundario ?  
-                          primaria.map((n, i) => <div id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Primaria")}>{n}</div>)
+                          primaria.map((n, i) => <div id={n} className={style.botonNiveles}  onClick={(e) => handleOnClick(e,"Primaria")}>{n}</div>)
                           : null                  
                 }
                 {
                     secundario && !primario ? 
-                          secundaria.map((n, i) => <div id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Secundaria")}>{n}</div>) 
+                          secundaria.map((n, i) => <div id={n} className={style.botonNiveles}  onClick={(e) => handleOnClick(e,"Secundaria")}>{n}</div>) 
                           : null                     
                 }
                 </div>
