@@ -26,7 +26,7 @@ export default function ContenedorCheckbox({history, active}) {
 			<div className={style.circles}>
 				<div className={style.circleGray}>1</div><div className={style.lineGray}></div> <div className={style.circleLila}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div><div className={style.lineGray}></div><div className={style.circleGray}>4</div>
 			</div>
-			<div className={`${style.checkboxMaterias} ${style.formInput}`}>
+			<div className={`${style.checkboxMaterias} ${style.formInput}`} style={{backgroundColor:'red'}}>
 			<ul className={style.containerListDays}>
 			{ dias && dias.map((dia, idx) => (
 				<li className={style.itemList}><Acordeon className={style.inlineCheck} dia={dia} key={idx} 
@@ -36,7 +36,6 @@ export default function ContenedorCheckbox({history, active}) {
 				</ul>
 			<Button
 				variant="contained"
-				style={{marginTop: '3rem'}}
 				className={style.testButton}
                 id={style.skere}
 				type="submit"
