@@ -65,7 +65,7 @@ class ContenedorMaterias extends React.Component {
 		
 	}
 	goBack(){
-		this.props.history.push('/voluntarios/horarios');
+		this.props.history.push('/voluntarios/niveles');
 	}
 	componentDidMount(){
 	this.props.getSubjects()

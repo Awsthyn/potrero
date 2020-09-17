@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import style from './Materias.module.css';
 import Button from '@material-ui/core/Button';
-//import {Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
 
-export default function Niveles() {
+export default function Niveles({history}) {
     const [primario, setPrimario] = useState(false);
     const [secundario, setSecundario] = useState(false);
     const [state, setState] = useState({});
+    const [redirect, setRedirect] = useState(false);
     const handlePrimario = () => {
         if (!primario) {
             setPrimario(true)
@@ -30,10 +32,16 @@ export default function Niveles() {
              [nivel] : e.target.id
         })
     }
-    var primaria = ["Primer grado","Segundo grado","Tercer grado","Cuarto grado","Quinto Grado","Sexto grado"];
+    var primaria = ["Primer grado","Segundo grado","Tercer grado","Cuarto grado","Quinto Grado","Sexto grado","Septimo grado"];
     var secundaria = ["Primer año","Segundo año","Tercer año","Cuarto año","Quinto año"];
+    if (redirect) {
+        return <Redirect to="/voluntarios/materias" />;
+    }
 		return (
 			<div>
+                <IconButton aria-label="ir atrás" onClick={() => history.push('/voluntarios/horarios')}>
+				<span className="material-icons">arrow_back</span>
+				</IconButton>
                 <h4>¿Cual es el nivel superior en el cual podrías ayudar?</h4>
                 <div>
                     { !secundario ? 
@@ -86,7 +94,7 @@ export default function Niveles() {
                         type="submit"
                         value="Submit"
                         onClick={() => {
-                            //setRedirect(true);
+                        setRedirect(true);
                         }}>
                         Continuar
                         <span className="material-icons">trending_flat</span>
