@@ -6,6 +6,7 @@ const { AcademicLevel, Subject } = require("../db.js");
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
+//LISTA LAS MATERIAS POR AÑO
 server.get("/", (req, res) => {
   AcademicLevel.findAll({
     attributes: {

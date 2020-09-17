@@ -17,13 +17,34 @@ const Sequelize = require("sequelize");
 server.get("/", (req, res) => {
   // BUSCA TODOS LOS STUDENTS Y LOS DEVUELVE COMO JSON (ARRAY DE OBJETOS)
   Student.findAll({
+    attributes: {
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "phone",
+        "email",
+        "tutor",
+        "difficulty",
+        "weakness",
+        "strengths",
+        "interests",
+        "motivations",
+        "isActive",
+      ],
+    },
     include: [
       {
         model: TypeOfDifficulty,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       },
       {
         model: Subject,
-      }
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
     ],
   })
     .then((students) => {
@@ -44,16 +65,34 @@ server.get("/:id", (req, res) => {
   // BUSCA AL STUDENT.
 
   Student.findOne({
-    where: {
-      id: req.params.id,
+    attributes: {
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "phone",
+        "email",
+        "tutor",
+        "difficulty",
+        "weakness",
+        "strengths",
+        "interests",
+        "motivations",
+        "isActive",
+      ],
     },
     include: [
       {
         model: TypeOfDifficulty,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       },
       {
         model: Subject,
-      }
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
     ],
   })
     .then((studentFound) => {
@@ -140,12 +179,18 @@ server.post("/", (req, res) => {
 // Y así poder filtrar solamente por estudiantes activos y no perder la info por si
 // mas adelante vulelve a la fundación.
 
-server.put('/:id', (req, res) => {
-    const {subjectsId} = req.body
-    // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
-    SubjectXStudent.destroy({ where: { studentId: req.params.id } })
-    .then(() => SubjectXStudent.bulkCreate(subjectsId.map(s => {return {subjectId: s, studentId: req.params.id}})))
-    .then(() => Student.update(req.body, {where: {id: req.params.id}}))
+server.put("/:id", (req, res) => {
+  const { subjectsId } = req.body;
+  // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
+  SubjectXStudent.destroy({ where: { studentId: req.params.id } })
+    .then(() =>
+      SubjectXStudent.bulkCreate(
+        subjectsId.map((s) => {
+          return { subjectId: s, studentId: req.params.id };
+        })
+      )
+    )
+    .then(() => Student.update(req.body, { where: { id: req.params.id } }))
     .then(() => {
       Student.findOne({
         where: {
@@ -169,33 +214,34 @@ server.put('/:id', (req, res) => {
       res.json(err);
     });
 });
- 
-server.put('/:id/changestatus', (req, res)=>{
-    Student.update({isActive: req.body.isActive},{where: {id: req.params.id}})
+
+server.put("/:id/changestatus", (req, res) => {
+  Student.update(
+    { isActive: req.body.isActive },
+    { where: { id: req.params.id } }
+  )
     .then(() => {
-        Student.findOne({
-            where: {
-                id: req.params.id
-            },
-            include: 
-            [
-                {
-                    model: TypeOfDifficulty
-                },
-                {
-                    model: Subject
-                }
-            ]
-        })
+      Student.findOne({
+        where: {
+          id: req.params.id,
+        },
+        include: [
+          {
+            model: TypeOfDifficulty,
+          },
+          {
+            model: Subject,
+          },
+        ],
+      })
         // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
-        .then(studentWithChanges => {
-            res.json(studentWithChanges)
-        })
+        .then((studentWithChanges) => {
+          res.json(studentWithChanges);
+        });
     })
-    .catch(err => {
-        res.json(err)
-    })
-})
+    .catch((err) => {
+      res.json(err);
+    });
+});
 
 module.exports = server;
-
