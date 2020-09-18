@@ -48,6 +48,9 @@ const academicLevelRouter = require("./academicLevel.js");
 //IMPORT DEL AÑO DEL AÑO ESCOLAR
 const academicLevelXSubjectRouter = require("./academicLevelXSubject.js");
 
+// IMPORT DE LA RUTA DE HORARIOS DE UN VOLUNTARIO
+const userScheduleRoute = require("./userSchedule.js");
+
 const router = Router();
 
 // ROUTES
@@ -96,5 +99,8 @@ router.use("/class", classRouter);
 
 // RUTA DE AÑO ESCOLAR X SUBJECT
 router.use("/academiclevelxsubject", academicLevelXSubjectRouter);
+
+// RUTA DE HORARIOS DE UN VOLUNTARIO 
+router.use("/userSchedule", userScheduleRoute)
 
 module.exports = router;

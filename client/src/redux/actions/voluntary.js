@@ -40,7 +40,9 @@ export function deleteVolunteer(id) {
 
 // Agrega Calendario(disponibilidad)
 export function addSchedule(schedules, userId) {
-	console.log({schedules})
+	for(let i = 0; i < schedules.length; i++){
+		schedules[i].userId = userId
+	}
 	return function (dispatch) {
 		return axios
 			.post(`http://localhost:3001/userSchedule/${userId}`, {schedules}, {withCredentials: true})
