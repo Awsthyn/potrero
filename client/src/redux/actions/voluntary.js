@@ -1,14 +1,14 @@
 import axios from 'axios';
 import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VOLUNTEER, ADD_SUBJECTS_VOLUNTEER} from '../constants';
 // Agrega un Voluntario --> Crea Calendario --> Envía Mail de Bienvenida 
-export function postVoluntary(voluntary, subjects) {
+export function postVoluntary(voluntary, subjects, schedule) {
 	return function (dispatch) {
 		return axios
 			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
-				// console.log(subjects)
-				// dispatch(postSubjectVoluntary(subjects, res.data.id));
 				dispatch(postMailWelcome(res.data));
+				dispatch(postSubjectVoluntary(subjects, res.data.id));
+				dispatch(addSchedule(schedule, res.data.id))
 				
 			})
 			.catch(err => console.log(err));
@@ -39,10 +39,11 @@ export function deleteVolunteer(id) {
 }
 
 // Agrega Calendario(disponibilidad)
-export function addSchedule(schedule) {
+export function addSchedule(schedules, userId) {
+	console.log({schedules})
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/users`, schedule, {withCredentials: true})
+			.post(`http://localhost:3001/userSchedule/${userId}`, {schedules}, {withCredentials: true})
 			.then(res => {
 				dispatch({type: ADD_SCHEDULE, schedule: res.data});
 			})
@@ -68,7 +69,7 @@ export function acceptVolunteer(volunteer) {
 export function postSubjectVoluntary(subjects, userId) {
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/users/${userId}/subjects`, subjects, {withCredentials: true})
+			.post(`http://localhost:3001/users/${userId}/subjects`, {subjects}, {withCredentials: true})
 			.then(res => {
 				dispatch({type: ADD_SUBJECTS_VOLUNTEER, subjects: res.data});
 			})

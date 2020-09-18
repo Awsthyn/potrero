@@ -37,17 +37,13 @@ class ContenedorMaterias extends React.Component {
 	}
 	handleOnChange(e) {
 		const field = e.target;
-
 		this.state.info.append(field.name, field.value);
-
 		this.setState({...this.state, info: this.state.info});
 	}
 
 	handleOnFileChange = (e) => {
 		const field = e.target;
-
 		this.state.info.append(field.name, field.files[0]);
-
 		this.setState({ ...this.state, info: this.state.info});
 	}
 	
@@ -63,17 +59,13 @@ class ContenedorMaterias extends React.Component {
 			.then((willSend) => {
 				if (willSend) {
 					let data = JSON.parse(localStorage.getItem('datos'));
-
+					let schedule = JSON.parse(localStorage.getItem('schedule'))
 					Object.entries(data).forEach(dato => {
 						this.state.info.append(dato[0], dato[1])
 					});
-
-					this.state.info.append("materias", this.state.materia);
-
-					this.props.postVoluntary(this.state.info);
-					
+					this.props.postVoluntary(this.state.info, this.state.materia, schedule);				
 					localStorage.removeItem('datos')
-			      //this.props.addSchedule();
+			      localStorage.removeItem('schedule')
 					swal("Tu solicitud ha sido enviada!", {
 						icon: "success",
 					});

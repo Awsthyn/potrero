@@ -29,7 +29,7 @@ export default function Niveles({history}) {
     }
     const handleOnClick = (e, nivel) => {
         setState({
-             [nivel] : e.target.id
+            [nivel] : e.target.id
         })
     }
     var primaria = ["Primer grado","Segundo grado","Tercer grado","Cuarto grado","Quinto Grado","Sexto grado","Septimo grado"];
@@ -49,7 +49,7 @@ export default function Niveles({history}) {
                             className={style.botonPyS}
                             onClick={() => handlePrimario()}>
                             {
-                               !primario ? <span>Primario</span> : <span>Volver</span> 
+                            !primario ? <span>Primario</span> : <span>Volver</span> 
                             }
                         </div> : null
                     }
@@ -58,7 +58,7 @@ export default function Niveles({history}) {
                             className={style.botonPyS}
                             onClick={() => handleSecundario()}>
                             {
-                               !secundario ? <span>Secundario</span> : <span>Volver</span> 
+                            !secundario ? <span>Secundario</span> : <span>Volver</span> 
                             }
                         </div> : null
                     }  
@@ -76,17 +76,17 @@ export default function Niveles({history}) {
                 <div>
                 {
                     primario && !secundario ?  
-                          primaria.map((n, i) => <div id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Primaria")}>{n}</div>)
-                          : null                  
+                        primaria.map((n, i) => <div id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n ? {backgroundColor: 'rgb(140, 198, 62)'} : {backgroundColor: 'white'} }>{n}</div>)
+                        : null                  
                 }
                 {
                     secundario && !primario ? 
-                          secundaria.map((n, i) => <div id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Secundaria")}>{n}</div>) 
-                          : null                     
+                        secundaria.map((n, i) => <div id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Secundaria")}>{n}</div>) 
+                        : null                     
                 }
                 </div>
                 {
-                  (primario || secundario) && Object.keys(state).length === 1 ?
+                (primario || secundario) && Object.keys(state).length === 1 ?
                         <Button
                         variant="contained"
                         style={{marginTop: '3rem'}}
