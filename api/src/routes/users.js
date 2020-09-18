@@ -154,6 +154,9 @@ server.post("/", upload.single("cv"), (req, res) => {
   }
   User.create(usuario)
     .then((userCreated) => {
+<<<<<<< HEAD
+      res.send(userCreated)
+=======
       // Se espera valores de Id's de Subjects Ejemplo: 1,2
       // Recorre SubjectId los prepara en un array y los recorre
       // entonces agrega la materia relacionado con el id del profesor
@@ -190,11 +193,9 @@ server.post("/", upload.single("cv"), (req, res) => {
     })
     .then(() => {
       res.json("Usuario creado exitosamente");
+>>>>>>> master
     })
-    .catch((err) => {
-      // SI HAY UN ERROR, LO DEVUELVE. POR SI FALTÓ UN CAMPO POR COMPLETAR O MISMO LOS DATOS NO SON VÁLIDOS.
-      res.send(err);
-    });
+    .catch(err => res.send(err))
 });
 
 // RELACIONA LAS MATERIAS CON USUARIOS
@@ -257,4 +258,32 @@ server.put("/:id", (req, res) => {
     });
 });
 
+<<<<<<< HEAD
+// RELACIONA LAS MATERIAS CON USUARIOS
+server.post("/:id/subjects", (req, res) => {
+  var id = req.params.id;
+  var materias = req.body.subjects;
+  var user = User.findByPk(id);
+
+  materias.map((m, i) => {
+    var subject = Subject.findOne({
+      where: {
+        name: m,
+      },
+    });
+    Promise.all([user, subject])
+      .then((values) => {
+        var user = values[0];
+        var subject = values[1];
+        user.addSubject(subject);
+        if (i === arrayMateria.length - 1) res.send(user);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  });
+});
+
+=======
+>>>>>>> master
 module.exports = server;

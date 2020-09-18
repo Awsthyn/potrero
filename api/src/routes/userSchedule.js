@@ -104,6 +104,15 @@ server.post("/:id", (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+//AGREGA HORARIOS AL PROFESOR
+server.post('/:userId', (req, res) => {
+    var dias = req.body.schedules
+    UserSchedule.bulkCreate(dias, {validate: true})
+    .then(schedule => res.send(schedule))
+    .catch(err => res.send(err))
+})
+=======
 server.delete("/:id", (req, res) => {
   //Se espera q lo traiga en un campo 'subjectsId'
   var dias = req.body.schedules.split("-");
@@ -131,5 +140,6 @@ server.delete("/:id", (req, res) => {
     }
   }
 });
+>>>>>>> master
 
 module.exports = server;
