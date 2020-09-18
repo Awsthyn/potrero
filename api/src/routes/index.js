@@ -5,6 +5,9 @@ const { Router } = require("express");
 // IMPORT DE LA RUTA DE USUARIOS
 const usersRouter = require("./users.js");
 
+// IMPORT DE LA RUTA DE USUARIOS
+const userScheduleRouter = require("./userSchedule.js");
+
 // IMPORT DE LA RUTA DE STUDENTS - ALUMNOS
 const studentRouter = require("./students.js");
 
@@ -42,11 +45,14 @@ const mailWelcomeRejection = require("./mailWelcomeRejection.js");
 // IMPORT DE LA RUTA DE CLASS
 const classRouter = require("./class.js");
 
-//IMPORT DEL AÑO DEL AÑO ESCOLAR
+//IMPORT DEL AÑO ESCOLAR
 const academicLevelRouter = require("./academicLevel.js");
 
-//IMPORT DEL AÑO DEL AÑO ESCOLAR
+//IMPORT DEL AÑO ESCOLAR X SUBJECT
 const academicLevelXSubjectRouter = require("./academicLevelXSubject.js");
+
+//IMPORT DEL NIVEL EDUCATIVO - PRIMARIA - SECUNDARIA
+const educationLevel = require("./educationLevel.js")
 
 const router = Router();
 
@@ -54,6 +60,9 @@ const router = Router();
 
 // RUTAS DE USUARIOS
 router.use("/users", usersRouter);
+
+// RUTAS DE HORARIOS USUARIOS
+router.use("/userschedule", userScheduleRouter);
 
 // Ruta de autenticacion
 router.use("/auth", authenticateRouter);
@@ -88,13 +97,16 @@ router.use("/typeofdifficulty", typeOfDificulty);
 // RUTA DE SUBJECTS
 router.use("/subjects", subjectsRouter);
 
-// RUTA DE CLASS
+// RUTA DE AÑO ESCOLAR
 router.use("/academiclevel", academicLevelRouter);
 
-// RUTA DE AÑO ESCOLAR
+// RUTA DE CLASS
 router.use("/class", classRouter);
 
 // RUTA DE AÑO ESCOLAR X SUBJECT
 router.use("/academiclevelxsubject", academicLevelXSubjectRouter);
+
+//RUTA DE NIVEL DE EDUCACION - PRIMARIA - SECUNDARIA
+router.use("/educationlevel", educationLevel)
 
 module.exports = router;
