@@ -1,7 +1,13 @@
 const server = require("express").Router();
 
 // TRAEMOS LOS USUARIOS DE LA BASE DE DATOS
-const { User, UserSchedule, Subject } = require("../db.js");
+const {
+  User,
+  UserSchedule,
+  Subject,
+  AcademicLevel,
+  EducationLevel,
+} = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
@@ -25,13 +31,109 @@ const upload = multer({
 });
 
 server.get("/", (req, res) => {
-  User.findAll()
+  User.findAll({
+    attributes: {
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "password",
+        "resetPasswordToken",
+        "resetPasswordExpires",
+      ],
+    },
+    include: [
+      {
+        model: Subject,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        include: [
+          {
+            model: AcademicLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "educationLevelId"],
+            },
+            include: [
+              {
+                model: EducationLevel,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        model: UserSchedule,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    ],
+  })
     .then((users) => {
       // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "USERS" ESTÁ VACÍO. ASÍ
       // RESPONDE CON UN MENSAJE, O SINO, DEVUELVE EL ARRAY CON LOS USUARIOS DENTRO.
       !users.length
         ? res.send("No hay usuarios disponibles.")
         : res.send(users);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+// BUSCA UN USUARIO EN ESPECÍFICO Y MUESTRA SUS DATOS.
+server.get("/:id", (req, res) => {
+  // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
+  User.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: {
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "password",
+        "resetPasswordToken",
+        "resetPasswordExpires",
+      ],
+    },
+    include: [
+      {
+        model: Subject,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        include: [
+          {
+            model: AcademicLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "educationLevelId"],
+            },
+            include: [
+              {
+                model: EducationLevel,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        model: UserSchedule,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    ],
+  })
+    .then((userFound) => {
+      // SI ENCUENTRA AL USUARIO, LO ENVÍA. SINO, ENVÍA UN MENSAJE DE ERROR.
+      !userFound ? res.send("El usuario no existe.") : res.send(userFound);
     })
     .catch((err) => {
       res.send(err);
@@ -57,21 +159,29 @@ server.post("/", upload.single("cv"), (req, res) => {
     .catch(err => res.send(err))
 });
 
-// BUSCA UN USUARIO EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", (req, res) => {
-  // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
-  User.findOne({
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((userFound) => {
-      // SI ENCUENTRA AL USUARIO, LO ENVÍA. SINO, ENVÍA UN MENSAJE DE ERROR.
-      !userFound ? res.send("El usuario no existe.") : res.send(userFound);
-    })
-    .catch((err) => {
-      res.send(err);
+// RELACIONA LAS MATERIAS CON USUARIOS
+server.post("/:id/subjects", (req, res) => {
+  var id = req.params.id;
+  var materias = req.body.materias;
+  var user = User.findByPk(id);
+
+  materias.map((m, i) => {
+    var subject = Subject.findOne({
+      where: {
+        name: m,
+      },
     });
+    Promise.all([user, subject])
+      .then((values) => {
+        var user = values[0];
+        var subject = values[1];
+        user.addSubject(subject);
+        if (i === arrayMateria.length - 1) res.send(user);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  });
 });
 
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY

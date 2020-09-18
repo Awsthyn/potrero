@@ -1,3 +1,5 @@
+// REVISIÓN TAL VEZ A FUTURO LO NECESITAREMOS
+
 // const server = require('express').Router();
 
 // // TRAEMOS LOS USUARIOS DE LA BASE DE DATOS
@@ -13,5 +15,3 @@
 
 
 // module.exports = server;
-
-// REVISIÓN

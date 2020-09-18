@@ -6,6 +6,7 @@ import ContenedorCheckbox from './ContenedorCheckbox';
 import Niveles from './Niveles';
 import Confirmacion from './Confirmacion';
 import style from './VoluntarioForm.module.css';
+import img from '../VolunteerFormAssets/formJueguitos.jpg';
 
 export default function ContenedorForm() {
 	return (
@@ -13,7 +14,7 @@ export default function ContenedorForm() {
 			<div className={style.conteiner}>
 			<img
 				className={style.img}
-				src="https://image.freepik.com/foto-gratis/accion-jugador-futbol-estadio_1150-14608.jpg"
+				src={img}
 				alt="Jugador de fútbol"
 				/>
 				<div className={style.imgTxt}><b>Sumáte!</b></div>
@@ -23,7 +24,7 @@ export default function ContenedorForm() {
 					</div>
 				</div>
 				
-			<div>
+			<div className={style.formLogo} >
 				<img
 					id="comp-jgasx8rqimgimage"
 					className={style.imgSize}
