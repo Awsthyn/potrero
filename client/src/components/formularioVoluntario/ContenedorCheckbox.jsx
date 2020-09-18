@@ -6,9 +6,10 @@ import IconButton from '@material-ui/core/IconButton';
 import style from './VoluntarioForm.module.css';
 // import styles from './ContenedorCheckbox.module.css';
 
-export default function ContenedorCheckbox({history, active}) {
+export default function ContenedorCheckbox({history}) {
 	const [redirect, setRedirect] = useState(false);
 	const [expandedAll, setExpandedAll] = useState(false);
+	const [schedule, setSchedule] = useState([])
 
 	if (redirect) {
 		return <Redirect to="/voluntarios/niveles" />;
@@ -17,8 +18,12 @@ export default function ContenedorCheckbox({history, active}) {
 	
 	const handleChange = (panel) => (event, isExpanded) => {
       setExpandedAll(isExpanded ? panel : false) 
-  };
-	
+};
+const setTime = (horarios) => {
+	let newSchedule = schedule.filter(s => s.nameWeekDay !== horarios[0].nameWeekDay)
+	setSchedule(newSchedule.concat(horarios))
+}
+
 	return (
 		<div>
 			<IconButton aria-label="ir atrás" onClick={() => history.push('/voluntarios/formulario')}>
@@ -28,12 +33,13 @@ export default function ContenedorCheckbox({history, active}) {
 				<div className={style.circleGray}>1</div><div className={style.lineGray}></div> <div className={style.circleLila}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div>
 			</div>
 			<div className={`${style.checkboxMaterias}`}>
-			<ul className={style.containerListDays}>
-			{ dias && dias.map((dia, idx) => (
-				<li className={style.itemList}><Acordeon className={style.inlineCheck} dia={dia} key={idx} 
-				handleChange={handleChange} expandedAll={expandedAll}
-				/></li>
-				))}
+				<ul className={style.containerListDays}>
+					{ dias && dias.map((dia, idx) => (
+						<li className={style.itemList} key={idx}>
+							<Acordeon className={style.inlineCheck} dia={dia} key={idx} setTime={setTime}
+							handleChange={handleChange} expandedAll={expandedAll}/>
+						</li>
+						))}
 				</ul>
 			<Button
 				variant="contained"
@@ -43,6 +49,7 @@ export default function ContenedorCheckbox({history, active}) {
 				value="Submit"
 				onClick={() => {
 					setRedirect(true);
+					localStorage.setItem('schedule', JSON.stringify(schedule))
 				}}>
 				Continuar
 				<span className="material-icons">trending_flat</span>

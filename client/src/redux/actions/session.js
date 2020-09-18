@@ -20,7 +20,7 @@ export function sessionLogin(data){
 export function sessionLogout(data){
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/auth/logout`, data , {withCredentials : true})
+			.get(`http://localhost:3001/auth/logout`, data , {withCredentials : true})
 			.then(res =>{
 				dispatch({type: LOGOUT });
 			})

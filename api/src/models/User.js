@@ -1,5 +1,7 @@
 const Sequelize = require("sequelize");
-const { DataTypes } = require('sequelize');
+const {
+  DataTypes
+} = require('sequelize');
 const bcrypt = require('bcrypt');
 
 module.exports = (sequelize) => {
@@ -9,7 +11,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
       validate: {
-          isEmail: true
+        isEmail: true
       }
     },
     password: {
@@ -17,8 +19,8 @@ module.exports = (sequelize) => {
       allowNull: true,
       validate: {
         is: {
-            args: ["(.)"],
-            msg: 'Inserte un valor dentro del password.'
+          args: ["(.)"],
+          msg: 'Inserte un valor dentro del password.'
         }
       }
     },
@@ -36,11 +38,11 @@ module.exports = (sequelize) => {
     },
     birthday: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     linkedin: {
       type: DataTypes.STRING,
@@ -53,22 +55,36 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    state:{
-        type: DataTypes.ENUM(['pendiente', 'aceptado', 'rechazado', 'admin']),
-        defaultValue: 'pendiente',
+    state: {
+      type: DataTypes.ENUM(['pendiente', 'aceptado', 'rechazado', 'admin']),
+      defaultValue: 'pendiente',
     },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-  },
+    },
     resetPasswordToken: {
-        type: DataTypes.STRING
+      type: DataTypes.STRING
     },
     resetPasswordExpires: {
-        type: DataTypes.DATE
+      type: DataTypes.DATE
     },
   });
-  User.createInstanceFromBody = function ({ email, password, firstName, lastName, address, birthday, phone, linkedin, cv, state, isActive, resetPasswordToken, resetPasswordExpires }) {
+  User.createInstanceFromBody = function ({
+    email,
+    password,
+    firstName,
+    lastName,
+    address,
+    birthday,
+    phone,
+    linkedin,
+    cv,
+    state,
+    isActive,
+    resetPasswordToken,
+    resetPasswordExpires
+  }) {
     return User.create({ // Preguntar si esta bien que sea User.create o tiene que ser Volunteer.create???
       email,
       password,
@@ -80,44 +96,47 @@ module.exports = (sequelize) => {
       linkedin,
       cv,
       state,
-      isActive
+      isActive,
+
+      resetPasswordToken,
+      resetPasswordExpires
     });
   };
   // debe ser function para que funcione this.password
-  User.prototype.isPasswordValid = function ( password ) {
+  User.prototype.isPasswordValid = function (password) {
     return bcrypt.compare(password, this.password)
-    .then(isValid => isValid)
-    .catch(err => {
+      .then(isValid => isValid)
+      .catch(err => {
         console.error('isPasswordValid:', err)
         return false
-    })
+      })
   }
 
   const hashPassword = password => {
-      console.info('hashPassword.password', password)
-    return new Promise( (resolve, reject) => {
+    console.info('hashPassword.password', password)
+    return new Promise((resolve, reject) => {
       bcrypt.hash(password, 8)
-      .then(hash => resolve(hash))
-      .catch(err=> reject(err))
+        .then(hash => resolve(hash))
+        .catch(err => reject(err))
     })
   }
 
-    User.addHook('beforeCreate', (user, options, cb) => {
-        if (user.password) {
-            return hashPassword(user.password).then(hash => user.password = hash)
-        } else {
-            return user.password
-        }
-    })
+  User.addHook('beforeCreate', (user, options, cb) => {
+    if (user.password) {
+      return hashPassword(user.password).then(hash => user.password = hash)
+    } else {
+      return user.password
+    }
+  })
 
-    User.addHook('beforeUpdate', (user, options, cb) =>{
-        console.info("en el hook beforeUpdate:", user)
-        if(user.password){
-            return hashPassword(user.password).then(hash => user.password = hash)
-        } else {
-            return user.password
-        }
-    })
+  User.addHook('beforeUpdate', (user, options, cb) => {
+    console.info("en el hook beforeUpdate:", user)
+    if (user.password) {
+      return hashPassword(user.password).then(hash => user.password = hash)
+    } else {
+      return user.password
+    }
+  })
 
   return User;
 };
