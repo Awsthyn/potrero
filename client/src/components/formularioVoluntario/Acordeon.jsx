@@ -82,7 +82,7 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
 					id="panel1bh-header"
 				>
 					<Typography className={classes.heading}>{dia}</Typography>
-					<Typography className={classes.secondaryHeading}>Escoge tu rango horario</Typography>
+					{/* <Typography className={classes.secondaryHeading}>Escoge tu rango horario</Typography> */}
 				</AccordionSummary>
 				<AccordionDetails>
 					<Typography>
