@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import Acordeon from './Acordeon';
 import IconButton from '@material-ui/core/IconButton';
 import style from './VoluntarioForm.module.css';
-// import styles from './ContenedorCheckbox.module.css';
 
 export default function ContenedorCheckbox({history}) {
 	const [redirect, setRedirect] = useState(false);
@@ -30,9 +29,9 @@ const setTime = (horarios) => {
 				<span className="material-icons">arrow_back</span>
 			</IconButton>
 			<div className={style.circles}>
-				<div className={style.circleGray}>1</div><div className={style.lineGray}></div> <div className={style.circleLila}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div>
+				<div className={style.circleGray}>1</div><div className={style.lineGray}></div> <div className={style.circleLila}>2</div><div className={style.lineGray}></div><div className={style.circleGray}>3</div><div className={style.lineGray}></div><div className={style.circleGray}>4</div>
 			</div>
-			<div className={`${style.checkboxMaterias}`}>
+			<div className={`${style.checkboxMaterias}${style.formInput}`}>
 				<ul className={style.containerListDays}>
 					{ dias && dias.map((dia, idx) => (
 						<li className={style.itemList} key={idx}>
@@ -43,8 +42,8 @@ const setTime = (horarios) => {
 				</ul>
 			<Button
 				variant="contained"
-				style={{marginTop: '3rem'}}
-				className={style.skere}
+				className={style.testButton}
+            id={style.skere}
 				type="submit"
 				value="Submit"
 				onClick={() => {
