@@ -30,29 +30,47 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
       if(typeof days === 'string'){
         return setDays([{startTime: 12, endTime: 14, nameWeekDay: dia}]);
       }else if(days.length < 2){
-        return setDays([...days, {startTime: 12, endTime: 14, nameWeekDay: dia}]);
+        return setDays([...days, {startTime: days[0].endTime, endTime: days[0].endTime + 1, nameWeekDay: dia}]);
       }
   }
   const handleTime = (type, idx, clase) => {
+    let horariosOcupados = [];
     let newDays = days.map((h,i) => {
-      if(i === idx){
-        if (type === 'aumentar' && clase === 'startTime' && h.startTime >= 8 && h.startTime < 19) {
+      if(i === idx && i === 0){
+        if (type === 'aumentar' && clase === 'startTime' && h.startTime >= 8 && h.startTime < 14 || h.startTime >= 14 && h.startTime < 19 ) {
           if (h.endTime - 1.5 < h.startTime) h.endTime = h.startTime + 1.5;
           return (h.startTime = {startTime: h.startTime + 0.5, endTime: h.endTime, nameWeekDay: dia});
-      }else if (type === 'aumentar' && clase === 'endTime' && h.endTime < 20 && h.endTime >= 9) {
+      } else if (type === 'aumentar' && clase === 'endTime' && h.endTime < 20 && h.endTime >= 9) {
                 return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
-              } else if (type === 'disminuir' && clase === 'startTime' && h.startTime <= 19 && h.startTime > 8) {
+      } else if (type === 'disminuir' && clase === 'startTime' && h.startTime <= 19 && h.startTime > 8) {
                 return (h[clase] ={startTime: h[clase] - 0.5, endTime: h.endTime, nameWeekDay: dia});
-              } else if (
+      } else if (
                 type === 'disminuir' &&
                 clase === 'endTime' &&
                 h.endTime <= 20 &&
                 h.endTime > 9 &&
                 h.endTime >= h.startTime + 1.5
-              ) {
+                ) {
                 return (h[clase] = {endTime: h[clase] - 0.5, startTime: h.startTime, nameWeekDay: dia});
-              }
-            }
+      }
+      } else {
+        if (type === 'aumentar' && clase === 'startTime' && h.startTime >= 8 && h.startTime < 14 || h.startTime >= 14 && h.startTime < 19 ) {
+          if (h.endTime - 1.5 < h.startTime) h.endTime = h.startTime + 1.5;
+          return (h.startTime = {startTime: h.startTime + 0.5, endTime: h.endTime, nameWeekDay: dia});
+      } else if (type === 'aumentar' && clase === 'endTime' && h.endTime < 20 && h.endTime >= 9) {
+                return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
+      } else if (type === 'disminuir' && clase === 'startTime' && h.startTime <= 19 && h.startTime > 8) {
+                return (h[clase] ={startTime: h[clase] - 0.5, endTime: h.endTime, nameWeekDay: dia});
+      } else if (
+                type === 'disminuir' &&
+                clase === 'endTime' &&
+                h.endTime <= 20 &&
+                h.endTime > 9 &&
+                h.endTime >= h.startTime + 1.5
+                ) {
+                return (h[clase] = {endTime: h[clase] - 0.5, startTime: h.startTime, nameWeekDay: dia});
+      }
+      }
           return h;
     })
   return  setDays(newDays)

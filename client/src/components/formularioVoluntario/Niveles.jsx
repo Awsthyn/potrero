@@ -85,7 +85,7 @@ export default function Niveles({history}) {
                 }
                 {
                     secundario && !primario ? 
-                        secundaria.map((n, i) => <div  style={{margin:'10px'}} id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Secundaria")}>{n}</div>) 
+                        secundaria.map((n, i) => <div  style={{margin:'10px'}} id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Secundaria")} style={state.Secundaria === n ? {backgroundColor: 'rgb(140, 198, 62)'} : {backgroundColor: 'white'} }>{n}</div>) 
                         : null                     
                 }
                 </div>
