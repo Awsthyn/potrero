@@ -3,11 +3,11 @@ import {postVoluntary} from '../../redux/actions/voluntary.js';
 import {getSubjects} from '../../redux/actions/subject.js';
 import {connect} from 'react-redux';
 import Materias from './Materias';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import style1 from './Materias.module.css';
-import swal from 'sweetalert'
+import swal from 'sweetalert';
+import styles from './VoluntarioForm.module.css';
 
 class ContenedorMaterias extends React.Component {
 	constructor(props) {
@@ -37,17 +37,13 @@ class ContenedorMaterias extends React.Component {
 	}
 	handleOnChange(e) {
 		const field = e.target;
-
 		this.state.info.append(field.name, field.value);
-
 		this.setState({...this.state, info: this.state.info});
 	}
 
 	handleOnFileChange = (e) => {
 		const field = e.target;
-
 		this.state.info.append(field.name, field.files[0]);
-
 		this.setState({ ...this.state, info: this.state.info});
 	}
 	
@@ -63,17 +59,13 @@ class ContenedorMaterias extends React.Component {
 			.then((willSend) => {
 				if (willSend) {
 					let data = JSON.parse(localStorage.getItem('datos'));
-
+					let schedule = JSON.parse(localStorage.getItem('schedule'))
 					Object.entries(data).forEach(dato => {
 						this.state.info.append(dato[0], dato[1])
 					});
-
-					this.state.info.append("materias", this.state.materia);
-
-					this.props.postVoluntary(this.state.info);
-					
+					this.props.postVoluntary(this.state.info, this.state.materia, schedule);				
 					localStorage.removeItem('datos')
-			      //this.props.addSchedule();
+			      localStorage.removeItem('schedule')
 					swal("Tu solicitud ha sido enviada!", {
 						icon: "success",
 					});
@@ -99,28 +91,28 @@ class ContenedorMaterias extends React.Component {
 				<span className="material-icons">arrow_back</span>
 				</IconButton>
 			<div className={style1.circles}>
-			  <div className={style1.circleGray}>1</div><div className={style1.lineGray}></div> <div className={style1.circleGray}>2</div><div className={style1.lineGray}></div><div className={style1.circleLila}>3</div>
+				<div className={styles.circleGray}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div><div className={styles.lineGray}></div><div className={styles.circleLila}>4</div>
 			</div>
 			
-				<h4 className={style1.title}>¿En qué áreas podrías ayudar?</h4>
-				<div className={style1.contenedorMateria}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
+				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
+				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
 				<br></br>
-				<TextField
+				<small>CV</small>
+				<input
 					style={{width: '80%', marginTop: '1%', display: 'block'}}
+					className={styles.input}
 					name="cv"
-					//label="CV"
 					type="file"
 					accept=".pdf"
-					id="standard-basic7"
 					onChange={e => this.handleOnFileChange(e)}
 				/>
 				<br></br>
-				<small>CV</small>
 				<small>Linkedin</small>
-				<TextField
+				<input
 					style={{width: '80%', marginTop: '1%', display: 'block'}}
+					className={styles.input}
 					name="linkedin"
-					//label="ej: www.linkedin.com/tu_cuenta/"
+					placeholder="ej: www.linkedin.com/tu_cuenta/"
 					type="text"
 					id="standard-basic6"
 					onChange={e => this.handleOnChange(e)}

@@ -51,8 +51,13 @@ const academicLevelRouter = require("./academicLevel.js");
 //IMPORT DEL AÑO ESCOLAR X SUBJECT
 const academicLevelXSubjectRouter = require("./academicLevelXSubject.js");
 
+<<<<<<< HEAD
+// IMPORT DE LA RUTA DE HORARIOS DE UN VOLUNTARIO
+const userScheduleRoute = require("./userSchedule.js");
+=======
 //IMPORT DEL NIVEL EDUCATIVO - PRIMARIA - SECUNDARIA
 const educationLevel = require("./educationLevel.js")
+>>>>>>> master
 
 const router = Router();
 
@@ -106,7 +111,12 @@ router.use("/class", classRouter);
 // RUTA DE AÑO ESCOLAR X SUBJECT
 router.use("/academiclevelxsubject", academicLevelXSubjectRouter);
 
+<<<<<<< HEAD
+// RUTA DE HORARIOS DE UN VOLUNTARIO 
+router.use("/userSchedule", userScheduleRoute)
+=======
 //RUTA DE NIVEL DE EDUCACION - PRIMARIA - SECUNDARIA
 router.use("/educationlevel", educationLevel)
+>>>>>>> master
 
 module.exports = router;
