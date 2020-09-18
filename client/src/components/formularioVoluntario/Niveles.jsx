@@ -80,7 +80,7 @@ export default function Niveles({history}) {
                 <div className={styles.containerListNiveles}>
                 {
                     primario && !secundario ?  
-                        primaria.map((n, i) => <div id={n} style={{margin:'10px'}} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n ? {backgroundColor: 'rgb(140, 198, 62)'} : {backgroundColor: 'white'} }>{n}</div>)
+                        primaria.map((n, i) => <div id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n}</div>)
                         : null                  
                 }
                 {

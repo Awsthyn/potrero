@@ -29,7 +29,7 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
   const handleOnClick = (e) => {
       if(typeof days === 'string'){
         return setDays([{startTime: 12, endTime: 14, nameWeekDay: dia}]);
-      }else if(days.length < 2){
+      }else if(days.length < 2 && days[0].endTime < 19.5){
         return setDays([...days, {startTime: days[0].endTime, endTime: days[0].endTime + 1, nameWeekDay: dia}]);
       }
   }
@@ -73,6 +73,10 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
       }
           return h;
     })
+    if(newDays[1] && newDays[1].startTime < days[0].endTime){
+      newDays[1] = {startTime: days[0].endTime, endTime: days[0].endTime + 1, nameWeekDay: dia}
+      if(newDays[0].endTime === 19.5) newDays.pop()
+    }
   return  setDays(newDays)
 	
 }
