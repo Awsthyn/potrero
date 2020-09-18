@@ -1,7 +1,15 @@
 const server = require("express").Router();
 
 // TRAEMOS CLASS DE LA BASE DE DATOS
-const { Class, DataSheet, Subject, User, Student } = require("../db.js");
+const {
+  Class,
+  DataSheet,
+  Subject,
+  User,
+  Student,
+  AcademicLevel,
+  EducationLevel,
+} = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
@@ -63,6 +71,22 @@ server.get("/", (req, res) => {
       {
         model: Subject,
         attributes: { exclude: ["createdAt", "updatedAt"] },
+        include: [
+          {
+            model: AcademicLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "educationLevelId"],
+            },
+            include: [
+              {
+                model: EducationLevel,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         model: DataSheet,
@@ -82,6 +106,8 @@ server.get("/", (req, res) => {
       res.json(err);
     });
 });
+
+// RARAMENTE NO ME ACEPTA LOS INCLUDE ANIDADOS EN USER/ID Y STUDENT/ID PERO SI EN DATASHEET/ID
 
 // BUSCA TODAS LAS CLASES DE UN USUARIO EN ESPECÍFICO Y ENVÍA SUS DATOS.
 server.get("/user/:id", (req, res) => {
@@ -122,7 +148,9 @@ server.get("/user/:id", (req, res) => {
       },
       {
         model: Subject,
-        attributes: { exclude: ["createdAt", "updatedAt"] },
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       },
       {
         model: DataSheet,
@@ -256,6 +284,22 @@ server.get("/datasheet/:id", (req, res) => {
       {
         model: Subject,
         attributes: { exclude: ["createdAt", "updatedAt"] },
+        include: [
+          {
+            model: AcademicLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "educationLevelId"],
+            },
+            include: [
+              {
+                model: EducationLevel,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         model: DataSheet,
@@ -280,19 +324,35 @@ server.get("/subject/:id", (req, res) => {
       subjectId: req.params.id,
     },
     attributes: {
-        exclude: [
-          "createdAt",
-          "updatedAt",
-          "dataSheetId",
-          "userId",
-          "studentId",
-          "subjectId",
-        ],
-      },
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "dataSheetId",
+        "userId",
+        "studentId",
+        "subjectId",
+      ],
+    },
     include: [
       {
         model: Subject,
-        attributes: { exclude: ["id","createdAt", "updatedAt"] },
+        attributes: { exclude: ["id", "createdAt", "updatedAt"] },
+        include: [
+          {
+            model: AcademicLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "educationLevelId"],
+            },
+            include: [
+              {
+                model: EducationLevel,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
       },
     ],
     order: [["createdAt", "DESC"]],

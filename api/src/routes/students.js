@@ -9,6 +9,7 @@ const {
   TODXStudent,
   SubjectXStudent,
   StudentSchedule,
+  EducationLevel,
 } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
@@ -44,6 +45,28 @@ server.get("/", (req, res) => {
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },
+        include: [
+          {
+            model: AcademicLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "educationLevelId"],
+            },
+            include: [
+              {
+                model: EducationLevel,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        model: StudentSchedule,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
       },
     ],
   })
@@ -65,6 +88,9 @@ server.get("/:id", (req, res) => {
   // BUSCA AL STUDENT.
 
   Student.findOne({
+    where: {
+      id: req.params.id,
+    },
     attributes: {
       exclude: [
         "createdAt",
@@ -89,6 +115,28 @@ server.get("/:id", (req, res) => {
       },
       {
         model: Subject,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        include: [
+          {
+            model: AcademicLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "educationLevelId"],
+            },
+            include: [
+              {
+                model: EducationLevel,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        model: StudentSchedule,
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },

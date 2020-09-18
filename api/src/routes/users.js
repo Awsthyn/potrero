@@ -1,7 +1,13 @@
 const server = require("express").Router();
 
 // TRAEMOS LOS USUARIOS DE LA BASE DE DATOS
-const { User, UserSchedule, Subject } = require("../db.js");
+const {
+  User,
+  UserSchedule,
+  Subject,
+  AcademicLevel,
+  EducationLevel,
+} = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
@@ -35,6 +41,36 @@ server.get("/", (req, res) => {
         "resetPasswordExpires",
       ],
     },
+    include: [
+      {
+        model: Subject,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        include: [
+          {
+            model: AcademicLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "educationLevelId"],
+            },
+            include: [
+              {
+                model: EducationLevel,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        model: UserSchedule,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    ],
   })
     .then((users) => {
       // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "USERS" ESTÁ VACÍO. ASÍ
@@ -64,6 +100,36 @@ server.get("/:id", (req, res) => {
         "resetPasswordExpires",
       ],
     },
+    include: [
+      {
+        model: Subject,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+        include: [
+          {
+            model: AcademicLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "educationLevelId"],
+            },
+            include: [
+              {
+                model: EducationLevel,
+                attributes: {
+                  exclude: ["createdAt", "updatedAt"],
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        model: UserSchedule,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    ],
   })
     .then((userFound) => {
       // SI ENCUENTRA AL USUARIO, LO ENVÍA. SINO, ENVÍA UN MENSAJE DE ERROR.
