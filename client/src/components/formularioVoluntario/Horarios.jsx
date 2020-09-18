@@ -44,8 +44,7 @@ export default function Horarios({de, hasta, id, handleTime, handleDelete}) {
 					<span className="material-icons">expand_more</span>
 				</IconButton>
 			</span>
-			<span style={{alignSelf:'center'}}> de: {horaDe} hs</span>
-			<span style={{alignSelf:'center'}}> a {horaHasta} hs</span>
+			<span style={{alignSelf:'center'}}> de: {horaDe} hs a {horaHasta} hs </span>
 			<span className={style.botonesMasyMenos}> 
 				<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', id, 'endTime')}>
 					<span className="material-icons">expand_less</span>

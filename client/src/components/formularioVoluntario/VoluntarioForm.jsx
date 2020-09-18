@@ -2,9 +2,6 @@ import React from 'react';
 import {Redirect} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import styles from './VoluntarioForm.module.css';
-// import styled from 'styled-components';
-import { TextField, NoSsr } from '@material-ui/core';
-
 
 export default class VolunteerForm extends React.Component {
 	constructor(props) {
@@ -45,7 +42,7 @@ export default class VolunteerForm extends React.Component {
 				<form className={styles.formInput}>
 					<div className={styles.formgroup}>
 						<input
-							spellcheck="false"
+							spellCheck="false"
 							autocomplete="off"
 							type="text"
 							name="firstName"

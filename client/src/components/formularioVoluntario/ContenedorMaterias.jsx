@@ -3,7 +3,6 @@ import {postVoluntary} from '../../redux/actions/voluntary.js';
 import {getSubjects} from '../../redux/actions/subject.js';
 import {connect} from 'react-redux';
 import Materias from './Materias';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import style1 from './Materias.module.css';
@@ -92,7 +91,7 @@ class ContenedorMaterias extends React.Component {
 				<span className="material-icons">arrow_back</span>
 				</IconButton>
 			<div className={style1.circles}>
-			<div className={styles.circleGray}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div><div className={styles.lineGray}></div><div className={styles.circleLila}>4</div>
+				<div className={styles.circleGray}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div><div className={styles.lineGray}></div><div className={styles.circleLila}>4</div>
 			</div>
 			
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
