@@ -109,7 +109,7 @@ export default class VolunteerForm extends React.Component {
 						value="Submit"
 						onClick={() => this.handleOnClick()}>
 						Continuar
-						<span style={{margin:"10px"}} className="material-icons">trending_flat</span>
+						<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
 					</Button>
 				</form>
 			</div>

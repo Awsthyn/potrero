@@ -104,7 +104,6 @@ server.post("/:id", (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 //AGREGA HORARIOS AL PROFESOR
 server.post('/:userId', (req, res) => {
     var dias = req.body.schedules
@@ -112,34 +111,5 @@ server.post('/:userId', (req, res) => {
     .then(schedule => res.send(schedule))
     .catch(err => res.send(err))
 })
-=======
-server.delete("/:id", (req, res) => {
-  //Se espera q lo traiga en un campo 'subjectsId'
-  var dias = req.body.schedules.split("-");
-  var numero = 1;
-  var obj = {};
-  for (let i = 0; i < dias.length; i++) {
-    if (numero === 1) {
-      obj.startTime = dias[i];
-      numero = numero + 1;
-    } else if (numero === 2) {
-      obj.endTime = dias[i];
-      numero = numero + 1;
-    } else if (numero === 3) {
-      obj.nameWeekDay = dias[i];
-      obj.userId = req.params.id;
-      console.log(obj);
-      numero = 1;
-      UserSchedule.destroy({
-        where: obj,
-      })
-        .then(() => res.json("Horario elimiado"))
-        .catch((err) => {
-          res.json(err);
-        });
-    }
-  }
-});
->>>>>>> master
 
 module.exports = server;
