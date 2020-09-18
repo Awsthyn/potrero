@@ -1,6 +1,6 @@
 const server = require("express").Router();
 
-// TRAEMOS LAS MATERIAS DE LA BASE DE DATOS
+// TRAEMOS LAS MATERIAS DE LA BASE DE DATOS 
 const { AcademicLevel, Subject, EducationLevel } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
