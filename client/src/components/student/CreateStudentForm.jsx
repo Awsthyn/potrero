@@ -30,7 +30,13 @@ export class CreateStudentForm extends Component {
 			strengths: [],
 			motivations: 'lorem ipsum',
 			observations: null,
-			disponibleTime: []
+			disponibleTime: {
+				lunes: [{de: "2020-01-01T12:00:00Z", hasta: "2020-01-01T12:00:00Z" }],
+				martes: null,
+				miercoles: null,
+				jueves: null,
+				viernes: null
+		},
 		};
 		this.subjects = this.props.subjects
 		this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
@@ -51,6 +57,14 @@ export class CreateStudentForm extends Component {
         
 		
 	};
+	
+	onChangeClock = (date) => {
+	let possibleHour = ((date).isBetween("2020-01-01T10:59:00Z", "2020-01-01T23:01:00Z"));
+	console.log(date)
+	console.log(possibleHour)
+	if(possibleHour) this.setState({disponibleTime: date})
+	else alert("Elija un horario ubicado entre las 8:00 y 20:00")
+	}
 
 	onCheckboxClicked(subject, isChecked) {
         if(isChecked){
@@ -95,7 +109,7 @@ export class CreateStudentForm extends Component {
 		return (
 			<div style={{marginLeft:250,marginTop:50,marginBottom:50,marginRight:50}}>
             <>
-			<form className="card p-4 shadow mx-auto" style={{ width: '70vw' }} onSubmit={this.submitHandler}>
+			<div className="card p-4 shadow mx-auto" style={{ width: '70vw' }}>
 			<h1 className="mb-3 mt-2">Formulario para alta de alumno</h1>
 				<div className="d-flex flex-row form-group">
 					<input
@@ -217,10 +231,20 @@ export class CreateStudentForm extends Component {
 				<div className="form-group">
 					<textarea name="observations" onChange={this.onChangeHandler} className="form-control" style={{width: "66.4vw"}} placeholder="Observaciones y/o comentarios..."/>
 				</div>
-				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="align-self-center text-white btn btn-lg" value="Agregar" type="submit" />
 				<h3>Horarios disponibles para las tutorías</h3>
-				<TimePicker minutesStep={30} onChange={(e) => console.log(moment(e).format("LT"))} value={"1994-11-05T15:00:00Z"} />
-			</form>
+				<h5>Lunes</h5>
+				<div className="d-flex flex-row justify-content-center mb-3">
+				
+				<span className="mr-2 mt-1">De:</span><TimePicker className="mr-4" style={{width:"70px"}} emptyLabel="Elija un horario" ampm={true} minutesStep={30}  onChange={(e) => this.onChangeClock(e)} value={this.state.disponibleTime.lunes[0].de} />
+				<span className="mr-2 mt-1">Hasta: </span><TimePicker style={{width:"70px"}} emptyLabel="Elija un horario" ampm={true} minutesStep={30}  onChange={(e) => this.onChangeClock(e)} value={this.state.disponibleTime.lunes[0].hasta} />
+				</div>
+				<h5>Martes</h5>
+				<h5>Miércoles</h5>
+				<h5>Jueves</h5>
+				<h5>Viernes</h5>
+				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="align-self-center text-white btn btn-lg" value="Agregar" type="submit" onClick={this.submitHandler} />
+
+			</div>
             </>
 			</div>
 		);
