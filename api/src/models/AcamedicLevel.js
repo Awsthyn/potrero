@@ -18,9 +18,10 @@ module.exports = (sequelize) => {
             defaultValue: new Date()
         },
     });
-    AcademicLevel.createInstanceFromBody = function ({ name }) {
+    AcademicLevel.createInstanceFromBody = function ({ name, educationLevelId}) {
         return AcademicLevel.create({
-            name
+            name,
+            educationLevelId
         });
     };
 };

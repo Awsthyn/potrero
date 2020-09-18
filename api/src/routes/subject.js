@@ -96,7 +96,7 @@ server.delete("/:id", (req, res, next) => {
     //UNA VEZ ELIMINADO DEVUELVE UN MENSAJE
     .then(() => {
       res.status(200);
-      res.send("Materia eliminada");
+      res.json("Materia eliminada");
     })
     .catch((err) => {
       res.json(err);

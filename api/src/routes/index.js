@@ -45,11 +45,14 @@ const mailWelcomeRejection = require("./mailWelcomeRejection.js");
 // IMPORT DE LA RUTA DE CLASS
 const classRouter = require("./class.js");
 
-//IMPORT DEL AÑO DEL AÑO ESCOLAR
+//IMPORT DEL AÑO ESCOLAR
 const academicLevelRouter = require("./academicLevel.js");
 
-//IMPORT DEL AÑO DEL AÑO ESCOLAR
+//IMPORT DEL AÑO ESCOLAR X SUBJECT
 const academicLevelXSubjectRouter = require("./academicLevelXSubject.js");
+
+//IMPORT DEL NIVEL EDUCATIVO - PRIMARIA - SECUNDARIA
+const educationLevel = require("./educationLevel.js")
 
 const router = Router();
 
@@ -102,5 +105,8 @@ router.use("/class", classRouter);
 
 // RUTA DE AÑO ESCOLAR X SUBJECT
 router.use("/academiclevelxsubject", academicLevelXSubjectRouter);
+
+//RUTA DE NIVEL DE EDUCACION - PRIMARIA - SECUNDARIA
+router.use("/educationlevel", educationLevel)
 
 module.exports = router;
