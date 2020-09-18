@@ -71,7 +71,7 @@ module.exports = (sequelize) => {
     strengths,
     interests,
     motivations,
-    isActive
+    isActive,
   }) {
     return Student.create({
       firstName,
@@ -84,7 +84,7 @@ module.exports = (sequelize) => {
       strengths,
       interests,
       motivations,
-      isActive
+      isActive,
     });
   };
 };

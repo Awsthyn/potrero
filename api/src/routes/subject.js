@@ -1,7 +1,7 @@
 const server = require("express").Router();
 
 // TRAEMOS LAS MATERIAS DE LA BASE DE DATOS
-const { Subject, AcademicLevel } = require("../db.js");
+const { Subject, AcademicLevel, EducationLevel } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
@@ -12,6 +12,22 @@ server.get("/", (req, res) => {
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
+    include: [
+      {
+        model: AcademicLevel,
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "educationLevelId"],
+        },
+        include: [
+          {
+            model: EducationLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
+      },
+    ],
   })
     .then((materia) => {
       // OPERADOR TERNARIO, QUE SE FIJA SI EL ARRAY DE OBJETOS "SUBJECT" ESTÁ VACÍO. ASÍ
@@ -29,12 +45,25 @@ server.get("/", (req, res) => {
 server.get("/:id", (req, res) => {
   // ACÁ BUSCA UNA MATERIA EN LA BASE DE DATOS
   Subject.findOne({
-    where: {
-      id: req.params.id,
-    },
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
+    include: [
+      {
+        model: AcademicLevel,
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "educationLevelId"],
+        },
+        include: [
+          {
+            model: EducationLevel,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
+      },
+    ],
   })
     .then((materiaFound) => {
       // SI ENCUENTRA LA MATERIA, LO ENVÍA. SINO, ENVÍA UN MENSAJE DE ERROR.
