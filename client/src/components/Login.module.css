@@ -74,14 +74,14 @@
 
 
 .input {
-    font-size: 14px;
-    color: #3333339f;
-    font-weight: 600;
-    padding: 0px 0px 7px 0px;
-    width: 300px;
-    margin-bottom: 15px;
-    border: none;
-    border-bottom: 2px solid #3333331f;
+font-size: 14px;
+color: #3333339f;
+font-weight: 600;
+padding: 0px 0px 7px 28px;
+width: 300px;
+margin-bottom: 15px;
+border: none;
+border-bottom: 2px solid #3333331f;
 }
 
 .input::-webkit-input-placeholder {
@@ -93,6 +93,13 @@
 input:focus {
     outline: none;
     border-bottom: 2px solid #8bc63ebe;
+}
+
+.at {
+    position: absolute;
+    left: 40px;
+    bottom: 273px;
+    fill: #33333350;
 }
 
 .check {
@@ -131,7 +138,7 @@ input:focus {
     left: 40px;
     bottom: 227px;
     fill: #33333350;
-    transform: rotate(135deg);
+    transform: rotate(130deg);
 }
 
 
@@ -139,7 +146,7 @@ input:focus {
     font-size: 16px;
     color: #333333b7;
     font-weight: 300;
-    padding: 0px 0px 5px 30px;
+    padding: 0px 0px 5px 28px;
     width: 300px;
     margin-bottom: 20px;
     border: none;
