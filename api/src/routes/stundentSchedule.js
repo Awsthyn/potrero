@@ -3,10 +3,11 @@ const server = require("express").Router();
 // TRAEMOS LOS USUARIOS DE LA BASE DE DATOS
 const { Student, StudentSchedule } = require("../db.js");
 
+const isAdmin = require("./middlewares.js").isAdmin;
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
-server.get("/", (req, res) => {
+server.get("/", isAdmin, (req, res) => {
   Student.findAll({
     attributes: {
       exclude: [
@@ -38,7 +39,7 @@ server.get("/", (req, res) => {
     });
 });
 
-server.get("/:id", (req, res) => {
+server.get("/:id", isAdmin, (req, res) => {
   Student.findOne({
     where: {
       id: req.params.id,
@@ -75,7 +76,7 @@ server.get("/:id", (req, res) => {
     });
 });
 
-server.post("/:id", (req, res) => {
+server.post("/:id", isAdmin, (req, res) => {
   //Se espera una propiedad 'schedules'
   var dias = req.body.schedules.split("-");
   console.log(req.body);
@@ -104,7 +105,7 @@ server.post("/:id", (req, res) => {
   }
 });
 
-server.delete("/:id", (req, res) => {
+server.delete("/:id", isAdmin, (req, res) => {
   //Se espera q lo traiga en un campo 'subjectsId'
   var dias = req.body.schedules.split("-");
   var numero = 1;

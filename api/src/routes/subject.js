@@ -2,12 +2,15 @@ const server = require("express").Router();
 
 // TRAEMOS LAS MATERIAS DE LA BASE DE DATOS
 const { Subject, AcademicLevel, EducationLevel } = require("../db.js");
+const isUserAdmin = require("./middlewares.js").isUserAdmin;
+const isAdmin = require("./middlewares.js").isAdmin;
+const isUserActive = require("./middlewares.js").isUserActive;
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
 //SOLO LISTA LAS MATERIAS
-server.get("/", (req, res) => {
+server.get("/",isUserAdmin, isUserActive,(req, res) => {
   Subject.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -42,7 +45,7 @@ server.get("/", (req, res) => {
 });
 
 // BUSCA UNA MATERIA EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", (req, res) => {
+server.get("/:id", isUserAdmin, isUserActive, (req, res) => {
   // ACÁ BUSCA UNA MATERIA EN LA BASE DE DATOS
   Subject.findOne({
     attributes: {
@@ -77,7 +80,7 @@ server.get("/:id", (req, res) => {
 });
 
 // CREA UNA MATERIA
-server.post("/", (req, res) => {
+server.post("/", isAdmin, (req, res) => {
   // RECIBE LOS DATOS DE LA MATERIA POR BODY
   const materia = req.body;
   Subject.createInstanceFromBody(materia)
@@ -92,7 +95,7 @@ server.post("/", (req, res) => {
 });
 
 // BUSCA UNA MATERIA Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put("/:id", (req, res) => {
+server.put("/:id", isAdmin, (req, res) => {
   // BUSCA Y MODIFICA LA MATERIA ENCONTRADA.
   Subject.update(req.body, {
     where: {
@@ -115,7 +118,7 @@ server.put("/:id", (req, res) => {
 });
 
 //ELIMINA LA MATERIA
-server.delete("/:id", (req, res, next) => {
+server.delete, isAdmin, ("/:id", (req, res, next) => {
   //ENCUENTRA LA MATERIA POR ID Y LA DESTRUYE
   Subject.destroy({
     where: {

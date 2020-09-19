@@ -40,7 +40,7 @@ const upload = multer({
 });
 
 
-server.get("/", isAdmin, (req, res) => {
+server.get("/", (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
