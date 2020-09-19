@@ -47,37 +47,29 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
         if (days.length === 2 && idx === 1 && type === 'aumentar' && clase === 'startTime' && h.startTime >= 8 && h.startTime < 19) {
           if (h.endTime - 1.5 < h.startTime) h.endTime = h.startTime + 1.5;
           return (h.startTime = {startTime: h.startTime + 0.5, endTime: h.endTime, nameWeekDay: dia});
+        }   
+        else if (days.length === 1 && type === 'aumentar' && clase === 'endTime' && h.endTime < 20 && h.endTime >= 9) {
+          return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
         }
-        
-      else if (days.length === 1 && type === 'aumentar' && clase === 'endTime' && h.endTime < 20 && h.endTime >= 9) {
-                return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
-              }
-              else if (days.length === 2 && idx === 0 && type === 'aumentar' && clase === 'endTime' && h.endTime < days[1].startTime && h.endTime >= 9) {
-                return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
-              }
-              else if (days.length === 2 && idx === 1 && type === 'aumentar' && clase === 'endTime' && h.endTime < 20 && h.endTime >= 9) {
-                return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
-              }
-                else if (type === 'disminuir' && clase === 'startTime' && h.startTime <= 19 && h.startTime > 8) {
-                return (h[clase] ={startTime: h[clase] - 0.5, endTime: h.endTime, nameWeekDay: dia});
-              } else if (
-                type === 'disminuir' &&
-                clase === 'endTime' &&
-                h.endTime <= 20 &&
-                h.endTime > 9 &&
-                h.endTime >= h.startTime + 1.5
-              ) {
-                return (h[clase] = {endTime: h[clase] - 0.5, startTime: h.startTime, nameWeekDay: dia});
-              }
-            }
+        else if (days.length === 2 && idx === 0 && type === 'aumentar' && clase === 'endTime' && h.endTime < days[1].startTime && h.endTime >= 9) {
+          return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
+        }
+        else if (days.length === 2 && idx === 1 && type === 'aumentar' && clase === 'endTime' && h.endTime < 20 && h.endTime >= 9) {
+          return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
+        }
+        else if (type === 'disminuir' && clase === 'startTime' && h.startTime <= 19 && h.startTime > 8) {
+          return (h[clase] ={startTime: h[clase] - 0.5, endTime: h.endTime, nameWeekDay: dia});
+        } 
+        else if (type === 'disminuir' && clase === 'endTime' && h.endTime <= 20 && h.endTime > 9 && h.endTime >= h.startTime + 1.5) {
+          return (h[clase] = {endTime: h[clase] - 0.5, startTime: h.startTime, nameWeekDay: dia});
+        }
+      }
           return h;
     })
     if(newDays[1] && newDays[1].startTime < days[0].endTime){
       newDays[1] = {startTime: days[0].endTime, endTime: days[1].endTime, nameWeekDay: dia}
     }
-   
   return  setDays(newDays)
-	
 }
   
   const handleDelete = (idx) =>  {
