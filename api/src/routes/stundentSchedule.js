@@ -1,63 +1,135 @@
-const server = require('express').Router();
+const server = require("express").Router();
 
 // TRAEMOS LOS USUARIOS DE LA BASE DE DATOS
-const { StudentSchedule, Student } = require('../db.js');
+const { Student, StudentSchedule } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 
-server.get('/:idStudent', (req, res) => {
-    Student.findOne({
-        where:
-        {
-            idStudent: req.params.id
-        },
-        include:
-            [
-                {
-                    model: StudentSchedule
-                }
-            ]
+server.get("/", (req, res) => {
+  Student.findAll({
+    attributes: {
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "phone",
+        "email",
+        "tutor",
+        "difficulty",
+        "weakness",
+        "strengths",
+        "interests",
+        "motivations",
+        "isActive",
+      ],
+    },
+    include: [
+      {
+        model: StudentSchedule,
+        attributes: { exclude: ["createdAt", "updatedAt", "studentId"] },
+      },
+    ],
+  })
+    .then((allSchedulesOfUsers) => {
+      res.json(allSchedulesOfUsers);
     })
-        .then(studentWithTheirSchedules => {
-            !studentWithTheirSchedules ? res.json("El alumno que busca no existe.") : res.json(studentWithTheirSchedules)
-        })
-        .catch(err => {
-            res.json(err)
-        })
-})
+    .catch((err) => {
+      res.json(err);
+    });
+});
 
-server.post('/time/:idStudent', (req, res) => {
-    console.log("HOLA")
-    console.log(req.body)
-    console.log(req.params)
-    const newSchedule = req.body;
-    Student.findOne({
-        where:
-        {
-            id: req.params.idStudent
-        }
+server.get("/:id", (req, res) => {
+  Student.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: {
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "phone",
+        "email",
+        "tutor",
+        "difficulty",
+        "weakness",
+        "strengths",
+        "interests",
+        "motivations",
+        "isActive",
+      ],
+    },
+    include: [
+      {
+        model: StudentSchedule,
+        attributes: { exclude: ["createdAt", "updatedAt", "studentId"] },
+      },
+    ],
+  })
+    .then((studentWithTheirSchedules) => {
+      !studentWithTheirSchedules
+        ? res.json("El alumno que busca no existe.")
+        : res.json(studentWithTheirSchedules);
     })
-        .then(student => {
-            console.log("chau")
-            console.log(student)
-            console.log("chau2")
-            !student ? res.json("El alumno que busca no existe.") : res.json(student)
-            // StudentSchedule.create(newSchedule)
-    // .then( studentWithTheirSchedules => {
-    //    !studentWithTheirSchedules ? res.json("El alumno que busca no existe.") : res.json( studentWithTheirSchedules )
-    // })
-    // .catch( err => {
-    //     res.json( err )
-    // })
-    POST
-        })
-        .catch(err => {
-            res.json(err)
-        })
+    .catch((err) => {
+      res.json(err);
+    });
+});
 
+server.post("/:id", (req, res) => {
+  //Se espera una propiedad 'schedules'
+  var dias = req.body.schedules.split("-");
+  console.log(req.body);
+  console.log(dias);
+  var numero = 1;
+  var obj = {};
+  for (let i = 0; i < dias.length; i++) {
+    if (numero === 1) {
+      obj.startTime = dias[i];
+      numero = numero + 1;
+    } else if (numero === 2) {
+      obj.endTime = dias[i];
+      numero = numero + 1;
+    } else if (numero === 3) {
+      obj.nameWeekDay = dias[i];
+      obj.studentId = req.params.id;
+      console.log(obj);
+      numero = 1;
+      StudentSchedule.create(obj)
+        .then((reso) => res.json(reso))
+        //   .then(() => res.json("Horario agregado"))
+        .catch((err) => {
+          res.send(err);
+        });
+    }
+  }
+});
 
-})
-
+server.delete("/:id", (req, res) => {
+  //Se espera q lo traiga en un campo 'subjectsId'
+  var dias = req.body.schedules.split("-");
+  var numero = 1;
+  var obj = {};
+  for (let i = 0; i < dias.length; i++) {
+    if (numero === 1) {
+      obj.startTime = dias[i];
+      numero = numero + 1;
+    } else if (numero === 2) {
+      obj.endTime = dias[i];
+      numero = numero + 1;
+    } else if (numero === 3) {
+      obj.nameWeekDay = dias[i];
+      obj.studentId = req.params.id;
+      console.log(obj);
+      numero = 1;
+      StudentSchedule.destroy({
+        where: obj,
+      })
+        .then(() => res.json("Horario elimiado"))
+        .catch((err) => {
+          res.json(err);
+        });
+    }
+  }
+});
 
 module.exports = server;

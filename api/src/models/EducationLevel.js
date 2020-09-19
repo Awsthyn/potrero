@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  const AcademicLevel = sequelize.define("academicLevel", {
+  const EducationLevel = sequelize.define("educationLevel", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,10 +18,9 @@ module.exports = (sequelize) => {
       defaultValue: new Date(),
     },
   });
-  AcademicLevel.createInstanceFromBody = function ({ name, educationLevelId }) {
-    return AcademicLevel.create({
+  EducationLevel.createInstanceFromBody = function ({ name }) {
+    return EducationLevel.create({
       name,
-      educationLevelId,
     });
   };
 };

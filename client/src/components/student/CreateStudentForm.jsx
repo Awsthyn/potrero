@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import  {TimePicker}  from "@material-ui/pickers/"
+import moment from 'moment';
+import 'moment/locale/es';
 import { getSubjects } from '../../redux/actions/subject'
 import { postStudent } from '../../redux/actions/student';
 
 import SubjectCheckbox from "./SubjectCheckbox"
 import StrengthCheckbox from "./StrengthCheckbox";
 import WeakCheckbox from "./WeaknessCheckbox";
+moment.locale('es');
 
 
 export class CreateStudentForm extends Component {
@@ -26,6 +29,8 @@ export class CreateStudentForm extends Component {
             interests: "lorem ipsum",
 			strengths: [],
 			motivations: 'lorem ipsum',
+			observations: null,
+			disponibleTime: []
 		};
 		this.subjects = this.props.subjects
 		this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
@@ -90,11 +95,11 @@ export class CreateStudentForm extends Component {
 		return (
 			<div style={{marginLeft:250,marginTop:50,marginBottom:50,marginRight:50}}>
             <>
-            <h1 className="mb-3 mt-2">Formulario para alta de alumno</h1>
-			<form className="card p-4 shadow mx-auto" style={{ width: '85vw' }} onSubmit={this.submitHandler}>
+			<form className="card p-4 shadow mx-auto" style={{ width: '70vw' }} onSubmit={this.submitHandler}>
+			<h1 className="mb-3 mt-2">Formulario para alta de alumno</h1>
 				<div className="d-flex flex-row form-group">
 					<input
-						style={{width: "40vw"}}
+						style={{width: "34vw"}}
 						className="form-control mr-4"
 						type="text"
 						name="firstName"
@@ -102,7 +107,7 @@ export class CreateStudentForm extends Component {
 						onChange={this.onChangeHandler}
 					/>
 					<input
-						style={{width: "40vw"}}
+						style={{width: "34vw"}}
 						className="form-control"
 						type="text"
 						name="lastName"
@@ -111,14 +116,14 @@ export class CreateStudentForm extends Component {
 					/>
 				</div>
 				<div className="mt-n2 mb-4 d-flex flex-row form-group">
-					<input style={{width: "40vw"}}
+					<input style={{width: "34vw"}}
 						className="form-control mr-4"
 						type="text"
 						name="phone"
 						placeholder="Teléfono del alumno..."
 						onChange={this.onChangeHandler}
 					/>
-					<input style={{width: "40vw"}}
+					<input style={{width: "34vw"}}
 						className="form-control"
 						type="text"
 						name="email"
@@ -162,15 +167,18 @@ export class CreateStudentForm extends Component {
 					</select>
 				</div>
 				<h3 className="text-center d-block mb-3">Materias que tiene que aprender</h3>
-				<div style={{width: "80vw"}} className="ml-auto mr-auto d-flex flex-wrap justify-content-center form-check form-check-inline">
+				<div style={{width: "70vw"}} className="ml-auto mr-auto d-flex flex-wrap justify-content-center form-check form-check-inline">
                     { Array.isArray(this.props.subjects)&& this.props.subjects.length > 0 ? this.props.subjects.map( subject => {
                         return (
                         <SubjectCheckbox key = {subject.id} initialState={false} subject={subject} onChange={this.onCheckboxClicked} required/>
                         )}
                     ) : null}
                 </div>
-				<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene FACILIDAD</h3>
-				<div style={{minHeight: "150px",width: "80vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
+				<h6 className="mt-4 mb-n2">A continuación puede hacer una selección de las materias que considera que el alumno tiene facilidad o dificultad para aprender. 
+					No es necesario clasificar a todas las materias.</h6>
+				<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene <span style={{color: "#8CC63E"}}>FACILIDAD</span></h3>
+				
+				<div style={{minHeight: "150px",width: "70vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
                     { Array.isArray(this.state.subjectsId)&& this.state.subjectsId.length > 0 ? this.state.subjectsId.map( subject => {
                     if(this.state.weakness.includes(subject) === false) return (
                         <StrengthCheckbox key = {subject+'strength'} initialState={false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onStrengthCheckboxClicked} required/>
@@ -178,8 +186,8 @@ export class CreateStudentForm extends Component {
 					
                     ) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}	
                 </div>
-				<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene DIFICULTAD</h3>
-				<div style={{minHeight: "150px",width: "80vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
+				<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene <span style={{color: "#c63e3e"}}>DIFICULTAD</span></h3>
+				<div style={{minHeight: "150px",width: "70vw"}} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
                     { Array.isArray(this.state.subjectsId)&& this.state.subjectsId.length > 0 ? this.state.subjectsId.map( subject => {
                     if(this.state.strengths.includes(subject) === false) return (
                         <WeakCheckbox key = {subject+'weak'} initialState={false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onWeakCheckboxClicked} required/>
@@ -206,8 +214,12 @@ export class CreateStudentForm extends Component {
 						onChange={this.onChangeHandler}
 					/>
 				</div>
-
+				<div className="form-group">
+					<textarea name="observations" onChange={this.onChangeHandler} className="form-control" style={{width: "66.4vw"}} placeholder="Observaciones y/o comentarios..."/>
+				</div>
 				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="align-self-center text-white btn btn-lg" value="Agregar" type="submit" />
+				<h3>Horarios disponibles para las tutorías</h3>
+				<TimePicker minutesStep={30} onChange={(e) => console.log(moment(e).format("LT"))} value={"1994-11-05T15:00:00Z"} />
 			</form>
             </>
 			</div>
