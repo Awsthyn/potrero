@@ -4,7 +4,7 @@ import style from './Login.module.css';
 import swal from 'sweetalert';
 import { sessionLogin } from "../redux/actions/session.js";
 import { connect } from "react-redux";
-import logo from './VolunteerFormAssets/logo.jpg'
+import logo from './VolunteerFormAssets/logo.png'
 import hero from './VolunteerFormAssets/pelota.jpg';
 import hero2 from './VolunteerFormAssets/potrero2.jpg';
 import hero3 from './VolunteerFormAssets/potrero3.jpg';
