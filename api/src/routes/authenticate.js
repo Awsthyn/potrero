@@ -35,6 +35,8 @@ function isAuthenticated(req, res, next) {
     }
 }
 
+
+
 server.get('/users', isAuthenticated, function(req, res){
     console.info('usuario autenticado')
     res.json(true)
