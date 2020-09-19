@@ -9,11 +9,20 @@ const {
   EducationLevel,
 } = require("../db.js");
 
+const isAdmin = require('./middlewares.js').isAdmin;
+const isUserActive = require('./middlewares.js').isUserActive;
+const isUserAdmin = require('./middlewares.js').isUserAdmin;
+
+// URL PARA MIDDLEWARES
+
+
+
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
 // USAMOS ESTE MIDDLEWARE PARA GUARDAR ARCHIVOS
 const multer = require("multer");
+const { isAuthenticated } = require("./authenticate.js");
 
 // Usamos esta funcion para guardar el archivo con extension
 const storage = multer.diskStorage({
@@ -30,7 +39,8 @@ const upload = multer({
   storage: storage,
 });
 
-server.get("/", (req, res) => {
+
+server.get("/", isAdmin, (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
@@ -85,7 +95,7 @@ server.get("/", (req, res) => {
 });
 
 // BUSCA UN USUARIO EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", (req, res) => {
+server.get("/:id", isUserAdmin, isUserActive, (req, res) => {
   // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
   User.findOne({
     where: {
