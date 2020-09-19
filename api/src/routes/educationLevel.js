@@ -6,8 +6,13 @@ const { EducationLevel, AcademicLevel } = require("../db.js");
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
+// IMPORTS DE MIDDLEWARES
+const isAdmin = require('./middlewares.js').isAdmin;
+const isUserAdmin = require('./middlewares.js').isUserAdmin;
+const isUserActive = require('./middlewares.js').isUserActive;
+
 //LISTA LAS MATERIAS POR AÑO
-server.get("/", (req, res) => {
+server.get("/", isAdmin, (req, res) => {
     EducationLevel.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -31,8 +36,8 @@ server.get("/", (req, res) => {
     });
 });
 
-// BUSCA UNA GRADO EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", (req, res) => {
+// BUSCA UN GRADO EN ESPECÍFICO Y MUESTRA SUS DATOS.
+server.get("/:id", isAdmin, (req, res) => {
   // ACÁ BUSCA UNA MATERIA EN LA BASE DE DATOS
   EducationLevel.findOne({
     where: {
@@ -62,7 +67,7 @@ server.get("/:id", (req, res) => {
 });
 
 // CREA UN NIVEL DE EDUCACIÓN - PRIMARIO - SECUNDARIO
-server.post("/", (req, res) => {
+server.post("/", isAdmin, (req, res) => {
   // RECIBE LOS DATOS DEL GRADO POR BODY
   const nivel = req.body;
   EducationLevel.createInstanceFromBody(nivel)
@@ -77,7 +82,7 @@ server.post("/", (req, res) => {
 });
 
 // BUSCA UNA NIVEL DE EDUCACIÓN Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put("/:id", (req, res) => {
+server.put("/:id", isAdmin, (req, res) => {
   // BUSCA Y MODIFICA LA MATERIA ENCONTRADA.
   EducationLevel.update(req.body, {
     where: {
@@ -100,7 +105,7 @@ server.put("/:id", (req, res) => {
 });
 
 //ELIMINA EL NIVEL DE EDUCACIÓN
-server.delete("/:id", (req, res, next) => {
+server.delete("/:id", isAdmin, (req, res, next) => {
     //ENCUENTRA LA MATERIA POR ID Y LA DESTRUYE
     EducationLevel.destroy({
       where: {

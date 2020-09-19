@@ -11,7 +11,6 @@ const middlewares = {
       },
     isUserAdmin: function(req, res, next){
         if(req.user.state === 'aceptado' || req.user.state === 'admin'){
-            console.log("SOY UN FRANKESTEIN DE MIDDLEWARES")
             next();
         }
         else{

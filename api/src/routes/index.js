@@ -118,12 +118,6 @@ router.use("/educationlevel", educationLevel)
 
 
 
-// IMPORT DE USERSCHEDULEADMIN
 
-// const userScheduleAdmin = require('./adminController/userScheduleAdmin.js');
-
-// RUTAS DE ADMIN (CONTROLADOR)
-
-// router.use('/admin/userSchedule', userScheduleAdmin);
 
 module.exports = router;
