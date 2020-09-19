@@ -4,8 +4,10 @@ import style from './Login.module.css';
 import swal from 'sweetalert';
 import { sessionLogin } from "../redux/actions/session.js";
 import { connect } from "react-redux";
-import logo from './VolunteerFormAssets/logo.jpg';
+import logo from './VolunteerFormAssets/logo.jpg'
 import hero from './VolunteerFormAssets/pelota.jpg';
+import hero2 from './VolunteerFormAssets/potrero2.jpg';
+import hero3 from './VolunteerFormAssets/potrero3.jpg';
 
 export class Login extends React.Component {
     constructor(props) {
@@ -161,7 +163,7 @@ export class Login extends React.Component {
 
                             </div><br />
 
-                            <button className={this.isNotEmpty(this.state.errors) ? style.disButton :style.button} disabled = {this.isNotEmpty(this.state.errors)} type="submit">Iniciar Sesión
+                            <button className={this.isNotEmpty(this.state.errors) ? style.disButton : style.button} disabled = {this.isNotEmpty(this.state.errors)} type="submit">Iniciar Sesión
                             <svg viewBox="0 0 16 16" className={style.rightArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                             </svg>
@@ -174,16 +176,42 @@ export class Login extends React.Component {
                     </div>
                 </div>
                 <div className={style.imageHolder}>
-                    <img className={style.image} src={hero} />
+
+                    {/* <img className={style.image} src={hero} /> */}
+
+
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div className="carousel-item active" >
+                                <img src={hero} className={`d-block w-100 ${style.image}`} alt="..." />
+                            </div>
+                            <div class="carousel-item">
+                                <img src={hero2} className={`d-block w-100 ${style.image}`} alt="..." />
+                            </div>
+                            <div class="carousel-item">
+                                <img src={hero3} className={`d-block w-100 ${style.image}`} alt="..." />
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+
+
                     <div className={style.textContainer}>
                         <h1 className={style.oQuote}>“</h1>
                         <p className={style.paraph}> La educación es el arma mas poderosa que puedes usar para cambiar el mundo.</p>
                         <p className={style.author}> - Nelson Mandela </p>
                         <h1 className={style.cQuote}>“</h1>
 
-                        <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" className={style.dot} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        {/* <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" className={style.dot} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M2 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm6 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm6 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                        </svg>
+                        </svg> */}
 
                     </div>
                 </div>
