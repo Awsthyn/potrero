@@ -33,6 +33,7 @@ export default function Niveles() {
             [nivel] : e.target.id
         })
     }
+
     var primaria = ["Primer grado","Segundo grado","Tercer grado","Cuarto grado","Quinto Grado","Sexto grado","Septimo grado"];
     var secundaria = ["Primer año","Segundo año","Tercer año","Cuarto año","Quinto año", "Sexto año"];
     if (redirect) {
