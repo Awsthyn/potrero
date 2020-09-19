@@ -1,6 +1,7 @@
 import React from 'react';
-import logo from './VolunteerFormAssets/logo.jpg';
+import logo from './VolunteerFormAssets/logo.png';
 import style from './PasswordRecovery.module.css';
+
 
 export class PasswordRecovery extends React.Component {
     constructor(props) {
@@ -104,7 +105,6 @@ export class PasswordRecovery extends React.Component {
                         </form>
                     </div>
                 </div>
-                
             </div>
 
         )
