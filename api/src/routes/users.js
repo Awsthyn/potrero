@@ -154,47 +154,46 @@ server.post("/", upload.single("cv"), (req, res) => {
   }
   User.create(usuario)
     .then((userCreated) => {
-      // Se espera valores de Id's de Subjects Ejemplo: 1,2
-      // Recorre SubjectId los prepara en un array y los recorre
-      // entonces agrega la materia relacionado con el id del profesor
-      req.body.subjectsId.forEach((idSub) => {
-        userCreated
-          .addSubjects(idSub)
-          .then(() => send.json("Materias agregadas al profesor"))
-          .catch((err) => {
-            // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
-            console.log(err);
-            res.json(err);
-          });
-      });
-      //AGREGA HORARIOS AL PROFESOR
-      // Recorre scheduleStudent los prepara en un objeto hasta 3 lugares con los numeros incrementando cuando llega a 3 se resetea la variable numero a 1 y vuelve a preparar el objeto, crea un UserSchedule cada 3 posiciones de dias
-      let dias = req.body.scheduleUser.split("-");
-      let separado = dias;
-      let numero = 1;
-      let obj = {};
-      for (let i = 0; i < separado.length; i++) {
-        if (numero === 1) {
-          obj.startTime = separado[i];
-          numero = numero + 1;
-        } else if (numero === 2) {
-          obj.endTime = separado[i];
-          numero = numero + 1;
-        } else if (numero === 3) {
-          obj.nameWeekDay = separado[i];
-          obj.userId = userCreated.id;
-          UserSchedule.create(obj);
-          numero = 1;
-        }
-      }
-    })
-    .then(() => {
+      // Se espera valores de Id's de Subjects Ejemplo: 1,2	
+      // Recorre SubjectId los prepara en un array y los recorre	
+      // entonces agrega la materia relacionado con el id del profesor	
+      req.body.subjectsId.forEach((idSub) => {	
+        userCreated	
+          .addSubjects(idSub)	
+          .then(() => send.json("Materias agregadas al profesor"))	
+          .catch((err) => {	
+            // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.	
+            console.log(err);	
+            res.json(err);	
+          });	
+      });	
+      //AGREGA HORARIOS AL PROFESOR	
+      // Recorre scheduleStudent los prepara en un objeto hasta 3 lugares con los numeros incrementando cuando llega a 3 se resetea la variable numero a 1 y vuelve a preparar el objeto, crea un UserSchedule cada 3 posiciones de dias	
+      let dias = req.body.scheduleUser.split("-");	
+      let separado = dias;	
+      let numero = 1;	
+      let obj = {};	
+      for (let i = 0; i < separado.length; i++) {	
+        if (numero === 1) {	
+          obj.startTime = separado[i];	
+          numero = numero + 1;	
+        } else if (numero === 2) {	
+          obj.endTime = separado[i];	
+          numero = numero + 1;	
+        } else if (numero === 3) {	
+          obj.nameWeekDay = separado[i];	
+          obj.userId = userCreated.id;	
+          UserSchedule.create(obj);	
+          numero = 1;	
+        }	
+      }	
+      
+    })	
+    .then(() => {	
       res.json("Usuario creado exitosamente");
+
     })
-    .catch((err) => {
-      // SI HAY UN ERROR, LO DEVUELVE. POR SI FALTÓ UN CAMPO POR COMPLETAR O MISMO LOS DATOS NO SON VÁLIDOS.
-      res.send(err);
-    });
+    .catch(err => res.send(err))
 });
 
 // RELACIONA LAS MATERIAS CON USUARIOS
@@ -255,6 +254,31 @@ server.put("/:id", (req, res) => {
     .catch((err) => {
       res.send(err);
     });
+});
+
+// RELACIONA LAS MATERIAS CON USUARIOS
+server.post("/:id/subjects", (req, res) => {
+  var id = req.params.id;
+  var materias = req.body.subjects;
+  var user = User.findByPk(id);
+
+  materias.map((m, i) => {
+    var subject = Subject.findOne({
+      where: {
+        name: m,
+      },
+    });
+    Promise.all([user, subject])
+      .then((values) => {
+        var user = values[0];
+        var subject = values[1];
+        user.addSubject(subject);
+        if (i === arrayMateria.length - 1) res.send(user);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  });
 });
 
 module.exports = server;

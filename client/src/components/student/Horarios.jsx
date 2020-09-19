@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import IconButton from '@material-ui/core/IconButton';
-import style from './VoluntarioForm.module.css'
+import style from '../formularioVoluntario/VoluntarioForm.module.css'
 
 export default function Horarios({de, hasta, id, handleTime, handleDelete}) {
 	const [horaDe, setHoraDe] = useState();

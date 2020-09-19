@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import  {TimePicker}  from "@material-ui/pickers/"
 import moment from 'moment';
 import 'moment/locale/es';
 import { getSubjects } from '../../redux/actions/subject'
@@ -9,6 +8,7 @@ import { postStudent } from '../../redux/actions/student';
 import SubjectCheckbox from "./SubjectCheckbox"
 import StrengthCheckbox from "./StrengthCheckbox";
 import WeakCheckbox from "./WeaknessCheckbox";
+import DaysContainer from "./DaysContainer"
 moment.locale('es');
 
 
@@ -30,13 +30,13 @@ export class CreateStudentForm extends Component {
 			strengths: [],
 			motivations: 'lorem ipsum',
 			observations: null,
-			disponibleTime: []
+			scheduleStudent: null
 		};
 		this.subjects = this.props.subjects
 		this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
 		this.onWeakCheckboxClicked = this.onWeakCheckboxClicked.bind(this);
 		this.onStrengthCheckboxClicked = this.onStrengthCheckboxClicked.bind(this);
-
+		this.onChangeSchedule = this.onChangeSchedule.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.submitHandler = this.submitHandler.bind(this);
 	}
@@ -86,6 +86,11 @@ export class CreateStudentForm extends Component {
             })
         }
     }
+
+	onChangeSchedule(schedule){
+		this.setState({scheduleStudent: schedule})
+	}
+
 
     componentDidMount() {
         this.props.getSubjects();
@@ -217,9 +222,10 @@ export class CreateStudentForm extends Component {
 				<div className="form-group">
 					<textarea name="observations" onChange={this.onChangeHandler} className="form-control" style={{width: "66.4vw"}} placeholder="Observaciones y/o comentarios..."/>
 				</div>
-				<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="align-self-center text-white btn btn-lg" value="Agregar" type="submit" />
 				<h3>Horarios disponibles para las tutorías</h3>
-				<TimePicker minutesStep={30} onChange={(e) => console.log(moment(e).format("LT"))} value={"1994-11-05T15:00:00Z"} />
+			<DaysContainer uploadParentState={this.onChangeSchedule} />
+			<input style={{fontSize: "1.5em",width: "300px", backgroundColor: "#492BC4"}} className="align-self-center text-white btn btn-lg" value="Agregar" type="submit" />
+
 			</form>
             </>
 			</div>

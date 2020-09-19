@@ -230,7 +230,7 @@ input:focus {
 
 .containerListDays{
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }

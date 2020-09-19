@@ -28,7 +28,7 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
 
   const handleOnClick = (e) => {
       if(typeof days === 'string'){
-        return setDays([{startTime: 12, endTime: 14, nameWeekDay: dia}]);
+        return setDays([{startTime: 12, endTime: 12, nameWeekDay: dia}]);
       }else if(days.length < 2 && days[0].endTime < 19.5){
         return setDays([...days, {startTime: days[0].endTime, endTime: days[0].endTime + 1, nameWeekDay: dia}]);
       }
@@ -97,11 +97,12 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
 										key={i}
 										id={i}
 										handleTime={handleTime}
-										handleDelete={handleDelete}
+										handleDelete={() => handleDelete(i)}
 									/>
 								);
 							})}
-							<button onClick={e => handleOnClick(e)}> + </button>
+              <button style={{borderStyle: "none", backgroundColor: "#492BC4", fontWeight:"100", fontSize: "1.3em", paddingLeft:"10px", paddingRight:"10px"}} 
+              className="ml-2 text-white rounded-circle" onClick={e => handleOnClick(e)}> + </button>
 						</span>
 					) : null}
 					</Typography>
