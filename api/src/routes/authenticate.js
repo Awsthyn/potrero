@@ -3,8 +3,10 @@ const { User } = require("../db.js");
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 
-server.get('/', function(req, res) {
+server.get('/', isAuthenticated, function(req, res) {
+    console.log("user", req.user)
     res.json({ user: req.user });
+
 });
 
 server.post('/login',
@@ -13,6 +15,7 @@ server.post('/login',
         console.log('inicio de sesion exitoso')
         res.json(req.user)
     // res.redirect('/');
+    
 });
 
 server.get('/logout', function(req, res){
@@ -31,6 +34,8 @@ function isAuthenticated(req, res, next) {
         res.json(false);
     }
 }
+
+
 
 server.get('/users', isAuthenticated, function(req, res){
     console.info('usuario autenticado')
