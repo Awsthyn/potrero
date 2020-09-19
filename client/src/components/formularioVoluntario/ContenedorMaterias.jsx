@@ -4,7 +4,6 @@ import {getSubjects} from '../../redux/actions/subject.js';
 import {connect} from 'react-redux';
 import Materias from './Materias';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import style1 from './Materias.module.css';
 import swal from 'sweetalert';
 import styles from './VoluntarioForm.module.css';
@@ -20,7 +19,6 @@ class ContenedorMaterias extends React.Component {
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSend = this.handleSend.bind(this);
 		this.handleOnFileChange = this.handleOnFileChange.bind(this);
-		this.goBack = this.goBack.bind(this);
 	}
 	handleOnClick(id, e) {
 		if (e.target.style.backgroundColor === 'rgb(140, 198, 62)') {
@@ -75,28 +73,16 @@ class ContenedorMaterias extends React.Component {
 			});
 		
 	}
-	goBack(){
-		this.props.history.push('/voluntarios/niveles');
-	}
 	componentDidMount(){
 	this.props.getSubjects()
 	}
 	render() {
 		var control;
 		var materias = this.props.subjects.subjects
-		//['Matemática', 'Idiomas', 'Biología', 'Tecnología', 'Artes', 'Computación'];
 		return (
-			<div>
-				<IconButton aria-label="ir atrás" onClick={this.goBack}>
-				<span className="material-icons">arrow_back</span>
-				</IconButton>
-			<div className={style1.circles}>
-				<div className={styles.circleGray}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div><div className={styles.lineGray}></div><div className={styles.circleLila}>4</div>
-			</div>
-			
+			<div className={styles.formInput} >
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
 				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
-				<br></br>
 				<small>CV</small>
 				<input
 					style={{width: '80%', marginTop: '1%', display: 'block'}}

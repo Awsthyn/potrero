@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import {Redirect} from 'react-router-dom';
-import IconButton from '@material-ui/core/IconButton';
 import styles from './VoluntarioForm.module.css';
 import style from './Materias.module.css';
 
-export default function Niveles({history}) {
+export default function Niveles() {
     const [primario, setPrimario] = useState(false);
     const [secundario, setSecundario] = useState(false);
     const [state, setState] = useState({});
     const [redirect, setRedirect] = useState(false);
+    
     const handlePrimario = () => {
         if (!primario) {
             setPrimario(true)
@@ -40,46 +40,41 @@ export default function Niveles({history}) {
     }
 		return (
 			<div>
-                <IconButton aria-label="ir atrás" onClick={() => history.push('/voluntarios/horarios')}>
-				    <span className="material-icons">arrow_back</span>
-				</IconButton>
-                <div className={styles.circles}>
-			        <div className={styles.circleGray}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleLila}>3</div><div className={styles.lineGray}></div><div className={styles.circleGray}>4</div>
-			    </div>
                 <div className={styles.formInput}>
-                <h4>¿Cuál es el nivel educativo en el que podrías ayudar?</h4>
+                <h4 style={{fontSize: '1rem'}} >¿Cuál es el nivel educativo en el que podrías ayudar?</h4>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
                     { !secundario ? 
                         <div className={style.btnVolver}
                             onClick={() => handlePrimario()}>
                             {
-                               !primario ? <span className={style.botonPyS}>Primario</span> : <span className={styles.testButton} id={style.back}>Volver</span> 
+                            !primario ? <span className={style.botonPyS}>Primario</span> : <span className={styles.testButton} id={style.back}>Volver</span> 
                             }
                         </div> : null
                     }
                     { !primario ?
                         <div
+                            className={style.btnVolver}
                             onClick={() => handleSecundario()}>
                             {
-                               !secundario ? <span className={style.botonPyS}>Secundario</span> : <span className={styles.testButton} id={style.back}>Volver</span> 
+                            !secundario ? <span className={style.botonPyS}>Secundario</span> : <span className={styles.testButton} id={style.back}>Volver</span> 
                             }
                         </div> : null
                     }  
                     {
                         primario && !secundario ? 
-                        <div><h4>Niveles de primaria</h4><p>Escoge el nivel educativo al cual podrías brindar asistencia</p></div> 
+                        <div><h4 style={{fontSize: '1.2rem'}} >Niveles de primaria</h4>{/*<p>Escoge el nivel educativo al cual podrías brindar asistencia</p>*/}</div> 
                         : null
                     }  
                     {
                         secundario && !primario ? 
-                        <div><h4>Niveles de secundaria</h4><p>Escoge el nivel educativo al cual podrías brindar asistencia</p></div>
+                        <div><h4 style={{fontSize: '1.2rem'}}>Niveles de secundaria</h4>{/*<p>Escoge el nivel educativo al cual podrías brindar asistencia</p>*/}</div>
                         : null
                     }   
                 </div>
                 <div className={styles.containerListNiveles}>
                 {
                     primario && !secundario ?  
-                        primaria.map((n, i) => <div id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n}</div>)
+                        primaria.map((n, i) => <div id={n} className={style.botonMateria} key={n} onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n}</div>)
                         : null                  
                 }
                 {
@@ -92,7 +87,7 @@ export default function Niveles({history}) {
                 (primario || secundario) && Object.keys(state).length === 1 ?
                         <Button
                         variant="contained"
-                        style={{marginTop: '3rem'}}
+                        style={{marginTop: '1%'}}
                         className={styles.testButton}
                         id={styles.skere}
                         type="submit"
@@ -102,12 +97,12 @@ export default function Niveles({history}) {
                         }}
                     >
                     Continuar
-                    <span className="material-icons">trending_flat</span>
+                    <span className="material-icons">arrow_forward</span>
                     </Button>
                     : null
                 }  
                 {
-                    primario || secundario ? null : <h5>Para continuar debes especificar el máximo nivel en el cual te gustaría ayudar</h5>
+                    primario || secundario ? null : <small>Para continuar debes especificar el máximo nivel en el cual te gustaría ayudar</small>
                 }
             </div>
 			</div>

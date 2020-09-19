@@ -5,6 +5,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import Horarios from './Horarios';
+import style from './VoluntarioForm.module.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,27 +34,29 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
         return setDays([...days, {startTime: days[0].endTime, endTime: days[0].endTime + 1, nameWeekDay: dia}]);
       }
   }
-  const handleTime = (type, idx, clase) => {
+  const handleTime = (type, idx, clase, dia) => {
+    let diaEndTime;
+    if(dia){
+      diaEndTime = days.filter(d =>{ 
+        return d.nameWeekDay === dia
+      })
+    }
     let newDays = days.map((h,i) => {
       if(i === idx){
-        if (type === 'aumentar' && clase === 'startTime' && h.startTime >= 8 && h.startTime < 19) {
+        if (type === 'aumentar' && clase === 'startTime' ) {
           if (h.endTime - 1.5 < h.startTime) h.endTime = h.startTime + 1.5;
           return (h.startTime = {startTime: h.startTime + 0.5, endTime: h.endTime, nameWeekDay: dia});
-      }else if (type === 'aumentar' && clase === 'endTime' && h.endTime < 20 && h.endTime >= 9) {
-                return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
-              } else if (type === 'disminuir' && clase === 'startTime' && h.startTime <= 19 && h.startTime > 8) {
-                return (h[clase] ={startTime: h[clase] - 0.5, endTime: h.endTime, nameWeekDay: dia});
-              } else if (
-                type === 'disminuir' &&
-                clase === 'endTime' &&
-                h.endTime <= 20 &&
-                h.endTime > 9 &&
-                h.endTime >= h.startTime + 1.5
-              ) {
-                return (h[clase] = {endTime: h[clase] - 0.5, startTime: h.startTime, nameWeekDay: dia});
-              }
-            }
-          return h;
+        }else if (type === 'aumentar' && clase === 'endTime') {
+          if(diaEndTime[0]?.endTime < h.startTime || diaEndTime[1]?.startTime === h.startTime){
+            return (h[clase] = {endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia});
+          }
+        } else if (type === 'disminuir' && clase === 'startTime')  {
+          return (h[clase] ={startTime: h.startTime - 0.5, endTime: h.endTime, nameWeekDay: dia});
+        } else if ( type === 'disminuir' && clase === 'endTime' && h.endTime >= h.startTime + 1.5) {
+          return (h[clase] = {endTime: h[clase] - 0.5, startTime: h.startTime, nameWeekDay: dia});
+        }
+          }
+        return h;
     })
     if(newDays[1] && newDays[1].startTime < days[0].endTime){
       newDays[1] = {startTime: days[0].endTime, endTime: days[0].endTime + 1, nameWeekDay: dia}
@@ -71,7 +74,10 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
 		
   }
   useEffect(() => {
-    if(typeof days !== 'string') setTime(days)
+    if(typeof days !== 'string') setTime(days, false)
+    else{
+      setTime([{nameWeekDay: dia}], true)
+    }
   }, [days])
 
   return(
@@ -82,7 +88,6 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
 					id="panel1bh-header"
 				>
 					<Typography className={classes.heading}>{dia}</Typography>
-					{/* <Typography className={classes.secondaryHeading}>Escoge tu rango horario</Typography> */}
 				</AccordionSummary>
 				<AccordionDetails>
 					<Typography>
@@ -95,13 +100,14 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
 										de={h.startTime}
 										hasta={h.endTime}
 										key={i}
-										id={i}
+                    id={i}
+                    dia={dia}
 										handleTime={handleTime}
 										handleDelete={handleDelete}
 									/>
 								);
 							})}
-							<button onClick={e => handleOnClick(e)}> + </button>
+							<button className={style.accordionButton} onClick={e => handleOnClick(e)}> + </button>
 						</span>
 					) : null}
 					</Typography>
