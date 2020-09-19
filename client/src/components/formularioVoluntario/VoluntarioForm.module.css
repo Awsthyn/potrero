@@ -156,8 +156,8 @@ input:focus {
 
 .imgSize {
 	position: relative;
-	width: 30%; 
-	height: 20%; 
+	width: 150px; 
+	height: 100px; 
 }
 
 /* .dateText{
