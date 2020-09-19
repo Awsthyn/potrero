@@ -14,9 +14,13 @@ const {
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
+const isAdmin = require('./middlewares.js').isAdmin;
+const isUserAdmin = require('./middlewares.js').isUserAdmin;
+const isUserActive = require('./middlewares.js').isUserActive;
+
 /////////////EXCLUI LOS CREATEDAT, UPDATEDAT EN GRAL AGREGENLO SI ES NECESARIO/////////////////
 
-server.get("/", (req, res) => {
+server.get("/", isUserAdmin, isUserActive, (req, res) => {
   // BUSCA TODAS LAS CLASES Y LOS DEVUELVE COMO JSON (ARRAY DE OBJETOS)
   Class.findAll({
     attributes: {
@@ -110,7 +114,7 @@ server.get("/", (req, res) => {
 // RARAMENTE NO ME ACEPTA LOS INCLUDE ANIDADOS EN USER/ID Y STUDENT/ID PERO SI EN DATASHEET/ID
 
 // BUSCA TODAS LAS CLASES DE UN USUARIO EN ESPECÍFICO Y ENVÍA SUS DATOS.
-server.get("/user/:id", (req, res) => {
+server.get("/user/:id", isUserAdmin, isUserActive, (req, res) => {
   Class.findOne({
     where: {
       userId: req.params.id,
@@ -172,7 +176,7 @@ server.get("/user/:id", (req, res) => {
 });
 
 // BUSCA TODAS LAS CLASES DE UN ESTUDIANTE EN ESPECÍFICO Y ENVÍA SUS DATOS.
-server.get("/student/:id", (req, res) => {
+server.get("/student/:id", isAdmin, (req, res) => {
   Class.findOne({
     where: {
       studentId: req.params.id,
@@ -227,7 +231,7 @@ server.get("/student/:id", (req, res) => {
 });
 
 // BUSCA LA CLASE ASOCIADA A UNA DATASHEET.
-server.get("/datasheet/:id", (req, res) => {
+server.get("/datasheet/:id", isUserAdmin, isUserActive, (req, res) => {
   Class.findOne({
     where: {
       dataSheetId: req.params.id,
@@ -318,7 +322,7 @@ server.get("/datasheet/:id", (req, res) => {
 });
 
 // BUSCA TODAS LAS CLASES ASOCIADAS A UNA ASIGNATURA/SUBJECT.
-server.get("/subject/:id", (req, res) => {
+server.get("/subject/:id", isAdmin, (req, res) => {
   Class.findAll({
     where: {
       subjectId: req.params.id,
@@ -368,7 +372,7 @@ server.get("/subject/:id", (req, res) => {
 });
 
 // CREA UNA CLASE NUEVA.
-server.post("/", (req, res) => {
+server.post("/", isAdmin, (req, res) => {
   // RECIBE TODA LA INFORMACIÓN POR BODY.
   const newClass = req.body;
   Class.create(newClass)
@@ -382,7 +386,7 @@ server.post("/", (req, res) => {
 });
 
 // ELIMINA UNA CLASE.
-server.delete("/:id", (req, res) => {
+server.delete("/:id", isAdmin, (req, res) => {
   Class.destroy({
     where: {
       id: req.params.id,
@@ -398,7 +402,7 @@ server.delete("/:id", (req, res) => {
     });
 });
 
-server.post("/:idClass/datasheet/", (req, res) => {
+server.post("/:idClass/datasheet/", isUserAdmin, isUserActive, (req, res) => {
   const newDataSheet = req.body;
   DataSheet.createInstanceFromBody(newDataSheet)
     // "ds" ES LA NUEVA DATASHEET CREADA PARA LA CLASE.
