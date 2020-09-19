@@ -3,6 +3,8 @@ import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VO
 // Agrega un Voluntario --> Crea Calendario --> Envía Mail de Bienvenida 
 export function postVoluntary(voluntary, subjects, schedule) {
 	return function (dispatch) {
+		console.log(subjects);
+		console.log(schedule);
 		return axios
 			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
