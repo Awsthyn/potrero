@@ -30,8 +30,8 @@ const setTime = (horarios, ultimo) => {
 	return (
 		<div>
 			<span className={style.frase}>  
-				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '24%'}} ><strong>Tu Disponibilidad </strong></p>
-				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > ¿Cuales son los días y horarios que podrías colaborar con nosotros? </span>
+				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '24%', fontFamily: 'Poppins'}} ><strong>Tu Disponibilidad </strong></p>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px',fontFamily: 'Poppins'}} > ¿Cuales son los días y horarios que podrías colaborar con nosotros? </span>
 				</span>
 			<div className={style.formInput} id={style.scroll} >
 			<p style={{margin: '25px 0px', fontSize: '13px'}} > Los horarios límites para las clases son de 8:00 hs a 20:00 hs. Los rangos horarios no deben ser inferiores a 1 hora</p> 
@@ -54,7 +54,7 @@ const setTime = (horarios, ultimo) => {
 					localStorage.setItem('schedule', JSON.stringify(schedule))
 				}}>
 				Continuar
-				<span className="material-icons">arrow_forward</span>
+				<span style={{margin: '10px'}} className="material-icons">arrow_forward</span>
 			</Button>
 				</div>
 		</div>

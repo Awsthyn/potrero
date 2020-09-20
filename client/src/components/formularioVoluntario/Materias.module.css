@@ -205,6 +205,7 @@
 	width: 92px;
 	background-color: #8CC63E;
 	margin-bottom: 0px;
+	font-family: 'Poppins' ;
 }
 .letrasLogo{
 	height: 50px;
@@ -219,11 +220,13 @@
 	top: 30%;
 	width: 20%;
 	margin-top: -15px;
+	font-family: 'Poppins' ;
 }
 .tituloConfirmacion{
 	font-size: 1.2rem;
 	font-weight: 1000;
 	margin-right: 30%;
+	font-family: 'Poppins' ;
 }
 
 .letras{
@@ -239,6 +242,7 @@
 	color: #9D9BB7;
 	right: 32.5%;
 	bottom: 40px;
+	font-family: 'Poppins' ;
 }
 .link:hover{
 	text-decoration: none;
