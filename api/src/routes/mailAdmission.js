@@ -34,7 +34,7 @@ server.post('/setPassword', function(req, res, next) {
                 `<h3>Hola ${usuario.firstName} ${usuario.lastName} !!</h3>
                 <p>Desde la fundación El Potrero te comunicamos que fuiste elegido como Asesor para dar apoyo escolar a los niños y niñas de El Potrero.</p>
                 <p>Para continuar con el proceso, debes hacer click en el siguiente Link, o en su defecto copiar y pegar en el navegador:</p>
-                <p>http://localhost:3000/formularioVoluntario/PasswordForgot/${token}</p>
+                <p>http://localhost:3000/login/${token}</p>
                 <p>Estamos muy Felices de que te sumes a esta gran Causa.</p>
                 <p>Un abrazo</p>`
             };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import style from './Login.module.css';
 import swal from 'sweetalert';
 import { sessionLogin } from "../redux/actions/session.js";
@@ -9,7 +9,7 @@ import hero from './VolunteerFormAssets/pelota.jpg';
 import hero2 from './VolunteerFormAssets/potrero2.jpg';
 import hero3 from './VolunteerFormAssets/potrero3.jpg';
 
-export class Login extends React.Component {
+class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,10 +27,10 @@ export class Login extends React.Component {
         this.resetState = this.resetState.bind(this)
         this.setPasswordVisibility = this.setPasswordVisibility.bind(this)
         this.isNotEmpty = this.isNotEmpty.bind(this)
-        
+
     }
 
-   
+
 
     setPasswordVisibility() {
         this.setState(prevState => {
@@ -57,7 +57,7 @@ export class Login extends React.Component {
             }
         })
     }
-    
+
 
     resetState() {
         this.setState({ loginData: { email: '', password: '' }, errors: {} })
@@ -65,7 +65,6 @@ export class Login extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
         const errores = this.validate(this.state.loginData)
         const hayErrores = Object.entries(errores).length > 0
 
@@ -76,6 +75,8 @@ export class Login extends React.Component {
                 .then(() => {
                     swal('Bienvenido')
                     this.resetState()
+                    // uso replace para que no quede en el historial /login
+                    this.props.history.replace('/admin')
                 })
                 .catch((err) => {
                     swal('No se pudo autenticar. Verifique los datos')
@@ -95,7 +96,7 @@ export class Login extends React.Component {
 
        if (!input.password) {
            errors.password = 'Contraseña es obligatoria';
-       } 
+       }
 
        return errors;
    };
@@ -109,7 +110,7 @@ export class Login extends React.Component {
 
 
     render() {
-        
+
         const { errors } = this.state
         return (
             <div className={style.container}>
@@ -208,11 +209,6 @@ export class Login extends React.Component {
                         <p className={style.paraph}> La educación es el arma mas poderosa que puedes usar para cambiar el mundo.</p>
                         <p className={style.author}> - Nelson Mandela </p>
                         <h1 className={style.cQuote}>“</h1>
-
-                        {/* <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" className={style.dot} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M2 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm6 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm6 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                        </svg> */}
-
                     </div>
                 </div>
             </div>
@@ -221,6 +217,11 @@ export class Login extends React.Component {
     }
 }
 
+function mapStateToProps(state){
+    return{
+        sessionUser : state.sessions.sessionUser
+    }
+}
 function mapDispatchToProps(dispatch) {
     return {
         sessionLogin: (usuario) => dispatch(sessionLogin(usuario)),
@@ -228,6 +229,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
-)(Login);
+)(withRouter(Login));
