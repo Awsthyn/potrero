@@ -27,24 +27,23 @@ const storage = multer.diskStorage({
     }
   },
   filename: function (req, file, cb) {
-    // console.log('AAAAAAAAAAAAA',file);
     let ext = file.originalname.split('.').pop();
-    // cb(null, file.fieldname + '-' + Date.now() + '.' + ext);
-    if (file.fieldname === 'cv') {
-      cb(null, file.fieldname + Date.now() + '.' + ext);
-    } else if (file.fieldname === 'frontDNI' || file.fieldname === 'backDNI') {
-      cb(null, file.fieldname + Date.now() + '.' + ext);
-    } else if (file.fieldname === 'profilePicture') {
-      cb(null, file.fieldname + Date.now() + '.' + ext);
-    }
+    cb(null, file.fieldname + Date.now() + '.' + ext);
+    // if (file.fieldname === 'cv') {
+    //   cb(null, file.fieldname + Date.now() + '.' + ext);
+    // } else if (file.fieldname === 'frontDNI' || file.fieldname === 'backDNI') {
+    //   cb(null, file.fieldname + Date.now() + '.' + ext);
+    // } else if (file.fieldname === 'profilePicture') {
+    //   cb(null, file.fieldname + Date.now() + '.' + ext);
+    // }
   },
 });
 
 const fileFilter = (req, file, cb) => {
   if (file.fieldname === 'cv') {
-    // if uploading resume
+    // if uploading cv
     if (file.mimetype === 'application/pdf') {
-      // check file type to be pdf, doc, or docx
+      // check file type to be pdf
       cb(null, true);
     } else {
       cb(null, false); // else fails
@@ -88,8 +87,6 @@ const upload = multer({
     maxCount: 1,
   },
 ]);
-
-console.log(upload);
 
 server.get('/', (req, res) => {
   User.findAll({
@@ -207,7 +204,6 @@ server.post(
   upload,
   (req, res) => {
     // RECIBE LOS DATOS DEL USUARIO POR BODY
-    console.log('MULTIPLE FILESSSSSSSSSSSSSSSSSS', req.body);
     let usuario;
     if (!req.files) {
       usuario = req.body;
@@ -221,43 +217,43 @@ server.post(
       };
     }
     User.create(usuario)
-      .then((userCreated) => {
+      // .then((userCreated) => {
         // Se espera valores de Id's de Subjects Ejemplo: 1,2
         // Recorre SubjectId los prepara en un array y los recorre
         // entonces agrega la materia relacionado con el id del profesor
-        req.body.subjectsId.forEach((idSub) => {
-          userCreated
-            .addSubjects(idSub)
-            .then(() => send.json('Materias agregadas al profesor'))
-            .catch((err) => {
-              // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
-              console.log(err);
-              res.json(err);
-            });
-        });
+        // req.body.subjectsId.forEach((idSub) => {
+        //   userCreated
+        //     .addSubjects(idSub)
+        //     .then(() => send.json('Materias agregadas al profesor'))
+        //     .catch((err) => {
+        //       // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
+        //       console.log(err);
+        //       res.json(err);
+        //     });
+        // });
         //AGREGA HORARIOS AL PROFESOR
         // Recorre scheduleStudent los prepara en un objeto hasta 3 lugares con los numeros incrementando cuando llega a 3 se resetea la variable numero a 1 y vuelve a preparar el objeto, crea un UserSchedule cada 3 posiciones de dias
-        let dias = req.body.scheduleUser.split('-');
-        let separado = dias;
-        let numero = 1;
-        let obj = {};
-        for (let i = 0; i < separado.length; i++) {
-          if (numero === 1) {
-            obj.startTime = separado[i];
-            numero = numero + 1;
-          } else if (numero === 2) {
-            obj.endTime = separado[i];
-            numero = numero + 1;
-          } else if (numero === 3) {
-            obj.nameWeekDay = separado[i];
-            obj.userId = userCreated.id;
-            UserSchedule.create(obj);
-            numero = 1;
-          }
-        }
-      })
-      .then(() => {
-        res.json('Usuario creado exitosamente');
+      //   let dias = req.body.scheduleUser.split('-');
+      //   let separado = dias;
+      //   let numero = 1;
+      //   let obj = {};
+      //   for (let i = 0; i < separado.length; i++) {
+      //     if (numero === 1) {
+      //       obj.startTime = separado[i];
+      //       numero = numero + 1;
+      //     } else if (numero === 2) {
+      //       obj.endTime = separado[i];
+      //       numero = numero + 1;
+      //     } else if (numero === 3) {
+      //       obj.nameWeekDay = separado[i];
+      //       obj.userId = userCreated.id;
+      //       UserSchedule.create(obj);
+      //       numero = 1;
+      //     }
+      //   }
+      // })
+      .then( userCreated => {
+        res.send(userCreated);
       })
       .catch((err) => res.send(err));
   }

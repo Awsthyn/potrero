@@ -1,0 +1,16 @@
+
+.iso {
+    width: 100px;
+    object-fit: cover;
+    animation: spin 1.7s infinite ease-in-out;
+    
+}
+
+@keyframes spin {
+    0%{
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(720deg)
+    }
+}
