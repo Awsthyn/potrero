@@ -1,6 +1,8 @@
 -- QUERY PARA USERS
 
 INSERT INTO users
+VALUES(DEFAULT, 'gallo@gmail.com', 'soyhenry2020', 'Franco', 'Matus', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/franmatus6', 'no tengo', 'aceptado', true, DEFAULT, DEFAULT);
+INSERT INTO users
 VALUES(DEFAULT, 'franco@gmail.com', 'capo123', 'Franco', 'Matus', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/franmatus6', 'no tengo', 'aceptado', true, DEFAULT, DEFAULT);
 INSERT INTO users
 VALUES(DEFAULT, 'lucca@gmail.com', 'hola123', 'Lucca', 'Lipisky', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'pendiente', false, DEFAULT, DEFAULT);
