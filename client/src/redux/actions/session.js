@@ -9,7 +9,6 @@ export function sessionLogin(data){
 			.then(res =>{
 				dispatch({type: LOGIN , payload: res.data});
 			})
-			.then(() => window.history.go(-1)) // Te regresa a la sección en la que estabas antes de logguearte
 			.catch(err => {
 				throw new Error('Error al autenticar, verifique los datos ingresados')
 			})
@@ -76,5 +75,19 @@ export function changePassword(token, password) {
         .catch((error) => {
             console.error(error);
         });
+    }
+}
+
+//-----------------------Envía token para cuando olvida la contraseña ----------
+export function mailParaResetPassword(email) {
+    return function(dispatch) {
+        return axios
+            .post(`http://localhost:3001/resetPassword/forgot`, email,{withCredentials: true})
+    .then(res => {
+        return res
+    })
+    .catch(err => {
+        console.info("Error al enviar email de reset password")
+    })
     }
 }

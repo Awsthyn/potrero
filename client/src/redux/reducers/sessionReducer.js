@@ -17,7 +17,6 @@ export default function sessionReducer (state = initialState, action) {
         }
 
     case LOGOUT:
-        console.log('LOGOUT redux');
         return {
             ...state,
             sessionUser: {}

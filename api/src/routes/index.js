@@ -60,6 +60,9 @@ const userScheduleRoute = require("./userSchedule.js");
 //IMPORT DEL NIVEL EDUCATIVO - PRIMARIA - SECUNDARIA
 const educationLevel = require("./educationLevel.js")
 
+//IMPORT DEL MATCHING ENTRE STUDENTSCHEDULE Y USERSCHEDULE
+const matching = require("./matching.js")
+
 const router = Router();
 
 // ROUTES
@@ -121,14 +124,9 @@ router.use("/userSchedule", userScheduleRoute)
 //RUTA DE NIVEL DE EDUCACION - PRIMARIA - SECUNDARIA
 router.use("/educationlevel", educationLevel)
 
+//RUTA DE MATCHEO DE STUDENTSCHEDULE Y USERSCHEDULE
+router.use("/matching", matching)
 
 
-// IMPORT DE USERSCHEDULEADMIN
-
-// const userScheduleAdmin = require('./adminController/userScheduleAdmin.js');
-
-// RUTAS DE ADMIN (CONTROLADOR)
-
-// router.use('/admin/userSchedule', userScheduleAdmin);
 
 module.exports = router;

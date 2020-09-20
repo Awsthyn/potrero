@@ -25,20 +25,29 @@ input:focus {
 
 .Formm {
 	display: flex;
-	width: 680px;
 	/* justify-content: center; */
 	/* align-content: center; */
-	margin-top: 35px;
+	margin-top: 15px;
 }
 .formInput{
 	width: 100%;
-	padding: 15px;
+	padding: 4%;
+	padding-top: 1%;
+	margin-top: 0px;
 	box-shadow: 0px 3px 3px 3px rgba(219, 216, 216, 0.623);
 	border-radius: 20px;
+	min-height: 280px;
+	max-height: 440px;
+}
+
+#scroll{
+	max-height: 448px;
+	overflow: scroll;
+	
 }
 
 .formgroup{
-	width: 80%;
+	width: 100%;
 	/* margin-bottom: 3rem; */
 	/* margin: auto; */
 }
@@ -46,24 +55,24 @@ input:focus {
 	border: red 1px solid;
 }
 .Contenedor{
+	height: 100%;
 	width: 90%;
-	margin-top: 30px;
 	display: flex; 
 	justify-content: center;
 	margin-left: 5%
 }
 .img{
-
 	margin-right: 50px;
+	margin-top: 0px;
 	width: 100%;
-	height: 500px;
+	height: 750px;
+	/* height: 100%; */
 }
 
 .skere:hover {
 	box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
 		0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 	background-color: #492BC4 !important;
-	
 	color: white !important;
 }
 #skere {
@@ -74,21 +83,21 @@ input:focus {
 	outline: none;
 	border: none;
 	border-radius: 5em;
-	/* margin-top: 15px; */
+	margin-top: 5%;
 	outline: none;
 	border: none;
-	/* margin-left: 32px; */
-	/* margin-bottom: 30px; */
+	margin-left: 2%;
 	text-transform: capitalize;
 	padding: 5px;
-	width:160px;
-	height: 40px;
+	width:195px;
+	height: 50px;
 	font-size: 15px;
+	font-family: 'Poppins';
 }
 
-#skere button{
+/* #skere button{
 	margin-left: 100px;
-}
+} */
 
 .testButton{
 	margin-bottom: 20px;
@@ -98,35 +107,37 @@ input:focus {
 	display: flex;
 	width: 100%;
 	height: 50px;
-	margin-top:30px;
 	justify-content: space-around;
-	
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 .circleLila {
 	background-color: #492BC4;
 	color: white;
-	font-size: 1.4rem;
-	width: 35px;
-	height: 35px;
+	font-size: 1.1rem;
+	width: 32px;
+	height: 32px;
 	border-radius: 50%;
 	align-self: center;
+	padding-top: 0.5%;
 }
 
 .circleGray {
 	background-color: #CAD2D9;
 	color: white;
-	font-size: 1.4rem;
-	width: 35px;
-	height: 35px;
+	font-size: 1.1rem;
+	width: 32px;
+	height: 32px;
 	border-radius: 50%;
 	align-self: center;
+	padding-top: 0.5%;
 }
 
 .lineGray {
 	background-color: #CAD2D9;
-	width: 90px;
-	height: 2px;
+	width: 26%;
+	height: 1.5px;
 	align-self: center; 
 }
 
@@ -138,6 +149,7 @@ input:focus {
 }
 
 .input {
+	width: 90%;
 	border: 0px;
 	margin-bottom:0px;
 }
@@ -151,9 +163,20 @@ input:focus {
 
 .imgSize {
 	position: relative;
-	width: 80px; 
-	height: 60px; 
+	margin-top: 20px;
+	margin-bottom: 0px;
+	top: 11px;
+	right: 42%;
+	width: 130px; 
+	height: 103px; 
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number] { -moz-appearance:textfield; }
 
 /* .dateText{
 	display: flex;
@@ -187,7 +210,8 @@ input:focus {
     position: relative;
     display: inline-block;
 	text-align: center;
-	width: 50%;
+	width: 65%;
+	height: 100%;
 }
 
 .imgTxt{
@@ -205,7 +229,6 @@ input:focus {
 }
 
 .imgContainText{
-
 	position: absolute;
 	width: 60%;
 	color: rgb(255, 255, 255);
@@ -217,26 +240,26 @@ input:focus {
 }
 
 .checkboxMaterias{
-	
 	width: 680px;
 	margin-top: 35px;
 }
 
 .itemList{
-	width: 300px;
-	margin: 20px auto;
+	display: flex;
+	flex-direction: column;
 	list-style: none;
+	width: 330px;
 }
 
-.containerListDays{
+/* .containerListDays{
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
 	justify-content: flex-start;
-}
+	flex-wrap: wrap;
+} */
 
 .containerListNiveles{
-	width:640px;
+	width:100%;
 	margin:15px;
 	display: flex;
 	flex-direction: row;
@@ -244,11 +267,11 @@ input:focus {
 	justify-content: center;
 }
 
-.inlineCheck{
+/* .inlineCheck{
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: flex-start;
-}
+} */
 .botonesMasyMenos{
 	display: flex;
 	flex-direction: column;
@@ -257,4 +280,50 @@ input:focus {
 
 .containerHorarios{
 	display: flex;
+}
+.formLogo{
+	margin: 4%;
+	width: 38%;
+	margin-bottom: 0px;
+}
+
+.leftArrow {
+	position: absolute;
+	top: 45px;
+	left: 60%;
+	width: 40px;
+	fill: #492BC4;
+}
+
+.leftArrow:hover {
+	position: absolute;
+	top: 45px;
+	left: 60%;
+	width: 40px;
+	fill: #492BC4;
+	cursor: pointer;
+}
+
+.accordionButton{
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	border: none;
+	outline: none;
+	background-color: white;
+}
+.accordionButton:hover{
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	border: none;
+	outline: none;
+	background-color: white;
+}
+
+.frase{
+	position: absolute;
+	top: 95px;
+	right: 14%;
+	width: 300px;
 }
