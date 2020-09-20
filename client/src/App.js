@@ -24,7 +24,7 @@ function App() {
 	return (
 		<div className="App">
 			 {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
-			<Route exact path={['/', '/voluntarios', '/voluntarios/formulario', '/admin', '/admin/voluntarios',
+			<Route exact path={['/', '/voluntarios', '/admin', '/admin/voluntarios',
 			'/admin/usuarios', '/admin/materias', '/usuario/perfil', '/admin/estudiantes',
 			'/admin/estudiantes/agregar', '/admin/estudiantes/detalles/:id']}
 			component={NavBar} />

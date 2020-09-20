@@ -9,7 +9,7 @@ export default class Materias extends React.Component {
 	render() {
 		return (
 			<div
-				style={{height:'80px', margin:'10px', padding:'15px'}}
+				style={{height:'40px', margin:'10px'}}
 				id={this.props.materia}
 				className={style.botonMateria}
 				onClick={e => this.props.handleOnClick(e.target.id, e)}>

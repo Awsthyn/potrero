@@ -28,52 +28,52 @@ export default class VolunteerForm extends React.Component {
 	}
 
 	render() {
-	   //localStorage.clear();
 		var control;
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;
 		}
 		return (
 			<div>
-			<div className={styles.circles}>
-			  <div className={styles.circleLila}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div><div className={styles.lineGray}></div><div className={styles.circleGray}>4</div>
-			</div>
+				<span style={{top: '140px'}} className={styles.frase}>  
+				<p style={{fontSize:'1.3rem', margin: '0px', fontFamily: 'Poppins'}} ><strong>Sumáte a nuestro equipo </strong></p>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px', fontFamily: 'Poppins'}} > Completá este formulario y nos pondremos en contacto con vos </span>
+				</span>
 			<div className={styles.Formm} >
 				<form className={styles.formInput}>
 					<div className={styles.formgroup}>
 						<input
 							spellCheck="false"
-							autocomplete="off"
+							autoComplete="off"
 							type="text"
 							name="firstName"
 							className={styles.input}
 							placeholder="Nombre"
-							InputLabelProps={{ shrink: true }}
+							// inputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<input
-							spellcheck="false"
-							autocomplete="off"
+							spellCheck="false"
+							autoComplete="off"
 							type="text"
 							name="lastName"
 							className={styles.input}
 							placeholder="Apellido"
-							InputLabelProps={{ shrink: true }}
+							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<input
-							spellcheck="false"
-							autocomplete="off"
+							spellCheck="false"
+							autoComplete="off"
 							type="date"
 							name="birthday"
 							className={styles.input}
 							// placeholder="fecha de nacimiento"
-							InputLabelProps={{ shrink: true }}
+							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
 						<input
-							spellcheck="false"
-							autocomplete="off"
+							spellCheck="false"
+							autoComplete="off"
 							type="number"
 							name="phone"
 							className={styles.input}
@@ -82,8 +82,8 @@ export default class VolunteerForm extends React.Component {
 							onChange={e => this.handleOnChange(e)}
 						/> 
 						<input
-							spellcheck="false"
-							autocomplete="off"
+							spellCheck="false"
+							autoComplete="off"
 							type="email"
 							name="email"
 							className={styles.input}
@@ -109,7 +109,7 @@ export default class VolunteerForm extends React.Component {
 						value="Submit"
 						onClick={() => this.handleOnClick()}>
 						Continuar
-						<span style={{margin:"10px"}} className="material-icons">trending_flat</span>
+						<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
 					</Button>
 				</form>
 			</div>
