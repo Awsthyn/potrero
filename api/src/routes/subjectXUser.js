@@ -5,9 +5,10 @@ const { User, SubjectXUser } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
+const { isAdmin } = require("./middlewares.js");
 
 // AGREGA LAS MATERIAS DE UN ESTUDIANTE DE UN STUDENT.
-server.post("/subject/:id", (req, res) => {
+server.post("/subject/:id", isAdmin, (req, res) => {
   // BUSCA Y MODIFICA LA MATERIA DEL STUDENT ENCONTRADO.
   //Se espera q lo traiga en un campo 'subjectsId'
   const subjectsId = req.body.subjectsId;
@@ -32,7 +33,7 @@ server.post("/subject/:id", (req, res) => {
     });
 });
 
-server.delete("/subject/:id", (req, res) => {
+server.delete("/subject/:id", isAdmin, (req, res) => {
   //Se espera q lo traiga en un campo 'subjectsId'
   const subjectsId = req.body.subjectsId;
   SubjectXUser.destroy({

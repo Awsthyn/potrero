@@ -95,7 +95,7 @@ server.get("/", isAdmin, (req, res) => {
 });
 
 // BUSCA UN USUARIO EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", isUserAdmin, isUserActive, (req, res) => {
+server.get("/:id", isUserActive, (req, res) => {
   // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
   User.findOne({
     where: {
@@ -232,7 +232,7 @@ server.post("/:id/subjects", (req, res) => {
 });
 
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put("/:id", (req, res) => {
+server.put("/:id", isUserActive, (req, res) => {
   if (req.body.disabled) {
     User.findByPk(req.params.id).then((user) => {
       user.state = "rechazado";

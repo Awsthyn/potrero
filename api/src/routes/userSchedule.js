@@ -6,8 +6,9 @@ const { User, UserSchedule } = require("../db.js");
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 const SendmailTransport = require("nodemailer/lib/sendmail-transport");
+const { isUserAdmin, isAdmin, isUserActive } = require("./middlewares.js");
 
-server.get("/", (req, res) => {
+server.get("/", isAdmin, (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
@@ -41,7 +42,7 @@ server.get("/", (req, res) => {
     });
 });
 
-server.get("/:id", (req, res) => {
+server.get("/:id", isUserActive, (req, res) => {
   User.findOne({
     where: {
       id: req.params.id,
@@ -78,7 +79,7 @@ server.get("/:id", (req, res) => {
     });
 });
 
-server.post("/:id", (req, res) => {
+server.post("/:id", isAdmin, (req, res) => {
   //Se espera una propiedad 'schedules'
   var dias = req.body.schedules.split("-");
   var numero = 1;
@@ -105,13 +106,13 @@ server.post("/:id", (req, res) => {
 });
 
 //AGREGA HORARIOS AL PROFESOR
-server.post('/:userId', (req, res) => {
+server.post('/:userId', isAdmin, (req, res) => {
     var dias = req.body.schedules
     UserSchedule.bulkCreate(dias, {validate: true})
     .then(schedule => res.send(schedule))
     .catch(err => res.send(err))
 })
-server.delete("/:id", (req, res) => {
+server.delete("/:id", isAdmin, (req, res) => {
   //Se espera q lo traiga en un campo 'subjectsId'
   var dias = req.body.schedules.split("-");
   var numero = 1;

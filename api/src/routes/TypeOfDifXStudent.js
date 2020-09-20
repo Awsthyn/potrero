@@ -5,9 +5,10 @@ const { Student, TODXStudent } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
+const { isAdmin } = require("./middlewares.js");
 
 // BUSCA Y AGREGA EL TOD AL STUDENT ENCONTRADO.
-server.post("/:id", (req, res) => {
+server.post("/:id", isAdmin, (req, res) => {
   //Se espera q lo traiga en un campo 'typeOfDifficultyId'
   const todId = req.body.typeOfDifficultyId;
   Student.findOne({
@@ -32,7 +33,7 @@ server.post("/:id", (req, res) => {
 });
 
 //Elimina el TOD del alumno
-server.delete("/:id", (req, res) => {
+server.delete("/:id", isAdmin, (req, res) => {
   //Se espera q lo traiga en un campo 'typeOfDifficultyId'
   const todId = req.body.typeOfDifficultyId;
   TODXStudent.destroy({

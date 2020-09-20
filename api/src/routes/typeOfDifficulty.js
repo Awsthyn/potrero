@@ -5,8 +5,9 @@ const { TypeOfDifficulty } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
+const { isUserActive, isAdmin } = require("./middlewares.js");
 
-server.get("/", (req, res) => {
+server.get("/", isUserActive, (req, res) => {
   TypeOfDifficulty.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -25,7 +26,7 @@ server.get("/", (req, res) => {
 });
 
 // BUSCA UN TOD EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", (req, res) => {
+server.get("/:id", isUserActive,  (req, res) => {
   // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
   TypeOfDifficulty.findOne({
     where: {
@@ -45,7 +46,7 @@ server.get("/:id", (req, res) => {
 });
 
 // CREA UNA DIFICULTAD
-server.post("/", (req, res) => {
+server.post("/", isAdmin, (req, res) => {
   // RECIBE LOS DATOS DEL USUARIO POR BODY
   const tod = req.body;
   TypeOfDifficulty.createInstanceFromBody(tod)
@@ -87,7 +88,7 @@ server.put("/:id", (req, res) => {
 });
 
 //ELIMINA EL TIPO DE DIFICULTAD
-server.delete("/:id", (req, res, next) => {
+server.delete("/:id", isAdmin, (req, res, next) => {
   //Busca TOD por id y la destruye
   TypeOfDifficulty.destroy({
     where: {
