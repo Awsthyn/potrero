@@ -86,63 +86,11 @@ const initialRoles =
     {name: "Administrador"}, 
     {name: "Voluntario"}
 ]
-const initialTODXStudent =
-[
-    {studentId: 2,typeOfDifficultyId:2}, 
-    {studentId: 2,typeOfDifficultyId:3},
-    {studentId: 2,typeOfDifficultyId:4}, 
-    {studentId: 1,typeOfDifficultyId:5}, 
-    {studentId: 1,typeOfDifficultyId:6},
-    {studentId: 1,typeOfDifficultyId:7}, 
-    {studentId: 1,typeOfDifficultyId:1}, 
-    
-]
-
-const initialStudents = [
-    {
-        firstName: "Maria",
-        lastName: "DificultTrue",
-        phone: "11 54121144",
-        email: "loremipsum@gmail.com",
-        tutor: "Et Ipsum",
-        difficulty: true,
-        weakness: "lorem ipsum",
-        strengths: "lorem ipsum",
-        interests: "lorem ipsum",
-        motivations: "lorem ipsum"
-    },
-    {
-        firstName: "José",
-        lastName: "DificultTrue",
-        phone: "11 541222144",
-        email: "joselorem@lorem.com",
-        tutor: "Et Lorem",
-        difficulty: true,
-        weakness: "lorem ipsum",
-        strengths: "lorem ipsum",
-        interests: "lorem ipsum",
-        motivations: "lorem ipsum"
-    },
-    {
-        firstName: "Ipsum",
-        lastName: "Spunta",
-        phone: "11 533121144",
-        email: "ipsumspunta@gmail.com",
-        tutor: "Et Spunta",
-        difficulty: false,
-        weakness: "lorem ipsum",
-        strengths: "lorem ipsum",
-        interests: "lorem ipsum",
-        motivations: "lorem ipsum"
-    },
-]
 
 module.exports = {
-    initialTODXStudent,
     initialTypeOfDifficulty,
     initialRoles,
     initialUsers,
     initialVolunteers,
     initialSubjects,
-    initialStudents
 }
