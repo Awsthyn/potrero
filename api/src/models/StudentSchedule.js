@@ -1,14 +1,10 @@
 const Sequelize = require("sequelize");
-const { DataTypes } = require("sequelize");
+const { DataTypes, DECIMAL } = require("sequelize");
 
 module.exports = (sequelize) => {
   const StudentSchedule = sequelize.define("studentSchedule", {
-    startTime: {
-      type: DataTypes.TIME,
-      allowNull: false,
-    },
-    endTime: {
-      type: DataTypes.TIME,
+    timeFrame: {
+      type: DataTypes.RANGE(DECIMAL),
       allowNull: false,
     },
     nameWeekDay: {
