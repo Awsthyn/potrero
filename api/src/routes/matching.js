@@ -84,7 +84,7 @@ server.get('/:studentId', (req, res) => {
                 let b = userRow.timeFrame[1].value
                 let c = elem[1].timeFrame[0].value
                 let d = elem[1].timeFrame[1].value
-                //Hago  B-A, B-C, D-C, D-A. El que me de el valor más bajo es el que indica donde ocurre el solapamiento.
+                //Hago  B-A, B-C, D-C, D-A. El que me de el valor más bajo es el que sirve para saber donde ocurre el solapamiento
                 let differences = [
                     {
                         endTime: a,
