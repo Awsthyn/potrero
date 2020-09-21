@@ -6,7 +6,6 @@ module.exports = (sequelize) => {
     duration: {
       type: DataTypes.RANGE(DECIMAL),
       allowNull: false,
-      defaultValue: new Date(),
     },
     createdAt: {
       type: DataTypes.DATE,
