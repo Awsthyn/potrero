@@ -60,16 +60,14 @@ class ContenedorMaterias extends React.Component {
       dangerMode: true,
     }).then((willSend) => {
       if (willSend) {
-        console.log(this.state.info);
         let data = JSON.parse(localStorage.getItem('datos'));
         let schedule = JSON.parse(localStorage.getItem('schedule'));
         Object.entries(data).forEach((dato) => {
-          console.log(dato[0] + ': ' + dato[1]);
           this.state.info.append(dato[0], dato[1]);
         });
         this.props.postVoluntary(this.state.info, this.state.materia, schedule);
-        // localStorage.removeItem('datos');
-        // localStorage.removeItem('schedule');
+        localStorage.removeItem('datos');
+        localStorage.removeItem('schedule');
         swal('Tu solicitud ha sido enviada!', {
           icon: 'success',
         });
@@ -87,7 +85,6 @@ class ContenedorMaterias extends React.Component {
   render() {
     var control;
     var materias = this.props.subjects.subjects;
-    //['Matemática', 'Idiomas', 'Biología', 'Tecnología', 'Artes', 'Computación'];
     return (
       <div>
         <IconButton aria-label='ir atrás' onClick={this.goBack}>
@@ -102,8 +99,10 @@ class ContenedorMaterias extends React.Component {
           <div className={styles.lineGray}></div>
           <div className={styles.circleLila}>4</div>
         </div>
-
-        {/* <form action="/multiple-upload" enctype="multipart/form-data"> */}
+        <span className={styles.frase} style={{width: '320px', right: '12%'}} >  
+				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Por último... </strong></p>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Estás a un paso de unirte a nuestra causa y nos gustaría saber un poco más de vos </span>
+				</span>
           <h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
           <div
             className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}

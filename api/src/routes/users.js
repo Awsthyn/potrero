@@ -262,7 +262,7 @@ server.post(
 // RELACIONA LAS MATERIAS CON USUARIOS
 server.post('/:id/subjects', (req, res) => {
   var id = req.params.id;
-  var materias = req.body.materias;
+  var materias = req.body.subjects;
   var user = User.findByPk(id);
 
   materias.map((m, i) => {
@@ -319,29 +319,29 @@ server.put('/:id', (req, res) => {
     });
 });
 
-// RELACIONA LAS MATERIAS CON USUARIOS
-server.post('/:id/subjects', (req, res) => {
-  var id = req.params.id;
-  var materias = req.body.subjects;
-  var user = User.findByPk(id);
+// // RELACIONA LAS MATERIAS CON USUARIOS
+// server.post('/:id/subjects', (req, res) => {
+//   var id = req.params.id;
+//   var materias = req.body.subjects;
+//   var user = User.findByPk(id);
 
-  materias.map((m, i) => {
-    var subject = Subject.findOne({
-      where: {
-        name: m,
-      },
-    });
-    Promise.all([user, subject])
-      .then((values) => {
-        var user = values[0];
-        var subject = values[1];
-        user.addSubject(subject);
-        if (i === arrayMateria.length - 1) res.send(user);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
-  });
-});
+//   materias.map((m, i) => {
+//     var subject = Subject.findOne({
+//       where: {
+//         name: m,
+//       },
+//     });
+//     Promise.all([user, subject])
+//       .then((values) => {
+//         var user = values[0];
+//         var subject = values[1];
+//         user.addSubject(subject);
+//         if (i === arrayMateria.length - 1) res.send(user);
+//       })
+//       .catch((err) => {
+//         res.send(err);
+//       });
+//   });
+// });
 
 module.exports = server;

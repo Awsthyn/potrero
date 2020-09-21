@@ -8,10 +8,14 @@ export function postVoluntary(voluntary, subjects, schedule) {
 		return axios
 			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
-				dispatch(postMailWelcome(res.data));
-				dispatch(postSubjectVoluntary(subjects, res.data.id));
-				dispatch(addSchedule(schedule, res.data.id))
-				
+				dispatch(postMailWelcome(res.data))
+				.then(() => {
+					dispatch(postSubjectVoluntary(subjects, res.data.id))
+					.then(() => dispatch(addSchedule(schedule, res.data.id)))
+				})
+				// .then(() => dispatch(addSchedule(schedule, res.data.id)))
+				// dispatch(postSubjectVoluntary(subjects, res.data.id));
+				// dispatch(addSchedule(schedule, res.data.id))
 			})
 			.catch(err => console.log(err));
 	};
