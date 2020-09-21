@@ -87,6 +87,7 @@ server.get("/", isAdmin, (req, res) => {
     });
 });
 
+
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
 server.get("/:id", isUserAdmin, isUserActive, (req, res) => {
   // BUSCA AL STUDENT.
