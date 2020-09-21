@@ -32,7 +32,7 @@ console.log('BODY', req.body)
                 text:
                 'Estas recibiendo este email porque pediste cambiar tu contraseña.\n\n' +
                 'Para continuar con el proceso, debes hacer click en el siguiente Link, o en su defecto copiar y pegar en el navegador:\n\n' +
-                'http://localhost:3000/resetPassword/' + token + '\n\n' +
+                'http://localhost:3000/login/' + token + '\n\n' +
                 'Si usted no pidió esto, por favor ignorar este mail y la contraseña se mantendrá igual.\n'
             };
 

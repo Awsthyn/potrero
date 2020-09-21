@@ -4,7 +4,6 @@ import {getSubjects} from '../../redux/actions/subject.js';
 import {connect} from 'react-redux';
 import Materias from './Materias';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import style1 from './Materias.module.css';
 import swal from 'sweetalert';
 import styles from './VoluntarioForm.module.css';
@@ -20,7 +19,6 @@ class ContenedorMaterias extends React.Component {
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSend = this.handleSend.bind(this);
 		this.handleOnFileChange = this.handleOnFileChange.bind(this);
-		this.goBack = this.goBack.bind(this);
 	}
 	handleOnClick(id, e) {
 		if (e.target.style.backgroundColor === 'rgb(140, 198, 62)') {
@@ -66,17 +64,15 @@ class ContenedorMaterias extends React.Component {
 					this.props.postVoluntary(this.state.info, this.state.materia, schedule);				
 					localStorage.removeItem('datos')
 			      localStorage.removeItem('schedule')
+					this.props.history.push('/voluntarios/confirmacion')
 					swal("Tu solicitud ha sido enviada!", {
 						icon: "success",
-					});
+					})
 				} else {
 				swal("Solicitud no enviada");
 				}
 			});
 		
-	}
-	goBack(){
-		this.props.history.push('/voluntarios/niveles');
 	}
 	componentDidMount(){
 	this.props.getSubjects()
@@ -84,19 +80,14 @@ class ContenedorMaterias extends React.Component {
 	render() {
 		var control;
 		var materias = this.props.subjects.subjects
-		//['Matemática', 'Idiomas', 'Biología', 'Tecnología', 'Artes', 'Computación'];
 		return (
-			<div>
-				<IconButton aria-label="ir atrás" onClick={this.goBack}>
-				<span className="material-icons">arrow_back</span>
-				</IconButton>
-			<div className={style1.circles}>
-				<div className={styles.circleGray}>1</div><div className={styles.lineGray}></div> <div className={styles.circleGray}>2</div><div className={styles.lineGray}></div><div className={styles.circleGray}>3</div><div className={styles.lineGray}></div><div className={styles.circleLila}>4</div>
-			</div>
-			
+			<div className={styles.formInput} >
+				<span className={styles.frase} style={{width: '320px', right: '12%'}} >  
+				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Por último... </strong></p>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Estás a un paso de unirte a nuestra causa y nos gustaría saber un poco más de vos </span>
+				</span>
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
 				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
-				<br></br>
 				<small>CV</small>
 				<input
 					style={{width: '80%', marginTop: '1%', display: 'block'}}
@@ -121,12 +112,13 @@ class ContenedorMaterias extends React.Component {
 				<Button
 					disabled={control ? true : false}
 					variant="contained"
-					style={{marginTop: '3rem'}}
-					className={style1.botonEnviar}
+					style={{marginTop: '5%'}}
+					id={style1.botonEnviar}
 					type="submit"
 					value="Submit"
 					onClick={e => this.handleSend(e)}>
 					Enviar
+					<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
 				</Button>
 			</div>
 		);
