@@ -26,15 +26,15 @@ server.get("/", isUserActive, (req, res) => {
 });
 
 // BUSCA UN TOD EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", isUserActive,  (req, res) => {
+server.get("/:id", isUserActive, (req, res) => {
   // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
   TypeOfDifficulty.findOne({
     where: {
       id: req.params.id,
     },
     attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
+      exclude: ["createdAt", "updatedAt"],
+    },
   })
     .then((todFound) => {
       // SI ENCUENTRA AL USUARIO, LO ENVÍA. SINO, ENVÍA UN MENSAJE DE ERROR.
@@ -61,7 +61,7 @@ server.post("/", isAdmin, (req, res) => {
 });
 
 // BUSCA UN TOD Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put("/:id", (req, res) => {
+server.put("/:id", isAdmin, (req, res) => {
   // BUSCA Y MODIFICA AL USUARIO ENCONTRADO.
   TypeOfDifficulty.update(req.body, {
     where: {
