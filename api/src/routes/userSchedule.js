@@ -80,7 +80,7 @@ server.get("/:id", (req, res) => {
 
 //AGREGA HORARIOS AL PROFESOR
 server.post('/:userId', (req, res) => {
-    var dias = req.body.schedules
+    var dias = req.body
     UserSchedule.bulkCreate(dias, {validate: true})
     .then(schedule => res.send(schedule))
     .catch(err => res.send(err))

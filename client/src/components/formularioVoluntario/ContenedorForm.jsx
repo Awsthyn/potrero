@@ -8,11 +8,12 @@ import Confirmacion from './Confirmacion';
 import style from './VoluntarioForm.module.css';
 import img from '../VolunteerFormAssets/formJueguitos.jpg';
 import logo from '../VolunteerFormAssets/logorecortado.png';
+import CargarArchivos from './CargarArchivos';
 
 
 const circleColor = (id) => {
 	document.getElementById(id).className = style.circleLila
-	let ids = ['uno', 'dos', 'tres', 'cuatro']
+	let ids = ['uno', 'dos', 'tres', 'cuatro', 'cinco']
 	ids.map(ids => {
 		if(ids !== id){
 			return document.getElementById(ids).className = style.circleGray
@@ -23,6 +24,8 @@ const circleColor = (id) => {
 export default function ContenedorForm({history, location}) {
 	const goBack = () => {
 		switch(location.pathname){
+			case "/voluntarios/formulario":
+				history.push('/')
 			case "/voluntarios/horarios":
 				history.push('/voluntarios/formulario')
 				break;
@@ -32,8 +35,9 @@ export default function ContenedorForm({history, location}) {
 			case "/voluntarios/materias":
 				history.push('/voluntarios/niveles')
 				break;
-			case "/voluntarios/formulario":
-				history.push('/')
+			case "/voluntarios/cargararchivos":
+				history.push('/voluntarios/materias')
+				break;
 			default: 
 			break;
 		}
@@ -42,7 +46,8 @@ export default function ContenedorForm({history, location}) {
 			if( location.pathname === "/voluntarios/formulario") circleColor('uno')
 			if( location.pathname === "/voluntarios/horarios") circleColor('dos')
 			if( location.pathname === "/voluntarios/niveles") circleColor('tres')
-			if( location.pathname === "/voluntarios/materias") circleColor('cuatro')				
+			if( location.pathname === "/voluntarios/materias") circleColor('cuatro')
+			if( location.pathname === "/voluntarios/cargararchivos") circleColor('cinco')				
 	}, [location])
 	return (
 		<div className={style.Contenedor}>
@@ -83,13 +88,15 @@ export default function ContenedorForm({history, location}) {
 							<div id='tres' className={style.circleGray}>3</div>
 							<div className={style.lineGray}></div>
 							<div id='cuatro' className={style.circleGray}>4</div>
-						
+							<div className={style.lineGray}></div>
+							<div id='cinco' className={style.circleGray}>5</div>						
 						</div>
 				</span> :null }
 						<Route exact path="/voluntarios/formulario" component={VolunteerForm} />
 						<Route exact path="/voluntarios/horarios" component={ContenedorCheckbox} />
 						<Route exact path="/voluntarios/niveles" component={Niveles} />
 						<Route exact path="/voluntarios/materias" component={ContenedorMaterias} />
+						<Route exact path="/voluntarios/cargararchivos" component={CargarArchivos} />
 						<Route exact path="/voluntarios/confirmacion" component={Confirmacion} />
 			</div>
 		</div>
