@@ -23,10 +23,6 @@ const subjectxstudentRouter = require("./subjectXStudent");
 // IMPORT DE LA RUTA DE STUDENTS - SUBJECT
 const subjectxuserRouter = require("./subjectXUser");
 
-// IMPORT DE LA RUTA DE ADMIN 
-
-const adminRouter = require('./admin.js');
-
 
 // IMPORT DE LA RUTA DE TYPE-OF-DIFFICULTY
 const typeOfDificulty = require("./typeOfDifficulty.js");
@@ -67,9 +63,6 @@ const router = Router();
 
 // ROUTES
 
-// RUTAS DE ADMIN
-
-router.use('/admin', adminRouter);
 
 // RUTAS DE USUARIOS
 router.use("/users", usersRouter);
@@ -77,6 +70,8 @@ router.use("/users", usersRouter);
 // RUTAS DE HORARIOS USUARIOS
 router.use("/userschedule", userScheduleRouter);
 
+
+// HOLA
 // Ruta de autenticacion
 router.use("/auth", authenticateRouter);
 
@@ -119,7 +114,7 @@ router.use("/class", classRouter);
 // RUTA DE AÑO ESCOLAR X SUBJECT
 router.use("/academiclevelxsubject", academicLevelXSubjectRouter);
 
-// RUTA DE HORARIOS DE UN VOLUNTARIO 
+// RUTA DE HORARIOS DE UN VOLUNTARIO
 router.use("/userSchedule", userScheduleRoute)
 //RUTA DE NIVEL DE EDUCACION - PRIMARIA - SECUNDARIA
 router.use("/educationlevel", educationLevel)

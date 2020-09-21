@@ -12,10 +12,14 @@ const {
   EducationLevel,
 } = require("../db.js");
 
+const isUserAdmin = require("./middlewares.js").isUserAdmin;
+const isAdmin = require("./middlewares.js").isAdmin;
+const isUserActive = require("./middlewares.js").isUserActive;
+
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
-server.get("/", (req, res) => {
+server.get("/", isAdmin, (req, res) => {
   // BUSCA TODOS LOS STUDENTS Y LOS DEVUELVE COMO JSON (ARRAY DE OBJETOS)
   Student.findAll({
     attributes: {
@@ -83,8 +87,9 @@ server.get("/", (req, res) => {
     });
 });
 
+
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
-server.get("/:id", (req, res) => {
+server.get("/:id", isUserAdmin, isUserActive, (req, res) => {
   // BUSCA AL STUDENT.
 
   Student.findOne({
@@ -155,7 +160,7 @@ server.get("/:id", (req, res) => {
     });
 });
 
-server.post("/", (req, res) => {
+server.post("/", isAdmin, (req, res) => {
   // CREA UN STUDENT.
   // RECIBE POR BODY TODA LA INFORMACIÓN DEL STUDENT.
   const student = req.body;

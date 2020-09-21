@@ -39,7 +39,9 @@ const upload = multer({
   storage: storage,
 });
 
-//isAdmin
+
+//Por ahora nada para obtener desde postman  luego debe ser isAdmin
+
 server.get("/", (req, res) => {
   User.findAll({
     attributes: {
@@ -193,6 +195,8 @@ server.post("/:id/subjects", (req, res) => {
   });
 });
 
+
+//Debe estar protegido por isUserActive
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
 server.put("/:id", (req, res) => {
   if (req.body.disabled) {
@@ -228,6 +232,8 @@ server.put("/:id", (req, res) => {
     });
 }); 
 
+
+//? Se usa?
 // RELACIONA LAS MATERIAS CON USUARIOS
 server.post("/:id/subjects", (req, res) => {
   var id = req.params.id;

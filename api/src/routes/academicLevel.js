@@ -3,11 +3,15 @@ const server = require("express").Router();
 // TRAEMOS LAS MATERIAS DE LA BASE DE DATOS 
 const { AcademicLevel, Subject, EducationLevel } = require("../db.js");
 
+const isAdmin = require('./middlewares.js').isAdmin;
+const isUserActive = require('./middlewares.js').isUserActive
+const isUserAdmin = require('./middlewares.js').isUserAdmin;
+
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
 //LISTA LAS MATERIAS POR AÑO
-server.get("/", (req, res) => {
+server.get("/", isAdmin, (req, res) => {
   AcademicLevel.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -38,7 +42,7 @@ server.get("/", (req, res) => {
 });
 
 // BUSCA UNA GRADO EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", (req, res) => {
+server.get("/:id", isUserAdmin, isUserActive, (req, res) => {
   // ACÁ BUSCA UNA MATERIA EN LA BASE DE DATOS
   AcademicLevel.findOne({
     where: {
@@ -74,7 +78,7 @@ server.get("/:id", (req, res) => {
 });
 
 // CREA UNA GRADO
-server.post("/", (req, res) => {
+server.post("/", isAdmin, (req, res) => {
   // RECIBE LOS DATOS DEL GRADO POR BODY
   const materia = req.body;
   AcademicLevel.createInstanceFromBody(materia)
@@ -89,7 +93,7 @@ server.post("/", (req, res) => {
 });
 
 // BUSCA UNA GRADO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put("/:id", (req, res) => {
+server.put("/:id", isAdmin, (req, res) => {
   // BUSCA Y MODIFICA LA MATERIA ENCONTRADA.
   AcademicLevel.update(req.body, {
     where: {

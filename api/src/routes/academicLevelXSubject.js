@@ -3,10 +3,12 @@ const server = require("express").Router();
 // TRAEMOS LAS MATERIAS DE LA BASE DE DATOS
 const { AcademicLevel, academicLeveltXSubject } = require("../db.js");
 
+const isAdmin = require('./middlewares.js').isAdmin;
+
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
-// AGREGA LAS MATERIAS DE UN ESTUDIANTE DE UN STUDENT.
-server.post("/:id", (req, res) => {
+// AGREGA LAS MATERIAS DE UN ESTUDIANTE.
+server.post("/:id", isAdmin, (req, res) => {
     // BUSCA Y MODIFICA LA MATERIA DEL STUDENT ENCONTRADO.
     //Se espera q lo traiga en un campo 'subjectsId'
     const subjectsId = req.body.subjectsId;
@@ -31,7 +33,7 @@ server.post("/:id", (req, res) => {
       });
   });
   
-  server.delete("/:id", (req, res) => {
+  server.delete("/:id", isAdmin, (req, res) => {
     //Se espera q lo traiga en un campo 'subjectsId'
     const subjectsId = req.body.subjectsId;
     academicLeveltXSubject.destroy({
