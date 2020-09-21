@@ -42,7 +42,8 @@ server.get("/", isAdmin, (req, res) => {
     });
 });
 
-server.get("/:id", isUserActive, (req, res) => {
+//Debe ser /me con protecciones
+server.get("/:id", isUserAdmin, (req, res) => {
   User.findOne({
     where: {
       id: req.params.id,

@@ -39,7 +39,7 @@ const upload = multer({
   storage: storage,
 });
 
-
+//isAdmin
 server.get("/", (req, res) => {
   User.findAll({
     attributes: {
