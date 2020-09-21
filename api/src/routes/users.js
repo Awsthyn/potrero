@@ -227,7 +227,7 @@ server.put("/:id", isUserActive, (req, res) => {
     .catch((err) => {
       res.send(err);
     });
-});
+}); 
 
 // RELACIONA LAS MATERIAS CON USUARIOS
 server.post("/:id/subjects", (req, res) => {
