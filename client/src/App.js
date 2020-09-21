@@ -22,40 +22,7 @@ import AdminRoute from './AdminRoute.js';
 import Chart from './components/admin/Chart';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        chartData:{}
-    }
-  }
-
-  componentWillMount(){
-      this.getChartData();
-  }
-
-  getChartData(){
-      this.setState({
-          chartData:{
-              labels: ['Asistencia','Nivel Primario', 'Nivel Secundario'],
-              datasets:[
-                  {
-                      label: 'Asistencia',
-                      data:[
-                          100,
-                          50,
-                          50
-                      ],
-                      backgroundColor:[
-                          'rgba: (255, 99 , 132, 0.6)',
-                          'rgba: (54, 162 , 235, 0.6)',
-                          'rgba: (153, 102 , 255, 0.6)'
-                      ]
-                  }
-              ]
-          }
-      }
-    )
-  }
+  
 
   render(){
   return (
@@ -88,9 +55,7 @@ class App extends React.Component {
 
             <Route
         path="/chart"
-        render={props =>
-          <Chart chartData={this.state.chartData} location="Capital" legendPosition="bottom"/>}
-      />
+        component = {Chart} />
 		</div>
 	);
 	}
