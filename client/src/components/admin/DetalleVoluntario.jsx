@@ -67,11 +67,24 @@ function DetalleVoluntario(props) {
       isActive,
       linkedin,
       cv,
+      frontDNI,
+      backDNI,
       phone,
       birthday,
     } = props.voluntarios.filter((v) => v.id == props.id)[0];
 
+  const [viewCV, setViewCV] = useState(false);
+  const [viewDNI, setViewDNI] = useState(false);
+
   const classes = useStyles();
+
+  const mostrarCV = () => {
+    viewCV ? setViewCV(false) : setViewCV(true);
+  }
+
+  const mostrarDNI = () => {
+    viewDNI ? setViewDNI(false) : setViewDNI(true);
+  }
 
   function handleDeletion(id) {
     swal({
@@ -178,16 +191,66 @@ function DetalleVoluntario(props) {
                 {!cv ? 'Sin CV' : ''}
                 <br />
                 {cv ? (
-                  <object
-                    data={`http://localhost:3001/uploads/${cv}`}
-                    type='application/pdf'
-                    width='90%'
-                    height='300px'
-                  />
+                  <div>
+                    <button onClick={() => mostrarCV()}>View CV</button>
+                    {
+                      viewCV ?
+                        <div style={{width:'1000px'}}>
+                          <br />
+                          <object
+                            data={`http://localhost:3001/uploads/cv/${cv}`}
+                            type='application/pdf'
+                            width='100%'
+                            height='500px'
+                          />
+                        </div>
+                      : 
+                        <div></div>
+                    }
+                  </div>
                 ) : (
-                  ''
-                )}
+                    ''
+                  )}
               </Grid>
+
+              <Grid
+                className={classes.typo}
+                container
+                justify='center'
+                spacing={2}
+              >
+                <b>Foto del DNI:</b>
+                {!frontDNI || !backDNI ? 'Sin imagen de DNI' : ''}
+                <br />
+                {frontDNI && backDNI ? (
+                  <div>
+                    {
+                      viewDNI ?
+                        <div>
+                          <button onClick={() => mostrarDNI()}>Ocultar Foto del DNI</button>
+                          <div style={{width:'90%', margin:'10px', display:'flex', justifyContent:'space-around'}}>
+                            <br />
+                            <img
+                              src={`http://localhost:3001/uploads/dni/${frontDNI}`}
+                              width='45%'
+                              height='500px'
+                            />
+                            <img
+                              src={`http://localhost:3001/uploads/dni/${backDNI}`}
+                              width='45%'
+                              height='500px'
+                            />
+                          </div>
+                        </div>
+                      : 
+                        <div><button onClick={() => mostrarDNI()}>Ver Foto del DNI</button></div>
+                    }
+                  </div>
+                ) : (
+                    ''
+                  )}
+              </Grid>
+
 
               <Grid
                 className={classes.typo}
@@ -199,7 +262,7 @@ function DetalleVoluntario(props) {
                   key={`aceptar${id}`}
                   className={`${
                     state === 'pendiente' ? 'btn-warning' : 'btn-success '
-                  } btn border`}
+                    } btn border`}
                   onClick={() =>
                     handleStatusChange({ id, firstName, lastName })
                   }
@@ -209,7 +272,7 @@ function DetalleVoluntario(props) {
                       state === 'pendiente'
                         ? 'fa fa-toggle-off'
                         : 'fa fa-toggle-on'
-                    }`}
+                      }`}
                   ></i>
                   {state === 'pendiente' ? 'Aceptar' : 'Activo'}
                 </button>
@@ -228,8 +291,8 @@ function DetalleVoluntario(props) {
           </Grid>
         </Paper>
       ) : (
-        'Loading'
-      )}
+          'Loading'
+        )}
     </div>
   );
 }

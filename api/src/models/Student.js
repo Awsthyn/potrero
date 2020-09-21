@@ -22,7 +22,11 @@ module.exports = (sequelize) => {
     tutor: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
+    },/*
+    tutorLastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },*/
     difficulty: {
       //En caso de true desplegar una nueva lista )?
       type: DataTypes.BOOLEAN,
