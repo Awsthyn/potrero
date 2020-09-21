@@ -19,9 +19,13 @@ import AdminDrawer from './components/admin/AdminDrawer';
 import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
+import Chart from './components/admin/Chart';
 
-function App() {
-	return (
+class App extends React.Component {
+  
+
+  render(){
+  return (
 		<div className="App">
 			 {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
 			<Route exact path={['/', '/voluntarios', '/admin', '/admin/voluntarios',
@@ -48,8 +52,13 @@ function App() {
 			<Route exact path="/usuario/recuperar" component={PasswordRecovery} />
 
 			<Route exact path="/login/:token" component={ResetPassword}/>
+
+            <Route
+        path="/chart"
+        component = {Chart} />
 		</div>
 	);
+	}
 }
 
 
