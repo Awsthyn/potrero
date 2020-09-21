@@ -2,42 +2,51 @@ import React from 'react';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 
 class Chart extends React.Component{
-        constructor(props){
-            super(props);
-            this.state={
-                chartData: props.chartData
-            }
-        }
-   static defaultProps ={
-       displayTitle: true,
-       displayLegend: true,
-       legendPosition: 'right',
-       location: 'Barrio'
-   }
+        constructor(props) {
+    super(props);
+    this.state = {
+        chartData:{}
+    }
+  }
+
+  componentWillMount(){
+      this.getChartData();
+  }
+
+  getChartData(){
+      this.setState({
+          chartData:{
+              labels: ['Asistencia','Nivel Primario', 'Nivel Secundario'],
+              datasets:[
+                  {
+                      label: 'Asistencia',
+                      data:[
+                          100,
+                          30,
+                          50
+                      ],
+                      backgroundColor:[
+                          'rgba(255, 99 , 132, 0.6)',
+                          'rgba(54, 162 , 235, 0.6)',
+                          'rgba(153, 102 , 255, 0.6)'
+                      ]
+                  }
+              ]
+          }
+      }
+    )
+  }
   render() {
-    return (
-      <div className ="chart">
-        <h2>Datos Relevados</h2>
-        
-            <Pie
-             data={this.state.chartData}
-             options={{
-                 title:{
-                     display: this.props.displayTitle,
-                     text: 'Zona  '+this.props.location,
-                     fontSize: 25
-                 },
-                 legend:{
-                     display: this.props.displayLegend,
-                     position: this.props.legendPosition,
-                     labels:{
-                         fontColor: '#000'
-                     }
-                 }
-             }}
-              />
-      </div>
-    );
+      return (
+          <div>
+              <Pie
+              data = {this.state.chartData}
+              options ={{
+                  
+                  }}
+                  />
+          </div>
+      )
   }
 }
 
