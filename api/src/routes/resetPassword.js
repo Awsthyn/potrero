@@ -1,7 +1,7 @@
 const server = require("express").Router();
 const nodemailer = require("nodemailer")
 const { User } = require("../db.js");
-var crypto = require('crypto');
+const crypto = require('crypto');
 
 
 
