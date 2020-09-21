@@ -31,6 +31,7 @@ class ContenedorMaterias extends React.Component {
 	
 	continuar(){
 		this.props.history.push("/voluntarios/cargararchivos")
+		localStorage.setItem('materias', JSON.stringify(this.state.materia))
 	}
 
 	componentDidMount(){

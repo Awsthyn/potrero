@@ -40,13 +40,15 @@ class CargarArchivos extends Component{
 			.then((willSend) => {
 				if (willSend) {
 					let data = JSON.parse(localStorage.getItem('datos'));
-					let schedule = JSON.parse(localStorage.getItem('schedule'))
+               let schedule = JSON.parse(localStorage.getItem('schedule'))
+               let materias = JSON.parse(localStorage.getItem('materias'))
 					Object.entries(data).forEach(dato => {
 						this.state.info.append(dato[0], dato[1])
 					});
-					this.props.postVoluntary(this.state.info, this.state.materia, schedule);				
+					this.props.postVoluntary(this.state.info, materias, schedule);				
 					localStorage.removeItem('datos')
-			      localStorage.removeItem('schedule')
+               localStorage.removeItem('schedule')
+               localStorage.removeItem('materias')
 					this.props.history.push('/voluntarios/confirmacion')
 					swal("Tu solicitud ha sido enviada!", {
 						icon: "success",
