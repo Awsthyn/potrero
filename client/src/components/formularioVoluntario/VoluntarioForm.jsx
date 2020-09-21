@@ -34,9 +34,9 @@ export default class VolunteerForm extends React.Component {
 		}
 		return (
 			<div>
-				<span style={{position: 'absolute', top: '90px', right: '10%', width: '300px'}}>  
-				<p> <strong>Sumate a nuestro equipo </strong></p>
-				<span> Completa este formulario y nos pondremos en contacto con vos </span>
+				<span style={{top: '140px'}} className={styles.frase}>  
+				<p style={{fontSize:'1.3rem', margin: '0px', fontFamily: 'Poppins'}} ><strong>Sumáte a nuestro equipo </strong></p>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px', fontFamily: 'Poppins'}} > Completá este formulario y nos pondremos en contacto con vos </span>
 				</span>
 			<div className={styles.Formm} >
 				<form className={styles.formInput}>

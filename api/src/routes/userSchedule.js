@@ -78,7 +78,6 @@ server.get("/:id", (req, res) => {
     });
 });
 
-
 //AGREGA HORARIOS AL PROFESOR
 server.post('/:userId', (req, res) => {
     console.log(req.body)

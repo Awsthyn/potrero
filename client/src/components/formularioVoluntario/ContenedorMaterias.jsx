@@ -64,9 +64,10 @@ class ContenedorMaterias extends React.Component {
 					this.props.postVoluntary(this.state.info, this.state.materia, schedule);				
 					localStorage.removeItem('datos')
 			      localStorage.removeItem('schedule')
+					this.props.history.push('/voluntarios/confirmacion')
 					swal("Tu solicitud ha sido enviada!", {
 						icon: "success",
-					});
+					})
 				} else {
 				swal("Solicitud no enviada");
 				}
@@ -81,6 +82,10 @@ class ContenedorMaterias extends React.Component {
 		var materias = this.props.subjects.subjects
 		return (
 			<div className={styles.formInput} >
+				<span className={styles.frase} style={{width: '320px', right: '12%'}} >  
+				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Por último... </strong></p>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Estás a un paso de unirte a nuestra causa y nos gustaría saber un poco más de vos </span>
+				</span>
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
 				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
 				<small>CV</small>
@@ -107,12 +112,13 @@ class ContenedorMaterias extends React.Component {
 				<Button
 					disabled={control ? true : false}
 					variant="contained"
-					style={{marginTop: '3rem'}}
-					className={style1.botonEnviar}
+					style={{marginTop: '5%'}}
+					id={style1.botonEnviar}
 					type="submit"
 					value="Submit"
 					onClick={e => this.handleSend(e)}>
 					Enviar
+					<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
 				</Button>
 			</div>
 		);

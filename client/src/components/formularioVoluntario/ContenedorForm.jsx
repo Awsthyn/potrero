@@ -7,6 +7,8 @@ import Niveles from './Niveles';
 import Confirmacion from './Confirmacion';
 import style from './VoluntarioForm.module.css';
 import img from '../VolunteerFormAssets/formJueguitos.jpg';
+import logo from '../VolunteerFormAssets/logorecortado.png';
+
 
 const circleColor = (id) => {
 	document.getElementById(id).className = style.circleLila
@@ -45,39 +47,50 @@ export default function ContenedorForm({history, location}) {
 	return (
 		<div className={style.Contenedor}>
 			<div className={style.conteiner}>
-			<img
-				className={style.img}
-				src={img}
-				alt="Jugador de fútbol"
-				/>
-				<div className={style.imgTxt}><b>Sumáte!</b></div>
-					<div className={style.imgContainText}>
-						Trabajemos juntos por la inclusión social y el 
-						desarrollo humano de niños y adolescentes en estado de vulnerabilidad
-					</div>
-				</div>
-			<div className={style.formLogo} >
-				<div> 
-				<svg viewBox="0 0 16 16" className={style.leftArrow} onClick={()=> goBack()} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-               </svg> 
-				</div>
 				<img
-					id="comp-jgasx8rqimgimage"
-					className={style.imgSize}
-					alt="Fundacion El Potrero"
-					data-type="image"
-					itemProp="image"
-					src="https://static.wixstatic.com/media/a54840_c5097fbb225d46cf8422b922e37634bb~mv2_d_2481_2226_s_2.png/v1/crop/x_578,y_519,w_1325,h_1048/fill/w_133,h_100,al_c,q_85,usm_0.66_1.00_0.01/a54840_c5097fbb225d46cf8422b922e37634bb~mv2_d_2481_2226_s_2.webp"
-				/>
-				<div className={style.circles}>
-			<div id='uno' className={style.circleGray}>1</div><div className={style.lineGray}></div> <div id='dos' className={style.circleGray}>2</div><div className={style.lineGray}></div><div id='tres' className={style.circleGray}>3</div><div className={style.lineGray}></div><div id='cuatro' className={style.circleGray}>4</div>
-			</div>
-				<Route exact path="/voluntarios/formulario" component={VolunteerForm} />
-				<Route exact path="/voluntarios/horarios" component={ContenedorCheckbox} />
-				<Route exact path="/voluntarios/niveles" component={Niveles} />
-				<Route exact path="/voluntarios/materias" component={ContenedorMaterias} />
-				<Route exact path="/voluntarios/confirmacion" component={Confirmacion} />
+					className={style.img}
+					src={img}
+					alt="Jugador de fútbol"
+					/>
+					<div className={style.imgTxt}><b>Sumáte!</b></div>
+						<div className={style.imgContainText}>
+							Trabajemos juntos por la inclusión social y el 
+							desarrollo humano de niños y adolescentes en estado de vulnerabilidad
+						</div>
+					</div>
+			<div className={style.formLogo} >
+				{location.pathname !== '/voluntarios/confirmacion' ?
+				<span> 
+						<div> 
+							<svg viewBox="0 0 16 16" className={style.leftArrow} onClick={()=> goBack()} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							<path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+							</svg> 
+						</div>
+						<img
+							id="comp-jgasx8rqimgimage"
+							style={location.pathname === '/voluntarios/formulario' ? {top: '50px', marginBottom: '70px'} :null}
+							className={style.imgSize}
+							alt="Fundacion El Potrero"
+							data-type="image"
+							itemProp="image"
+							src={logo}
+						/>
+						<div className={style.circles}>
+							<div id='uno' className={style.circleGray}>1</div>
+							<div className={style.lineGray}></div> 
+							<div id='dos' className={style.circleGray}>2</div>
+							<div className={style.lineGray}></div>
+							<div id='tres' className={style.circleGray}>3</div>
+							<div className={style.lineGray}></div>
+							<div id='cuatro' className={style.circleGray}>4</div>
+						
+						</div>
+				</span> :null }
+						<Route exact path="/voluntarios/formulario" component={VolunteerForm} />
+						<Route exact path="/voluntarios/horarios" component={ContenedorCheckbox} />
+						<Route exact path="/voluntarios/niveles" component={Niveles} />
+						<Route exact path="/voluntarios/materias" component={ContenedorMaterias} />
+						<Route exact path="/voluntarios/confirmacion" component={Confirmacion} />
 			</div>
 		</div>
 	);

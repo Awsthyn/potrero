@@ -41,8 +41,12 @@ export default function Niveles() {
     }
 		return (
 			<div>
+                <span className={styles.frase}>  
+				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '24%'}} ><strong> Nivel Educativo </strong></p>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > ¿Cuál es el nivel educativo en el que podrías brindar asistencia? </span>
+				</span>
                 <div className={styles.formInput}>
-                <h4 style={{fontSize: '1rem'}} >¿Cuál es el nivel educativo en el que podrías ayudar?</h4>
+                <h4 style={{fontSize: '1rem', marginTop: '15px'}} > Escoge el nivel educativo en el cual podrías ayudar </h4>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
                     { !secundario ? 
                         <div className={style.btnVolver}
@@ -63,12 +67,12 @@ export default function Niveles() {
                     }  
                     {
                         primario && !secundario ? 
-                        <div><h4 style={{fontSize: '1.2rem'}} >Niveles de primaria</h4>{/*<p>Escoge el nivel educativo al cual podrías brindar asistencia</p>*/}</div> 
+                        <div><h4 style={{fontSize: '1.2rem'}} >Niveles de primaria</h4></div> 
                         : null
                     }  
                     {
                         secundario && !primario ? 
-                        <div><h4 style={{fontSize: '1.2rem'}}>Niveles de secundaria</h4>{/*<p>Escoge el nivel educativo al cual podrías brindar asistencia</p>*/}</div>
+                        <div><h4 style={{fontSize: '1.2rem'}}>Niveles de secundaria</h4></div>
                         : null
                     }   
                 </div>
@@ -84,11 +88,9 @@ export default function Niveles() {
                         : null                     
                 }
                 </div>
-                {
-                (primario || secundario) && Object.keys(state).length === 1 ?
                         <Button
                         variant="contained"
-                        style={{marginTop: '1%'}}
+                        style={(primario || secundario) && Object.keys(state).length === 1 ? {marginTop: '1%'} :{visibility: 'hidden'}}
                         className={styles.testButton}
                         id={styles.skere}
                         type="submit"
@@ -100,8 +102,6 @@ export default function Niveles() {
                     Continuar
                     <span className="material-icons">arrow_forward</span>
                     </Button>
-                    : null
-                }  
                 {
                     primario || secundario ? null : <small>Para continuar debes especificar el máximo nivel en el cual te gustaría ayudar</small>
                 }
