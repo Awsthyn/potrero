@@ -9,7 +9,7 @@ VALUES(3, 'elebeatrizgonzalez@gmail.com',null, 'Elena', 'Gonzalez', 'San Martin 
 INSERT INTO users
 VALUES(4, 'gustavo@gmail.com', null, 'Gustavo', 'Altamiranda', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', null, 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- QUERY PARA SUBJECTS
+-- QUERY PARA SUBJECTS 
 
 INSERT INTO subjects
 VALUES(1, 'Matematicas', DEFAULT, DEFAULT);
