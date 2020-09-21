@@ -40,13 +40,12 @@ const upload = multer({
 });
 
 
-server.get("/", isAdmin, (req, res) => {
+server.get("/", (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
         "createdAt",
         "updatedAt",
-        "password",
         "resetPasswordToken",
         "resetPasswordExpires",
       ],
@@ -195,7 +194,7 @@ server.post("/:id/subjects", (req, res) => {
 });
 
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put("/:id", isUserActive, (req, res) => {
+server.put("/:id", (req, res) => {
   if (req.body.disabled) {
     User.findByPk(req.params.id).then((user) => {
       user.state = "rechazado";
