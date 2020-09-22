@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 import * as actions from '../../redux/actions/stats.js';
 
-class MiStats extends React.Component{
+class NoteGrafic extends React.Component{
     state={
         respuesta:[],
         dataAssistance:[],
@@ -46,11 +46,10 @@ class MiStats extends React.Component{
                   {
                       label: 'Asistencias totales',
                       data: [this.state.dataAssistance, this.state.dataInassistance, this.state.dataDelay],
-                      backgroundColor:[
-                          'rgba(255, 99 , 132, 0.6)',
-                          'rgba(54, 162 , 235, 0.6)',
-                          'rgba(153, 102 , 255, 0.6)'
-                                        ]
+                      fill: false,
+                      backgroundColor:'rgba(54, 162 , 235, 0.6)',
+                      borderColor: 'rgba(54, 162 , 235, 0.6)',
+                      pointBorderColor: 'rgba(54, 162 , 235, 0.6)',
                   }
               ]}
               console.log("Soy datos" ,datos)
@@ -72,19 +71,21 @@ class MiStats extends React.Component{
             await this.peticion();
             await this.getChartData();
         }
+
      render(){
       return (
         <div>
-              <Pie
+              <Line
+              type
               data = {this.state.datos}
               options ={{
                 responsive: true,
                 maintainAspectRatio: false,
                   }}>
-                 </Pie>
+                 </Line>
           </div>
       )
   }
 }
 
-export default MiStats;
+export default NoteGrafic;

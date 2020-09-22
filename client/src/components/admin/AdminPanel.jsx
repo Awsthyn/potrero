@@ -1,8 +1,14 @@
-import React from 'react'
 import {Link} from 'react-router-dom';
 import {Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
-import estadisticas from './assets/estadisticas.png';
+//import estadisticas from './assets/estadisticas.png';
+//import AllStats from '../stats/AllStats';
+import MiStats from '../stats/MiStats.jsx';
+import NoteGrafic from '../stats/NoteGrafic.jsx';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {Bar, Line, Pie} from 'react-chartjs-2';
+import * as actions from '../../redux/actions/stats.js';
 
 const VIOLETA = '#492BC4'
 const VERDE = '#8CC63E'
@@ -17,7 +23,7 @@ const useStyles = makeStyles({
         position: 'absolute',
         fontFamily: 'Poppins',
         fontWeight: 700,
-        margin: 60,  
+        margin: 60,
     },
     img: {
         width: '1700px',
@@ -26,13 +32,20 @@ const useStyles = makeStyles({
     },
 
 })
-
+//<img className = {classes.img} src = {estadisticas} alt = ""/> <h1 className= {classes.font}>Asistencia de alumnos</h1>
 export default () => {
     const classes = useStyles()
              return    (
                  <div className={classes.root}>
-                     <h1 className= {classes.font}>Asistencia de alumnos</h1>
-                    <img className = {classes.img} src = {estadisticas} alt = ""/>
+
+                     <br>
+                     </br>
+                     <div>
+                     <MiStats />
+                     </div>
+                     <div>
+                     <NoteGrafic />
+                     </div>
                 </div>
                 )
         }
