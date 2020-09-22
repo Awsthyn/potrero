@@ -1,25 +1,29 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
 import logo from './VolunteerFormAssets/logo.png';
 import style from './PasswordRecovery.module.css';
+import { mailParaResetPassword} from "../redux/actions/session";
+import { connect } from "react-redux";
+import swal from "sweetalert";
 
-
-export class PasswordRecovery extends React.Component {
+class PasswordRecovery extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             errors: { email: 'emptyInput' },
-            
+            email : ""
         }
-       
+
         this.handleInputChange = this.handleInputChange.bind(this)
-       
+
         this.validate = this.validate.bind(this)
-       
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleInputChange(e) {
         const { name, value } = e.target
+        this.setState({[e.target.name]: e.target.value})
         this.setState(prevState => {
             return {
                 ...prevState,
@@ -34,18 +38,18 @@ export class PasswordRecovery extends React.Component {
             }
         })
     }
-    
+
 
     validate(input) {
 
         let errors = {};
         if (!input.email) {
             errors.email = 'Email es obligatorio';
-        } 
+        }
         if (!/\S+@\S+\.\S+/.test(input.email)) {
             errors.email = 'Email inválido';
         }
- 
+
         return errors;
     };
 
@@ -55,9 +59,28 @@ export class PasswordRecovery extends React.Component {
         return Object.keys(obj).length !== 0;
       }
 
-      
+      complete() {
+          swal({
+              title: "Completado",
+              text: "Se envió un mail para el cambio de contraseña",
+              icon: "success",
+              timer: "4000",
+          })
+          setTimeout(() => this.props.history.replace('/'), 3000)
+    }
+
+      handleSubmit(e) {
+          e.preventDefault();
+          if (this.state.email) {
+              this.props.mailParaResetPassword({email: this.state.email})
+              this.complete();
+          } else {
+              this.error()
+          }
+      }
+
     render() {
-        
+
         const { errors } = this.state
         return (
             <div className={style.container}>
@@ -73,7 +96,7 @@ export class PasswordRecovery extends React.Component {
                                 <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" />
                             </svg>
                     }
-                
+
 
                         <form className='container' onSubmit={this.handleSubmit}>
                             <div className='container'>
@@ -93,14 +116,14 @@ export class PasswordRecovery extends React.Component {
 
                             </div><br />
 
-                            <button className={this.isNotEmpty(this.state.errors) ? style.disButton : style.button} disabled = {this.isNotEmpty(this.state.errors)} type="submit">Enviar 
+                            <button className={this.isNotEmpty(this.state.errors) ? style.disButton : style.button} disabled = {this.isNotEmpty(this.state.errors)} type="submit">Enviar
                                     <svg viewBox="0 0 16 16" className={style.rightArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
                                 </svg>
                             </button>
-                           
-                            
-                            
+
+
+
 
                         </form>
                     </div>
@@ -111,5 +134,13 @@ export class PasswordRecovery extends React.Component {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        mailParaResetPassword: (email) => dispatch(mailParaResetPassword(email))
+    };
+}
 
-export default PasswordRecovery;
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(PasswordRecovery))

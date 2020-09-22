@@ -1,11 +1,11 @@
 import React from 'react';
-// import { useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { getCurrentUser, changePassword, sessionLogin} from "../../redux/actions/session"
 import { connect } from "react-redux";
 import swal from 'sweetalert';
 
 
-export class ResetPassword extends React.Component {
+class ResetPassword extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -38,7 +38,7 @@ export class ResetPassword extends React.Component {
             icon: "success",
             timer: "4000",
         })
-        setTimeout(() => window.location = "/", 3000)
+        setTimeout(() => this.props.history.push('/usuario/login'), 3000)
     }
 
     handleChange(e) {
@@ -90,4 +90,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(ResetPassword);
+)(withRouter(ResetPassword));

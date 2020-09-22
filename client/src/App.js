@@ -18,10 +18,14 @@ import AdminNavBar from './components/admin/AdminNavBar';
 import AdminDrawer from './components/admin/AdminDrawer';
 import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
+import AdminRoute from './AdminRoute.js';
+import Chart from './components/admin/Chart';
 
+class App extends React.Component {
+  
 
-function App() {
-	return (
+  render(){
+  return (
 		<div className="App">
 			 {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
 			<Route exact path={['/', '/voluntarios', '/admin', '/admin/voluntarios',
@@ -33,24 +37,28 @@ function App() {
 
 			<Route path="/admin" component={AdminNavBar} />
 			<Route path="/admin" component={AdminDrawer} />
-			<Route exact path="/admin" component={AdminPanel} />
+			<AdminRoute path="/admin" component={AdminPanel}/>
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
 			<Route exact path="/admin/voluntarios/:id"  render={({match}) => <DetalleVoluntario  id={match.params.id}/>} />
 			<Route exact path="/admin/usuarios" component={TablaUsuarios} />
 			<Route exact path="/admin/materias" component={TablaMaterias} />
 			<Route exact path="/admin/estudiantes" component={StudentCrud} />
 			<Route exact path="/admin/estudiantes/agregar" component={CreateStudentForm} />
-			<Route exact path="/admin/estudiantes/detalles/:id" 
+			<Route exact path="/admin/estudiantes/detalles/:id"
 			render={props => <StudentFile student={props.location.state.props} />} />
 
 			<Route exact path="/usuario/login" component={Login} />
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
 			<Route exact path="/usuario/recuperar" component={PasswordRecovery} />
-		
 
-			<Route exact path="/formularioVoluntario/PasswordForgot/:token" component={ResetPassword} />
+			<Route exact path="/login/:token" component={ResetPassword}/>
+
+            <Route
+        path="/chart"
+        component = {Chart} />
 		</div>
 	);
+	}
 }
 
 

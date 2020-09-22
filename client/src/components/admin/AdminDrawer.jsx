@@ -40,22 +40,22 @@ const useStyles = makeStyles({
             width:190,
             marginTop:0,
             padding:0,
-            
+
     }
 })
 
 function AdminDrawer() {
         const classes = useStyles()
     return (
-        <div style={{display:'flex'}}>  
+        <div style={{display:'flex'}}>
                     <Drawer
                     style={{width: drawerWidth }}
                     variant="persistent"
                     anchor="left"
                     open={true}
-                    onClose={''}
+                    onClose={()=>''}
                     classes={{ paper: classes.drawerPaper}}
-                    
+
                     >
             <List>
                 <Link to= '/' className={classes.link}>
@@ -68,46 +68,46 @@ function AdminDrawer() {
                     <Link to= '/admin' className={classes.link}>
                             <ListItem button>
                                 <ListItemIcon >
-                                        <PieChartRoundedIcon/> 
+                                        <PieChartRoundedIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Panel'/>
-                                    
+
                             </ListItem>
                     </Link>
                     <Link to= '/admin/voluntarios' className={classes.link}>
                             <ListItem button>
                                 <ListItemIcon >
-                                        <StarsRoundedIcon/> 
+                                        <StarsRoundedIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Voluntarios'/>
-                                    
+
                             </ListItem>
                     </Link>
                     <Link to= '/admin/estudiantes' className={classes.link}>
                             <ListItem button>
                                 <ListItemIcon >
-                                        <LocalLibraryIcon/> 
+                                        <LocalLibraryIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Estudiantes'/>
-                                    
+
                             </ListItem>
                     </Link>
                     <Link to= '/admin/usuarios' className={classes.link}>
                             <ListItem button>
                                 <ListItemIcon >
-                                        <SupervisedUserCircleRoundedIcon/> 
+                                        <SupervisedUserCircleRoundedIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Asesores'/>
-                                    
+
                             </ListItem>
                     </Link>
                     <Link to= '/admin/materias' className={classes.link}>
                             <ListItem button>
                                 <ListItemIcon >
-                                        <SettingsApplicationsRoundedIcon/> 
+                                        <SettingsApplicationsRoundedIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Gestion'/>
-                                    
+
                             </ListItem>
                     </Link>
 
@@ -120,4 +120,3 @@ function AdminDrawer() {
 
 
 export default AdminDrawer
-
