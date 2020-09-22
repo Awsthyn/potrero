@@ -19,7 +19,8 @@ import AdminDrawer from './components/admin/AdminDrawer';
 import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
-import Chart from './components/admin/Chart';
+import AllAssistancesStudents from './components/stats/AllAssistancesStudents.jsx';
+import AllStats from './components/stats/AllStats.jsx';
 
 class App extends React.Component {
   
@@ -54,8 +55,13 @@ class App extends React.Component {
 			<Route exact path="/login/:token" component={ResetPassword}/>
 
             <Route
-        path="/chart"
-        component = {Chart} />
+			exact path="/stats/assistances"
+			component = {AllAssistancesStudents} 
+			/>
+			<Route
+			exact path="/stats"
+			component={AllStats}
+			/>
 		</div>
 	);
 	}
