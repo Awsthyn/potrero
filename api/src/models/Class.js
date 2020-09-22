@@ -7,6 +7,10 @@ module.exports = (sequelize) => {
       type: DataTypes.RANGE(DECIMAL),
       allowNull: false,
     },
+    nameWeekDay: {
+      type: DataTypes.ENUM("Lunes", "Martes", "Miercoles", "Jueves", "Viernes"),
+      allowNull: false,
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: true,
