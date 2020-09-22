@@ -23,7 +23,7 @@ const circleColor = (id) => {
 
 export default function ContenedorForm({history, location}) {
 	const goBack = () => {
-		switch(location.pathname){
+		switch(location.pathname ){
 			case "/voluntarios/formulario":
 				history.push('/')
 			case "/voluntarios/horarios":
@@ -40,6 +40,28 @@ export default function ContenedorForm({history, location}) {
 				break;
 			default: 
 			break;
+		}
+	}
+	const goTo = (e) => {
+		console.log(e.target.id)
+		switch(e.target.id){
+			case 'uno': 
+				history.push('/voluntarios/formulario')
+				break;
+			case 'dos':
+				history.push('/voluntarios/horarios')
+				break;
+			case 'tres':
+				history.push('/voluntarios/niveles')
+				break;
+			case 'cuatro':
+				history.push('/voluntarios/materias')
+				break;
+			case 'cinco':
+				history.push('/voluntarios/cargararchivos')
+				break;
+			default:
+				return 
 		}
 	}
 	useEffect(() => {	
@@ -81,15 +103,15 @@ export default function ContenedorForm({history, location}) {
 							src={logo}
 						/>
 						<div className={style.circles}>
-							<div id='uno' className={style.circleGray}>1</div>
+							<div id='uno' className={style.circleGray} onClick={(e) => goTo(e)} >1</div>
 							<div className={style.lineGray}></div> 
-							<div id='dos' className={style.circleGray}>2</div>
+							<div id='dos' className={style.circleGray} onClick={(e) => goTo(e)}>2</div>
 							<div className={style.lineGray}></div>
-							<div id='tres' className={style.circleGray}>3</div>
+							<div id='tres' className={style.circleGray} onClick={(e) => goTo(e)}>3</div>
 							<div className={style.lineGray}></div>
-							<div id='cuatro' className={style.circleGray}>4</div>
+							<div id='cuatro' className={style.circleGray} onClick={(e) => goTo(e)}>4</div>
 							<div className={style.lineGray}></div>
-							<div id='cinco' className={style.circleGray}>5</div>						
+							<div id='cinco' className={style.circleGray} onClick={(e) => goTo(e)}>5</div>						
 						</div>
 				</span> :null }
 						<Route exact path="/voluntarios/formulario" component={VolunteerForm} />

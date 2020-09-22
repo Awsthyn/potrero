@@ -48,6 +48,7 @@ export default class VolunteerForm extends React.Component {
 							name="firstName"
 							className={styles.input}
 							placeholder="Nombre"
+							value={this.state.info.firstName}
 							// inputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>

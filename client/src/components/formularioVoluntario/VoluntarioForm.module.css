@@ -132,6 +132,7 @@ input:focus {
 	border-radius: 50%;
 	align-self: center;
 	padding-top: 0.5%;
+	cursor: pointer;
 }
 
 .lineGray {
@@ -139,6 +140,7 @@ input:focus {
 	width: 20%;
 	height: 1.5px;
 	align-self: center; 
+	cursor: pointer;
 }
 
 .lineInput {
@@ -309,7 +311,7 @@ input[type=number] { -moz-appearance:textfield; }
 	width: 30px;
 	border-radius: 50%;
 	border: none;
-	outline: none;
+	outline: none !important;
 	background-color: white;
 }
 .accordionButton:hover{
