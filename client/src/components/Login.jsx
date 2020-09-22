@@ -8,6 +8,7 @@ import logo from './VolunteerFormAssets/logo.png'
 import hero from './VolunteerFormAssets/pelota.jpg';
 import hero2 from './VolunteerFormAssets/potrero2.jpg';
 import hero3 from './VolunteerFormAssets/potrero3.jpg';
+import Spinner from './potrero-spinner/Spinner.jsx';
 
 class Login extends React.Component {
     constructor(props) {
@@ -18,8 +19,11 @@ class Login extends React.Component {
                 password: ""
             },
             errors: { email: 'emptyInput' },
-            passwordVisibility: false
+            passwordVisibility: false,
+            loading: false
+            
         }
+   
 
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,6 +31,7 @@ class Login extends React.Component {
         this.resetState = this.resetState.bind(this)
         this.setPasswordVisibility = this.setPasswordVisibility.bind(this)
         this.isNotEmpty = this.isNotEmpty.bind(this)
+        this.setLoading = this.setLoading.bind(this)
 
     }
 
@@ -58,10 +63,15 @@ class Login extends React.Component {
         })
     }
 
+    setLoading() {
+        this.setState({loading: true})
+        }
 
     resetState() {
         this.setState({ loginData: { email: '', password: '' }, errors: {} })
     }
+    
+    
 
     handleSubmit(e) {
         e.preventDefault();
@@ -71,16 +81,23 @@ class Login extends React.Component {
         if (hayErrores) {
             swal('No se pudo autenticar. Verifique los datos')
         } else {
+            this.setLoading();
+
+            setTimeout(() => {
+                
+            
             this.props.sessionLogin(this.state.loginData)
                 .then(() => {
                     swal('Bienvenido')
                     this.resetState()
+                    this.setState({loading: false});
                     // uso replace para que no quede en el historial /login
                     this.props.history.replace('/admin')
                 })
                 .catch((err) => {
                     swal('No se pudo autenticar. Verifique los datos')
                 });
+            }, 2000)
         }
     }
 
@@ -109,10 +126,15 @@ class Login extends React.Component {
 
 
 
-    render() {
 
+    render() {
+        const {loading} = this.state
         const { errors } = this.state
+        
+        
         return (
+            <div >
+            {loading ? <Spinner/> : 
             <div className={style.container}>
                <svg viewBox="0 0 16 16" class={style.leftArrow} onClick={()=> this.props.history.push('/')} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
@@ -147,8 +169,8 @@ class Login extends React.Component {
 
                                     <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Tu email o usuario" className={style.input}
 
-                                        onChange={this.handleInputChange}
-                                        value={this.state.loginData.email} />
+                                onChange={this.handleInputChange}
+                                value={this.state.loginData.email} />
 
                                 </div>
                             </div>
@@ -160,7 +182,7 @@ class Login extends React.Component {
                                     className={style.passInput}
                                     onChange={this.handleInputChange}
                                     value={this.state.loginData.password}
-                                />
+                                    />
 
                             </div><br />
 
@@ -210,11 +232,14 @@ class Login extends React.Component {
                         <p className={style.author}> - Nelson Mandela </p>
                         <h1 className={style.cQuote}>“</h1>
                     </div>
+                
                 </div>
+                </div>}
             </div>
-
+                    
         )
     }
+                                
 }
 
 function mapStateToProps(state){
