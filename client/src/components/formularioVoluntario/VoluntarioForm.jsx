@@ -26,7 +26,12 @@ export default class VolunteerForm extends React.Component {
 			return {redirect: true};
 		});	
 	}
-
+	componentDidMount(){
+		if(!this.state.info.firstName){
+			let newState = JSON.parse(localStorage.getItem('datos'))
+			this.setState({info: newState})
+		}
+	}
 	render() {
 		var control;
 		if (this.state.redirect) {
@@ -59,6 +64,7 @@ export default class VolunteerForm extends React.Component {
 							name="lastName"
 							className={styles.input}
 							placeholder="Apellido"
+							value={this.state.info.lastName}
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
@@ -68,6 +74,7 @@ export default class VolunteerForm extends React.Component {
 							type="date"
 							name="birthday"
 							className={styles.input}
+							value={this.state.info.birthday}
 							// placeholder="fecha de nacimiento"
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
@@ -79,6 +86,7 @@ export default class VolunteerForm extends React.Component {
 							name="phone"
 							className={styles.input}
 							placeholder="Telefono"
+							value={this.state.info.phone}
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/> 
@@ -89,6 +97,7 @@ export default class VolunteerForm extends React.Component {
 							name="email"
 							className={styles.input}
 							placeholder="E-mail"
+							value={this.state.info.email}
 							// InputLabelProps={{ shrink: true }}
 							aria-describedby="emailHelp"
 							onChange={e => this.handleOnChange(e)}

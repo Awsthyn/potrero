@@ -39,7 +39,7 @@ class ContenedorMaterias extends React.Component {
 	}
 	render() {
 		var control;
-		var materias = this.props.subjects.subjects
+		var materias = this.props.subjects
 		return (
 			<div className={styles.formInput} >
 				<span className={styles.frase} style={{width: '320px', right: '12%'}} >  
@@ -67,7 +67,7 @@ class ContenedorMaterias extends React.Component {
 }
 function mapStateToProps(state){
 	return {
-		subjects: state.subjects
+		subjects: state.subjects.subjects
 	}
 }
 export default connect(mapStateToProps, {getSubjects})(ContenedorMaterias);

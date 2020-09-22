@@ -6,7 +6,7 @@ export function getAcademicLevels() {
 		return axios
 			.get(`http://localhost:3001/academiclevel`, {withCredentials: true})
 			.then(res => {
-                console.log(res.data)
+               console.log(res.data)
 				dispatch({type: GET_ACADEMIC_LEVELS, payload: res.data});
 			})
 			.catch(err => console.log(err));

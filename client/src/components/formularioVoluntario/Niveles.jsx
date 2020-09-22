@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
     const [redirect, setRedirect] = useState(false);
     console.log(academicLevels)
     
-    var academicPrimary;
     const handlePrimario = () => {
         getAcademicLevels()
         if (!primario) {
@@ -23,7 +22,6 @@ import { connect } from 'react-redux';
             setPrimario(false)
             setState({})
         }
-        academicPrimary = academicLevels.filter(a => a.educationLevel.name === "Primaria");
     }
     
     const handleSecundario = () => {
@@ -87,14 +85,14 @@ import { connect } from 'react-redux';
                 <div className={styles.containerListNiveles}>
                 {
                     primario && !secundario ?  
-                    academicLevels.map((n, i) => { if(n.educationLevel.name === "Primaria"){
+                    academicLevels.map((n, i) => { if(n?.educationLevel?.name === "Primaria"){
                     return <div id={n.name} className={style.botonMateria} key={n.name} onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n.name ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n.name}</div>
                     }})
                     : null 
                 } 
                 {
                     secundario && !primario ? 
-                    academicLevels.map((n, i) => { if(n.educationLevel.name === "Secundaria"){
+                    academicLevels.map((n, i) => { if(n?.educationLevel?.name === "Secundaria"){
                         return <div id={n.name} className={style.botonMateria} key={n.name} onClick={(e) => handleOnClick(e,"Secundaria")} style={state.Secundaria === n.name ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n.name}</div>
                         }})
                         : null                    

@@ -7,7 +7,12 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
 	switch (action.type) {
 		case GET_ACADEMIC_LEVELS:
-			console.log(action.payload)
+			if(typeof action.payload === 'string'){
+				return {
+					...state,
+					academicLevels: []
+				}
+			}
 			return {
 				...state,
 				academicLevels: action.payload,
