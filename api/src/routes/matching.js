@@ -2,8 +2,9 @@ const server = require("express").Router();
 const Sequelize = require("sequelize");
 
 //const {conn} = require("../db")
-const { Student, StudentSchedule, User, UserSchedule, Subject, Class } = require("../db.js");
+const { StudentSchedule, User, UserSchedule, Subject, Class } = require("../db.js");
 
+//merge(): une intervalos de números.. Ej: [[1,3],[2,6],[8,10]] => [[1,6],[8,10]]
 function merge(arr) {
     // copy and sort the array
     var result = arr.slice().sort(function(a, b) {
@@ -28,6 +29,7 @@ function merge(arr) {
     return result;
 };
 
+//findFreeinterval() devuelve un array con los intervalos no overlapeados.. ej: [[1,3],[5,6],[7,9]] => [[3,5],[6,7]]
 function findFreeinterval(arr){
     let disponible = []
     for(let i = 1; i < arr.length; i++){
@@ -38,22 +40,6 @@ function findFreeinterval(arr){
     return disponible
 }
 
-function shallowEqual(object1, object2) {
-    const keys1 = Object.keys(object1);
-    const keys2 = Object.keys(object2);
-  
-    if (keys1.length !== keys2.length) {
-      return false;
-    }
-  
-    for (let key of keys1) {
-      if (object1[key] !== object2[key]) {
-        return false;
-      }
-    }
-  
-    return true;
-  }
 
 server.get('/:studentId/:subject', (req, res) => {
     let { subject } = req.params
@@ -157,14 +143,17 @@ server.get('/:studentId/:subject', (req, res) => {
 
         ])}))
         .then(data => {
-            let noDisponible = []
+            //Creo una variable que va a almacenar los intervalos de tiempo libres
             let disponible = []
             data.map(m => {
                 let array = []
+                //El primer elemento de array es [0, startTime].. necesario para detectar intervalos de tiempos libres
                 array.push([0,Number(m[0].startTime)])
+                //Coloco todos los intervalos de tiempo de las clases
                 m[1].map(h => array.push([Number(h.duration[0].value), Number(h.duration[1].value)]))
+                //El último elemento de array es [endTime, 23].. necesario para detectar intervalos de tiempos libres
                 array.push([Number(m[0].endTime), 23])
-                noDisponible.push({noDisponible: merge(array), user: m[0].user, nameWeekDay: m[0].nameWeekDay})
+                array = merge(array)
                 let freeIntervalStore = findFreeinterval(array)
                 freeIntervalStore.length > 0  ? disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay }) : null
                 
