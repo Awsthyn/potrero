@@ -1,13 +1,12 @@
 const server = require("express").Router();
 const Sequelize = require("sequelize");
 
-//const sequelize = require("../db")
+//const {conn} = require("../db")
 const { Student, StudentSchedule, User, UserSchedule, Subject, Class } = require("../db.js");
 
 
-server.get('/:studentId', (req, res) => {
-    let { subject } = req.body
-    subject = 1
+server.get('/:studentId/:subject', (req, res) => {
+    let { subject } = req.params
     //Busca todos los studentSchedules del alumno ingresado por req.params
     StudentSchedule.findAll({where: {studentId: req.params.studentId}})
     .then((studentSchedulesFound) => {
@@ -21,21 +20,12 @@ server.get('/:studentId', (req, res) => {
             model: User,
             attributes: {
                 exclude: [
-                  "createdAt",
-                  "updatedAt",
-                  "password",
-                  "address",
-                  "birthday",
-                  "phone",
-                  "linkedin",
-                  "cv",
-                  "resetPasswordToken",
-                  "resetPasswordExpires",
+                  "createdAt","updatedAt","password","address","birthday","phone","linkedin","cv","resetPasswordToken","resetPasswordExpires",
                 ],
               },
             where: {
                 state: {
-                    [Sequelize.Op.in]: ["aceptado", "admin", "pendiente"]
+                    [Sequelize.Op.in]: ["aceptado", "admin", "pendiente"]//!SACAR PENDIENTE, LO USÉ COMO PRUEBA. LOS ADMIN DAN CLASES?
                 },
                 isActive: {
                     [Sequelize.Op.in]: [true, false]
@@ -60,10 +50,11 @@ server.get('/:studentId', (req, res) => {
         } 
         ]
             })
-        , schedule])))// ES OBLIGATORIO MANDAR SCHEDULE AL SIGUIENTE "THEN", PARA PODER HACER LAS COMPARACIONES
+        , schedule])))// Es obligatorio mandar schedule al siguiente "then", para poder hacer las comparaciones
     })
     .then((data) => {
         let finalData = []
+        //Dos loops anidados... O(n^2).. ver si se puede mejorar.
         data.map(elem =>{
             for(userRow of elem[0]){
                 //Almaceno startTime y endTime del registro de userSchedule y starTime y endTime del registro de studentSchedule
@@ -106,6 +97,8 @@ server.get('/:studentId', (req, res) => {
         })
         return finalData})
     .then(data => {
+        // Me traigo todas las clases, correspondientes al alumno y al user en cuestión, que overlapeen con los horarios matcheados
+        // Esto es el primer paso para conocer la disponibilidad real de horarios
         Promise.all(data.map(elem =>{
            return Promise.all([elem, Class.findAll({where: {
                [Sequelize.Op.or]: [
