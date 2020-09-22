@@ -3,14 +3,19 @@ import Button from '@material-ui/core/Button';
 import {Redirect} from 'react-router-dom';
 import styles from './VoluntarioForm.module.css';
 import style from './Materias.module.css';
+import {getAcademicLevels} from '../../redux/actions/academicLevel';
+import { connect } from 'react-redux';
 
-export default function Niveles() {
+ function Niveles({getAcademicLevels, academicLevels}) {
     const [primario, setPrimario] = useState(false);
     const [secundario, setSecundario] = useState(false);
     const [state, setState] = useState({});
     const [redirect, setRedirect] = useState(false);
+    console.log(academicLevels)
     
+    var academicPrimary;
     const handlePrimario = () => {
+        getAcademicLevels()
         if (!primario) {
             setPrimario(true)
             setSecundario(false)
@@ -18,8 +23,11 @@ export default function Niveles() {
             setPrimario(false)
             setState({})
         }
+        academicPrimary = academicLevels.filter(a => a.educationLevel.name === "Primaria");
     }
+    
     const handleSecundario = () => {
+        getAcademicLevels()
         if (!secundario) {
             setSecundario(true)
             setPrimario(false)
@@ -79,13 +87,17 @@ export default function Niveles() {
                 <div className={styles.containerListNiveles}>
                 {
                     primario && !secundario ?  
-                        primaria.map((n, i) => <div id={n} className={style.botonMateria} key={n} onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n}</div>)
-                        : null                  
-                }
+                    academicLevels.map((n, i) => { if(n.educationLevel.name === "Primaria"){
+                    return <div id={n.name} className={style.botonMateria} key={n.name} onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n.name ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n.name}</div>
+                    }})
+                    : null 
+                } 
                 {
                     secundario && !primario ? 
-                        secundaria.map((n, i) => <div   style={state.Secundaria === n ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} } id={n} className={style.botonMateria}  onClick={(e) => handleOnClick(e,"Secundaria")}>{n}</div>) 
-                        : null                     
+                    academicLevels.map((n, i) => { if(n.educationLevel.name === "Secundaria"){
+                        return <div id={n.name} className={style.botonMateria} key={n.name} onClick={(e) => handleOnClick(e,"Secundaria")} style={state.Secundaria === n.name ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n.name}</div>
+                        }})
+                        : null                    
                 }
                 </div>
                         <Button
@@ -110,3 +122,11 @@ export default function Niveles() {
 		);
 }
 
+function mapStateToProps(state){
+    console.log(state)
+    return {
+        academicLevels: state.academic.academicLevels,
+    } 
+}
+
+export default connect(mapStateToProps, {getAcademicLevels})(Niveles)
