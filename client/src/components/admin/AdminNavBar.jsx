@@ -1,12 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link,Redirect,Route} from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Drawer, List,ListItem,ListItemIcon,ListItemText} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PieChartIcon from '@material-ui/icons/PieChart'
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import { sessionLogout } from '../../redux/actions/session';
 
 
@@ -47,6 +49,8 @@ const useStyles = makeStyles({
          },
     },
     icons:{
+        paddingTop:0,
+        justifyContent:'center',
         maxWidth:30,
         maxHeight:30,
     },
@@ -54,53 +58,74 @@ const useStyles = makeStyles({
         display:'flex',
     },
     grouplinks:{
-        display:'row',
+        padding:0,
+        display:'flex',
         color:'white',
-        position:'flex-end',
-        alignItems:'center',
-        width:200
-    }
+        width:'100%',
+        justifyContent:'flex-end'
+    },
+    item:{
+        padding:0,
+    },
+    link:{
+        padding: 0,
+        textDecoration:'none',
+        color:'gray',
+        '&:hover': {
+            color:VIOLETA,
+            textDecoration:'none',
+         },
+    },
 
 })
 
 
 const AdminNavBar = (props) => {
     const classes = useStyles()
+
     const handleLogout = () =>   {
-        props.sessionLogout(props.session)
+        props.sessionLogout(props.session);
+        console.log('seee');
     }
+
     return(
         <div className={classes.root}>
                 <AppBar className={classes.root}>
-                    <Toolbar >
-                    <ListItem button>
-                        <Typography  variant='h6' >
-                            <ListItemIcon >
-                                    Panel <PieChartIcon /> 
-                            </ListItemIcon>   
-                        </Typography>
-                     </ListItem>
-                    <List className={classes.grouplinks} >
-                            <ListItem className={classes.icon} button>
-                                <Typography className={classes.font} variant='h6' >
-                                        <ListItemIcon >
-                                            {`${props.session.firstName} ${props.session.lastName}`} <AccountBoxIcon className={classes.icon} />  
-                                                <ListItem onClick={handleLogout} className={classes.icon} button>
-                                                    <ListItemIcon >
-                                                            <PowerSettingsNewIcon className={classes.icon}/>
-                                                    </ListItemIcon>           
-                                                </ListItem> 
-                                        </ListItemIcon>  
-                                        <Link to= '/' className={classes.link}>
-                                        
-                                         </Link>
-                                </Typography>
-                            </ListItem>
+                    <Toolbar  >
+                  
+                     <Link to= '/admin/' className={classes.link}>
+                                <ListItem className={classes.item} button>
+                                    <ListItemText primary='Panel'/>
+                                    <ListItemIcon className={classes.icons}>
+                                            <PieChartIcon/>
+                                        </ListItemIcon>
+                                </ListItem>
+                    </Link> 
 
-                            
-                                  
-                          
-                        </List>
+                     <Link to= '/admin/usuarios' className={classes.link}>
+                                <ListItem className={classes.item} button>
+                                    <ListItemText primary='Miembros'/>
+                                    <ListItemIcon className={classes.icons}>
+                                            <SupervisedUserCircleRoundedIcon/>
+                                        </ListItemIcon>
+                                </ListItem>
+                    </Link> 
+
+                <List className={classes.grouplinks}>
+                    <Link to= '/admin/usuarios' className={classes.link}>
+                                <ListItem className={classes.item} >
+                                    <ListItemText primary={`${props.session.firstName} ${props.session.lastName}`}/>
+                                </ListItem>
+                    </Link> 
+                    <Link to= '/' className={classes.link}>
+                        <ListItem onClick={handleLogout} className={classes.grouplinks} button>
+                            <ListItemIcon className={classes.icons} >
+                                        <PowerSettingsNewIcon />
+                                </ListItemIcon>
+                        </ListItem>
+                    </Link> 
+                </List>
+
                     </Toolbar>
                 </AppBar>
                
