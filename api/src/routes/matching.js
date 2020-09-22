@@ -5,9 +5,8 @@ const Sequelize = require("sequelize");
 const { Student, StudentSchedule, User, UserSchedule, Subject, Class } = require("../db.js");
 
 
-server.get('/:studentId', (req, res) => {
-    let { subject } = req.body
-    subject = 1 //!SACAR ESTO, LO USÉ COMO PRUEBA
+server.get('/:studentId/:subject', (req, res) => {
+    let { subject } = req.params
     //Busca todos los studentSchedules del alumno ingresado por req.params
     StudentSchedule.findAll({where: {studentId: req.params.studentId}})
     .then((studentSchedulesFound) => {
