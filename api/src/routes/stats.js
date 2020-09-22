@@ -107,49 +107,73 @@ server.get("/qualification", (req, res) => {
     },
   })
     .then((allClasses) => {
-      // console.log(allClasses)
-      let countQualification = [5, 3, 1, 9, 10, 7];
-      // res.json(allClasses)
+
+      let countQualification = [];
+
       allClasses.forEach((element) => {
         if (element.hadExam === true) {
           var num = parseInt(element.qualification);
           countQualification.push(num);
         }
       });
-      console.log(countQualification);
-      res.json(countQualification);
+
+    res.json(countQualification);
     })
     .catch((err) => {
       console.log(err);
     });
 });
 
-server.get("/qualification/alumno", (req, res) => {
-  Class.findAll({
-    attributes: {
-      exclude: ["createdAt", "updatedAt"],
-    },
+server.get("/offer/subject", (req, res) => {
+  Subject.findAll({  
     include: [
-      {
-        model: Student,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
-      },
-      {
-        model: DataSheet,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
-      },
-    ],
+        {
+          model: User
+        }
+      ]
   })
-    .then((allClasses) => {
-      res.json(allClasses);
+    .then( allSubjectsWithOffer => {
+      let objectSubjects = {
+        nameSubjectsOffer: [],
+        offerSubjects: 0
+      };
+      allSubjectsWithOffer.forEach( subject => {
+          objectSubjects.nameSubjectsOffer.push(subject.name)
+          objectSubjects.offerSubjects = objectSubjects.offerSubjects + subject.users.length
+        })
+      res.json(objectSubjects);
     })
     .catch((err) => {
       console.log(err);
     });
 });
+
+server.get('/demand/subject', (req, res) => {
+  Subject.findAll({
+    include: [{
+      model: Student
+    }]
+  })
+  .then( allSubjectsWithDemand => {
+
+    let objectSubjectsDemand = {
+      nameSubjectsDemand: [],
+      demandSubjects: 0,
+      subjectHasDemand: false
+    };
+      allSubjectsWithDemand.forEach( demandSubject => {
+        if(demandSubject.students.length > 0) {
+          objectSubjectsDemand.nameSubjectsDemand.push(demandSubject.name);
+          objectSubjectsDemand.demandSubjects = objectSubjectsDemand.demandSubjects + demandSubject.students.length;
+          objectSubjectsDemand.subjectHasDemand = true
+        }
+      })
+      // console.log(objectSubjectsDemand)
+      res.json( objectSubjectsDemand )
+    })
+  .catch( err => {
+    res.json( err )
+  })
+})
 
 module.exports = server;
