@@ -21,6 +21,28 @@ export const TablaVoluntarios2 = (props) => {
 
     const classes = useStyles()
 
+    function handleDeletion(id){
+        swal({
+            title: "¡¡ Cuidado !!",
+            text: "No se recomienda en lo absoluto este tipo de acciones. Si continúa, estará eliminando datos muy valiosos... Se recomienda simplemente rechazar al postulante",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+            props.deleteVolunteer(Number(id))
+            console.log(id);
+              swal("El registro fue destruido con éxito", {
+                icon: "success",
+              });
+            } else {
+              swal("El registro fue conservado");
+            }
+          });
+    
+    }
+
         useEffect(()=>{
             props.getVolunteers();
         },[])
@@ -52,7 +74,7 @@ export const TablaVoluntarios2 = (props) => {
                                                     <Link color ="primary" to={`/admin/voluntarios/${voluntario.id}`} key={`detalles${voluntario.id}`} className="btn btn-primary" type="button">
                                                              <FaceIcon/> Detalles
                                                     </Link>
-                                                    <Button color="secondary">
+                                                    <Button color="secondary" key={`rechazar${voluntario.id}`} name={voluntario.id} className="btn btn-danger" onClick={() => handleDeletion(voluntario.id)}>
                                                                 <DeleteForeverIcon/> Eliminar   
                                                     </Button>
                                         </ButtonGroup>
