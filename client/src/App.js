@@ -37,7 +37,7 @@ class App extends React.Component {
 
 			<Route path="/admin" component={AdminNavBar} />
 			<Route path="/admin" component={AdminDrawer} />
-			<AdminRoute path="/admin" component={AdminPanel}/>
+			<AdminRoute exact path="/admin" component={AdminPanel}/>
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
 			<Route exact path="/admin/voluntarios/:id"  render={({match}) => <DetalleVoluntario  id={match.params.id}/>} />
 			<Route exact path="/admin/usuarios" component={TablaUsuarios} />
