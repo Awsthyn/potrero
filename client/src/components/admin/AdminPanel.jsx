@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 import * as actions from '../../redux/actions/stats.js';
+import './stats.css'
 
 const VIOLETA = '#492BC4'
 const VERDE = '#8CC63E'
@@ -40,10 +41,10 @@ export default () => {
 
                      <br>
                      </br>
-                     <div>
+                     <div className="stats">
                      <MiStats />
                      </div>
-                     <div>
+                     <div className="stats">
                      <NoteGrafic />
                      </div>
                 </div>
