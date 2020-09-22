@@ -28,7 +28,7 @@ class App extends React.Component {
   return (
 		<div className="App">
 			 {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
-			<Route exact path={['/', '/voluntarios', '/admin', '/admin/voluntarios',
+			<Route exact path={['/voluntarios', '/admin', '/admin/voluntarios',
 			'/admin/usuarios', '/admin/materias', '/usuario/perfil', '/admin/estudiantes',
 			'/admin/estudiantes/agregar', '/admin/estudiantes/detalles/:id']}
 			component={NavBar} />
@@ -37,7 +37,7 @@ class App extends React.Component {
 
 			<Route path="/admin" component={AdminNavBar} />
 			<Route path="/admin" component={AdminDrawer} />
-			<AdminRoute path="/admin" component={AdminPanel}/>
+			<AdminRoute exact path="/admin" component={AdminPanel}/>
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
 			<Route exact path="/admin/voluntarios/:id"  render={({match}) => <DetalleVoluntario  id={match.params.id}/>} />
 			<Route exact path="/admin/usuarios" component={TablaUsuarios} />
