@@ -15,12 +15,13 @@ const NEGRO = '#333333'
 
 const useStyles = makeStyles({
     root:{
+        height:50,
         background: VIOLETA,
         position:'fixed',
-        width:`calc(100% - ${220}px)`,
-        marginLeft: 220,
+        marginLeft: 0,
     },
     font:{
+        maxWidth:'auto',
         fontFamily: 'Poppins',
         margin:5,
     },
@@ -31,6 +32,7 @@ const useStyles = makeStyles({
         alignItems:'center',
     },
     profileBox:{
+        maxWidth:'auto',
         justifyContent:'flex-end',
     },
     link:{
@@ -58,13 +60,13 @@ const AdminNavBar = (props) => {
                             El Potrero / Panel de Admin
                      </Typography>
                     <List className={classes.Navicons}>
-                                    <ListItem className={classes.profileBox} button>
-                                    <Typography className={classes.font} variant='h6'>
-                                         {`${props.session.firstName} ${props.session.lastName}`}
-                                     </Typography>
-                                        <ListItemIcon >
-                                                <AccountBoxIcon/> 
-                                        </ListItemIcon>           
+                            <ListItem className={classes.profileBox} button>
+                                <Typography className={classes.font} variant='h6'>
+                                    {`${props.session.firstName} ${props.session.lastName}`}
+                                </Typography>
+                                <ListItemIcon >
+                                    <AccountBoxIcon/> 
+                                </ListItemIcon>           
                                     </ListItem>
 
                             <Link to= '/' className={classes.link}>
