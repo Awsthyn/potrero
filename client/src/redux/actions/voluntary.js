@@ -66,9 +66,10 @@ export function acceptVolunteer(volunteer) {
 
 // Crea relación entre Materia y Voluntario
 export function postSubjectVoluntary(subjects, userId) {
+	console.log(subjects)
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/users/${userId}/subjects`, {subjects}, {withCredentials: true})
+			.post(`http://localhost:3001/subjectxuser/${userId}/subjects`, {subjects}, {withCredentials: true})
 			.then(res => {
 				dispatch({type: ADD_SUBJECTS_VOLUNTEER, subjects: res.data});
 			})
