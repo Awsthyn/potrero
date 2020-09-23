@@ -31,7 +31,7 @@ export function postStudent(student) {
 				dispatch({type: ADD_STUDENT, payload: res.data})
 				// window.location= "/admin/student"
 			})
-			// .then(() => window.history.go(-1))
+			.then(() => window.history.go(-1))
 			.catch(err => console.log(err));
 	};
 }

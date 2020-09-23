@@ -2,38 +2,34 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import 'moment/locale/es';
-import { getSubjects } from '../../redux/actions/subject'
 import { postStudent } from '../../redux/actions/student';
 import { getEducationLevel } from '../../redux/actions/educationLevel';
 import SubjectCheckbox from "./SubjectCheckbox"
 import StrengthCheckbox from "./StrengthCheckbox";
 import LevelEducation from "./LevelEducation";
 import WeakCheckbox from "./WeaknessCheckbox";
-import DaysContainer from "./DaysContainer"
-import style from './SubjectCheckbox.modules.css';
+import DaysContainer from "./DaysContainer";
 moment.locale('es');
 
 export class CreateStudentForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			alumno: {
-				firstName: '',
-				lastName: null,
-				phone: null,
-				email: null,
-				tutorFirstName: null,
-				tutorLastName: null,
-				tutorEmail: null,
-				tutorPhone: null,
-				difficulty: false,
-				weakness: [],
-				interests: "lorem ipsum",
-				strengths: [],
-				motivations: 'lorem ipsum',
-				observations: null,
-				scheduleStudent: null
-			},
+			firstName: '',
+			lastName: null,
+			phone: null,
+			email: null,
+			tutorFirstName: null,
+			tutorLastName: null,
+			tutorEmail: null,
+			tutorPhone: null,
+			difficulty: false,
+			weakness: [],
+			interests: "lorem ipsum",
+			strengths: [],
+			motivations: 'lorem ipsum',
+			observations: null,
+			scheduleStudent: null,
 			subjectsId: [],
 			subjectsXLevel: [],
 			academicLevels: null,
@@ -53,11 +49,14 @@ export class CreateStudentForm extends Component {
 	onChangeHandler = (event) => {
 		let name = event.target.name;
 		let value = event.target.value;
-		this.setState({ [name]: value });
+		console.log('NAME: ', name);
+		console.log('VALUE: ', value);
+		this.setState( { [name]: value } );
+		console.log('THIS.STATE: ', this.state)
 	};
 	submitHandler = (event) => {
 		event.preventDefault();
-		this.props.postStudent(this.state.alumno)
+		this.props.postStudent(this.state)
 	};
 
 	showGrade(academicLevels, isChecked) {
@@ -70,11 +69,6 @@ export class CreateStudentForm extends Component {
 	}
 
 	onCheckboxClicked(subjects, isChecked) {
-		console.log('ggggg',subjects)
-		// if(Array.isArray(subjects)){
-		// 	this.setState({ subjectsId: subjects })
-		// }
-		// else 
 		if (isChecked) {
 			this.setState({ isLevelSelect: true });
 			this.setState({
@@ -87,29 +81,29 @@ export class CreateStudentForm extends Component {
 				subjectsId: this.state.subjectsId.filter(s => s !== subjects.id)
 			})
 			:
-			this.setState({ isLevelSelect: false, strengths: [], weakness: [] })
+			this.setState({ isLevelSelect: false })
 		}
 	}
 
 	onStrengthCheckboxClicked(subject, isChecked) {
 		if (isChecked) {
 			this.setState({
-				strengths: [...this.state.alumno.strengths, subject.id]
+				strengths: [...this.state.strengths, subject.id]
 			})
 		} else {
 			this.setState({
-				strengths: this.state.alumno.strengths.filter(s => s !== subject.id)
+				strengths: this.state.strengths.filter(s => s !== subject.id)
 			})
 		}
 	}
 	onWeakCheckboxClicked(subject, isChecked) {
 		if (isChecked) {
 			this.setState({
-				weakness: [...this.state.alumno.weakness, subject.id]
+				weakness: [...this.state.weakness, subject.id]
 			})
 		} else {
 			this.setState({
-				weakness: this.state.alumno.weakness.filter(s => s !== subject.id)
+				weakness: this.state.weakness.filter(s => s !== subject.id)
 			})
 		}
 	}
@@ -120,7 +114,6 @@ export class CreateStudentForm extends Component {
 
 
 	componentDidMount() {
-		this.props.getSubjects();
 		this.props.getEducationLevel();
 	}
 
@@ -208,10 +201,10 @@ export class CreateStudentForm extends Component {
 							<label style={{ fontSize: "1.7em" }} htmlFor="nivelEducativo">Nivel educativo</label>
 							<div style={{ display: 'flex', justifyContent: 'center' }} className="form-group">
 								{
-									this.props.educationLevel ?
+									this.educationLevel ?
 										this.props.educationLevel.map(level => <LevelEducation initialState={false} level={level} onChange={this.showGrade} required />)
 										:
-										''
+										'No se encontraron niveles educativos'
 								}
 							</div>
 							{
@@ -252,7 +245,7 @@ export class CreateStudentForm extends Component {
 														(
 															Array.isArray(this.state.subjectsId) && this.state.subjectsId.length > 0) ? 
 																this.state.subjectsId.map(subject => {
-																	if (this.state.alumno.weakness.includes(subject) === false) return (
+																	if (this.state.weakness.includes(subject) === false) return (
 																		<StrengthCheckbox key={subject + 'strength'} initialState={false} subject={this.state.subjectsXLevel.find(e => Number(e.id) === Number(subject))} onChange={this.onStrengthCheckboxClicked} required />
 																	)
 																}
@@ -266,7 +259,7 @@ export class CreateStudentForm extends Component {
 													{
 														(Array.isArray(this.state.subjectsId) && this.state.subjectsId.length > 0) ? 
 															this.state.subjectsId.map(subject => {
-																if (this.state.alumno.strengths.includes(subject) === false) return (
+																if (this.state.strengths.includes(subject) === false) return (
 																	<WeakCheckbox key={subject + 'weak'} initialState={false} subject={this.state.subjectsXLevel.find(e => e.id === subject)} onChange={this.onWeakCheckboxClicked} required />
 																)
 																else return null;
@@ -317,13 +310,11 @@ export class CreateStudentForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	subjects: state.subjects.subjects,
 	educationLevel: state.educationLevel.educationLevel
 });
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getSubjects: () => dispatch(getSubjects()),
 		postStudent: (student) => dispatch(postStudent(student)),
 		getEducationLevel: () => dispatch(getEducationLevel())
 	};
