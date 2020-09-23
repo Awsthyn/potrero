@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import styles from './VoluntarioForm.module.css';
 
@@ -34,6 +35,7 @@ export default class VolunteerForm extends React.Component {
 		}
 	}
 	render() {
+		console.log(moment("20111031", "YYYYMMDD").fromNow())
 		var control;
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;
