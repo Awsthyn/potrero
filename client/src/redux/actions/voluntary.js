@@ -2,6 +2,7 @@ import axios from 'axios';
 import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VOLUNTEER, ADD_SUBJECTS_VOLUNTEER} from '../constants';
 // Agrega un Voluntario --> Crea Calendario --> Envía Mail de Bienvenida 
 export function postVoluntary(voluntary, subjects, schedule) {
+	console.log(voluntary)
 	return function (dispatch) {
 		console.log(subjects);
 		console.log(schedule);

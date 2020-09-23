@@ -123,7 +123,7 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime, rende
 									/>
 								);
 							})}
-							{days.length < 2 ? <button className={style.accordionButton} onClick={e => handleOnClick(e)}> + </button> : null}
+							{(typeof days === 'string' || days.length < 2) ? <button className={style.accordionButton} onClick={e => handleOnClick(e)}> + </button> : null}
 						</span>
 					) : null}
 					</Typography>

@@ -48,7 +48,8 @@ class CargarArchivos extends Component{
 					this.props.postVoluntary(this.state.info, materias, schedule);				
 					localStorage.removeItem('datos')
                localStorage.removeItem('schedule')
-               localStorage.removeItem('materias')
+					localStorage.removeItem('materias')
+					localStorage.removeItem('nivel')
 					this.props.history.push('/voluntarios/confirmacion')
 					swal("Tu solicitud ha sido enviada!", {
 						icon: "success",
