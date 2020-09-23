@@ -20,6 +20,9 @@ import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
 import Chart from './components/admin/Chart';
+import StudentCard from './components/student/StudentCard/StudentCard';
+
+
 
 class App extends React.Component {
   
@@ -53,9 +56,14 @@ class App extends React.Component {
 
 			<Route exact path="/login/:token" component={ResetPassword}/>
 
+		{/* //// RUTAS PARA TESTEAR / VISUALIZAR COMPONENTES EN CONSTRUCCIÓN. BORRAR LUEGO. //// */}
             <Route
         path="/chart"
         component = {Chart} />
+
+		<Route
+        path="/studentCard"
+        component = {StudentCard} />
 		</div>
 	);
 	}

@@ -2,7 +2,43 @@ const server = require("express").Router();
 const Sequelize = require("sequelize");
 
 //const {conn} = require("../db")
-const { Student, StudentSchedule, User, UserSchedule, Subject, Class } = require("../db.js");
+const { StudentSchedule, User, UserSchedule, Subject, Class } = require("../db.js");
+
+//merge(): une intervalos de números.. Ej: [[1,3],[2,6],[8,10]] => [[1,6],[8,10]]
+function merge(arr) {
+    // copy and sort the array
+    var result = arr.slice().sort(function(a, b) {
+            return a[0] > b[0];
+        }),
+        i = 0;
+
+    while(i < result.length - 1) {
+        var current = result[i],
+            next = result[i+1];
+
+        // check if there is an overlapping
+        if(current[1] >= next[0]) {
+            current[1] = Math.max(current[1], next[1]);
+            // remove next
+            result.splice(i+1, 1);
+        } else {
+            // move to next
+            i++;
+        }
+    }
+    return result;
+};
+
+//findFreeinterval() devuelve un array con los intervalos no overlapeados.. ej: [[1,3],[5,6],[7,9]] => [[3,5],[6,7]]
+function findFreeinterval(arr){
+    let disponible = []
+    for(let i = 1; i < arr.length; i++){
+        prevEnd = arr[i - 1][1]
+        currStart = arr[i][0] 
+        if (prevEnd < currStart) disponible.push([prevEnd, currStart])
+    }
+    return disponible
+}
 
 
 server.get('/:studentId/:subject', (req, res) => {
@@ -25,10 +61,10 @@ server.get('/:studentId/:subject', (req, res) => {
               },
             where: {
                 state: {
-                    [Sequelize.Op.in]: ["aceptado", "admin", "pendiente"]//!SACAR PENDIENTE, LO USÉ COMO PRUEBA. LOS ADMIN DAN CLASES?
+                    [Sequelize.Op.in]: ["aceptado", "admin"]
                 },
                 isActive: {
-                    [Sequelize.Op.in]: [true, false]
+                    [Sequelize.Op.in]: [true]
                 }
             },
             include: [{
@@ -42,9 +78,6 @@ server.get('/:studentId/:subject', (req, res) => {
                 where: {
                     id: subject
                 }
-            },
-            {
-                model: Class,
             }
             ]
         } 
@@ -109,7 +142,24 @@ server.get('/:studentId/:subject', (req, res) => {
             }})
 
         ])}))
-        .then(data => res.json(data))
+        .then(data => {
+            //Creo una variable que va a almacenar los intervalos de tiempo libres
+            let disponible = []
+            data.map(m => {
+                let array = []
+                //El primer elemento de array es [0, startTime].. necesario para detectar intervalos de tiempos libres
+                array.push([0,Number(m[0].startTime)])
+                //Coloco todos los intervalos de tiempo de las clases
+                m[1].map(h => array.push([Number(h.duration[0].value), Number(h.duration[1].value)]))
+                //El último elemento de array es [endTime, 23].. necesario para detectar intervalos de tiempos libres
+                array.push([Number(m[0].endTime), 23])
+                array = merge(array)
+                let freeIntervalStore = findFreeinterval(array)
+                freeIntervalStore.length > 0  ? disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay }) : null
+                
+            })
+
+            res.json(disponible)})
         
     })    
 })
