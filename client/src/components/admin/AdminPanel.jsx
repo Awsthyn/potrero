@@ -27,11 +27,14 @@ const useStyles = makeStyles({
 });
 
 export default () => {
-  const classes = useStyles();
-  return (
-    <div style={{width:'100%'}} className={classes.root}>
-      <h1 className={classes.font}>Asistencia de alumnos</h1>
-      <img className={classes.img} src={estadisticas} alt='' />
-    </div>
-  );
-};
+    const classes = useStyles()
+             return    (
+                 <>
+                 <div className={classes.root}>
+                    
+                     <h1 className= {classes.font}>Asistencia de alumnos</h1>
+                    <img className = {classes.img} src = {estadisticas} alt = ""/>
+                </div>
+                </>
+                )
+        }
