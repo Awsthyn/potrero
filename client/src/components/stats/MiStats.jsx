@@ -11,19 +11,22 @@ class MiStats extends React.Component {
     dataDelay: [],
     datos: [],
     opciones: [],
+    total: 0,
+    promedioAsistencias: 0,
+    promedioInasistencias: 0,
+    promedioTardanzas: 0,
   };
 
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/assistances");
     var respuesta = await peticion.json();
-    // console.log(respuesta)
     var dataAssistance = [];
     var dataInassistance = [];
     var dataDelay = [];
     this.setState({
       respuesta: respuesta,
     });
-
+    
     dataAssistance.push(respuesta.assistance);
     dataInassistance.push(respuesta.inassistance);
     dataDelay.push(respuesta.delay);
@@ -33,15 +36,18 @@ class MiStats extends React.Component {
       dataAssistance: dataAssistance,
       dataInassistance: dataInassistance,
       dataDelay: dataDelay,
+      total: respuesta.total,
     });
-    // console.log("Soy dataAssistance",this.state.dataAssistance)
-    // console.log("Soy dataInassistance",this.state.dataInassistance)
-    // console.log("Soy delay",this.state.dataDelay)
+  
+    console.log("Soy el total ", this.state.total)
+    this.state.promedioAsistencias = this.state.dataAssistance / this.state.total;
+    this.state.promedioInasistencias = this.state.dataInassistance / this.state.total;
+    this.state.promedioTardanzas = this.state.dataDelay / this.state.total;
   }
 
   getChartData() {
     const datos = {
-      labels: ["Asistencias", "Inasistencias", "Tardanzas"],
+      labels: ["Asistencias " + this.state.promedioAsistencias * 100 + "%", "Inasistencias " + this.state.promedioInasistencias * 100 + "%", "Tardanzas " + this.state.dataDelay + "%"],
       datasets: [
         {
           label: "Asistencias totales",

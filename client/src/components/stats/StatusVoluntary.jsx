@@ -5,60 +5,46 @@ import * as actions from "../../redux/actions/stats.js";
 
 class StatusVoluntary extends React.Component {
   state = {
-    respuesta: [],
-    dataAssistance: [],
-    dataInassistance: [],
-    dataDelay: [],
-    datos: [],
-    opciones: [],
+    totalAdvisors: 0,
+    totalAdvisorsActives: 0,
+    totalAdvisorsInactives: 0,
+    promedioActives: 0,
+    promedioInactives: 0,
   };
-
+  
   async peticion() {
-    var peticion = await fetch("http://localhost:3001/stats/assistances");
+    var peticion = await fetch("http://localhost:3001/stats/advisorstatus");
     var respuesta = await peticion.json();
-    // console.log(respuesta)
-    var dataAssistance = [];
-    var dataInassistance = [];
-    var dataDelay = [];
+    console.log(respuesta)
     this.setState({
-      respuesta: respuesta,
+      totalAdvisors: respuesta.totalAdvisors,
+      totalAdvisorsActives: respuesta.totalAdvisorsActives,
+      totalAdvisorsInactives: respuesta.totalAdvisorsInactives,
     });
-
-    dataAssistance.push(respuesta.assistance);
-    dataInassistance.push(respuesta.inassistance);
-    dataDelay.push(respuesta.delay);
-
-    this.setState({
-      respuesta: respuesta,
-      dataAssistance: dataAssistance,
-      dataInassistance: dataInassistance,
-      dataDelay: dataDelay,
-    });
-    // console.log("Soy dataAssistance",this.state.dataAssistance)
-    // console.log("Soy dataInassistance",this.state.dataInassistance)
-    // console.log("Soy delay",this.state.dataDelay)
+    
+    this.state.promedioActives = this.state.totalAdvisorsActives / this.state.totalAdvisors;
+    this.state.promedioInactives =  this.state.totalAdvisorsInactives / this.state.totalAdvisors;
   }
 
   getChartData() {
     const datos = {
-      labels: ["Activos", "Inactivos"],
+      labels: ["Activos " + this.state.promedioActives * 100 + "%", "Inactivos " + this.state.promedioInactives * 100 + "%"],
       datasets: [
         {
           label: "Asesores",
           data: [
-            this.state.respuesta.assistance,
-            this.state.respuesta.inassistance,
-            this.state.respuesta.assistance.delay,
+            this.state.totalAdvisorsActives,
+            this.state.totalAdvisorsInactives
           ],
           backgroundColor: [
-            "rgba(255, 99 , 132, 0.6)",
-            "rgba(54, 162 , 235, 0.6)",
-            "rgba(153, 102 , 255, 0.6)",
+            "rgba(73, 43, 196, 0.6)",
+            "rgba(140, 198, 62, 0.6)",
+            "rgba(71, 165, 214, 0.6)",
           ],
         },
       ],
     };
-    //   console.log("Soy datos" ,datos)
+
     const opciones = {
       responsive: true,
       maintainAspectRatio: false,

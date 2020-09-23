@@ -7,7 +7,7 @@ import {makeStyles} from '@material-ui/styles';
 import MiStats from '../stats/MiStats.jsx';
 import Demands from '../stats/Demands.jsx';
 import Offers from '../stats/Offers';
-import StatusVoluntary from '../stats/StatusVoluntary';
+import StatusVoluntary from '../stats/StatusVoluntary.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 import * as actions from '../../redux/actions/stats.js';
