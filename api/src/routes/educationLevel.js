@@ -1,14 +1,14 @@
 const server = require("express").Router();
 
 // TRAEMOS LAS MATERIAS DE LA BASE DE DATOS
-const { EducationLevel, AcademicLevel } = require("../db.js");
+const { EducationLevel, AcademicLevel, Subject } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
 //LISTA LAS MATERIAS POR AÑO
 server.get("/", (req, res) => {
-    EducationLevel.findAll({
+  EducationLevel.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
@@ -18,6 +18,14 @@ server.get("/", (req, res) => {
         attributes: {
           exclude: ["createdAt", "updatedAt", "academicLeveltXSubject"],
         },
+        include: [
+          {
+            model: Subject,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "academicLeveltXSubject"],
+            },
+          },
+        ],
       },
     ],
   })

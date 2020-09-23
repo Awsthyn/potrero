@@ -29,8 +29,9 @@ export function postStudent(student) {
 			.post(`http://localhost:3001/students`, student, {withCredentials: true})
 			.then(res => {
 				dispatch({type: ADD_STUDENT, payload: res.data})
-				window.location= "/admin/student"
+				// window.location= "/admin/student"
 			})
+			// .then(() => window.history.go(-1))
 			.catch(err => console.log(err));
 	};
 }

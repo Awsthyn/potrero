@@ -29,13 +29,13 @@ VALUES(7, 'Practicas del Lenguaje', DEFAULT, DEFAULT);
 -- QUERY PARA STUDENTS
 
 INSERT INTO students
-VALUES(1, 'Don', 'Carlitos', '1152142506','carlos@gmail.com', 'Maria Stephenson', false, 'Literatura', 'Matematicas', 'Futbol', 'Ayudar', true, DEFAULT, DEFAULT);
+VALUES(1, 'Don', 'Carlitos', '1152142506','carlos@gmail.com', 'Maria', 'Stephenson', '1152252406', 'maria@gmail.com', false, 'Literatura', 'Matematicas', 'Futbol', 'Ayudar', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(2, 'Jose', 'Pepito', '1120424223', 'pepito@gmail.com', 'Josefa Johnson', false, 'Matematicas', 'Literatura', 'Basquet', 'Emprender', true, DEFAULT, DEFAULT);
+VALUES(2, 'Jose', 'Pepito', '1120424223', 'pepito@gmail.com', 'Josefa', 'Johnson', '1158584747',, 'josefa@gmail.com', false, 'Matematicas', 'Literatura', 'Basquet', 'Emprender', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(3, 'Juan', 'Perez', '112222506','juan@gmail.com', 'Maria Perez', false, 'Literatura', 'Matematicas', 'Futbol', 'Aprender cosas nuevas', true, DEFAULT, DEFAULT);
+VALUES(3, 'Juan', 'Perez', '112222506','juan@gmail.com', 'Maria', 'Perez', '1125454547', 'maria@gmail.com', false, 'Literatura', 'Matematicas', 'Futbol', 'Aprender cosas nuevas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(4, 'Juana', 'Perez', '1100124223', 'juana@gmail.com', 'José Perez', false, 'Matematicas', 'Literatura', 'Basquet', 'Superarse día a día', true, DEFAULT, DEFAULT);
+VALUES(4, 'Juana', 'Perez', '1100124223', 'juana@gmail.com', 'José', 'Perez', '1126232524', 'jose@gmail.com', false, 'Matematicas', 'Literatura', 'Basquet', 'Superarse día a día', true, DEFAULT, DEFAULT);
 
 -- QUERY PARA TYPEOFDIFFICULTIES
 
@@ -114,12 +114,58 @@ VALUES(2, 'Secundaria', DEFAULT, DEFAULT);
 
 -- QUERY PARA ACADEMICLEVELXSUBJECT
 INSERT INTO "academicLevels"
-VALUES(1,'Primer Año', DEFAULT,DEFAULT, 1);
+VALUES(DEFAULT,'Primer Grado', DEFAULT,DEFAULT, 1);
 INSERT INTO "academicLevels"
-VALUES(2,'Segundo Año', DEFAULT, DEFAULT, 2);
+VALUES(DEFAULT,'Primer Grado', DEFAULT,DEFAULT, 1);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Segundo Grado', DEFAULT,DEFAULT, 1);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Tercer Grado', DEFAULT,DEFAULT, 1);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Cuarto Grado', DEFAULT,DEFAULT, 1);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Quinto Grado', DEFAULT,DEFAULT, 1);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Sexto Grado', DEFAULT,DEFAULT, 1);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Septimo Grado', DEFAULT,DEFAULT, 1);
+
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Primer Año', DEFAULT, DEFAULT, 2);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Segundo Año', DEFAULT, DEFAULT, 2);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Tercer Año', DEFAULT, DEFAULT, 2);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Cuarto Año', DEFAULT, DEFAULT, 2);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Quinto Año', DEFAULT, DEFAULT, 2);
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Sexto Año', DEFAULT, DEFAULT, 2);
 
 -- QUERY PARA EDUCATIONLEVELTXSUBJECT
 INSERT INTO "academicLeveltXSubject"
-VALUES(1,1);
+VALUES(2,1);
 INSERT INTO "academicLeveltXSubject"
-VALUES(2,2);
+VALUES(3,1);
+INSERT INTO "academicLeveltXSubject"
+VALUES(4,1);
+INSERT INTO "academicLeveltXSubject"
+VALUES(5,1);
+INSERT INTO "academicLeveltXSubject"
+VALUES(6,1);
+INSERT INTO "academicLeveltXSubject"
+VALUES(7,1);
+
+INSERT INTO "academicLeveltXSubject"
+VALUES(1,2);
+INSERT INTO "academicLeveltXSubject"
+VALUES(3,2);
+INSERT INTO "academicLeveltXSubject"
+VALUES(4,2);
+INSERT INTO "academicLeveltXSubject"
+VALUES(5,2);
+INSERT INTO "academicLeveltXSubject"
+VALUES(6,2);
+INSERT INTO "academicLeveltXSubject"
+VALUES(7,2);

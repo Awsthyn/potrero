@@ -19,14 +19,22 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    tutor: {
+    tutorFirstName: {
       type: DataTypes.STRING,
       allowNull: false,
-    },/*
+    },
     tutorLastName: {
       type: DataTypes.STRING,
       allowNull: false,
-    },*/
+    },
+    tutorPhone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    tutorEmail: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     difficulty: {
       //En caso de true desplegar una nueva lista )?
       type: DataTypes.BOOLEAN,
@@ -68,7 +76,10 @@ module.exports = (sequelize) => {
     lastName,
     phone,
     email,
-    tutor,
+    tutorFirstName,
+    tutorLastName,
+    tutorEmail,
+    tutorPhone,
     difficulty,
     typeOfDifficulty,
     weakness,
@@ -82,7 +93,10 @@ module.exports = (sequelize) => {
       lastName,
       phone,
       email,
-      tutor,
+      tutorFirstName,
+      tutorLastName,
+      tutorEmail,
+      tutorPhone,
       difficulty,
       weakness,
       strengths,
