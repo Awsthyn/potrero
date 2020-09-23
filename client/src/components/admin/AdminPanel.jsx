@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import estadisticas from './assets/estadisticas.png';
+import AdminDrawer from './AdminDrawer';
 
 const VIOLETA = '#492BC4';
 const VERDE = '#8CC63E';
@@ -27,11 +28,15 @@ const useStyles = makeStyles({
 });
 
 export default () => {
-  const classes = useStyles();
-  return (
-    <div style={{width:'100%'}} className={classes.root}>
-      <h1 className={classes.font}>Asistencia de alumnos</h1>
-      <img className={classes.img} src={estadisticas} alt='' />
-    </div>
-  );
-};
+    const classes = useStyles()
+             return    (
+                 <>
+                <AdminDrawer/>
+                 <div className={classes.root}>
+                    
+                     <h1 className= {classes.font}>Asistencia de alumnos</h1>
+                    <img className = {classes.img} src = {estadisticas} alt = ""/>
+                </div>
+                </>
+                )
+        }
