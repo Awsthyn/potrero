@@ -7,6 +7,7 @@ class Offers extends React.Component {
   state = {
     datos: [],
     opciones: [],
+    total: 0,
   };
 
   async peticion() {
@@ -19,11 +20,11 @@ class Offers extends React.Component {
     var dataDelay = [];
     this.setState({
       offers: ofertas.onlyDemandOffert,
+      total: ofertas.offertSubjects,
     });
   }
 
   getChartData() {
-    console.log("State offers", this.state);
     const demOffer = [];
     this.state.offers.forEach(e => {
        let nombre = Object.keys(e)
@@ -33,11 +34,9 @@ class Offers extends React.Component {
     const countdemOffer = []
     for(let i= 0; i < this.state.offers.length; i++){
         for (const property in this.state.offers[i]) {
-          //console.log(property);
           countdemOffer.push(this.state.offers[i][property])
         }
       } 
-      console.log(countdemOffer);
 
     const datos = {
       //hacer map para labels
@@ -48,6 +47,12 @@ class Offers extends React.Component {
           data: countdemOffer,
           fill: false,
           backgroundColor: [
+            "rgba(73, 43, 196, 0.6)",
+            "rgba(140, 198, 62, 0.6)",
+            "rgba(71, 165, 214, 0.6)",
+            "rgba(73, 43, 196, 0.6)",
+            "rgba(140, 198, 62, 0.6)",
+            "rgba(71, 165, 214, 0.6)",
             "rgba(73, 43, 196, 0.6)",
             "rgba(140, 198, 62, 0.6)",
             "rgba(71, 165, 214, 0.6)",
