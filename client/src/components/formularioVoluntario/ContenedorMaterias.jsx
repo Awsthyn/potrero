@@ -1,10 +1,10 @@
 import React from 'react';
-import {getSubjects} from '../../redux/actions/subject.js';
 import {connect} from 'react-redux';
 import Materias from './Materias';
 import Button from '@material-ui/core/Button'
 import style1 from './Materias.module.css';
 import styles from './VoluntarioForm.module.css';
+import { getAcademicLevels, filterByLevel } from '../../redux/actions/academicLevel.js';
 
 class ContenedorMaterias extends React.Component {
 	constructor(props) {
@@ -28,18 +28,33 @@ class ContenedorMaterias extends React.Component {
 			});
 		}
 	}
-	
 	continuar(){
 		this.props.history.push("/voluntarios/cargararchivos")
 		localStorage.setItem('materias', JSON.stringify(this.state.materia))
 	}
 
 	componentDidMount(){
-	this.props.getSubjects()
+		this.props.getAcademicLevels()
+		let nivel = JSON.parse(localStorage.getItem('nivel'))
+		if(nivel.Primaria){
+			this.props.filterByLevel(nivel.Primaria)
+		}else{
+			this.props.filterByLevel(nivel.Secundaria)
+		}
+		
+		// if(nivel.Primaria){
+		// 	let mats = this.props.academicLevels.filter(a => a.name === nivel.Primaria)
+		// 	this.setState({materiasPorNivel: mats[0]?.subjects})
+		// }else{
+		// 	let mats = this.props.academicLevels.filter(a => a.name === nivel.Secundaria)
+		// 	this.setState({materiasPorNivel: mats[0]?.subjects})
+		// }
 	}
+
 	render() {
+		console.log(this.props.academicLevels)
+		console.log(this.props.materiasPorNivel)
 		var control;
-		var materias = this.props.subjects
 		return (
 			<div className={styles.formInput} >
 				<span className={styles.frase} style={{width: '320px', right: '12%'}} >  
@@ -48,7 +63,9 @@ class ContenedorMaterias extends React.Component {
 				</span>
 
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
-				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>{ materias?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }</div>
+				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>
+					{ this.props.materiasPorNivel?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }
+				</div>
 				
 				<Button
 						disabled={control ? true : false}
@@ -67,7 +84,8 @@ class ContenedorMaterias extends React.Component {
 }
 function mapStateToProps(state){
 	return {
-		subjects: state.subjects.subjects
+		academicLevels: state.academic.academicLevels,
+		materiasPorNivel: state.academic.materias
 	}
 }
-export default connect(mapStateToProps, {getSubjects})(ContenedorMaterias);
+export default connect(mapStateToProps, {getAcademicLevels, filterByLevel})(ContenedorMaterias);

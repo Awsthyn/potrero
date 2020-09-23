@@ -1,9 +1,9 @@
-const Sequelize = require("sequelize");
-const { DataTypes } = require("sequelize");
-const bcrypt = require("bcrypt");
+const Sequelize = require('sequelize');
+const { DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 module.exports = (sequelize) => {
-  const User = sequelize.define("user", {
+  const User = sequelize.define('user', {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,8 +17,8 @@ module.exports = (sequelize) => {
       allowNull: true,
       validate: {
         is: {
-          args: ["(.)"],
-          msg: "Inserte un valor dentro del password.",
+          args: ['(.)'],
+          msg: 'Inserte un valor dentro del password.',
         },
       },
     },
@@ -53,9 +53,21 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    frontDNI: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    backDNI: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    profilePicture: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     state: {
-      type: DataTypes.ENUM(["pendiente", "aceptado", "rechazado", "admin"]),
-      defaultValue: "pendiente",
+      type: DataTypes.ENUM(['pendiente', 'aceptado', 'rechazado', 'admin']),
+      defaultValue: 'pendiente',
     },
     isActive: {
       type: DataTypes.BOOLEAN,
@@ -78,6 +90,9 @@ module.exports = (sequelize) => {
     phone,
     linkedin,
     cv,
+    frontDNI,
+    backDNI,
+    profilePicture,
     state,
     isActive,
     resetPasswordToken,
@@ -94,6 +109,9 @@ module.exports = (sequelize) => {
       phone,
       linkedin,
       cv,
+      frontDNI,
+      backDNI,
+      profilePicture,
       state,
       isActive,
       resetPasswordToken,
@@ -106,13 +124,13 @@ module.exports = (sequelize) => {
       .compare(password, this.password)
       .then((isValid) => isValid)
       .catch((err) => {
-        console.error("isPasswordValid:", err);
+        console.error('isPasswordValid:', err);
         return false;
       });
   };
 
   const hashPassword = (password) => {
-    console.info("hashPassword.password", password);
+    console.info('hashPassword.password', password);
     return new Promise((resolve, reject) => {
       bcrypt
         .hash(password, 8)
@@ -121,7 +139,7 @@ module.exports = (sequelize) => {
     });
   };
 
-  User.addHook("beforeCreate", (user, options, cb) => {
+  User.addHook('beforeCreate', (user, options, cb) => {
     if (user.password) {
       return hashPassword(user.password).then((hash) => (user.password = hash));
     } else {
@@ -129,8 +147,8 @@ module.exports = (sequelize) => {
     }
   });
 
-  User.addHook("beforeUpdate", (user, options, cb) => {
-    console.info("en el hook beforeUpdate:", user);
+  User.addHook('beforeUpdate', (user, options, cb) => {
+    console.info('en el hook beforeUpdate:', user);
     if (user.password) {
       return hashPassword(user.password).then((hash) => (user.password = hash));
     } else {

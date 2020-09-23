@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import {Redirect} from 'react-router-dom';
 import styles from './VoluntarioForm.module.css';
@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
     const [secundario, setSecundario] = useState(false);
     const [state, setState] = useState({});
     const [redirect, setRedirect] = useState(false);
-    console.log(academicLevels)
     
     const handlePrimario = () => {
         getAcademicLevels()
@@ -39,9 +38,19 @@ import { connect } from 'react-redux';
             [nivel] : e.target.id
         })
     }
-
-    var primaria = ["Primer grado","Segundo grado","Tercer grado","Cuarto grado","Quinto Grado","Sexto grado","Septimo grado"];
-    var secundaria = ["Primer año","Segundo año","Tercer año","Cuarto año","Quinto año", "Sexto año"];
+    useEffect(() => {
+        getAcademicLevels()
+        if(!state.Primaria && !state.Secundaria){
+            let newState = JSON.parse(localStorage.getItem('nivel'))
+            console.log(newState)
+                if(newState) {
+                    setState(newState)
+                    if(newState.Primaria) setPrimario(true)
+                    else{ setSecundario(true)}
+                }
+            }
+    }, [])
+    console.log(academicLevels)
     if (redirect) {
         return <Redirect to="/voluntarios/materias" />;
     }
@@ -52,7 +61,7 @@ import { connect } from 'react-redux';
 				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > ¿Cuál es el nivel educativo en el que podrías brindar asistencia? </span>
 				</span>
                 <div className={styles.formInput}>
-                <h4 style={{fontSize: '1rem', marginTop: '15px'}} > Escoge el nivel educativo en el cual podrías ayudar </h4>
+                <h4 style={{fontSize: '1rem', marginTop: '15px'}} > Escoge el máximo nivel educativo en el cual podrías ayudar </h4>
                 <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
                     { !secundario ? 
                         <div className={style.btnVolver}
@@ -85,14 +94,14 @@ import { connect } from 'react-redux';
                 <div className={styles.containerListNiveles}>
                 {
                     primario && !secundario ?  
-                    academicLevels.map((n, i) => { if(n?.educationLevel?.name === "Primaria"){
+                    academicLevels.map((n, i) => { if(n.educationLevel.name === "Primaria"){
                     return <div id={n.name} className={style.botonMateria} key={n.name} onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n.name ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n.name}</div>
                     }})
                     : null 
                 } 
                 {
                     secundario && !primario ? 
-                    academicLevels.map((n, i) => { if(n?.educationLevel?.name === "Secundaria"){
+                    academicLevels.map((n, i) => { if(n.educationLevel.name === "Secundaria"){
                         return <div id={n.name} className={style.botonMateria} key={n.name} onClick={(e) => handleOnClick(e,"Secundaria")} style={state.Secundaria === n.name ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n.name}</div>
                         }})
                         : null                    
@@ -106,6 +115,7 @@ import { connect } from 'react-redux';
                         type="submit"
                         value="Submit"
                         onClick={() => {
+                        localStorage.setItem('nivel', JSON.stringify(state))
                         setRedirect(true);
                         }}
                     >
@@ -121,7 +131,6 @@ import { connect } from 'react-redux';
 }
 
 function mapStateToProps(state){
-    console.log(state)
     return {
         academicLevels: state.academic.academicLevels,
     } 

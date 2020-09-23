@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Acordeon from './Acordeon';
@@ -9,9 +9,6 @@ export default function ContenedorCheckbox() {
 	const [expandedAll, setExpandedAll] = useState(false);
 	const [schedule, setSchedule] = useState([])
 
-	if (redirect) {
-		return <Redirect to="/voluntarios/niveles" />;
-	}
 	let dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'];
 	
 	const handleChange = (panel) => (event, isExpanded) => {
@@ -27,6 +24,16 @@ const setTime = (horarios, ultimo) => {
 	}
 }
 
+useEffect(() => {
+	if(!schedule.length){
+		let newState = JSON.parse(localStorage.getItem('schedule'))
+		console.log(newState)
+			if(newState) setSchedule(newState)
+		}
+}, [])
+if (redirect) {
+	return <Redirect to="/voluntarios/niveles" />;
+}
 	return (
 		<div>
 			<span className={style.frase}>  
@@ -36,10 +43,9 @@ const setTime = (horarios, ultimo) => {
 			<div className={style.formInput} id={style.scroll} >
 			<p style={{margin: '25px 0px', fontSize: '13px'}} > Los horarios límites para las clases son de 8:00 hs a 20:00 hs. Los rangos horarios no deben ser inferiores a 1 hora</p> 
 				<ul style={{marginTop: '10px'}} className={style.containerListDays}>
-					{ dias && dias.map((dia, idx) => (
+					{ dias.map((dia, idx) => (
 						<li className={style.itemList} key={idx}>
-							<Acordeon  dia={dia} key={idx} setTime={setTime}
-							handleChange={handleChange} expandedAll={expandedAll} />
+							<Acordeon  dia={dia} key={idx} setTime={setTime} handleChange={handleChange} expandedAll={expandedAll} render={schedule.filter(s => s.nameWeekDay === dia)} />
 						</li>
 						))}
 				</ul>

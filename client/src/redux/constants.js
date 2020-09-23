@@ -31,5 +31,5 @@ export const DELETE_DIFFICULTY = 'DELETE_DIFFICULTY';
 
 // Niveles academicos
 export const GET_ACADEMIC_LEVELS = 'GET_ACADEMIC_LEVELS';
-
 export const GET_USERS = "GET_USERS"
+export const FILTER_BY_LEVEL = "FILTER_BY_LEVEL"

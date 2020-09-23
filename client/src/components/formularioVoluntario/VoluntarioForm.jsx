@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import styles from './VoluntarioForm.module.css';
 
@@ -29,7 +29,8 @@ export default class VolunteerForm extends React.Component {
 	componentDidMount(){
 		if(!this.state.info.firstName){
 			let newState = JSON.parse(localStorage.getItem('datos'))
-			this.setState({info: newState})
+			if(newState) this.setState({info: newState})
+			else{ this.setState({info: {}})}
 		}
 	}
 	render() {
