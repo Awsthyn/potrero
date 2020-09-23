@@ -149,11 +149,7 @@ VALUES(2, 2);
 INSERT INTO "SubjectXUser"
 VALUES(1, 1);
 INSERT INTO "SubjectXUser"
-VALUES(2, 2);
-INSERT INTO "SubjectXUser"
 VALUES(1, 3);
-INSERT INTO "SubjectXUser"
-VALUES(2, 4);
 INSERT INTO "SubjectXUser"
 VALUES(1, 5);
 INSERT INTO "SubjectXUser"
