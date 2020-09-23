@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Acordeon from './Acordeon';
 import style from './VoluntarioForm.module.css';
 
-export default function ContenedorCheckbox() {
+export default function ContenedorCheckbox({history}) {
 	const [redirect, setRedirect] = useState(false);
 	const [expandedAll, setExpandedAll] = useState(false);
 	const [schedule, setSchedule] = useState([])
@@ -49,19 +49,26 @@ if (redirect) {
 						</li>
 						))}
 				</ul>
-			<Button
-				variant="contained"
-				className={style.testButton}
-            id={style.skere}
-				type="submit"
-				value="Submit"
-				onClick={() => {
-					setRedirect(true);
-					localStorage.setItem('schedule', JSON.stringify(schedule))
-				}}>
-				Continuar
-				<span style={{margin: '10px'}} className="material-icons">arrow_forward</span>
-			</Button>
+				<div style={{display: 'flex', alignItems: 'center'}}>
+					<div onClick={() => history.push('/voluntarios/formulario')} > 
+						<svg viewBox="0 0 16 16" className={style.leftArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+						</svg> 
+					</div>
+					<Button
+						variant="contained"
+						className={style.testButton}
+						id={style.skere}
+						type="submit"
+						value="Submit"
+						onClick={() => {
+							setRedirect(true);
+							localStorage.setItem('schedule', JSON.stringify(schedule))
+						}}>
+						Continuar
+						<span style={{margin: '10px'}} className="material-icons">arrow_forward</span>
+					</Button>
+					</div>
 				</div>
 		</div>
 	);

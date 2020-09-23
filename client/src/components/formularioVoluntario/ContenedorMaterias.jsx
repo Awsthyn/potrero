@@ -17,12 +17,10 @@ class ContenedorMaterias extends React.Component {
 	}
 	handleOnClick(id, e) {
 		if (e.target.style.backgroundColor === 'rgb(140, 198, 62)') {
-			e.target.style.backgroundColor = 'white';
 			this.setState(function (state) {
 				return {materia: state.materia.filter(m => m !== id)};
 			});
 		} else {
-			e.target.style.backgroundColor = 'rgb(140, 198, 62)';
 			this.setState({
 				materia: [...this.state.materia, id],
 			});
@@ -30,10 +28,6 @@ class ContenedorMaterias extends React.Component {
 	}
 	continuar(){
 		this.props.history.push("/voluntarios/cargararchivos")
-		let mat = JSON.parse(localStorage.getItem('materias'))
-		mat && mat.concat(this.state.materia)
-		let materias = new Set(mat)
-		console.log(materias)
 		localStorage.setItem('materias', JSON.stringify(this.state.materia))
 	}
 
@@ -70,20 +64,26 @@ class ContenedorMaterias extends React.Component {
 
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
 				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>
-					{ this.props.materiasPorNivel?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick} />) }
+					{ this.props.materiasPorNivel?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick} fondo={this.state.materia.filter(mat => mat === m.name)} />) }
 				</div>
-				
-				<Button
-						disabled={control ? true : false}
-						variant="contained"
-						className={styles.testButton}
-						id={styles.skere}
-						type="submit"
-						value="Submit"
-						onClick={() => this.continuar()}>
-						Continuar
-						<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
-					</Button>
+				<div style={{display: 'flex', alignItems: 'center'}}> 
+					<div onClick={() => this.props.history.push('/voluntarios/materias')} > 
+						<svg viewBox="0 0 16 16" className={styles.leftArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+						</svg> 
+					</div>
+					<Button
+							disabled={control ? true : false}
+							variant="contained"
+							className={styles.testButton}
+							id={styles.skere}
+							type="submit"
+							value="Submit"
+							onClick={() => this.continuar()}>
+							Continuar
+							<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
+						</Button>
+					</div>
 			</div>
 		);
 	}
