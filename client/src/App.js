@@ -30,15 +30,15 @@ class App extends React.Component {
   return (
 		<div className="App">
 			 {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
-			<Route exact path={['/voluntarios', '/admin', '/admin/voluntarios',
-			'/admin/usuarios', '/admin/materias', '/usuario/perfil', '/admin/estudiantes',
+			<Route exact path={['/admin/voluntarios','/admin/voluntarios/:id',
+			'/admin/usuarios', '/admin/materias', '/admin/estudiantes',
 			'/admin/estudiantes/agregar', '/admin/estudiantes/detalles/:id']}
-			component={NavBar} />
+			component={AdminNavBar} />
 			<Route exact path="/" component={Home} />
 			<Route path="/voluntarios" component={ContenedorForm} />
 			{/* <Route path="/admin" component={AdminDrawer} /> */}
-			<Route path="/admin" component={AdminNavBar} />
-			<AdminRoute exact path="/admin" component={AdminPanel}/>
+			<AdminRoute exact path="/admin" component={AdminDrawer}/>
+			<Route exact path="/admin" component={AdminPanel} />
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
 			<Route exact path="/admin/voluntarios/:id"  render={({match}) => <DetalleVoluntario  id={match.params.id}/>} />
 			<Route exact path="/admin/usuarios" component={TablaUsuarios} />
@@ -52,7 +52,7 @@ class App extends React.Component {
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
 			<Route exact path="/usuario/recuperar" component={PasswordRecovery} />
 			
-			<Route exact path="/admin" component={AdminDrawer} />
+			
 
 			<Route exact path="/login/:token" component={ResetPassword}/>
 
