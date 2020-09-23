@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
-import {Link,Redirect,Route} from 'react-router-dom';
+import {Link,useHistory} from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -20,8 +20,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
-
-
+import Icon from '@material-ui/core/Icon';
 
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import PieChartIcon from '@material-ui/icons/PieChart'
@@ -30,6 +29,17 @@ import Miembros from './MenuItemMiembros';
 import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import HomeIcon from '@material-ui/icons/Home';
 import { sessionLogout } from '../../redux/actions/session';
+
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import StarsTwoToneIcon from '@material-ui/icons/StarsTwoTone';
+import StarsRoundedIcon from '@material-ui/icons/StarsRounded';
+import SettingsApplicationsRoundedIcon from '@material-ui/icons/SettingsApplicationsRounded';
+import PieChartRoundedIcon from '@material-ui/icons/PieChartRounded';
+import logo from './assets/logo.png';
+import AssistantIcon from '@material-ui/icons/Assistant';
+
+
 const drawerWidth = 240;
 
 const VIOLETA = '#492BC4'
@@ -147,13 +157,14 @@ item:{
     padding:0,
 },
 link:{
-    padding: 0,
+    padding: 3,
     textDecoration:'none',
     color:'gray',
     '&:hover': {
         color:VIOLETA,
         textDecoration:'none',
      },
+
 },
 
 }));
@@ -164,6 +175,8 @@ function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const history = useHistory();
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -200,7 +213,7 @@ function MiniDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Admini
+            Admin
           </Typography>
 
                      <Link to= '/admin/' className={classes.link}>
@@ -250,22 +263,42 @@ function MiniDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+              <List>
+                    <ListItem onClick={() => history.push(`/`)}  button>
+                        <ListItemIcon className={classes.link} >
+                        <img style={{height:30,width:30}} src={logo} alt="" />
+                        </ListItemIcon>
+                        <ListItemText className={classes.link} primary={'El Potrero'} />
+                    </ListItem>
+              </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+                 <ListItem onClick={() => history.push(`/admin/panel`)} button >
+                    <ListItemIcon className={classes.link} ><PieChartRoundedIcon/></ListItemIcon>
+                    <ListItemText className={classes.link} primary={'Panel'} />
+                  </ListItem>
+
+                  <ListItem onClick={() => history.push(`/admin/voluntarios`)} button > 
+                    <ListItemIcon className={classes.link}><AssistantIcon/></ListItemIcon>
+                    <ListItemText className={classes.link} primary={'Voluntarios'} />
+                  </ListItem>
+
+                  <ListItem onClick={() => history.push(`/admin/estudiantes`)} button >
+                    <ListItemIcon className={classes.link}><LocalLibraryIcon/></ListItemIcon>
+                    <ListItemText className={classes.link} primary={'Estudiantes'} />
+                  </ListItem>
+
+                  <ListItem onClick={() => history.push(`/admin/usuarios`)} button >
+                    <ListItemIcon className={classes.link}> <SupervisedUserCircleRoundedIcon/></ListItemIcon>
+                    <ListItemText className={classes.link} primary={'Asesores'} />
+                  </ListItem>
+
+
+                  <ListItem onClick={() => history.push(`/admin/materias`)} button >
+                    <ListItemIcon className={classes.link}><SettingsApplicationsRoundedIcon/></ListItemIcon>
+                    <ListItemText className={classes.link} primary={'Gestion'} />
+                  </ListItem>
+
         </List>
       </Drawer>
       <main className={classes.content}>
