@@ -7,6 +7,7 @@ import {makeStyles} from '@material-ui/styles';
 import MiStats from '../stats/MiStats.jsx';
 import Demands from '../stats/Demands.jsx';
 import Offers from '../stats/Offers';
+import StatusVoluntary from '../stats/StatusVoluntary';
 import { useSelector, useDispatch } from 'react-redux';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 import * as actions from '../../redux/actions/stats.js';
@@ -53,6 +54,10 @@ export default () => {
                      <div className="stats">
                          <h3>Ofertas de materias</h3>
                      <Offers />
+                     </div>
+                     <div className="stats">
+                         <h3>Asesores</h3>
+                     <StatusVoluntary />
                      </div>
                 </div>
                 )
