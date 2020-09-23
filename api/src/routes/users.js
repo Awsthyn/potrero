@@ -208,14 +208,26 @@ server.post(
     if (!req.files) {
       usuario = req.body;
     }
-    else {
+    else if(req.files.cv && req.files.frontDNI){
       usuario = {
         ...req.body,
         cv: `${req.files.cv[0].filename}`,
         frontDNI: `${req.files.frontDNI[0].filename}`,
         backDNI: `${req.files.frontDNI[0].filename}`
-      };
-    }
+      }
+    }else if(req.files.cv){
+      usuario = {
+        ...req.body,
+        cv: `${req.files.cv[0].filename}`,
+        }
+      }else if(req.files.frontDNI){
+        usuario = {
+          ...req.body,
+          frontDNI: `${req.files.frontDNI[0].filename}`,
+          backDNI: `${req.files.frontDNI[0].filename}`
+        }
+      }
+    
     User.create(usuario)
       // .then((userCreated) => {
         // Se espera valores de Id's de Subjects Ejemplo: 1,2
@@ -259,30 +271,6 @@ server.post(
   }
 );
 
-// RELACIONA LAS MATERIAS CON USUARIOS
-server.post('/:id/subjects', (req, res) => {
-  var id = req.params.id;
-  var materias = req.body.subjects;
-  var user = User.findByPk(id);
-
-  materias.map((m, i) => {
-    var subject = Subject.findOne({
-      where: {
-        name: m,
-      },
-    });
-    Promise.all([user, subject])
-      .then((values) => {
-        var user = values[0];
-        var subject = values[1];
-        user.addSubject(subject);
-        if (i === arrayMateria.length - 1) res.send(user);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
-  });
-});
 
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
 server.put('/:id', (req, res) => {
@@ -318,30 +306,5 @@ server.put('/:id', (req, res) => {
       res.send(err);
     });
 });
-
-// // RELACIONA LAS MATERIAS CON USUARIOS
-// server.post('/:id/subjects', (req, res) => {
-//   var id = req.params.id;
-//   var materias = req.body.subjects;
-//   var user = User.findByPk(id);
-
-//   materias.map((m, i) => {
-//     var subject = Subject.findOne({
-//       where: {
-//         name: m,
-//       },
-//     });
-//     Promise.all([user, subject])
-//       .then((values) => {
-//         var user = values[0];
-//         var subject = values[1];
-//         user.addSubject(subject);
-//         if (i === arrayMateria.length - 1) res.send(user);
-//       })
-//       .catch((err) => {
-//         res.send(err);
-//       });
-//   });
-// });
 
 module.exports = server;

@@ -24,6 +24,10 @@ const useStyles = makeStyles({
         fontFamily: 'Poppins',
     },
     drawerPaper:{
+            position:'fixed',
+            alignItems:'baseline',
+            justifyContent:'center',
+            marginTop:50,
             width: 'inherit',
             justifyContent:'center'
     },
@@ -37,10 +41,14 @@ const useStyles = makeStyles({
          },
     },
     logo:{
+          
             width:190,
             marginTop:0,
             padding:0,
 
+    },
+    icons:{
+        color: 'rgb(73 43 196)',
     }
 })
 
@@ -60,14 +68,14 @@ function AdminDrawer() {
             <List>
                 <Link to= '/' className={classes.link}>
                             <ListItem button>
-                                <ListItemIcon >
+                                <ListItemIcon className={classes.icons}>
                                         <img className={classes.logo} src={logo} alt=""/>
                                 </ListItemIcon>
                             </ListItem>
                     </Link>
                     <Link to= '/admin' className={classes.link}>
                             <ListItem button>
-                                <ListItemIcon >
+                                <ListItemIcon className={classes.icons}>
                                         <PieChartRoundedIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Panel'/>
@@ -76,7 +84,7 @@ function AdminDrawer() {
                     </Link>
                     <Link to= '/admin/voluntarios' className={classes.link}>
                             <ListItem button>
-                                <ListItemIcon >
+                                <ListItemIcon className={classes.icons} >
                                         <StarsRoundedIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Voluntarios'/>
@@ -85,7 +93,7 @@ function AdminDrawer() {
                     </Link>
                     <Link to= '/admin/estudiantes' className={classes.link}>
                             <ListItem button>
-                                <ListItemIcon >
+                                <ListItemIcon className={classes.icons} >
                                         <LocalLibraryIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Estudiantes'/>
@@ -94,7 +102,7 @@ function AdminDrawer() {
                     </Link>
                     <Link to= '/admin/usuarios' className={classes.link}>
                             <ListItem button>
-                                <ListItemIcon >
+                                <ListItemIcon className={classes.icons}>
                                         <SupervisedUserCircleRoundedIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Asesores'/>
@@ -103,7 +111,7 @@ function AdminDrawer() {
                     </Link>
                     <Link to= '/admin/materias' className={classes.link}>
                             <ListItem button>
-                                <ListItemIcon >
+                                <ListItemIcon className={classes.icons}>
                                         <SettingsApplicationsRoundedIcon/>
                                 </ListItemIcon>
                                 <ListItemText primary='Gestion'/>

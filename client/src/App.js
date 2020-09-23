@@ -19,12 +19,19 @@ import AdminDrawer from './components/admin/AdminDrawer';
 import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
+import Chart from './components/admin/Chart';
+import StudentCard from './components/student/StudentCard/StudentCard';
 
-function App() {
-	return (
+
+
+class App extends React.Component {
+  
+
+  render(){
+  return (
 		<div className="App">
 			 {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
-			<Route exact path={['/', '/voluntarios', '/admin', '/admin/voluntarios',
+			<Route exact path={['/voluntarios', '/admin', '/admin/voluntarios',
 			'/admin/usuarios', '/admin/materias', '/usuario/perfil', '/admin/estudiantes',
 			'/admin/estudiantes/agregar', '/admin/estudiantes/detalles/:id']}
 			component={NavBar} />
@@ -48,8 +55,18 @@ function App() {
 			<Route exact path="/usuario/recuperar" component={PasswordRecovery} />
 
 			<Route exact path="/login/:token" component={ResetPassword}/>
+
+		{/* //// RUTAS PARA TESTEAR / VISUALIZAR COMPONENTES EN CONSTRUCCIÓN. BORRAR LUEGO. //// */}
+            <Route
+        path="/chart"
+        component = {Chart} />
+
+		<Route
+        path="/studentCard"
+        component = {StudentCard} />
 		</div>
 	);
+	}
 }
 
 

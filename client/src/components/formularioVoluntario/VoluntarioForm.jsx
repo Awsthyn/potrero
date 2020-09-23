@@ -4,29 +4,35 @@ import Button from '@material-ui/core/Button';
 import styles from './VoluntarioForm.module.css';
 
 export default class VolunteerForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      info: {},
-      redirect: false,
-    };
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleOnClick = this.handleOnClick.bind(this);
-  }
-  handleOnChange(e) {
-    this.setState({
-      info: { ...this.state.info, [e.target.name]: e.target.value },
-    });
-  }
-  handleOnClick() {
-    if (this.state.info) {
-      localStorage.setItem('datos', JSON.stringify(this.state.info));
-    }
-    this.setState(function () {
-      return { redirect: true };
-    });
-  }
-
+	constructor(props) {
+		super(props);
+		this.state = {
+			info: {},
+			redirect: false,
+		};
+		this.handleOnChange = this.handleOnChange.bind(this);
+		this.handleOnClick = this.handleOnClick.bind(this);
+	}
+	handleOnChange(e) {
+		this.setState({
+			info: {...this.state.info, [e.target.name]: e.target.value},
+		});
+	}
+	handleOnClick() {
+		if(this.state.info){
+			localStorage.setItem('datos', JSON.stringify(this.state.info));
+		}
+		this.setState(function () {
+			return {redirect: true};
+		});	
+	}
+	componentDidMount(){
+		if(!this.state.info.firstName){
+			let newState = JSON.parse(localStorage.getItem('datos'))
+			if(newState) this.setState({info: newState})
+			else{ this.setState({info: {}})}
+		}
+	}
 	render() {
 		var control;
 		if (this.state.redirect) {
@@ -48,6 +54,7 @@ export default class VolunteerForm extends React.Component {
 							name="firstName"
 							className={styles.input}
 							placeholder="Nombre"
+							value={this.state.info.firstName}
 							// inputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
@@ -58,6 +65,7 @@ export default class VolunteerForm extends React.Component {
 							name="lastName"
 							className={styles.input}
 							placeholder="Apellido"
+							value={this.state.info.lastName}
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
@@ -67,6 +75,7 @@ export default class VolunteerForm extends React.Component {
 							type="date"
 							name="birthday"
 							className={styles.input}
+							value={this.state.info.birthday}
 							// placeholder="fecha de nacimiento"
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
@@ -78,6 +87,7 @@ export default class VolunteerForm extends React.Component {
 							name="phone"
 							className={styles.input}
 							placeholder="Telefono"
+							value={this.state.info.phone}
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/> 
@@ -88,18 +98,19 @@ export default class VolunteerForm extends React.Component {
 							name="email"
 							className={styles.input}
 							placeholder="E-mail"
+							value={this.state.info.email}
 							// InputLabelProps={{ shrink: true }}
 							aria-describedby="emailHelp"
 							onChange={e => this.handleOnChange(e)}
 						/>
 					</div>
-					{/* {!this.state.info.firstName ||
+					{!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
 					!this.state.info.email ||
 					!this.state.info.phone 
 						? (control = true)
-						: false} */}
+						: false}
 					<Button
 						disabled={control ? true : false}
 						variant="contained"
