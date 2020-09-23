@@ -183,7 +183,7 @@ server.post("/", (req, res) => {
     const schedule = StudentSchedule.bulkCreate(student.scheduleStudent.map(e =>{
       return {
         studentId: sc.id,
-        timeFrame: `(${e.startTime}, ${e.endTime})`,
+        timeFrame: [e.startTime, e.endTime],
         nameWeekDay: e.nameWeekDay
       }
     }))  
