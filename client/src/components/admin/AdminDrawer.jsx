@@ -41,8 +41,7 @@ const useStyles = makeStyles({
          },
     },
     logo:{
-            borderStyle:'groove',
-            borderRadius: '50%',
+          
             width:190,
             marginTop:0,
             padding:0,
