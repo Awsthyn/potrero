@@ -20,7 +20,11 @@ import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
 import Chart from './components/admin/Chart';
+
 import StudentCard from './components/student/StudentCard/StudentCard';
+
+import TablaVoluntarios2 from './components/admin/TablaVoluntarios2';
+
 
 class App extends React.Component {
   
@@ -39,7 +43,7 @@ class App extends React.Component {
 			<Route path="/admin" component={AdminNavBar} />
 			<Route path="/admin" component={AdminDrawer} />
 			<AdminRoute exact path="/admin" component={AdminPanel}/>
-			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
+			<Route exact path="/admin/voluntarios" component={TablaVoluntarios2} />
 			<Route exact path="/admin/voluntarios/:id"  render={({match}) => <DetalleVoluntario  id={match.params.id}/>} />
 			<Route exact path="/admin/usuarios" component={TablaUsuarios} />
 			<Route exact path="/admin/materias" component={TablaMaterias} />
