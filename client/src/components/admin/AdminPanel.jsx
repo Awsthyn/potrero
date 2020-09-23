@@ -17,14 +17,13 @@ const useStyles = makeStyles({
         position: 'absolute',
         fontFamily: 'Poppins',
         fontWeight: 700,
-        margin: 60,  
+        margin: 60,
     },
     img: {
         width: '1700px',
         objectFit: 'cover',
         color: '#333333'
     },
-
 })
 
 export default () => {
