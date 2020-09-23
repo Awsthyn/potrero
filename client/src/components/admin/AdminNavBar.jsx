@@ -10,7 +10,7 @@ import PieChartIcon from '@material-ui/icons/PieChart'
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import { sessionLogout } from '../../redux/actions/session';
-
+import Miembros from './MenuItemMiembros';
 
 const VIOLETA = '#492BC4'
 const VERDE = '#8CC63E'
@@ -49,6 +49,7 @@ const useStyles = makeStyles({
          },
     },
     icons:{
+        color:'white',
         paddingTop:0,
         justifyContent:'center',
         maxWidth:30,
@@ -102,14 +103,8 @@ const AdminNavBar = (props) => {
                                 </ListItem>
                     </Link> 
 
-                     <Link to= '/admin/usuarios' className={classes.link}>
-                                <ListItem className={classes.item} button>
-                                    <ListItemText primary='Miembros'/>
-                                    <ListItemIcon className={classes.icons}>
-                                            <SupervisedUserCircleRoundedIcon/>
-                                        </ListItemIcon>
-                                </ListItem>
-                    </Link> 
+                    <ListItem className={classes.item} button><Miembros/></ListItem>
+                  
 
                 <List className={classes.grouplinks}>
                     <Link to= '/admin/usuarios' className={classes.link}>
