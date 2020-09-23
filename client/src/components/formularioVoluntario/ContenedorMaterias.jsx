@@ -30,18 +30,26 @@ class ContenedorMaterias extends React.Component {
 	}
 	continuar(){
 		this.props.history.push("/voluntarios/cargararchivos")
+		let mat = JSON.parse(localStorage.getItem('materias'))
+		mat && mat.concat(this.state.materia)
+		let materias = new Set(mat)
+		console.log(materias)
 		localStorage.setItem('materias', JSON.stringify(this.state.materia))
 	}
 
 	componentDidMount(){
 		this.props.getAcademicLevels()
 		let nivel = JSON.parse(localStorage.getItem('nivel'))
-		if(nivel.Primaria){
-			this.props.filterByLevel(nivel.Primaria)
+		if(nivel?.Primaria){
+			this.props.filterByLevel(nivel?.Primaria)
 		}else{
-			this.props.filterByLevel(nivel.Secundaria)
+			this.props.filterByLevel(nivel?.Secundaria)
 		}
-		
+		if(!this.state.materia.length){
+			let newState = JSON.parse(localStorage.getItem('materias'))
+			if(newState) this.setState({materia: newState})
+			else{ this.setState({materia: []})}
+		}
 		// if(nivel.Primaria){
 		// 	let mats = this.props.academicLevels.filter(a => a.name === nivel.Primaria)
 		// 	this.setState({materiasPorNivel: mats[0]?.subjects})
@@ -52,8 +60,6 @@ class ContenedorMaterias extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.academicLevels)
-		console.log(this.props.materiasPorNivel)
 		var control;
 		return (
 			<div className={styles.formInput} >
@@ -64,7 +70,7 @@ class ContenedorMaterias extends React.Component {
 
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
 				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>
-					{ this.props.materiasPorNivel?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }
+					{ this.props.materiasPorNivel?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick} />) }
 				</div>
 				
 				<Button

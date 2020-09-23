@@ -215,12 +215,7 @@ server.post(
         frontDNI: `${req.files.frontDNI[0].filename}`,
         backDNI: `${req.files.frontDNI[0].filename}`
       }
-    }else if(req.files.cv){
-      usuario = {
-        ...req.body,
-        cv: `${req.files.cv[0].filename}`,
-        }
-      }else if(req.files.frontDNI){
+    }else if(req.files.frontDNI){
         usuario = {
           ...req.body,
           frontDNI: `${req.files.frontDNI[0].filename}`,
