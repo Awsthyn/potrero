@@ -294,6 +294,9 @@ input[type=number] { -moz-appearance:textfield; }
 	/* position: absolute;
 	top: 45px;
 	left: 60%; */
+	margin-top: 10px;
+	display:flex;
+	justify-content:flex-start;
 	width: 40px;
 	fill: #492BC4;
 }
