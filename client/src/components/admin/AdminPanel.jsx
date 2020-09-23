@@ -1,11 +1,12 @@
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import {Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 //import estadisticas from './assets/estadisticas.png';
 //import AllStats from '../stats/AllStats';
 import MiStats from '../stats/MiStats.jsx';
-import NoteGrafic from '../stats/NoteGrafic.jsx';
-import React, { useEffect, useState } from 'react';
+import Demands from '../stats/Demands.jsx';
+import Offers from '../stats/Offers';
 import { useSelector, useDispatch } from 'react-redux';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 import * as actions from '../../redux/actions/stats.js';
@@ -42,10 +43,16 @@ export default () => {
                      <br>
                      </br>
                      <div className="stats">
+                         <h3>Asistencias</h3>
                      <MiStats />
                      </div>
                      <div className="stats">
-                     <NoteGrafic />
+                         <h3>Demandas de materias</h3>
+                     <Demands />
+                     </div>
+                     <div className="stats">
+                         <h3>Ofertas de materias</h3>
+                     <Offers />
                      </div>
                 </div>
                 )
