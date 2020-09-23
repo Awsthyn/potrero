@@ -21,7 +21,7 @@ import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
 import Chart from './components/admin/Chart';
 import StudentCard from './components/student/StudentCard/StudentCard';
-
+import AdminDrawer2 from './components/admin/AdminDrawer2'
 
 
 class App extends React.Component {
@@ -37,9 +37,8 @@ class App extends React.Component {
 			component={NavBar} />
 			<Route exact path="/" component={Home} />
 			<Route path="/voluntarios" component={ContenedorForm} />
-
+			{/* <Route path="/admin" component={AdminDrawer} /> */}
 			<Route path="/admin" component={AdminNavBar} />
-			<Route path="/admin" component={AdminDrawer} />
 			<AdminRoute exact path="/admin" component={AdminPanel}/>
 			<Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
 			<Route exact path="/admin/voluntarios/:id"  render={({match}) => <DetalleVoluntario  id={match.params.id}/>} />
@@ -53,6 +52,8 @@ class App extends React.Component {
 			<Route exact path="/usuario/login" component={Login} />
 			<Route exact path="/usuario/perfil" component={MiPerfil} />
 			<Route exact path="/usuario/recuperar" component={PasswordRecovery} />
+			
+			<Route exact path="/admin/drawer2" component={AdminDrawer2} />
 
 			<Route exact path="/login/:token" component={ResetPassword}/>
 
