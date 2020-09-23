@@ -67,36 +67,28 @@ export class CreateStudentForm extends Component {
 	selectedGrade(selectGrade) {
 		const selected = this.state.academicLevels.filter(grade => Number(grade.id) === Number(selectGrade));
 		this.setState({ subjectsXLevel: selected[0].subjects });
-
-		const subId = selected[0].subjects.map( sub => sub.id);
-
-		this.onCheckboxClicked(subId, true);
 	}
 
 	onCheckboxClicked(subjects, isChecked) {
-		console.log(this.state.alumno.subjectsId)
-		console.log(subjects)
+		console.log('ggggg',subjects)
+		// if(Array.isArray(subjects)){
+		// 	this.setState({ subjectsId: subjects })
+		// }
+		// else 
 		if (isChecked) {
-			if(Array.isArray(subjects)){
-				console.log('eeeee', Array.isArray(subjects))
-				this.setState({ subjectsId: subjects })
-			}
-			else{
-				this.setState({ isLevelSelect: true });
-				this.setState({
-					subjectsId: [...this.state.subjectsId, subjects.id]
-				})
-			}
-		}
-		else {
-			this.setState({ isLevelSelect: false })
-			subjects.length > 0 && subjects.forEach(subj => {
-				this.setState({
-					subjectsXLevel: this.state.subjectsId.filter(s => s !== subj.id)
-				})
+			this.setState({ isLevelSelect: true });
+			this.setState({
+				subjectsId: [...this.state.subjectsId, subjects.id]
 			})
 		}
-		console.log(this.state.subjectsId)
+		else {
+			this.state.subjectsId.length > 0 ?
+			this.setState({
+				subjectsId: this.state.subjectsId.filter(s => s !== subjects.id)
+			})
+			:
+			this.setState({ isLevelSelect: false, strengths: [], weakness: [] })
+		}
 	}
 
 	onStrengthCheckboxClicked(subject, isChecked) {
@@ -256,25 +248,33 @@ export class CreateStudentForm extends Component {
 												<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene <span style={{ color: "#8CC63E" }}>FACILIDAD</span></h3>
 
 												<div style={{ minHeight: "150px", width: "70vw" }} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
-													{Array.isArray(this.state.subjectsId) && this.state.subjectsId.length > 0 ? this.state.subjectsId.map(subject => {
-														{/* if (this.state.alumno.weakness.includes(subject) === false) return (
-															<StrengthCheckbox key={subject + 'strength'} initialState={false} subject={this.state.subjectsXLevel.find(e => Number(e.id) === Number(subject))} onChange={this.onStrengthCheckboxClicked} required />
-														) */}
-														console.log('((((((((', this.state.alumno.weakness.includes(subject))
+													{
+														(
+															Array.isArray(this.state.subjectsId) && this.state.subjectsId.length > 0) ? 
+																this.state.subjectsId.map(subject => {
+																	if (this.state.alumno.weakness.includes(subject) === false) return (
+																		<StrengthCheckbox key={subject + 'strength'} initialState={false} subject={this.state.subjectsXLevel.find(e => Number(e.id) === Number(subject))} onChange={this.onStrengthCheckboxClicked} required />
+																	)
+																}
+														) 
+														: 
+														<h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>
 													}
-
-													) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}
 												</div>
 												<h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene <span style={{ color: "#c63e3e" }}>DIFICULTAD</span></h3>
 												<div style={{ minHeight: "150px", width: "70vw" }} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
-													{Array.isArray(this.subjects) && this.subjects.length > 0 ? this.subjects.map(subject => {
-														if (this.state.strengths.includes(subject) === false) return (
-															<WeakCheckbox key={subject + 'weak'} initialState={false} subject={this.subjects.find(e => e.id === subject.id)} onChange={this.onWeakCheckboxClicked} required />
-														)
-														else return null
+													{
+														(Array.isArray(this.state.subjectsId) && this.state.subjectsId.length > 0) ? 
+															this.state.subjectsId.map(subject => {
+																if (this.state.alumno.strengths.includes(subject) === false) return (
+																	<WeakCheckbox key={subject + 'weak'} initialState={false} subject={this.state.subjectsXLevel.find(e => e.id === subject)} onChange={this.onWeakCheckboxClicked} required />
+																)
+																else return null;
+															}
+														) 
+														: 
+														<h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>
 													}
-
-													) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}
 												</div>
 											</div>
 											:

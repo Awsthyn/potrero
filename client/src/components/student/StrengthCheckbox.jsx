@@ -4,8 +4,6 @@ import style from './SubjectCheckbox.modules.css';
 const SubjectCheckbox = ({ initialState, subject, onChange }) => {
     const [checked, setChecked] = useState(initialState);
 
-    console.log('111', subject)
-
     const onClick = (checked) => {
         setChecked(checked);
         onChange(subject, checked);
