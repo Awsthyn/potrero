@@ -46,19 +46,19 @@ class MiStats extends React.Component {
 
   getChartData() {
     const datos = {
-      labels: ["Asistencias " + this.state.promedioAsistencias * 100 + "%", "Inasistencias " + this.state.promedioInasistencias * 100 + "%", "Tardanzas " + this.state.dataDelay + "%"],
+      labels: ["Asistencias " + this.state.dataAssistance + " (" + Math.round(this.state.promedioAsistencias * 100) + "%" + ")", "Inasistencias " + this.state.dataInassistance + " (" + Math.round(this.state.promedioInasistencias * 100) + "%" + ")", "Tardanzas " + this.state.dataDelay + " (" + Math.round(this.state.dataDelay) + "%" + ")"],
       datasets: [
         {
           label: "Asistencias totales",
           data: [
             this.state.respuesta.assistance,
             this.state.respuesta.inassistance,
-            this.state.respuesta.assistance.delay,
+            this.state.respuesta.delay,
           ],
           backgroundColor: [
-            "rgba(255, 99 , 132, 0.6)",
-            "rgba(54, 162 , 235, 0.6)",
-            "rgba(153, 102 , 255, 0.6)",
+            "rgba(73, 43, 196, 0.6)",
+            "rgba(140, 198, 62, 0.6)",
+            "rgba(71, 165, 214, 0.6)",
           ],
         },
       ],
@@ -85,6 +85,7 @@ class MiStats extends React.Component {
   render() {
     return (
       <div>
+        <h3>{"Asistencias generales: " + this.state.total}</h3>
         <Pie
           data={this.state.datos}
           options={{

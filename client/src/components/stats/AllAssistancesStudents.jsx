@@ -7,31 +7,33 @@ export default function AllAssistancesStudents(){
     
     const dispatch = useDispatch();
     const assistance = useSelector( state =>  state.stats.allAssistances);
-    const [state, setState] = useState({chartData: {}});
 
+    const [state, setState] = useState({chartData: {}});
     useEffect(() => {
         dispatch(actions.getAllAssistance());
     }, []);
 
   const getChartData = () => {
+
       setState({
           chartData:{
-              labels: ['Asistencias','Inasistencias', 'Tardanzas'],
+              labels: ['sarasasasas','Inasistencias', 'Tardanzas'],
               datasets:[
                   {
                       label: 'Asistencias totales',
                       data: [assistance.assistance, assistance.inassistance, assistance.delay],
                       backgroundColor:[
-                          'rgba(255, 99 , 132, 0.6)',
-                          'rgba(54, 162 , 235, 0.6)',
-                          'rgba(153, 102 , 255, 0.6)'
+                        "rgba(73, 43, 196, 0.6)",
+                        "rgba(140, 198, 62, 0.6)",
+                        "rgba(71, 165, 214, 0.6)",
                       ]
                   }
               ]
           }
       }
     )
-  }
+  } 
+
        const defaultProps = {
        displayTitle: true,
        displayLegend: true,

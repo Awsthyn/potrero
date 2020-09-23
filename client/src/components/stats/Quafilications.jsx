@@ -10,8 +10,11 @@ class Offers extends React.Component {
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/qualification");
     var notas = await peticion.json();
+    let pro = notas.reduce((acc, currValue) => acc + currValue)
+
     this.setState({
       notas: notas,
+      total: Math.round(pro / notas.length)
     });
   }
 
@@ -28,14 +31,14 @@ class Offers extends React.Component {
         promedio = promedio / not.length;
       }
     }
-    console.log(promedio);
+
     const datos = {
       //hacer map para labels
       labels: ["Menor nota", "Promedio", "Mayor nota"],
       datasets: [
         {
           label: "Demandas de materias",
-          data: [minimo, promedio, maximo],
+          data: [Math.round(minimo), Math.round(promedio), Math.round(maximo)],
           fill: false,
           backgroundColor: [
             "rgba(73, 43, 196, 0.6)",
@@ -67,11 +70,14 @@ class Offers extends React.Component {
   async componentDidMount() {
     await this.peticion();
     await this.getChartData();
+    
+ 
   }
 
   render() {
     return (
       <div>
+        <h3>{"Promedio notas: " + this.state.total}</h3>
         <Bar
           type
           data={this.state.datos}

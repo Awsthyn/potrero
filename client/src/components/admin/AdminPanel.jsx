@@ -43,7 +43,6 @@ export default () => {
       <br></br>
       <br></br>
       <div>
-        <h3>Asistencias</h3>
         <div className="stats">
           <MiStats />
         </div>
@@ -51,7 +50,6 @@ export default () => {
       <br></br>
       <br></br>
       <div>
-        <h3>Demandas de materias</h3>
         <div className="stats">
           <Demands />
         </div>
@@ -59,7 +57,6 @@ export default () => {
       <br></br>
       <br></br>
       <div>
-        <h3>Ofertas de materias</h3>
         <div className="stats">
           <Offers />
         </div>
@@ -67,7 +64,6 @@ export default () => {
       <br></br>
       <br></br>
       <div>
-        <h3>Asesores</h3>
         <div className="stats">
           <StatusVoluntary />
         </div>
@@ -75,7 +71,6 @@ export default () => {
       <br></br>
       <br></br>
       <div>
-        <h3>Promedio notasfalse</h3>
         <div className="stats">
           <Qualifications />
         </div>

@@ -80,6 +80,7 @@ class Offers extends React.Component {
   render() {
     return (
       <div>
+        <h3>{"Ofertas de materias: " + this.state.total}</h3>
         <Bar
           type
           data={this.state.datos}

@@ -27,7 +27,7 @@ class StatusVoluntary extends React.Component {
 
   getChartData() {
     const datos = {
-      labels: ["Activos " + this.state.promedioActives * 100 + "%", "Inactivos " + this.state.promedioInactives * 100 + "%"],
+      labels: ["Activos " + Math.round(this.state.promedioActives * 100) + "%", "Inactivos " + Math.round(this.state.promedioInactives * 100) + "%"],
       datasets: [
         {
           label: "Asesores",
@@ -65,6 +65,7 @@ class StatusVoluntary extends React.Component {
   render() {
     return (
       <div>
+        <h3>{"Asesores: " + this.state.totalAdvisors}</h3>
         <Doughnut
           data={this.state.datos}
           options={{

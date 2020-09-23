@@ -7,6 +7,7 @@ class Demands extends React.Component {
   state = {
     datos: [],
     opciones: [],
+    total: 0,
   };
 
   async peticion() {
@@ -15,8 +16,10 @@ class Demands extends React.Component {
     var dataAssistance = [];
     var dataInassistance = [];
     var dataDelay = [];
+    
     this.setState({
       demand: demandas.onlyDemand,
+      total: demandas.demandSubjects,
     });
   }
 
@@ -74,6 +77,7 @@ class Demands extends React.Component {
   render() {
     return (
       <div>
+        <h3>{"Demandas de materias: " + this.state.total}</h3>
         <Bar
           type
           data={this.state.datos}
