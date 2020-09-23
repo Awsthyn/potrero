@@ -35,7 +35,6 @@ export default class VolunteerForm extends React.Component {
 		}
 	}
 	render() {
-		console.log(moment("20111031", "YYYYMMDD").fromNow())
 		var control;
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;
