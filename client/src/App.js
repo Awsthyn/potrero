@@ -62,6 +62,7 @@ class App extends React.Component {
 			exact path="/stats"
 			component={AllStats}
 			/>
+			{/* PONER EXACT PATH */}
 		</div>
 	);
 	}

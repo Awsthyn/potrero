@@ -98,6 +98,22 @@ INSERT INTO "SubjectXUser"
 VALUES(1, 1);
 INSERT INTO "SubjectXUser"
 VALUES(2, 2);
+INSERT INTO "SubjectXUser"
+VALUES(1, 3);
+INSERT INTO "SubjectXUser"
+VALUES(2, 4);
+INSERT INTO "SubjectXUser"
+VALUES(1, 5);
+INSERT INTO "SubjectXUser"
+VALUES(2, 2);
+INSERT INTO "SubjectXUser"
+VALUES(1, 2);
+INSERT INTO "SubjectXUser"
+VALUES(2, 4);
+INSERT INTO "SubjectXUser"
+VALUES(2, 1);
+INSERT INTO "SubjectXUser"
+VALUES(5, 4);
 
 -- QUERY PARA SUBJECTXSTUDENT
 
@@ -105,7 +121,18 @@ INSERT INTO "SubjectXStudent"
 VALUES(1, 1);
 INSERT INTO "SubjectXStudent"
 VALUES(2, 2);
-
+INSERT INTO "SubjectXStudent"
+VALUES(2, 1);
+INSERT INTO "SubjectXStudent"
+VALUES(1, 2);
+INSERT INTO "SubjectXStudent"
+VALUES(3, 4);
+INSERT INTO "SubjectXStudent"
+VALUES(2, 4);
+INSERT INTO "SubjectXStudent"
+VALUES(1, 3);
+INSERT INTO "SubjectXStudent"
+VALUES(5, 3);
 -- QUERY PARA EDUCATIONLEVEL
 INSERT INTO "educationLevels"
 VALUES(1, 'Primaria', DEFAULT, DEFAULT);

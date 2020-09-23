@@ -230,4 +230,60 @@ server.get("/demand/subject", (req, res) => {
     });
 });
 
+server.get('/advisorstatus', (req, res) => {
+  User.findAll({
+    attributes: {
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "password",
+        "address",
+        "birthday",
+        "phone",
+        "linkedin",
+        "cv",
+        "resetPasswordToken",
+        "resetPasswordExpires",
+      ],
+    },
+  })
+  .then( allAdvisors => {
+
+  let advisorStatus = {
+    advisorsActives: [],
+    advisorsInactives: [],
+    admin: [],
+    totalAdvisorsActives: 0,
+    totalAdvisorsInactives: 0,
+    totalAdvisors: 0,
+    hasAdvisor: false,
+    }
+
+      allAdvisors.forEach( advisor => {
+        if(advisor.state === 'admin'){
+          advisorStatus.admin.push(advisor)
+        }
+          else if(advisor && allAdvisors.length > 0) {
+            advisorStatus.hasAdvisor = true;
+            advisorStatus.totalAdvisors = allAdvisors.length;
+              if(advisor.isActive === true && advisor.state === 'aceptado'){
+                advisorStatus.advisorsActives.push(advisor)
+              } 
+                else {
+                advisorStatus.advisorsInactives.push(advisor)
+                }
+          }
+      })
+    advisorStatus.totalAdvisorsActives = advisorStatus.advisorsActives.length;
+    advisorStatus.totalAdvisorsInactives = advisorStatus.advisorsInactives.length;
+    advisorStatus.totalAdvisors = allAdvisors.length - advisorStatus.admin.length;
+
+    res.json( advisorStatus )
+
+  })
+  .catch( err => {
+    res.json( err )
+  })
+})
+
 module.exports = server;
