@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import style from './SubjectCheckbox.modules.css';
 
-
-const SubjectCheckbox = ({ initialState, subject, onChange }) => {
-
+const LevelEducation = ({ initialState, level, onChange }) => {
     const [checked, setChecked] = useState(initialState);
 
     const onClick = (checked) => {
         setChecked(checked);
-        onChange(subject, checked);
+
+        onChange(level.academicLevels, checked);
     }
 
     return (
@@ -17,15 +16,15 @@ const SubjectCheckbox = ({ initialState, subject, onChange }) => {
                 type="checkbox"
                 className={style}
                 onClick={e => onClick(e.target.checked)}
-                defaultChecked={checked}
+                checked={checked}
                 hidden
-                id={`checkbox${subject.id}`}
+                id={`checkboxStrength${level.id}`}
             />
-            <label style={{ height: "50px", width: "200px" }} htmlFor={`checkbox${subject.id}`} className="d-flex flex-column justify-content-center rounded shadow form-check-label mr-3" >
-                {subject.name}
+            <label style={{ height: "50px", width: "200px" }} htmlFor={`checkboxStrength${level.id}`} className="d-flex flex-column justify-content-center rounded shadow form-check-label mr-3" >
+                {level.name}
             </label>
         </div>
     )
 };
 
-export default SubjectCheckbox;
+export default LevelEducation;

@@ -4,6 +4,7 @@ import studentReducer from "./studentReducer";
 import subjectReducer from "./subjectReducer"
 import sessionReducer from "./sessionReducer";
 import userReducer from "./userReducer";
+import educationLevelReducer from './educationLevelReducer';
 import academicReducer from "./academicReducer";
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
     subjects: subjectReducer,
     sessions: sessionReducer,
     users: userReducer,
+    educationLevel: educationLevelReducer,
     academic: academicReducer
 });

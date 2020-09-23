@@ -95,15 +95,6 @@ server.get("/:id", (req, res) => {
       exclude: [
         "createdAt",
         "updatedAt",
-        "phone",
-        "email",
-        "tutor",
-        "difficulty",
-        "weakness",
-        "strengths",
-        "interests",
-        "motivations",
-        "isActive",
       ],
     },
     include: [
