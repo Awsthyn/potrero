@@ -5,6 +5,7 @@ const { AcademicLevel, academicLeveltXSubject } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
+
 // AGREGA LAS MATERIAS DE UN ESTUDIANTE DE UN STUDENT.
 server.post("/:id", (req, res) => {
     // BUSCA Y MODIFICA LA MATERIA DEL STUDENT ENCONTRADO.
