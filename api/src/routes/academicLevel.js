@@ -73,6 +73,7 @@ server.get("/:id", (req, res) => {
     });
 });
 
+
 // CREA UNA GRADO
 server.post("/", (req, res) => {
   // RECIBE LOS DATOS DEL GRADO POR BODY
