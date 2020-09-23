@@ -39,7 +39,6 @@ class MiStats extends React.Component {
       total: respuesta.total,
     });
   
-    console.log("Soy el total ", this.state.total)
     this.state.promedioAsistencias = this.state.dataAssistance / this.state.total;
     this.state.promedioInasistencias = this.state.dataInassistance / this.state.total;
     this.state.promedioTardanzas = this.state.dataDelay / this.state.total;
@@ -64,7 +63,7 @@ class MiStats extends React.Component {
         },
       ],
     };
-    //   console.log("Soy datos" ,datos)
+
     const opciones = {
       responsive: true,
       maintainAspectRatio: false,

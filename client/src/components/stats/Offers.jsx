@@ -14,7 +14,6 @@ class Offers extends React.Component {
     
     var peticion = await fetch("http://localhost:3001/stats/offer/subject");
     var ofertas = await peticion.json();
-      console.log("soy ofertas", ofertas);
     var dataAssistance = [];
     var dataInassistance = [];
     var dataDelay = [];
@@ -86,7 +85,7 @@ class Offers extends React.Component {
           data={this.state.datos}
           options={{
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
           }}
         ></Bar>
       </div>

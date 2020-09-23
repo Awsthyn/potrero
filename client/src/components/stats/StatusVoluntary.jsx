@@ -15,7 +15,6 @@ class StatusVoluntary extends React.Component {
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/advisorstatus");
     var respuesta = await peticion.json();
-    console.log(respuesta)
     this.setState({
       totalAdvisors: respuesta.totalAdvisors,
       totalAdvisorsActives: respuesta.totalAdvisorsActives,

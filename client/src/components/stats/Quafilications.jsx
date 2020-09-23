@@ -3,52 +3,50 @@ import { Pie, Line, Bar } from "react-chartjs-2";
 import * as actions from "../../redux/actions/stats.js";
 import React from "react";
 
-class Demands extends React.Component {
+class Offers extends React.Component {
   state = {
-    datos: [],
-    opciones: [],
+    notas: [],
   };
-
   async peticion() {
-    var peticion = await fetch("http://localhost:3001/stats/demand/subject");
-    var demandas = await peticion.json();
-    var dataAssistance = [];
-    var dataInassistance = [];
-    var dataDelay = [];
+    var peticion = await fetch("http://localhost:3001/stats/qualification");
+    var notas = await peticion.json();
     this.setState({
-      demand: demandas.onlyDemand,
+      notas: notas,
     });
   }
 
   getChartData() {
-    const demOffer = [];
-    this.state.demand.forEach((e) => {
-      let nombre = Object.keys(e);
-      demOffer.push(nombre[0]);
-    });
+    let not = this.state.notas;
+    let promedio = 0;
+    let minimo = Math.min.apply(null, not);
+    let maximo = Math.max.apply(null, not);
 
-    const countdemOffer = [];
-    for (let i = 0; i < this.state.demand.length; i++) {
-      for (const property in this.state.demand[i]) {
-        countdemOffer.push(this.state.demand[i][property]);
+    for (let i = 0; i < not.length; i++) {
+      promedio = promedio + not[i];
+      if (!(i + 1 < not.length)) {
+        // Instrucciones de la ultima iteración
+        promedio = promedio / not.length;
       }
     }
-
+    console.log(promedio);
     const datos = {
       //hacer map para labels
-      labels: demOffer,
+      labels: ["Menor nota", "Promedio", "Mayor nota"],
       datasets: [
         {
           label: "Demandas de materias",
-          data: countdemOffer,
+          data: [minimo, promedio, maximo],
           fill: false,
           backgroundColor: [
-            // 73, 43, 196, 0.6   -     140, 198, 62, 0.6  - 71, 165, 214, 0.6  -  	171, 70, 208, 0.6    -   240, 198, 49, 0.6
             "rgba(73, 43, 196, 0.6)",
             "rgba(140, 198, 62, 0.6)",
             "rgba(71, 165, 214, 0.6)",
+            "rgba(73, 43, 196, 0.6)",
+            "rgba(140, 198, 62, 0.6)",
             "rgba(71, 165, 214, 0.6)",
-            "rgba(240, 198, 49, 0.6)",
+            "rgba(73, 43, 196, 0.6)",
+            "rgba(140, 198, 62, 0.6)",
+            "rgba(71, 165, 214, 0.6)",
           ],
         },
       ],
@@ -80,6 +78,14 @@ class Demands extends React.Component {
           options={{
             responsive: true,
             maintainAspectRatio: true,
+            scales: {
+              yAxes: [{
+                  ticks: {
+                      suggestedMin: 0,
+                      suggestedMax: 10
+                  }
+              }]
+          }
           }}
         ></Bar>
       </div>
@@ -87,4 +93,4 @@ class Demands extends React.Component {
   }
 }
 
-export default Demands;
+export default Offers;
