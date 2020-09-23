@@ -208,14 +208,26 @@ server.post(
     if (!req.files) {
       usuario = req.body;
     }
-    else {
+    else if(req.files.cv && req.files.frontDNI){
       usuario = {
         ...req.body,
         cv: `${req.files.cv[0].filename}`,
         frontDNI: `${req.files.frontDNI[0].filename}`,
         backDNI: `${req.files.frontDNI[0].filename}`
-      };
-    }
+      }
+    }else if(req.files.cv){
+      usuario = {
+        ...req.body,
+        cv: `${req.files.cv[0].filename}`,
+        }
+      }else if(req.files.frontDNI){
+        usuario = {
+          ...req.body,
+          frontDNI: `${req.files.frontDNI[0].filename}`,
+          backDNI: `${req.files.frontDNI[0].filename}`
+        }
+      }
+    
     User.create(usuario)
       // .then((userCreated) => {
         // Se espera valores de Id's de Subjects Ejemplo: 1,2
