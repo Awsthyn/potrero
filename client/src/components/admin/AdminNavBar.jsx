@@ -49,6 +49,7 @@ const useStyles = makeStyles({
          },
     },
     icons:{
+        color:'white',
         paddingTop:0,
         justifyContent:'center',
         maxWidth:30,

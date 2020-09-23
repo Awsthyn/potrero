@@ -12,21 +12,25 @@ import moment from 'moment';
 import 'moment/locale/es';
 // Sweet Alerts
 import swal from 'sweetalert';
-import {Link,Redirect} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 
 
 //Material-UI Components
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Button from '@material-ui/core/Button'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import FaceIcon from '@material-ui/icons/Face';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
+import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import Paper from '@material-ui/core/Paper';
+import SearchIcon from '@material-ui/icons/Search';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -35,12 +39,17 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableHead from '@material-ui/core/TableHead'
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import TextField from '@material-ui/core/TextField';
+
 moment.locale('es');
 
 const useStyles1 = makeStyles((theme) => ({
   root: {
     flexShrink: 0,
     marginLeft: 20,
+  },
+  margin: {
+    margin: 20,
   },
 }));
 
@@ -118,12 +127,14 @@ const useStyles = makeStyles({
 
 
 
-export const TablaVoluntarios2 = (props) => {
+const TablaVoluntarios = (props) => {
 
-    const classes = useStyles()
+    const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-
+    const [filtered,setFiltered] = useState([]);
+    const [inputSearch,setInputSearch] = useState('');
+    const history = useHistory();
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -143,8 +154,9 @@ export const TablaVoluntarios2 = (props) => {
           })
           .then((willDelete) => {
             if (willDelete) {
-            props.deleteVolunteer(Number(id))
-            console.log(id);
+            props.deleteVolunteer(Number(id)).then(()=>{
+              setFiltered(filtered.filter(vol=>vol.id !== id))
+            })
               swal("El registro fue destruido con éxito", {
                 icon: "success",
               });
@@ -179,14 +191,70 @@ export const TablaVoluntarios2 = (props) => {
 
     // Me traigo los Voluntarios de la DB y sincronizo al Redux
         useEffect(()=>{
-            props.getVolunteers();
+            props.getVolunteers()
+            .then((pendientes)=>{
+               setFiltered(pendientes);
+              })
         },[])
 
+      
+    function handleFilter(e){
+      switch (e){
+        case 'LIN':
+          setFiltered(props.volunteers.filter(voluntario => voluntario.linkedin !== null));
+          break;
+        case 'CV':
+          setFiltered(props.volunteers.filter(voluntario => voluntario.cv !== null));
+          break;
+        case 'TODOS':
+          setFiltered(props.volunteers)
+          break;
+          case 'NOMBRE':
+          setFiltered(props.volunteers.filter(voluntario => voluntario.firstName.toLowerCase().includes(inputSearch.toLowerCase() ) || voluntario.lastName.toLowerCase().includes(inputSearch.toLowerCase()) ))
+          break;
+     } 
+    }
 
 
     return (
+      <>
+                                    <ButtonGroup variant="contained" alignItems="center"  aria-label="contained button group">
+                                              
+                                                   <Button disableRipple  name="TODOS" key="TODOS" style={{ background:"green",color:'white'}} onClick={()=>handleFilter('TODOS')}>
+                                                   <CheckCircleOutlineIcon/> Todos 
+                                                    </Button>
+                                                    <Button disableRipple  name="CV"  key="CV" style={{ background:"blue",color:'white'}} onClick={()=>handleFilter('CV')}>
+                                                    <CheckCircleOutlineIcon/> CV   
+                                                    </Button>
+                                                    <Button disableRipple  name="LINKEDIN"  key="LINKEDIN" style={{ background:"red",color:'white'}} onClick={()=>handleFilter('LIN')}>
+                                                    <CheckCircleOutlineIcon/> Linkedin   
+                                                    </Button>
+                                        </ButtonGroup>
+                                        <ButtonGroup style={{ marginLeft:50}} variant="contained"  aria-label="contained button group">
+                                                    <div className={classes.margin}>
+                                                      <Grid container spacing={1} alignItems="center">
+                                                        <Grid item>
+                                                          <AccountCircle />
+                                                        </Grid>
+                                                        <Grid item>
+                                                          <TextField id="input-with-icon-grid" label="Buscar Nombre o Apellido" value={inputSearch} onChange={(e)=>setInputSearch(e.target.value)} />
+                                                        </Grid>
+                                                      </Grid>
+                                                    </div>
+                                                    <Button type="submit" name="NOMBRE"  key="NOMBRE" style={{ background:"lightblue",color:'white'}} onClick={()=>
+                                                    {
+                                                      handleFilter('NOMBRE');
+                                                      setInputSearch('');
+                                                      }}>
+                                                          <SearchIcon />
+                                                    </Button>
+
+                                                    </ButtonGroup>
+
+
+      
         <TableContainer component={Paper} style={{marginLeft:230, marginTop: 40, width:`calc(100% - ${250}px)`}}>
-         { props.volunteers.length ? 
+         { filtered ? 
               <Table className={classes.table} aria-label="custom pagination table">
                     <TableHead>
                         <TableRow>
@@ -200,8 +268,8 @@ export const TablaVoluntarios2 = (props) => {
                     <TableBody>
 
                     {(rowsPerPage > 0
-                          ?  props.volunteers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                           : props.volunteers
+                          ?  filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                           : filtered
                         ).map((voluntario) => (
                           <TableRow key={voluntario.firstName}>
                             <TableCell component="th" scope="voluntario">
@@ -218,14 +286,16 @@ export const TablaVoluntarios2 = (props) => {
                             </TableCell>
                             <TableCell align="right">
                                         {
-                                        <ButtonGroup variant="contained"  aria-label="contained primary button group" key={`detalles${voluntario.id}`}>
-                                                   <Button style={{ background:"#8CC63E",color:'green'}} key={`aceptar${voluntario.id}`} name={voluntario.id}  onClick={() => handleStatusChange(voluntario)}>
-                                                                <CheckCircleIcon/>  
+                                        <ButtonGroup variant="contained"  aria-label="contained button group" key={`detalles${voluntario.id}`}>
+                                                   
+                                                   <Button style={{ background:"green",color:'white'}} key={`aceptar${voluntario.id}`}  onClick={() => handleStatusChange(voluntario)}>
+                                                                <CheckCircleIcon/> Aprobar 
                                                     </Button>
-                                                    <Link color ="primary" to={`/admin/voluntarios/${voluntario.id}`} key={`detalles${voluntario.id}`} className="btn btn-primary" type="button">
-                                                             <FaceIcon/> Detalles
-                                                    </Link>
-                                                    <Button color="secondary" key={`rechazar${voluntario.id}`} name={voluntario.id} onClick={() => handleDeletion(voluntario.id)}>
+                                                    <Button  style={{ background:"blue",color:'white'}} key={`detalles${voluntario.id}`}  onClick={() => history.push(`/admin/voluntarios/${voluntario.id}`)}>
+                                                            <FaceIcon/> Detalles   
+                                                    </Button>
+                                                   
+                                                    <Button color="secondary" key={`rechazar${voluntario.id}`}  onClick={() => handleDeletion(voluntario.id)}>
                                                                 <DeleteForeverIcon/> Eliminar   
                                                     </Button>
                                                    
@@ -240,7 +310,7 @@ export const TablaVoluntarios2 = (props) => {
                     <TablePagination
                       rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                       colSpan={6}
-                      count={props.volunteers.length}
+                      count={filtered.length}
                       rowsPerPage={rowsPerPage}
                       page={page}
                       SelectProps={{
@@ -256,6 +326,7 @@ export const TablaVoluntarios2 = (props) => {
                 </Table>:'No hay voluntarios en este momento'}
      
       </TableContainer>
+      </>
     )
 }
 
@@ -273,4 +344,4 @@ const mapDispatchToProps = (dispatch) => ({
         deleteVolunteer:(id) => dispatch(deleteVolunteer(id)),
         acceptVolunteer: (id) => dispatch(acceptVolunteer(id)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(TablaVoluntarios2)
+export default connect(mapStateToProps, mapDispatchToProps)(TablaVoluntarios)

@@ -34,8 +34,6 @@ server.get("/", (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
-        "createdAt",
-        "updatedAt",
         "password",
         "resetPasswordToken",
         "resetPasswordExpires",
