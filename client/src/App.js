@@ -20,8 +20,6 @@ import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
 import Chart from './components/admin/Chart';
-import TablaVoluntarios from './components/admin/TablaVoluntarios';
-
 
 class App extends React.Component {
   

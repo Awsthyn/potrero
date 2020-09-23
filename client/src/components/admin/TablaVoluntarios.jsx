@@ -253,7 +253,7 @@ export const TablaVoluntarios2 = (props) => {
                     />
                   </TableRow>
                 </TableFooter>
-                </Table>:''}
+                </Table>:'No hay voluntarios en este momento'}
      
       </TableContainer>
     )
