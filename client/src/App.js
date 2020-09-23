@@ -24,7 +24,6 @@ import AllStats from './components/stats/AllStats.jsx';
 
 class App extends React.Component {
   
-
   render(){
   return (
 		<div className="App">
@@ -56,7 +55,7 @@ class App extends React.Component {
 
             <Route
 			exact path="/stats/assistances"
-			component = {AllAssistancesStudents} 
+			component = {AllAssistancesStudents}
 			/>
 			<Route
 			exact path="/stats"
