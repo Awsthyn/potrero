@@ -35,11 +35,13 @@ export default class VolunteerForm extends React.Component {
 		}
 	}
 	render() {
+		
 		console.log(moment("20111031", "YYYYMMDD").fromNow())
 		var control;
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;
 		}
+		let años;
 		return (
 			<div>
 				<span className={styles.frase}>  
@@ -71,6 +73,13 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
+						{
+							this.state.info.birthday && 
+							!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
+							parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 
+							? <small>Debes ser mayor a 18 años</small> : null
+							
+						}
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -82,6 +91,11 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
+						{
+							this.state.info.phone && 
+							this.state.info.phone.toString().length !== 12
+							? <small>Debes ingresar un número telefonico válido</small> : null	
+						}
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -109,8 +123,11 @@ export default class VolunteerForm extends React.Component {
 					{!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
+					!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
+					parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 ||		
 					!this.state.info.email ||
-					!this.state.info.phone 
+					!this.state.info.phone || 
+					 this.state.info.phone.toString().length !== 12 
 						? (control = true)
 						: false}
 						<div style={{display: 'flex', alignItems: 'center'}}> 

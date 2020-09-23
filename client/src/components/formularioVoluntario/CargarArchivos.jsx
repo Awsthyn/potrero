@@ -61,6 +61,7 @@ class CargarArchivos extends Component{
 		
 	}
    render(){
+	console.log(this.state)
       let control;
    return(
       <div className={styles.formInput} >
@@ -109,13 +110,17 @@ class CargarArchivos extends Component{
 					id='standard-basic6'
 					onChange={(e) => this.handleOnChange(e)}
 				/>
-            {/* {!this.state.info.linkedin && !this.state.info.cv ? (control = true) : false} */}
 				<div style={{display: 'flex', alignItems: 'center'}}> 
 					<div onClick={() => this.props.history.push('/voluntarios/materias')} > 
 						<svg viewBox="0 0 16 16" className={styles.leftArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						<path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
 						</svg> 
 					</div>
+					{
+						!this.state.info.linkedin ||
+						!this.state.info.cv 
+						? (control = true) : false 
+					}
 					<Button
 						disabled={control ? true : false}
 						variant="contained"

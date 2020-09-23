@@ -54,7 +54,9 @@ function Niveles({getAcademicLevels, academicLevels, history}) {
     if (redirect) {
       return <Redirect to="/voluntarios/materias" />;
     }
+    
 		return (
+         
 			<div>
             <span className={styles.frase}>  
 				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '24%'}} ><strong> Nivel Educativo </strong></p>
@@ -128,10 +130,11 @@ function Niveles({getAcademicLevels, academicLevels, history}) {
                   Continuar
                   <span className="material-icons">arrow_forward</span>
                </Button>
+               </div>
                {
                     primario || secundario ? null : <small>Para continuar debes especificar el máximo nivel en el cual te gustaría ayudar</small>
                 }
-				</div>
+				
             </div>
 			</div>
 		);
