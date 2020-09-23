@@ -57,15 +57,15 @@
 
 }
 .botonPyS:active{
-    color:white;
+   color:white;
 }
 
 
 .contenedorMateria{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
     /* justify-content: space-around; */
 }    
 
@@ -80,7 +80,7 @@
 	margin-top: 5%;
 	outline: none;
 	border: none;
-	margin-left: 2%;
+	margin-left: 50%;
 	text-transform: capitalize;
 	padding: 5px;
 	width:195px;

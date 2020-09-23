@@ -27,7 +27,9 @@ export function getVolunteers() {
 		return axios
 			.get(`http://localhost:3001/users`, {withCredentials: true})
 			.then(res => {
-				dispatch({type: GET_VOLUNTEERS, volunteers:res.data.filter(e=> e.state === "pendiente")});
+				const pendientes = res.data.filter(e=> e.state === "pendiente")
+				dispatch({type: GET_VOLUNTEERS, volunteers:pendientes});
+					return pendientes;
 			})
 			.catch(err => console.log(err));
 	};
