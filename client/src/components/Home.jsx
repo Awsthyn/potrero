@@ -10,7 +10,6 @@ const history = useHistory()
 useEffect(() => {
     getStudents()
 }, [getStudents])
-
     return (
 <>
 <div className="jumbotron">
