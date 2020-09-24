@@ -22,7 +22,6 @@ export default function ContenedorCheckbox({ history, uploadParentState }) {
 
 	return (
 		<div>
-
 			<p> Los rangos horarios deben ser colocados en forma ordenada cronológicamente. </p>
 			<small> Los horarios límites para las clases son de 8:00 hs a 20:00 hs. Escoge tu rango horario (los mismos no deben ser inferiores a 1 hora)</small>
 			<div className={`${style.checkboxMaterias}${style.formInput}`}>
