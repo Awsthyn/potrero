@@ -77,6 +77,7 @@ class ContenedorMaterias extends React.Component {
 						: false}
 					<Button
 							disabled={control ? true : false}
+							style={control ? {backgroundColor: "#c2c2c2"} : null}
 							variant="contained"
 							className={styles.testButton}
 							id={styles.skere}
