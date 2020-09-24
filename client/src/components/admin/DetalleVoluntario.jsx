@@ -29,7 +29,6 @@ const NEGRO = '#333333';
 
 const useStyles = makeStyles({
   root: {
-    position: 'fixed',
     width: `calc(100% - ${400}px)`,
     marginTop: 100,
     fontFamily: 'Poppins',
@@ -157,7 +156,7 @@ function DetalleVoluntario(props) {
                   component='h2'
                   gutterBottom
                 >
-                  <b> LinkedIn:</b> <a href={linkedin}>LinkedIn</a>
+                  <b> LinkedIn:</b><a href={linkedin} target='_blank'>LinkedIn</a>
                 </Typography>
               </Grid>
             </Grid>
@@ -228,17 +227,17 @@ function DetalleVoluntario(props) {
                       viewDNI ?
                         <div>
                           <button onClick={() => mostrarDNI()}>Ocultar Foto del DNI</button>
-                          <div style={{width:'90%', margin:'10px', display:'flex', justifyContent:'space-around'}}>
+                          <div style={{width:'100%', margin:'10px', display:'flex', justifyContent:'space-around'}}>
                             <br />
                             <img
                               src={`http://localhost:3001/uploads/dni/${frontDNI}`}
-                              width='45%'
-                              height='500px'
+                              width='48%'
+                              height='40%'
                             />
                             <img
                               src={`http://localhost:3001/uploads/dni/${backDNI}`}
-                              width='45%'
-                              height='500px'
+                              width='48%'
+                              height='40%'
                             />
                           </div>
                         </div>
