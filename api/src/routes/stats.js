@@ -159,18 +159,26 @@ server.get("/offer/subject", (req, res) => {
     ],
   })
     .then((allSubjectsWithOffer) => {
+      //Prepara el objeto
       let objectSubjects = {
         onlyDemandOffert: [],
         nameSubjectsOffert: [],
         offertSubjects: 0,
         subjectHasOffert: false,
       };
+
+      //Recorro el objeto que me llega y si su longitud de usuarios por materias es !== 0 se pushea.
       allSubjectsWithOffer.forEach((subject) => {
-        objectSubjects.nameSubjectsOffert.push(subject);
-        objectSubjects.offertSubjects =
-          objectSubjects.offertSubjects + subject.users.length;
+        if (subject.users.length !== 0) {
+          objectSubjects.nameSubjectsOffert.push(subject);
+        }
+        if (subject.users.length !== 0) {
+          objectSubjects.offertSubjects =
+            objectSubjects.offertSubjects + subject.users.length;
+        }
         objectSubjects.subjectHasOffert = true;
       });
+
       objectSubjects.nameSubjectsOffert.forEach((oneSubjectOffert) => {
         objectSubjects.onlyDemandOffert.push({
           [oneSubjectOffert.name]: oneSubjectOffert.users.length,

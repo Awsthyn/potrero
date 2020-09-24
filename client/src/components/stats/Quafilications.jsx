@@ -10,8 +10,8 @@ class Offers extends React.Component {
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/qualification");
     var notas = await peticion.json();
-    let pro; 
-    notas[0] && notas.reduce((acc, currValue) => acc + currValue)
+
+    let pro = notas.length > 0 ? notas.reduce((acc, currValue) => acc + currValue) : 0;
 
     this.setState({
       notas: notas,
@@ -78,7 +78,11 @@ class Offers extends React.Component {
   render() {
     return (
       <div>
-        <h3>{"Promedio notas: " + this.state.total}</h3>
+        {
+          isNaN(this.state.total) ? <h3>Promedio notas: No existen notas</h3>
+          : <h3>"Promedio notas: " {this.state.total}</h3>
+        }
+
         <Bar
           type
           data={this.state.datos}
