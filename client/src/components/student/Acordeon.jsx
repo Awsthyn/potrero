@@ -30,7 +30,7 @@ export default function Acordeon({ dia, expandedAll, handleChange, setTime, rend
     e.preventDefault();
     if (typeof days === 'string') {
       return setDays([{ startTime: 12, endTime: 13, nameWeekDay: dia }]);
-    } else if (days.length < 2 && days[0].endTime < 19.5) {
+    } else if (days.length < 1 && days[0].endTime < 19.5) {
       return setDays([...days, { startTime: days[0].endTime, endTime: days[0].endTime + 1, nameWeekDay: dia }]);
     }
   }
@@ -61,8 +61,10 @@ export default function Acordeon({ dia, expandedAll, handleChange, setTime, rend
 
   }
   useEffect(() => {
-    if (typeof days !== 'string') setTime(days)
-    else{ setTime([])}
+    if(typeof days !== 'string') setTime(days, false)
+    else{
+      setTime([{nameWeekDay: dia}], true)
+    }
   }, [days])
 
   return (
@@ -91,8 +93,8 @@ export default function Acordeon({ dia, expandedAll, handleChange, setTime, rend
                     />
                   );
                 })}
-              <button style={{ borderStyle: "none", backgroundColor: "#492BC4", fontWeight: "100", fontSize: "1.3em", paddingLeft: "10px", paddingRight: "10px" }}
-                className="ml-2 text-white rounded-circle" onClick={e => handleOnClick(e)}> + </button>
+              {(typeof days === 'string' || days.length < 1) ? <button style={{ borderStyle: "none", backgroundColor: "#492BC4", fontWeight: "100", fontSize: "1.3em", paddingLeft: "10px", paddingRight: "10px" }}
+                className="ml-2 text-white rounded-circle" onClick={e => handleOnClick(e)}> + </button> : null}
             </span>
           ) : null}
         </Typography>
