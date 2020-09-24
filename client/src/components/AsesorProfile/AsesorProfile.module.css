@@ -50,7 +50,7 @@
     margin-top: 12px;
 }
 
-span {
+.span {
     font-size: 13px;
     color: white;
     padding: 1px 15px;
@@ -135,7 +135,7 @@ span {
     }
     
     
-    input:focus {
+    .input:focus {
         outline: none;
         border-bottom: 2px solid #8bc63ebe;
     }
@@ -229,7 +229,7 @@ span {
         border-bottom: 4px solid #8CC63E;
     }
 
-  li:hover {
+  .item:hover {
       cursor: pointer;
   }
 
