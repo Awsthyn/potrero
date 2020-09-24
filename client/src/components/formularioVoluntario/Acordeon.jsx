@@ -24,10 +24,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Acordeon({dia, expandedAll, handleChange, setTime, render}) {
-  console.log(dia)
   const classes = useStyles();
   const [days, setDays] = useState('Agregar rango horario');
-  console.log(render)
+
   const handleOnClick = (e) => {
       if(typeof days === 'string'){
         return setDays([{startTime: 12, endTime: 14, nameWeekDay: dia}]);
@@ -89,9 +88,7 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime, rende
   }, [days])
 
   useEffect(() => {
-    console.log('hiii')
     if(typeof days === 'string' && render[0]){
-      console.log(render)
       setDays(render)
     }
   }, [render])
