@@ -7,7 +7,7 @@ const LevelEducation = ({ initialState, level, onChange }) => {
     const onClick = (checked) => {
         setChecked(checked);
 
-        onChange(level.academicLevels, checked);
+        onChange(level, checked);
     }
 
     return (
