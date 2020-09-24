@@ -32,7 +32,7 @@ INSERT INTO users
 VALUES(DEFAULT, 'vcgucucucfufcucfu@gmail.com',null, 'xdtdxtdtxdxt', 'xdtdxttdxtdx', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez','no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'cfufcufcufcufcuc@gmail.com', null, 'xtdxdtdxt', 'xdtdttxdtdx', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
--- QUERY PARA SUBJECTS 
+-- QUERY PARA SUBJECTS
 
 INSERT INTO subjects
 VALUES(DEFAULT, 'Matematicas', DEFAULT, DEFAULT);
@@ -200,7 +200,7 @@ VALUES(DEFAULT, 4, 'ausente', 5, 4, false, null, 'Ha tenido un gran rendimiento 
 INSERT INTO "dataSheets"
 VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT);
 
-                                             
+
 -- QUERY PARA STUDENTSCHEDULE
 
 INSERT INTO "studentSchedules"
@@ -231,8 +231,7 @@ VALUES(DEFAULT,'(13.5,15.5)','Martes',DEFAULT,DEFAULT,1);
 INSERT INTO "userSchedules"
 VALUES(DEFAULT,'(14.5,16.5)','Martes',DEFAULT,DEFAULT,1);
 
-
--- //HASTAS asdasdasdasdasd 
+-- //HASTAS asdasdasdasdasd
 
 -- QUERY PARA CLASS
 
@@ -312,6 +311,8 @@ VALUES(2, 14);
 INSERT INTO "SubjectXUser"
 VALUES(3, 15);
 INSERT INTO "SubjectXUser"
+VALUES(5, 1);
+INSERT INTO "SubjectXUser"
 VALUES(2, 2);
 INSERT INTO "SubjectXUser"
 VALUES(5, 3);
@@ -325,6 +326,8 @@ INSERT INTO "SubjectXUser"
 VALUES(4, 7);
 INSERT INTO "SubjectXUser"
 VALUES(2, 8);
+INSERT INTO "SubjectXUser"
+VALUES(5, 9);
 
 -- QUERY PARA SUBJECTXSTUDENT
 
@@ -360,17 +363,15 @@ INSERT INTO "SubjectXStudent"
 VALUES(4, 15);
 INSERT INTO "SubjectXStudent"
 VALUES(3, 16);
-
-
 -- QUERY PARA EDUCATIONLEVEL
-
 INSERT INTO "educationLevels"
-VALUES(1, 'Primaria', DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Primaria', DEFAULT, DEFAULT);
 INSERT INTO "educationLevels"
-VALUES(2, 'Secundaria', DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Secundaria', DEFAULT, DEFAULT);
 
--- QUERY PARA ACADEMICLEVELXSUBJECT
-
+-- QUERY PARA ACADEMICLEVEL
+INSERT INTO "academicLevels"
+VALUES(DEFAULT,'Primer Grado', DEFAULT,DEFAULT, 1);
 INSERT INTO "academicLevels"
 VALUES(DEFAULT,'Primer Grado', DEFAULT,DEFAULT, 1);
 INSERT INTO "academicLevels"
@@ -385,6 +386,7 @@ INSERT INTO "academicLevels"
 VALUES(DEFAULT,'Sexto Grado', DEFAULT,DEFAULT, 1);
 INSERT INTO "academicLevels"
 VALUES(DEFAULT,'Septimo Grado', DEFAULT,DEFAULT, 1);
+
 INSERT INTO "academicLevels"
 VALUES(DEFAULT,'Primer Año', DEFAULT, DEFAULT, 2);
 INSERT INTO "academicLevels"
@@ -411,6 +413,7 @@ INSERT INTO "academicLeveltXSubject"
 VALUES(6,1);
 INSERT INTO "academicLeveltXSubject"
 VALUES(7,1);
+
 INSERT INTO "academicLeveltXSubject"
 VALUES(1,2);
 INSERT INTO "academicLeveltXSubject"
