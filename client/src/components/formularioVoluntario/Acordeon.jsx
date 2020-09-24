@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Acordeon({dia, expandedAll, handleChange, setTime, render}) {
+  console.log(dia)
   const classes = useStyles();
   const [days, setDays] = useState('Agregar rango horario');
   console.log(render)
@@ -103,7 +104,7 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime, rende
 					aria-controls="panel1bh-content"
 					id="panel1bh-header"
 				>
-					<Typography className={classes.heading}>{dia}</Typography>
+					<Typography className={classes.heading} style={expandedAll === dia ? {fontWeight: '700'} : null} >{dia}</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
 					<Typography>

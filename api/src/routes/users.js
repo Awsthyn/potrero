@@ -197,11 +197,9 @@ server.get('/:id', (req, res) => {
 });
 
 // CREA UN USUARIO
-server.post(
-  '/',
-  upload,
-  (req, res) => {
+server.post('/', upload, (req, res) => {
     // RECIBE LOS DATOS DEL USUARIO POR BODY
+    console.log(req.body)
     let usuario;
     if (!req.files) {
       usuario = req.body;
@@ -213,19 +211,14 @@ server.post(
         frontDNI: `${req.files.frontDNI[0].filename}`,
         backDNI: `${req.files.frontDNI[0].filename}`
       }
-    }else if(req.files.cv){
-      usuario = {
-        ...req.body,
-        cv: `${req.files.cv[0].filename}`,
-        }
-      }else if(req.files.frontDNI){
+    }else if(req.files.frontDNI){
         usuario = {
           ...req.body,
           frontDNI: `${req.files.frontDNI[0].filename}`,
           backDNI: `${req.files.frontDNI[0].filename}`
         }
       }
-    
+    console.log(usuario)
     User.create(usuario)
       // .then((userCreated) => {
         // Se espera valores de Id's de Subjects Ejemplo: 1,2

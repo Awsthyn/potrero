@@ -22,43 +22,23 @@ const circleColor = (id) => {
 }
 
 export default function ContenedorForm({history, location}) {
-	const goBack = () => {
-		switch(location.pathname ){
-			case "/voluntarios/formulario":
-				history.push('/')
-			case "/voluntarios/horarios":
-				history.push('/voluntarios/formulario')
-				break;
-			case "/voluntarios/niveles":
-				history.push('/voluntarios/horarios')
-				break;
-			case "/voluntarios/materias":
-				history.push('/voluntarios/niveles')
-				break;
-			case "/voluntarios/cargararchivos":
-				history.push('/voluntarios/materias')
-				break;
-			default: 
-			break;
-		}
-	}
 	const goTo = (e) => {
 		console.log(e.target.id)
 		switch(e.target.id){
 			case 'uno': 
-				history.push('/voluntarios/formulario')
-				break;
+			history.push('/voluntarios/formulario')
+			break;
 			case 'dos':
+				if(location.pathname === '/voluntarios/niveles' || location.pathname === '/voluntarios/materias' || location.pathname === '/voluntarios/cargararchivos')
 				history.push('/voluntarios/horarios')
 				break;
 			case 'tres':
+				if(location.pathname === '/voluntarios/niveles' || location.pathname === '/voluntarios/materias')
 				history.push('/voluntarios/niveles')
 				break;
 			case 'cuatro':
+				if(location.pathname === '/voluntarios/cargararchivos')
 				history.push('/voluntarios/materias')
-				break;
-			case 'cinco':
-				history.push('/voluntarios/cargararchivos')
 				break;
 			default:
 				return 
@@ -88,14 +68,9 @@ export default function ContenedorForm({history, location}) {
 			<div className={style.formLogo} >
 				{location.pathname !== '/voluntarios/confirmacion' ?
 				<span> 
-						<div> 
-							<svg viewBox="0 0 16 16" className={style.leftArrow} onClick={()=> goBack()} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							<path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-							</svg> 
-						</div>
 						<img
 							id="comp-jgasx8rqimgimage"
-							style={location.pathname === '/voluntarios/formulario' ? {top: '50px', marginBottom: '70px'} :null}
+							// style={location.pathname === '/voluntarios/formulario' ? {top: '50px', marginBottom: '70px'} :null}
 							className={style.imgSize}
 							alt="Fundacion El Potrero"
 							data-type="image"

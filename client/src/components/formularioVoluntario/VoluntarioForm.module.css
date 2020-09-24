@@ -10,7 +10,6 @@
     border: none;
 	border-bottom: 2px solid #3333331f !important;
 	text-align: left;
-	
 }
 
 input:focus {
@@ -37,7 +36,7 @@ input:focus {
 	margin-top: 0px;
 	box-shadow: 0px 3px 3px 3px rgba(219, 216, 216, 0.623);
 	border-radius: 20px;
-	min-height: 280px;
+	min-height: 350px;
 	max-height: 440px;
 }
 
@@ -87,7 +86,7 @@ input:focus {
 	margin-top: 5%;
 	outline: none;
 	border: none;
-	margin-left: 2%;
+	margin-left: 55%;
 	text-transform: capitalize;
 	padding: 5px;
 	width:195px;
@@ -291,17 +290,19 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .leftArrow {
-	position: absolute;
-	top: 45px;
-	left: 60%;
+	/* position: absolute;
+	left: 63%; 
+	bottom: 12%; */
+	margin-top: 20px;
 	width: 40px;
 	fill: #492BC4;
 }
 
 .leftArrow:hover {
-	position: absolute;
-	top: 45px;
-	left: 60%;
+	/* position: absolute;
+	left: 63%; 
+	bottom: 12%; */
+	margin-top: 20px;
 	width: 40px;
 	fill: #492BC4;
 	cursor: pointer;
