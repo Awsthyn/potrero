@@ -232,7 +232,7 @@ INSERT INTO "userSchedules"
 VALUES(DEFAULT,'(14.5,16.5)','Martes',DEFAULT,DEFAULT,1);
 
 
--- //HASTAS asdasdasdasdasd
+-- //HASTAS asdasdasdasdasd 
 
 -- QUERY PARA CLASS
 
