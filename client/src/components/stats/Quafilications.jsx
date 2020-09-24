@@ -10,7 +10,8 @@ class Offers extends React.Component {
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/qualification");
     var notas = await peticion.json();
-    let pro = notas.reduce((acc, currValue) => acc + currValue)
+
+    let pro = notas.length > 0 ? notas.reduce((acc, currValue) => acc + currValue) : 0;
 
     this.setState({
       notas: notas,
