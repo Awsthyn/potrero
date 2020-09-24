@@ -5,7 +5,7 @@ import ContenedorForm from './components/formularioVoluntario/ContenedorForm';
 import Login from './components/Login';
 import MiPerfil from './components/MiPerfil';
 import Home from './components/Home';
-import NavBar from './components/NavBar';
+// import NavBar from './components/NavBar';
 import AdminPanel from './components/admin/AdminPanel';
 import TablaUsuarios from './components/admin/TablaUsuarios';
 import TablaVoluntarios from './components/admin/TablaVoluntarios';
