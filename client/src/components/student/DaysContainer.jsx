@@ -11,10 +11,14 @@ export default function ContenedorCheckbox({ uploadParentState }) {
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpandedAll(isExpanded ? panel : false)
 	};
-	const setTime = (horarios) => {
-		if(!horarios.length) return setSchedule([])
-		let newSchedule = schedule.filter(s => s.nameWeekDay !== horarios[0].nameWeekDay);
-		setSchedule(newSchedule.concat(horarios));
+	const setTime = (horarios, ultimo) => {
+		let newSchedule;
+	newSchedule = schedule.filter(s => s.nameWeekDay !== horarios[0].nameWeekDay)
+	if(ultimo){
+		setSchedule(newSchedule)
+	}else{
+		setSchedule(newSchedule.concat(horarios))
+	}
 		uploadParentState(schedule);
 	}
 
