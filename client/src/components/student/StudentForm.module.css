@@ -223,17 +223,18 @@ input:focus {
 }
 
 .itemList{
-	width: 300px;
-	margin: 20px auto;
-	list-style: none;
-}
-
-.containerListDays{
 	display: flex;
 	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: flex-start;
+	list-style: none;
+	width: 330px;
+	margin-left: 31%;
 }
+
+/* .containerListDays{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+} */
 
 .containerListNiveles{
 	width:640px;

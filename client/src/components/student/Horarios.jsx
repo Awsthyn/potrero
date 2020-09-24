@@ -37,19 +37,19 @@ export default function Horarios({de, hasta, id, handleTime, handleDelete}) {
 	return (
 		<span className={style.containerHorarios} >
 			<span className={style.botonesMasyMenos}> 
-				<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', id, 'startTime')}>
+				<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', 'startTime')}>
 					<span className="material-icons">expand_less</span>
 				</IconButton>
-				<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir', id, 'startTime')}>
+				<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir','startTime')}>
 					<span className="material-icons">expand_more</span>
 				</IconButton>
 			</span>
 			<span style={{alignSelf:'center'}}> de: {horaDe} hs a {horaHasta} hs </span>
 			<span className={style.botonesMasyMenos}> 
-				<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', id, 'endTime')}>
+				<IconButton aria-label="aumentar" onClick={() => handleTime('aumentar', 'endTime')}>
 					<span className="material-icons">expand_less</span>
 				</IconButton>
-				<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir', id, 'endTime')}>
+				<IconButton aria-label="disminuir" onClick={() => handleTime('disminuir', 'endTime')}>
 					<span className="material-icons">expand_more</span>
 				</IconButton>
 			</span>

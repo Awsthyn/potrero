@@ -27,7 +27,6 @@ const setTime = (horarios, ultimo) => {
 useEffect(() => {
 	if(!schedule.length){
 		let newState = JSON.parse(localStorage.getItem('schedule'))
-		console.log(newState)
 			if(newState) setSchedule(newState)
 		}
 }, [])

@@ -197,10 +197,7 @@ server.get('/:id', (req, res) => {
 });
 
 // CREA UN USUARIO
-server.post(
-  '/',
-  upload,
-  (req, res) => {
+server.post('/', upload, (req, res) => {
     // RECIBE LOS DATOS DEL USUARIO POR BODY
     let usuario;
     if (!req.files) {
