@@ -21,6 +21,7 @@ import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
 import Chart from './components/admin/Chart';
 import StudentCard from './components/student/StudentCard/StudentCard';
+import AsesorProfile from './components/AsesorProfile/AsesorProfile';
 
 
 class App extends React.Component {
@@ -32,7 +33,7 @@ class App extends React.Component {
 			 {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
 			<Route exact path={['/voluntarios', '/admin', '/admin/voluntarios',
 			'/admin/usuarios', '/admin/materias', '/usuario/perfil', '/admin/estudiantes',
-			'/admin/estudiantes/agregar', '/admin/estudiantes/detalles/:id']}
+			'/admin/estudiantes/agregar', '/admin/estudiantes/detalles/:id', ]}
 			component={NavBar} />
 			<Route exact path="/" component={Home} />
 			<Route path="/voluntarios" component={ContenedorForm} />
@@ -64,6 +65,11 @@ class App extends React.Component {
 		<Route
         path="/studentCard"
         component = {StudentCard} />
+
+		<Route
+		path = "/asesor/test"
+		component = {AsesorProfile}/>
+
 		</div>
 	);
 	}
