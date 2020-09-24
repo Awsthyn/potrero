@@ -98,8 +98,8 @@ server.get('/:studentId/:subject', (req, res) => {
                 //Hago  B-A, B-C, D-C, D-A. El que me de el valor más bajo es el que sirve para saber donde ocurre el solapamiento
                 let differences = [
                     {
-                        endTime: a,
-                        startTime: b,
+                        endTime: b,
+                        startTime: a,
                         diferencia: b-a
                     },
                     {
@@ -161,8 +161,8 @@ server.get('/:studentId/:subject', (req, res) => {
             })
 
             res.json(disponible)})
-        
-    })    
+            .catch(err => console.log(err))  
+    })
 })
 
 
