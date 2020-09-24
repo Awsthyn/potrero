@@ -1,7 +1,9 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import styles from './VoluntarioForm.module.css';
+import { red } from '@material-ui/core/colors';
 
 export default class VolunteerForm extends React.Component {
 	constructor(props) {
@@ -38,9 +40,10 @@ export default class VolunteerForm extends React.Component {
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;
 		}
+		let años;
 		return (
 			<div>
-				<span style={{top: '140px'}} className={styles.frase}>  
+				<span className={styles.frase}>  
 				<p style={{fontSize:'1.3rem', margin: '0px', fontFamily: 'Poppins'}} ><strong>Sumáte a nuestro equipo </strong></p>
 				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px', fontFamily: 'Poppins'}} > Completá este formulario y nos pondremos en contacto con vos </span>
 				</span>
@@ -69,6 +72,7 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
+					
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -80,6 +84,13 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
+							{
+							this.state.info.birthday && 
+							!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
+							parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 
+							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Debes ser mayor de 18 años</p> : null
+						}
+						
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -91,6 +102,11 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/> 
+						{
+							this.state.info.phone && 
+							this.state.info.phone.toString().length !== 12
+							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Debes ingresar un número telefónico válido</p> : null	
+						}
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -107,21 +123,32 @@ export default class VolunteerForm extends React.Component {
 					{!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
+					!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
+					parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 ||		
 					!this.state.info.email ||
-					!this.state.info.phone 
+					!this.state.info.phone || 
+					 this.state.info.phone.toString().length !== 12 
 						? (control = true)
 						: false}
-					<Button
-						disabled={control ? true : false}
-						variant="contained"
-						className={styles.testButton}
-						id={styles.skere}
-						type="submit"
-						value="Submit"
-						onClick={() => this.handleOnClick()}>
-						Continuar
-						<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
-					</Button>
+						<div style={{display: 'flex', alignItems: 'center'}}> 
+							<div onClick={() => this.props.history.push('/')} > 
+								<svg viewBox="0 0 16 16" className={styles.leftArrow} style={{bottom: '19%'}} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+								</svg> 
+							</div>
+						<Button
+							disabled={control ? true : false}
+							style={control ? {backgroundColor: "#CAD2D9"} : null}
+							variant="contained"
+							className={styles.testButton}
+							id={styles.skere}
+							type="submit"
+							value="Submit"
+							onClick={() => this.handleOnClick()}>
+							Continuar
+							<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
+						</Button>
+					</div>
 				</form>
 			</div>
 			</div>

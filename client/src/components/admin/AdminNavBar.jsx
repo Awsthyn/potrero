@@ -18,6 +18,7 @@ const NEGRO = '#333333'
 
 const useStyles = makeStyles({
     root:{
+        zIndex: 1,
         height:50,
         background: VIOLETA,
         position:'fixed',

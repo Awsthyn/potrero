@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Acordeon({ dia, expandedAll, handleChange, setTime }) {
+export default function Acordeon({ dia, expandedAll, handleChange, setTime, render }) {
   const classes = useStyles();
   const [days, setDays] = useState('Agregar rango horario');
 
@@ -30,38 +30,27 @@ export default function Acordeon({ dia, expandedAll, handleChange, setTime }) {
     e.preventDefault();
     if (typeof days === 'string') {
       return setDays([{ startTime: 12, endTime: 13, nameWeekDay: dia }]);
-    } else if (days.length < 2 && days[0].endTime < 19.5) {
+    } else if (days.length < 1 && days[0].endTime < 19.5) {
       return setDays([...days, { startTime: days[0].endTime, endTime: days[0].endTime + 1, nameWeekDay: dia }]);
     }
   }
-  const handleTime = (type, idx, clase) => {
-    let newDays = days.map((h, i) => {
-      if (i === idx) {
-        if (type === 'aumentar' && clase === 'startTime' && h.startTime >= 8 && h.startTime < 19) {
-          if (h.endTime - 1.5 < h.startTime) h.endTime = h.startTime + 1.5;
-          return (h.startTime = { startTime: h.startTime + 0.5, endTime: h.endTime, nameWeekDay: dia });
-        } else if (type === 'aumentar' && clase === 'endTime' && h.endTime < 20 && h.endTime >= 9) {
-          return (h[clase] = { endTime: h[clase] + 0.5, startTime: h.startTime, nameWeekDay: dia });
-        } else if (type === 'disminuir' && clase === 'startTime' && h.startTime <= 19 && h.startTime > 8) {
-          return (h[clase] = { startTime: h[clase] - 0.5, endTime: h.endTime, nameWeekDay: dia });
+  const handleTime = (type, clase) => {
+        if (type === 'aumentar' && clase === 'startTime' && days[0].startTime >= 8 && days[0].startTime < 19) {
+          if (days[0].endTime - 1.5 < days[0].startTime) days[0].endTime = days[0].startTime + 1.5;
+          setDays({ startTime: days[0].startTime + 0.5, endTime: days[0].endTime, nameWeekDay: dia });
+        } else if (type === 'aumentar' && clase === 'endTime' && days[0].endTime < 20 && days[0].endTime >= 9) {
+          setDays({ endTime: days[0][clase] + 0.5, startTime: days[0].startTime, nameWeekDay: dia });
+        } else if (type === 'disminuir' && clase === 'startTime' && days[0].startTime <= 19 && days[0].startTime > 8) {
+          setDays({ startTime: days[0][clase] - 0.5, endTime: days[0].endTime, nameWeekDay: dia });
         } else if (
           type === 'disminuir' &&
           clase === 'endTime' &&
-          h.endTime <= 20 &&
-          h.endTime > 9 &&
-          h.endTime >= h.startTime + 1.5
+          days[0].endTime <= 20 &&
+          days[0].endTime > 9 &&
+          days[0].endTime >= days[0].startTime + 1.5
         ) {
-          return (h[clase] = { endTime: h[clase] - 0.5, startTime: h.startTime, nameWeekDay: dia });
+          setDays({ endTime: days[0][clase] - 0.5, startTime: days[0].startTime, nameWeekDay: dia });
         }
-      }
-      return h;
-    })
-    if (newDays[1] && newDays[1].startTime < days[0].endTime) {
-      newDays[1] = { startTime: days[0].endTime, endTime: days[0].endTime + 1, nameWeekDay: dia }
-      if (newDays[0].endTime === 19.5) newDays.pop()
-    }
-    return setDays(newDays)
-
   }
 
   const handleDelete = (idx) => {
@@ -72,18 +61,20 @@ export default function Acordeon({ dia, expandedAll, handleChange, setTime }) {
 
   }
   useEffect(() => {
-    if (typeof days !== 'string') setTime(days)
+    if(typeof days !== 'string') setTime(days, false)
+    else{
+      setTime([{nameWeekDay: dia}], true)
+    }
   }, [days])
 
   return (
-    <Accordion expanded={expandedAll === dia} onChange={handleChange(dia)} >
+    <Accordion expanded={expandedAll === dia} onChange={handleChange(dia)} style={render[0] ?{border: '2px solid rgb(140, 198, 62'} : {backgroundColor: "white"}}>
       <AccordionSummary
         expandIcon={<span className="material-icons ">expand_more</span>}
         aria-controls="panel1bh-content"
         id="panel1bh-header"
       >
-        <Typography className={classes.heading}>{dia}</Typography>
-        {/* <Typography className={classes.secondaryHeading}>Escoge tu rango horario</Typography> */}
+        <Typography className={classes.heading}  style={expandedAll === dia ? {fontWeight: '700'} : null}>{dia}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Typography>
@@ -102,8 +93,8 @@ export default function Acordeon({ dia, expandedAll, handleChange, setTime }) {
                     />
                   );
                 })}
-              <button style={{ borderStyle: "none", backgroundColor: "#492BC4", fontWeight: "100", fontSize: "1.3em", paddingLeft: "10px", paddingRight: "10px" }}
-                className="ml-2 text-white rounded-circle" onClick={e => handleOnClick(e)}> + </button>
+              {(typeof days === 'string' || days.length < 1) ? <button style={{ borderStyle: "none", backgroundColor: "#492BC4", fontWeight: "100", fontSize: "1.3em", paddingLeft: "10px", paddingRight: "10px" }}
+                className="ml-2 text-white rounded-circle" onClick={e => handleOnClick(e)}> + </button> : null}
             </span>
           ) : null}
         </Typography>
