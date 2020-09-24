@@ -9,16 +9,17 @@ export default class StudentCard extends React.Component {
 
 render() {
 return(
-    
+    <div className = {style.outer}>
     <div className = {style.container}>
     <div className = {style.student}>
         <i className={`fas fa-circle ${style.online}`}></i>
-        <img className = {style.avatar} src = "https://api.adorable.io/avatars/285/abott@adorable.png" alt = ""/>
-        <h4 className = {style.name} >Leandro Alvarez</h4>
+        <img className = {style.avatar} src = {this.props.img} alt = ""/>
+        <h4 className = {style.name} >{this.props.name}</h4>
     </div>
     <div className = {style.info}>
-        <p className = {style.data}><i style = {{color: '#cfcfcf',fontSize: '18px',transform: 'scaleX(-1)', marginRight : '8px'}} class="fas fa-envelope"></i>leandroalvarez@gmail.com</p>
-        <p className = {style.data}><i style = {{color: '#cfcfcf', fontSize: '18px',transform: 'scaleX(-1)', marginRight : '8px'}} class="fas fa-phone"></i>+549 11 569 985</p>
+        <p className = {style.data}><i style = {{color: '#cfcfcf',fontSize: '18px',transform: 'scaleX(-1)', marginRight : '8px'}} class="fas fa-envelope"></i>{this.props.email}</p>
+        <p className = {style.data}><i style = {{color: '#cfcfcf', fontSize: '18px',transform: 'scaleX(-1)', marginRight : '8px'}} class="fas fa-phone"></i>{this.props.phone}</p>
+    </div>
     </div>
     </div>
     
