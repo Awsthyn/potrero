@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import styles from './VoluntarioForm.module.css';
+import { red } from '@material-ui/core/colors';
 
 export default class VolunteerForm extends React.Component {
 	constructor(props) {
@@ -71,12 +72,7 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
-						{
-							this.state.info.birthday && 
-							!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
-							parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 
-							? <p style={{fontSize: "10px"}}>Debes ser mayor a 18 años</p> : null
-						}
+					
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -88,11 +84,13 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
-						{
-							this.state.info.phone && 
-							this.state.info.phone.toString().length !== 12
-							? <p style={{fontSize: "10px"}}>Debes ingresar un número telefónico válido</p> : null	
+							{
+							this.state.info.birthday && 
+							!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
+							parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 
+							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Debes ser mayor de 18 años</p> : null
 						}
+						
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -104,6 +102,11 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/> 
+						{
+							this.state.info.phone && 
+							this.state.info.phone.toString().length !== 12
+							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Debes ingresar un número telefónico válido</p> : null	
+						}
 						<input
 							spellCheck="false"
 							autoComplete="off"
