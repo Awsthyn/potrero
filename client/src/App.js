@@ -19,10 +19,11 @@ import AdminDrawer from './components/admin/AdminDrawer';
 import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
-import Chart from './components/admin/Chart';
 import StudentCard from './components/student/StudentCard/StudentCard';
+import AsesorProfile from './components/AsesorProfile/AsesorProfile';
 
 class App extends React.Component {
+
   render() {
     return (
       <div className='App'>
@@ -67,19 +68,27 @@ class App extends React.Component {
           )}
         />
 
+
         <Route exact path='/usuario/login' component={Login} />
         <Route exact path='/usuario/perfil' component={MiPerfil} />
         <Route exact path='/usuario/recuperar' component={PasswordRecovery} />
 
         <Route exact path='/login/:token' component={ResetPassword} />
 
-        {/* //// RUTAS PARA TESTEAR / VISUALIZAR COMPONENTES EN CONSTRUCCIÓN. BORRAR LUEGO. //// */}
-        <Route path='/chart' component={Chart} />
+       
 
-        <Route path='/studentCard' component={StudentCard} />
-      </div>
-    );
-  }
+		<Route
+        path="/studentCard"
+        component = {StudentCard} />
+
+		<Route
+		path = "/asesor/test"
+		component = {AsesorProfile}/>
+
+		</div>
+	);
+	}
+
 }
 
 export default App;

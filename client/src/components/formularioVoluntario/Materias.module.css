@@ -211,7 +211,7 @@
 	height: 50px;
 	width: 150px;
 	position: absolute;
-	bottom: 60px;
+	bottom: 200px;
 	right: 31%;
 }
 .contenedorLetras{
@@ -241,7 +241,7 @@
 	font-weight: 500;
 	color: #9D9BB7;
 	right: 32.5%;
-	bottom: 40px;
+	bottom: 185px;
 	font-family: 'Poppins' ;
 }
 .link:hover{

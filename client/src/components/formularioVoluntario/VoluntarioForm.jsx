@@ -39,6 +39,7 @@ export default class VolunteerForm extends React.Component {
 		if (this.state.redirect) {
 			return <Redirect to="/voluntarios/horarios" />;
 		}
+		let años;
 		return (
 			<div>
 				<span className={styles.frase}>  
@@ -70,6 +71,12 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
+						{
+							this.state.info.birthday && 
+							!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
+							parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 
+							? <p style={{fontSize: "10px"}}>Debes ser mayor a 18 años</p> : null
+						}
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -81,6 +88,11 @@ export default class VolunteerForm extends React.Component {
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
 						/>
+						{
+							this.state.info.phone && 
+							this.state.info.phone.toString().length !== 12
+							? <p style={{fontSize: "10px"}}>Debes ingresar un número telefónico válido</p> : null	
+						}
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -108,8 +120,11 @@ export default class VolunteerForm extends React.Component {
 					{!this.state.info.firstName ||
 					!this.state.info.lastName ||
 					!this.state.info.birthday ||
+					!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
+					parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 ||		
 					!this.state.info.email ||
-					!this.state.info.phone 
+					!this.state.info.phone || 
+					 this.state.info.phone.toString().length !== 12 
 						? (control = true)
 						: false}
 						<div style={{display: 'flex', alignItems: 'center'}}> 
@@ -120,6 +135,7 @@ export default class VolunteerForm extends React.Component {
 							</div>
 						<Button
 							disabled={control ? true : false}
+							style={control ? {backgroundColor: "#CAD2D9"} : null}
 							variant="contained"
 							className={styles.testButton}
 							id={styles.skere}

@@ -33,6 +33,7 @@ useEffect(() => {
 if (redirect) {
 	return <Redirect to="/voluntarios/niveles" />;
 }
+var control;
 	return (
 		<div>
 			<span className={style.frase}>  
@@ -54,7 +55,12 @@ if (redirect) {
 						<path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
 						</svg> 
 					</div>
+					{schedule.length === 0 
+						? (control = true)
+						: false}
 					<Button
+						disabled={control ? true : false}
+						style={control ? {backgroundColor: "#CAD2D9"} : null}
 						variant="contained"
 						className={style.testButton}
 						id={style.skere}
