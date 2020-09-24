@@ -2,9 +2,10 @@ import axios from 'axios';
 import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VOLUNTEER, ADD_SUBJECTS_VOLUNTEER} from '../constants';
 // Agrega un Voluntario --> Crea Calendario --> Envía Mail de Bienvenida 
 export function postVoluntary(voluntary, subjects, schedule) {
+	console.log(voluntary)
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/users`, {voluntary}, {withCredentials: true})
+			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
 				dispatch(postMailWelcome(res.data))
 				.then(() => {
