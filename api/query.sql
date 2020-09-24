@@ -17,7 +17,7 @@ VALUES(DEFAULT, 'josefo@gmail.com',null, 'Elena', 'Gonzalez', 'San Martin 1213',
 INSERT INTO users
 VALUES(DEFAULT, 'lele@gmail.com', null, 'Gustavo', 'Altamiranda', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', null, 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- QUERY PARA SUBJECTS 
+-- QUERY PARA SUBJECTS
 
 INSERT INTO subjects
 VALUES(1, 'Matematicas', DEFAULT, DEFAULT);
@@ -118,9 +118,9 @@ VALUES(DEFAULT, '3', 'tardanza', '6', '9', false, null, 'Ha tenido un gran rendi
 -- QUERY PARA STUDENTSCHEDULE
 
 INSERT INTO "studentSchedules"
-VALUES(1,'09:00', '12:00','Lunes', DEFAULT, DEFAULT, 1);
+VALUES(DEFAULT,'09:00', '12:00','Lunes', DEFAULT, DEFAULT, 1);
 INSERT INTO "studentSchedules"
-VALUES(2,'09:00', '12:00','Martes', DEFAULT, DEFAULT, 1);
+VALUES(DEFAULT,'09:00', '12:00','Martes', DEFAULT, DEFAULT, 1);
 
 -- QUERY PARA USERSCHEDULE
 
@@ -133,9 +133,9 @@ VALUES(2,'09:00', '12:00','Martes', DEFAULT, DEFAULT, 1);
 -- QUERY PARA CLASS
 
 INSERT INTO classes
-VALUES(1, DEFAULT, DEFAULT, 1, 1, 1, 2);
+VALUES(DEFAULT, DEFAULT, DEFAULT, 1, 1, 1, 2);
 INSERT INTO classes
-VALUES(2, DEFAULT, DEFAULT, 2, 2, 2, 4);
+VALUES(DEFAULT, DEFAULT, DEFAULT, 2, 2, 2, 4);
 
 
 -- QUERY PARA TIPO DE DIFICULTAD POR ESTUDIANTE
@@ -184,11 +184,11 @@ INSERT INTO "SubjectXStudent"
 VALUES(5, 3);
 -- QUERY PARA EDUCATIONLEVEL
 INSERT INTO "educationLevels"
-VALUES(1, 'Primaria', DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Primaria', DEFAULT, DEFAULT);
 INSERT INTO "educationLevels"
-VALUES(2, 'Secundaria', DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Secundaria', DEFAULT, DEFAULT);
 
--- QUERY PARA ACADEMICLEVELXSUBJECT
+-- QUERY PARA ACADEMICLEVEL
 INSERT INTO "academicLevels"
 VALUES(DEFAULT,'Primer Grado', DEFAULT,DEFAULT, 1);
 INSERT INTO "academicLevels"
