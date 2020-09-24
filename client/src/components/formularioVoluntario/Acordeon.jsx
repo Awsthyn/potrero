@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Acordeon({dia, expandedAll, handleChange, setTime, render}) {
+  console.log(dia)
   const classes = useStyles();
   const [days, setDays] = useState('Agregar rango horario');
   console.log(render)
