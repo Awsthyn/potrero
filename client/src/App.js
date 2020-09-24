@@ -19,8 +19,6 @@ import AdminDrawer from './components/admin/AdminDrawer';
 import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
-import AllAssistancesStudents from './components/stats/AllAssistancesStudents.jsx';
-import AllStats from './components/stats/AllStats.jsx';
 
 class App extends React.Component {
   
@@ -52,16 +50,6 @@ class App extends React.Component {
 			<Route exact path="/usuario/recuperar" component={PasswordRecovery} />
 
 			<Route exact path="/login/:token" component={ResetPassword}/>
-
-            <Route
-			exact path="/stats/assistances"
-			component = {AllAssistancesStudents}
-			/>
-			<Route
-			exact path="/stats"
-			component={AllStats}
-			/>
-			{/* PONER EXACT PATH */}
 		</div>
 	);
 	}
