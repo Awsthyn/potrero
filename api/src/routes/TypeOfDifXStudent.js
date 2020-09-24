@@ -4,7 +4,7 @@ const server = require("express").Router();
 const { Student, TODXStudent } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
-const Sequelize = require("sequelize");
+const Sequelize = require("sequelize"); 
 
 // BUSCA Y AGREGA EL TOD AL STUDENT ENCONTRADO.
 server.post("/:id", (req, res) => {

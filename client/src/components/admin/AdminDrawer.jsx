@@ -211,13 +211,11 @@ function AdminDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-         
-                <List className={classes.grouplinks}>
-                        <ListItem  >
-                        <Typography variant="h4" noWrap>
-                         Panel de Admin
-                         </Typography>
-                        </ListItem>
+          <Typography variant="h6" noWrap>
+            Panel de Admin
+          </Typography>
+
+                         <List className={classes.grouplinks}>
                                 <ListItem  >
                                     <ListItemText className={classes.grouplinks} primary={`${props.session.firstName} ${props.session.lastName}`}/>
                                 </ListItem>

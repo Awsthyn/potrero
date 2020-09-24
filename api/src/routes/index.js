@@ -59,6 +59,10 @@ const educationLevel = require("./educationLevel.js")
 //IMPORT DEL MATCHING ENTRE STUDENTSCHEDULE Y USERSCHEDULE
 const matching = require("./matching.js")
 
+// IMPORT DE STATS.JS
+
+const statsRouter = require('./stats.js');
+
 const router = Router();
 
 // ROUTES
@@ -118,6 +122,9 @@ router.use("/educationlevel", educationLevel)
 
 //RUTA DE MATCHEO DE STUDENTSCHEDULE Y USERSCHEDULE
 router.use("/matching", matching)
+
+// RUTA DE ESTADÍSTICAS
+router.use('/stats', statsRouter);
 
 
 

@@ -122,6 +122,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 500,
   },
+  root: {
+    marginTop: 100,
+  },
 });
 
 
@@ -217,7 +220,7 @@ const TablaVoluntarios = (props) => {
 
 
     return (
-      <>
+      <div  className={classes.root}>
                                     <ButtonGroup variant="contained" alignItems="center"  aria-label="contained button group">
                                               
                                                    <Button disableRipple  name="TODOS" key="TODOS" style={{ background:"green",color:'white'}} onClick={()=>handleFilter('TODOS')}>
@@ -253,7 +256,7 @@ const TablaVoluntarios = (props) => {
 
 
       
-        <TableContainer component={Paper} style={{marginLeft:230, marginTop: 40, width:`calc(100% - ${250}px)`}}>
+        <TableContainer component={Paper} style={{margin:50, width:`calc(100% - ${100}px)`}}>
          { filtered ? 
               <Table className={classes.table} aria-label="custom pagination table">
                     <TableHead>
@@ -326,7 +329,7 @@ const TablaVoluntarios = (props) => {
                 </Table>:'No hay voluntarios en este momento'}
      
       </TableContainer>
-      </>
+    </div>
     )
 }
 
