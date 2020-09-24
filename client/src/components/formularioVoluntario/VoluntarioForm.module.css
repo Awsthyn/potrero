@@ -55,13 +55,16 @@ input:focus {
 	border: red 1px solid;
 }
 .Contenedor{
+	margin-top: 5vh;
 	height: 100%;
-	width: 90%;
+	width: 80%;
 	display: flex; 
 	justify-content: center;
 	margin-left: 5%
 }
 .img{
+	object-fit: cover;
+	object-position: 9% 40%; 
 	margin-right: 50px;
 	margin-top: 0px;
 	width: 100%;
@@ -217,27 +220,29 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .imgTxt{
-    position: absolute;
-    top: 52%;
-	left: 56%;
+	margin: 0;
+	text-align: left;
 	color: rgb(255, 255, 255);
 	font-weight: bold;
-	font-size: 50px;
+	font-size: 70px;
 	font-family: 'Poppins' ;
-	transform: translate(-80%, -110%);
+	
 	/* z-index: 1; */
 	/* margin-bottom: 0px; */
-	padding-bottom: 20px;
+	
 }
 
 .imgContainText{
+	
+	font-weight: 100;
+	text-align: left;
 	position: absolute;
-	width: 60%;
+	width: 55%;
 	color: rgb(255, 255, 255);
-	font-size: 15px;
+	font-size: 19px;
 	font-family: 'Poppins' ;
-	top: 54%;
-	left: 60%;
+	top: 40%;
+	left: 55%;
 	transform: translate(-70%, -50%);
 }
 
@@ -326,8 +331,9 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .frase{
+	text-align: left;
 	position: absolute;
-	top: 95px;
-	right: 14%;
+	top: 166px;
+	right: 24%;
 	width: 300px;
 }

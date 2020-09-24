@@ -6,7 +6,7 @@ import ContenedorCheckbox from './ContenedorCheckbox';
 import Niveles from './Niveles';
 import Confirmacion from './Confirmacion';
 import style from './VoluntarioForm.module.css';
-import img from '../VolunteerFormAssets/formJueguitos.jpg';
+import img from '../VolunteerFormAssets/formJueguitos.png';
 import logo from '../VolunteerFormAssets/logorecortado.png';
 import CargarArchivos from './CargarArchivos';
 
@@ -59,10 +59,10 @@ export default function ContenedorForm({history, location}) {
 					src={img}
 					alt="Jugador de fútbol"
 					/>
-					<div className={style.imgTxt}><b>Sumáte!</b></div>
 						<div className={style.imgContainText}>
-							Trabajemos juntos por la inclusión social y el 
-							desarrollo humano de niños y adolescentes en estado de vulnerabilidad
+							<h1 className={style.imgTxt} >Sumáte!</h1>
+							<p>Trabajemos juntos por la inclusión social y el 
+							desarrollo humano de niños y adolescentes en estado de vulnerabilidad</p>
 						</div>
 					</div>
 			<div className={style.formLogo} >
