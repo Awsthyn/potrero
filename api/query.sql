@@ -200,7 +200,7 @@ VALUES(DEFAULT, 4, 'ausente', 5, 4, false, null, 'Ha tenido un gran rendimiento 
 INSERT INTO "dataSheets"
 VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT);
 
-
+ 
 -- QUERY PARA STUDENTSCHEDULE
 
 INSERT INTO "studentSchedules"
