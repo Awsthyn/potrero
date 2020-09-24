@@ -80,9 +80,9 @@ class Offers extends React.Component {
       <div>
         {
           isNaN(this.state.total) ? <h3>Promedio notas: No existen notas</h3>
-          : <h3>"Promedio notas: " + this.state.total</h3>
+          : <h3>"Promedio notas: " {this.state.total}</h3>
         }
-        
+
         <Bar
           type
           data={this.state.datos}
