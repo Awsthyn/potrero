@@ -63,7 +63,7 @@ const { conn, User, Student, TypeOfDifficulty, Subject, Role, TODXStudent,Subjec
 /*const { initialVolunteers, initialUsers, initialSubjects, initialStudents,initialRoles,initialTypeOfDifficulty,initialTODXStudent} = require("./src/seed");*/
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
 server.listen(3001, () => {
 console.log('%s listening at 3001'); // eslint-disable-line no-console
     });
