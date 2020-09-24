@@ -16,16 +16,11 @@ export class StudentFile extends Component {
       email: '',
       tutor: '',
       difficulty: false,
-    //   subjectsId: this.props.studentDetail.subjects.map((s) => s.id),
-      // weakness: props.student.weakness,
       interests: '',
-      // strengths: props.student.strengths,
       motivations: ''
     };
     this.subjects = this.props.subjects;
     this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
-    // this.onWeakCheckboxClicked = this.onWeakCheckboxClicked.bind(this);
-    // this.onStrengthCheckboxClicked = this.onStrengthCheckboxClicked.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
   }
@@ -52,29 +47,6 @@ export class StudentFile extends Component {
       });
     }
   }
-
-  // onStrengthCheckboxClicked(subject, isChecked) {
-  // 	if (isChecked) {
-  // 		this.setState({
-  // 			strengths: [...this.state.strengths, subject.id]
-  // 		})
-  // 	} else {
-  // 		this.setState({
-  // 			strengths: this.state.strengths.filter(s => s !== subject.id)
-  // 		})
-  // 	}
-  // }
-  // onWeakCheckboxClicked(subject, isChecked) {
-  // 	if (isChecked) {
-  // 		this.setState({
-  // 			weakness: [...this.state.weakness, subject.id]
-  // 		})
-  // 	} else {
-  // 		this.setState({
-  // 			weakness: this.state.weakness.filter(s => s !== subject.id)
-  // 		})
-  // 	}
-  // }
 
   componentDidMount() {
     this.props.getStudentDetail(this.props.match.params.id);
