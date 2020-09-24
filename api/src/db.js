@@ -102,6 +102,7 @@ TypeOfDifficulty.belongsToMany(Student, {
 //USER ACEPTADO O ADMIN DEL SISTEMA
 User.belongsToMany(Subject, { through: "SubjectXUser", timestamps: false });
 User.hasMany(UserSchedule);
+User.hasMany(Class);
 
 //CALIFICACION POR CLASE
 DataSheet.hasOne(Class);

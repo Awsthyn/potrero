@@ -16,7 +16,6 @@ class Demands extends React.Component {
     var dataAssistance = [];
     var dataInassistance = [];
     var dataDelay = [];
-    
     this.setState({
       demand: demandas.onlyDemand,
       total: demandas.demandSubjects,
@@ -25,18 +24,19 @@ class Demands extends React.Component {
 
   getChartData() {
     const demOffer = [];
-    this.state.demand.forEach((e) => {
+    this.state.demand && this.state.demand.forEach((e) => {
       let nombre = Object.keys(e);
       demOffer.push(nombre[0]);
     });
-
     const countdemOffer = [];
-    for (let i = 0; i < this.state.demand.length; i++) {
-      for (const property in this.state.demand[i]) {
-        countdemOffer.push(this.state.demand[i][property]);
+    if(this.state.demand.length > 0){
+      for (let i = 0; i < this.state.demand.length; i++) {
+        for (const property in this.state.demand[i]) {
+          countdemOffer.push(this.state.demand[i][property]);
+        }
       }
     }
-
+   
     const datos = {
       //hacer map para labels
       labels: demOffer,
@@ -84,6 +84,13 @@ class Demands extends React.Component {
           options={{
             responsive: true,
             maintainAspectRatio: true,
+              yAxes: [{
+                  ticks: {
+                      min: 0,
+                      max: 100,
+                      stepSize: 10.0
+                  }
+              }]
           }}
         ></Bar>
       </div>

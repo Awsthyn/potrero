@@ -13,6 +13,7 @@ import StatusVoluntary from "../stats/StatusVoluntary.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import * as actions from "../../redux/actions/stats.js";
+import estadisticas from './assets/estadisticas.png';
 import "./stats.css";
 
 const VIOLETA = "#492BC4";

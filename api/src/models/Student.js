@@ -19,27 +19,35 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    tutor: {
+    tutorFirstName: {
       type: DataTypes.STRING,
       allowNull: false,
-    },/*
+    },
     tutorLastName: {
       type: DataTypes.STRING,
       allowNull: false,
-    },*/
-    difficulty: {
-      //En caso de true desplegar una nueva lista )?
-      type: DataTypes.BOOLEAN,
+    },
+    tutorPhone: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    weakness: {
-      type: DataTypes.TEXT,
-      allowNull: true,
+    tutorEmail: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    strengths: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
+    // difficulty: {
+    //   //En caso de true desplegar una nueva lista )?
+    //   type: DataTypes.BOOLEAN,
+    //   allowNull: false,
+    // },
+    // weakness: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: true,
+    // },
+    // strengths: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: true,
+    // },
     interests: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -68,11 +76,14 @@ module.exports = (sequelize) => {
     lastName,
     phone,
     email,
-    tutor,
-    difficulty,
-    typeOfDifficulty,
-    weakness,
-    strengths,
+    tutorFirstName,
+    tutorLastName,
+    tutorEmail,
+    tutorPhone,
+    // difficulty,
+    // typeOfDifficulty,
+    // weakness,
+    // strengths,
     interests,
     motivations,
     isActive,
@@ -82,10 +93,13 @@ module.exports = (sequelize) => {
       lastName,
       phone,
       email,
-      tutor,
-      difficulty,
-      weakness,
-      strengths,
+      tutorFirstName,
+      tutorLastName,
+      tutorEmail,
+      tutorPhone,
+      // difficulty,
+      // weakness,
+      // strengths,
       interests,
       motivations,
       isActive,

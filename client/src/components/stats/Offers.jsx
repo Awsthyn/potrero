@@ -11,7 +11,7 @@ class Offers extends React.Component {
   };
 
   async peticion() {
-    
+
     var peticion = await fetch("http://localhost:3001/stats/offer/subject");
     var ofertas = await peticion.json();
     var dataAssistance = [];
@@ -35,14 +35,14 @@ class Offers extends React.Component {
         for (const property in this.state.offers[i]) {
           countdemOffer.push(this.state.offers[i][property])
         }
-      } 
+      }
 
     const datos = {
       //hacer map para labels
       labels: demOffer,
       datasets: [
         {
-          label: "Demandas de materias",
+          label: "Oferta de materias",
           data: countdemOffer,
           fill: false,
           backgroundColor: [
