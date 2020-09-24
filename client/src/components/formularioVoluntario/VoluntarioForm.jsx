@@ -115,7 +115,7 @@ export default class VolunteerForm extends React.Component {
 						disabled={control ? true : false}
 						variant="contained"
 						className={styles.testButton}
-						id={styles.skere}
+						id={control ? styles.skereInactive : styles.skere}
 						type="submit"
 						value="Submit"
 						onClick={() => this.handleOnClick()}>
