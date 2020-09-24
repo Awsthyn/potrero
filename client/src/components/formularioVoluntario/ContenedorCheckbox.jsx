@@ -60,7 +60,8 @@ var control;
 						? (control = true)
 						: false}
 					<Button
-					    disabled={control ? true : false}
+						disabled={control ? true : false}
+						style={control ? {backgroundColor: "#CAD2D9"} : null}
 						variant="contained"
 						className={style.testButton}
 						id={style.skere}

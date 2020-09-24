@@ -61,7 +61,6 @@ class CargarArchivos extends Component{
 		
 	}
    render(){
-	console.log(this.state)
       let control;
    return(
       <div className={styles.formInput} >
@@ -117,9 +116,9 @@ class CargarArchivos extends Component{
 						</svg> 
 					</div>
 					{
-						!this.state.info.linkedin ||
-						!this.state.info.cv 
-						? (control = true) : false 
+						//!this.state.info.linkedin ||
+						//!this.state.info.cv 
+						//? (control = true) : false 
 					}
 					<Button
 						disabled={control ? true : false}

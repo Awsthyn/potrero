@@ -77,8 +77,7 @@ export default class VolunteerForm extends React.Component {
 							this.state.info.birthday && 
 							!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
 							parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 
-							? <small>Debes ser mayor a 18 años</small> : null
-							
+							? <p style={{fontSize: "10px"}}>Debes ser mayor a 18 años</p> : null
 						}
 						<input
 							spellCheck="false"
@@ -94,7 +93,7 @@ export default class VolunteerForm extends React.Component {
 						{
 							this.state.info.phone && 
 							this.state.info.phone.toString().length !== 12
-							? <small>Debes ingresar un número telefonico válido</small> : null	
+							? <p style={{fontSize: "10px"}}>Debes ingresar un número telefónico válido</p> : null	
 						}
 						<input
 							spellCheck="false"
@@ -138,6 +137,7 @@ export default class VolunteerForm extends React.Component {
 							</div>
 						<Button
 							disabled={control ? true : false}
+							style={control ? {backgroundColor: "#CAD2D9"} : null}
 							variant="contained"
 							className={styles.testButton}
 							id={styles.skere}
