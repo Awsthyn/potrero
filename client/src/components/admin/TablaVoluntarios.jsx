@@ -1,27 +1,153 @@
-import React from 'react'
+// React, HOOK de estado y efecto y REDUX
+import React, {useState,useEffect} from 'react'
 import { connect } from "react-redux";
+// Estilos
+import {makeStyles } from '@material-ui/styles';
+import { createMuiTheme, ThemeProvider,useTheme } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+//Actions
 import { getVolunteers, deleteVolunteer, acceptVolunteer} from "../../redux/actions/voluntary"
+// Moment
 import moment from 'moment';
 import 'moment/locale/es';
+// Sweet Alerts
 import swal from 'sweetalert';
-import {Link,Redirect} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
+
+
+//Material-UI Components
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import ButtonGroup from '@material-ui/core/ButtonGroup'
+import Button from '@material-ui/core/Button'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import FaceIcon from '@material-ui/icons/Face';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import Paper from '@material-ui/core/Paper';
+import SearchIcon from '@material-ui/icons/Search';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableFooter from '@material-ui/core/TableFooter';
+import TableHead from '@material-ui/core/TableHead'
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import TextField from '@material-ui/core/TextField';
+
 moment.locale('es');
 
-class TablaVoluntarios extends React.Component {
-    constructor(props) {
-        super(props);
-          this.state = {
+const useStyles1 = makeStyles((theme) => ({
+  root: {
+    flexShrink: 0,
+    marginLeft: 20,
+  },
+  margin: {
+    margin: 20,
+  },
+}));
 
-          }
-          this.handleStatusChange = this.handleStatusChange.bind(this) 
-          this.handleDeletion = this.handleDeletion.bind(this) 
+function TablePaginationActions(props) {
+
+  const theme = useTheme();
+  const classes = useStyles1();
+  const { count, page, rowsPerPage, onChangePage } = props;
+
+  const handleFirstPageButtonClick = (event) => {
+    onChangePage(event, 0);
+  };
+
+  const handleBackButtonClick = (event) => {
+    onChangePage(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event) => {
+    onChangePage(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event) => {
+    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <div className={classes.root}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
+        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
+    </div>
+  );
+}
+
+TablePaginationActions.propTypes = {
+  count: PropTypes.number.isRequired,
+  onChangePage: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+};
+
+
+
+
+
+
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 500,
+  },
+  root: {
+    marginTop: 100,
+  },
+});
+
+
+
+
+const TablaVoluntarios = (props) => {
+
+    const classes = useStyles();
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [filtered,setFiltered] = useState([]);
+    const [inputSearch,setInputSearch] = useState('');
+    const history = useHistory();
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
     };
-    componentDidMount(){
-        this.props.getVolunteers();
-    }
+    
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };    
 
-    handleDeletion(id){
-  
+    function handleDeletion(id){
         swal({
             title: "¡¡ Cuidado !!",
             text: "No se recomienda en lo absoluto este tipo de acciones. Si continúa, estará eliminando datos muy valiosos... Se recomienda simplemente rechazar al postulante",
@@ -31,8 +157,9 @@ class TablaVoluntarios extends React.Component {
           })
           .then((willDelete) => {
             if (willDelete) {
-            this.props.deleteVolunteer(Number(id))
-            console.log(id);
+            props.deleteVolunteer(Number(id)).then(()=>{
+              setFiltered(filtered.filter(vol=>vol.id !== id))
+            })
               swal("El registro fue destruido con éxito", {
                 icon: "success",
               });
@@ -42,99 +169,182 @@ class TablaVoluntarios extends React.Component {
           });
     
     }
-    handleStatusChange(volunteer){
-        swal({
-          title: `Estás por dar de alta a ${volunteer.firstName} ${volunteer.lastName} como voluntario.`,
-          text: "¿Está seguro? Si confirma esta acción, el voluntario se convertirá en asesor.",
-          icon: "warning",
-          buttons: true,
-          dangerMode: false,
-        })
-        .then((confirm) => {
-          if (confirm) {
-          this.props.acceptVolunteer(volunteer)
-            swal("El usuario se convirtió en asesor.", {
-              icon: "success",
-            });
-          } else {
-            swal("No se pudo convertir en asesor al usuario.");
-          }
-        });
-        
+
+    function handleStatusChange(volunteer){
+      swal({
+        title: `Estás por dar de alta a ${volunteer.firstName} ${volunteer.lastName} como voluntario.`,
+        text: "¿Está seguro? Si confirma esta acción, el voluntario se convertirá en asesor.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: false,
+      })
+      .then((confirm) => {
+        if (confirm) {
+        props.acceptVolunteer(volunteer)
+          swal("El usuario se convirtió en asesor.", {
+            icon: "success",
+          });
+        } else {
+          swal("El Voluntario no ha sido dado de alta");
+        }
+      });
+      
+  }
+
+
+    // Me traigo los Voluntarios de la DB y sincronizo al Redux
+        useEffect(()=>{
+            props.getVolunteers()
+            .then((pendientes)=>{
+               setFiltered(pendientes);
+              })
+        },[])
+
+      
+    function handleFilter(e){
+      switch (e){
+        case 'LIN':
+          setFiltered(props.volunteers.filter(voluntario => voluntario.linkedin !== null));
+          break;
+        case 'CV':
+          setFiltered(props.volunteers.filter(voluntario => voluntario.cv !== null));
+          break;
+        case 'TODOS':
+          setFiltered(props.volunteers)
+          break;
+          case 'NOMBRE':
+          setFiltered(props.volunteers.filter(voluntario => voluntario.firstName.toLowerCase().includes(inputSearch.toLowerCase() ) || voluntario.lastName.toLowerCase().includes(inputSearch.toLowerCase()) ))
+          break;
+     } 
     }
 
-    render() { 
-    
-         return(   
-                <div className='container' style={{marginLeft:220, marginTop: 40}} >
-                       {this.props.volunteers.length ? <table className="table table-striped border">
-                            <thead>
-                                <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">CV</th>
-                                <th scope="col">Fecha de Postulación</th>
-                                <th scope="col">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                            {this.props.volunteers && this.props.volunteers.map(volunteer => 
-                                                 <tr key={volunteer.id}>
-                                                    <td>{volunteer.firstName}</td>
-                                                    <td>{volunteer.lastName}</td>
-                                                    <td>{volunteer.email}</td>
-                                                    <td>{volunteer.cv? 'Si':'No'}</td>
-                                                    <td>{moment(volunteer.createdAt).format('LLL')}hs</td>
-                                                    <td>
-                                                            <div className="collapse" id={`collapse${volunteer.id}`}>
-                                                                <div className="card card-body">
-                                                                    <p className={'card-text text'}>email: {volunteer.email} </p>
-                                                                    <a href={`${volunteer.linkedin}`} className={'card-text text'}>Visitar LinkedIn</a>
-                                                                    {/* <iframe src={`http://localhost:3001/uploads/${volunteer.cv}.pdf`} style={{width:'600px', height:'500px'}} frameborder="0" onClick={() => <a target='_blank'>View CV</a>}></iframe> */}
-                                                                    <object data={`http://localhost:3001/uploads/${volunteer.cv}`} 
-                                                                      type='application/pdf' 
-                                                                      width='100%' 
-                                                                      height='700px'/>
-                                                                    <p>Fecha de postulación:  {moment(volunteer.createdAt).format('LLL')}hs </p>
-                                                                </div>
-                                                            </div>
-                                                        <div key={volunteer.id}>
-                                                          <Link to={`/admin/voluntarios/${volunteer.id}`} key={`detalles${volunteer.id}`} className="btn btn-primary border" type="button">
-                                                            Detalles 
-                                                          </Link>
 
-                                                            <button key={`aceptar${volunteer.id}`} className={`${volunteer.state ==='pendiente'? "btn-warning":"btn-success "} btn border`}  onClick={() => this.handleStatusChange(volunteer)}>
-                                                                 <i className={`${volunteer.state === 'pendiente'? "fa fa-toggle-off":"fa fa-toggle-on"}`}></i> 
-                                                                 {volunteer.state ==='pendiente'? 'Aceptar':'Activo'}                                                                
-                                                            </button>
-                                                            <button key={`rechazar${volunteer.id}`} name={volunteer.id} className="btn btn-danger border" onClick={e => this.handleDeletion(volunteer.id)}>
-                                                                 <i name={volunteer.id} className="fa fa-trash">Rechazar</i>                                                                   
-                                                            </button>
-                                                            
-                                                        </div>
-                                                    </td>
-                                                
-                                                </tr>)}
-                            </tbody>
-                        </table> : <div className='container-flud'><h6 className='card-text'>En este momento no hay postulaciones pendientes </h6> <Link to='/admin' type="button" className="btn btn-danger border"> Regresar al panel de Admin </Link> </div>}         
-                </div>
-                )
-            }
+    return (
+      <div  className={classes.root}>
+                                    <ButtonGroup variant="contained" alignItems="center"  aria-label="contained button group">
+                                              
+                                                   <Button disableRipple  name="TODOS" key="TODOS" style={{ background:"green",color:'white'}} onClick={()=>handleFilter('TODOS')}>
+                                                   <CheckCircleOutlineIcon/> Todos 
+                                                    </Button>
+                                                    <Button disableRipple  name="CV"  key="CV" style={{ background:"blue",color:'white'}} onClick={()=>handleFilter('CV')}>
+                                                    <CheckCircleOutlineIcon/> CV   
+                                                    </Button>
+                                                    <Button disableRipple  name="LINKEDIN"  key="LINKEDIN" style={{ background:"red",color:'white'}} onClick={()=>handleFilter('LIN')}>
+                                                    <CheckCircleOutlineIcon/> Linkedin   
+                                                    </Button>
+                                        </ButtonGroup>
+                                        <ButtonGroup style={{ marginLeft:50}} variant="contained"  aria-label="contained button group">
+                                                    <div className={classes.margin}>
+                                                      <Grid container spacing={1} alignItems="center">
+                                                        <Grid item>
+                                                          <AccountCircle />
+                                                        </Grid>
+                                                        <Grid item>
+                                                          <TextField id="input-with-icon-grid" label="Buscar Nombre o Apellido" value={inputSearch} onChange={(e)=>setInputSearch(e.target.value)} />
+                                                        </Grid>
+                                                      </Grid>
+                                                    </div>
+                                                    <Button type="submit" name="NOMBRE"  key="NOMBRE" style={{ background:"lightblue",color:'white'}} onClick={()=>
+                                                    {
+                                                      handleFilter('NOMBRE');
+                                                      setInputSearch('');
+                                                      }}>
+                                                          <SearchIcon />
+                                                    </Button>
+
+                                                    </ButtonGroup>
+
+
+      
+        <TableContainer component={Paper} style={{margin:50, width:`calc(100% - ${100}px)`}}>
+         { filtered ? 
+              <Table className={classes.table} aria-label="custom pagination table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="right">Nombre</TableCell>
+                            <TableCell align="right">Apellido</TableCell>
+                            <TableCell align="right">E-mail</TableCell>
+                            <TableCell align="right">Fecha de postulación</TableCell>
+                            <TableCell align="right">Acciones</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+
+                    {(rowsPerPage > 0
+                          ?  filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                           : filtered
+                        ).map((voluntario) => (
+                          <TableRow key={voluntario.firstName}>
+                            <TableCell component="th" scope="voluntario">
+                              {voluntario.firstName}
+                            </TableCell>
+                            <TableCell style={{ width: 100 }} align="right">
+                              {voluntario.lastName}
+                            </TableCell>
+                            <TableCell style={{ width: 100 }} align="right">
+                              {voluntario.email}
+                            </TableCell>
+                            <TableCell style={{ width: 300 }} align="right">
+                              {moment(voluntario.createdAt).format('LLL')+'hs'}
+                            </TableCell>
+                            <TableCell align="right">
+                                        {
+                                        <ButtonGroup variant="contained"  aria-label="contained button group" key={`detalles${voluntario.id}`}>
+                                                   
+                                                   <Button style={{ background:"green",color:'white'}} key={`aceptar${voluntario.id}`}  onClick={() => handleStatusChange(voluntario)}>
+                                                                <CheckCircleIcon/> Aprobar 
+                                                    </Button>
+                                                    <Button  style={{ background:"blue",color:'white'}} key={`detalles${voluntario.id}`}  onClick={() => history.push(`/admin/voluntarios/${voluntario.id}`)}>
+                                                            <FaceIcon/> Detalles   
+                                                    </Button>
+                                                   
+                                                    <Button color="secondary" key={`rechazar${voluntario.id}`}  onClick={() => handleDeletion(voluntario.id)}>
+                                                                <DeleteForeverIcon/> Eliminar   
+                                                    </Button>
+                                                   
+                                        </ButtonGroup>
+                                        }
+                                        </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                    <TableFooter>
+                  <TableRow>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                      colSpan={6}
+                      count={filtered.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      SelectProps={{
+                        inputProps: { 'aria-label': 'rows per page' },
+                        native: true,
+                      }}
+                      onChangePage={handleChangePage}
+                      onChangeRowsPerPage={handleChangeRowsPerPage}
+                      ActionsComponent={TablePaginationActions}
+                    />
+                  </TableRow>
+                </TableFooter>
+                </Table>:'No hay voluntarios en este momento'}
+     
+      </TableContainer>
+    </div>
+    )
 }
 
-function mapStateToProps(state) {
-    return {
-        volunteers:state.volunteers.volunteers,
-    };
-  }
 
-  function mapDispatchToProps(dispatch) {
-    return {
-       getVolunteers:() => dispatch(getVolunteers()),
-       deleteVolunteer:(id) => dispatch(deleteVolunteer(id)),
-       acceptVolunteer: (id) => dispatch(acceptVolunteer(id)),
-    };
-  }
-  export default connect(mapStateToProps, mapDispatchToProps)(TablaVoluntarios);
-        
+
+
+
+const mapStateToProps = (state) => ({
+        volunteers:state.volunteers.volunteers,
+})
+
+
+const mapDispatchToProps = (dispatch) => ({
+        getVolunteers:() => dispatch(getVolunteers()),
+        deleteVolunteer:(id) => dispatch(deleteVolunteer(id)),
+        acceptVolunteer: (id) => dispatch(acceptVolunteer(id)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(TablaVoluntarios)

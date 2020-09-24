@@ -10,8 +10,8 @@ import { Route, Redirect } from "react-router-dom";
                 return(
                     sessionUser && (sessionUser.state === 'admin')
                     ? <Component {...props} />
-                    :<Component {...props} />)
-                    //: <Redirect to = '/' />)
+                    : <Component {...props} />)
+                    // <Redirect to = '/' />)
                 }
             }/>)
     }

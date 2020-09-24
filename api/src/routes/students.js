@@ -95,15 +95,6 @@ server.get("/:id", (req, res) => {
       exclude: [
         "createdAt",
         "updatedAt",
-        "phone",
-        "email",
-        "tutor",
-        "difficulty",
-        "weakness",
-        "strengths",
-        "interests",
-        "motivations",
-        "isActive",
       ],
     },
     include: [
@@ -166,7 +157,7 @@ server.post("/", (req, res) => {
       // Se espera valores de Id's de Subjects Ejemplo: 1,2
       // Recorre SubjectId los prepara en un array y los recorre
       // entonces agrega la materia relacionado con el id del estudiante
-      req.body.subjectsId.forEach((idSub) => {
+    const subjects =  Promise.all(student.subjectsId.forEach((idSub) => {
         studentCreated
           .addSubject(idSub)
           .then(() => console.log("Ok1"))
@@ -175,11 +166,11 @@ server.post("/", (req, res) => {
             console.log(err);
             res.json(err);
           });
-      });
+      }));
 
       // Recorre TODId los prepara en un array y los recorre
       // entonces agrega la materia relacionado con el id del estudiante
-      req.body.TODId.forEach((idTOD) => {
+    const difficulties =  Promise.all(student.TODId.forEach((idTOD) => {
         studentCreated
           .addTypeOfDifficulty(idTOD)
           .then(() => console.log("Ok2"))
@@ -188,29 +179,16 @@ server.post("/", (req, res) => {
             console.log(err);
             res.json(err);
           });
-      });
-
-      //AGREGA HORARIOS AL ESTUDIANTE
-      // Recorre scheduleStudent los prepara en un objeto hasta 3 lugares con los numeros incrementando cuando llega a 3 se resetea la variable numero a 1 y vuelve a preparar el objeto, crea una StudentSchedule cada 3 posiciones de dias
-
-      let dias = req.body.scheduleStudent.split("-");
-      let separado = dias;
-      let numero = 1;
-      let obj = {};
-      for (let i = 0; i < separado.length; i++) {
-        if (numero === 1) {
-          obj.startTime = separado[i];
-          numero = numero + 1;
-        } else if (numero === 2) {
-          obj.endTime = separado[i];
-          numero = numero + 1;
-        } else if (numero === 3) {
-          obj.nameWeekDay = separado[i];
-          obj.studentId = sc.id;
-          StudentSchedule.create(obj);
-          numero = 1;
-        }
+      }));
+    const schedule = StudentSchedule.bulkCreate(student.scheduleStudent.map(e =>{
+      return {
+        studentId: sc.id,
+        timeFrame: [e.startTime, e.endTime],
+        nameWeekDay: e.nameWeekDay
       }
+    }))  
+
+    return Promise.all([subjects, difficulties, schedule])  
     })
     .then(() => {
       res.json("Alumno creado exitosamente");
@@ -222,10 +200,6 @@ server.post("/", (req, res) => {
     });
 });
 
-//BORRADO LÓGICO
-// En lugar de eliminar un estudiante lo que hacemos es cambiarle el status a false
-// Y así poder filtrar solamente por estudiantes activos y no perder la info por si
-// mas adelante vulelve a la fundación.
 
 server.put("/:id", (req, res) => {
   const { subjectsId } = req.body;
@@ -240,7 +214,7 @@ server.put("/:id", (req, res) => {
     )
     .then(() => Student.update(req.body, { where: { id: req.params.id } }))
     .then(() => {
-      Student.findOne({
+      return Student.findOne({
         where: {
           id: req.params.id,
         },
@@ -263,13 +237,17 @@ server.put("/:id", (req, res) => {
     });
 });
 
+//BORRADO LÓGICO
+// En lugar de eliminar un estudiante lo que hacemos es cambiarle el status a false
+// Y así poder filtrar solamente por estudiantes activos y no perder la info por si
+// mas adelante vulelve a la fundación.
 server.put("/:id/changestatus", (req, res) => {
   Student.update(
     { isActive: req.body.isActive },
     { where: { id: req.params.id } }
   )
     .then(() => {
-      Student.findOne({
+      return Student.findOne({
         where: {
           id: req.params.id,
         },

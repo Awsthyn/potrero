@@ -1,7 +1,14 @@
 
+.container {
+    margin: 400px 400px;
+    display: flex;
+    justify-content: center;
+}
+
 .iso {
+ 
     width: 100px;
-    object-fit: cover;
+   
     animation: spin 1.7s infinite ease-in-out;
     
 }

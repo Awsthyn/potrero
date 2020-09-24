@@ -26,7 +26,7 @@ export default function subjectReducer(state = initialState, action) {
 				...state,
 				subjects: state.subjects.map((subject) => {
 				if(subject.id === action.payload.id) {
-				  return action.payload
+					return action.payload
 				}
 				return subject;
 			  })
