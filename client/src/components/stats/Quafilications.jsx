@@ -37,7 +37,7 @@ class Offers extends React.Component {
       labels: ["Menor nota", "Promedio", "Mayor nota"],
       datasets: [
         {
-          label: "Demandas de materias",
+          label: "Notas",
           data: [Math.round(minimo), Math.round(promedio), Math.round(maximo)],
           fill: false,
           backgroundColor: [
@@ -70,8 +70,8 @@ class Offers extends React.Component {
   async componentDidMount() {
     await this.peticion();
     await this.getChartData();
-    
- 
+
+
   }
 
   render() {
