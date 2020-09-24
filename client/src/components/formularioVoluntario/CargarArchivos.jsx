@@ -65,9 +65,9 @@ class CargarArchivos extends Component{
       let control;
    return(
       <div className={styles.formInput} >
-				<span className={styles.frase} style={{width: '320px', right: '12%'}} >  
+				<span className={styles.frase} >  
 				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Por último... </strong></p>
-				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Estás a un paso de unirte a nuestra causa y nos gustaría saber un poco más de vos </span>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Necesitamos algunos datos extras para poder validar tu identidad. </span>
 				</span>
          	<small>CV (Formato aceptado .pdf)</small>
          	<input
