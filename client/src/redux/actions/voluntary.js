@@ -4,8 +4,6 @@ import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VO
 export function postVoluntary(voluntary, subjects, schedule) {
 	console.log(voluntary)
 	return function (dispatch) {
-		console.log(subjects);
-		console.log(schedule);
 		return axios
 			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
@@ -49,6 +47,7 @@ export function deleteVolunteer(id) {
 
 // Agrega Calendario(disponibilidad)
 export function addSchedule(schedules, userId) {
+	console.log(schedules)
 	return function (dispatch) {
 		return axios
 			.post(`http://localhost:3001/userSchedule/${userId}`, {dias: schedules}, {withCredentials: true})

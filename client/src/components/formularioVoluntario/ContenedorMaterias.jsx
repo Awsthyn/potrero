@@ -17,12 +17,10 @@ class ContenedorMaterias extends React.Component {
 	}
 	handleOnClick(id, e) {
 		if (e.target.style.backgroundColor === 'rgb(140, 198, 62)') {
-			e.target.style.backgroundColor = 'white';
 			this.setState(function (state) {
 				return {materia: state.materia.filter(m => m !== id)};
 			});
 		} else {
-			e.target.style.backgroundColor = 'rgb(140, 198, 62)';
 			this.setState({
 				materia: [...this.state.materia, id],
 			});
@@ -36,12 +34,16 @@ class ContenedorMaterias extends React.Component {
 	componentDidMount(){
 		this.props.getAcademicLevels()
 		let nivel = JSON.parse(localStorage.getItem('nivel'))
-		if(nivel.Primaria){
-			this.props.filterByLevel(nivel.Primaria)
+		if(nivel?.Primaria){
+			this.props.filterByLevel(nivel?.Primaria)
 		}else{
-			this.props.filterByLevel(nivel.Secundaria)
+			this.props.filterByLevel(nivel?.Secundaria)
 		}
-		
+		if(!this.state.materia.length){
+			let newState = JSON.parse(localStorage.getItem('materias'))
+			if(newState) this.setState({materia: newState})
+			else{ this.setState({materia: []})}
+		}
 		// if(nivel.Primaria){
 		// 	let mats = this.props.academicLevels.filter(a => a.name === nivel.Primaria)
 		// 	this.setState({materiasPorNivel: mats[0]?.subjects})
@@ -52,8 +54,6 @@ class ContenedorMaterias extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.academicLevels)
-		console.log(this.props.materiasPorNivel)
 		var control;
 		return (
 			<div className={styles.formInput} >
@@ -64,20 +64,29 @@ class ContenedorMaterias extends React.Component {
 
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
 				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>
-					{ this.props.materiasPorNivel?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick}/>) }
+					{ this.props.materiasPorNivel?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick} fondo={this.state.materia.filter(mat => mat === m.name)} />) }
 				</div>
-				
-				<Button
-						disabled={control ? true : false}
-						variant="contained"
-						className={styles.testButton}
-						id={styles.skere}
-						type="submit"
-						value="Submit"
-						onClick={() => this.continuar()}>
-						Continuar
-						<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
-					</Button>
+				<div style={{display: 'flex', alignItems: 'center'}}> 
+					<div onClick={() => this.props.history.push('/voluntarios/niveles')} > 
+						<svg viewBox="0 0 16 16" className={styles.leftArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+						</svg> 
+					</div>
+					{this.state.materia.length === 0 
+						? (control = true)
+						: false}
+					<Button
+							disabled={control ? true : false}
+							variant="contained"
+							className={styles.testButton}
+							id={styles.skere}
+							type="submit"
+							value="Submit"
+							onClick={() => this.continuar()}>
+							Continuar
+							<span style={{margin:"10px"}} className="material-icons">arrow_forward</span>
+						</Button>
+					</div>
 			</div>
 		);
 	}
