@@ -48,3 +48,10 @@ export const FILTER_BY_LEVEL = "FILTER_BY_LEVEL"
 // Clases
 
 export const GET_MATCHING_SCHEDULES = "GET_MATCHING_SCHEDULES"
+
+// Users
+
+export const GET_USER_SUBJECTS = "GET_USER_SUBJECTS";
+export const GET_USER_STUDENTS = "GET_USER_STUDENTS";
+export const GET_USER_CLASS = "GET_USER_CLASS";
+export const PUT_USER = "PUT_USER";
