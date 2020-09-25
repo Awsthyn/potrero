@@ -18,6 +18,7 @@ import AdminNavBar from './components/admin/AdminNavBar';
 import AdminDrawer from './components/admin/AdminDrawer';
 import PasswordRecovery from './components/PasswordRecovery';
 import DetalleVoluntario from './components/admin/DetalleVoluntario';
+import DetalleHorariosVoluntario from './components/admin/DetalleHorariosVoluntario';
 import AdminRoute from './AdminRoute.js';
 import StudentCard from './components/student/StudentCard/StudentCard';
 import AsesorProfile from './components/AsesorProfile/AsesorProfile';
@@ -53,6 +54,11 @@ class App extends React.Component {
           exact
           path='/admin/voluntarios/:id'
           render={({ match }) => <DetalleVoluntario id={match.params.id} />}
+        />
+        <Route
+          exact
+          path='/admin/voluntarios/detalleHorarios/:id'
+          render={({ match }) => <DetalleHorariosVoluntario id={match.params.id} />}
         />
         <Route exact path='/admin/usuarios' component={TablaUsuarios} />
         <Route exact path='/admin/materias' component={TablaMaterias} />
