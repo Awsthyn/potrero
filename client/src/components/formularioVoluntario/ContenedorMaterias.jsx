@@ -57,9 +57,9 @@ class ContenedorMaterias extends React.Component {
 		var control;
 		return (
 			<div className={styles.formInput} >
-				<span className={styles.frase} style={{width: '320px', right: '12%'}} >  
-				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Por último... </strong></p>
-				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Estás a un paso de unirte a nuestra causa y nos gustaría saber un poco más de vos </span>
+				<span className={styles.frase} >  
+				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Materias </strong></p>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Indicanos en que materias podés asistir a los chicos de la fundación. </span>
 				</span>
 
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
@@ -77,6 +77,7 @@ class ContenedorMaterias extends React.Component {
 						: false}
 					<Button
 							disabled={control ? true : false}
+							style={control ? {backgroundColor: "#c2c2c2"} : null}
 							variant="contained"
 							className={styles.testButton}
 							id={styles.skere}
