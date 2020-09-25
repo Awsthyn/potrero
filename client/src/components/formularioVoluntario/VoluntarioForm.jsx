@@ -104,7 +104,8 @@ export default class VolunteerForm extends React.Component {
 						/> 
 						{
 							this.state.info.phone && 
-							this.state.info.phone.toString().length !== 12
+							(this.state.info.phone.toString().length < 8 ||
+							this.state.info.phone.toString().length > 13)
 							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Debes ingresar un número telefónico válido</p> : null	
 						}
 						<input
@@ -127,7 +128,8 @@ export default class VolunteerForm extends React.Component {
 					parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 ||		
 					!this.state.info.email ||
 					!this.state.info.phone || 
-					 this.state.info.phone.toString().length !== 12 
+					this.state.info.phone.toString().length < 8 ||
+					this.state.info.phone.toString().length > 13
 						? (control = true)
 						: false}
 						<div style={{display: 'flex', alignItems: 'center'}}> 
