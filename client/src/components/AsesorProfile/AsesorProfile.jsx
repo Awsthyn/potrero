@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import style from './AsesorProfile.module.css';
 import AsesorStudents from './AsesorStudents/AsesorStudents.jsx';
 import { ExpansionPanelDetails } from '@material-ui/core';
+import { connect } from 'react-redux'
+import {getUserSubjects, putUser} from '../../redux/actions/users'
 
 
-
-export default function AsesorProfile () {
+function AsesorProfile ({history}) {
 
     let subjects = ['Matemáticas', 'Lengua y Literatura', 'Ciencias Sociales', 'Ciencias Naturales', 'Inglés', 'Formación Ética y Ciudadana' ]
 
@@ -17,7 +18,7 @@ return(
         
         <div className = {style.profile}>
         
-        <svg viewBox="0 0 16 16" class={style.leftArrow} onClick={()=> this.props.history.push('/')} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 16 16" class={style.leftArrow} onClick={()=> history.push('/')} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
         </svg>
 
@@ -97,3 +98,11 @@ return(
     </div>
 )
 }
+
+function mapStateToProps(state){
+    return {
+        userSubjects: state.users.userSubjects
+    }
+}
+
+export default connect(mapStateToProps, {getUserSubjects, putUser})(AsesorProfile)

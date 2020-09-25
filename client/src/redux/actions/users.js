@@ -12,12 +12,12 @@ export function getUsers() {
 	};
 }
 
-export function getUserSubjects() {
+export function getUserSubjects(userId) {
 	return function (dispatch) {
 		return axios
-			.get(`http://localhost:3001/users`, {withCredentials: true})
+			.get(`http://localhost:3001/users/${userId}`, {withCredentials: true})
 			.then(res => {
-				dispatch({type: GET_USER_SUBJECTS, payload: res.data.filter(e=> e.state === "aceptado")});
+				dispatch({type: GET_USER_SUBJECTS, payload: res.data});
 			})
 			.catch(err => console.log(err));
 	};
@@ -28,7 +28,7 @@ export function getUserStudents() {
 		return axios
 			.get(`http://localhost:3001/users`, {withCredentials: true})
 			.then(res => {
-				dispatch({type: GET_USER_STUDENTS, payload: res.data.filter(e=> e.state === "aceptado")});
+				dispatch({type: GET_USER_STUDENTS, payload: res.data});
 			})
 			.catch(err => console.log(err));
 	};
@@ -39,7 +39,7 @@ export function getUserClass() {
 		return axios
 			.get(`http://localhost:3001/users`, {withCredentials: true})
 			.then(res => {
-				dispatch({type: GET_USER_CLASS, payload: res.data.filter(e=> e.state === "aceptado")});
+				dispatch({type: GET_USER_CLASS, payload: res.data});
 			})
 			.catch(err => console.log(err));
 	};
