@@ -9,6 +9,7 @@ import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import Link from '@material-ui/core/Link';
+import {Link as Linked,useHistory} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItem from '@material-ui/core/ListItem';
@@ -62,7 +63,8 @@ icons:{
 },
 menuitem:{
   color:NEGRO,
-  padding:0,
+  padding:3,
+  margin:1,
   justifyContent:'center',
   width: 'fit-content',
   height: 'fit-content',
@@ -98,12 +100,14 @@ export default function MenuListComposition() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+  const history = useHistory();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const handleClose = (event,route) => {
+    history.push(`${route}`)
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -156,8 +160,8 @@ export default function MenuListComposition() {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <Link to='/admin/voluntarios' className={classes.menuitem}><MenuItem   onClick={handleClose}><AssistantIcon/>  Voluntarios</MenuItem></Link>
-                    <Link to='/admin/usuarios' className={classes.menuitem}> <MenuItem   onClick={handleClose}><SupervisedUserCircleRoundedIcon/>  Asesores</MenuItem></Link>
+                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'/admin/voluntarios')}><AssistantIcon/>  Voluntarios</MenuItem>
+                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'/admin/usuarios')}><SupervisedUserCircleRoundedIcon/>  Asesores</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

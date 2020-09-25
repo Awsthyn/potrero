@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import {Link,Redirect,Route} from 'react-router-dom';
+import {Link,useHistory} from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Drawer, List,ListItem,ListItemIcon,ListItemText} from '@material-ui/core';
 import {makeStyles} from '@material-ui/styles';
 import HomeIcon from '@material-ui/icons/Home';
