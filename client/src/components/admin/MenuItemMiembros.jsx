@@ -107,7 +107,7 @@ export default function MenuListComposition() {
   };
 
   const handleClose = (event,route) => {
-    history.push(`${route}`)
+  if(route === 'voluntarios'|| route === 'usuarios')  history.push(`/admin/${route}`)
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -160,8 +160,8 @@ export default function MenuListComposition() {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'/admin/voluntarios')}><AssistantIcon/>  Voluntarios</MenuItem>
-                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'/admin/usuarios')}><SupervisedUserCircleRoundedIcon/>  Asesores</MenuItem>
+                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'voluntarios')}><AssistantIcon/>  Voluntarios</MenuItem>
+                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'usuarios')}><SupervisedUserCircleRoundedIcon/>  Asesores</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
