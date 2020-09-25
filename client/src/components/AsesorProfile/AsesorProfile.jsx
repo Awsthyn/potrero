@@ -10,6 +10,13 @@ export default function AsesorProfile () {
     let subjects = ['Matemáticas', 'Lengua y Literatura', 'Ciencias Sociales', 'Ciencias Naturales', 'Inglés', 'Formación Ética y Ciudadana' ]
 
     const [ edit, setEdit ] = useState(false);
+    const [state, setState] = useState({});
+
+    const handleOnchange = (e) => {
+        setState({
+            ...state, [e.target.name]: e.target.value
+        })
+    }
 
 return(
     <div className = {style.outer}>
@@ -50,16 +57,16 @@ return(
                      
                         <div>
 
-                            <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Primer nombre" className={style.input} />
-                            <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Apellido" className={style.input} />
-                            <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Fecha de Nacimiento: día/mes/año" className={style.input} />
-                            <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Celular (sin el N°15)" className={style.input} />
-                            <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Correo Electrónico" className={style.input} />
+                            <input spellcheck="false" autocomplete="off" type="text" name="firstName" id="email" placeholder="Primer nombre" className={style.input} onChange={(e) => handleOnchange(e)} />
+                            <input spellcheck="false" autocomplete="off" type="text" name="lastName" id="email" placeholder="Apellido" className={style.input} onChange={(e) => handleOnchange(e)} />
+                            <input spellcheck="false" autocomplete="off" type="text" name="birthday" id="email" placeholder="Fecha de Nacimiento: día/mes/año" className={style.input} onChange={(e) => handleOnchange(e)}/>
+                            <input spellcheck="false" autocomplete="off" type="text" name="phone" id="email" placeholder="Celular (sin el N°15)" className={style.input} onChange={(e) => handleOnchange(e)}/>
+                            <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Correo Electrónico" className={style.input} onChange={(e) => handleOnchange(e)}/>
                         </div>
                     
                     <div className = {style.btnContainer}>
                     <button onClick = {() => setEdit(!edit)} className={style.cancelBtn}>Cancelar</button>
-                    <button className={style.button} type="submit">Modificar</button>
+                    <button className={style.button} type="submit" onClick={() => putUser()}>Modificar</button>
                     </div>
                 </form>
                 </div>
