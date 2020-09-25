@@ -9,6 +9,14 @@ const {
   EducationLevel,
 } = require("../db.js");
 
+server.get('/panel', (req, res) => {
+  if(req.student.state === 'admin'){
+    next();
+  } else{
+    res.redirect('localhost:4000')
+  }
+})
+
 server.get("/assistances", (req, res) => {
   DataSheet.findAll({
     attributes: {
@@ -19,7 +27,7 @@ server.get("/assistances", (req, res) => {
       let countAssistance = [];
       let countInassistance = [];
       let countDelay = [];
-      // res.json(allClasses)
+
       allClasses.forEach((element) => {
         if (element.assistance === "presente") {
           countAssistance.push(element.assistance);
@@ -298,5 +306,90 @@ server.get("/advisorstatus", (req, res) => {
       res.json(err);
     });
 });
+
+server.get('/demandwithoffer', (req, res) => {
+  Subject.findAll({
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+    include: [
+      {
+        model: Student,
+        attributes: {
+          exclude: [
+            "createdAt",
+            "updatedAt",
+            "phone",
+            "tutor",
+            "interests",
+            "motivations",
+            "isActive",
+            "tutorLastName",
+            "tutorFirstName",
+            "tutorPhone",
+            "tutorEmail",
+          ],
+        }
+      },
+      {
+        model: User,
+        attributes: {
+          exclude: [
+            "createdAt",
+            "updatedAt",
+            "password",
+            "address",
+            "birthday",
+            "phone",
+            "linkedin",
+            "cv",
+            "resetPasswordToken",
+            "resetPasswordExpires",
+            "profilePicture",
+            "backDNI",
+            "frontDNI",
+          ]
+        }
+      }
+    ]
+  })
+  .then( subjectsWithDemandAndOffer => {
+
+    let offersAvailables = []
+    let demandsAvailables = []
+    
+    let totalDemandAndOffer = {
+      allDemands: [],
+      allOffer: [],
+      subjectOfferedNames: [],
+      subjectDemandersNames: [],
+      demandWithoutOffer: [],
+      offerWithoutDemand: [],
+      totalDemands: 0,
+      totalOffers: 0,
+      totalOfferWithoutDemand: 0,
+      totalDemandWithoutOffer: 0,
+    }
+
+    subjectsWithDemandAndOffer.forEach( element => {
+      if(element.users.length > 0){
+        offersAvailables.push(element)
+      }
+    });
+    let advisorsAccepted = [];
+    offersAvailables.forEach( subjectsOffered => {
+        advisorsAccepted = subjectsOffered.users.filter( advisor => advisor.state !== 'rechazado' && advisor.state !== 'pendiente' && advisor.isActive !== false)
+              totalDemandAndOffer.allOffer.push({
+                [subjectsOffered.name] : advisorsAccepted
+      })
+    });
+    
+    res.json ( totalDemandAndOffer )
+
+  })
+  .catch( err => {
+    res.json( err )
+  })
+})
 
 module.exports = server;
