@@ -41,6 +41,20 @@ function findFreeinterval(arr){
 }
 
 
+const sorter = {
+    "Lunes": 1,
+    "Martes": 2,
+    "Miercoles": 3,
+    "Jueves": 4,
+    "Viernes": 5,
+  }
+function sortByDay(a, b) {
+    let day1 = a.nameWeekDay
+    let day2 = b.nameWeekDay
+    return sorter[day1] - sorter[day2];
+}
+  
+
 server.get('/:studentId/:subject', (req, res) => {
     let { subject } = req.params
     //Busca todos los studentSchedules del alumno ingresado por req.params
@@ -153,14 +167,31 @@ server.get('/:studentId/:subject', (req, res) => {
                 m[1].map(h => array.push([Number(h.duration[0].value), Number(h.duration[1].value)]))
                 //El último elemento de array es [endTime, 23].. necesario para detectar intervalos de tiempos libres
                 array.push([Number(m[0].endTime), 23])
-                console.log(array)
+                //console.log(array)
                 array = merge(array)
                 let freeIntervalStore = findFreeinterval(array)
-                freeIntervalStore.length > 0  ? disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay }) : null
-                
+                if(disponible.length > 0){
+                    //Este algoritmo descarta valores repetidos
+                    //Faltaría el tema de valores overlapeados
+                    let truthArray = []
+                    disponible.map(e =>{
+                    let a = 0
+                    let b = 0    
+                    a += m[0].user.id === e.user.id ? 1 : 0; b += 1;
+                    a += freeIntervalStore[0][0] === e.disponibleTime[0][0] ? 1 : 0; b += 1;
+                    a += freeIntervalStore[0][1] === e.disponibleTime[0][1] ? 1 : 0; b += 1;
+                    a += e.nameWeekDay === m[0].nameWeekDay ? 1 : 0; b += 1;
+
+                    truthArray.push(a === b) 
+                    })
+                    truthArray.includes(true) ? null : disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay })
+                }
+
+                else disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay })                
             })
 
-            res.json(disponible)})
+
+            res.json(disponible.sort(sortByDay))})
             .catch(err => console.log(err))  
     })
 })
