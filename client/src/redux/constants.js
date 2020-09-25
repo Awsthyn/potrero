@@ -47,3 +47,6 @@ export const FILTER_BY_LEVEL = "FILTER_BY_LEVEL"
 
 // Data sheet
 export const ADD_DATA_SHEET = 'ADD_DATA_SHEET'
+// Clases
+
+export const GET_MATCHING_SCHEDULES = "GET_MATCHING_SCHEDULES"
