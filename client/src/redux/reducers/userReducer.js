@@ -1,7 +1,7 @@
-import {GET_USERS} from '../constants';
+import {GET_USERS, ADD_DATA_SHEET} from '../constants';
 
 const initialState = {
-    users: [],
+	 users: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -12,7 +12,8 @@ export default function rootReducer(state = initialState, action) {
 				...state,
 				users: action.payload,
 			};
-
+		case ADD_DATA_SHEET:
+			return state
 		default:
 			return state;
 	}

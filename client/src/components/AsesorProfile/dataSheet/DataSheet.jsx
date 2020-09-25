@@ -5,7 +5,9 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import {addDataSheet} from '../../../redux/actions/users'
 import {connect} from 'react-redux'
 
-function DataSheet(){
+// !!! REOCORDAR QUE FALTA EL USERDID
+
+function DataSheet({addDataSheet}){
    const [estado, setEstado] = useState({})
    let ausente = useRef(null); let presente = useRef(null); let tardanza = useRef(null)
    let si = useRef(null); let no = useRef(null)
@@ -20,6 +22,7 @@ function DataSheet(){
                if(a.current.value !== e.target.value){
                   return a.current.checked = false
                }
+               return
             }) 
          }else if(type === 'comp'){
             if(e.target.value === 'true'){
@@ -82,7 +85,7 @@ function DataSheet(){
             onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value * 2})}
          />
       </Box>
-         <h4> estaba acompañado </h4>
+         <h4> Estaba acompañado </h4>
             <input type="checkbox" ref={si} value="true" name="someoneAccompaniesHim" 
             onChange={(e) => handleChecked(e, 'comp')}/>
             <label htmlFor="true"> Si </label><br></br>
@@ -91,33 +94,36 @@ function DataSheet(){
             <label htmlFor="false"> No </label><br></br>
          {estado.someoneAccompaniesHim === 'true' ? 
          <div> 
-            <h4> quien lo acopañaba </h4>
+            <h4> Quien lo acopañaba </h4>
             <input name="companionName" value={estado?.companionName} onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}/>
          </div>
          : null }
-         <h4> comentarios </h4>
+         <h4> Comentarios </h4>
          <textarea name="comments" value={estado?.comments} onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}/>
-         <h4> tiene examen </h4>
+         <h4> Tuvo examen </h4>
             <input type="checkbox" ref={yes} value="true" name="hadExam" 
             onChange={(e) => handleChecked(e, 'exam')}/>
             <label htmlFor="true"> Si </label><br></br>
             <input type="checkbox"  ref={nop} value="false" name="hadExam" 
             onChange={(e) => handleChecked(e, 'exam')}/>
             <label htmlFor="false"> No </label><br></br>
-         <h4> calificacion </h4>
-      <Box component="fieldset" mb={3} borderColor="transparent">
-         <Rating
-            name="qualification"
-            defaultValue={0}
-            precision={0.5}
-            emptyIcon={<StarBorderIcon fontSize="inherit" />}
-            onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value * 2})}
-         />
-      </Box>
-         <h4> duracion </h4> 
+         { estado.hadExam === 'true' ?
+         <div>  
+            <h4> Calificacion </h4>
+               <Box component="fieldset" mb={3} borderColor="transparent">
+                  <Rating
+                     name="qualification"
+                     defaultValue={0}
+                     precision={0.5}
+                     emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                     onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value * 2})}
+                  />
+               </Box>
+            </div> : null}
+         <h4> Duracion </h4> 
          <input type="number" name="duration"  
          onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})} />
-         <h4> actitud </h4> 
+         <h4> Actitud </h4> 
       <Box component="fieldset" mb={3} borderColor="transparent">
          <Rating
             name="attitude"

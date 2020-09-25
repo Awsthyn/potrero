@@ -18,12 +18,12 @@ const circleColor = (id) => {
 		if(ids !== id){
 			return document.getElementById(ids).className = style.circleGray
 		}
+		return 
 	})
 }
 
 export default function ContenedorForm({history, location}) {
 	const goTo = (e) => {
-		console.log(e.target.id)
 		switch(e.target.id){
 			case 'uno': 
 			history.push('/voluntarios/formulario')
