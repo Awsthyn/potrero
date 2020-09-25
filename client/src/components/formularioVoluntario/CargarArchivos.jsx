@@ -85,37 +85,38 @@ class CargarArchivos extends Component{
 					onChange={(e) => {this.handleOnFileChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
          	/>
          	<br></br>
-         	<small>Frente del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
+         	<small  style={{display: 'block'}}>Frente del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
          	<input
-					style={{ width: '80%', marginTop: '1%', display: 'block' }}
+					style={{ width: '80%', marginTop: '1%', display: 'inline' }}
 					className={styles.input}
 					name='frontDNI'
 					type='file'
 					accept='.png, .jpg, .jpeg'
 					placeholder='fdzgdfgfdgfd'
 					onChange={(e) => {this.handleOnFileChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
-         	/>
+         	/><span style={{color: "#c2c2c2"}}> * </span>
 				<br></br>
-				<small>Reverso del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
+				<small  style={{display: 'block'}}>Reverso del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
 				<input
-					style={{ width: '80%', marginTop: '1%', display: 'block' }}
+					style={{ width: '80%', marginTop: '1%', display: 'inline' }}
 					className={styles.input}
 					name='backDNI'
 					type='file'
 					accept='.png, .jpg, .jpeg'
 					onChange={(e) => {this.handleOnFileChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
-				/>
+				/> <span style={{color: "#c2c2c2"}}> * </span> 
 				<br></br>
-				<small>Linkedin</small>
+				<small style={{display: 'block'}} >Linkedin</small>
 				<input
-					style={{ width: '80%', marginTop: '1%', display: 'block' }}
+					style={{ width: '80%', marginTop: '1%', display: 'inline' }}
 					className={styles.input}
 					name='linkedin'
 					placeholder='ej: www.linkedin.com/tu_cuenta/'
 					type='text'
 					id='standard-basic6'
 					onChange={(e) => {this.handleOnChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
-				/>
+				/><span style={{color: "#c2c2c2"}}> * </span> 
+				<p style={{color: "#c2c2c2", fontSize: '13px', marginTop: '15px'}}> obligatorio * </p>
 				<br></br>
 				<input type="checkbox" name="terminos" value="terminos" onClick={e => this.handleCheked(e)} />
 				{/* <label for="terminos"> Acepto los términos y condiciones</label> */}
@@ -130,7 +131,8 @@ class CargarArchivos extends Component{
 						!this.state.validate.linkedin &&
 						!this.state.validate.cv ||
 						!this.state.validate.frontDNI ||
-						!this.state.validate.backDNI
+						!this.state.validate.backDNI ||
+						!this.state.checked
 						? (control = true) : false 
 					}
 					<Button
