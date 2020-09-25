@@ -6,7 +6,7 @@
     margin-top: 70px;
     border: 1px solid #E1E1E1;
     display: flex;
-    
+
 }
 
 .leftArrow {
@@ -250,7 +250,7 @@ input:focus {
     padding: 3px 23px 2px 23px;
     border: none;
     border-radius: 25px;
-    background-color: #492BC4;  
+    background-color: #492BC4;
 }
 
 button:hover {
