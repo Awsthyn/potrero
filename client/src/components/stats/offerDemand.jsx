@@ -22,6 +22,7 @@ class Offers extends React.Component {
       demandas,
     });
 
+    console.log(this.state);
     // this.setState({
     //   allDemands: demandas.onlyDemand,
     //   totalDemands: demandas.demandSubjects,
@@ -104,7 +105,7 @@ class Offers extends React.Component {
       datasets: [
         {
           label: "Demandas de materias",
-          data: 0,
+          data: 10,
           fill: false,
           backgroundColor: [
             "rgba(73, 43, 196, 0.6)",

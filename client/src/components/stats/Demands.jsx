@@ -84,13 +84,17 @@ class Demands extends React.Component {
           options={{
             responsive: true,
             maintainAspectRatio: true,
-              yAxes: [{
+            scales: {
+              yAxes: [
+                {
                   ticks: {
-                      min: 0,
-                      max: 100,
-                      stepSize: 10.0
-                  }
-              }]
+                    suggestedMin: 0,
+                    suggestedMax: 10,
+                    stepSize: 2,
+                  },
+                },
+              ],
+            },
           }}
         ></Bar>
       </div>

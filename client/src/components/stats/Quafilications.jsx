@@ -11,11 +11,12 @@ class Offers extends React.Component {
     var peticion = await fetch("http://localhost:3001/stats/qualification");
     var notas = await peticion.json();
 
-    let pro = notas.length > 0 ? notas.reduce((acc, currValue) => acc + currValue) : 0;
+    let pro =
+      notas.length > 0 ? notas.reduce((acc, currValue) => acc + currValue) : 0;
 
     this.setState({
       notas: notas,
-      total: Math.round(pro / notas.length)
+      total: Math.round(pro / notas.length),
     });
   }
 
@@ -71,17 +72,16 @@ class Offers extends React.Component {
   async componentDidMount() {
     await this.peticion();
     await this.getChartData();
-
-
   }
 
   render() {
     return (
       <div>
-        {
-          isNaN(this.state.total) ? <h3>Promedio notas: No existen notas</h3>
-          : <h3>"Promedio notas: " {this.state.total}</h3>
-        }
+        {isNaN(this.state.total) ? (
+          <h3>Promedio notas: No existen notas</h3>
+        ) : (
+          <h3>"Promedio notas: " {this.state.total}</h3>
+        )}
 
         <Bar
           type
@@ -90,13 +90,15 @@ class Offers extends React.Component {
             responsive: true,
             maintainAspectRatio: true,
             scales: {
-              yAxes: [{
+              yAxes: [
+                {
                   ticks: {
-                      suggestedMin: 0,
-                      suggestedMax: 10
-                  }
-              }]
-          }
+                    suggestedMin: 0,
+                    stepSize: 2,
+                  },
+                },
+              ],
+            },
           }}
         ></Bar>
       </div>

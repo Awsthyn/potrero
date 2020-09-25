@@ -7,12 +7,13 @@ import { makeStyles } from "@material-ui/styles";
 import MiStats from "../stats/MiStats.jsx";
 import Demands from "../stats/Demands.jsx";
 import Offers from "../stats/Offers.jsx";
+import OffersDemand from "../stats/offerDemand.jsx";
 import Qualifications from "../stats/Quafilications";
 import StatusVoluntary from "../stats/StatusVoluntary.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import * as actions from "../../redux/actions/stats.js";
-import estadisticas from './assets/estadisticas.png';
+import estadisticas from "./assets/estadisticas.png";
 import "./stats.css";
 
 const VIOLETA = "#492BC4";
@@ -74,6 +75,11 @@ export default () => {
       <div>
         <div className="stats">
           <Qualifications />
+        </div>
+      </div>
+      <div>
+        <div className="stats">
+          <OffersDemand />
         </div>
       </div>
     </div>
