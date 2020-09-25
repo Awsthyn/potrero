@@ -13,7 +13,13 @@ import Typography from '@material-ui/core/Typography';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import AssistantIcon from '@material-ui/icons/Assistant';
 
+
+
+const VIOLETA = '#492BC4'
+const VERDE = '#8CC63E'
+const NEGRO = '#333333'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,13 +40,11 @@ const useStyles = makeStyles((theme) => ({
         color:'white',
         textDecoration:'none',
      },
-     
-     disableFocusRipple:true
-},
+  },
+
 
 
 icons:{
-
   disableRipple: true, 
   color:'white',
   paddingTop:0,
@@ -55,8 +59,22 @@ icons:{
     background: 'none',
     backgroundColor:'transparent'
  },
-
 },
+menuitem:{
+  color:NEGRO,
+  padding:0,
+  justifyContent:'center',
+  width: 'fit-content',
+  height: 'fit-content',
+  '&:hover': {
+    textDecoration:'none',
+    color:VIOLETA,
+    background: 'none',
+    backgroundColor:'transparent'
+ },
+},
+
+
 item:{
   color:'gray',
   padding:0,
@@ -70,7 +88,11 @@ item:{
     backgroundColor:'transparent'
  },
 },
-}));
+font:{
+  maxWidth:'auto',
+  fontFamily: 'Poppins'
+},
+  }));
 
 export default function MenuListComposition() {
   const classes = useStyles();
@@ -108,7 +130,9 @@ export default function MenuListComposition() {
 
   return (
     <div className={classes.root} >
-        <Link className={classes.link}
+        <Link 
+    
+          className={classes.link}
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
@@ -119,7 +143,7 @@ export default function MenuListComposition() {
                      <ListItemIcon  className={classes.icons}>
                          <SupervisedUserCircleRoundedIcon /> 
                                 </ListItemIcon >
-                         <ListItemText primary='Miembros'/>
+                         <ListItemText className={classes.font} primary='Miembros'/>
                  </ListItem>
         </Link >
 
@@ -132,8 +156,8 @@ export default function MenuListComposition() {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={handleClose}>Voluntarios</MenuItem>
-                    <MenuItem onClick={handleClose}>Asesores</MenuItem>
+                    <Link to='/admin/voluntarios' className={classes.menuitem}><MenuItem   onClick={handleClose}><AssistantIcon/>  Voluntarios</MenuItem></Link>
+                    <Link to='/admin/usuarios' className={classes.menuitem}> <MenuItem   onClick={handleClose}><SupervisedUserCircleRoundedIcon/>  Asesores</MenuItem></Link>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

@@ -85,6 +85,12 @@ const useStyles = makeStyles({
          paddingTop:0,
          
     },
+    logout:{
+        '&:hover': {
+            backgroundColor:'red'
+            
+         },
+    }
    
    
 
@@ -125,7 +131,7 @@ const AdminNavBar = (props) => {
                     </Link> 
                     <Link to= '/' className={classes.link}>
                         <ListItem onClick={handleLogout} className={classes.grouplinks} button>
-                            <ListItemIcon className={classes.icons} >
+                            <ListItemIcon className={`${classes.icons} ${classes.logout}`} >
                                         <PowerSettingsNewIcon />
                                 </ListItemIcon>
                         </ListItem>

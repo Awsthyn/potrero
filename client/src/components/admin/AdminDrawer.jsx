@@ -38,7 +38,7 @@ import SettingsApplicationsRoundedIcon from '@material-ui/icons/SettingsApplicat
 import PieChartRoundedIcon from '@material-ui/icons/PieChartRounded';
 import logo from './assets/logo.png';
 import AssistantIcon from '@material-ui/icons/Assistant';
-
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const drawerWidth = 240;
 
@@ -147,25 +147,37 @@ toolbar:{
     display:'flex',
 },
 grouplinks:{
+    marginLeft:'auto',
     padding:0,
     display:'flex',
     color:'white',
-    width:'100%',
-    justifyContent:'flex-end'
+    width:'fit-content',
+    alignSelf: 'center',
+    marginRight:0,
+
 },
 item:{
     padding:0,
 },
-link:{
-    padding: 3,
-    textDecoration:'none',
-    color:'gray',
-    '&:hover': {
-        color:VIOLETA,
-        textDecoration:'none',
-     },
 
-},
+settings:{
+  '&:hover': {
+      variant:'raised',
+      backgroundColor:'gray',
+      paddingTop:5,
+    },
+    
+  },
+
+logout:{
+  '&:hover': {
+     variant:'raised',
+      backgroundColor:'red',
+      paddingTop:5,
+      paddingBottom:10,
+    },
+    
+  },
 
 }));
 
@@ -215,19 +227,26 @@ function AdminDrawer(props) {
             Panel de Admin
           </Typography>
 
-                         <List className={classes.grouplinks}>
-                                <ListItem  >
-                                    <ListItemText className={classes.grouplinks} primary={`${props.session.firstName} ${props.session.lastName}`}/>
-                                </ListItem>
-                                                
-                                <Link to= '/'>
-                                        <ListItem onClick={handleLogout} className={classes.grouplinks} button>
-                                        <ListItemIcon className={classes.icons} >
-                                                        <PowerSettingsNewIcon />
-                                                </ListItemIcon>
-                                        </ListItem>
-                                </Link> 
-                </List>
+                        <List className={classes.grouplinks}>
+                              <ListItem onClick={''} className={classes.grouplinks} button>
+                                   <ListItemIcon className={`${classes.icons} ${classes.settings}`} >
+                                           <SettingsIcon/>
+                                      </ListItemIcon>
+                              </ListItem>
+                                
+                            <ListItem  >
+                                <ListItemText className={classes.grouplinks} primary={`${props.session.firstName} ${props.session.lastName}`}/>
+                            </ListItem>
+                                            
+                            <Link style={{alignSelf:'center'}} className={classes.link} to= '/'>
+                                    <ListItem onClick={handleLogout} className={classes.grouplinks} button>
+                                    <ListItemIcon className={`${classes.icons} ${classes.logout}`} >
+                                                    <PowerSettingsNewIcon />
+                                            </ListItemIcon>
+                                    </ListItem>
+                            </Link> 
+                                        
+                        </List>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -250,7 +269,7 @@ function AdminDrawer(props) {
         </div>
         <Divider />
               <List>
-                    <ListItem onClick={() => history.push(`/`)}  button>
+                    <ListItem onClick={() => history.push(`/admin`)}  button>
                         <ListItemIcon className={classes.link} >
                         <img style={{height:30,width:30}} src={logo} alt="" />
                         </ListItemIcon>
@@ -281,7 +300,7 @@ function AdminDrawer(props) {
 
 
                   <ListItem onClick={() => history.push(`/admin/materias`)} button >
-                    <ListItemIcon className={classes.link}><SettingsApplicationsRoundedIcon/></ListItemIcon>
+                    <ListItemIcon className={`${classes.link}`}><SettingsApplicationsRoundedIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Gestion'} />
                   </ListItem>
 
