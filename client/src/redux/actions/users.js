@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_USERS} from '../constants';
+import {GET_USERS, ADD_DATA_SHEET} from '../constants';
 
 export function getUsers() {
 	return function (dispatch) {
@@ -10,4 +10,13 @@ export function getUsers() {
 			})
 			.catch(err => console.log(err));
 	};
+}
+
+export function addDataSheet(info){
+	console.log(info)
+   return function(dispatch){
+      return axios.post('http://localhost:3001/datasheet', info, {withCredentials: true})
+		.then(res => dispatch({type: ADD_DATA_SHEET, dataSheet: res.data}))
+		.catch(err => console.log(err))
+   }
 }
