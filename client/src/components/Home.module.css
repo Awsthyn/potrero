@@ -3,12 +3,13 @@
 }
 
 .logo {
+    margin: 0 auto;
     width: 45%;
 }
 
 
 .btnContainer{
-    margin-top: -180px;
+    margin-top: -11%;
     justify-content: center;
 }
 
