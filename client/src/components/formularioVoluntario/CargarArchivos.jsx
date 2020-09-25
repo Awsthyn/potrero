@@ -12,7 +12,8 @@ class CargarArchivos extends Component{
 		super();
 		this.state = {
 			info: new FormData(),
-			checked: false
+			checked: false,
+			validate:{}
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSend = this.handleSend.bind(this);
@@ -70,9 +71,9 @@ class CargarArchivos extends Component{
       let control;
    return(
       <div className={styles.formInput} >
-				<span className={styles.frase} style={{width: '320px', right: '12%'}} >  
+				<span className={styles.frase} >  
 				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Por último... </strong></p>
-				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Estás a un paso de unirte a nuestra causa y nos gustaría saber un poco más de vos </span>
+				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Necesitamos algunos datos extras para poder validar tu identidad. </span>
 				</span>
          	<small>CV (Formato aceptado .pdf)</small>
          	<input
@@ -81,7 +82,7 @@ class CargarArchivos extends Component{
 					name='cv'
 					type='file'
 					accept='.pdf'
-					onChange={(e) => this.handleOnFileChange(e)}
+					onChange={(e) => {this.handleOnFileChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
          	/>
          	<br></br>
          	<small>Frente del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
@@ -92,7 +93,7 @@ class CargarArchivos extends Component{
 					type='file'
 					accept='.png, .jpg, .jpeg'
 					placeholder='fdzgdfgfdgfd'
-					onChange={(e) => this.handleOnFileChange(e)}
+					onChange={(e) => {this.handleOnFileChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
          	/>
 				<br></br>
 				<small>Reverso del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
@@ -102,7 +103,7 @@ class CargarArchivos extends Component{
 					name='backDNI'
 					type='file'
 					accept='.png, .jpg, .jpeg'
-					onChange={(e) => this.handleOnFileChange(e)}
+					onChange={(e) => {this.handleOnFileChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
 				/>
 				<br></br>
 				<small>Linkedin</small>
@@ -113,7 +114,7 @@ class CargarArchivos extends Component{
 					placeholder='ej: www.linkedin.com/tu_cuenta/'
 					type='text'
 					id='standard-basic6'
-					onChange={(e) => this.handleOnChange(e)}
+					onChange={(e) => {this.handleOnChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
 				/>
 				<br></br>
 				<input type="checkbox" name="terminos" value="terminos" onClick={e => this.handleCheked(e)} />
@@ -126,14 +127,16 @@ class CargarArchivos extends Component{
 						</svg> 
 					</div>
 					{
-						//!this.state.info.linkedin ||
-						//!this.state.info.cv 
-						//? (control = true) : false 
+						!this.state.validate.linkedin &&
+						!this.state.validate.cv ||
+						!this.state.validate.frontDNI ||
+						!this.state.validate.backDNI
+						? (control = true) : false 
 					}
 					<Button
 						disabled={control ? true : false}
 						variant="contained"
-						style={{marginTop: '6%'}}
+						style={{marginTop: '6%'}, control ? {backgroundColor: "#c2c2c2"} : null} 
 						id={style1.botonEnviar}
 						type="submit"
 						value="Submit"
