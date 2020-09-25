@@ -33,8 +33,12 @@ export default function rootReducer(state = initialState, action) {
 		case PUT_USER:
 			return {
 				...state,
-
-				
+				users: state.users.map((user) => {
+				if(user.id === action.payload.id) {
+					return action.payload
+				}
+				return user;
+			  })
 			}
 		case ADD_DATA_SHEET:
 			return state

@@ -48,7 +48,7 @@ export function getUserClass() {
 export function putUser(userId, data) {
 	return function (dispatch) {
 		return axios
-			.put(`http://localhost:3001/subjects/${userId}`, data, {withCredentials: true})
+			.put(`http://localhost:3001/users/${userId}`, data, {withCredentials: true})
 			.then(res => {
 				dispatch({type: PUT_USER, payload: res.data})
 			})
