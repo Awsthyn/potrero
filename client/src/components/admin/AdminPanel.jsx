@@ -9,6 +9,7 @@ import Demands from "../stats/Demands.jsx";
 import Offers from "../stats/Offers.jsx";
 import OffersDemand from "../stats/offerDemand.jsx";
 import Qualifications from "../stats/Quafilications";
+import OfferWithDemand from "../stats/GraficarAll";
 import StatusVoluntary from "../stats/StatusVoluntary.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { Bar, Line, Pie } from "react-chartjs-2";
@@ -79,7 +80,7 @@ export default () => {
       </div>
       <div>
         <div className="stats">
-          <OffersDemand />
+          <OfferWithDemand />
         </div>
       </div>
     </div>

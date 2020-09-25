@@ -11,58 +11,85 @@ class GraficarAll extends React.Component {
   };
 
   async peticion() {
-
     var peticion = await fetch("http://localhost:3001/stats/demandwithoffer");
     var respuesta = await peticion.json();
 
     this.setState({
-     demanda: respuesta.allDemands,
+      demand: respuesta.allDemands,
       offers: respuesta.allOffer,
-      totalDemands : respuesta.totalDemands,
+      totalDemands: respuesta.totalDemands,
       totalOffers: respuesta.totalOffers,
     });
   }
 
   getChartData() {
-    const demOffer = [];
-    this.state.offers.forEach(e => {
-       let nombre = Object.keys(e)
-       demOffer.push(nombre[0])
-    })
-    console.log(demOffer)
-    const countdemOffer = []
-    for(let i= 0; i < this.state.offers.length; i++){
-        for (const property in this.state.offers[i]) {
-          countdemOffer.push(this.state.offers[i][property])
+    console.log(this.state);
+
+    const nombreMatOf = [];
+    const countNombreMatOf = [];
+    const nombreMatDem = [];
+    const countNombreMatDem = [];
+
+    //Pusheo los nombres de materias
+    this.state.offers.forEach((e) => {
+      let nombre = Object.keys(e);
+      nombreMatOf.push(nombre[0]);
+    });
+
+    //Pusheo la longitud a los nombres de materias
+    for (let i = 0; i < this.state.offers.length; i++) {
+      for (const property in this.state.offers[i]) {
+        countNombreMatOf.push(this.state.offers[i][property].length);
+      }
+    }
+
+    //Pusheo los nombres de materias
+    this.state.demand &&
+      this.state.demand.forEach((e) => {
+        let nombre = Object.keys(e);
+        nombreMatDem.push(nombre[0]);
+      });
+
+    //Pusheo la longitud a los nombres de materias
+    if (this.state.demand.length > 0) {
+      for (let i = 0; i < this.state.demand.length; i++) {
+        for (const property in this.state.demand[i]) {
+          countNombreMatDem.push(this.state.demand[i][property].length);
         }
       }
+    }
+
+    let colorOferta = [];
+    let colorDemanda = [];
+    //Preparamos los colores para q se repita segun la cantidad de la longitud de los nombres de materia
+    for (let i = 0; i < nombreMatOf.length; i++) {
+      colorOferta.push("rgba(73, 43, 196, 0.6)");
+    }
+
+    for (let i = 0; i < nombreMatOf.length; i++) {
+      colorDemanda.push("rgba(140, 198, 62, 0.6)");
+    }
+
+    console.log(colorOferta);
 
     const data = {
       //hacer map para labels
-      labels: demOffer,
+      labels: nombreMatOf,
       datasets: [
         {
           label: "Oferta de materias",
-          data: [4],
+          data: countNombreMatOf,
           fill: false,
-          backgroundColor: [
-            "rgba(73, 43, 196, 0.6)",
-            "rgba(73, 43, 196, 0.6)",
-            "rgba(73, 43, 196, 0.6)",
-          ],
+          backgroundColor: colorOferta,
 
-           borderWidth: 1
+          borderWidth: 1,
         },
         {
           label: "Demanda de materias",
-          data: [3, 5 ,7],
+          data: countNombreMatDem,
           fill: false,
-          backgroundColor: [
-            "rgba(140, 198, 62, 0.6)",
-            "rgba(140, 198, 62, 0.6)",
-            "rgba(140, 198, 62, 0.6)",
-          ],
-           borderWidth: 1
+          backgroundColor: colorDemanda,
+          borderWidth: 1,
         },
       ],
     };
@@ -72,7 +99,7 @@ class GraficarAll extends React.Component {
       displayTitle: true,
       displayLegend: true,
       legendPosition: "bottom",
-  };
+    };
     this.setState({
       datos: data,
       opciones: opciones,
@@ -89,20 +116,26 @@ class GraficarAll extends React.Component {
       <div>
         <h3>{"Ofertas/Demanda de materias: " + this.state.total}</h3>
         <Bar
-        type
-        data={this.state.datos}
-        options={{
-          responsive: true,
-          maintainAspectRatio: true,
-          scales: {
-            yAxes: [{
-                ticks: {
+          type
+          data={this.state.datos}
+          options={{
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
                     suggestedMin: 0,
-                    suggestedMax: 10
-                }
-            }]
-        }
-        }}
+                    stepSize: 2,
+                  },
+                },
+              ],
+              // INTENTO DE AMPLIAR LETRA
+              xAxes: [{
+                fontSize: 40
+              }]
+            },
+          }}
         ></Bar>
       </div>
     );
