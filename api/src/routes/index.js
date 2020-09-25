@@ -63,6 +63,10 @@ const matching = require("./matching.js")
 
 const statsRouter = require('./stats.js');
 
+//IMPORT DE DATASHEET.JS 
+
+const dataSheet = require('./dataSheet')
+
 const router = Router();
 
 // ROUTES
@@ -125,6 +129,9 @@ router.use("/matching", matching)
 
 // RUTA DE ESTADÍSTICAS
 router.use('/stats', statsRouter);
+
+// RUTA DATASHEET 
+router.use('/datasheet', dataSheet)
 
 
 
