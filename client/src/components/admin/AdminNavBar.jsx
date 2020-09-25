@@ -19,8 +19,15 @@ const NEGRO = '#333333'
 const useStyles = makeStyles({
     root:{
         zIndex: 1,
+        position:'fixed',
+        marginLeft: 0,
+        padding:0,
+        width:'fit-content',
+        height:'fit-content',
+    },
+    app:{
+        zIndex: 1,
         height:50,
-        background: VIOLETA,
         position:'fixed',
         marginLeft: 0,
     },
@@ -45,16 +52,17 @@ const useStyles = makeStyles({
         textDecoration:'none',
         color:'gray',
         '&:hover': {
-            color:VIOLETA,
+            color:'white',
             textDecoration:'none',
          },
+         justifyContent:'center',
+         alignSelf:'center',
     },
     icons:{
         color:'white',
+        width:30,
+        justifyContent: "center",
         paddingTop:0,
-        justifyContent:'center',
-        maxWidth:30,
-        maxHeight:30,
     },
     toolbar:{
         display:'flex',
@@ -67,17 +75,18 @@ const useStyles = makeStyles({
         justifyContent:'flex-end'
     },
     item:{
-        padding:0,
-    },
-    link:{
-        padding: 0,
-        textDecoration:'none',
-        color:'gray',
         '&:hover': {
-            color:VIOLETA,
+            color:'white',
             textDecoration:'none',
+            backgroundColor:'transparent'
          },
+         padding:0,
+         margin:0,
+         paddingTop:0,
+         
     },
+   
+   
 
 })
 
@@ -92,19 +101,20 @@ const AdminNavBar = (props) => {
 
     return(
         <div className={classes.root}>
-                <AppBar className={classes.root}>
-                    <Toolbar  >
-                  
+                <AppBar className={classes.app}>
+                <Toolbar style={{backgroundColor:VIOLETA}}>
                      <Link to= '/admin/' className={classes.link}>
-                                <ListItem className={classes.item} button>
-                                    <ListItemText primary='Panel'/>
+                                <ListItem className={classes.item}  disableRipple>
                                     <ListItemIcon className={classes.icons}>
                                             <PieChartIcon/>
                                         </ListItemIcon>
+                                        <ListItemText primary='Panel'/>
                                 </ListItem>
                     </Link> 
 
-                    <ListItem className={classes.item} button><Miembros/></ListItem>
+                    <ListItem className={classes.item} disableRipple>
+                         <Miembros/>
+                     </ListItem>
                   
 
                 <List className={classes.grouplinks}>
@@ -124,8 +134,6 @@ const AdminNavBar = (props) => {
 
                     </Toolbar>
                 </AppBar>
-               
-                
         </div>
   )
 }

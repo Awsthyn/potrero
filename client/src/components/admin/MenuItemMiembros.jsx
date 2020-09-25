@@ -8,14 +8,68 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
 import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    "&:hover": {
+      backgroundColor: "transparent"
+    },
+    padding: 0,
   },
   paper: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(0),
   },
+  link:{
+    flexDirection:'row',
+    textDecoration:'none',
+    color:'gray',
+    '&:hover': {
+        color:'white',
+        textDecoration:'none',
+     },
+     
+     disableFocusRipple:true
+},
+
+
+icons:{
+
+  disableRipple: true, 
+  color:'white',
+  paddingTop:0,
+  justifyContent:'center',
+  maxWidth:30,
+  maxHeight:30,
+  width: 'fit-content',
+  height: 'fit-content',
+  '&:hover': {
+    textDecoration:'none',
+    color:'white',
+    background: 'none',
+    backgroundColor:'transparent'
+ },
+
+},
+item:{
+  color:'gray',
+  padding:0,
+  justifyContent:'center',
+  width: 'fit-content',
+  height: 'fit-content',
+  '&:hover': {
+    textDecoration:'none',
+    color:'white',
+    background: 'none',
+    backgroundColor:'transparent'
+ },
+},
 }));
 
 export default function MenuListComposition() {
@@ -53,16 +107,22 @@ export default function MenuListComposition() {
   }, [open]);
 
   return (
-    <div className={classes.root}>
-      <div>
-        <Button
+    <div className={classes.root} >
+        <Link className={classes.link}
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
         >
-         <SupervisedUserCircleRoundedIcon/> Miembros
-        </Button>
+          
+                <ListItem className={classes.item} >
+                     <ListItemIcon  className={classes.icons}>
+                         <SupervisedUserCircleRoundedIcon /> 
+                                </ListItemIcon >
+                         <ListItemText primary='Miembros'/>
+                 </ListItem>
+        </Link >
+
         <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow
@@ -80,7 +140,6 @@ export default function MenuListComposition() {
             </Grow>
           )}
         </Popper>
-      </div>
     </div>
   );
 }

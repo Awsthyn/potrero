@@ -49,8 +49,7 @@ const NEGRO = '#333333'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    // height:50,
-    // background: VIOLETA,
+    height:100,
     // position:'fixed',
     // marginLeft: 0,
   },
@@ -60,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
+
     }),
   },
   appBarShift: {
@@ -199,7 +199,7 @@ function AdminDrawer(props) {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar style={{backgroundColor:VIOLETA}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
