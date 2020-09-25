@@ -9,13 +9,6 @@ const {
   EducationLevel,
 } = require("../db.js");
 
-server.get('/panel', (req, res) => {
-  if(req.student.state === 'admin'){
-    next();
-  } else{
-    res.redirect('localhost:4000')
-  }
-})
 
 server.get("/assistances", (req, res) => {
   DataSheet.findAll({
@@ -361,10 +354,6 @@ server.get('/demandwithoffer', (req, res) => {
     let totalDemandAndOffer = {
       allDemands: [],
       allOffer: [],
-      subjectOfferedNames: [],
-      subjectDemandersNames: [],
-      demandWithoutOffer: [],
-      offerWithoutDemand: [],
       totalDemands: 0,
       totalOffers: 0,
       totalOfferWithoutDemand: 0,
@@ -372,18 +361,39 @@ server.get('/demandwithoffer', (req, res) => {
     }
 
     subjectsWithDemandAndOffer.forEach( element => {
+      if(element.students.length > 0){
+        element.students.forEach( studentsDemand => {
+          demandsAvailables.push(studentsDemand )
+        })
+      }
       if(element.users.length > 0){
         offersAvailables.push(element)
-      }
+      } 
     });
     let advisorsAccepted = [];
+    let studentsTotales = 0;
+    let sumaDeOfertas = 0;
+
     offersAvailables.forEach( subjectsOffered => {
-        advisorsAccepted = subjectsOffered.users.filter( advisor => advisor.state !== 'rechazado' && advisor.state !== 'pendiente' && advisor.isActive !== false)
-              totalDemandAndOffer.allOffer.push({
-                [subjectsOffered.name] : advisorsAccepted
+      advisorsAccepted = subjectsOffered.users.filter( advisor => advisor.state !== 'rechazado' && advisor.state !== 'pendiente' && advisor.isActive !== false)
+      totalDemandAndOffer.allOffer.push({
+        [subjectsOffered.name] : advisorsAccepted
       })
+      studentsTotales = studentsTotales + subjectsOffered.students.length
+      sumaDeOfertas = sumaDeOfertas + advisorsAccepted.length;
+      totalDemandAndOffer.allDemands.push({ [subjectsOffered.name] : subjectsOffered.students })
     });
+
+   
     
+
+    const sumasTotales = (arg) => {
+      arg.totalDemands = studentsTotales;
+      arg.totalOffers = sumaDeOfertas;
+    }
+
+    sumasTotales(totalDemandAndOffer);
+
     res.json ( totalDemandAndOffer )
 
   })
