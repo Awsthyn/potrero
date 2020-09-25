@@ -11,9 +11,17 @@ export default class VolunteerForm extends React.Component {
 		this.state = {
 			info: {},
 			redirect: false,
+			error:"",
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleOnClick = this.handleOnClick.bind(this);
+	}
+	validateEmail(email){
+		if(!/\S+@\S+\.\S+/.test(email)) {
+			this.setState({error: "ingrese un e-mail valido"});
+		} else {
+			this.setState({error: ""});
+		}
 	}
 	handleOnChange(e) {
 		this.setState({
@@ -118,8 +126,12 @@ export default class VolunteerForm extends React.Component {
 							value={this.state.info.email}
 							// InputLabelProps={{ shrink: true }}
 							aria-describedby="emailHelp"
-							onChange={e => this.handleOnChange(e)}
+							onChange={e => {this.handleOnChange(e); this.validateEmail(e.target.value)}}
 						/>
+						{
+							this.state.info.email && this.state.error
+							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Ingrese un e-mail valido</p> : null
+						}
 					</div>
 					{!this.state.info.firstName ||
 					!this.state.info.lastName ||
@@ -129,7 +141,8 @@ export default class VolunteerForm extends React.Component {
 					!this.state.info.email ||
 					!this.state.info.phone || 
 					this.state.info.phone.toString().length < 8 ||
-					this.state.info.phone.toString().length > 13
+					this.state.info.phone.toString().length > 13 ||
+					this.state.info.email && this.state.error
 						? (control = true)
 						: false}
 						<div style={{display: 'flex', alignItems: 'center'}}> 
