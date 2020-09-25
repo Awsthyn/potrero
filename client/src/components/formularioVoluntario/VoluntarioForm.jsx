@@ -11,9 +11,17 @@ export default class VolunteerForm extends React.Component {
 		this.state = {
 			info: {},
 			redirect: false,
+			error:"",
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleOnClick = this.handleOnClick.bind(this);
+	}
+	validateEmail(email){
+		if(!/\S+@\S+\.\S+/.test(email)) {
+			this.setState({error: "ingrese un e-mail valido"});
+		} else {
+			this.setState({error: ""});
+		}
 	}
 	handleOnChange(e) {
 		this.setState({
@@ -60,7 +68,7 @@ export default class VolunteerForm extends React.Component {
 							value={this.state.info.firstName}
 							// inputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
-						/>
+						/> <span style={{color: "#c2c2c2"}} > * </span> 
 						<input
 							spellCheck="false"
 							autoComplete="off"
@@ -71,7 +79,7 @@ export default class VolunteerForm extends React.Component {
 							value={this.state.info.lastName}
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
-						/>
+							/> <span style={{color: "#c2c2c2"}}> * </span> 
 					
 						<input
 							spellCheck="false"
@@ -83,12 +91,12 @@ export default class VolunteerForm extends React.Component {
 							// placeholder="fecha de nacimiento"
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
-						/>
+							/> <span style={{color: "#c2c2c2"}}> * </span> 
 							{
-							this.state.info.birthday && 
-							!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
-							parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 
-							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Debes ser mayor de 18 años</p> : null
+								this.state.info.birthday && 
+								!moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().includes("años") || 
+								parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 
+								? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Debes ser mayor de 18 años</p> : null
 						}
 						
 						<input
@@ -101,10 +109,11 @@ export default class VolunteerForm extends React.Component {
 							value={this.state.info.phone}
 							// InputLabelProps={{ shrink: true }}
 							onChange={e => this.handleOnChange(e)}
-						/> 
+							/> <span style={{color: "#c2c2c2"}}> * </span> 
 						{
 							this.state.info.phone && 
-							this.state.info.phone.toString().length !== 12
+							(this.state.info.phone.toString().length < 8 ||
+							this.state.info.phone.toString().length > 13)
 							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Debes ingresar un número telefónico válido</p> : null	
 						}
 						<input
@@ -117,8 +126,13 @@ export default class VolunteerForm extends React.Component {
 							value={this.state.info.email}
 							// InputLabelProps={{ shrink: true }}
 							aria-describedby="emailHelp"
-							onChange={e => this.handleOnChange(e)}
-						/>
+							onChange={e => {this.handleOnChange(e); this.validateEmail(e.target.value)}}
+						/><span style={{color: "#c2c2c2"}}> * </span> 
+						{
+							this.state.info.email && this.state.error
+							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Ingrese un e-mail valido</p> : null
+						}
+						<p style={{color: "#c2c2c2", fontSize: '13px', marginTop: '15px'}}> obligatorio * </p> 
 					</div>
 					{!this.state.info.firstName ||
 					!this.state.info.lastName ||
@@ -127,7 +141,9 @@ export default class VolunteerForm extends React.Component {
 					parseInt(moment(this.state.info.birthday?.split("-").join(""), "YYYYMMDD").fromNow().slice(5,7)) < 17 ||		
 					!this.state.info.email ||
 					!this.state.info.phone || 
-					 this.state.info.phone.toString().length !== 12 
+					this.state.info.phone.toString().length < 8 ||
+					this.state.info.phone.toString().length > 13 ||
+					this.state.info.email && this.state.error
 						? (control = true)
 						: false}
 						<div style={{display: 'flex', alignItems: 'center'}}> 
@@ -138,7 +154,7 @@ export default class VolunteerForm extends React.Component {
 							</div>
 						<Button
 							disabled={control ? true : false}
-							style={control ? {backgroundColor: "#c2c2c2"} : null}
+							style={control ? {backgroundColor: "#c2c2c2", marginTop: '0px'} : {marginTop: '0px'}}
 							variant="contained"
 							className={styles.testButton}
 							id={styles.skere}
