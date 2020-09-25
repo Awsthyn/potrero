@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './AsesorProfile.module.css';
 import AsesorStudents from './AsesorStudents/AsesorStudents.jsx';
 import { ExpansionPanelDetails } from '@material-ui/core';
@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import {getUserSubjects, putUser} from '../../redux/actions/users'
 
 
-function AsesorProfile ({history}) {
+function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
 
     let subjects = ['Matemáticas', 'Lengua y Literatura', 'Ciencias Sociales', 'Ciencias Naturales', 'Inglés', 'Formación Ética y Ciudadana' ]
 
@@ -19,6 +19,11 @@ function AsesorProfile ({history}) {
         })
     }
 
+    useEffect(() => {
+        getUserSubjects(match.params.id)
+    }, [])
+    console.log(user)
+    console.log(match)
 return(
     <div className = {style.outer}>
     <div className = {style.container}>
@@ -88,8 +93,6 @@ return(
         </div>
 
 
-
-
         <div className = {style.cards}>
             <div className = {style.filter}>
                 <ul className = {style.items}>
@@ -108,7 +111,7 @@ return(
 
 function mapStateToProps(state){
     return {
-        userSubjects: state.users.userSubjects
+        user: state.users.userSubjects
     }
 }
 

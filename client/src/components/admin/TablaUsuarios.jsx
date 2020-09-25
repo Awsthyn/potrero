@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from "react-redux";
-import { getUsers } from "../../redux/actions/users"
+import { getUsers, getUserSubjects } from "../../redux/actions/users"
 import UserDetailsModal from "./UserDetailsModal"
-
+import { Link } from 'react-router-dom'
 
  class TablaUsuarios extends React.Component {
     constructor(props) {
@@ -35,7 +35,9 @@ import UserDetailsModal from "./UserDetailsModal"
                       <tbody>
                         {this.props.users.map(u =>
                           <tr>
+                        <Link to={`/asesor/test/${u.id}`}>
                           <td>{u.firstName}<UserDetailsModal user={u} /></td>
+                        </Link>
                           <td>{u.lastName}</td>
                           <td>{u.state}</td>
                           {u.isActive ? <td>Activo</td> : <td>Inactivo</td>}
@@ -59,7 +61,7 @@ function mapStateToProps(state) {
   function mapDispatchToProps(dispatch) {
     return {
       getUsers:() => dispatch(getUsers()),
-
+      getUserSubjects: () => dispatch(getUserSubjects())
     };
   }
   export default connect(mapStateToProps, mapDispatchToProps)(TablaUsuarios);
