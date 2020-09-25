@@ -11,9 +11,17 @@ export default class VolunteerForm extends React.Component {
 		this.state = {
 			info: {},
 			redirect: false,
+			error:"",
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleOnClick = this.handleOnClick.bind(this);
+	}
+	validateEmail(email){
+		if(!/\S+@\S+\.\S+/.test(email)) {
+			this.setState({error: "ingrese un e-mail valido"});
+		} else {
+			this.setState({error: ""});
+		}
 	}
 	handleOnChange(e) {
 		this.setState({
@@ -118,9 +126,13 @@ export default class VolunteerForm extends React.Component {
 							value={this.state.info.email}
 							// InputLabelProps={{ shrink: true }}
 							aria-describedby="emailHelp"
-							onChange={e => this.handleOnChange(e)}
-							/> <span style={{color: "#c2c2c2"}}> * </span> 
-							<p style={{color: "#c2c2c2", fontSize: '13px', marginTop: '15px'}}> obligatorio * </p> 
+							onChange={e => {this.handleOnChange(e); this.validateEmail(e.target.value)}}
+						/><span style={{color: "#c2c2c2"}}> * </span> 
+						{
+							this.state.info.email && this.state.error
+							? <p style={{fontSize: "10px", textAlign: 'left', marginLeft: '23px', position: 'absolute', color: 'red'}}>Ingrese un e-mail valido</p> : null
+						}
+						<p style={{color: "#c2c2c2", fontSize: '13px', marginTop: '15px'}}> obligatorio * </p> 
 					</div>
 					{!this.state.info.firstName ||
 					!this.state.info.lastName ||
@@ -130,9 +142,10 @@ export default class VolunteerForm extends React.Component {
 					!this.state.info.email ||
 					!this.state.info.phone || 
 					this.state.info.phone.toString().length < 8 ||
-					this.state.info.phone.toString().length > 13
-					? (control = true)
-					: false}
+					this.state.info.phone.toString().length > 13 ||
+					this.state.info.email && this.state.error
+						? (control = true)
+						: false}
 						<div style={{display: 'flex', alignItems: 'center'}}> 
 							<div onClick={() => this.props.history.push('/')} > 
 								<svg viewBox="0 0 16 16" className={styles.leftArrow} style={{bottom: '19%'}} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
