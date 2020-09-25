@@ -1,4 +1,4 @@
-import {GET_USERS, GET_USER_SUBJECTS, GET_USER_STUDENTS, GET_USER_CLASS, PUT_USER} from '../constants';
+import {GET_USERS, GET_USER_SUBJECTS, GET_USER_STUDENTS, GET_USER_CLASS, PUT_USER, ADD_DATA_SHEET} from '../constants';
 
 const initialState = {
 	users: [],
@@ -36,6 +36,8 @@ export default function rootReducer(state = initialState, action) {
 
 				
 			}
+		case ADD_DATA_SHEET:
+			return state
 		default:
 			return state;
 	}

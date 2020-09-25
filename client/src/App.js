@@ -21,6 +21,7 @@ import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
 import StudentCard from './components/student/StudentCard/StudentCard';
 import AsesorProfile from './components/AsesorProfile/AsesorProfile';
+import DataSheet from './components/AsesorProfile/dataSheet/DataSheet';
 import ClassAssignation from "./components/student/ClassAssignation"
 
 class App extends React.Component {
@@ -44,7 +45,15 @@ class App extends React.Component {
           component={AdminNavBar}
         />
         <Route exact path='/' component={Home} />
-        <Route path='/voluntarios' component={ContenedorForm} />
+        <Route exact
+          path={[
+            '/voluntarios/formulario',
+            '/voluntarios/horarios',
+            '/voluntarios/niveles',
+            '/voluntarios/materias',
+            '/voluntarios/cargararchivos',
+            '/voluntarios/confirmacion',
+          ]} component={ContenedorForm} />
         {/* <Route path="/admin" component={AdminDrawer} /> */}
         <AdminRoute exact path='/admin' component={AdminDrawer} />
         <Route exact path='/admin' component={AdminPanel} />
@@ -75,10 +84,7 @@ class App extends React.Component {
         <Route exact path='/usuario/login' component={Login} />
         <Route exact path='/usuario/perfil' component={MiPerfil} />
         <Route exact path='/usuario/recuperar' component={PasswordRecovery} />
-
         <Route exact path='/login/:token' component={ResetPassword} />
-
-       
 
 		<Route
         path="/studentCard"
@@ -87,7 +93,7 @@ class App extends React.Component {
 		<Route
 		path = "/asesor/test"
 		component = {AsesorProfile}/>
-
+    <Route path="/datasheet/test" component={DataSheet}/> 
 		</div>
 	);
 	}
