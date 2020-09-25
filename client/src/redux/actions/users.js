@@ -13,6 +13,7 @@ export function getUsers() {
 }
 
 export function getUserSubjects(userId) {
+	console.log(userId)
 	return function (dispatch) {
 		return axios
 			.get(`http://localhost:3001/users/${userId}`, {withCredentials: true})
