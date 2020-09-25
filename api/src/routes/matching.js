@@ -41,6 +41,20 @@ function findFreeinterval(arr){
 }
 
 
+const sorter = {
+    "Lunes": 1,
+    "Martes": 2,
+    "Miercoles": 3,
+    "Jueves": 4,
+    "Viernes": 5,
+  }
+function sortByDay(a, b) {
+    let day1 = a.nameWeekDay
+    let day2 = b.nameWeekDay
+    return sorter[day1] - sorter[day2];
+}
+  
+
 server.get('/:studentId/:subject', (req, res) => {
     let { subject } = req.params
     //Busca todos los studentSchedules del alumno ingresado por req.params
@@ -176,7 +190,8 @@ server.get('/:studentId/:subject', (req, res) => {
                 else disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay })                
             })
 
-            res.json(disponible)})
+
+            res.json(disponible.sort(sortByDay))})
             .catch(err => console.log(err))  
     })
 })
