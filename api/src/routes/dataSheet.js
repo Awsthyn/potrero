@@ -1,10 +1,18 @@
 const server = require("express").Router();
 
 // TRAEMOS DataSheet DE LA BASE DE DATOS
-const { DataSheet } = require("../db.js");
+const { DataSheet, Class } = require("../db.js");
 
-server.post('/', (req,res) => {
-   console.log(req.body)
+server.get('/userId', (req, res) => {
+   DataSheet.findAll({
+      include: [{model: Class}],
+      where: {
+         userId: req.params.useId
+      }
+   })
+})
+
+server.post('/', (req, res) => {
    DataSheet.create(req.body)
    .then(ds => res.send(ds))
    .catch(err => res.send(err))
