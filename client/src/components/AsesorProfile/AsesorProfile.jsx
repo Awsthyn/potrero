@@ -13,6 +13,7 @@ function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
     const [ edit, setEdit ] = useState(false);
     const [state, setState] = useState({});
     const [perfil, setPerfil] = useState(false);
+    const [email, setEmail] = useState(false);
 
     const handleOnchange = (e) => {
         setState({
@@ -49,10 +50,10 @@ return(
         
 
         <div className = {style.buttons}>
-        <i className={`fas fa-user ${style.actions}`} onClick={() => setPerfil(!perfil)}></i>
+        <i className={`fas fa-user ${style.actions}`} onClick={() => {setPerfil(!perfil); setEmail(false)}}></i>
         <i className={`far fa-calendar-alt ${style.actions}`}></i>
         <i className={`fab fa-wpforms ${style.actions}`}></i>
-        <i className={`fas fa-envelope ${style.actions}`}></i>
+        <i className={`fas fa-envelope ${style.actions}`} onClick={() => {setEmail(!email); setPerfil(false)} }></i>
         <i className={`fas fa-plus ${style.actions}`}></i>
         </div>
 
@@ -102,6 +103,21 @@ return(
                             <p className = {style.asesorinfo}>Fecha de nacimiento: {user.birthday}</p>
                             <p className = {style.asesorinfo}>Telefono: {user.phone}</p>
                             <p className = {style.asesorinfo}>E-mail: {user.email}</p>
+                        </div>
+                </form>
+                </div>
+                :  null
+                
+    }
+    {email ?   
+        <div className = {style.edit}>
+        <p className = {style.asesorinfo}>Enviar e-mail a {user.firstName} {user.lastName}</p>
+                <form className={style.formContainer}>
+                     
+                        <div>
+                        <input spellcheck="false" autocomplete="off" type="text" name="asunto" id="asunto" placeholder="Asunto" className={style.input} onChange={(e) => handleOnchange(e)} />
+                        <textarea  className={style.input} onChange={(e) => handleOnchange(e)}></textarea>
+                        <button></button>
                         </div>
                 </form>
                 </div>
