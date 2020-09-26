@@ -7,10 +7,10 @@ import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {getUserSubjects, putUser} from '../../redux/actions/users'
 import AssesorCalendar from './AssesorCalendar';
+import axios from "axios";
 
 
 function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
-
     let subjects = ['Matemáticas', 'Lengua y Literatura', 'Ciencias Sociales', 'Ciencias Naturales', 'Inglés', 'Formación Ética y Ciudadana' ]
 
     const [ edit, setEdit ] = useState(false);
@@ -20,11 +20,22 @@ function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
         classes: false,
         grades: false
     }) 
+    const [perfil, setPerfil] = useState(false);
+    const [email, setEmail] = useState(false);
+    const [enviar, setEnviar] = useState({});
+
     const handleOnchange = (e) => {
         setState({
             ...state, [e.target.name]: e.target.value
         })
     }
+
+    const handleSendEmail = () => {
+        axios
+          .post('http://localhost:3001/mailPersonal/asesorEmail', enviar, {withCredentials: true})
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
+      };
 
     useEffect(() => {
         getUserSubjects(match.params.id)
@@ -70,8 +81,10 @@ return(
         <div className = {style.buttons}>
         <i className={`fas fa-user ${style.actions}`} ></i>
         <AssesorCalendar />
+        <i className={`fas fa-user ${style.actions}`} onClick={() => {setPerfil(!perfil); setEmail(false)}}></i>
+        <i className={`far fa-calendar-alt ${style.actions}`}></i>
         <i className={`fab fa-wpforms ${style.actions}`}></i>
-        <i className={`fas fa-envelope ${style.actions}`}></i>
+        <i className={`fas fa-envelope ${style.actions}`} onClick={() => {setEmail(!email); setPerfil(false)} }></i>
         <i className={`fas fa-plus ${style.actions}`}></i>
         </div>
 
@@ -102,6 +115,7 @@ return(
             {user.subjects?.map(subject => 
             <p key={subject.id} className = {style.subjects}>{subject.name}</p>
           )}
+          
             {/* <p className = {style.subjects}>Matemáticas</p>
             <p className = {style.subjects}>Lengua y Literatura</p>
             <p className = {style.subjects}>Matemáticas</p>
@@ -109,8 +123,40 @@ return(
         </div>
         </div>
     }
+    {perfil ?   
+        <div className = {style.edit}>
+        <p className = {style.asesorinfo}>Información del Asesor</p>
+                <form className={style.formContainer}>
+                     
+                        <div>
+                            <p className = {style.asesorinfo}>Nombre: {user.firstName}</p>
+                            <p className = {style.asesorinfo}>Apellido: {user.lastName}</p>
+                            <p className = {style.asesorinfo}>Fecha de nacimiento: {user.birthday.slice(8,10) + "/" + user.birthday.slice(5,7) + "/" + user.birthday.slice(0,4)}</p>
+                            <p className = {style.asesorinfo}>Telefono: {user.phone}</p>
+                            <p className = {style.asesorinfo}>E-mail: {user.email}</p>
+                        </div>
+                </form>
+                </div>
+                :  null
+                
+    }
+    {email ?   
+        <div className = {style.edit}>
+        <p className = {style.asesorinfo}>Enviar e-mail a: {user.email}</p>
+                <form className={style.formContainer}>
+                     
+                        <div>
+                        <input spellcheck="false" autocomplete="off" type="text" name="asunto" id="asunto" placeholder="Asunto" className={style.input} onChange={(e) => setEnviar({...enviar, [e.target.name]: e.target.value})} />
+                        <textarea  name="mensaje" placeholder="Mensaje" className={style.bodyMessage} onChange={(e) => setEnviar({...enviar, [e.target.name]: e.target.value, email: user.email})}></textarea>
+                        <button disable={!enviar.mensaje ? true : false} className={!enviar.mensaje ? style.sendEmailFalse : style.sendEmailTrue} onClick={() => handleSendEmail()}>Enviar e-mail</button>
+                        </div>
+                </form>
+                </div>
+                :  null
+                
+    }
         </div>
-
+    
 
 
 
