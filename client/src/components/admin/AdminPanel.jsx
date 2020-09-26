@@ -47,16 +47,16 @@ export default () => {
       <br></br>
       <div>
         <div className="linkGraficos ocultoimpresion">
-          <a href="#stats1" class="btn">
+          <a href="#stats1" className="btn">
             Asistencias
           </a>
-          <a href="#stats2" class="btn">
+          <a href="#stats2" className="btn">
             Asesores
           </a>
-          <a href="#stats3" class="btn">
+          <a href="#stats3" className="btn">
             Promedio Notas
           </a>
-          <a href="#stats4" class="btn">
+          <a href="#stats4" className="btn">
             Ofertas/Demandas
           </a>
           <button onClick={imprimir} className="btn">
