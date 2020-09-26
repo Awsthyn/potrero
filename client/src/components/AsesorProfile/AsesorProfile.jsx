@@ -3,23 +3,31 @@ import style from './AsesorProfile.module.css';
 import AsesorStudents from './AsesorStudents/AsesorStudents.jsx';
 import { ExpansionPanelDetails } from '@material-ui/core';
 import { connect } from 'react-redux'
-import {getUserSubjects, putUser} from '../../redux/actions/users'
+import {getUserSubjects, putUser} from '../../redux/actions/users';
+import axios from "axios";
 
 
 function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
-
     let subjects = ['Matemáticas', 'Lengua y Literatura', 'Ciencias Sociales', 'Ciencias Naturales', 'Inglés', 'Formación Ética y Ciudadana' ]
 
     const [ edit, setEdit ] = useState(false);
     const [state, setState] = useState({});
     const [perfil, setPerfil] = useState(false);
     const [email, setEmail] = useState(false);
+    const [enviar, setEnviar] = useState({});
 
     const handleOnchange = (e) => {
         setState({
             ...state, [e.target.name]: e.target.value
         })
     }
+
+    const handleSendEmail = () => {
+        axios
+          .post('http://localhost:3001/mailPersonal/asesorEmail', enviar, {withCredentials: true})
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
+      };
 
     useEffect(() => {
         getUserSubjects(match.params.id)
@@ -100,7 +108,7 @@ return(
                         <div>
                             <p className = {style.asesorinfo}>Nombre: {user.firstName}</p>
                             <p className = {style.asesorinfo}>Apellido: {user.lastName}</p>
-                            <p className = {style.asesorinfo}>Fecha de nacimiento: {user.birthday}</p>
+                            <p className = {style.asesorinfo}>Fecha de nacimiento: {user.birthday.slice(8,10) + "/" + user.birthday.slice(5,7) + "/" + user.birthday.slice(0,4)}</p>
                             <p className = {style.asesorinfo}>Telefono: {user.phone}</p>
                             <p className = {style.asesorinfo}>E-mail: {user.email}</p>
                         </div>
@@ -111,13 +119,13 @@ return(
     }
     {email ?   
         <div className = {style.edit}>
-        <p className = {style.asesorinfo}>Enviar e-mail a {user.firstName} {user.lastName}</p>
+        <p className = {style.asesorinfo}>Enviar e-mail a: {user.email}</p>
                 <form className={style.formContainer}>
                      
                         <div>
-                        <input spellcheck="false" autocomplete="off" type="text" name="asunto" id="asunto" placeholder="Asunto" className={style.input} onChange={(e) => handleOnchange(e)} />
-                        <textarea  className={style.input} onChange={(e) => handleOnchange(e)}></textarea>
-                        <button></button>
+                        <input spellcheck="false" autocomplete="off" type="text" name="asunto" id="asunto" placeholder="Asunto" className={style.input} onChange={(e) => setEnviar({...enviar, [e.target.name]: e.target.value})} />
+                        <textarea  name="mensaje" placeholder="Mensaje" className={style.bodyMessage} onChange={(e) => setEnviar({...enviar, [e.target.name]: e.target.value, email: user.email})}></textarea>
+                        <button disable={!enviar.mensaje ? true : false} className={!enviar.mensaje ? style.sendEmailFalse : style.sendEmailTrue} onClick={() => handleSendEmail()}>Enviar e-mail</button>
                         </div>
                 </form>
                 </div>

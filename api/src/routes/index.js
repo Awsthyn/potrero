@@ -67,6 +67,9 @@ const statsRouter = require('./stats.js');
 
 const dataSheet = require('./dataSheet')
 
+//IMPORT DE Ruta de mail cuando el admin desea enviar un email especifico a un asesor
+const mailPersonal = require("./personalEmail.js");
+
 const router = Router();
 
 // ROUTES
@@ -132,6 +135,9 @@ router.use('/stats', statsRouter);
 
 // RUTA DATASHEET 
 router.use('/datasheet', dataSheet)
+
+//Ruta de mail cuando el admin desea enviar un email especifico a un asesor
+router.use("/mailPersonal", mailPersonal);
 
 
 
