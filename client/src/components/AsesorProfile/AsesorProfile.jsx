@@ -79,8 +79,6 @@ return(
         
 
         <div className = {style.buttons}>
-        <i className={`fas fa-user ${style.actions}`} ></i>
-        <AssesorCalendar />
         <i className={`fas fa-user ${style.actions}`} onClick={() => {setPerfil(!perfil); setEmail(false)}}></i>
         <i className={`far fa-calendar-alt ${style.actions}`}></i>
         <i className={`fab fa-wpforms ${style.actions}`}></i>
