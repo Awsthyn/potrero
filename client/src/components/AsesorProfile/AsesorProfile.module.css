@@ -233,4 +233,14 @@
       cursor: pointer;
   }
 
- 
+.calendarContainer{
+    display: grid;
+    width: 500px;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 10px;
+    /* border: 1px solid black; */
+}
+
+.column{
+    border: 1px solid black;
+}
