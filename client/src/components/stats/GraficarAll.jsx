@@ -115,7 +115,7 @@ class GraficarAll extends React.Component {
           data={this.state.datos}
           options={{
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             scales: {
               yAxes: [
                 {
@@ -126,9 +126,6 @@ class GraficarAll extends React.Component {
                 },
               ],
               // INTENTO DE AMPLIAR LETRA
-              xAxes: [{
-                fontSize: 40
-              }]
             },
           }}
         ></Bar>

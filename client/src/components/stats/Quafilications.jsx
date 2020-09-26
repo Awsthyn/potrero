@@ -86,7 +86,7 @@ class Offers extends React.Component {
           data={this.state.datos}
           options={{
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             scales: {
               yAxes: [
                 {
