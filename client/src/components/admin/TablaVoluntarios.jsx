@@ -209,6 +209,12 @@ const TablaVoluntarios = (props) => {
       .then((confirm) => {
         if (confirm) {
         props.acceptVolunteer(volunteer)
+        .then(()=>{
+          props.getVolunteers()
+          .then((pendientes)=>{
+             setFiltered(pendientes);
+            })
+        })
           swal(`Se ha dado de alta a: ${volunteer.firstName} con éxito`, {
             icon: "success",
           });
@@ -258,7 +264,7 @@ const TablaVoluntarios = (props) => {
                                                     <Button disableRipple  name="CV"  key="CV" style={{ background:"lightblue",color:'white'}} onClick={()=>handleFilter('CV')}>
                                                     <CheckCircleOutlineIcon/> CV   
                                                     </Button>
-                                                    <Button disableRipple  name="LINKEDIN"  key="LINKEDIN" style={{ background:"lightred",color:'white'}} onClick={()=>handleFilter('LIN')}>
+                                                    <Button disableRipple  name="LINKEDIN"  key="LINKEDIN" style={{ background:"pink",color:'white'}} onClick={()=>handleFilter('LIN')}>
                                                     <CheckCircleOutlineIcon/> Linkedin   
                                                     </Button>
                                         </ButtonGroup>
@@ -336,7 +342,7 @@ const TablaVoluntarios = (props) => {
                                                             <FaceIcon/> Detalles   
                                                     </Button>
                                                    
-                                                    <Button style={{textTransform: 'none', background:"lightred",color:'white'}}  key={`rechazar${voluntario.id}`}  onClick={() => handleDeletion(voluntario.id)}>
+                                                    <Button style={{textTransform: 'none', background:"pink",color:'white'}}  key={`rechazar${voluntario.id}`}  onClick={() => handleDeletion(voluntario.id)}>
                                                                 <DeleteForeverIcon/> Eliminar   
                                                     </Button>
                                                    
