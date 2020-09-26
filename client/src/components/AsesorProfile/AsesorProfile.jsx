@@ -15,7 +15,11 @@ function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
 
     const [ edit, setEdit ] = useState(false);
     const [state, setState] = useState({});
-
+    const [ toggle, setToggle ] = useState ({
+        students: false,
+        classes: false,
+        grades: false
+    }) 
     const handleOnchange = (e) => {
         setState({
             ...state, [e.target.name]: e.target.value
@@ -26,6 +30,19 @@ function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
         getUserSubjects(match.params.id)
     }, [])
     console.log(user)
+   
+
+    function pestañas (e) {
+        console.log(e.target.name)
+        let defaultToggle = {
+            students: false,
+            classes: false,
+            grades: false
+        }
+        setToggle({...defaultToggle, [e.target.name] : true})
+    }
+
+   
 return(
     <div className = {style.outer}>
     <div className = {style.container}>
@@ -99,7 +116,7 @@ return(
 
         <div className = {style.cards}>
             <div className = {style.filter}>
-                <ul className = {style.items}>
+            {/* <ul className = {style.items}>
                 <Link to={`/asesores/estudiantes/${user.id}`} style={{textDecoration: 'none', color: '#836D6D'}}>
                     <li className = {history.location.pathname.includes('asesores/estudiantes') ? style.item : null}>Estudiantes</li>
                 </Link> 
@@ -107,7 +124,12 @@ return(
                     <li className = {history.location.pathname.includes('asesores/clases') ? style.item : null}>Clases</li>
                 </Link>
                     <li className = {history.location.pathname.includes('asesores/notas') ? style.item : null}>Notas</li>
-                </ul>
+                </ul> */}
+                <div className = {style.items}>
+                    <button onClick = {(e) => pestañas(e)} name = "students" className = {toggle.students ? style.itemOn : style.item} >Estudiantes</button>
+                    <button onClick = {(e) => pestañas(e)} name = "classes" className = {toggle.classes ? style.itemOn : style.item} >Clases</button>
+                    <button onClick = {(e) => pestañas(e)} name = "grades" className = {toggle.grades ? style.itemOn : style.item}  >Notas</button>
+                </div>
             </div>
             <Route exact path={`/asesores/estudiantes/${user.id}`} render={() => <AsesorStudents />} />
             <Route exact path={`/asesores/clases/${user.id}`} render={() => <AsesorClases user={user} />} /> 

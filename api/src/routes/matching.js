@@ -37,6 +37,7 @@ function findFreeinterval(arr){
         currStart = arr[i][0] 
         if (prevEnd < currStart) disponible.push([prevEnd, currStart])
     }
+    console.log(disponible)
     return disponible
 }
 
