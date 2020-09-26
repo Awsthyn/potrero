@@ -114,12 +114,19 @@ class GraficarAll extends React.Component {
           data={this.state.datos}
           options={{
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
+            legend: {
+              labels: {
+                fontColor: "black",
+                fontSize: 18,
+              },
+            },
             scales: {
               xAxes: [
                 {
                   ticks: {
                     fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 18,
                   },
                 },
               ],
@@ -129,6 +136,7 @@ class GraficarAll extends React.Component {
                     suggestedMin: 0,
                     stepSize: 2,
                     fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 18,
                   },
                 },
               ],

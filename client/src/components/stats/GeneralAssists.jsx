@@ -86,17 +86,12 @@ class generalAssists extends React.Component {
     const opciones = {
       responsive: true,
       maintainAspectRatio: true,
-      displayTitle: true,
-      displayLegend: true,
       legendPosition: "bottom",
       location: "Asistencias totales",
       legend: {
         labels: {
-          // This more specific font property overrides the global property
-          font: {
-            color: "yellow",
-          },
-          size: 100,
+          fontColor: "black",
+          fontSize: 18,
         },
       },
     };

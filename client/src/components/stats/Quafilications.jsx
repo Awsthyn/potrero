@@ -101,6 +101,7 @@ class Offers extends React.Component {
                     suggestedMin: 0,
                     stepSize: 2,
                     fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 18,
                   },
                 },
               ],
