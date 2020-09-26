@@ -1,31 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import React from "react";
 import { makeStyles } from "@material-ui/styles";
-//import estadisticas from './assets/estadisticas.png';
-//import AllStats from '../stats/AllStats';
-import MiStats from "../stats/MiStats.jsx";
-import Demands from "../stats/Demands.jsx";
-import Offers from "../stats/Offers.jsx";
-import OffersDemand from "../stats/offerDemand.jsx";
+import Assist from "../stats/GeneralAssists.jsx";
+import Advisers from "../stats/Advisers.jsx";
 import Qualifications from "../stats/Quafilications";
 import OfferWithDemand from "../stats/GraficarAll";
-import StatusVoluntary from "../stats/StatusVoluntary.jsx";
-import { useSelector, useDispatch } from "react-redux";
-import { Bar, Line, Pie } from "react-chartjs-2";
-import * as actions from "../../redux/actions/stats.js";
-import estadisticas from "./assets/estadisticas.png";
 import "./stats.css";
 
-const VIOLETA = "#492BC4";
-const VERDE = "#8CC63E";
-const NEGRO = "#333333";
-
-function imprimir(){
-    let input = window.document.getElementById("graficas");
-    document.getElementsByClassName('makeStyles-root-1')[0].style.visibility = 'hidden';
-    window.print(input);
-    document.getElementsByClassName('makeStyles-root-1')[0].style.visibility = 'visible';
+function imprimir() {
+  let input = window.document.getElementById("graficas");
+  document.getElementsByClassName("makeStyles-root-1")[0].style.visibility =
+    "hidden";
+  window.print(input);
+  document.getElementsByClassName("makeStyles-root-1")[0].style.visibility =
+    "visible";
 }
 
 const useStyles = makeStyles({
@@ -50,35 +37,57 @@ export default () => {
   const classes = useStyles();
   return (
     <div id="graficas">
-    <p><button onClick={imprimir} className="ocultoimpresion btn btn-primary float-right">PRINT</button></p>
-    <div>
-      <br></br>
-      <br></br>
-      <div>
-        <div className="stats">
-          <MiStats />
-        </div>
+      <div className="titlePotrero">
+        <h1>Fundación El Potrero</h1>
+        <img src="https://static.wixstatic.com/media/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png" />
       </div>
       <br></br>
       <br></br>
-      <div>
-        <div className="stats">
-          <StatusVoluntary />
-        </div>
-      </div>
       <br></br>
       <br></br>
       <div>
-        <div className="stats">
-          <Qualifications />
+        <div className="linkGraficos ocultoimpresion">
+          <a href="#stats1" class="btn">
+            Asistencias
+          </a>
+          <a href="#stats2" class="btn">
+            Asesores
+          </a>
+          <a href="#stats3" class="btn">
+            Promedio Notas
+          </a>
+          <a href="#stats4" class="btn">
+            Ofertas/Demandas
+          </a>
+          <button onClick={imprimir} className="btn">
+            Imprimir
+          </button>
+        </div>
+        <div>
+          <div id="stats1">
+            <Assist />
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <div id="stats2">
+            <Advisers />
+          </div>
+        </div>
+        <br></br>
+        <br></br>
+        <div>
+          <div id="stats3">
+            <Qualifications />
+          </div>
+        </div>
+        <div>
+          <div id="stats4">
+            <OfferWithDemand />
+          </div>
         </div>
       </div>
-      <div>
-        <div className="stats">
-          <OfferWithDemand />
-        </div>
-      </div>
-    </div>
     </div>
   );
 };

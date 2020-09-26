@@ -1,7 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Pie, Line, Bar } from "react-chartjs-2";
-import * as actions from "../../redux/actions/stats.js";
 import React from "react";
+import { Bar } from "react-chartjs-2";
 
 class GraficarAll extends React.Component {
   state = {
@@ -23,7 +21,6 @@ class GraficarAll extends React.Component {
   }
 
   getChartData() {
-    console.log(this.state);
 
     const nombreMatOf = [];
     const countNombreMatOf = [];
@@ -70,8 +67,6 @@ class GraficarAll extends React.Component {
       colorDemanda.push("rgba(140, 198, 62, 0.6)");
     }
 
-    console.log(colorOferta);
-
     const data = {
       //hacer map para labels
       labels: nombreMatOf,
@@ -114,7 +109,7 @@ class GraficarAll extends React.Component {
   render() {
     return (
       <div>
-        <h3>{"Ofertas/Demanda de materias: " + this.state.total}</h3>
+        <h4>{"Ofertas/Demanda de materias: " + this.state.total}</h4>
         <Bar
           type
           data={this.state.datos}

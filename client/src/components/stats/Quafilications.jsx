@@ -1,7 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Pie, Line, Bar } from "react-chartjs-2";
-import * as actions from "../../redux/actions/stats.js";
 import React from "react";
+import { Bar } from "react-chartjs-2";
 
 class Offers extends React.Component {
   state = {
@@ -78,9 +76,9 @@ class Offers extends React.Component {
     return (
       <div>
         {isNaN(this.state.total) ? (
-          <h3>Promedio notas: No existen notas</h3>
+          <h4>Promedio notas: No existen notas</h4>
         ) : (
-          <h3>"Promedio notas: " {this.state.total}</h3>
+          <h4>"Promedio notas: " {this.state.total}</h4>
         )}
 
         <Bar

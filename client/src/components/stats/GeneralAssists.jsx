@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Bar, Line, Pie } from "react-chartjs-2";
-import * as actions from "../../redux/actions/stats.js";
+import React from "react";
+import { Pie } from "react-chartjs-2";
 
-class MiStats extends React.Component {
+class generalAssists extends React.Component {
   state = {
     respuesta: [],
     dataAssistance: [],
@@ -66,7 +64,7 @@ class MiStats extends React.Component {
 
     const opciones = {
       responsive: true,
-      maintainAspectRatio: false,
+      maintainAspectRatio: true,
       displayTitle: true,
       displayLegend: true,
       legendPosition: "bottom",
@@ -85,7 +83,7 @@ class MiStats extends React.Component {
   render() {
     return (
       <div>
-        <h3>{"Asistencias generales: " + this.state.total}</h3>
+        <h4>{"Asistencias generales: " + this.state.total}</h4>
         <Pie
           data={this.state.datos}
           options={{
@@ -98,4 +96,4 @@ class MiStats extends React.Component {
   }
 }
 
-export default MiStats;
+export default generalAssists;

@@ -1,16 +1,60 @@
+@media print {
+  .ocultoimpresion,
+  .ocultoimpresion * {
+    display: none !important;
+  }
+
+  .titlePotrero, 
+  titlePotrero * {
+    display: ruby !important;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+}
+
+.linkGraficos {
+  display: flex;
+  justify-content: space-between;
+  width: 77%;
+  margin: auto;
+  margin-left: 16%;
+  margin-bottom: 5%;
+}
+
+.linkGraficos a {
+  background-color: #492bc4;
+  color: white;
+}
+
+.linkGraficos button {
+  background-color: #492bc4;
+  color: white;
+}
+
+.linkGraficos a:hover{
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white;
+}
+
+.linkGraficos button:hover{
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white;
+}
+
 .stats {
   margin: auto;
-  margin-top: 50px;
   cursor: pointer;
-  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-
-@media print{
-  .ocultoimpresion, .ocultoimpresion *{
-    display: none !important;
-  }
+.titlePotrero{
+  display: ruby;
+}
+ 
+.titlePotrero img{
+  margin-top: -9px;
 }
