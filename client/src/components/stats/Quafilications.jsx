@@ -87,12 +87,28 @@ class Offers extends React.Component {
           options={{
             responsive: true,
             maintainAspectRatio: false,
+            legend: {
+              labels: {
+                fontColor: "black",
+                fontSize: 15,
+              },
+            },
             scales: {
+              xAxes: [
+                {
+                  ticks: {
+                    fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 15,
+                  },
+                },
+              ],
               yAxes: [
                 {
                   ticks: {
                     suggestedMin: 0,
                     stepSize: 2,
+                    fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 15,
                   },
                 },
               ],

@@ -1,7 +1,7 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-class GraficarAll extends React.Component {
+class OffersWithDemand extends React.Component {
   state = {
     datos: [],
     opciones: [],
@@ -17,12 +17,12 @@ class GraficarAll extends React.Component {
       offers: respuesta.allOffer,
       totalDemands: respuesta.totalDemands,
       totalOffers: respuesta.totalOffers,
-
+      countOffers: respuesta.totalOffers,
+      countDemands: respuesta.totalDemands
     });
   }
 
   getChartData() {
-
     const nombreMatOf = [];
     const countNombreMatOf = [];
     const nombreMatDem = [];
@@ -117,16 +117,31 @@ class GraficarAll extends React.Component {
           options={{
             responsive: true,
             maintainAspectRatio: false,
+            legend: {
+              labels: {
+                fontColor: "black",
+                fontSize: 15,
+              },
+            },
             scales: {
+              xAxes: [
+                {
+                  ticks: {
+                    fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 15,
+                  },
+                },
+              ],
               yAxes: [
                 {
                   ticks: {
                     suggestedMin: 0,
                     stepSize: 2,
+                    fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 15,
                   },
                 },
               ],
-              // INTENTO DE AMPLIAR LETRA
             },
           }}
         ></Bar>
@@ -135,4 +150,4 @@ class GraficarAll extends React.Component {
   }
 }
 
-export default GraficarAll;
+export default OffersWithDemand;
