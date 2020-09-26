@@ -72,7 +72,7 @@ return(
                     
                     <div className = {style.btnContainer}>
                     <button onClick = {() => setEdit(!edit)} className={style.cancelBtn}>Cancelar</button>
-                    <button className={style.button} type="submit" onClick={() => putUser()}>Modificar</button>
+                    <button className={style.button} type="submit" onClick={() => putUser(user.id, state)}>Modificar</button>
                     </div>
                 </form>
                 </div>
@@ -91,6 +91,8 @@ return(
         </div>
     }
         </div>
+
+
 
 
         <div className = {style.cards}>
