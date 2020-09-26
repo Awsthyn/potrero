@@ -63,26 +63,20 @@ export default () => {
             Imprimir
           </button>
         </div>
-        <div>
+        <div className="stats">
           <div id="stats1">
             <Assist />
           </div>
-        </div>
-        <br></br>
-        <br></br>
-        <div>
+          <br></br>
+          <br></br>
           <div id="stats2">
             <Advisers />
           </div>
-        </div>
-        <br></br>
-        <br></br>
-        <div>
+          <br></br>
+          <br></br>
           <div id="stats3">
             <Qualifications />
           </div>
-        </div>
-        <div>
           <div id="stats4">
             <OfferWithDemand />
           </div>

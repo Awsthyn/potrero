@@ -43,12 +43,17 @@
   background-color: white;
 }
 
-.stats {
+#stats1, #stats2, #stats3, #stats4 {
   margin: auto;
   cursor: pointer;
   display: flex;
+  width: 70%;
   flex-direction: column;
   justify-content: center;
+}
+
+.stats{
+  margin-left: 3%;
 }
 
 .titlePotrero{
@@ -56,5 +61,5 @@
 }
  
 .titlePotrero img{
-  margin-top: -9px;
+  margin-top: -15px;
 }

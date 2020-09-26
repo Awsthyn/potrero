@@ -24,7 +24,7 @@ class generalAssists extends React.Component {
     this.setState({
       respuesta: respuesta,
     });
-    
+
     dataAssistance.push(respuesta.assistance);
     dataInassistance.push(respuesta.inassistance);
     dataDelay.push(respuesta.delay);
@@ -36,15 +36,36 @@ class generalAssists extends React.Component {
       dataDelay: dataDelay,
       total: respuesta.total,
     });
-  
-    this.state.promedioAsistencias = this.state.dataAssistance / this.state.total;
-    this.state.promedioInasistencias = this.state.dataInassistance / this.state.total;
+
+    this.state.promedioAsistencias =
+      this.state.dataAssistance / this.state.total;
+    this.state.promedioInasistencias =
+      this.state.dataInassistance / this.state.total;
     this.state.promedioTardanzas = this.state.dataDelay / this.state.total;
   }
 
   getChartData() {
     const datos = {
-      labels: ["Asistencias " + this.state.dataAssistance + " (" + Math.round(this.state.promedioAsistencias * 100) + "%" + ")", "Inasistencias " + this.state.dataInassistance + " (" + Math.round(this.state.promedioInasistencias * 100) + "%" + ")", "Tardanzas " + this.state.dataDelay + " (" + Math.round(this.state.dataDelay) + "%" + ")"],
+      labels: [
+        "Asistencias " +
+          this.state.dataAssistance +
+          " (" +
+          Math.round(this.state.promedioAsistencias * 100) +
+          "%" +
+          ")",
+        "Inasistencias " +
+          this.state.dataInassistance +
+          " (" +
+          Math.round(this.state.promedioInasistencias * 100) +
+          "%" +
+          ")",
+        "Tardanzas " +
+          this.state.dataDelay +
+          " (" +
+          Math.round(this.state.dataDelay) +
+          "%" +
+          ")",
+      ],
       datasets: [
         {
           label: "Asistencias totales",
@@ -69,6 +90,15 @@ class generalAssists extends React.Component {
       displayLegend: true,
       legendPosition: "bottom",
       location: "Asistencias totales",
+      legend: {
+              labels: {
+                // This more specific font property overrides the global property
+                font: {
+                  color: "yellow",
+                },
+                size: 100
+              },
+            },
     };
     this.setState({
       datos: datos,
