@@ -78,7 +78,7 @@ class Offers extends React.Component {
         {isNaN(this.state.total) ? (
           <h4>Promedio notas: No existen notas</h4>
         ) : (
-          <h4>"Promedio notas: " {this.state.total}</h4>
+          <h4>Promedio notas:  {this.state.total}</h4>
         )}
 
         <Bar
@@ -105,3 +105,11 @@ class Offers extends React.Component {
 }
 
 export default Offers;
+
+
+
+
+
+
+
+

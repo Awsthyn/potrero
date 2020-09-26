@@ -17,6 +17,7 @@ class GraficarAll extends React.Component {
       offers: respuesta.allOffer,
       totalDemands: respuesta.totalDemands,
       totalOffers: respuesta.totalOffers,
+
     });
   }
 
@@ -58,7 +59,7 @@ class GraficarAll extends React.Component {
 
     let colorOferta = [];
     let colorDemanda = [];
-    //Preparamos los colores para q se repita segun la cantidad de la longitud de los nombres de materia
+    //Preparamos los colores para que se repita según la cantidad de la longitud de los nombres de materia
     for (let i = 0; i < nombreMatOf.length; i++) {
       colorOferta.push("rgba(73, 43, 196, 0.6)");
     }
@@ -68,11 +69,10 @@ class GraficarAll extends React.Component {
     }
 
     const data = {
-      //hacer map para labels
       labels: nombreMatOf,
       datasets: [
         {
-          label: "Oferta de materias",
+          label: "Oferta de materias " + this.state.countOffers,
           data: countNombreMatOf,
           fill: false,
           backgroundColor: colorOferta,
@@ -80,7 +80,7 @@ class GraficarAll extends React.Component {
           borderWidth: 1,
         },
         {
-          label: "Demanda de materias",
+          label: "Demanda de materias " + this.state.countDemands,
           data: countNombreMatDem,
           fill: false,
           backgroundColor: colorDemanda,
@@ -88,6 +88,7 @@ class GraficarAll extends React.Component {
         },
       ],
     };
+
     const opciones = {
       responsive: true,
       maintainAspectRatio: false,
@@ -109,7 +110,7 @@ class GraficarAll extends React.Component {
   render() {
     return (
       <div>
-        <h4>{"Ofertas/Demanda de materias: " + this.state.total}</h4>
+        <h4>Ofertas y demandas de materias</h4>
         <Bar
           type
           data={this.state.datos}
