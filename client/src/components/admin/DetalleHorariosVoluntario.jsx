@@ -10,13 +10,15 @@ const VERDE = '#8CC63E';
 const NEGRO = '#333333';
 
 function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
-    const days = ['', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
+    const days = ['GTM-3', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
     const timetable = ['08:00', '09:00', '10:00', '11:00', '12:00','13:00', 
     '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00']
 
     useEffect(() => {
         getUserSchedule(id)
-    }, [])
+    }, []);
+
+    
 
     return (
         <div className={style.container}>
@@ -31,11 +33,12 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                             timetable.map(time => {
                                 return(
                                     <div className={style.horarios}>
-                                        <div>1</div>
-                                        <div>2</div>
-                                        <div>3</div>
-                                        <div>4</div>
-                                        <div>5</div>
+                                        {schedule.userSchedules && schedule.userSchedules.forEach(sch => console.log(sch))}
+                                        <div className={style.boxHorario}></div>
+                                        <div className={style.boxHorario}></div>
+                                        <div className={style.boxHorario}></div>
+                                        <div className={style.boxHorario}></div>
+                                        <div className={style.boxHorario}></div>
                                     </div>
                                 )
                             })
