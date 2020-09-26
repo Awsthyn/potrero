@@ -12,6 +12,7 @@ function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
 
     const [ edit, setEdit ] = useState(false);
     const [state, setState] = useState({});
+    const [perfil, setPerfil] = useState(false);
 
     const handleOnchange = (e) => {
         setState({
@@ -49,7 +50,7 @@ return(
         
 
         <div className = {style.buttons}>
-        <i className={`fas fa-user ${style.actions}`} ></i>
+        <i className={`fas fa-user ${style.actions}`} onClick={() => setPerfil(!perfil)}></i>
         <i className={`far fa-calendar-alt ${style.actions}`}></i>
         <i className={`fab fa-wpforms ${style.actions}`}></i>
         <i className={`fas fa-envelope ${style.actions}`}></i>
@@ -83,6 +84,7 @@ return(
             {subjects && subjects.map(subject => 
             <p className = {style.subjects}>{subject}</p>
           )}
+          
             {/* <p className = {style.subjects}>Matemáticas</p>
             <p className = {style.subjects}>Lengua y Literatura</p>
             <p className = {style.subjects}>Matemáticas</p>
@@ -90,8 +92,25 @@ return(
         </div>
         </div>
     }
+    {perfil ?   
+        <div className = {style.edit}>
+        <p className = {style.asesorinfo}>Información del Asesor</p>
+                <form className={style.formContainer}>
+                     
+                        <div>
+                            <p className = {style.asesorinfo}>Nombre: {user.firstName}</p>
+                            <p className = {style.asesorinfo}>Apellido: {user.lastName}</p>
+                            <p className = {style.asesorinfo}>Fecha de nacimiento: {user.birthday}</p>
+                            <p className = {style.asesorinfo}>Telefono: {user.phone}</p>
+                            <p className = {style.asesorinfo}>E-mail: {user.email}</p>
+                        </div>
+                </form>
+                </div>
+                :  null
+                
+    }
         </div>
-
+    
 
 
 
