@@ -113,7 +113,7 @@ class generalAssists extends React.Component {
           data={this.state.datos}
           options={{
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: false, 
           }}
         ></Pie>
       </div>
