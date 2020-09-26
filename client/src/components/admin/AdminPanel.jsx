@@ -16,35 +16,16 @@ import { Bar, Line, Pie } from "react-chartjs-2";
 import * as actions from "../../redux/actions/stats.js";
 import estadisticas from "./assets/estadisticas.png";
 import "./stats.css";
-import Button from '@material-ui/core/Button';
 
 const VIOLETA = "#492BC4";
 const VERDE = "#8CC63E";
 const NEGRO = "#333333";
 
-function closePrint () {
-  document.body.removeChild(this.__container__);
-}
-
-function setPrint () {
-  this.contentWindow.__container__ = this;
-  this.contentWindow.onbeforeunload = closePrint;
-  this.contentWindow.onafterprint = closePrint;
-  this.contentWindow.focus(); // Required for IE
-  this.contentWindow.print();
-}
-
-function printPage (sURL) {
-  var oHiddFrame = document.createElement("iframe");
-  oHiddFrame.onload = setPrint;
-  oHiddFrame.style.position = "fixed";
-  oHiddFrame.style.right = "0";
-  oHiddFrame.style.bottom = "0";
-  oHiddFrame.style.width = "0";
-  oHiddFrame.style.height = "0";
-  oHiddFrame.style.border = "0";
-  oHiddFrame.src = sURL;
-  document.body.appendChild(oHiddFrame);
+function imprimir(){
+    let input = window.document.getElementById("graficas");
+    document.getElementsByClassName('makeStyles-root-1')[0].style.visibility = 'hidden';
+    window.print(input);
+    document.getElementsByClassName('makeStyles-root-1')[0].style.visibility = 'visible';
 }
 
 const useStyles = makeStyles({
@@ -64,12 +45,13 @@ const useStyles = makeStyles({
     color: "#333333",
   },
 });
-//<img className = {classes.img} src = {estadisticas} alt = ""/> <h1 className= {classes.font}>Asistencia de alumnos</h1>
+
 export default () => {
   const classes = useStyles();
   return (
     <div id="graficas">
-    <div className={classes.root}>
+    <p><button onClick={imprimir} className="ocultoimpresion btn btn-primary float-right">PRINT</button></p>
+    <div>
       <br></br>
       <br></br>
       <div>
@@ -97,10 +79,6 @@ export default () => {
         </div>
       </div>
     </div>
-    //()=>window.print()}
-    <p><button onClick={() => window.print()} className="ocultoimpresion">PRINT</button></p>
-    <elemento className="oculto-impresion">Esto no aparece en la impresión pero sí en la página web</elemento>
-
     </div>
   );
 };
