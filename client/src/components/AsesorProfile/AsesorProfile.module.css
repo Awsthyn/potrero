@@ -209,7 +209,7 @@
 
     .subjectsContainer{
         margin-left: -5px;
-        width: 500px;
+        width: 118%;
         display: flex;
         flex-wrap: wrap;
         margin-top: 0px;
@@ -220,8 +220,8 @@
     white-space: nowrap;
     overflow: hidden;
     font-size: 14px;
-    min-width: 135px;
-    max-width: 135px;
+    min-width: 27%;
+    max-width: 27%;
     color: white;
     margin: 5px 5px;
     padding: 12px 15px;
@@ -237,7 +237,7 @@
 
     .items {
         color: #6d6d6d;
-        padding: 0px 7px 5px 30px;
+        padding: 0px 0px 5px 30px;
         font-size: 16px;
         font-weight: 500;
         display: flex;
@@ -247,15 +247,51 @@
     }
 
     .item {
+        background: none;
+        outline: 0 !important;
+        color: inherit;
+        border: none;
         padding-right: 20px;
         margin-bottom: -9px;
         border-bottom: 4px solid #8CC63E;
     }
 
+    .item {
+        background: none;
+        outline: 0 !important;
+        color: inherit;
+        border: none;
+        padding-right: 20px;
+        margin-bottom: -5px;
+        
+    }
+
+    .itemOn {
+        background: none;
+        outline: 0 !important;
+        color: inherit;
+        border: none;
+        padding-right: 20px;
+        margin-bottom: -9px;
+        border-bottom: 4px solid #8CC63E;
+    }
+
+
   .item:hover {
       cursor: pointer;
   }
 
+.calendarContainer{
+    display: grid;
+    width: 500px;
+    grid-template-columns: repeat(6, 1fr);
+    margin: 10px;
+    /* border: 1px solid black; */
+}
+
+.column{
+    border: 1px solid black;
+}
   .sendEmailTrue {
     font-size: 16px;
     font-weight: 300;

@@ -22,7 +22,8 @@ import AdminRoute from './AdminRoute.js';
 import StudentCard from './components/student/StudentCard/StudentCard';
 import AsesorProfile from './components/AsesorProfile/AsesorProfile';
 import DataSheet from './components/AsesorProfile/dataSheet/DataSheet';
-import ClassAssignation from "./components/student/ClassAssignation"
+import ClassAssignation from "./components/student/classes/ClassAssignation"
+import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 
 class App extends React.Component {
 
@@ -79,6 +80,8 @@ class App extends React.Component {
           )}
         />
         <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
+        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
+
 
 
         <Route exact path='/usuario/login' component={Login} />
@@ -91,7 +94,7 @@ class App extends React.Component {
         component = {StudentCard} />
 
 		<Route
-		path = "/asesor/test/:id"
+		exact path = {[ "/asesores/estudiantes/:id", "/asesores/clases/:id", "/asesores/notas/:id"]}
 		component = {AsesorProfile}/>
     <Route path="/datasheet/test" component={DataSheet}/> 
 		</div>

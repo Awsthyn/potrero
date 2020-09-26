@@ -8,7 +8,7 @@ import {connect} from 'react-redux'
 // !!! REOCORDAR QUE FALTA EL USERDID
 
 function DataSheet({addDataSheet}){
-   const [estado, setEstado] = useState({})
+   const [estado, setEstado] = useState({classId : 1})
    let ausente = useRef(null); let presente = useRef(null); let tardanza = useRef(null)
    let si = useRef(null); let no = useRef(null)
    let yes = useRef(null); let nop = useRef(null)
