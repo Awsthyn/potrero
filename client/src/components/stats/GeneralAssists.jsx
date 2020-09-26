@@ -91,14 +91,14 @@ class generalAssists extends React.Component {
       legendPosition: "bottom",
       location: "Asistencias totales",
       legend: {
-              labels: {
-                // This more specific font property overrides the global property
-                font: {
-                  color: "yellow",
-                },
-                size: 100
-              },
-            },
+        labels: {
+          // This more specific font property overrides the global property
+          font: {
+            color: "yellow",
+          },
+          size: 100,
+        },
+      },
     };
     this.setState({
       datos: datos,
@@ -118,7 +118,14 @@ class generalAssists extends React.Component {
           data={this.state.datos}
           options={{
             responsive: true,
-            maintainAspectRatio: false, 
+            maintainAspectRatio: false,
+            legend: {
+              labels: {
+                // This more specific font property overrides the global property
+                fontColor: "black",
+                fontSize: 20
+              },
+            },
           }}
         ></Pie>
       </div>

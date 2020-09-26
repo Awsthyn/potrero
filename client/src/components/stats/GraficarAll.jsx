@@ -21,7 +21,6 @@ class GraficarAll extends React.Component {
   }
 
   getChartData() {
-
     const nombreMatOf = [];
     const countNombreMatOf = [];
     const nombreMatDem = [];
@@ -117,15 +116,22 @@ class GraficarAll extends React.Component {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
+              xAxes: [
+                {
+                  ticks: {
+                    fontColor: "rgba(0, 0, 0, 1)",
+                  },
+                },
+              ],
               yAxes: [
                 {
                   ticks: {
                     suggestedMin: 0,
                     stepSize: 2,
+                    fontColor: "rgba(0, 0, 0, 1)",
                   },
                 },
               ],
-              // INTENTO DE AMPLIAR LETRA
             },
           }}
         ></Bar>
