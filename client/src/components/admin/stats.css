@@ -7,3 +7,10 @@
   flex-direction: column;
   justify-content: center;
 }
+
+
+@media print{
+  .ocultoimpresion, .ocultoimpresion *{
+    display: none !important;
+  }
+}
