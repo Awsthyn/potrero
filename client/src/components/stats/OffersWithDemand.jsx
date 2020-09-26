@@ -1,7 +1,7 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-class GraficarAll extends React.Component {
+class OffersWithDemand extends React.Component {
   state = {
     datos: [],
     opciones: [],
@@ -118,7 +118,7 @@ class GraficarAll extends React.Component {
             legend: {
               labels: {
                 fontColor: "black",
-                fontSize: 18,
+                fontSize: 15,
               },
             },
             scales: {
@@ -126,7 +126,7 @@ class GraficarAll extends React.Component {
                 {
                   ticks: {
                     fontColor: "rgba(0, 0, 0, 1)",
-                    fontSize: 18,
+                    fontSize: 15,
                   },
                 },
               ],
@@ -136,7 +136,7 @@ class GraficarAll extends React.Component {
                     suggestedMin: 0,
                     stepSize: 2,
                     fontColor: "rgba(0, 0, 0, 1)",
-                    fontSize: 18,
+                    fontSize: 15,
                   },
                 },
               ],
@@ -148,4 +148,4 @@ class GraficarAll extends React.Component {
   }
 }
 
-export default GraficarAll;
+export default OffersWithDemand;

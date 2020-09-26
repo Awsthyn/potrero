@@ -49,6 +49,12 @@ class Advisers extends React.Component {
       displayLegend: true,
       legendPosition: "bottom",
       location: "Asistencias totales",
+      legend: {
+        labels: {
+          fontColor: "black",
+          fontSize: 15,
+        },
+      },
     };
     this.setState({
       datos: datos,
@@ -69,6 +75,13 @@ class Advisers extends React.Component {
           options={{
             responsive: true,
             maintainAspectRatio: false,
+            legend: {
+              labels: {
+                // This more specific font property overrides the global property
+                fontColor: "black",
+                fontSize: 15
+              },
+            },
           }}
         ></Doughnut>
       </div>

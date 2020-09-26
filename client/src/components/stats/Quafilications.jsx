@@ -78,7 +78,7 @@ class Offers extends React.Component {
         {isNaN(this.state.total) ? (
           <h4>Promedio notas: No existen notas</h4>
         ) : (
-          <h4>"Promedio notas: " {this.state.total}</h4>
+          <h4>Promedio notas: {this.state.total}</h4>
         )}
 
         <Bar
@@ -87,11 +87,18 @@ class Offers extends React.Component {
           options={{
             responsive: true,
             maintainAspectRatio: false,
+            legend: {
+              labels: {
+                fontColor: "black",
+                fontSize: 15,
+              },
+            },
             scales: {
               xAxes: [
                 {
                   ticks: {
                     fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 15,
                   },
                 },
               ],
@@ -101,7 +108,7 @@ class Offers extends React.Component {
                     suggestedMin: 0,
                     stepSize: 2,
                     fontColor: "rgba(0, 0, 0, 1)",
-                    fontSize: 18,
+                    fontSize: 15,
                   },
                 },
               ],

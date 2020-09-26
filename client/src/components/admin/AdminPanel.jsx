@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import Assist from "../stats/GeneralAssists.jsx";
 import Advisers from "../stats/Advisers.jsx";
 import Qualifications from "../stats/Quafilications";
-import OfferWithDemand from "../stats/GraficarAll";
+import OfferWithDemand from "../stats/OffersWithDemand";
 import "./stats.css";
 
 function imprimir() {
@@ -69,14 +69,19 @@ export default () => {
           </div>
           <br></br>
           <br></br>
+          <br></br>
           <div id="stats2">
             <Advisers />
           </div>
           <br></br>
           <br></br>
+          <br></br>
           <div id="stats3">
             <Qualifications />
           </div>
+          <br></br>
+          <br></br>
+          <br></br>
           <div id="stats4">
             <OfferWithDemand />
           </div>

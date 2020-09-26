@@ -91,7 +91,7 @@ class generalAssists extends React.Component {
       legend: {
         labels: {
           fontColor: "black",
-          fontSize: 18,
+          fontSize: 15,
         },
       },
     };
@@ -118,7 +118,7 @@ class generalAssists extends React.Component {
               labels: {
                 // This more specific font property overrides the global property
                 fontColor: "black",
-                fontSize: 20
+                fontSize: 15
               },
             },
           }}
