@@ -57,7 +57,7 @@ const {
 //BelongsTo(...) -> Escribe el id referente en la entidad entre ()
 
 //CLASE
-Class.belongsTo(DataSheet);
+Class.hasOne(DataSheet);
 Class.belongsTo(User);
 Class.belongsTo(Student);
 Class.belongsTo(Subject);
@@ -105,7 +105,7 @@ User.hasMany(UserSchedule);
 User.hasMany(Class);
 
 //CALIFICACION POR CLASE
-DataSheet.hasOne(Class);
+DataSheet.belongsTo(Class);
 
 //HORARIO ALUMNO
 StudentSchedule.belongsTo(Student);
