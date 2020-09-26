@@ -21,7 +21,8 @@ import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
 import StudentCard from './components/student/StudentCard/StudentCard';
 import AsesorProfile from './components/AsesorProfile/AsesorProfile';
-import ClassAssignation from "./components/student/ClassAssignation"
+import ClassAssignation from "./components/student/classes/ClassAssignation"
+import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 
 class App extends React.Component {
 
@@ -70,6 +71,8 @@ class App extends React.Component {
           )}
         />
         <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
+        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
+
 
 
         <Route exact path='/usuario/login' component={Login} />
