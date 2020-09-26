@@ -116,19 +116,31 @@ class GraficarAll extends React.Component {
           options={{
             responsive: true,
             maintainAspectRatio: true,
+            legend: {
+              labels: {
+                fontColor: "black",
+                fontSize: 18,
+              },
+            },
             scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    suggestedMin: 0,
-                    stepSize: 2,
+                yAxes: [
+                  {
+                    ticks: {
+                      suggestedMin: 0,
+                      stepSize: 2,
+                      fontSize: 18,
+                    },
                   },
-                },
-              ],
-              // INTENTO DE AMPLIAR LETRA
-              xAxes: [{
-                fontSize: 40
-              }]
+                ],
+                xAxes: [
+                  {
+                    ticks: {
+                      suggestedMin: 0,
+                      stepSize: 2,
+                      fontSize: 18,
+                    },
+                  },
+                ],
             },
           }}
         ></Bar>

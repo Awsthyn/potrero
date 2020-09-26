@@ -93,6 +93,16 @@ class Offers extends React.Component {
                   ticks: {
                     suggestedMin: 0,
                     stepSize: 2,
+                    fontSize: 18,
+                  },
+                },
+              ],
+              xAxes: [
+                {
+                  ticks: {
+                    suggestedMin: 0,
+                    stepSize: 2,
+                    fontSize: 18,
                   },
                 },
               ],
