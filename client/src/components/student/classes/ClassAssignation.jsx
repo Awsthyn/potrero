@@ -1,22 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import Card from "./ClassAssignationCard"
-import { getMatchingSchedules } from '../../redux/actions/class';
+import CardParent from "./ClassAssignationChild"
+import { getMatchingSchedules } from '../../../redux/actions/class';
 
 
 
 export const ClassAssignation = ({getMatchingSchedules, matchingSchedule}) => {
+    const [checked, setChecked] = useState();
+
     useEffect(() => {
         getMatchingSchedules(1,5)
     }, [getMatchingSchedules])
+    
+    const onClick = (checked) => {
+        //setChecked(checked);
+        //onChange(subject, checked);
+    }
     return (
         <div>
             <h1>Horarios disponibles para asignar</h1>
             <div className="d-flex flex-wrap flex-row">
             {matchingSchedule.length > 0 ? 
-            matchingSchedule.map((e,i) => <Card key={i} option={e} id={i} />) 
+            matchingSchedule.map((e,i) => <CardParent onClick={onClick} key={i} option={e} id={i} />) 
             : null}
-            </div>
+            </div>    
         </div>
     )
 }
