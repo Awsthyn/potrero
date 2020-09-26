@@ -10,7 +10,23 @@ export default function AsesorProfile () {
     let subjects = ['Matemáticas', 'Lengua y Literatura', 'Ciencias Sociales', 'Ciencias Naturales', 'Inglés', 'Formación Ética y Ciudadana' ]
 
     const [ edit, setEdit ] = useState(false);
+    const [ toggle, setToggle ] = useState ({
+        students: false,
+        classes: false,
+        grades: false
+    }) 
 
+    function pestañas (e) {
+        console.log(e.target.name)
+        let defaultToggle = {
+            students: false,
+            classes: false,
+            grades: false
+        }
+        setToggle({...defaultToggle, [e.target.name] : true})
+    }
+
+   
 return(
     <div className = {style.outer}>
     <div className = {style.container}>
@@ -84,11 +100,11 @@ return(
 
         <div className = {style.cards}>
             <div className = {style.filter}>
-                <ul className = {style.items}>
-                    <li className = {style.item}>Estudiantes</li>
-                    <li >Clases</li>
-                    <li >Notas</li>
-                </ul>
+                <div className = {style.items}>
+                    <button onClick = {(e) => pestañas(e)} name = "students" className = {toggle.students ? style.itemOn : style.item} >Estudiantes</button>
+                    <button onClick = {(e) => pestañas(e)} name = "classes" className = {toggle.classes ? style.itemOn : style.item} >Clases</button>
+                    <button onClick = {(e) => pestañas(e)} name = "grades" className = {toggle.grades ? style.itemOn : style.item}  >Notas</button>
+                </div>
             </div>
             
             <AsesorStudents />
