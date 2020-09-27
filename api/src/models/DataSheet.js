@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
       },
     },
     assistance: {
-      type: DataTypes.ENUM("ausente", "tardanza", "presente"),
+      type: DataTypes.ENUM("justificada", "no justificada", "tardanza", "presente"),
       allowNull: false,
     },
     internetConnection: {
