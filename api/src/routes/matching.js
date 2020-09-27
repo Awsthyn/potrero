@@ -9,8 +9,9 @@ server.get('/:studentId', (req, res) => {
     .then(data => Promise.all(data.map(e => matching(req.params.studentId, e.subjectId))))
     .then(data => {
         
-        let cleanData = data.filter(e => e.length > 0)
-        res.json(cleanData)})
+    let cleanData = data.filter(e => e.length > 0)
+    
+    res.json(cleanData)})
    
    
 })

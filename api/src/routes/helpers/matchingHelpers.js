@@ -182,10 +182,10 @@ function matching(studentId, subjectId){
 
                     truthArray.push(a === b) 
                     })
-                    truthArray.includes(true) ? null : disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay })
+                    truthArray.includes(true) ? null : disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay})
                 }
 
-                else disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay })                
+                else disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay})                
             })
             return disponible.sort(sortByDay)})
             .catch(err => console.log(err))  
