@@ -124,12 +124,7 @@ TablePaginationActions.propTypes = {
 
 
 
-// table { border-collapse: separate; }
-// td { border: solid 1px #000; }
-// tr:first-child td:first-child { border-top-left-radius: 10px; }
-// tr:first-child td:last-child { border-top-right-radius: 10px; }
-// tr:last-child td:first-child { border-bottom-left-radius: 10px; }
-// tr:last-child td:last-child { border-bottom-right-radius: 10px; }
+
 
 const useStyles = makeStyles({
   table: {
@@ -336,14 +331,14 @@ const TablaVoluntarios = (props) => {
                                         <ButtonGroup variant="contained"  aria-label="contained button group" key={`detalles${voluntario.id}`}>
                                                    
                                                    <Button style={{ textTransform: 'none',background:"lightgreen",color:'white',}} key={`aceptar${voluntario.id}`}  onClick={() => handleStatusChange(voluntario)}>
-                                                                <CheckCircleIcon/> Aprobar 
+                                                                <CheckCircleIcon/>  
                                                     </Button>
                                                     <Button  style={{textTransform: 'none', background:"lightblue",color:'white'}} key={`detalles${voluntario.id}`}  onClick={() => history.push(`/admin/voluntarios/${voluntario.id}`)}>
                                                             <FaceIcon/> Detalles   
                                                     </Button>
                                                    
                                                     <Button style={{textTransform: 'none', background:"pink",color:'white'}}  key={`rechazar${voluntario.id}`}  onClick={() => handleDeletion(voluntario.id)}>
-                                                                <DeleteForeverIcon/> Eliminar   
+                                                                <DeleteForeverIcon/> 
                                                     </Button>
                                                    
                                         </ButtonGroup>

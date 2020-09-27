@@ -29,7 +29,7 @@ class Demands extends React.Component {
       demOffer.push(nombre[0]);
     });
     const countdemOffer = [];
-    if(this.state.demand.length > 0){
+    if(this.state.demand && this.state.demand.length > 0){
       for (let i = 0; i < this.state.demand.length; i++) {
         for (const property in this.state.demand[i]) {
           countdemOffer.push(this.state.demand[i][property]);
