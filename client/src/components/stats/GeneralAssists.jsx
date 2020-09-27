@@ -1,5 +1,7 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
+import { Link } from "react-router-dom";
+import GenAsDet from "./printDetail/GeneralAssistsDetail.jsx";
 
 class generalAssists extends React.Component {
   state = {
@@ -26,7 +28,9 @@ class generalAssists extends React.Component {
     let dataDelay = [];
     this.setState({
       respuesta: respuesta,
+      info: respuesta.info,
     });
+
     dataJustificada.push(respuesta.haveJustify);
     dataNoJustificada.push(respuesta.noJustify);
     dataAssistance.push(respuesta.assistance);
@@ -42,17 +46,15 @@ class generalAssists extends React.Component {
     });
 
     this.state.promedioAsistencias =
-    this.state.dataAssistance / this.state.total;  
+      this.state.dataAssistance / this.state.total;
 
-    this.state.promedioInjustificadas = 
-    this.state.dataNoJustificada / this.state.total;
+    this.state.promedioInjustificadas =
+      this.state.dataNoJustificada / this.state.total;
 
-    this.state.promedioJustificadas = 
-    this.state.dataJustificada / this.state.total;
+    this.state.promedioJustificadas =
+      this.state.dataJustificada / this.state.total;
 
-    this.state.promedioTardanzas = 
-    this.state.dataDelay / this.state.total;
-
+    this.state.promedioTardanzas = this.state.dataDelay / this.state.total;
   }
 
   getChartData() {
@@ -70,11 +72,11 @@ class generalAssists extends React.Component {
           Math.round(this.state.promedioJustificadas * 100) +
           "%" +
           ")",
-          "Faltas injustificadas " + 
-          this.state.dataNoJustificada + 
-          " (" + 
-          Math.round(this.state.promedioInjustificadas * 100) + 
-          "%" + 
+        "Faltas injustificadas " +
+          this.state.dataNoJustificada +
+          " (" +
+          Math.round(this.state.promedioInjustificadas * 100) +
+          "%" +
           ")",
         "Tardanzas " +
           this.state.dataDelay +
@@ -125,6 +127,10 @@ class generalAssists extends React.Component {
     await this.getChartData();
   }
   render() {
+    const enviarDetalles = {
+      pathname: "/admin/detail",
+      infoGrafico: this.state.info,
+    };
     return (
       <div>
         <h4>{"Asistencias generales: " + this.state.total}</h4>
@@ -136,11 +142,12 @@ class generalAssists extends React.Component {
             legend: {
               labels: {
                 fontColor: "black",
-                fontSize: 15
+                fontSize: 15,
               },
             },
           }}
         ></Pie>
+        <Link to={enviarDetalles}><button className="btn btn-primary">Enviame</button></Link>
       </div>
     );
   }

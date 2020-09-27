@@ -12,12 +12,25 @@ const {
 server.get("/assistances", (req, res) => {
   DataSheet.findAll({
     attributes: {
-      exclude: ["createdAt", "updatedAt"],
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "concentration",
+        "companionName",
+        "internetConnection",
+        "performance",
+        "someoneAccompaniesHim",
+        "comments",
+        "duration",
+        "attitude",
+        "hadExam",
+        "qualification",
+      ],
     },
     include: {
       model: Class,
       attributes: {
-        exclude: ["updatedAt", "userId", "studentId", "subjectId"],
+        exclude: ["updatedAt", "createdAt", "userId", "studentId", "subjectId"],
       },
       include: {
         model: Student,
@@ -25,10 +38,12 @@ server.get("/assistances", (req, res) => {
           exclude: [
             "createdAt",
             "updatedAt",
-            "tutor",
-            "difficulty",
-            "weakness",
-            "strengths",
+            "phone",
+            "email",
+            "tutorFirstName",
+            "tutorLastName",
+            "tutorPhone",
+            "tutorEmail",
             "interests",
             "motivations",
             "isActive",
@@ -43,7 +58,6 @@ server.get("/assistances", (req, res) => {
       let countNoJustify = [];
       let countHaveJustify = [];
       let moreDetailsOfNoJustify = [];
-
       allClasses.forEach((element) => {
         if (element.assistance === "presente") {
           countAssistance.push(element.assistance);
@@ -72,6 +86,7 @@ server.get("/assistances", (req, res) => {
         haveJustify: countHaveJustify.length,
         delay: countDelay.length,
         total: totalAccount,
+        info: allClasses,
       };
       res.json(countTotalAssistance);
     })

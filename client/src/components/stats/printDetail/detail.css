@@ -1,0 +1,7 @@
+.printDetail{
+    margin-top:100px
+}
+
+.printDetail div a button{
+    display: none;
+}
