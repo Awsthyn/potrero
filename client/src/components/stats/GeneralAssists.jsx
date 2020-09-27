@@ -5,43 +5,55 @@ class generalAssists extends React.Component {
   state = {
     respuesta: [],
     dataAssistance: [],
-    dataInassistance: [],
+    dataNoJustificada: [],
+    dataJustificada: [],
     dataDelay: [],
     datos: [],
     opciones: [],
     total: 0,
+    promedioJustificadas: 0,
+    promedioInjustificadas: 0,
     promedioAsistencias: 0,
-    promedioInasistencias: 0,
     promedioTardanzas: 0,
   };
 
   async peticion() {
     let peticion = await fetch("http://localhost:3001/stats/assistances");
     let respuesta = await peticion.json();
+    console.log(respuesta)
     let dataAssistance = [];
-    let dataInassistance = [];
+    let dataNoJustificada = [];
+    let dataJustificada = [];
     let dataDelay = [];
     this.setState({
       respuesta: respuesta,
     });
-
+    dataJustificada.push(respuesta.haveJustify);
+    dataNoJustificada.push(respuesta.noJustify);
     dataAssistance.push(respuesta.assistance);
-    dataInassistance.push(respuesta.inassistance);
     dataDelay.push(respuesta.delay);
 
     this.setState({
       respuesta: respuesta,
       dataAssistance: dataAssistance,
-      dataInassistance: dataInassistance,
+      dataJustificada: respuesta.haveJustify,
+      dataNoJustificada: respuesta.noJustify,
       dataDelay: dataDelay,
       total: respuesta.total,
     });
 
     this.state.promedioAsistencias =
-      this.state.dataAssistance / this.state.total;
-    this.state.promedioInasistencias =
-      this.state.dataInassistance / this.state.total;
-    this.state.promedioTardanzas = this.state.dataDelay / this.state.total;
+    this.state.dataAssistance / this.state.total;  
+
+    this.state.promedioInjustificadas = 
+    this.state.dataNoJustificada / this.state.total;
+
+    this.state.promedioJustificadas = 
+    this.state.dataJustificada / this.state.total;
+
+    this.state.promedioTardanzas = 
+    this.state.dataDelay / this.state.total;
+
   }
 
   getChartData() {
@@ -53,11 +65,17 @@ class generalAssists extends React.Component {
           Math.round(this.state.promedioAsistencias * 100) +
           "%" +
           ")",
-        "Inasistencias " +
-          this.state.dataInassistance +
+        "Faltas justificadas " +
+          this.state.dataJustificada +
           " (" +
-          Math.round(this.state.promedioInasistencias * 100) +
+          Math.round(this.state.promedioJustificadas * 100) +
           "%" +
+          ")",
+          "Faltas injustificadas " + 
+          this.state.dataNoJustificada + 
+          " (" + 
+          Math.round(this.state.promedioInjustificadas * 100) + 
+          "%" + 
           ")",
         "Tardanzas " +
           this.state.dataDelay +
@@ -71,13 +89,15 @@ class generalAssists extends React.Component {
           label: "Asistencias totales",
           data: [
             this.state.respuesta.assistance,
-            this.state.respuesta.inassistance,
+            this.state.respuesta.haveJustify,
+            this.state.respuesta.noJustify,
             this.state.respuesta.delay,
           ],
           backgroundColor: [
             "rgba(73, 43, 196, 0.6)",
-            "rgba(140, 198, 62, 0.6)",
             "rgba(71, 165, 214, 0.6)",
+            "rgba(166, 40, 40, 0.6)",
+            "rgba(140, 198, 62, 0.6)",
           ],
         },
       ],
@@ -116,7 +136,6 @@ class generalAssists extends React.Component {
             maintainAspectRatio: false,
             legend: {
               labels: {
-                // This more specific font property overrides the global property
                 fontColor: "black",
                 fontSize: 15
               },

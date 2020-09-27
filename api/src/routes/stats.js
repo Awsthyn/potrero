@@ -15,27 +15,66 @@ server.get("/assistances", (req, res) => {
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
+    include: {
+      model: Class,
+      attributes: {
+        exclude: ["updatedAt", "userId", "studentId", "subjectId"]
+      },
+      include: {
+      model: Student,
+      attributes: {
+        exclude: [
+          "createdAt",
+          "updatedAt",
+          "tutor",
+          "difficulty",
+          "weakness",
+          "strengths",
+          "interests",
+          "motivations",
+          "isActive",
+        ],
+        }
+      }
+    }
   })
     .then((allClasses) => {
       let countAssistance = [];
-      let countInassistance = [];
       let countDelay = [];
+      let countNoJustify = [];
+      let countHaveJustify = [];
+      let moreDetailsOfNoJustify = [];
+
+     
 
       allClasses.forEach((element) => {
         if (element.assistance === "presente") {
           countAssistance.push(element.assistance);
-        } else if (element.assistance === "ausente") {
-          countInassistance.push(element.assistance);
-        } else if (element.assistance === "tardanza") {
+        } 
+        else if (element.assistance === "no justificada") {
+          moreDetailsOfNoJustify.push({
+            [element.class.nameWeekDay] : element.class.student,
+             fecha: element.class.createdAt
+          })
+          countNoJustify.push(element.class);
+        }
+        else if (element.assistance === "justificada") {
+          countHaveJustify.push(element.assistance);
+        }
+        else if (element.assistance === "tardanza") {
           countDelay.push(element.assistance);
         }
       });
+                console.log(moreDetailsOfNoJustify)
+      let totalAccount = countAssistance.length + countNoJustify.length + countHaveJustify.length + countDelay.length;
+
       let countTotalAssistance = {
+        noJustifyDetails: moreDetailsOfNoJustify,
         assistance: countAssistance.length,
-        inassistance: countInassistance.length,
+        noJustify: countNoJustify.length,
+        haveJustify: countHaveJustify.length,
         delay: countDelay.length,
-        total:
-          countAssistance.length + countInassistance.length + countDelay.length,
+        total: totalAccount
       };
       res.json(countTotalAssistance);
     })
