@@ -1,7 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Pie, Line, Bar } from "react-chartjs-2";
-import * as actions from "../../redux/actions/stats.js";
 import React from "react";
+import { Bar } from "react-chartjs-2";
 
 class Offers extends React.Component {
   state = {
@@ -11,11 +9,12 @@ class Offers extends React.Component {
     var peticion = await fetch("http://localhost:3001/stats/qualification");
     var notas = await peticion.json();
 
-    let pro = notas.length > 0 ? notas.reduce((acc, currValue) => acc + currValue) : 0;
+    let pro =
+      notas.length > 0 ? notas.reduce((acc, currValue) => acc + currValue) : 0;
 
     this.setState({
       notas: notas,
-      total: Math.round(pro / notas.length)
+      total: Math.round(pro / notas.length),
     });
   }
 
@@ -35,11 +34,11 @@ class Offers extends React.Component {
 
     const datos = {
       //hacer map para labels
-      labels: ["Menor nota", "Promedio", "Mayor nota"],
+      labels: ["Menor nota", "Mayor nota", "Promedio"],
       datasets: [
         {
           label: "Notas",
-          data: [Math.round(minimo), Math.round(promedio), Math.round(maximo)],
+          data: [Math.round(minimo), Math.round(maximo), Math.round(promedio)],
           fill: false,
           backgroundColor: [
             "rgba(73, 43, 196, 0.6)",
@@ -71,32 +70,49 @@ class Offers extends React.Component {
   async componentDidMount() {
     await this.peticion();
     await this.getChartData();
-
-
   }
 
   render() {
     return (
       <div>
-        {
-          isNaN(this.state.total) ? <h3>Promedio notas: No existen notas</h3>
-          : <h3>"Promedio notas: " {this.state.total}</h3>
-        }
+        {isNaN(this.state.total) ? (
+          <h4>Promedio notas: No existen notas</h4>
+        ) : (
+          <h4>Promedio notas: {this.state.total}</h4>
+        )}
 
         <Bar
           type
           data={this.state.datos}
           options={{
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
+            legend: {
+              labels: {
+                fontColor: "black",
+                fontSize: 15,
+              },
+            },
             scales: {
-              yAxes: [{
+              xAxes: [
+                {
                   ticks: {
-                      suggestedMin: 0,
-                      suggestedMax: 10
-                  }
-              }]
-          }
+                    fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 15,
+                  },
+                },
+              ],
+              yAxes: [
+                {
+                  ticks: {
+                    suggestedMin: 0,
+                    stepSize: 2,
+                    fontColor: "rgba(0, 0, 0, 1)",
+                    fontSize: 15,
+                  },
+                },
+              ],
+            },
           }}
         ></Bar>
       </div>

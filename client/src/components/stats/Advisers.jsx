@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Line, Pie, Doughnut} from "react-chartjs-2";
-import * as actions from "../../redux/actions/stats.js";
+import React from "react";
+import { Doughnut} from "react-chartjs-2";
 
-class StatusVoluntary extends React.Component {
+class Advisers extends React.Component {
+
   state = {
     totalAdvisors: 0,
     totalAdvisorsActives: 0,
@@ -51,6 +50,12 @@ class StatusVoluntary extends React.Component {
       displayLegend: true,
       legendPosition: "bottom",
       location: "Asistencias totales",
+      legend: {
+        labels: {
+          fontColor: "black",
+          fontSize: 15,
+        },
+      },
     };
     this.setState({
       datos: datos,
@@ -65,12 +70,18 @@ class StatusVoluntary extends React.Component {
   render() {
     return (
       <div>
-        <h3>{"Asesores: " + this.state.totalAdvisors}</h3>
+        <h4>{"Asesores: " + this.state.totalAdvisors}</h4>
         <Doughnut
           data={this.state.datos}
           options={{
             responsive: true,
             maintainAspectRatio: false,
+            legend: {
+              labels: {
+                fontColor: "black",
+                fontSize: 15
+              },
+            },
           }}
         ></Doughnut>
       </div>
@@ -78,4 +89,4 @@ class StatusVoluntary extends React.Component {
   }
 }
 
-export default StatusVoluntary;
+export default Advisers;
