@@ -1,11 +1,11 @@
--- QUERY PARA USERS
+-- QUERY PARA USERS 
 
 INSERT INTO users
 VALUES(DEFAULT, 'martinch@gmail.com', null, 'Lucca', 'Lipisky', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'sanlorenzo10@gmail.com',null, 'LaLele', 'Sarasasasa', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'sanlorenzo10@gmail.com',null, 'Ane', 'Ruz', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'carlitoh@gmail.com', null, 'Markito', 'ATR', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'carlitoh@gmail.com', null, 'Markito', 'Hernandez', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'eltumba@gmail.com', null, 'Tirri', 'Joel', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/franmatus6', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
@@ -15,23 +15,23 @@ VALUES(DEFAULT, 'josefo@gmail.com',null, 'Elena', 'Gonzalez', 'San Martin 1213',
 INSERT INTO users
 VALUES(DEFAULT, 'lele@gmail.com', null, 'Gustavo', 'Altamiranda', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'jdgajggryt@gmail.com', null, 'ggdxgesyesyey', 'zdgdzgszdgdxgxgd', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/jarakajsa', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'rechazado', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'guillermo12312@gmail.com', null, 'Guillermo', 'Guillermino', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/jarakajsa', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'rechazado', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'dryfutftftyyft@gmail.com', null, 'zgzdgdxgzdgegzdsf', 'fcbfcbfxgxgxzg', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/marasasa', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'josetomas@gmail.com', null, 'Jose Tomas', 'Arce', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/marasasa', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'httfhthtfhsse@gmail.com',null, 'dxfyxdyxyfxgdxfg', 'cfbcfgfcbfcbcb', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/shepetos', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'mellado2@gmail.com',null, 'Zoe', 'Mellado', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/shepetos', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'awdawdarays@gmail.com', null, 'dxfxeghexggseg', 'exegexgdxgdxyx', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/malevo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'fonseca@gmail.com', null, 'Tatiana', 'Fonseca', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/malevo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'agahdfgdrtdrt@gmail.com', null, 'awtatsysrdt', 'fghfhdrgdrt', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/ricond', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'alfonso@gmail.com', null, 'Oscar', 'Alfonso', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/ricond', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'fctfcycucgucu@gmail.com', null, 'awwdwdawdsr', 'sgsfxdfgexxv', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/zlamrar', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'verdugo@gmail.com', null, 'Marti', 'Verdugo', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/zlamrar', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'vcgucucucfufcucfu@gmail.com',null, 'xdtdxtdtxdxt', 'xdtdxttdxtdx', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez','no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'simon@gmail.com',null, 'Nacho', 'Simon', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez','no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'cfufcufcufcufcuc@gmail.com', null, 'xtdxdtdxt', 'xdtdttxdtdx', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'mellado@gmail.com', null, 'Zoe', 'Mellado', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'fbngvimftimrfh@gmail.com', null, 'asrastdgdg', 'ercxtcrydry', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'todavia no', 'capaz', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'hernandez@gmail.com', null, 'Camila', 'Hernandez', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'todavia no', 'capaz', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 -- QUERY PARA SUBJECTS 
 
 INSERT INTO subjects
@@ -204,7 +204,7 @@ VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 16, 16, 2);
 -- QUERY PARA DATASHEET
 
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 1, 'ausente', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 1);
+VALUES(DEFAULT, 1, 'justificada', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 1);
 INSERT INTO "dataSheets"
 VALUES(DEFAULT, 2, 'no justificada', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 2);
 INSERT INTO "dataSheets"
@@ -273,9 +273,6 @@ INSERT INTO "dataSheets"
 VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 35);
 INSERT INTO "dataSheets"
 VALUES(DEFAULT, 4, 'justificada', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 36);
-INSERT INTO "dataSheets"
-VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 37);
-
                                              
 -- QUERY PARA STUDENTSCHEDULE
 

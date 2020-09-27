@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {postVoluntary} from '../../redux/actions/voluntary.js';
 import {connect} from 'react-redux';
+import TerminosYcondiciones from './TerminosYCondiciones'
 import swal from 'sweetalert';
 import Button from '@material-ui/core/Button';
 import styles from './VoluntarioForm.module.css';
@@ -11,11 +12,13 @@ class CargarArchivos extends Component{
 		super();
 		this.state = {
 			info: new FormData(),
+			checked: false,
 			validate:{}
 		};
 		this.handleOnChange = this.handleOnChange.bind(this);
 		this.handleSend = this.handleSend.bind(this);
 		this.handleOnFileChange = this.handleOnFileChange.bind(this);
+		this.handleCheked = this.handleCheked.bind(this)
    }
    
    handleOnChange(e) {
@@ -61,6 +64,9 @@ class CargarArchivos extends Component{
 			});
 		
 	}
+	handleCheked(e) {
+		this.setState({checked: e.target.checked});
+	}
    render(){
       let control;
    return(
@@ -79,37 +85,42 @@ class CargarArchivos extends Component{
 					onChange={(e) => {this.handleOnFileChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
          	/>
          	<br></br>
-         	<small>Frente del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
+         	<small  style={{display: 'block'}}>Frente del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
          	<input
-					style={{ width: '80%', marginTop: '1%', display: 'block' }}
+					style={{ width: '80%', marginTop: '1%', display: 'inline' }}
 					className={styles.input}
 					name='frontDNI'
 					type='file'
 					accept='.png, .jpg, .jpeg'
 					placeholder='fdzgdfgfdgfd'
 					onChange={(e) => {this.handleOnFileChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
-         	/>
+         	/><span style={{color: "#c2c2c2"}}> * </span>
 				<br></br>
-				<small>Reverso del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
+				<small  style={{display: 'block'}}>Reverso del DNI (Formato aceptado .png, .jpg o .jpeg)</small>
 				<input
-					style={{ width: '80%', marginTop: '1%', display: 'block' }}
+					style={{ width: '80%', marginTop: '1%', display: 'inline' }}
 					className={styles.input}
 					name='backDNI'
 					type='file'
 					accept='.png, .jpg, .jpeg'
 					onChange={(e) => {this.handleOnFileChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
-				/>
+				/> <span style={{color: "#c2c2c2"}}> * </span> 
 				<br></br>
-				<small>Linkedin</small>
+				<small style={{display: 'block'}} >Linkedin</small>
 				<input
-					style={{ width: '80%', marginTop: '1%', display: 'block' }}
+					style={{ width: '80%', marginTop: '1%', display: 'inline' }}
 					className={styles.input}
 					name='linkedin'
 					placeholder='ej: www.linkedin.com/tu_cuenta/'
 					type='text'
 					id='standard-basic6'
 					onChange={(e) => {this.handleOnChange(e); this.setState({validate:{...this.state.validate, [e.target.name]: e.target.value}})}}
-				/>
+				/><span style={{color: "#c2c2c2"}}> * </span> 
+				<p style={{color: "#c2c2c2", fontSize: '13px', marginTop: '15px'}}> obligatorio * </p>
+				<br></br>
+				<input type="checkbox" name="terminos" value="terminos" onClick={e => this.handleCheked(e)} />
+				{/* <label for="terminos"> Acepto los términos y condiciones</label> */}
+				<TerminosYcondiciones />
 				<div style={{display: 'flex', alignItems: 'center'}}> 
 					<div onClick={() => this.props.history.push('/voluntarios/materias')} > 
 						<svg viewBox="0 0 16 16" className={styles.leftArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +131,8 @@ class CargarArchivos extends Component{
 						!this.state.validate.linkedin &&
 						!this.state.validate.cv ||
 						!this.state.validate.frontDNI ||
-						!this.state.validate.backDNI
+						!this.state.validate.backDNI ||
+						!this.state.checked
 						? (control = true) : false 
 					}
 					<Button

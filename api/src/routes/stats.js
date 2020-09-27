@@ -9,7 +9,6 @@ const {
   EducationLevel,
 } = require("../db.js");
 
-
 server.get("/assistances", (req, res) => {
   DataSheet.findAll({
     attributes: {
@@ -18,25 +17,25 @@ server.get("/assistances", (req, res) => {
     include: {
       model: Class,
       attributes: {
-        exclude: ["updatedAt", "userId", "studentId", "subjectId"]
+        exclude: ["updatedAt", "userId", "studentId", "subjectId"],
       },
       include: {
-      model: Student,
-      attributes: {
-        exclude: [
-          "createdAt",
-          "updatedAt",
-          "tutor",
-          "difficulty",
-          "weakness",
-          "strengths",
-          "interests",
-          "motivations",
-          "isActive",
-        ],
-        }
-      }
-    }
+        model: Student,
+        attributes: {
+          exclude: [
+            "createdAt",
+            "updatedAt",
+            "tutor",
+            "difficulty",
+            "weakness",
+            "strengths",
+            "interests",
+            "motivations",
+            "isActive",
+          ],
+        },
+      },
+    },
   })
     .then((allClasses) => {
         let countAssistance = [];
@@ -48,18 +47,15 @@ server.get("/assistances", (req, res) => {
       allClasses.forEach((element) => {
         if (element.assistance === "presente") {
           countAssistance.push(element.assistance);
-        } 
-        else if (element.assistance === "no justificada") {
+        } else if (element.assistance === "no justificada") {
           moreDetailsOfNoJustify.push({
-            [element.class.nameWeekDay] : element.class.student,
-             fecha: element.class.createdAt
-          })
+            [element.class.nameWeekDay]: element.class.student,
+            fecha: element.class.createdAt,
+          });
           countNoJustify.push(element.class);
-        }
-        else if (element.assistance === "justificada") {
+        } else if (element.assistance === "justificada") {
           countHaveJustify.push(element.assistance);
-        }
-        else if (element.assistance === "tardanza") {
+        } else if (element.assistance === "tardanza") {
           countDelay.push(element.assistance);
         }
       });
@@ -83,7 +79,7 @@ server.get("/assistances", (req, res) => {
     });
 });
 
-//A futuro
+//A futuro USAR EXCLUDES CORRECTAMENTE
 server.get("/assistances/:id", (req, res) => {
   Student.findOne({
     where: {
@@ -141,25 +137,28 @@ server.get("/assistances/:id", (req, res) => {
 });
 
 server.get("/qualification", (req, res) => {
-  Class.findAll({
+  DataSheet.findAll({
     attributes: {
-      exclude: ["createdAt", "updatedAt"],
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "concentration",
+        "assitance",
+        "companionName",
+        "internetConnection",
+        "performance",
+        "someoneAccompaniesHim",
+        "comments",
+        "duration",
+        "attitude",
+      ],
     },
-    include: [
-      {
-        model: Student,
-      },
-      {
-        model: DataSheet,
-      },
-    ],
   })
     .then((allClasses) => {
       let countQualification = [];
-
       allClasses.forEach((element) => {
-        if (element.dataSheet.hadExam == true) {
-          let num = parseInt(element.dataSheet.qualification);
+        if (element.hadExam == true) {
+          let num = parseInt(element.qualification);
           countQualification.push(num);
         }
       });
@@ -339,7 +338,7 @@ server.get("/advisorstatus", (req, res) => {
     });
 });
 
-server.get('/demandwithoffer', (req, res) => {
+server.get("/demandwithoffer", (req, res) => {
   Subject.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -361,7 +360,7 @@ server.get('/demandwithoffer', (req, res) => {
             "tutorPhone",
             "tutorEmail",
           ],
-        }
+        },
       },
       {
         model: User,
@@ -380,65 +379,67 @@ server.get('/demandwithoffer', (req, res) => {
             "profilePicture",
             "backDNI",
             "frontDNI",
-          ]
+          ],
+        },
+      },
+    ],
+  })
+    .then((subjectsWithDemandAndOffer) => {
+      let offersAvailables = [];
+      let demandsAvailables = [];
+
+      let totalDemandAndOffer = {
+        allDemands: [],
+        allOffer: [],
+        totalDemands: 0,
+        totalOffers: 0,
+        totalOfferWithoutDemand: 0,
+        totalDemandWithoutOffer: 0,
+      };
+
+      subjectsWithDemandAndOffer.forEach((element) => {
+        if (element.students.length > 0) {
+          element.students.forEach((studentsDemand) => {
+            demandsAvailables.push(studentsDemand);
+          });
         }
-      }
-    ]
-  })
-  .then( subjectsWithDemandAndOffer => {
+        if (element.users.length > 0) {
+          offersAvailables.push(element);
+        }
+      });
+      let advisorsAccepted = [];
+      let studentsTotales = 0;
+      let sumaDeOfertas = 0;
 
-    let offersAvailables = []
-    let demandsAvailables = []
-    
-    let totalDemandAndOffer = {
-      allDemands: [],
-      allOffer: [],
-      totalDemands: 0,
-      totalOffers: 0,
-      totalOfferWithoutDemand: 0,
-      totalDemandWithoutOffer: 0,
-    }
+      offersAvailables.forEach((subjectsOffered) => {
+        advisorsAccepted = subjectsOffered.users.filter(
+          (advisor) =>
+            advisor.state !== "rechazado" &&
+            advisor.state !== "pendiente" &&
+            advisor.isActive !== false
+        );
+        totalDemandAndOffer.allOffer.push({
+          [subjectsOffered.name]: advisorsAccepted,
+        });
+        studentsTotales = studentsTotales + subjectsOffered.students.length;
+        sumaDeOfertas = sumaDeOfertas + advisorsAccepted.length;
+        totalDemandAndOffer.allDemands.push({
+          [subjectsOffered.name]: subjectsOffered.students,
+        });
+      });
 
-    subjectsWithDemandAndOffer.forEach( element => {
-      if(element.students.length > 0){
-        element.students.forEach( studentsDemand => {
-          demandsAvailables.push(studentsDemand )
-        })
-      }
-      if(element.users.length > 0){
-        offersAvailables.push(element)
-      } 
+      const sumasTotales = (arg) => {
+        arg.totalDemands = studentsTotales;
+        arg.totalOffers = sumaDeOfertas;
+      };
+
+      sumasTotales(totalDemandAndOffer);
+
+      res.json(totalDemandAndOffer);
+    })
+    .catch((err) => {
+      res.json(err);
     });
-    let advisorsAccepted = [];
-    let studentsTotales = 0;
-    let sumaDeOfertas = 0;
-
-    offersAvailables.forEach( subjectsOffered => {
-      advisorsAccepted = subjectsOffered.users.filter( advisor => advisor.state !== 'rechazado' && advisor.state !== 'pendiente' && advisor.isActive !== false)
-      totalDemandAndOffer.allOffer.push({
-        [subjectsOffered.name] : advisorsAccepted
-      })
-      studentsTotales = studentsTotales + subjectsOffered.students.length
-      sumaDeOfertas = sumaDeOfertas + advisorsAccepted.length;
-      totalDemandAndOffer.allDemands.push({ [subjectsOffered.name] : subjectsOffered.students })
-    });
-
-   
-    
-
-    const sumasTotales = (arg) => {
-      arg.totalDemands = studentsTotales;
-      arg.totalOffers = sumaDeOfertas;
-    }
-
-    sumasTotales(totalDemandAndOffer);
-
-    res.json ( totalDemandAndOffer )
-
-  })
-  .catch( err => {
-    res.json( err )
-  })
-})
+});
 
 module.exports = server;

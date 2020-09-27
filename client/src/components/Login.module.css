@@ -254,7 +254,7 @@ input:focus {
     background-color: #492BC4;
 }
 
-button:hover {
+.button:hover {
     background-color: #5736db;
     
 }
