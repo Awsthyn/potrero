@@ -2,9 +2,8 @@ const server = require("express").Router();
 const nodemailer = require("nodemailer");
 const {User} = require("../db.js");
 
-//Ver como viene el texto desde un post
+//Envío mail desde la fundación a un asesor
 server.post('/advisor', function(req, res){
-    console.log("Body del emal: ", req.body.body)
     User.findOne({where: {email : req.body.email}})
     .then(volunteer =>{
         const transporter= nodemailer.createTransport({
