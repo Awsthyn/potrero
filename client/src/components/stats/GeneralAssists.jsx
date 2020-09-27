@@ -16,11 +16,11 @@ class generalAssists extends React.Component {
   };
 
   async peticion() {
-    var peticion = await fetch("http://localhost:3001/stats/assistances");
-    var respuesta = await peticion.json();
-    var dataAssistance = [];
-    var dataInassistance = [];
-    var dataDelay = [];
+    let peticion = await fetch("http://localhost:3001/stats/assistances");
+    let respuesta = await peticion.json();
+    let dataAssistance = [];
+    let dataInassistance = [];
+    let dataDelay = [];
     this.setState({
       respuesta: respuesta,
     });
@@ -62,7 +62,7 @@ class generalAssists extends React.Component {
         "Tardanzas " +
           this.state.dataDelay +
           " (" +
-          Math.round(this.state.dataDelay) +
+          Math.round(this.state.promedioTardanzas * 100) +
           "%" +
           ")",
       ],

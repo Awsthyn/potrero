@@ -1,8 +1,6 @@
 -- QUERY PARA USERS
 
 INSERT INTO users
-VALUES(DEFAULT, 'frank@gmail.com', null, 'Franco', 'Matus', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/franmatus6', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO users
 VALUES(DEFAULT, 'martinch@gmail.com', null, 'Lucca', 'Lipisky', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'sanlorenzo10@gmail.com',null, 'LaLele', 'Sarasasasa', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
@@ -13,11 +11,11 @@ VALUES(DEFAULT, 'eltumba@gmail.com', null, 'Tirri', 'Joel', 'Beraza', '11/04/200
 INSERT INTO users
 VALUES(DEFAULT, 'ratatatatat@gmail.com', null, 'Mark', 'Zarasa', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'josefo@gmail.com',null, 'Elena', 'Gonzalez', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez','no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'josefo@gmail.com',null, 'Elena', 'Gonzalez', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez','no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'lele@gmail.com', null, 'Gustavo', 'Altamiranda', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'jdgajggryt@gmail.com', null, 'ggdxgesyesyey', 'zdgdzgszdgdxgxgd', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/jarakajsa', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'jdgajggryt@gmail.com', null, 'ggdxgesyesyey', 'zdgdzgszdgdxgxgd', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/jarakajsa', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'rechazado', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'dryfutftftyyft@gmail.com', null, 'zgzdgdxgzdgegzdsf', 'fcbfcbfxgxgxzg', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/marasasa', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
@@ -31,7 +29,7 @@ VALUES(DEFAULT, 'fctfcycucgucu@gmail.com', null, 'awwdwdawdsr', 'sgsfxdfgexxv', 
 INSERT INTO users
 VALUES(DEFAULT, 'vcgucucucfufcucfu@gmail.com',null, 'xdtdxtdtxdxt', 'xdtdxttdxtdx', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez','no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'cfufcufcufcufcuc@gmail.com', null, 'xtdxdtdxt', 'xdtdttxdtdx', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'cfufcufcufcufcuc@gmail.com', null, 'xtdxdtdxt', 'xdtdttxdtdx', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 -- QUERY PARA SUBJECTS 
 
 INSERT INTO subjects
