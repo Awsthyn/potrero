@@ -2,6 +2,7 @@ import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 import GenAsDet from "./printDetail/GeneralAssistsDetail.jsx";
+import "./printDetail/detail.css";
 
 class generalAssists extends React.Component {
   state = {

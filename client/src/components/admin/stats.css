@@ -3,14 +3,26 @@
   .ocultoimpresion * {
     display: none !important;
   }
-
-  .titlePotrero, 
-  titlePotrero * {
-    display: ruby !important;
-    font-size: 24px;
-    margin-bottom: 10px;
+  .oculto{
+      visibility: visible;
   }
+  .titlePotrero,
+   titlePotrero * {
+     display: ruby !important;
+     font-size: 24px;
+     margin-bottom: 10px;
+   }
+ }
+
+ .visible{
+     visibility: visible;
+ }
+
+.oculto{
+    visibility: hidden;
 }
+
+
 
 .linkGraficos {
   display: flex;
@@ -55,7 +67,7 @@
 .titlePotrero{
   display: ruby;
 }
- 
+
 .titlePotrero img{
   margin-top: -15px;
 }

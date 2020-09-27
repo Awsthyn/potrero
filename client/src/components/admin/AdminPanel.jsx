@@ -48,7 +48,7 @@ export default () => {
   const classes = useStyles();
   return (
     <div id="graficas">
-      <div className={`titlePotrero`}>
+      <div className={`titlePotrero oculto`}>
         <h1>Fundación El Potrero</h1>
         <img
         src="https://static.wixstatic.com/media/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png" />
@@ -78,7 +78,7 @@ export default () => {
         <div className="stats">
           <div id="stats1">
             <Assist />
-        <Link to="/admin/inassistances" className="btn btn-primary fixBtn">Ver detalles</Link>
+        {/*<Link to="/admin/inassistances" className="btn btn-primary fixBtn">Ver detalles</Link>*/}
           </div>
           <br></br>
           <br></br>

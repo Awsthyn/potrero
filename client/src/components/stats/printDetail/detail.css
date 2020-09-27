@@ -1,3 +1,20 @@
+@media print {
+  .ocultoimpresion,
+  .ocultoimpresion * {
+    display: none !important;
+  }
+  .oculto{
+      visibility: visible;
+  }
+}
+.oculto{
+    visibility: hidden;
+}
+
+.visible{
+    visibility: visible;
+}
+
 .printDetail{
     margin-top:100px
 }
