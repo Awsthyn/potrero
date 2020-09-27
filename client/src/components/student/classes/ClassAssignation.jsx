@@ -5,11 +5,12 @@ import { getMatchingSchedules } from '../../../redux/actions/class';
 
 
 
-export const ClassAssignation = ({getMatchingSchedules, matchingSchedule}) => {
+export const ClassAssignation = ({getMatchingSchedules, matchingSchedule, match}) => {
     const [checked, setChecked] = useState();
 
     useEffect(() => {
-        getMatchingSchedules(1,5)
+        const {params} = match
+        getMatchingSchedules(params.studentId, params.subjectId)
     }, [getMatchingSchedules])
     
     const onClick = (checked) => {

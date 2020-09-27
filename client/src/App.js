@@ -70,8 +70,8 @@ class App extends React.Component {
             <StudentFile student={props.location.state.props} />
           )}
         />
-        <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
-        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
+        <Route exact path='/admin/estudiantes/asignacion/:studentId/:subjectId' component={ClassAssignation} />
+        <Route exact path='/admin/estudiantes/listadematerias/:studentId' component={SubjectsPerStudent} />
 
 
 
