@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import Assist from "../stats/GeneralAssists.jsx";
 import Advisers from "../stats/Advisers.jsx";
@@ -35,13 +35,13 @@ const useStyles = makeStyles({
   arreglar: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   icon: {
     height: 40,
     width: 40,
-    top: 100
-  }
+    top: 100,
+  },
 });
 
 export default () => {
@@ -50,8 +50,7 @@ export default () => {
     <div id="graficas">
       <div className={`titlePotrero oculto`}>
         <h1>Fundación El Potrero</h1>
-        <img
-        src="https://static.wixstatic.com/media/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png" />
+        <img src="https://static.wixstatic.com/media/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png" />
       </div>
       <br></br>
       <br></br>
@@ -78,7 +77,9 @@ export default () => {
         <div className="stats">
           <div id="stats1">
             <Assist />
-        {/*<Link to="/admin/inassistances" className="btn btn-primary fixBtn">Ver detalles</Link>*/}
+            <Link to="/admin/inassistances" className="btn btn-primary fixBtn">
+              Ver detalles
+            </Link>
           </div>
           <br></br>
           <br></br>
