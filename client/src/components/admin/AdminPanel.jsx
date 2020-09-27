@@ -81,15 +81,21 @@ export default () => {
           <br></br>
           <br></br>
           <br></br>
+          <br></br>
+          <br></br>
           <div id="stats2">
             <Advisers />
           </div>
           <br></br>
           <br></br>
           <br></br>
+          <br></br>
+          <br></br>
           <div id="stats3">
             <Qualifications />
           </div>
+          <br></br>
+          <br></br>
           <br></br>
           <br></br>
           <br></br>

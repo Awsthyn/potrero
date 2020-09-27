@@ -80,7 +80,7 @@ server.get("/assistances", (req, res) => {
     });
 });
 
-//A futuro
+//A futuro USAR EXCLUDES CORRECTAMENTE
 server.get("/assistances/:id", (req, res) => {
   Student.findOne({
     where: {
@@ -140,18 +140,20 @@ server.get("/assistances/:id", (req, res) => {
 server.get("/qualification", (req, res) => {
   DataSheet.findAll({
     attributes: {
-      exclude: ["createdAt", "updatedAt"],
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "concentration",
+        "assitance",
+        "companionName",
+        "internetConnection",
+        "performance",
+        "someoneAccompaniesHim",
+        "comments",
+        "duration",
+        "attitude",
+      ],
     },
-    include: [
-      {
-        model: Class,
-        include: [
-          {
-            model: Student,
-          },
-        ],
-      },
-    ],
   })
     .then((allClasses) => {
       let countQualification = [];
