@@ -204,7 +204,7 @@ VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 16, 16, 2);
 -- QUERY PARA DATASHEET
 
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 1, 'ausente', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 1);
+VALUES(DEFAULT, 1, 'justificada', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 1);
 INSERT INTO "dataSheets"
 VALUES(DEFAULT, 2, 'no justificada', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 2);
 INSERT INTO "dataSheets"
