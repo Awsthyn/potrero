@@ -30,6 +30,8 @@ INSERT INTO users
 VALUES(DEFAULT, 'vcgucucucfufcucfu@gmail.com',null, 'xdtdxtdtxdxt', 'xdtdxttdxtdx', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez','no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'cfufcufcufcufcuc@gmail.com', null, 'xtdxdtdxt', 'xdtdttxdtdx', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO users
+VALUES(DEFAULT, 'fbngvimftimrfh@gmail.com', null, 'asrastdgdg', 'ercxtcrydry', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'todavia no', 'capaz', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 -- QUERY PARA SUBJECTS 
 
 INSERT INTO subjects
@@ -123,80 +125,156 @@ VALUES(DEFAULT, 'Sordo-mudo', DEFAULT, DEFAULT);
 INSERT INTO "typeOfDifficulties"
 VALUES(DEFAULT, 'No vidente', DEFAULT, DEFAULT);
 
+-- QUERY PARA CLASS
+
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 1, 1, 1);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Viernes', DEFAULT, DEFAULT, 2, 2, 2);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 3, 3, 1);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 4, 4, 4);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 5, 5, 5);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Viernes', DEFAULT, DEFAULT, 6, 6, 6);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Jueves', DEFAULT, DEFAULT, 7, 7, 7);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Viernes', DEFAULT, DEFAULT, 8, 8, 1);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 9, 9, 2);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 10, 10, 3);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 11, 11, 4);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 12, 12, 5);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 13, 13, 6);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 14, 14, 7);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 15, 15, 1);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 16, 16, 2);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 1, 1, 3);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Viernes', DEFAULT, DEFAULT, 2, 2, 4);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 3, 3, 5);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 4, 4, 6);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 5, 5, 7);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Viernes', DEFAULT, DEFAULT, 6, 6, 1);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Jueves', DEFAULT, DEFAULT, 7, 7, 2);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Viernes', DEFAULT, DEFAULT, 8, 8, 3);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 9, 9, 4);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 10, 10, 5);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 11, 11, 6);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 12, 12, 7);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 13, 13, 1);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 14, 14, 2);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 15, 15, 3);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 16, 16, 4);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 12, 12, 5);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 13, 13, 6);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 14, 14, 7);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 15, 15, 1);
+INSERT INTO classes
+VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 16, 16, 2);
 -- QUERY PARA DATASHEET
 
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 1, 'ausente', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 1, 'ausente', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 1);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 2, 'tardanza', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 2, 'no justificada', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 2);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 3, 'presente', 7, 1, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 3, 'justificada', 7, 1, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 3);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'tardanza', 8, 2, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 4, 'tardanza', 8, 2, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 4);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'presente', 3, 5, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 5, 'presente', 3, 5, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 5);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 6, 'presente', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 6, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 6);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 7, 'presente', 5, 3, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 7, 'presente', 5, 3, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 7);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'ausente', 3, 1, false, null, 'Ha tenido un gran rendimiento en programacion', true, 6, '60', 9, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 8, 'justificada', 3, 1, false, null, 'Ha tenido un gran rendimiento en programacion', true, 6, '60', 9, DEFAULT, DEFAULT, 8);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'ausente', 9, 8, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 8, 'no justificada', 9, 8, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 10);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 5, 'justificada', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 11);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'ausente', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 4, 'no justificada', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 12);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 13);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 1, 'ausente', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 1, 'justificada', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 14);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 2, 'tardanza', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 2, 'tardanza', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 15);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 3, 'presente', 7, 1, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 3, 'presente', 7, 1, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 16);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'tardanza', 8, 2, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 4, 'tardanza', 8, 2, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 17);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'presente', 3, 5, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 5, 'presente', 3, 5, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 18);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 6, 'presente', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 6, 'presente', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 19);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 7, 'presente', 5, 3, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 7, 'presente', 5, 3, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 20);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'ausente', 3, 1, false, null, 'Ha tenido un gran rendimiento en programacion', true, 6, '60', 9, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 8, 'presente', 3, 1, false, null, 'Ha tenido un gran rendimiento en programacion', true, 6, '60', 9, DEFAULT, DEFAULT, 21);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'ausente', 9, 8, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 8, 'justificada', 9, 8, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 22);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 23);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'ausente', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 4, 'no justificada', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 24);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 25);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 1, 'ausente', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 1, 'no justificada', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 26);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 2, 'tardanza', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 2, 'tardanza', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 27);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 3, 'presente', 7, 1, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 3, 'presente', 7, 1, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 28);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'tardanza', 8, 2, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 4, 'tardanza', 8, 2, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 29);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'presente', 3, 5, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 5, 'presente', 3, 5, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 30);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 6, 'presente', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 6, 'presente', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 31);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 7, 'presente', 5, 3, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 7, 'presente', 5, 3, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 32);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'ausente', 3, 1, false, null, 'Ha tenido un gran rendimiento en programacion', true, 6, '60', 9, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 8, 'justificada', 3, 1, false, null, 'Ha tenido un gran rendimiento en programacion', true, 6, '60', 9, DEFAULT, DEFAULT, 33);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'ausente', 9, 8, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 8, 'justificada', 9, 8, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 34);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 35);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'ausente', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 4, 'justificada', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 36);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 37);
 
                                              
 -- QUERY PARA STUDENTSCHEDULE
@@ -232,43 +310,6 @@ VALUES(DEFAULT,'(14.5,16.5)','Martes',DEFAULT,DEFAULT,1);
 
 
 -- //HASTAS asdasdasdasdasd 
-
--- QUERY PARA CLASS
-
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 1, 1, 1, 3);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Viernes', DEFAULT, DEFAULT, 2, 2, 2, 2);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 3, 3, 1, 2);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 4, 4, 4, 4);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 5, 5, 5, 3);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Viernes', DEFAULT, DEFAULT, 6, 6, 6, 5);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Jueves', DEFAULT, DEFAULT, 7, 7, 7, 6);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Viernes', DEFAULT, DEFAULT, 8, 8, 8, 7);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 9, 9, 9, 2);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 10, 10, 10, 4);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 11, 11, 11, 5);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 12, 12, 12, 6);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 13, 13, 13, 3);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Martes', DEFAULT, DEFAULT, 14, 14, 14, 6);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 15, 15, 15, 7);
-INSERT INTO classes
-VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 16, 16, 16, 5);
-
-
 
 
 -- QUERY PARA TIPO DE DIFICULTAD POR ESTUDIANTE
