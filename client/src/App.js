@@ -21,7 +21,8 @@ import DetalleVoluntario from './components/admin/DetalleVoluntario';
 import AdminRoute from './AdminRoute.js';
 import StudentCard from './components/student/StudentCard/StudentCard';
 import AsesorProfile from './components/AsesorProfile/AsesorProfile';
-import ClassAssignation from "./components/student/ClassAssignation"
+import ClassAssignation from "./components/student/ClassAssignation";
+import DetailsOfInassistances from './components/stats/DetailsOfInassistances';
 
 class App extends React.Component {
 
@@ -87,6 +88,10 @@ class App extends React.Component {
 		<Route
 		path = "/asesor/test"
 		component = {AsesorProfile}/>
+
+    <Route 
+    exact path="/admin/inassistances"
+    component = {DetailsOfInassistances}/>
 
 		</div>
 	);

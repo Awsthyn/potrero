@@ -2,6 +2,7 @@ import React from "react";
 import { Doughnut} from "react-chartjs-2";
 
 class Advisers extends React.Component {
+
   state = {
     totalAdvisors: 0,
     totalAdvisorsActives: 0,
@@ -77,7 +78,6 @@ class Advisers extends React.Component {
             maintainAspectRatio: false,
             legend: {
               labels: {
-                // This more specific font property overrides the global property
                 fontColor: "black",
                 fontSize: 15
               },

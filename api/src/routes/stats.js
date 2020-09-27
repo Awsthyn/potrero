@@ -39,13 +39,11 @@ server.get("/assistances", (req, res) => {
     }
   })
     .then((allClasses) => {
-      let countAssistance = [];
-      let countDelay = [];
-      let countNoJustify = [];
-      let countHaveJustify = [];
-      let moreDetailsOfNoJustify = [];
-
-     
+        let countAssistance = [];
+        let countDelay = [];
+        let countNoJustify = [];
+        let countHaveJustify = [];
+        let moreDetailsOfNoJustify = [];
 
       allClasses.forEach((element) => {
         if (element.assistance === "presente") {
@@ -65,18 +63,20 @@ server.get("/assistances", (req, res) => {
           countDelay.push(element.assistance);
         }
       });
-                console.log(moreDetailsOfNoJustify)
+
       let totalAccount = countAssistance.length + countNoJustify.length + countHaveJustify.length + countDelay.length;
 
-      let countTotalAssistance = {
-        noJustifyDetails: moreDetailsOfNoJustify,
-        assistance: countAssistance.length,
-        noJustify: countNoJustify.length,
-        haveJustify: countHaveJustify.length,
-        delay: countDelay.length,
-        total: totalAccount
-      };
+        let countTotalAssistance = {
+          noJustifyDetails: moreDetailsOfNoJustify,
+          assistance: countAssistance.length,
+          noJustify: countNoJustify.length,
+          haveJustify: countHaveJustify.length,
+          delay: countDelay.length,
+          total: totalAccount
+        };
+
       res.json(countTotalAssistance);
+      
     })
     .catch((err) => {
       console.log(err);

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import { makeStyles } from "@material-ui/styles";
 import Assist from "../stats/GeneralAssists.jsx";
 import Advisers from "../stats/Advisers.jsx";
@@ -77,6 +78,7 @@ export default () => {
         <div className="stats">
           <div id="stats1">
             <Assist />
+        <Link to="/admin/inassistances" className="btn btn-primary fixBtn">Ver detalles</Link>
           </div>
           <br></br>
           <br></br>
