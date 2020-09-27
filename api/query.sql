@@ -273,9 +273,6 @@ INSERT INTO "dataSheets"
 VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 35);
 INSERT INTO "dataSheets"
 VALUES(DEFAULT, 4, 'justificada', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 36);
-INSERT INTO "dataSheets"
-VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 37);
-
                                              
 -- QUERY PARA STUDENTSCHEDULE
 
