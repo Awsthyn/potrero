@@ -1,4 +1,4 @@
--- QUERY PARA USERS
+-- QUERY PARA USERS 
 
 INSERT INTO users
 VALUES(DEFAULT, 'martinch@gmail.com', null, 'Lucca', 'Lipisky', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
@@ -19,7 +19,7 @@ VALUES(DEFAULT, 'guillermo12312@gmail.com', null, 'Guillermo', 'Guillermino', 'B
 INSERT INTO users
 VALUES(DEFAULT, 'josetomas@gmail.com', null, 'Jose Tomas', 'Arce', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/marasasa', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'mellado@gmail.com',null, 'Zoe', 'Mellado', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/shepetos', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'mellado2@gmail.com',null, 'Zoe', 'Mellado', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/shepetos', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'fonseca@gmail.com', null, 'Tatiana', 'Fonseca', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/malevo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
