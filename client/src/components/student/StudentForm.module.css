@@ -259,3 +259,7 @@ input:focus {
 .containerHorarios{
 	display: flex;
 }
+
+.containerListDays {
+	margin: 0 auto;
+}
