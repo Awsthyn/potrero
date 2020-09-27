@@ -7,7 +7,11 @@ export function sessionLogin(data){
 		return axios
 			.post(`http://localhost:3001/auth/login`, data , {withCredentials : true})
 			.then(res =>{
-				dispatch({type: LOGIN , payload: res.data});
+				if(res.data.error){
+					throw new Error(res.data.error)
+				}else{
+					dispatch({type: LOGIN , payload: res.data});
+				}
 			})
 			.catch(err => {
 				throw new Error('Error al autenticar, verifique los datos ingresados')
