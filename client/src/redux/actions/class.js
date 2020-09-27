@@ -11,3 +11,9 @@ export function getMatchingSchedules(studentId, subjectId) {
 			.catch(err => console.log(err));
 	};
 }
+
+export function postClass(clase){
+		return axios
+			.post(`http://localhost:3001/class/`, clase, {withCredentials: true})
+	
+}
