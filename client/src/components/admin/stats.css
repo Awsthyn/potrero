@@ -59,3 +59,21 @@
 .titlePotrero img{
   margin-top: -15px;
 }
+
+.fixBtn{
+  width: 120px;
+  font-size: 12px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.noListStyle{
+  text-decoration: none;
+  list-style: none;
+}
+
+.centerTitle{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

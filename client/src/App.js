@@ -23,6 +23,7 @@ import AsesorProfile from "./components/AsesorProfile/AsesorProfile";
 import ClassAssignation from "./components/student/classes/ClassAssignation";
 import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent";
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
+import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
 
 class App extends React.Component {
   render() {
@@ -89,7 +90,11 @@ class App extends React.Component {
         <Route path="/studentCard" component={StudentCard} />
 
         <Route path="/asesor/test" component={AsesorProfile} />
-
+        <Route
+          exact
+          path="/admin/inassistances"
+          component={DetailsOfInassistances}
+        />
         <Route path="/admin/detail" component={GeneralAssistsDetail} />
       </div>
     );

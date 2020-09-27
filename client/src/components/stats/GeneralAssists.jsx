@@ -22,6 +22,7 @@ class generalAssists extends React.Component {
   async peticion() {
     let peticion = await fetch("http://localhost:3001/stats/assistances");
     let respuesta = await peticion.json();
+    
     let dataAssistance = [];
     let dataNoJustificada = [];
     let dataJustificada = [];
