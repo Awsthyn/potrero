@@ -2,8 +2,8 @@ const server = require("express").Router();
 const nodemailer = require("nodemailer");
 const {User} = require("../db.js");
 
-server.get('/:id/email', function(req, res){
-    User.findOne({where: {id : req.params.id}})
+server.post('/email', function(req, res){
+    User.findOne({where: {email : req.body.email}})
     .then(volunteer =>{
         const transporter= nodemailer.createTransport({
             service: "gmail",
@@ -12,7 +12,7 @@ server.get('/:id/email', function(req, res){
                 pass: 'Henryelpotrero'
             }
         });
-
+        //Adjunto pdf con los términos y condiciones de la fundación
         var mailOptions = {
             from: "El Potrero",
             to: volunteer.email,
