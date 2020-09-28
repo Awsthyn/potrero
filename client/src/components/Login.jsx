@@ -88,13 +88,14 @@ class Login extends React.Component {
 
                 this.props.sessionLogin(this.state.loginData)
                     .then(() => {
-                        swal('Bienvenido')
+                        
                         this.resetState()
                         this.setState({ loading: false });
                         // uso replace para que no quede en el historial /login
                         this.props.history.replace('/admin')
                     })
                     .catch((err) => {
+                        this.setState({ loading: false });
                         swal('No se pudo autenticar. Verifique los datos')
                     });
             }, 2000)

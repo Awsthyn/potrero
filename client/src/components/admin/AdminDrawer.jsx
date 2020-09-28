@@ -278,6 +278,7 @@ function AdminDrawer(props) {
               </List>
         <Divider />
         <List>
+          
                  <ListItem onClick={() => history.push(`/admin`)} button >
                     <ListItemIcon className={classes.link} ><PieChartRoundedIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Panel'} />

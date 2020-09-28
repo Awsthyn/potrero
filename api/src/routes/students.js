@@ -10,6 +10,7 @@ const {
   SubjectXStudent,
   StudentSchedule,
   EducationLevel,
+  Class
 } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
@@ -86,8 +87,8 @@ server.get("/", (req, res) => {
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
 server.get("/:id", (req, res) => {
   // BUSCA AL STUDENT.
-
-  Student.findOne({
+  
+  Promise.all([Student.findOne({
     where: {
       id: req.params.id,
     },
@@ -133,12 +134,14 @@ server.get("/:id", (req, res) => {
         },
       },
     ],
-  })
+  }), Class.findAll({where: {studentId: req.params.id}})])
     .then((studentFound) => {
       // SI ENCUENTRA AL STUDENT, ENVÍA SUS DATOS. O SINO, ENVÍA UN MENSAJE DE ERROR.
-      !studentFound
-        ? res.json("El student no existe.")
-        : res.json(studentFound);
+      if(!studentFound) res.json("El student no existe.")
+      else {
+        let studentData = studentFound[0]
+        studentData["dataValues"].classes = studentFound[1]
+        res.json(studentData)};
     })
     .catch((err) => {
       // SI HAY UN ERROR, LO ENVÍA.

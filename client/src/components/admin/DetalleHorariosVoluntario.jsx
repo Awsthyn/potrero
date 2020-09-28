@@ -21,7 +21,7 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
         getUserSchedule(id)
     }, []);
 
-    if (schedule.userSchedules){
+    if ( schedule && schedule.userSchedules){
         schedule.userSchedules.forEach(prop => {
             if (prop.nameWeekDay === 'Lunes'){
                 inter += 1;
@@ -114,13 +114,13 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                     let rango = ((Number(timetable[timetable.length - 1].split(':')[0]) + 1 - horarioAux)) * 2;
             
                     if(rango > 0){
-                        horarios[1].push(<div style={{backgroundColor:'whitesmoke'}}></div>)
+                        horarios[1].day.push(<div style={{backgroundColor:'whitesmoke'}}></div>)
                         horarios[1].gridRow += `${rango}fr`
                     }
                 }
                 else if(int.day === 'Miercoles'){
                     for (const interval of currentDay) {
-                        if((Number(interval[2].value) - horarioAux) > 0){
+                        if((Number(interval[0].value) - horarioAux) > 0){
                             horarios[1].day.push(<div style={{backgroundColor:'whitesmoke'}}></div>)
                             rangoHorario = (Number(interval[0].value) - horarioAux) * 2;
                             horarios[2].gridRow += `${rangoHorario}fr `;
@@ -189,27 +189,34 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
         <div className={style.container}>
             <h3 className={style.title}>Horarios del voluntario</h3>
             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{alignSelf:'center', width:'30px', height:'15px', backgroundColor:'#8CC63F', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Horario seleccionado</span></div>
-                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{alignSelf:'center', width:'30px', height:'15px', backgroundColor:'whitesmoke', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Horario libre</span></div>
+                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{border:'1px solid #8CC63F', alignSelf:'center', width:'30px', height:'15px', backgroundColor:'#8CC63F', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Horario seleccionado</span></div>
+                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{border:'1px solid whitesmoke', alignSelf:'center', width:'30px', height:'15px', backgroundColor:'whitesmoke', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Horario libre</span></div>
                 <div></div>
             </div>
-            <div className={style.catainerDays}>
-                {days.map(day => <div className={style.catainerOneDay}>{day}</div>)}
-            </div>
-            <div className={style.box}>
-                <div className={style.catainerTimetable}>
-                    <div>{timetable.map(time => <div className={style.catainerOneTimetable}>{time}</div>)}</div>
-                    <div className={style.schedule}>
-                        { schedule.userSchedules &&  horarios.map(horario => {
-                            return (
-                                <div className={style.boxHorario} style={{gridTemplateRows:`${horario.gridRow}`}}>
-                                    {horario.day}
+            { 
+                schedule ?
+                    <div>
+                        <div className={style.catainerDays}>
+                            {days.map(day => <div className={style.catainerOneDay}>{day}</div>)}
+                        </div>
+                        <div className={style.box}>
+                            <div className={style.catainerTimetable}>
+                                <div>{timetable.map(time => <div className={style.catainerOneTimetable}>{time}</div>)}</div>
+                                <div className={style.schedule}>
+                                    { schedule.userSchedules &&  horarios.map(horario => {
+                                        return (
+                                            <div className={style.boxHorario} style={{gridTemplateRows:`${horario.gridRow}`}}>
+                                                {horario.day}
+                                            </div>
+                                        ) 
+                                    })}
                                 </div>
-                            ) 
-                        })}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                :
+                <div><h4 className={style.title}>Rango no disponible</h4></div> 
+            }
             <svg viewBox="0 0 16 16" class={style.leftArrow} onClick={()=> window.history.go(-1)} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
             </svg>

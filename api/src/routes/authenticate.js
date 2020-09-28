@@ -10,9 +10,10 @@ server.get('/', function(req, res) {
 server.post('/login',
     passport.authenticate('local'),
     function(req, res, next) {
-        console.log('inicio de sesion exitoso')
-        res.json(req.user)
-    // res.redirect('/');
+        console.log(req.user.isActive)
+        req.user.isActive?
+            res.json(req.user)
+        :res.json({error: "No tiene permiso para realizar esta operación"})
 });
 
 server.get('/logout', function(req, res){
