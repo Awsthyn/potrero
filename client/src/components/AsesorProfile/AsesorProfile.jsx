@@ -77,12 +77,12 @@ return(
             :  
             <div>
                 <p className = {style.asesorinfo}>Materias</p>
-            <div className = {style.subjectsContainer}>
-            {user.subjects?.map(subject => 
-            <p key={subject.id} className = {style.subjects}>{subject.name}</p>
-        )}
-        </div>
-        </div>
+                <div className = {style.subjectsContainer}>
+                {user.subjects?.map(subject => 
+                <p key={subject.id} className = {style.subjects}>{subject.name}</p>
+                )}
+                </div>
+            </div>
     }
     {perfil ?  < AsesorInfo user={user} /> : null}
     { email ?  < EnviarEmail user={user}/>  : null }
