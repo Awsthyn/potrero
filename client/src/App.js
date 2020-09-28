@@ -1,33 +1,31 @@
-import React from 'react';
-import './App.css';
-import { Route } from 'react-router-dom';
-import ContenedorForm from './components/formularioVoluntario/ContenedorForm';
-import Login from './components/Login';
-import MiPerfil from './components/MiPerfil';
-import Home from './components/Home';
-// import NavBar from './components/NavBar';
-import AdminPanel from './components/admin/AdminPanel';
-import TablaUsuarios from './components/admin/TablaUsuarios';
-import TablaVoluntarios from './components/admin/TablaVoluntarios';
-import StudentCrud from './components/student/StudentCrud';
-import CreateStudentForm from './components/student/CreateStudentForm';
-import StudentFile from './components/student/StudentFile';
-import ResetPassword from './components/formularioVoluntario/PasswordForgot';
-import TablaMaterias from './components/admin/TablaMaterias';
-import AdminNavBar from './components/admin/AdminNavBar';
-import AdminDrawer from './components/admin/AdminDrawer';
-import PasswordRecovery from './components/PasswordRecovery';
-import DetalleVoluntario from './components/admin/DetalleVoluntario';
-import AdminRoute from './AdminRoute.js';
-import StudentCard from './components/student/StudentCard/StudentCard';
-import AsesorProfile from './components/AsesorProfile/AsesorProfile';
-import DataSheet from './components/AsesorProfile/dataSheet/DataSheet';
-import ClassAssignation from "./components/student/classes/ClassAssignation"
-import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
+import React from "react";
+import "./App.css";
+import { Route } from "react-router-dom";
+import ContenedorForm from "./components/formularioVoluntario/ContenedorForm";
+import Login from "./components/Login";
+import MiPerfil from "./components/MiPerfil";
+import Home from "./components/Home";
+import AdminPanel from "./components/admin/AdminPanel";
+import TablaUsuarios from "./components/admin/TablaUsuarios";
+import TablaVoluntarios from "./components/admin/TablaVoluntarios";
+import StudentCrud from "./components/student/StudentCrud";
+import CreateStudentForm from "./components/student/CreateStudentForm";
+import StudentFile from "./components/student/StudentFile";
+import ResetPassword from "./components/formularioVoluntario/PasswordForgot";
+import TablaMaterias from "./components/admin/TablaMaterias";
+import AdminNavBar from "./components/admin/AdminNavBar";
+import AdminDrawer from "./components/admin/AdminDrawer";
+import PasswordRecovery from "./components/PasswordRecovery";
+import DetalleVoluntario from "./components/admin/DetalleVoluntario";
+import DetalleHorariosVoluntario from './components/admin/DetalleHorariosVoluntario';
+import AdminRoute from "./AdminRoute.js";
+import StudentCard from "./components/student/StudentCard/StudentCard";
+import AsesorProfile from "./components/AsesorProfile/AsesorProfile";
+import ClassAssignation from "./components/student/classes/ClassAssignation";
+import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent";
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
-
-
+import DataSheet from './components/AsesorProfile/dataSheet/DataSheet'
 
 class App extends React.Component {
   render() {
@@ -35,7 +33,6 @@ class App extends React.Component {
       <div className="App">
         {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
         <Route
-          exact
           path={[
             "/admin/voluntarios",
             "/admin/voluntarios/:id",
@@ -45,6 +42,8 @@ class App extends React.Component {
             "/admin/estudiantes/agregar",
             "/admin/estudiantes/detalles/:id",
             "/admin/detail",
+            "/admin/estudiantes/listadematerias/:studentId",
+            "/admin/estudiantes/asignacion/:studentId/:subjectId"
           ]}
           component={AdminNavBar}
         />
@@ -59,9 +58,14 @@ class App extends React.Component {
           path="/admin/voluntarios/:id"
           render={({ match }) => <DetalleVoluntario id={match.params.id} />}
         />
-        <Route exact path="/admin/usuarios" component={TablaUsuarios} />
-        <Route exact path="/admin/materias" component={TablaMaterias} />
-        <Route exact path="/admin/estudiantes" component={StudentCrud} />
+        <Route
+          exact
+          path='/admin/voluntarios/detalleHorarios/:id'
+          render={({ match }) => <DetalleHorariosVoluntario id={match.params.id} />}
+        />
+        <Route exact path='/admin/usuarios' component={TablaUsuarios} />
+        <Route exact path='/admin/materias' component={TablaMaterias} />
+        <Route exact path='/admin/estudiantes' component={StudentCrud} />
         <Route
           exact
           path="/admin/estudiantes/agregar"

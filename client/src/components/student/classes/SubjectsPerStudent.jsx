@@ -22,27 +22,27 @@ export const SubjectsPerStudent = ({getStudentDetail, getMatchingSchedulesForAll
     let possibleClasses = matchingSchedule && matchingSchedule[0] && matchingSchedule.map(e => e[0].user.subjects[0].name)
 
     return (
-        <div className="mt-4">
+        <div style={{marginTop: "80px"}}>
             <h2>Clases de {studentDetail.firstName + " " + studentDetail.lastName}</h2>
             <h3>Materias con clases asignadas</h3>
             {assignedSubjects && assignedSubjects.length > 0 ? assignedSubjects.map((s,i) => {
                 return (
-                <h4 key={"a"+i}>{s.name}</h4>
+                <h4 key={"a"+i} className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw"}}>{s.name}</h4>
                 )} ) : <h1>No hay datos</h1>}
-            <h3>Materias sin clases asignadas</h3>
+            <h3 className="mt-4">Materias sin clases asignadas</h3>
             <p>Las materias en color <span style={{color: "#492BC4"}}>lila</span> indican que existe por lo menos un docente con un horario disponible para asignarle una clase a este alumno.</p>
-            <p>En caso de querer asignar una clase, haga clic en la <span style={{color: "#492BC4"}}>materia</span> correspondiente.</p>
+            <p className="mt-n3">En caso de querer asignar una clase, haga clic en la <span style={{color: "#492BC4"}}>materia</span> correspondiente.</p>
             {matchingSchedule && matchingSchedule.length > 0  ? matchingSchedule.map((e,i) => {
                 if(compareAssignedToPosible && compareAssignedToPosible.length > 0 && !compareAssignedToPosible.includes(e[0].user.subjects[0].name)){
                 return (
-                <h4 style={{color: "#492BC4"}} 
+                <h4 role="button" className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw", color: "#492BC4"}} 
                 onClick={(e)=> window.location = `/admin/estudiantes/asignacion/${params.studentId}/${e.target.getAttribute("subjectid")}`}
                 subjectid={e[0].user.subjects[0].id} 
                 key={"p"+i}>{e[0].user.subjects[0].name}</h4>
                 )}} ) : null}
             {studentDetail.id && studentDetail.subjects && studentDetail.subjects.length > 0 ? studentDetail.subjects.map((s,i) => {
                 if(possibleClasses && possibleClasses.length > 0 && !possibleClasses.includes(s.name)){return (
-                    <h4 key={"n"+i}>{s.name}</h4>
+                    <h4 className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw"}} key={"n"+i}>{s.name}</h4>
                     )}
                 } 
                  ) : null}

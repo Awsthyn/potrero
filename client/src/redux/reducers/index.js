@@ -7,6 +7,7 @@ import userReducer from "./userReducer";
 import statsReducer from './statsReducer';
 import educationLevelReducer from './educationLevelReducer';
 import academicReducer from "./academicReducer";
+import userScheduleReducer from './userScheduleReducer';
 
 export default combineReducers({
     volunteers: volunteersReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     users: userReducer,
     stats: statsReducer,
     educationLevel: educationLevelReducer,
-    academic: academicReducer
+    academic: academicReducer,
+    userSchedule: userScheduleReducer
 });

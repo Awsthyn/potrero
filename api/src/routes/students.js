@@ -30,8 +30,7 @@ server.get("/", (req, res) => {
         "weakness",
         "strengths",
         "interests",
-        "motivations",
-        "isActive",
+        "motivations"
       ],
     },
     include: [
