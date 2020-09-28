@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/styles';
 import Paper from '@material-ui/core/Paper';
@@ -248,6 +248,9 @@ function DetalleVoluntario(props) {
                 ) : (
                     ''
                   )}
+              </Grid>
+              <Grid>
+              <Link to={`/admin/voluntarios/detalleHorarios/${id}`}><h4>Ver detalle de los horarios seleccionados</h4></Link>
               </Grid>
 
 

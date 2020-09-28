@@ -180,16 +180,19 @@ const TablaVoluntarios = (props) => {
           })
           .then((willDelete) => {
             if (willDelete) {
-            props.deleteVolunteer(Number(id)).then(()=>{
-              setFiltered(filtered.filter(vol=>vol.id !== id))
-            })
-              swal("El postulante fue rechazado", {
-                icon: "success",
-              });
-            } else {
+             return  props.deleteVolunteer(Number(id))
+            } 
+            else {
               swal("El registro fue conservado");
             }
-          });
+          })
+          .then(()=>{
+            setFiltered(filtered.filter(vol=>vol.id !== id))
+            swal("El postulante fue rechazado", {
+              icon: "success",
+            });
+         })
+            
     
     }
 

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import {postClass} from '../../../redux/actions/class'
 
 
-export default function ChooseHour({friendlyData, userData, hours, id}) {
+export default function ChooseHour({friendlyData, nameWeekDay, userData, hours, id}) {
   const [start, setStart] = useState(hours[0])
   const [end, setEnd] = useState(hours[0]+ 0.5)
   
@@ -29,16 +29,17 @@ export default function ChooseHour({friendlyData, userData, hours, id}) {
     a += end <= hours[1] ? 1 : 0; b += 1;
     if(a===b){
       Swal.fire({
-        title: '¿Desea confirmar la creación de la clase?',
-        text: `Se creará una clase de ${friendlyData.subject} 
-        desde ${start % 1 === 0 ? String(start) + ":00" : String(start).substring(0,2) + ":30"} a  ${end % 1 === 0 ? String(end) + ":00" : String(end).substring(0,2) + ":30"} hs
-        Alumno: ${friendlyData.name},
-        Asesor: ${userData}`,
+        title: 'Confirmar clase',
+        text: `
+        ${userData.name} le dará clases de ${friendlyData.subject.name} a ${friendlyData.student.name}. Las mismas se darán los ${nameWeekDay}, 
+        de ${start % 1 === 0 ? String(start) + ":00" : String(start).substring(0,2) + ":30"} a  ${end % 1 === 0 ? String(end) + ":00" : String(end).substring(0,2) + ":30"} hs.`
+       ,
         showDenyButton: false,
         showCancelButton: true,
         confirmButtonText: `Crear clase`,
         cancelButtonText: `Cancelar`,
       }).then((result) => {
+        postClass({subjectId: friendlyData.subject.id, studentId: friendlyData.student.id, duration: [start,end], userId: userData.id})
         result.isConfirmed && Swal.fire('Clase creada', '', 'success')
       })
     }
