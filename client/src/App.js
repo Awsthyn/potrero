@@ -93,9 +93,7 @@ class App extends React.Component {
         path="/studentCard"
         component = {StudentCard} />
 
-		<Route
-		exact path = {[ "/asesores/estudiantes/:id", "/asesores/clases/:id", "/asesores/notas/:id"]}
-		component = {AsesorProfile}/>
+		<Route exact path = "/asesores/:id" component = {AsesorProfile}/>
     <Route path="/datasheet/test" component={DataSheet}/> 
 		</div>
 	);
