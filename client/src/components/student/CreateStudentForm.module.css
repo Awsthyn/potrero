@@ -1,0 +1,105 @@
+.createStudent {
+    display: flex;
+    justify-content: center;
+    margin: 50 50 50 250;
+}
+
+.formStudent{
+    width: 65vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 45px;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 3px 3px rgba(219, 216, 216, 0.623);
+	border-radius: 20px;
+}
+
+.container{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.containerLevel{
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.input{
+    padding: 10px 0px;
+    width: 70%;
+    margin: 10px 20px 0 20px;
+    border: none;
+	border-bottom: 2px solid #3333331f;
+}
+
+.input:focus {
+    outline: none;
+    border-bottom: 2px solid #8bc63ebe;
+}
+
+.input::-webkit-input-placeholder {
+	font-weight: 100;
+    font-size: 14px;
+}
+
+.labelDatos{
+    font-size: 1.5rem; 
+    padding-top: 3px;
+    font-weight: 300;
+}
+
+/* div {
+    padding: 5px 5px 0 5px;
+} */
+
+select { 
+    -webkit-appearance: none;  
+    -moz-appearance: none;  
+    appearance: none;  
+    cursor: pointer;
+    width: 200px;
+    height: 30px;
+    text-align-last: center;
+} 
+
+select:hover{
+    cursor: pointer;
+    border: 3px solid #8bc63ebe;
+}
+
+select:enabled{
+    outline: none;
+    border: 3px solid #8bc63ebe;
+}
+
+.createStudent .formStudent .container{
+    position: relative;
+}
+
+.containerDays{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.btnAgregar {
+    font-size: 16px;
+    font-weight: 500;
+    width: 210px;
+    height: 50px;
+    background: none;
+    color: white;
+    text-align: center;
+    padding: 0px 20px 0px 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: #492BC4;
+    margin-bottom: 15px;
+    align-self: center;
+}
+

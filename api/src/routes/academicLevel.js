@@ -1,17 +1,17 @@
 const server = require("express").Router();
 
-// TRAEMOS LAS MATERIAS DE LA BASE DE DATOS 
+// TRAEMOS LAS MATERIAS DE LA BASE DE DATOS
 const { AcademicLevel, Subject, EducationLevel } = require("../db.js");
 
-const isAdmin = require('./middlewares.js').isAdmin;
-const isUserActive = require('./middlewares.js').isUserActive
-const isUserAdmin = require('./middlewares.js').isUserAdmin;
+const isAdmin = require("./middlewares.js").isAdmin;
+const isUserActive = require("./middlewares.js").isUserActive;
+const isUserAdmin = require("./middlewares.js").isUserAdmin;
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
 //LISTA LAS MATERIAS POR AÑO
-server.get("/", isAdmin, (req, res) => {
+server.get("/", (req, res) => {
   AcademicLevel.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],

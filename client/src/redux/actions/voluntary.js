@@ -2,14 +2,19 @@ import axios from 'axios';
 import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VOLUNTEER, ADD_SUBJECTS_VOLUNTEER} from '../constants';
 // Agrega un Voluntario --> Crea Calendario --> Envía Mail de Bienvenida 
 export function postVoluntary(voluntary, subjects, schedule) {
+	console.log(voluntary)
 	return function (dispatch) {
 		return axios
 			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
 			.then(res => {
-				dispatch(postMailWelcome(res.data));
-				dispatch(postSubjectVoluntary(subjects, res.data.id));
-				dispatch(addSchedule(schedule, res.data.id))
-				
+				dispatch(postMailWelcome(res.data))
+				.then(() => {
+					dispatch(postSubjectVoluntary(subjects, res.data.id))
+					.then(() => dispatch(addSchedule(schedule, res.data.id)))
+				})
+				// .then(() => dispatch(addSchedule(schedule, res.data.id)))
+				// dispatch(postSubjectVoluntary(subjects, res.data.id));
+				// dispatch(addSchedule(schedule, res.data.id))
 			})
 			.catch(err => console.log(err));
 	};
@@ -20,7 +25,9 @@ export function getVolunteers() {
 		return axios
 			.get(`http://localhost:3001/users`, {withCredentials: true})
 			.then(res => {
-				dispatch({type: GET_VOLUNTEERS, volunteers:res.data.filter(e=> e.state === "pendiente")});
+				const pendientes = res.data.filter(e=> e.state === "pendiente")
+				dispatch({type: GET_VOLUNTEERS, volunteers:pendientes});
+					return pendientes;
 			})
 			.catch(err => console.log(err));
 	};
@@ -40,12 +47,10 @@ export function deleteVolunteer(id) {
 
 // Agrega Calendario(disponibilidad)
 export function addSchedule(schedules, userId) {
-	for(let i = 0; i < schedules.length; i++){
-		schedules[i].userId = userId
-	}
+	console.log(schedules)
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/userSchedule/${userId}`, {schedules}, {withCredentials: true})
+			.post(`http://localhost:3001/userSchedule/${userId}`, {dias: schedules}, {withCredentials: true})
 			.then(res => {
 				dispatch({type: ADD_SCHEDULE, schedule: res.data});
 			})
@@ -69,9 +74,10 @@ export function acceptVolunteer(volunteer) {
 
 // Crea relación entre Materia y Voluntario
 export function postSubjectVoluntary(subjects, userId) {
+	console.log(subjects)
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/users/${userId}/subjects`, {subjects}, {withCredentials: true})
+			.post(`http://localhost:3001/subjectxuser/${userId}/subjects`, {subjects}, {withCredentials: true})
 			.then(res => {
 				dispatch({type: ADD_SUBJECTS_VOLUNTEER, subjects: res.data});
 			})

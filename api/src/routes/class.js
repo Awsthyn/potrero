@@ -14,9 +14,9 @@ const {
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
-const isAdmin = require('./middlewares.js').isAdmin;
-const isUserAdmin = require('./middlewares.js').isUserAdmin;
-const isUserActive = require('./middlewares.js').isUserActive;
+const isAdmin = require("./middlewares.js").isAdmin;
+const isUserAdmin = require("./middlewares.js").isUserAdmin;
+const isUserActive = require("./middlewares.js").isUserActive;
 
 /////////////EXCLUI LOS CREATEDAT, UPDATEDAT EN GRAL AGREGENLO SI ES NECESARIO/////////////////
 

@@ -1,19 +1,19 @@
 const server = require("express").Router();
 
 // TRAEMOS LAS MATERIAS DE LA BASE DE DATOS
-const { EducationLevel, AcademicLevel } = require("../db.js");
+const { EducationLevel, AcademicLevel, Subject } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
 // IMPORTS DE MIDDLEWARES
-const isAdmin = require('./middlewares.js').isAdmin;
-const isUserAdmin = require('./middlewares.js').isUserAdmin;
-const isUserActive = require('./middlewares.js').isUserActive;
+const isAdmin = require("./middlewares.js").isAdmin;
+const isUserAdmin = require("./middlewares.js").isUserAdmin;
+const isUserActive = require("./middlewares.js").isUserActive;
 
 //LISTA LAS MATERIAS POR AÑO
-server.get("/", isAdmin, (req, res) => {
-    EducationLevel.findAll({
+server.get("/", (req, res) => {
+  EducationLevel.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
@@ -23,6 +23,14 @@ server.get("/", isAdmin, (req, res) => {
         attributes: {
           exclude: ["createdAt", "updatedAt", "academicLeveltXSubject"],
         },
+        include: [
+          {
+            model: Subject,
+            attributes: {
+              exclude: ["createdAt", "updatedAt", "academicLeveltXSubject"],
+            },
+          },
+        ],
       },
     ],
   })
@@ -37,7 +45,7 @@ server.get("/", isAdmin, (req, res) => {
 });
 
 // BUSCA UN GRADO EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", isAdmin, (req, res) => {
+server.get("/:id", (req, res) => {
   // ACÁ BUSCA UNA MATERIA EN LA BASE DE DATOS
   EducationLevel.findOne({
     where: {
@@ -91,7 +99,7 @@ server.put("/:id", isAdmin, (req, res) => {
   })
     // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
     .then(() => {
-        EducationLevel.findOne({
+      EducationLevel.findOne({
         where: {
           id: req.params.id,
         },
@@ -106,20 +114,20 @@ server.put("/:id", isAdmin, (req, res) => {
 
 //ELIMINA EL NIVEL DE EDUCACIÓN
 server.delete("/:id", isAdmin, (req, res, next) => {
-    //ENCUENTRA LA MATERIA POR ID Y LA DESTRUYE
-    EducationLevel.destroy({
-      where: {
-        id: req.params.id,
-      },
+  //ENCUENTRA LA MATERIA POR ID Y LA DESTRUYE
+  EducationLevel.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    //UNA VEZ ELIMINADO DEVUELVE UN MENSAJE
+    .then(() => {
+      res.status(200);
+      res.json("Nivel de educación eliminada");
     })
-      //UNA VEZ ELIMINADO DEVUELVE UN MENSAJE
-      .then(() => {
-        res.status(200);
-        res.json("Nivel de educación eliminada");
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  });
+    .catch((err) => {
+      res.json(err);
+    });
+});
 
 module.exports = server;

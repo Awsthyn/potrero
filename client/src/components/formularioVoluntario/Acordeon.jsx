@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
+export default function Acordeon({dia, expandedAll, handleChange, setTime, render}) {
   const classes = useStyles();
   const [days, setDays] = useState('Agregar rango horario');
 
@@ -87,14 +87,21 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
     }
   }, [days])
 
+  useEffect(() => {
+    if(typeof days === 'string' && render[0]){
+      setDays(render)
+    }
+  }, [render])
+  
+
   return(
-        <Accordion expanded={expandedAll === dia} onChange={handleChange(dia)} >
+        <Accordion expanded={expandedAll === dia} onChange={handleChange(dia)} style={render[0] ?{border: '2px solid rgb(140, 198, 62'} : {backgroundColor: "white"}}>
 				<AccordionSummary
 					expandIcon={<span className="material-icons ">expand_more</span>}
 					aria-controls="panel1bh-content"
 					id="panel1bh-header"
 				>
-					<Typography className={classes.heading}>{dia}</Typography>
+					<Typography className={classes.heading} style={expandedAll === dia ? {fontWeight: '700'} : null} >{dia}</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
 					<Typography>
@@ -114,7 +121,7 @@ export default function Acordeon({dia, expandedAll, handleChange, setTime}) {
 									/>
 								);
 							})}
-							<button className={style.accordionButton} onClick={e => handleOnClick(e)}> + </button>
+							{(typeof days === 'string' || days.length < 2) ? <button className={style.accordionButton} onClick={e => handleOnClick(e)}> + </button> : null}
 						</span>
 					) : null}
 					</Typography>

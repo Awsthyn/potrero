@@ -4,20 +4,32 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   const DataSheet = sequelize.define("dataSheet", {
     concentration: {
-      type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+      type: DataTypes.INTEGER,
       allowNull: true,
+      validate: {
+        min: 1,
+        max: 10
+      },
     },
     assistance: {
-      type: DataTypes.ENUM("ausente", "tardanza", "presente"),
+      type: DataTypes.ENUM("justificada", "no justificada", "tardanza", "presente"),
       allowNull: false,
     },
     internetConnection: {
-      type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+      type: DataTypes.INTEGER,
       allowNull: true,
+      validate: {
+        min: 1,
+        max: 10
+      },
     },
     performance: {
-      type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+      type: DataTypes.INTEGER,
       allowNull: true,
+      validate: {
+        min: 1,
+        max: 10
+      },
     },
     someoneAccompaniesHim: {
       type: DataTypes.BOOLEAN,
@@ -36,16 +48,24 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     qualification: {
-      type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+      type: DataTypes.INTEGER,
       allowNull: true,
+      validate: {
+        min: 1,
+        max: 10
+      },
     },
     duration: {
       type: DataTypes.STRING,
       allowNull: true,
     },
     attitude: {
-      type: DataTypes.ENUM("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"),
+      type: DataTypes.INTEGER,
       allowNull: true,
+      validate: {
+        min: 1,
+        max: 10
+      },
     },
     createdAt: {
       type: DataTypes.DATE,

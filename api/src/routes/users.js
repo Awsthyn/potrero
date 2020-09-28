@@ -9,13 +9,11 @@ const {
   EducationLevel,
 } = require("../db.js");
 
-const isAdmin = require('./middlewares.js').isAdmin;
-const isUserActive = require('./middlewares.js').isUserActive;
-const isUserAdmin = require('./middlewares.js').isUserAdmin;
+const isAdmin = require("./middlewares.js").isAdmin;
+const isUserActive = require("./middlewares.js").isUserActive;
+const isUserAdmin = require("./middlewares.js").isUserAdmin;
 
 // URL PARA MIDDLEWARES
-
-
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
@@ -27,29 +25,85 @@ const { isAuthenticated } = require("./authenticate.js");
 // Usamos esta funcion para guardar el archivo con extension
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `${__dirname}/uploads`);
+    if (file.fieldname === "cv") {
+      cb(null, `${__dirname}/uploads/cv`);
+    } else if (file.fieldname === "frontDNI" || file.fieldname === "backDNI") {
+      cb(null, `${__dirname}/uploads/dni`);
+    } else if (file.fieldname === "profilePicture") {
+      cb(null, `${__dirname}/uploads/perfil`);
+    }
   },
   filename: function (req, file, cb) {
     let ext = file.originalname.split(".").pop();
-    cb(null, file.fieldname + "-" + Date.now() + "." + ext);
+    cb(null, file.fieldname + Date.now() + "." + ext);
+    // if (file.fieldname === 'cv') {
+    //   cb(null, file.fieldname + Date.now() + '.' + ext);
+    // } else if (file.fieldname === 'frontDNI' || file.fieldname === 'backDNI') {
+    //   cb(null, file.fieldname + Date.now() + '.' + ext);
+    // } else if (file.fieldname === 'profilePicture') {
+    //   cb(null, file.fieldname + Date.now() + '.' + ext);
+    // }
   },
 });
 
+const fileFilter = (req, file, cb) => {
+  if (file.fieldname === "cv") {
+    // if uploading cv
+    if (file.mimetype === "application/pdf") {
+      // check file type to be pdf
+      cb(null, true);
+    } else {
+      cb(null, false); // else fails
+    }
+  } else {
+    // else uploading image
+    if (
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg"
+    ) {
+      // check file type to be png, jpeg, or jpg
+      cb(null, true);
+    } else {
+      cb(null, false); // else fails
+    }
+  }
+};
+
 const upload = multer({
   storage: storage,
-});
-
-
-//Por ahora nada para obtener desde postman  luego debe ser isAdmin
+  limits: {
+    fileSize: "2mb",
+  },
+  fileFilter: fileFilter,
+}).fields([
+  {
+    name: "cv",
+    maxCount: 1,
+  },
+  {
+    name: "frontDNI",
+    maxCount: 1,
+  },
+  {
+    name: "backDNI",
+    maxCount: 1,
+  },
+  {
+    name: "profilePicture",
+    maxCount: 1,
+  },
+]);
 
 server.get("/", (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
-        "createdAt",
-        "updatedAt",
+        "password",
         "resetPasswordToken",
         "resetPasswordExpires",
+        "createdAt",
+        "updatedAt",
       ],
     },
     include: [
@@ -152,49 +206,68 @@ server.get("/:id", isUserActive, (req, res) => {
 });
 
 // CREA UN USUARIO
-server.post("/", upload.single("cv"), (req, res) => {
+server.post("/", upload, (req, res) => {
   // RECIBE LOS DATOS DEL USUARIO POR BODY
+  console.log(req.body);
   let usuario;
-  if (!req.file) {
+  if (!req.files) {
     usuario = req.body;
-  } else {
+  } else if (req.files.cv && req.files.frontDNI) {
     usuario = {
       ...req.body,
-      cv: `${req.file.filename}`,
+      cv: `${req.files.cv[0].filename}`,
+      frontDNI: `${req.files.frontDNI[0].filename}`,
+      backDNI: `${req.files.frontDNI[0].filename}`,
+    };
+  } else if (req.files.frontDNI) {
+    usuario = {
+      ...req.body,
+      frontDNI: `${req.files.frontDNI[0].filename}`,
+      backDNI: `${req.files.frontDNI[0].filename}`,
     };
   }
+  console.log(usuario);
   User.create(usuario)
+    // .then((userCreated) => {
+    // Se espera valores de Id's de Subjects Ejemplo: 1,2
+    // Recorre SubjectId los prepara en un array y los recorre
+    // entonces agrega la materia relacionado con el id del profesor
+    // req.body.subjectsId.forEach((idSub) => {
+    //   userCreated
+    //     .addSubjects(idSub)
+    //     .then(() => send.json('Materias agregadas al profesor'))
+    //     .catch((err) => {
+    //       // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
+    //       console.log(err);
+    //       res.json(err);
+    //     });
+    // });
+    //AGREGA HORARIOS AL PROFESOR
+    // Recorre scheduleStudent los prepara en un objeto hasta 3 lugares con los numeros incrementando cuando llega a 3 se resetea la variable numero a 1 y vuelve a preparar el objeto, crea un UserSchedule cada 3 posiciones de dias
+    //   let dias = req.body.scheduleUser.split('-');
+    //   let separado = dias;
+    //   let numero = 1;
+    //   let obj = {};
+    //   for (let i = 0; i < separado.length; i++) {
+    //     if (numero === 1) {
+    //       obj.startTime = separado[i];
+    //       numero = numero + 1;
+    //     } else if (numero === 2) {
+    //       obj.endTime = separado[i];
+    //       numero = numero + 1;
+    //     } else if (numero === 3) {
+    //       obj.nameWeekDay = separado[i];
+    //       obj.userId = userCreated.id;
+    //       UserSchedule.create(obj);
+    //       numero = 1;
+    //     }
+    //   }
+    // })
     .then((userCreated) => {
-      res.send(userCreated)
+      res.send(userCreated);
     })
-    .catch(err => res.send(err))
+    .catch((err) => res.send(err));
 });
-
-// RELACIONA LAS MATERIAS CON USUARIOS
-server.post("/:id/subjects", (req, res) => {
-  var id = req.params.id;
-  var materias = req.body.materias;
-  var user = User.findByPk(id);
-
-  materias.map((m, i) => {
-    var subject = Subject.findOne({
-      where: {
-        name: m,
-      },
-    });
-    Promise.all([user, subject])
-      .then((values) => {
-        var user = values[0];
-        var subject = values[1];
-        user.addSubject(subject);
-        if (i === arrayMateria.length - 1) res.send(user);
-      })
-      .catch((err) => {
-        res.send(err);
-      });
-  });
-});
-
 
 //Debe estar protegido por isUserActive
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
@@ -230,8 +303,7 @@ server.put("/:id", (req, res) => {
     .catch((err) => {
       res.send(err);
     });
-}); 
-
+});
 
 //? Se usa?
 // RELACIONA LAS MATERIAS CON USUARIOS
