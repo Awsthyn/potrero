@@ -155,15 +155,15 @@ const TablaUsuarios = (props) => {
                     icon: () => <LinkedInIcon color="primary" />,
                     tooltip: 'Visitar LinkedIn',
                     onClick: (event, rowData) => 
-                       
-                    swal({
-                        title:  `¿Deseas visitar el perfil LinkedIn de ${rowData.firstName} ${rowData.lastName}?`,
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: false,
+                    Swal.fire({
+                        title:  `¿Deseas visitar el detalle de ${rowData.firstName} ${rowData.lastName}?`,
+                        icon: "question",
+                        confirmButtonColor: VIOLETA,
+                        showCancelButton: true,
+                        cancelButtonColor: 'gray',
                        })
-                        .then((confirm) => {
-                                 if (confirm) {
+                        .then((result) => {
+                                 if (result.isConfirmed) {
                                     window.open(rowData.linkedin, "_blank");
                                  }
                                 })
@@ -171,7 +171,19 @@ const TablaUsuarios = (props) => {
                     {
                     icon: () => <ListAltIcon/>,
                     tooltip: 'Detalle de Asesor',
-                    onClick: (event, rowData) => swal("Visitaras perfil de " + rowData.firstName)
+                    onClick: (event, rowData) =>
+                    Swal.fire({
+                        title:  `¿Deseas visitar el detalle de ${rowData.firstName} ${rowData.lastName}?`,
+                        icon: "question",
+                        confirmButtonColor: VIOLETA,
+                        showCancelButton: true,
+                        cancelButtonColor: 'gray',
+                       })
+                        .then((result) => {
+                                 if (result.isConfirmed) {
+                                    history.push(`/admin/voluntarios/${rowData.id}`)
+                                 }
+                                })
                     },
                     
                     rowData => ({
