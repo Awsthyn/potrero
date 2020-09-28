@@ -11,6 +11,9 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import { sessionLogout } from '../../redux/actions/session';
 import Miembros from './MenuItemMiembros';
+import Clases from './MenuItemClases';
+import Gestion from './MenuItemGestion';
+
 
 const VIOLETA = '#492BC4'
 const VERDE = '#8CC63E'
@@ -81,9 +84,8 @@ const useStyles = makeStyles({
             backgroundColor:'transparent',
             cursor: 'pointer',
          },
+         width:'fit-content',
          padding:0,
-         margin:0,
-         paddingTop:0,
          
     },
     logout:{
@@ -122,7 +124,12 @@ const AdminNavBar = (props) => {
                     <ListItem className={classes.item} disableRipple>
                          <Miembros/>
                      </ListItem>
-                  
+                     <ListItem className={classes.item} disableRipple>
+                         <Clases/>
+                     </ListItem>
+                     <ListItem className={classes.item} disableRipple>
+                         <Gestion/>
+                     </ListItem>
 
                 <List className={classes.grouplinks}>
                     <Link to= '/admin/usuarios' className={classes.link}>
