@@ -22,7 +22,7 @@ export const SubjectsPerStudent = ({getStudentDetail, getMatchingSchedulesForAll
     let possibleClasses = matchingSchedule && matchingSchedule[0] && matchingSchedule.map(e => e[0].user.subjects[0].name)
 
     return (
-        <div className="mt-4">
+        <div style={{marginTop: "100px"}}>
             <h2>Clases de {studentDetail.firstName + " " + studentDetail.lastName}</h2>
             <h3>Materias con clases asignadas</h3>
             {assignedSubjects && assignedSubjects.length > 0 ? assignedSubjects.map((s,i) => {

@@ -35,7 +35,6 @@ class App extends React.Component {
       <div className="App">
         {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
         <Route
-          exact
           path={[
             "/admin/voluntarios",
             "/admin/voluntarios/:id",
@@ -45,6 +44,8 @@ class App extends React.Component {
             "/admin/estudiantes/agregar",
             "/admin/estudiantes/detalles/:id",
             "/admin/detail",
+            "/admin/estudiantes/listadematerias/:studentId",
+            "/admin/estudiantes/asignacion/:studentId/:subjectId"
           ]}
           component={AdminNavBar}
         />
