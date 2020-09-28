@@ -91,7 +91,7 @@ const TablaUsuarios = (props) => {
                 if(!users) {
                     Swal.fire(
                         'Conectar la BD',
-                        `Debes conectar la Base de Datos`,
+                        `Debes conectar la Base de Datos o agregar usuarios`,
                         'warning'
                         )
                         history.push(`/admin`)    
@@ -107,9 +107,10 @@ const TablaUsuarios = (props) => {
                 nivel:'Building',
                 grado:'Building',
                 linkedin:asesor.linkedin
-                        })
-                    )
-                )
+             })
+             )
+             )
+        
                     }
             )
       
