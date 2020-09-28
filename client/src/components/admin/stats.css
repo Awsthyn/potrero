@@ -1,9 +1,79 @@
-.stats {
-  margin: auto;
-  margin-top: 50px;
-  cursor: pointer;
-  width: 50%;
+@media print {
+  .ocultoimpresion,
+  .ocultoimpresion * {
+    display: none !important;
+  }
+
+  .titlePotrero, 
+  titlePotrero * {
+    display: ruby !important;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+}
+
+.linkGraficos {
   display: flex;
+  justify-content: space-between;
+  width: 77%;
+  margin: auto;
+  margin-left: 16%;
+  margin-bottom: 5%;
+}
+
+.linkGraficos a {
+  background-color: #492bc4;
+  color: white;
+}
+
+.linkGraficos button {
+  background-color: #492bc4;
+  color: white;
+}
+
+.linkGraficos a:hover{
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white;
+}
+
+.linkGraficos button:hover{
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white;
+}
+
+#stats1, #stats2, #stats3, #stats4 {
+  margin: auto;
+  cursor: pointer;
+  display: flex;
+  width: 70%;
   flex-direction: column;
+  justify-content: center;
+}
+
+.titlePotrero{
+  display: ruby;
+}
+ 
+.titlePotrero img{
+  margin-top: -15px;
+}
+
+.fixBtn{
+  width: 120px;
+  font-size: 12px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.noListStyle{
+  text-decoration: none;
+  list-style: none;
+}
+
+.centerTitle{
+  display: flex;
+  flex-direction: row;
   justify-content: center;
 }

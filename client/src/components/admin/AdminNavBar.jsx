@@ -78,7 +78,8 @@ const useStyles = makeStyles({
         '&:hover': {
             color:'white',
             textDecoration:'none',
-            backgroundColor:'transparent'
+            backgroundColor:'transparent',
+            cursor: 'pointer',
          },
          padding:0,
          margin:0,
