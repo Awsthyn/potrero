@@ -7,7 +7,6 @@ export function getUserSchedule(id) {
 		return axios
 			.get(`http://localhost:3001/userSchedule/${id}`, {withCredentials: true})
 			.then(res => {
-                console.log('ssssssssss', res.data)
 				dispatch({type: GET_USER_SCHEDULE, payload: res.data});
 			})
 			.catch(err => console.log(err));
