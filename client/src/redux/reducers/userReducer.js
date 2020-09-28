@@ -1,8 +1,8 @@
-import {GET_USERS, GET_USER_SUBJECTS, GET_USER_STUDENTS, GET_USER_CLASS, PUT_USER, ADD_DATA_SHEET} from '../constants';
+import {GET_USERS, GET_USER, GET_USER_STUDENTS, GET_USER_CLASS, PUT_USER, ADD_DATA_SHEET} from '../constants';
 
 const initialState = {
 	users: [],
-	userSubjects:[],
+	user:[],
 	userStudents:[],
 	userClass:[],
 };
@@ -14,10 +14,10 @@ export default function rootReducer(state = initialState, action) {
 			if (typeof action.payload === 'string') 
 			return {...state, users: []}
 			return {...state, users: action.payload}	
-		case GET_USER_SUBJECTS:			
+		case GET_USER:			
 			return {
 				...state,
-				userSubjects: action.payload,
+				user: action.payload,
 			};
 		case GET_USER_STUDENTS:			
 			return {
