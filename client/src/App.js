@@ -26,6 +26,7 @@ import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
 import DataSheet from './components/AsesorProfile/dataSheet/DataSheet'
+import DetalleClase from './components/admin/DetalleClase';
 
 class App extends React.Component {
   render() {
@@ -100,6 +101,7 @@ class App extends React.Component {
           component={DetailsOfInassistances}
         />
         <Route path="/admin/detail" component={GeneralAssistsDetail} />
+        <Route path="/admin/class/detail" component={DetalleClase} />
       </div>
     );
   }
