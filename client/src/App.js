@@ -49,21 +49,8 @@ class App extends React.Component {
           ]}
           component={AdminNavBar}
         />
-<<<<<<< HEAD
-        <Route exact path='/' component={Home} />
-        <Route exact
-          path={[
-            '/voluntarios/formulario',
-            '/voluntarios/horarios',
-            '/voluntarios/niveles',
-            '/voluntarios/materias',
-            '/voluntarios/cargararchivos',
-            '/voluntarios/confirmacion',
-          ]} component={ContenedorForm} />
-=======
         <Route exact path="/" component={Home} />
         <Route path="/voluntarios" component={ContenedorForm} />
->>>>>>> master
         {/* <Route path="/admin" component={AdminDrawer} /> */}
         <AdminRoute exact path="/admin" component={AdminDrawer} />
         <Route exact path="/admin" component={AdminPanel} />
@@ -88,29 +75,6 @@ class App extends React.Component {
             <StudentFile student={props.location.state.props} />
           )}
         />
-<<<<<<< HEAD
-        <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
-        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
-
-
-
-        <Route exact path='/usuario/login' component={Login} />
-        <Route exact path='/usuario/perfil' component={MiPerfil} />
-        <Route exact path='/usuario/recuperar' component={PasswordRecovery} />
-        <Route exact path='/login/:token' component={ResetPassword} />
-
-		<Route
-        path="/studentCard"
-        component = {StudentCard} />
-
-		<Route
-		exact path = {[ "/asesores/estudiantes/:id", "/asesores/clases/:id", "/asesores/notas/:id"]}
-		component = {AsesorProfile}/>
-    <Route path="/datasheet/test" component={DataSheet}/> 
-		</div>
-	);
-	}
-=======
         <Route
           exact
           path="/admin/estudiantes/asignacion/:studentId/:subjectId"
@@ -129,7 +93,7 @@ class App extends React.Component {
         <Route exact path="/login/:token" component={ResetPassword} />
 
         <Route path="/studentCard" component={StudentCard} />
->>>>>>> master
+        <Route path="/datasheet/test" component={DataSheet}/>
 
         <Route path="/asesor/test" component={AsesorProfile} />
         <Route
