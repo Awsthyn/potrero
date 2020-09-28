@@ -9,7 +9,17 @@ export default function TablaClases() {
    function getClasses(){
       return axios.get('http://localhost:3001/class')
          .then(res => {
-            if(typeof res.data !== 'string') setClases(res.data)
+            if(typeof res.data !== 'string') {
+               setClases(res.data.map(c => {
+                  return {
+                     userFullName: c.user.firstName +  ' ' + c.user.lastName,
+                     sutudentFullname: c.student.firstName + ' ' + c.student.lastName,
+                     subject: c.subject.name,
+                     nameWeekDay: c.nameWeekDay,
+                     hora: `${c.duration[0].value} a ${c.duration[1].value}`
+                  }
+               }))
+            }
             else{ setClases([])}
          })
          .catch(err => console.log(err))
@@ -23,13 +33,11 @@ export default function TablaClases() {
          <MaterialTable
             title="Clases Asignadas"
             columns={[
-            { title: 'Alumno', field: 'student.lastName' },
-            { title: 'Asesor', field: 'user.lastName'},
-            { title: 'Materia', field: 'subject.name' },
+            { title: 'Alumno', field: 'sutudentFullname' },
+            { title: 'Asesor', field: 'userFullName'},
+            { title: 'Materia', field: 'subject' },
             { title: 'Día', field: 'nameWeekDay'},
-            { title: 'Hora', field: 'duration[0].value', type: 'numeric' },
-            { title: ''},
-            { title: ''}
+            { title: 'Hora', field: 'hora' },
             ]}
             data={clases}        
             actions={[
