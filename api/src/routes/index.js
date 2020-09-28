@@ -45,6 +45,9 @@ const mailWelcomeRejection = require("./mailWelcomeRejection.js");
 // IMPORT DE LA RUTA DE Mail con envío de los terminos y condiciones
 const termsAndConditions = require("./termsAndConditions.js");
 
+// IMPORT DE LA RUTA DE Mail de Admisión
+const mailAdvisor= require("./mailAdvisor.js");
+
 // IMPORT DE LA RUTA DE CLASS
 const classRouter = require("./class.js");
 
@@ -87,6 +90,9 @@ router.use("/mailAdmission", mailAdmission);
 
 //Ruta del mail de bienvenida al nuevo asesor
 router.use("/mailWelcomeRejection", mailWelcomeRejection);
+
+//Ruta para enviar mail a un asesor
+router.use("/mailAdvisor", mailAdvisor);
 
 //Ruta de mail con los términos y condiciones
 router.use("/termsAndConditions", termsAndConditions);
