@@ -6,17 +6,14 @@ import Swal from 'sweetalert2'
 import {postClass} from '../../../redux/actions/class'
 
 
-export default function ChooseHour({hours, id}) {
+export default function ChooseHour({friendlyData, userData, hours, id}) {
   const [start, setStart] = useState(hours[0])
   const [end, setEnd] = useState(hours[0]+ 0.5)
   
   let startToHour = hours[0] % 1 === 0 ? String(hours[0]) + ":00" : String(hours[0]).substring(0,2) + ":30"
   let endToHour = hours[1] % 1 === 0 ? String(hours[1]) + ":00" : String(hours[1]).substring(0,2) + ":30"
-
   const handleTime = (hour, time) => {
     let hours = moment(hour).format('LT')
-    console.log(moment.duration(hours).asHours())
-    console.log(time)
     time == "start" ? setStart(moment.duration(hours).asHours()) : setEnd(moment.duration(hours).asHours())
   }
 
@@ -33,7 +30,10 @@ export default function ChooseHour({hours, id}) {
     if(a===b){
       Swal.fire({
         title: '¿Desea confirmar la creación de la clase?',
-        text: `Se creará una clase de ${start % 1 === 0 ? String(start) + ":00" : String(start).substring(0,2) + ":30"} a  ${end % 1 === 0 ? String(end) + ":00" : String(end).substring(0,2) + ":30"} hs.`,
+        text: `Se creará una clase de ${friendlyData.subject} 
+        desde ${start % 1 === 0 ? String(start) + ":00" : String(start).substring(0,2) + ":30"} a  ${end % 1 === 0 ? String(end) + ":00" : String(end).substring(0,2) + ":30"} hs
+        Alumno: ${friendlyData.name},
+        Asesor: ${userData}`,
         showDenyButton: false,
         showCancelButton: true,
         confirmButtonText: `Crear clase`,
