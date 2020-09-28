@@ -27,7 +27,7 @@ export const ClassAssignation = ({getMatchingSchedules, matchingSchedule, getSub
             <h2>Horarios disponibles para asignar una clase de {subjectDetail.name} a {studentDetail.firstName + ' ' + studentDetail.lastName}</h2>
             <div className="d-flex flex-wrap flex-row">
             {matchingSchedule.length > 0 ? 
-            matchingSchedule.map((e,i) => <CardParent friendlyData={{subject: subjectDetail.name, name: studentDetail.firstName + ' ' + studentDetail.lastName }} params={params} onClick={onClick} key={i} option={e} id={i} />) 
+            matchingSchedule.map((e,i) => <CardParent friendlyData={{subject: {id: subjectDetail.id, name: subjectDetail.name}, student: {id: studentDetail.id, name: studentDetail.firstName + ' ' + studentDetail.lastName} }} params={params} onClick={onClick} key={i} option={e} id={i} />) 
             : null}
             </div>    
         </div>

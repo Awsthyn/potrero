@@ -5,7 +5,6 @@ import ChooseHour from "./ChooseHour"
 export const MatchCard = ({option, friendlyData, id, data, params, onClick}) => {
     let start = data[0] % 1 === 0 ? String(data[0]) + ":00" : String(data[0]).substring(0,2) + ":30"
     let end = data[1] % 1 === 0 ? String(data[1]) + ":00" : String(data[1]).substring(0,2) + ":30"
-    console.log(friendlyData)
     return (
         <div className="form-group">
         <input
@@ -22,7 +21,7 @@ export const MatchCard = ({option, friendlyData, id, data, params, onClick}) => 
             <h5>{option.nameWeekDay}</h5>
             <h5 className="mb-4">{`${start}  -  ${end}`}</h5>
         </label>
-        <ChooseHour userData={option.user.firstName + " " + option.user.lastName} friendlyData={friendlyData} hours={data} id={id}/>
+        <ChooseHour nameWeekDay={option.nameWeekDay} userData={{id: option.user.id, name: option.user.firstName + " " + option.user.lastName}} friendlyData={friendlyData} hours={data} id={id}/>
     </div>
     )
 }
