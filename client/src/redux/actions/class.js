@@ -27,6 +27,12 @@ export function getMatchingSchedules(studentId, subjectId) {
 
 export function postClass(clase){
 		return axios
-			.post(`http://localhost:3001/class/`, clase, {withCredentials: true})
+			.post(`http://localhost:3001/class`, clase, {withCredentials: true})
 			.then(() => window.location= "/admin/estudiantes/listadematerias/" + clase.studentId)
+}
+
+export function deleteClass(classId){
+	return axios
+		.delete(`http://localhost:3001/class/${classId}`, {withCredentials: true})
+		.then(() => window.location.reload())
 }
