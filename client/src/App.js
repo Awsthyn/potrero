@@ -26,6 +26,10 @@ import ClassAssignation from "./components/student/classes/ClassAssignation"
 import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
+<<<<<<< HEAD
+=======
+import TablaClases from './components/admin/TablaClases';
+>>>>>>> c0b0e7c60df2e4a821cfd8fe48424182c9d0bd07
 
 
 
@@ -63,6 +67,7 @@ class App extends React.Component {
         <Route exact path="/admin/usuarios" component={TablaUsuarios} />
         <Route exact path="/admin/materias" component={TablaMaterias} />
         <Route exact path="/admin/estudiantes" component={StudentCrud} />
+        <Route exact path="/admin/clases" component={TablaClases} />
         <Route
           exact
           path="/admin/estudiantes/agregar"
@@ -75,6 +80,7 @@ class App extends React.Component {
             <StudentFile student={props.location.state.props} />
           )}
         />
+<<<<<<< HEAD
         <Route
           exact
           path="/admin/estudiantes/asignacion/:studentId/:subjectId"
@@ -94,8 +100,24 @@ class App extends React.Component {
 
         <Route path="/studentCard" component={StudentCard} />
         <Route path="/datasheet/test" component={DataSheet}/>
+=======
+        <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
+        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
 
-        <Route path="/asesor/test" component={AsesorProfile} />
+
+
+        <Route exact path='/usuario/login' component={Login} />
+        <Route exact path='/usuario/perfil' component={MiPerfil} />
+        <Route exact path='/usuario/recuperar' component={PasswordRecovery} />
+        <Route exact path='/login/:token' component={ResetPassword} />
+
+        <Route
+            path="/studentCard"
+            component = {StudentCard} />
+>>>>>>> c0b0e7c60df2e4a821cfd8fe48424182c9d0bd07
+
+        <Route exact path = "/asesores/:id" component = {AsesorProfile}/>
+        <Route path="/datasheet/test" component={DataSheet}/> 
         <Route
           exact
           path="/admin/inassistances"

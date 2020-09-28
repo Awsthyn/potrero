@@ -10,10 +10,10 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
 	switch (action.type) {
 
-        case GET_USERS:	
+		case GET_USERS:	
 			if (typeof action.payload === 'string') 
 			return {...state, users: []}
-			return {...state, users: action.payload}   
+			return {...state, users: action.payload}	
 		case GET_USER_SUBJECTS:			
 			return {
 				...state,

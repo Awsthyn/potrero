@@ -3,7 +3,6 @@ import style from './AsesorProfile.module.css';
 import AsesorStudents from './AsesorStudents/AsesorStudents.jsx';
 import AsesorClases from './asesorClases/AsesorClases'
 import { ExpansionPanelDetails } from '@material-ui/core';
-import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {getUserSubjects, putUser} from '../../redux/actions/users'
 import AssesorCalendar from './AssesorCalendar';
@@ -12,11 +11,10 @@ import axios from "axios";
 
 function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
     let subjects = ['Matemáticas', 'Lengua y Literatura', 'Ciencias Sociales', 'Ciencias Naturales', 'Inglés', 'Formación Ética y Ciudadana' ]
-
     const [ edit, setEdit ] = useState(false);
     const [state, setState] = useState({});
     const [ toggle, setToggle ] = useState ({
-        students: false,
+        students: true,
         classes: false,
         grades: false
     }) 
@@ -160,23 +158,14 @@ return(
 
         <div className = {style.cards}>
             <div className = {style.filter}>
-            {/* <ul className = {style.items}>
-                <Link to={`/asesores/estudiantes/${user.id}`} style={{textDecoration: 'none', color: '#836D6D'}}>
-                    <li className = {history.location.pathname.includes('asesores/estudiantes') ? style.item : null}>Estudiantes</li>
-                </Link> 
-                <Link to={`/asesores/clases/${user.id}`} style={{textDecoration: 'none', color: '#836D6D'}}> 
-                    <li className = {history.location.pathname.includes('asesores/clases') ? style.item : null}>Clases</li>
-                </Link>
-                    <li className = {history.location.pathname.includes('asesores/notas') ? style.item : null}>Notas</li>
-                </ul> */}
                 <div className = {style.items}>
                     <button onClick = {(e) => pestañas(e)} name = "students" className = {toggle.students ? style.itemOn : style.item} >Estudiantes</button>
                     <button onClick = {(e) => pestañas(e)} name = "classes" className = {toggle.classes ? style.itemOn : style.item} >Clases</button>
                     <button onClick = {(e) => pestañas(e)} name = "grades" className = {toggle.grades ? style.itemOn : style.item}  >Notas</button>
                 </div>
             </div>
-            <Route exact path={`/asesores/estudiantes/${user.id}`} render={() => <AsesorStudents />} />
-            <Route exact path={`/asesores/clases/${user.id}`} render={() => <AsesorClases user={user} />} /> 
+            {toggle.students ? <AsesorStudents/> : null}
+            {toggle.classes ? <AsesorClases user={user}/> : null}
         </div>
     </div>
     </div>
