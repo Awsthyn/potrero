@@ -25,6 +25,10 @@ import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
 
+
+
+
+
 class App extends React.Component {
   render() {
     return (
