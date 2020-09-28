@@ -23,9 +23,9 @@ export default function ContenedorCheckbox({ uploadParentState }) {
 	}
 
 	return (
-		<div>
-			<small> Los horarios límites para las clases son de 8:00 hs a 20:00 hs. Escoge tu rango horario (los mismos no deben ser inferiores a 1 hora)</small>
-			<div className={`${style.checkboxMaterias}${style.formInput}`}>
+		<div >
+			<p style = {{fontSize : '14px', fontWeight : '200', marginTop : '1%'}}> Los horarios límites para las clases son de 8:00 hs a 20:00 hs. Escoge tu rango horario (los mismos no deben ser inferiores a 1 hora)</p>
+			<div style = {{margin: '0 auto'}} className={`${style.checkboxMaterias}${style.formInput}`}>
 				<ul style={{marginTop: '20px'}} className={style.containerListDays}>
 					{dias && dias.map((dia, idx) => (
 						<li className={style.itemList} key={idx}>
