@@ -1,15 +1,10 @@
+
 -- QUERY PARA USERS 
 
 INSERT INTO users
-<<<<<<< HEAD
-VALUES(DEFAULT, 'frank@gmail.com', null, 'Franco', 'Matus', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/franmatus6', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO users
-VALUES(DEFAULT, 'martinch@gmail.com', null, 'Lucca', 'Lipisky', 'Santiago', '25/05/2002', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-=======
 VALUES(DEFAULT, 'martinch@gmail.com', null, 'Lucca', 'Lipisky', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
->>>>>>> master
 INSERT INTO users
-VALUES(DEFAULT, 'sanlorenzo10@gmail.com',null, 'Ane', 'Ruz', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'sanlorenzo10@gmail.com', null, 'Ane', 'Ruz', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'carlitoh@gmail.com', null, 'Markito', 'Hernandez', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
@@ -17,7 +12,7 @@ VALUES(DEFAULT, 'eltumba@gmail.com', null, 'Tirri', 'Joel', 'Beraza', '11/04/200
 INSERT INTO users
 VALUES(DEFAULT, 'ratatatatat@gmail.com', null, 'Mark', 'Zarasa', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'josefo@gmail.com',null, 'Elena', 'Gonzalez', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez','no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'josefo@gmail.com', null, 'Elena', 'Gonzalez', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'lele@gmail.com', null, 'Gustavo', 'Altamiranda', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
@@ -25,7 +20,7 @@ VALUES(DEFAULT, 'guillermo12312@gmail.com', null, 'Guillermo', 'Guillermino', 'B
 INSERT INTO users
 VALUES(DEFAULT, 'josetomas@gmail.com', null, 'Jose Tomas', 'Arce', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/marasasa', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'mellado2@gmail.com',null, 'Zoe', 'Mellado', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/shepetos', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'mellado2@gmail.com', null, 'Zoe', 'Mellado', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/shepetos', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'fonseca@gmail.com', null, 'Tatiana', 'Fonseca', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/malevo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
@@ -33,16 +28,12 @@ VALUES(DEFAULT, 'alfonso@gmail.com', null, 'Oscar', 'Alfonso', 'Beraza', '11/04/
 INSERT INTO users
 VALUES(DEFAULT, 'verdugo@gmail.com', null, 'Marti', 'Verdugo', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/zlamrar', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-VALUES(DEFAULT, 'simon@gmail.com',null, 'Nacho', 'Simon', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez','no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES(DEFAULT, 'simon@gmail.com', null, 'Nacho', 'Simon', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'mellado@gmail.com', null, 'Zoe', 'Mellado', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-<<<<<<< HEAD
-VALUES(DEFAULT, 'cfufcufcufcufcuc@gmail.com', null, 'xtdxdtdxt', 'xdtdttxdtdx', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
-=======
 VALUES(DEFAULT, 'hernandez@gmail.com', null, 'Camila', 'Hernandez', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'todavia no', 'capaz', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
->>>>>>> master
+
 -- QUERY PARA SUBJECTS 
 
 INSERT INTO subjects
@@ -60,65 +51,65 @@ VALUES(DEFAULT, 'Literatura', DEFAULT, DEFAULT);
 INSERT INTO subjects
 VALUES(DEFAULT, 'Practicas del Lenguaje', DEFAULT, DEFAULT);
 
-
 -- QUERY PARA STUDENTS
 
 INSERT INTO students
-VALUES(DEFAULT, 'Manuel', 'Pepe', '1125252242','Manuelpepe@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Manuel', 'Pepe', '1125252242', 'Manuelpepe@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Juan', 'Perez', '1125252242','Juanpere@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Juan', 'Perez', '1125252242', 'Juanpere@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Giovani', 'Gonzalez', '1125252242','Giovaniasfasf@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Giovani', 'Gonzalez', '1125252242', 'Giovaniasfasf@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Marcos', 'Charly', '1125252242','Marcosasd@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Marcos', 'Charly', '1125252242', 'Marcosasd@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Joseph', 'Sthepenson', '1125252242','Sthepenson@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Joseph', 'Sthepenson', '1125252242', 'Sthepenson@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Franco', 'Matus', '1125252242','Matus@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Franco', 'Matus', '1125252242', 'Matus@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Kimberly', 'Lopez', '1125252242','Lopez@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Kimberly', 'Lopez', '1125252242', 'Lopez@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Nicolas', 'Jastin', '1125252242','Jastin@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Nicolas', 'Jastin', '1125252242', 'Jastin@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Pepe', 'Futbol', '1125252242','Futbol@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Pepe', 'Futbol', '1125252242', 'Futbol@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Jose', 'Maria', '1125252242','Maria@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Jose', 'Maria', '1125252242', 'Maria@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'ManJuanuel', 'Maneul', '1125252242','Maneul@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'ManJuanuel', 'Maneul', '1125252242', 'Maneul@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Robert', 'Deniro', '1125252242','Deniro@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Robert', 'Deniro', '1125252242', 'Deniro@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Charles', 'Darwin', '1125252242','Darwin@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Charles', 'Darwin', '1125252242', 'Darwin@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Albert', 'Einstein', '1125252242','Einstein@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Albert', 'Einstein', '1125252242', 'Einstein@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Mark', 'Malthus', '1125252242','Malthus@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Mark', 'Malthus', '1125252242', 'Malthus@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Sthepen', 'Tryon', '1125252242','Tryon@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Sthepen', 'Tryon', '1125252242', 'Tryon@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'LeBron', 'James', '1125252242','James@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'LeBron', 'James', '1125252242', 'James@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Emanuel', 'Roberts', '1125252242','Roberts@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Emanuel', 'Roberts', '1125252242', 'Roberts@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'James', 'Johnson', '1125252242','Johnson@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'James', 'Johnson', '1125252242', 'Johnson@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Harry', 'Check', '1125252242','Check@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Harry', 'Check', '1125252242', 'Check@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Don', 'Almendra', '1125252242','Almendra@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Don', 'Almendra', '1125252242', 'Almendra@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Fabio', 'Rakiic', '1125252242','Rakiic@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Fabio', 'Rakiic', '1125252242', 'Rakiic@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Nico', 'Del Potro', '1125252242','delpotro@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Nico', 'Del Potro', '1125252242', 'delpotro@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Lionel', 'Messi', '1125252242','Lionel@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Lionel', 'Messi', '1125252242', 'Lionel@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Cristiano', 'Ronaldo', '1125252242','Cristiano@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Cristiano', 'Ronaldo', '1125252242', 'Cristiano@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Carlos', 'Pepe', '1125252242','Carlos@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Carlos', 'Pepe', '1125252242', 'Carlos@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Albert', 'Makinst', '1125252242','Albert@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Albert', 'Makinst', '1125252242', 'Albert@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
-VALUES(DEFAULT, 'Beive', 'Rekinat', '1125252242','Beive@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+VALUES(DEFAULT, 'Beive', 'Rekinat', '1125252242', 'Beive@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+
 -- QUERY PARA TYPEOFDIFFICULTIES
 
 INSERT INTO "typeOfDifficulties"
@@ -212,6 +203,7 @@ INSERT INTO classes
 VALUES(DEFAULT, '(13,15.5)', 'Lunes', DEFAULT, DEFAULT, 15, 15, 1);
 INSERT INTO classes
 VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 16, 16, 2);
+
 -- QUERY PARA DATASHEET
 
 INSERT INTO "dataSheets"
@@ -284,40 +276,36 @@ INSERT INTO "dataSheets"
 VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 35);
 INSERT INTO "dataSheets"
 VALUES(DEFAULT, 4, 'justificada', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 36);
-                                             
+
 -- QUERY PARA STUDENTSCHEDULE
 
 INSERT INTO "studentSchedules"
-VALUES(DEFAULT,'(14.5,16.5)','Lunes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(14.5,16.5)', 'Lunes', DEFAULT, DEFAULT, 1);
 INSERT INTO "studentSchedules"
-VALUES(DEFAULT,'(14.5,16.5)','Martes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(14.5,16.5)', 'Martes', DEFAULT, DEFAULT, 1);
 INSERT INTO "studentSchedules"
-VALUES(DEFAULT,'(12.5,14.5)','Lunes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(12.5,14.5)', 'Lunes', DEFAULT, DEFAULT, 1);
 INSERT INTO "studentSchedules"
-VALUES(DEFAULT,'(13.5,15.5)','Martes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(13.5,15.5)', 'Martes', DEFAULT, DEFAULT, 1);
 INSERT INTO "studentSchedules"
-VALUES(DEFAULT,'(13.5,15.5)','Martes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(13.5,15.5)', 'Martes', DEFAULT, DEFAULT, 1);
 INSERT INTO "studentSchedules"
-VALUES(DEFAULT,'(14.5,16.5)','Martes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(14.5,16.5)', 'Martes', DEFAULT, DEFAULT, 1);
 
 -- QUERY PARA USERSCHEDULE
 
 INSERT INTO "userSchedules"
-VALUES(DEFAULT,'(14.5,16.5)','Lunes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(14.5,16.5)', 'Lunes', DEFAULT, DEFAULT, 1);
 INSERT INTO "userSchedules"
-VALUES(DEFAULT,'(14.5,16.5)','Martes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(14.5,16.5)', 'Martes', DEFAULT, DEFAULT, 1);
 INSERT INTO "userSchedules"
-VALUES(DEFAULT,'(12.5,14.5)','Lunes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(12.5,14.5)', 'Lunes', DEFAULT, DEFAULT, 1);
 INSERT INTO "userSchedules"
-VALUES(DEFAULT,'(13.5,15.5)','Martes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(13.5,15.5)', 'Martes', DEFAULT, DEFAULT, 1);
 INSERT INTO "userSchedules"
-VALUES(DEFAULT,'(13.5,15.5)','Martes',DEFAULT,DEFAULT,1);
+VALUES(DEFAULT, '(13.5,15.5)', 'Martes', DEFAULT, DEFAULT, 1);
 INSERT INTO "userSchedules"
-VALUES(DEFAULT,'(14.5,16.5)','Martes',DEFAULT,DEFAULT,1);
-
-
-
--- //HASTAS asdasdasdasdasd 
+VALUES(DEFAULT, '(14.5,16.5)', 'Martes', DEFAULT, DEFAULT, 1);
 
 
 -- QUERY PARA TIPO DE DIFICULTAD POR ESTUDIANTE
@@ -420,54 +408,55 @@ VALUES(2, 'Secundaria', DEFAULT, DEFAULT);
 -- QUERY PARA ACADEMICLEVELXSUBJECT
 
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Primer Grado', DEFAULT,DEFAULT, 1);
+VALUES(DEFAULT, 'Primer Grado', DEFAULT, DEFAULT, 1);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Segundo Grado', DEFAULT,DEFAULT, 1);
+VALUES(DEFAULT, 'Segundo Grado', DEFAULT, DEFAULT, 1);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Tercer Grado', DEFAULT,DEFAULT, 1);
+VALUES(DEFAULT, 'Tercer Grado', DEFAULT, DEFAULT, 1);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Cuarto Grado', DEFAULT,DEFAULT, 1);
+VALUES(DEFAULT, 'Cuarto Grado', DEFAULT, DEFAULT, 1);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Quinto Grado', DEFAULT,DEFAULT, 1);
+VALUES(DEFAULT, 'Quinto Grado', DEFAULT, DEFAULT, 1);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Sexto Grado', DEFAULT,DEFAULT, 1);
+VALUES(DEFAULT, 'Sexto Grado', DEFAULT, DEFAULT, 1);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Septimo Grado', DEFAULT,DEFAULT, 1);
+VALUES(DEFAULT, 'Septimo Grado', DEFAULT, DEFAULT, 1);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Primer Año', DEFAULT, DEFAULT, 2);
+VALUES(DEFAULT, 'Primer Año', DEFAULT, DEFAULT, 2);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Segundo Año', DEFAULT, DEFAULT, 2);
+VALUES(DEFAULT, 'Segundo Año', DEFAULT, DEFAULT, 2);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Tercer Año', DEFAULT, DEFAULT, 2);
+VALUES(DEFAULT, 'Tercer Año', DEFAULT, DEFAULT, 2);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Cuarto Año', DEFAULT, DEFAULT, 2);
+VALUES(DEFAULT, 'Cuarto Año', DEFAULT, DEFAULT, 2);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Quinto Año', DEFAULT, DEFAULT, 2);
+VALUES(DEFAULT, 'Quinto Año', DEFAULT, DEFAULT, 2);
 INSERT INTO "academicLevels"
-VALUES(DEFAULT,'Sexto Año', DEFAULT, DEFAULT, 2);
+VALUES(DEFAULT, 'Sexto Año', DEFAULT, DEFAULT, 2);
 
 -- QUERY PARA EDUCATIONLEVELTXSUBJECT
+
 INSERT INTO "academicLeveltXSubject"
-VALUES(2,1);
+VALUES(2, 1);
 INSERT INTO "academicLeveltXSubject"
-VALUES(3,1);
+VALUES(3, 1);
 INSERT INTO "academicLeveltXSubject"
-VALUES(4,1);
+VALUES(4, 1);
 INSERT INTO "academicLeveltXSubject"
-VALUES(5,1);
+VALUES(5, 1);
 INSERT INTO "academicLeveltXSubject"
-VALUES(6,1);
+VALUES(6, 1);
 INSERT INTO "academicLeveltXSubject"
-VALUES(7,1);
+VALUES(7, 1);
 INSERT INTO "academicLeveltXSubject"
-VALUES(1,2);
+VALUES(1, 2);
 INSERT INTO "academicLeveltXSubject"
-VALUES(3,2);
+VALUES(3, 2);
 INSERT INTO "academicLeveltXSubject"
-VALUES(4,2);
+VALUES(4, 2);
 INSERT INTO "academicLeveltXSubject"
-VALUES(5,2);
+VALUES(5, 2);
 INSERT INTO "academicLeveltXSubject"
-VALUES(6,2);
+VALUES(6, 2);
 INSERT INTO "academicLeveltXSubject"
-VALUES(7,2);
+VALUES(7, 2);
