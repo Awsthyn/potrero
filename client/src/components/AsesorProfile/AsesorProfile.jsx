@@ -144,7 +144,7 @@ return(
                         <div>
                         <input spellcheck="false" autocomplete="off" type="text" name="asunto" id="asunto" placeholder="Asunto" className={style.input} onChange={(e) => setEnviar({...enviar, [e.target.name]: e.target.value})} />
                         <textarea  name="mensaje" placeholder="Mensaje" className={style.bodyMessage} onChange={(e) => setEnviar({...enviar, [e.target.name]: e.target.value, email: user.email})}></textarea>
-                        <button disable={!enviar.mensaje ? true : false} className={!enviar.mensaje ? style.sendEmailFalse : style.sendEmailTrue} onClick={() => handleSendEmail()}>Enviar e-mail</button>
+                        <button disabled={!enviar.mensaje ? true : false} className={!enviar.mensaje ? style.sendEmailFalse : style.sendEmailTrue} style={{display: "flex", alignItems: "center"}}  onClick={() => handleSendEmail()}>Enviar e-mail<span style={{margin: "10px"}} className="material-icons">send</span></button>
                         </div>
                 </form>
                 </div>
