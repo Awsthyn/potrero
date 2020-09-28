@@ -25,7 +25,6 @@ import ClassAssignation from "./components/student/classes/ClassAssignation";
 import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent";
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
-import DataSheet from './components/AsesorProfile/dataSheet/DataSheet'
 import DetalleClase from './components/admin/DetalleClase';
 
 class App extends React.Component {
@@ -94,7 +93,6 @@ class App extends React.Component {
             component = {StudentCard} />
 
         <Route exact path = "/asesores/:id" component = {AsesorProfile}/>
-        <Route path="/datasheet/test" component={DataSheet}/> 
         <Route
           exact
           path="/admin/inassistances"

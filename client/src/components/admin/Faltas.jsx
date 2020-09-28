@@ -9,7 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function Faltas() {
   const [open, setOpen] = React.useState(false);
-  const [estado, setEstado] = useState({classId : 1})
+  const [estado, setEstado] = useState({})
+
    let ausente = useRef(null); let presente = useRef(null); 
    let si = useRef(null); let no = useRef(null)
    let yes = useRef(null); let nop = useRef(null)
@@ -17,7 +18,6 @@ export default function Faltas() {
    const handleChecked = (e, type) => {
       if(e.target.checked){
          setEstado({...estado, [e.target.name]: e.target.value})
-         if(type === 'asist') { 
             let asistencia = [ ausente, presente]
             asistencia.map(a => {
                if(a.current.value !== e.target.value){
@@ -25,7 +25,7 @@ export default function Faltas() {
                }
                return
             }) 
-         }
+         
       }else{
          setEstado({...estado, [e.target.name]: null})
       }
@@ -38,7 +38,7 @@ export default function Faltas() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log(estado)
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -48,13 +48,16 @@ export default function Faltas() {
         <DialogTitle id="form-dialog-title">¿La falta del alumno fue justificada?</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            <input type="checkbox" ref={presente} value="presente" name="assistance" 
+            <input type="checkbox" ref={presente} value="si" name="justify" 
             onChange={(e) => handleChecked(e, 'asist')}/>
             <label htmlFor="presente"> Si </label><br></br>
-            <input type="checkbox"  ref={ausente} value="ausente" name="assistance" 
+            <input type="checkbox"  ref={ausente} value="no" name="justify" 
             onChange={(e) => handleChecked(e, 'asist')}/>
             <label htmlFor="ausente"> No </label><br></br>
           </DialogContentText>
+          {
+              estado.justify === "si" ? 
+          
           <TextField
             autoFocus
             margin="dense"
@@ -62,14 +65,18 @@ export default function Faltas() {
             label="Justificacion"
             type="email"
             fullWidth
+            name="justification"
+            onChange={(e) => setEstado({...estado, [e.target.name]:e.target.value})}
           />
+          : null
+         }
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
           <Button onClick={handleClose} color="primary">
-            Enviar
+            Aceptar
           </Button>
         </DialogActions>
       </Dialog>
