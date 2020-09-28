@@ -10,6 +10,7 @@ const {
 } = require("../db.js");
 
 const isUserAdmin = require("./middlewares.js").isUserAdmin;
+const isAdmin = require("./middlewares.js").isAdmin;
 const isUserActive = require("./middlewares.js").isUserActive;
 
 server.get("/assistances", isUserActive, isUserAdmin, (req, res) => {

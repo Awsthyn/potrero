@@ -3,7 +3,7 @@ const { User } = require("../db.js");
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 
-server.get("/", isAuthenticated, function (req, res) {
+server.get("/", function (req, res) {
   console.log("user", req.user);
   res.json({ user: req.user });
 });
