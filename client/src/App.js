@@ -26,7 +26,6 @@ import ClassAssignation from "./components/student/classes/ClassAssignation"
 import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
-import TablaClases from './components/admin/TablaClases';
 
 
 
@@ -63,7 +62,6 @@ class App extends React.Component {
         <Route exact path="/admin/usuarios" component={TablaUsuarios} />
         <Route exact path="/admin/materias" component={TablaMaterias} />
         <Route exact path="/admin/estudiantes" component={StudentCrud} />
-        <Route exact path="/admin/clases" component={TablaClases} />
         <Route
           exact
           path="/admin/estudiantes/agregar"
