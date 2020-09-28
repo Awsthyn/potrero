@@ -6,7 +6,9 @@ export function getUsers() {
 		return axios
 			.get(`http://localhost:3001/users`, {withCredentials: true})
 			.then(res => {
-				dispatch({type: GET_USERS, payload: res.data.filter(e=> e.state === "aceptado" || e.state === "admin")});
+				const users = res.data.filter(e=> e.state === "aceptado" || e.state === "admin")
+				dispatch({type: GET_USERS, payload:users });
+				return users;
 			})
 			.catch(err => console.log(err));
 	};

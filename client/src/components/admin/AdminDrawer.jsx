@@ -39,6 +39,7 @@ import PieChartRoundedIcon from '@material-ui/icons/PieChartRounded';
 import logo from './assets/logo.png';
 import AssistantIcon from '@material-ui/icons/Assistant';
 import SettingsIcon from '@material-ui/icons/Settings';
+import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
 
 const drawerWidth = 240;
 
@@ -278,6 +279,7 @@ function AdminDrawer(props) {
               </List>
         <Divider />
         <List>
+          
                  <ListItem onClick={() => history.push(`/admin`)} button >
                     <ListItemIcon className={classes.link} ><PieChartRoundedIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Panel'} />
@@ -293,6 +295,11 @@ function AdminDrawer(props) {
                     <ListItemText className={classes.link} primary={'Estudiantes'} />
                   </ListItem>
 
+                  <ListItem onClick={() => history.push(`/admin/clases`)} button >
+                    <ListItemIcon className={classes.link}><LaptopChromebookIcon/></ListItemIcon>
+                    <ListItemText className={classes.link} primary={'Clases'} />
+                  </ListItem>
+                  
                   <ListItem onClick={() => history.push(`/admin/usuarios`)} button >
                     <ListItemIcon className={classes.link}> <SupervisedUserCircleRoundedIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Asesores'} />

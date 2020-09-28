@@ -24,57 +24,54 @@ import AsesorProfile from './components/AsesorProfile/AsesorProfile';
 import DataSheet from './components/AsesorProfile/dataSheet/DataSheet';
 import ClassAssignation from "./components/student/classes/ClassAssignation"
 import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
+import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
+import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
+import TablaClases from './components/admin/TablaClases';
+
+
 
 class App extends React.Component {
-
-
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
         <Route
           exact
           path={[
-            '/admin/voluntarios',
-            '/admin/voluntarios/:id',
-            '/admin/usuarios',
-            '/admin/materias',
-            '/admin/estudiantes',
-            '/admin/estudiantes/agregar',
-            '/admin/estudiantes/detalles/:id',
+            "/admin/voluntarios",
+            "/admin/voluntarios/:id",
+            "/admin/usuarios",
+            "/admin/materias",
+            "/admin/estudiantes",
+            "/admin/estudiantes/agregar",
+            "/admin/estudiantes/detalles/:id",
+            "/admin/detail",
           ]}
           component={AdminNavBar}
         />
-        <Route exact path='/' component={Home} />
-        <Route exact
-          path={[
-            '/voluntarios/formulario',
-            '/voluntarios/horarios',
-            '/voluntarios/niveles',
-            '/voluntarios/materias',
-            '/voluntarios/cargararchivos',
-            '/voluntarios/confirmacion',
-          ]} component={ContenedorForm} />
+        <Route exact path="/" component={Home} />
+        <Route path="/voluntarios" component={ContenedorForm} />
         {/* <Route path="/admin" component={AdminDrawer} /> */}
-        <AdminRoute exact path='/admin' component={AdminDrawer} />
-        <Route exact path='/admin' component={AdminPanel} />
-        <Route exact path='/admin/voluntarios' component={TablaVoluntarios} />
+        <AdminRoute exact path="/admin" component={AdminDrawer} />
+        <Route exact path="/admin" component={AdminPanel} />
+        <Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
         <Route
           exact
-          path='/admin/voluntarios/:id'
+          path="/admin/voluntarios/:id"
           render={({ match }) => <DetalleVoluntario id={match.params.id} />}
         />
-        <Route exact path='/admin/usuarios' component={TablaUsuarios} />
-        <Route exact path='/admin/materias' component={TablaMaterias} />
-        <Route exact path='/admin/estudiantes' component={StudentCrud} />
+        <Route exact path="/admin/usuarios" component={TablaUsuarios} />
+        <Route exact path="/admin/materias" component={TablaMaterias} />
+        <Route exact path="/admin/estudiantes" component={StudentCrud} />
+        <Route exact path="/admin/clases" component={TablaClases} />
         <Route
           exact
-          path='/admin/estudiantes/agregar'
+          path="/admin/estudiantes/agregar"
           component={CreateStudentForm}
         />
         <Route
           exact
-          path='/admin/estudiantes/detalles/:id'
+          path="/admin/estudiantes/detalles/:id"
           render={(props) => (
             <StudentFile student={props.location.state.props} />
           )}
@@ -89,16 +86,21 @@ class App extends React.Component {
         <Route exact path='/usuario/recuperar' component={PasswordRecovery} />
         <Route exact path='/login/:token' component={ResetPassword} />
 
-		<Route
-        path="/studentCard"
-        component = {StudentCard} />
+        <Route
+            path="/studentCard"
+            component = {StudentCard} />
 
-		<Route exact path = "/asesores/:id" component = {AsesorProfile}/>
-    <Route path="/datasheet/test" component={DataSheet}/> 
-		</div>
-	);
-	}
-
+        <Route exact path = "/asesores/:id" component = {AsesorProfile}/>
+        <Route path="/datasheet/test" component={DataSheet}/> 
+        <Route
+          exact
+          path="/admin/inassistances"
+          component={DetailsOfInassistances}
+        />
+        <Route path="/admin/detail" component={GeneralAssistsDetail} />
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -42,6 +42,9 @@ const mailAdmission = require("./mailAdmission.js");
 // IMPORT DE LA RUTA DE Mail de Bienvenida o Rechazo de Voluntario
 const mailWelcomeRejection = require("./mailWelcomeRejection.js");
 
+// IMPORT DE LA RUTA DE Mail con envío de los terminos y condiciones
+const termsAndConditions = require("./termsAndConditions.js");
+
 // IMPORT DE LA RUTA DE CLASS
 const classRouter = require("./class.js");
 
@@ -92,6 +95,9 @@ router.use("/mailAdmission", mailAdmission);
 //Ruta del mail de bienvenida al nuevo asesor
 router.use("/mailWelcomeRejection", mailWelcomeRejection);
 
+//Ruta de mail con los términos y condiciones
+router.use("/termsAndConditions", termsAndConditions);
+
 // RUTA DE STUDENTS
 router.use("/students", studentRouter);
 
@@ -122,7 +128,7 @@ router.use("/class", classRouter);
 // RUTA DE AÑO ESCOLAR X SUBJECT
 router.use("/academiclevelxsubject", academicLevelXSubjectRouter);
 
-// RUTA DE HORARIOS DE UN VOLUNTARIO 
+// RUTA DE HORARIOS DE UN VOLUNTARIO
 router.use("/userSchedule", userScheduleRoute)
 //RUTA DE NIVEL DE EDUCACION - PRIMARIA - SECUNDARIA
 router.use("/educationlevel", educationLevel)
