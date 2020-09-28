@@ -26,7 +26,7 @@ server.get("/", isUserActive, isUserAdmin, (req, res) => {
 });
 
 // BUSCA UN TOD EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", isUserActive, isUserAdmin (req, res) => {
+server.get("/:id", isUserActive, isUserAdmin, (req, res) => {
   // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
   TypeOfDifficulty.findOne({
     where: {
