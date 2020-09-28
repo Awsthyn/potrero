@@ -11,11 +11,12 @@ import {makeStyles} from '@material-ui/styles';
 import { createMuiTheme} from '@material-ui/core/styles';
 
 //Actions
-import { getUsers} from "../../redux/actions/users"
+import { getUsers,banUser} from "../../redux/actions/users"
 
 // Sweet Alerts
 import swal from 'sweetalert';
 import Swal from 'sweetalert2';
+
 
 // Moment
 import moment from 'moment';
@@ -85,22 +86,34 @@ const TablaUsuarios = (props) => {
     const [locked,setLocked] = useState(true)
 
     useEffect(()=>{
-        props.getUsers()
-        .then((asesor)=>{
-           setData(asesor.map(asesor => ({
-            imageUrl:`https://api.adorable.io/avatars/285/${asesor.firstName}@adorable.png`,
-             firstName: asesor.firstName, 
-             lastName: asesor.lastName,
-             email:asesor.email, 
-             birthday:moment(asesor.birthday).get('year') ,
-             nivel:'Building',
-             grado:'Building',
-             linkedin:asesor.linkedin
-          })
-        )
+            props.getUsers()
+            .then((users)=>{
+                if(!users) {
+                    Swal.fire(
+                        'Conectar la BD',
+                        `Debes conectar la Base de Datos`,
+                        'warning'
+                        )
+                        history.push(`/admin`)    
+                        return 
+                    }
+             setData( users.filter(user=>user.isActive).map(asesor => ({
+                 id: asesor.id,
+                imageUrl:`https://api.adorable.io/avatars/285/${asesor.firstName}@adorable.png`,
+                firstName: asesor.firstName, 
+                lastName: asesor.lastName,
+                email:asesor.email, 
+                birthday:moment(asesor.birthday).get('year') ,
+                nivel:'Building',
+                grado:'Building',
+                linkedin:asesor.linkedin
+                        })
+                    )
+                )
+                    }
+            )
+      
 
-           ) 
-          })
     },[])
     
 
@@ -109,7 +122,7 @@ const TablaUsuarios = (props) => {
                 {data && data.length ? 
                 <MaterialTable
                 icons={tableIcons}
-                title="Tabla de Asesores"
+                title="Tabla de Asesores Activos"
                 components={{
                     Toolbar: props => (
                         <div style={{backgroundColor: '#e8eaf5'}}>
@@ -141,6 +154,7 @@ const TablaUsuarios = (props) => {
                     icon: () => <LinkedInIcon color="primary" />,
                     tooltip: 'Visitar LinkedIn',
                     onClick: (event, rowData) => 
+                       
                     swal({
                         title:  `¿Deseas visitar el perfil LinkedIn de ${rowData.firstName} ${rowData.lastName}?`,
                         icon: "warning",
@@ -158,11 +172,48 @@ const TablaUsuarios = (props) => {
                     tooltip: 'Detalle de Asesor',
                     onClick: (event, rowData) => swal("Visitaras perfil de " + rowData.firstName)
                     },
+                    
                     rowData => ({
                         icon: () => <BlockIcon color="secondary" />,
+                        disabled: locked,
                         tooltip: 'Inhabilitar Asesor',
-                        onClick: (event, rowData) => swal(" Inhabilitarás " + rowData.firstName),
-                        disabled: locked
+                        onClick: (event, rowData) =>
+                            Swal.fire({
+                                title: `Inhabilitar a ${rowData.firstName} ${rowData.lastName}`,
+                                text: `Confirmando esta acción, se le denegará el acceso a la plataforma pero
+                                se conservarán los datos relacionados a su labor.`,
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: VERDE,
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Inhabilitar',
+                                showLoaderOnConfirm: true,
+                                preConfirm: () => {
+                                    console.log(rowData)
+                                    return props.banUser(rowData.id)
+                                    .then(response => {
+                                       
+                                        if (response.statusText !=='OK') {
+                                          throw new Error('No se pudo che')
+                                        }
+                                        console.log(data)
+                                        setData(data.filter(activos =>activos.id!==rowData.id))
+                                        return response.data
+                                    })
+                                  },
+                                allowOutsideClick: () => !Swal.isLoading()
+                                })
+                                .then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire(
+                                    'Listo',
+                                    `La operación fue resuelta con éxito.`,
+                                    'success'
+                                    )
+                                }
+                                })
+
+                       
                     })
                 ]}
                 onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
@@ -201,5 +252,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
         getUsers:() => dispatch(getUsers()),
+        banUser:(id) => dispatch(banUser(id)),
+
 });
 export default connect(mapStateToProps, mapDispatchToProps)(TablaUsuarios)
