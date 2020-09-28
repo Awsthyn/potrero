@@ -12,7 +12,7 @@ server.post("/:id/subjects", (req, res) => {
   var id = req.params.id;
   var materias = req.body.subjects;
   var user = User.findByPk(id);
-  console.log(materias)
+  console.log(materias);
   materias.map((m, i) => {
     var subject = Subject.findOne({
       where: {
@@ -32,7 +32,6 @@ server.post("/:id/subjects", (req, res) => {
   });
 });
 
-// AGREGA LAS MATERIAS DE UN ESTUDIANTE DE UN STUDENT.
 server.post("/subject/:id", isAdmin, (req, res) => {
   // BUSCA Y MODIFICA LA MATERIA DEL STUDENT ENCONTRADO.
   //Se espera q lo traiga en un campo 'subjectsId'

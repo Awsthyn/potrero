@@ -10,7 +10,7 @@ const isUserActive = require("./middlewares.js").isUserActive;
 const Sequelize = require("sequelize");
 
 //SOLO LISTA LAS MATERIAS
-server.get("/",isUserAdmin, isUserActive,(req, res) => {
+server.get("/", isUserAdmin, isUserActive, (req, res) => {
   Subject.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -118,21 +118,24 @@ server.put("/:id", isAdmin, (req, res) => {
 });
 
 //ELIMINA LA MATERIA
-server.delete, isAdmin, ("/:id", (req, res, next) => {
-  //ENCUENTRA LA MATERIA POR ID Y LA DESTRUYE
-  Subject.destroy({
-    where: {
-      id: req.params.id,
-    },
-  })
-    //UNA VEZ ELIMINADO DEVUELVE UN MENSAJE
-    .then(() => {
-      res.status(200);
-      res.json("Materia eliminada");
+server.delete,
+  isAdmin,
+  ("/:id",
+  (req, res, next) => {
+    //ENCUENTRA LA MATERIA POR ID Y LA DESTRUYE
+    Subject.destroy({
+      where: {
+        id: req.params.id,
+      },
     })
-    .catch((err) => {
-      res.json(err);
-    });
-});
+      //UNA VEZ ELIMINADO DEVUELVE UN MENSAJE
+      .then(() => {
+        res.status(200);
+        res.json("Materia eliminada");
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
 
 module.exports = server;

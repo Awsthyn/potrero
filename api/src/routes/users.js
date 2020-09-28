@@ -95,7 +95,7 @@ const upload = multer({
   },
 ]);
 
-server.get("/", (req, res) => {
+server.get("/", isAdmin, (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
@@ -150,7 +150,7 @@ server.get("/", (req, res) => {
 });
 
 // BUSCA UN USUARIO EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", isUserActive, (req, res) => {
+server.get("/:id", isAdmin, (req, res) => {
   // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
   User.findOne({
     where: {
@@ -271,7 +271,7 @@ server.post("/", upload, (req, res) => {
 
 //Debe estar protegido por isUserActive
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put("/:id", (req, res) => {
+server.put("/:id", isAdmin, (req, res) => {
   if (req.body.disabled) {
     User.findByPk(req.params.id).then((user) => {
       user.state = "rechazado";

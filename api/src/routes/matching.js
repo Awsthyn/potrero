@@ -2,7 +2,10 @@ const server = require("express").Router();
 const { matching } = require("./helpers/matchingHelpers");
 const { Student, SubjectXStudent } = require("../db.js");
 
-server.get("/:studentId", (req, res) => {
+const isUserAdmin = require("./middlewares.js").isUserAdmin;
+const isUserActive = require("./middlewares.js").isUserActive;
+
+server.get("/:studentId", isUserActive, isUserAdmin, (req, res) => {
   SubjectXStudent.findAll({ where: { studentId: req.params.studentId } })
     .then((data) =>
       Promise.all(data.map((e) => matching(req.params.studentId, e.subjectId)))

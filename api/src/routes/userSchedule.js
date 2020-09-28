@@ -8,7 +8,7 @@ const Sequelize = require("sequelize");
 const SendmailTransport = require("nodemailer/lib/sendmail-transport");
 const { isUserAdmin, isAdmin, isUserActive } = require("./middlewares.js");
 
-server.get("/", isAdmin, (req, res) => {
+server.get("/", isUserActive, isAdmin, (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
@@ -43,7 +43,7 @@ server.get("/", isAdmin, (req, res) => {
 });
 
 //Debe ser /me con protecciones
-server.get("/:id", isUserAdmin, (req, res) => {
+server.get("/:id", isUserActive, isUserAdmin, (req, res) => {
   User.findOne({
     where: {
       id: req.params.id,

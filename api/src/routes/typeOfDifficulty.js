@@ -5,9 +5,9 @@ const { TypeOfDifficulty } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
-const { isUserActive, isAdmin } = require("./middlewares.js");
+const { isUserActive, isAdmin, isUserAdmin } = require("./middlewares.js");
 
-server.get("/", isUserActive, (req, res) => {
+server.get("/", isUserActive, isUserAdmin, (req, res) => {
   TypeOfDifficulty.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -26,7 +26,7 @@ server.get("/", isUserActive, (req, res) => {
 });
 
 // BUSCA UN TOD EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", isUserActive, (req, res) => {
+server.get("/:id", isUserActive, isUserAdmin (req, res) => {
   // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
   TypeOfDifficulty.findOne({
     where: {

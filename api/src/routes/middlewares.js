@@ -7,6 +7,7 @@ const middlewares = {
       res.redirect("localhost:3000");
     }
   },
+
   isUserAdmin: function (req, res, next) {
     if (req.user.state === "aceptado" || req.user.state === "admin") {
       next();
@@ -14,6 +15,7 @@ const middlewares = {
       res.redirect("localhost:3000");
     }
   },
+
   isUserActive: (req, res, next) => {
     if (req.user.isActive === true) {
       next();

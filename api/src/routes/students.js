@@ -10,17 +10,17 @@ const {
   SubjectXStudent,
   StudentSchedule,
   EducationLevel,
-  Class
+  Class,
 } = require("../db.js");
 
 const isUserAdmin = require("./middlewares.js").isUserAdmin;
-const isAdmin = require("./middlewares.js").isAdmin;
 const isUserActive = require("./middlewares.js").isUserActive;
+const isAdmin = require("./middlewares.js").isAdmin;
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
-server.get("/", isAdmin, (req, res) => {
+server.get("/", isUserActive, isUserAdmin, (req, res) => {
   // BUSCA TODOS LOS STUDENTS Y LOS DEVUELVE COMO JSON (ARRAY DE OBJETOS)
   Student.findAll({
     attributes: {
@@ -88,65 +88,65 @@ server.get("/", isAdmin, (req, res) => {
     });
 });
 
-
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
-server.get("/:id", isUserAdmin, isUserActive, (req, res) => {
+server.get("/:id", isUserActive, isUserAdmin, (req, res) => {
   // BUSCA AL STUDENT.
-  
-  Promise.all([Student.findOne({
-    where: {
-      id: req.params.id,
-    },
-    attributes: {
-      exclude: [
-        "createdAt",
-        "updatedAt",
-      ],
-    },
-    include: [
-      {
-        model: TypeOfDifficulty,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
+
+  Promise.all([
+    Student.findOne({
+      where: {
+        id: req.params.id,
       },
-      {
-        model: Subject,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
-        include: [
-          {
-            model: AcademicLevel,
-            attributes: {
-              exclude: ["createdAt", "updatedAt", "educationLevelId"],
-            },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+      include: [
+        {
+          model: TypeOfDifficulty,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
           },
-        ],
-      },
-      {
-        model: StudentSchedule,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
         },
-      },
-    ],
-  }), Class.findAll({where: {studentId: req.params.id}})])
+        {
+          model: Subject,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+          include: [
+            {
+              model: AcademicLevel,
+              attributes: {
+                exclude: ["createdAt", "updatedAt", "educationLevelId"],
+              },
+              include: [
+                {
+                  model: EducationLevel,
+                  attributes: {
+                    exclude: ["createdAt", "updatedAt"],
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          model: StudentSchedule,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+    }),
+    Class.findAll({ where: { studentId: req.params.id } }),
+  ])
     .then((studentFound) => {
       // SI ENCUENTRA AL STUDENT, ENVÍA SUS DATOS. O SINO, ENVÍA UN MENSAJE DE ERROR.
-      if(!studentFound) res.json("El student no existe.")
+      if (!studentFound) res.json("El student no existe.");
       else {
-        let studentData = studentFound[0]
-        studentData["dataValues"].classes = studentFound[1]
-        res.json(studentData)};
+        let studentData = studentFound[0];
+        studentData["dataValues"].classes = studentFound[1];
+        res.json(studentData);
+      }
     })
     .catch((err) => {
       // SI HAY UN ERROR, LO ENVÍA.
@@ -165,38 +165,44 @@ server.post("/", isAdmin, (req, res) => {
       // Se espera valores de Id's de Subjects Ejemplo: 1,2
       // Recorre SubjectId los prepara en un array y los recorre
       // entonces agrega la materia relacionado con el id del estudiante
-    const subjects =  Promise.all(student.subjectsId.forEach((idSub) => {
-        studentCreated
-          .addSubject(idSub)
-          .then(() => console.log("Ok1"))
-          .catch((err) => {
-            // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
-            console.log(err);
-            res.json(err);
-          });
-      }));
+      const subjects = Promise.all(
+        student.subjectsId.forEach((idSub) => {
+          studentCreated
+            .addSubject(idSub)
+            .then(() => console.log("Ok1"))
+            .catch((err) => {
+              // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
+              console.log(err);
+              res.json(err);
+            });
+        })
+      );
 
       // Recorre TODId los prepara en un array y los recorre
       // entonces agrega la materia relacionado con el id del estudiante
-    const difficulties =  Promise.all(student.TODId.forEach((idTOD) => {
-        studentCreated
-          .addTypeOfDifficulty(idTOD)
-          .then(() => console.log("Ok2"))
-          .catch((err) => {
-            // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
-            console.log(err);
-            res.json(err);
-          });
-      }));
-    const schedule = StudentSchedule.bulkCreate(student.scheduleStudent.map(e =>{
-      return {
-        studentId: sc.id,
-        timeFrame: [e.startTime, e.endTime],
-        nameWeekDay: e.nameWeekDay
-      }
-    }))  
+      const difficulties = Promise.all(
+        student.TODId.forEach((idTOD) => {
+          studentCreated
+            .addTypeOfDifficulty(idTOD)
+            .then(() => console.log("Ok2"))
+            .catch((err) => {
+              // SI HAY UN ERROR, DEVUELVE QUÉ CAMPO FALTA COMPLETAR.
+              console.log(err);
+              res.json(err);
+            });
+        })
+      );
+      const schedule = StudentSchedule.bulkCreate(
+        student.scheduleStudent.map((e) => {
+          return {
+            studentId: sc.id,
+            timeFrame: [e.startTime, e.endTime],
+            nameWeekDay: e.nameWeekDay,
+          };
+        })
+      );
 
-    return Promise.all([subjects, difficulties, schedule])  
+      return Promise.all([subjects, difficulties, schedule]);
     })
     .then(() => {
       res.json("Alumno creado exitosamente");
@@ -208,8 +214,7 @@ server.post("/", isAdmin, (req, res) => {
     });
 });
 
-
-server.put("/:id", (req, res) => {
+server.put("/:id", isAdmin, (req, res) => {
   const { subjectsId } = req.body;
   // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
   SubjectXStudent.destroy({ where: { studentId: req.params.id } })
@@ -222,23 +227,25 @@ server.put("/:id", (req, res) => {
     )
     .then(() => Student.update(req.body, { where: { id: req.params.id } }))
     .then(() => {
-      return Student.findOne({
-        where: {
-          id: req.params.id,
-        },
-        include: [
-          {
-            model: TypeOfDifficulty,
+      return (
+        Student.findOne({
+          where: {
+            id: req.params.id,
           },
-          {
-            model: Subject,
-          },
-        ],
-      })
-        // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
-        .then((studentWithChanges) => {
-          res.json(studentWithChanges);
-        });
+          include: [
+            {
+              model: TypeOfDifficulty,
+            },
+            {
+              model: Subject,
+            },
+          ],
+        })
+          // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
+          .then((studentWithChanges) => {
+            res.json(studentWithChanges);
+          })
+      );
     })
     .catch((err) => {
       res.json(err);
@@ -249,29 +256,31 @@ server.put("/:id", (req, res) => {
 // En lugar de eliminar un estudiante lo que hacemos es cambiarle el status a false
 // Y así poder filtrar solamente por estudiantes activos y no perder la info por si
 // mas adelante vulelve a la fundación.
-server.put("/:id/changestatus", (req, res) => {
+server.put("/:id/changestatus", isAdmin, (req, res) => {
   Student.update(
     { isActive: req.body.isActive },
     { where: { id: req.params.id } }
   )
     .then(() => {
-      return Student.findOne({
-        where: {
-          id: req.params.id,
-        },
-        include: [
-          {
-            model: TypeOfDifficulty,
+      return (
+        Student.findOne({
+          where: {
+            id: req.params.id,
           },
-          {
-            model: Subject,
-          },
-        ],
-      })
-        // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
-        .then((studentWithChanges) => {
-          res.json(studentWithChanges);
-        });
+          include: [
+            {
+              model: TypeOfDifficulty,
+            },
+            {
+              model: Subject,
+            },
+          ],
+        })
+          // UNA VEZ HECHO LOS CAMBIOS, ENVÍA SUS DATOS CON LA ACTUALIZACIÓN QUE HAYA REALIZADO.
+          .then((studentWithChanges) => {
+            res.json(studentWithChanges);
+          })
+      );
     })
     .catch((err) => {
       res.json(err);
