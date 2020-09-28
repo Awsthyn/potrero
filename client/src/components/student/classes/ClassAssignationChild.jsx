@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { } from 'react'
 import { connect } from 'react-redux'
 import Card from "./MatchCard"
 
-export const ClassAssignationCard = ({option, id, onClick}) => {
+export const ClassAssignationCard = ({friendlyData, params, option, id, onClick}) => {
     const rangeTimes = option.disponibleTime.map(e => {
         let auxArray = []
         let start = e[0] % 1 === 0 ? String(e[0]) + ":00" : String(e[0]).substring(0,2) + ":30"
@@ -12,7 +12,7 @@ export const ClassAssignationCard = ({option, id, onClick}) => {
     })
 
     return (
-        option.disponibleTime.map((e,i) => <Card key={"CardParent" + id + i} onClick={onClick} option={option} id={'Op'+id+i} data={e}/>)
+        option.disponibleTime.map((e,i) => <Card key={"CardParent" + id + i} onClick={onClick} friendlyData={friendlyData} option={option} params={params} id={'Op'+id+i} data={e}/>)
     )
 }
 
