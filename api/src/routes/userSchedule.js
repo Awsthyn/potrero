@@ -68,7 +68,7 @@ server.get("/:id", isUserActive, isUserAdmin, (req, res) => {
     include: [
       {
         model: UserSchedule,
-        attributes: { exclude: ["createdAt", "updatedAt", "userId"] },
+        attributes: { exclude: ["createdAt", "updatedAt", "userId"] }
       },
     ],
   })

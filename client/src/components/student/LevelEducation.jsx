@@ -20,7 +20,7 @@ const LevelEducation = ({ initialState, level, onChange }) => {
                 hidden
                 id={`checkboxStrength${level.id}`}
             />
-            <label style={{ height: "50px", width: "200px" }} htmlFor={`checkboxStrength${level.id}`} className="d-flex flex-column justify-content-center rounded shadow form-check-label mr-3" >
+            <label style={{ height: "50px", width: "200px", backgroundColor: '#492BC4', color: 'white' }} htmlFor={`checkboxStrength${level.id}`} className="d-flex flex-column justify-content-center rounded  form-check-label mr-3" >
                 {level.name}
             </label>
         </div>

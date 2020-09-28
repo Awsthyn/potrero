@@ -34,8 +34,7 @@ server.get("/", isUserActive, isUserAdmin, (req, res) => {
         "weakness",
         "strengths",
         "interests",
-        "motivations",
-        "isActive",
+        "motivations"
       ],
     },
     include: [

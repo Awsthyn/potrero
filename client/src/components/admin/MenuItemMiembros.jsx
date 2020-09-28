@@ -15,6 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import AssistantIcon from '@material-ui/icons/Assistant';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 
 
 
@@ -107,7 +108,7 @@ export default function MenuListComposition() {
   };
 
   const handleClose = (event,route) => {
-  if(route === 'voluntarios'|| route === 'usuarios')  history.push(`/admin/${route}`)
+  if(route === 'estudiantes'|| route === 'usuarios')  history.push(`/admin/${route}`)
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -160,7 +161,7 @@ export default function MenuListComposition() {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'voluntarios')}><AssistantIcon/>  Voluntarios</MenuItem>
+                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'estudiantes')}><LocalLibraryIcon/>  Estudiantes</MenuItem>
                     <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'usuarios')}><SupervisedUserCircleRoundedIcon/>  Asesores</MenuItem>
                   </MenuList>
                 </ClickAwayListener>

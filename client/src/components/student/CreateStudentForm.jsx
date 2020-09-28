@@ -114,8 +114,8 @@ export class CreateStudentForm extends Component {
 					className={`${style.formStudent}`}
 					onSubmit={this.submitHandler}
 				>
-					<h1 className='mb-3 mt-2'>Formulario para alta de alumno</h1>
 					<div className={style.container}>
+					<h1 className='mb-3 mt-2' style = {{fontWeight : '500', paddingBottom: '5%'}}>Formulario para alta de alumno</h1>
 						<label className={style.labelDatos}>
 							Datos del Alumno
               			</label>
@@ -160,11 +160,12 @@ export class CreateStudentForm extends Component {
 								/>
 							</div>
 						</div>
+
 						<div className={style.container}>
 							<label className={style.labelDatos}>
 								Datos del Tutor
               				</label>
-							<div className='mt-n2 mb-4 d-flex flex-row form-group'>
+							<div className='d-flex flex-row form-group'>
 								<input
 									spellCheck="false"
 									autoComplete="off"
@@ -184,8 +185,8 @@ export class CreateStudentForm extends Component {
 									onChange={this.onChangeHandler}
 								/>
 							</div>
-						</div>
-						<div className={style.container}>
+						
+					
 							<div className='mt-n2 mb-4 d-flex flex-row form-group'>
 								<input
 									spellCheck="false"
@@ -206,9 +207,10 @@ export class CreateStudentForm extends Component {
 									onChange={this.onChangeHandler}
 								/>
 							</div>
-						</div>
+							</div>
+						
 						<div className='form-group'>
-							<label style={{ fontSize: '1.7em' }} htmlFor='nivelEducativo'>
+							<label style={{ fontSize: '1.7em', marginTop: '4%' }} htmlFor='nivelEducativo'>
 								Nivel educativo
               				</label>
 							<div
@@ -255,11 +257,11 @@ export class CreateStudentForm extends Component {
 												this.state.subjectsXLevel.length > 0 ?
 													(
 														<div>
-															<h3 className='text-center d-block mb-3'>
+															<h3 style = {{marginTop: '5%'}} className='text-center d-block mb-3'>
 																Materias que tiene que aprender
 															</h3>
 															<div
-																style={{ width: '70vw' }}
+																style={{ width: '100%', marginTop: '3%' }}
 																className='ml-auto mr-auto d-flex flex-wrap justify-content-center form-check form-check-inline'
 															>
 																{
@@ -296,7 +298,7 @@ export class CreateStudentForm extends Component {
 														)
 														:
 														(
-															<div style={{ color: 'red' }}>
+															<div style={{ color: 'red', fontSize: '14px' }}>
 																Debe seleccionar un GRADO / AÑO LECTIVO para ver las materias disponibles
 																{console.log('*****¡',this.state.subjectsId, ' ', this.state.academicLevels, ' ', this.state.isLevelSelect)}
 															</div>
@@ -307,7 +309,7 @@ export class CreateStudentForm extends Component {
 													)
 													:
 													(
-														<div style={{ color: 'red' }}>
+														<div style={{ color: 'red', fontSize: '14px' }}>
 															Debe seleccionar un nivel educativo para poder seleccionar el
 															grado académico
 														</div>
@@ -343,7 +345,7 @@ export class CreateStudentForm extends Component {
 								<textarea
 									name='observations'
 									onChange={this.onChangeHandler}
-									className={style.input}
+									className={style.textArea}
 									style={{ width: '95%' }}
 									placeholder='Observaciones y/o comentarios...'
 								/>
@@ -354,12 +356,12 @@ export class CreateStudentForm extends Component {
 							<DaysContainer className={style.days} uploadParentState={this.onChangeSchedule} />
 							<input
 								style={{
-									fontSize: '1.5em',
-									width: '300px',
+									fontSize: '1.2em',
+									width: '18%',
 									backgroundColor: '#492BC4',
 								}}
 								className={style.btnAgregar}
-								value='Agregar'
+								value='Agregar Alumno'
 								type='submit'
 							/>
 						</div>

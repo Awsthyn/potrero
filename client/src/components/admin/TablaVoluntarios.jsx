@@ -41,6 +41,11 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 
+
+const VIOLETA = '#492BC4'
+const VERDE = '#8CC63E'
+const NEGRO = '#333333'
+
 moment.locale('es');
 
 const useStyles1 = makeStyles((theme) => ({
@@ -51,6 +56,7 @@ const useStyles1 = makeStyles((theme) => ({
   margin: {
     margin: 20,
   },
+
 }));
 
 function TablePaginationActions(props) {
@@ -118,13 +124,30 @@ TablePaginationActions.propTypes = {
 
 
 
+
+
 const useStyles = makeStyles({
   table: {
     minWidth: 500,
+    borderCollapse:'separate',
+    borderSpacing:'0px 10px',
   },
   root: {
     marginTop: 100,
+    justifyContent:'center'
   },
+ form:{
+  //  margin: 30,
+ },
+ filterpanel:{
+   padding:20,
+   display:'flex',
+   justifyContent:'center',
+   width: 'fit-content',
+   elevation:10,
+   alignItems:'center',
+   margin:'auto'
+ }
 });
 
 
@@ -150,30 +173,33 @@ const TablaVoluntarios = (props) => {
     function handleDeletion(id){
         swal({
             title: "¡¡ Cuidado !!",
-            text: "No se recomienda en lo absoluto este tipo de acciones. Si continúa, estará eliminando datos muy valiosos... Se recomienda simplemente rechazar al postulante",
+            text: "Si continúa, estará inhabilitando la solicitud... La información seguirá disponible en la sección rechazados",
             icon: "warning",
             buttons: true,
             dangerMode: true,
           })
           .then((willDelete) => {
             if (willDelete) {
-            props.deleteVolunteer(Number(id)).then(()=>{
-              setFiltered(filtered.filter(vol=>vol.id !== id))
-            })
-              swal("El registro fue destruido con éxito", {
-                icon: "success",
-              });
-            } else {
+             return  props.deleteVolunteer(Number(id))
+            } 
+            else {
               swal("El registro fue conservado");
             }
-          });
+          })
+          .then(()=>{
+            setFiltered(filtered.filter(vol=>vol.id !== id))
+            swal("El postulante fue rechazado", {
+              icon: "success",
+            });
+         })
+            
     
     }
 
     function handleStatusChange(volunteer){
       swal({
         title: `Estás por dar de alta a ${volunteer.firstName} ${volunteer.lastName} como voluntario.`,
-        text: "¿Está seguro? Si confirma esta acción, el voluntario se convertirá en asesor.",
+        text: "¿Está seguro? Si confirma esta acción, se convertirá al postulante voluntario en miembro asesor.",
         icon: "warning",
         buttons: true,
         dangerMode: false,
@@ -181,7 +207,13 @@ const TablaVoluntarios = (props) => {
       .then((confirm) => {
         if (confirm) {
         props.acceptVolunteer(volunteer)
-          swal("El usuario se convirtió en asesor.", {
+        .then(()=>{
+          props.getVolunteers()
+          .then((pendientes)=>{
+             setFiltered(pendientes);
+            })
+        })
+          swal(`Se ha dado de alta a: ${volunteer.firstName} con éxito`, {
             icon: "success",
           });
         } else {
@@ -221,46 +253,55 @@ const TablaVoluntarios = (props) => {
 
     return (
       <div  className={classes.root}>
+
+                  <Paper className={classes.filterpanel}>
                                     <ButtonGroup variant="contained" alignItems="center"  aria-label="contained button group">
-                                              
-                                                   <Button disableRipple  name="TODOS" key="TODOS" style={{ background:"green",color:'white'}} onClick={()=>handleFilter('TODOS')}>
+                                                   <Button disableRipple  name="TODOS" key="TODOS" style={{ background:"lightgreen",color:'white'}} onClick={()=>handleFilter('TODOS')}>
                                                    <CheckCircleOutlineIcon/> Todos 
                                                     </Button>
-                                                    <Button disableRipple  name="CV"  key="CV" style={{ background:"blue",color:'white'}} onClick={()=>handleFilter('CV')}>
+                                                    <Button disableRipple  name="CV"  key="CV" style={{ background:"lightblue",color:'white'}} onClick={()=>handleFilter('CV')}>
                                                     <CheckCircleOutlineIcon/> CV   
                                                     </Button>
-                                                    <Button disableRipple  name="LINKEDIN"  key="LINKEDIN" style={{ background:"red",color:'white'}} onClick={()=>handleFilter('LIN')}>
+                                                    <Button disableRipple  name="LINKEDIN"  key="LINKEDIN" style={{ background:"pink",color:'white'}} onClick={()=>handleFilter('LIN')}>
                                                     <CheckCircleOutlineIcon/> Linkedin   
                                                     </Button>
                                         </ButtonGroup>
-                                        <ButtonGroup style={{ marginLeft:50}} variant="contained"  aria-label="contained button group">
+
+                                           <form className={classes.form} onSubmit={e=>{e.preventDefault()}}>
+
+                                              <ButtonGroup style={{ marginLeft:50}} variant="contained"  aria-label="contained button group">
                                                     <div className={classes.margin}>
                                                       <Grid container spacing={1} alignItems="center">
                                                         <Grid item>
                                                           <AccountCircle />
                                                         </Grid>
+                                                 
                                                         <Grid item>
                                                           <TextField id="input-with-icon-grid" label="Buscar Nombre o Apellido" value={inputSearch} onChange={(e)=>setInputSearch(e.target.value)} />
                                                         </Grid>
                                                       </Grid>
                                                     </div>
-                                                    <Button type="submit" name="NOMBRE"  key="NOMBRE" style={{ background:"lightblue",color:'white'}} onClick={()=>
-                                                    {
+                                                    <Button type="submit" name="NOMBRE"  key="NOMBRE" style={{ background:VIOLETA,color:'white'}} onClick={()=>
+                                                      {
                                                       handleFilter('NOMBRE');
                                                       setInputSearch('');
                                                       }}>
                                                           <SearchIcon />
                                                     </Button>
-
-                                                    </ButtonGroup>
-
-
+                                                  
+                                              </ButtonGroup>
+                                            </form>
+                      </Paper>
       
         <TableContainer component={Paper} style={{margin:50, width:`calc(100% - ${100}px)`}}>
          { filtered ? 
-              <Table className={classes.table} aria-label="custom pagination table">
-                    <TableHead>
-                        <TableRow>
+              <Table style={{
+                minWidth: 500,
+                borderCollapse:'separate',
+                borderSpacing:'0px 10px',
+              }} className={classes.table} aria-label="custom pagination table">
+                    <TableHead >
+                        <TableRow >
                             <TableCell align="right">Nombre</TableCell>
                             <TableCell align="right">Apellido</TableCell>
                             <TableCell align="right">E-mail</TableCell>
@@ -268,14 +309,15 @@ const TablaVoluntarios = (props) => {
                             <TableCell align="right">Acciones</TableCell>
                         </TableRow>
                     </TableHead>
+
                     <TableBody>
 
                     {(rowsPerPage > 0
                           ?  filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                            : filtered
                         ).map((voluntario) => (
-                          <TableRow key={voluntario.firstName}>
-                            <TableCell component="th" scope="voluntario">
+                          <TableRow  key={voluntario.id} style={{borderRadius:10}}>
+                            <TableCell  component="th" scope="voluntario">
                               {voluntario.firstName}
                             </TableCell>
                             <TableCell style={{ width: 100 }} align="right">
@@ -291,15 +333,15 @@ const TablaVoluntarios = (props) => {
                                         {
                                         <ButtonGroup variant="contained"  aria-label="contained button group" key={`detalles${voluntario.id}`}>
                                                    
-                                                   <Button style={{ background:"green",color:'white'}} key={`aceptar${voluntario.id}`}  onClick={() => handleStatusChange(voluntario)}>
-                                                                <CheckCircleIcon/> Aprobar 
+                                                   <Button style={{ textTransform: 'none',background:"lightgreen",color:'white',}} key={`aceptar${voluntario.id}`}  onClick={() => handleStatusChange(voluntario)}>
+                                                                <CheckCircleIcon/>  
                                                     </Button>
-                                                    <Button  style={{ background:"blue",color:'white'}} key={`detalles${voluntario.id}`}  onClick={() => history.push(`/admin/voluntarios/${voluntario.id}`)}>
+                                                    <Button  style={{textTransform: 'none', background:"lightblue",color:'white'}} key={`detalles${voluntario.id}`}  onClick={() => history.push(`/admin/voluntarios/${voluntario.id}`)}>
                                                             <FaceIcon/> Detalles   
                                                     </Button>
                                                    
-                                                    <Button color="secondary" key={`rechazar${voluntario.id}`}  onClick={() => handleDeletion(voluntario.id)}>
-                                                                <DeleteForeverIcon/> Eliminar   
+                                                    <Button style={{textTransform: 'none', background:"pink",color:'white'}}  key={`rechazar${voluntario.id}`}  onClick={() => handleDeletion(voluntario.id)}>
+                                                                <DeleteForeverIcon/> 
                                                     </Button>
                                                    
                                         </ButtonGroup>
