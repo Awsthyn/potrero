@@ -111,7 +111,7 @@ server.get("/", (req, res) => {
 
 // BUSCA TODAS LAS CLASES DE UN USUARIO EN ESPECÍFICO Y ENVÍA SUS DATOS.
 server.get("/user/:id", (req, res) => {
-  Class.findOne({
+  Class.findAll({
     where: {
       userId: req.params.id,
     },

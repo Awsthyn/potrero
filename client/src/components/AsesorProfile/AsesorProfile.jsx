@@ -4,15 +4,15 @@ import AsesorStudents from './AsesorStudents/AsesorStudents.jsx';
 import AsesorClases from './asesorClases/AsesorClases'
 import { ExpansionPanelDetails } from '@material-ui/core';
 import { connect } from 'react-redux'
-import {getUserSubjects, putUser} from '../../redux/actions/users'
+import {getUser, putUser} from '../../redux/actions/users'
 import AssesorCalendar from './AssesorCalendar';
 import axios from "axios";
+import AsesorInfo from './AsesorInfo';
+import EnviarEmail from './EnviarEmail';
 
 
-function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
-    let subjects = ['Matemáticas', 'Lengua y Literatura', 'Ciencias Sociales', 'Ciencias Naturales', 'Inglés', 'Formación Ética y Ciudadana' ]
+function AsesorProfile ({history, getUser, putUser, user, match}) {
     const [ edit, setEdit ] = useState(false);
-    const [state, setState] = useState({});
     const [ toggle, setToggle ] = useState ({
         students: true,
         classes: false,
@@ -20,26 +20,16 @@ function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
     }) 
     const [perfil, setPerfil] = useState(false);
     const [email, setEmail] = useState(false);
-    const [enviar, setEnviar] = useState({});
-
-    const handleOnchange = (e) => {
-        setState({
-            ...state, [e.target.name]: e.target.value
-        })
-    }
-
-    const handleSendEmail = () => {
-        axios
-          .post('http://localhost:3001/mailPersonal/asesorEmail', enviar, {withCredentials: true})
-          .then(res => console.log(res))
-          .catch(err => console.log(err));
-      };
+    const [clases, setClases] = useState()
 
     useEffect(() => {
-        getUserSubjects(match.params.id)
+        getUser(match.params.id)
+        axios.get(`http://localhost:3001/class/user/${match.params.id}`)
+        .then(res => setClases(res.data))
+        .catch(err => console.log(err))
     }, [])
     console.log(user)
-   
+    console.log(clases)
 
     function pestañas (e) {
         console.log(e.target.name)
@@ -51,7 +41,6 @@ function AsesorProfile ({history, getUserSubjects, putUser, user, match}) {
         setToggle({...defaultToggle, [e.target.name] : true})
     }
 
-   
 return(
     <div className = {style.outer}>
     <div className = {style.container}>
@@ -84,78 +73,21 @@ return(
         <i className={`fas fa-plus ${style.actions}`}></i>
         </div>
 
-        {edit ?   
-        <div className = {style.edit}>
-        <p className = {style.asesorinfo}>Información del contacto</p>
-                <form className={style.formContainer}>
-                    
-                        <div>
-
-                            <input spellcheck="false" autocomplete="off" type="text" name="firstName" id="email" placeholder="Primer nombre" className={style.input} onChange={(e) => handleOnchange(e)} />
-                            <input spellcheck="false" autocomplete="off" type="text" name="lastName" id="email" placeholder="Apellido" className={style.input} onChange={(e) => handleOnchange(e)} />
-                            <input spellcheck="false" autocomplete="off" type="text" name="birthday" id="email" placeholder="Fecha de Nacimiento: día/mes/año" className={style.input} onChange={(e) => handleOnchange(e)}/>
-                            <input spellcheck="false" autocomplete="off" type="text" name="phone" id="email" placeholder="Celular (sin el N°15)" className={style.input} onChange={(e) => handleOnchange(e)}/>
-                            <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Correo Electrónico" className={style.input} onChange={(e) => handleOnchange(e)}/>
-                        </div>
-                    
-                    <div className = {style.btnContainer}>
-                    <button onClick = {() => setEdit(!edit)} className={style.cancelBtn}>Cancelar</button>
-                    <button className={style.button} type="submit" onClick={() => putUser(user.id, state)}>Modificar</button>
-                    </div>
-                </form>
-                </div>
-                :  
-                <div>
-        <p className = {style.asesorinfo}>Materias</p>
-        <div className = {style.subjectsContainer}>
+        {edit ? <AsesorInfo putUser={putUser} user={user}/>
+            :  
+            <div>
+                <p className = {style.asesorinfo}>Materias</p>
+            <div className = {style.subjectsContainer}>
             {user.subjects?.map(subject => 
             <p key={subject.id} className = {style.subjects}>{subject.name}</p>
-          )}
-          
-            {/* <p className = {style.subjects}>Matemáticas</p>
-            <p className = {style.subjects}>Lengua y Literatura</p>
-            <p className = {style.subjects}>Matemáticas</p>
-            <p className = {style.subjects}>Matemáticas</p> */}
+        )}
         </div>
         </div>
     }
-    {perfil ?   
-        <div className = {style.edit}>
-        <p className = {style.asesorinfo}>Información del Asesor</p>
-                <form className={style.formContainer}>
-                     
-                        <div>
-                            <p className = {style.asesorinfo}>Nombre: {user.firstName}</p>
-                            <p className = {style.asesorinfo}>Apellido: {user.lastName}</p>
-                            <p className = {style.asesorinfo}>Fecha de nacimiento: {user.birthday.slice(8,10) + "/" + user.birthday.slice(5,7) + "/" + user.birthday.slice(0,4)}</p>
-                            <p className = {style.asesorinfo}>Telefono: {user.phone}</p>
-                            <p className = {style.asesorinfo}>E-mail: {user.email}</p>
-                        </div>
-                </form>
-                </div>
-                :  null
-                
-    }
-    {email ?   
-        <div className = {style.edit}>
-        <p className = {style.asesorinfo}>Enviar e-mail a: {user.email}</p>
-                <form className={style.formContainer}>
-                     
-                        <div>
-                        <input spellcheck="false" autocomplete="off" type="text" name="asunto" id="asunto" placeholder="Asunto" className={style.input} onChange={(e) => setEnviar({...enviar, [e.target.name]: e.target.value})} />
-                        <textarea  name="mensaje" placeholder="Mensaje" className={style.bodyMessage} onChange={(e) => setEnviar({...enviar, [e.target.name]: e.target.value, email: user.email})}></textarea>
-                        <button disabled={!enviar.mensaje ? true : false} className={!enviar.mensaje ? style.sendEmailFalse : style.sendEmailTrue} style={{display: "flex", alignItems: "center"}}  onClick={() => handleSendEmail()}>Enviar e-mail<span style={{margin: "10px"}} className="material-icons">send</span></button>
-                        </div>
-                </form>
-                </div>
-                :  null
-                
-    }
+    {perfil ?  < AsesorInfo user={user} /> : null}
+    { email ?  < EnviarEmail user={user}/>  : null }
         </div>
     
-
-
-
         <div className = {style.cards}>
             <div className = {style.filter}>
                 <div className = {style.items}>
@@ -165,7 +97,7 @@ return(
                 </div>
             </div>
             {toggle.students ? <AsesorStudents/> : null}
-            {toggle.classes ? <AsesorClases user={user}/> : null}
+            {toggle.classes ? clases.map(c => <AsesorClases key={c.id} clase={c}/>) : null}
         </div>
     </div>
     </div>
@@ -174,8 +106,8 @@ return(
 
 function mapStateToProps(state){
     return {
-        user: state.users.userSubjects
+        user: state.users.user
     }
 }
 
-export default connect(mapStateToProps, {getUserSubjects, putUser})(AsesorProfile)
+export default connect(mapStateToProps, {getUser,  putUser})(AsesorProfile)

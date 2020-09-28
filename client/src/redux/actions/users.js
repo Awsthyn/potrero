@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_USERS, GET_USER_SUBJECTS, GET_USER_STUDENTS, GET_USER_CLASS, PUT_USER, ADD_DATA_SHEET} from '../constants';
+import {GET_USERS, GET_USER, GET_USER_STUDENTS, GET_USER_CLASS, PUT_USER, ADD_DATA_SHEET} from '../constants';
 
 export function getUsers() {
 	return function (dispatch) {
@@ -31,39 +31,39 @@ export function banUser(id) {
 	};
 }
 
-export function getUserSubjects(userId) {
+export function getUser(userId) {
 	console.log(userId)
 	return function (dispatch) {
 		return axios
 			.get(`http://localhost:3001/users/${userId}`, {withCredentials: true})
 			.then(res => {
-				dispatch({type: GET_USER_SUBJECTS, payload: res.data});
+				dispatch({type: GET_USER, payload: res.data});
 			})
 			.catch(err => console.log(err));
 	};
 }
 
-export function getUserStudents() {
-	return function (dispatch) {
-		return axios
-			.get(`http://localhost:3001/users`, {withCredentials: true})
-			.then(res => {
-				dispatch({type: GET_USER_STUDENTS, payload: res.data});
-			})
-			.catch(err => console.log(err));
-	};
-}
+// export function getUserStudents() {
+// 	return function (dispatch) {
+// 		return axios
+// 			.get(`http://localhost:3001/users`, {withCredentials: true})
+// 			.then(res => {
+// 				dispatch({type: GET_USER_STUDENTS, payload: res.data});
+// 			})
+// 			.catch(err => console.log(err));
+// 	};
+// }
 
-export function getUserClass() {
-	return function (dispatch) {
-		return axios
-			.get(`http://localhost:3001/users`, {withCredentials: true})
-			.then(res => {
-				dispatch({type: GET_USER_CLASS, payload: res.data});
-			})
-			.catch(err => console.log(err));
-	};
-}
+// export function getUserClass() {
+// 	return function (dispatch) {
+// 		return axios
+// 			.get(`http://localhost:3001/users`, {withCredentials: true})
+// 			.then(res => {
+// 				dispatch({type: GET_USER_CLASS, payload: res.data});
+// 			})
+// 			.catch(err => console.log(err));
+// 	};
+// }
 
 export function putUser(userId, data) {
 	return function (dispatch) {

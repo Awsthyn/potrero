@@ -2,9 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import style from './AsesorProfile.module.css';
 
 export default function AssesorCalendar() {
@@ -14,7 +11,7 @@ export default function AssesorCalendar() {
    const handleClickOpen = () => {
       setOpen(true);
    };
-   
+                                                
    const handleClose = () => {
       setOpen(false);
    };
@@ -40,15 +37,8 @@ export default function AssesorCalendar() {
             <div className={style.column}>Miércoles</div>
             <div className={style.column}>Jueves</div>
             <div className={style.column}>Viernes</div>
-            {horas.map(h => <div style={{border: '1px solid black'}}> {h} </div>)}
+            {horas.map((h,i )=> <div key={i} style={{border: '1px solid black'}}> {h} </div>)}
          </div>
-         {/* <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-         <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
-            </DialogContentText>
-         </DialogContent> */}
       </Dialog>
       </div>
    );
