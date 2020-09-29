@@ -7,6 +7,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    numericLevel: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -18,10 +22,8 @@ module.exports = (sequelize) => {
       defaultValue: new Date(),
     },
   });
-  AcademicLevel.createInstanceFromBody = function ({ name, educationLevelId }) {
+  AcademicLevel.createInstanceFromBody = function ({ name }) {
     return AcademicLevel.create({
-      name,
-      educationLevelId,
-    });
+      name    });
   };
 };

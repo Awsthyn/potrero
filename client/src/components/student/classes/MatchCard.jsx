@@ -16,10 +16,10 @@ export const MatchCard = ({option, friendlyData, id, data, params, onClick}) => 
             hidden
             id={`radio${id}`}
         />
-        <label data-toggle="modal" data-target={"#hourModal" + id} style={{ height: "250px", width: "200px" }} htmlFor={`radio${id}`} className="d-flex flex-column wrap justify-content-between rounded shadow form-check-label mr-3" >
-            <h5 className="mt-4">{option.user.firstName + " " + option.user.lastName}</h5>
-            <h5>{option.nameWeekDay}</h5>
-            <h5 className="mb-4">{`${start}  -  ${end}`}</h5>
+        <label data-toggle="modal" data-target={"#hourModal" + id} className="d-flex flex-row align-items-center justify-content-between text-left card shadow ml-4 mb-2 pt-2 pl-3" style={{width: "90vw"}} htmlFor={`radio${id}`} >
+            <h5 style={{width:"35vw"}}>{option.user.firstName + " " + option.user.lastName}</h5>
+            <h5 style={{width:"25vw"}}>{option.nameWeekDay}</h5>
+            <h5 style={{width:"10vw"}} className="mr-2">{`${start}  -  ${end}`}</h5>
         </label>
         <ChooseHour nameWeekDay={option.nameWeekDay} userData={{id: option.user.id, name: option.user.firstName + " " + option.user.lastName}} friendlyData={friendlyData} hours={data} id={id}/>
     </div>

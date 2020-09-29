@@ -45,6 +45,9 @@ const mailWelcomeRejection = require("./mailWelcomeRejection.js");
 // IMPORT DE LA RUTA DE Mail con envío de los terminos y condiciones
 const termsAndConditions = require("./termsAndConditions.js");
 
+// IMPORT DE LA RUTA DE Mail de Admisión
+const mailAdvisor= require("./mailAdvisor.js");
+
 // IMPORT DE LA RUTA DE CLASS
 const classRouter = require("./class.js");
 
@@ -57,7 +60,7 @@ const academicLevelXSubjectRouter = require("./academicLevelXSubject.js");
 // IMPORT DE LA RUTA DE HORARIOS DE UN VOLUNTARIO
 const userScheduleRoute = require("./userSchedule.js");
 //IMPORT DEL NIVEL EDUCATIVO - PRIMARIA - SECUNDARIA
-const educationLevel = require("./educationLevel.js")
+//const educationLevel = require("./educationLevel.js")
 
 //IMPORT DEL MATCHING ENTRE STUDENTSCHEDULE Y USERSCHEDULE
 const matching = require("./matching.js")
@@ -95,6 +98,9 @@ router.use("/mailAdmission", mailAdmission);
 //Ruta del mail de bienvenida al nuevo asesor
 router.use("/mailWelcomeRejection", mailWelcomeRejection);
 
+//Ruta para enviar mail a un asesor
+router.use("/mailAdvisor", mailAdvisor);
+
 //Ruta de mail con los términos y condiciones
 router.use("/termsAndConditions", termsAndConditions);
 
@@ -131,7 +137,7 @@ router.use("/academiclevelxsubject", academicLevelXSubjectRouter);
 // RUTA DE HORARIOS DE UN VOLUNTARIO
 router.use("/userSchedule", userScheduleRoute)
 //RUTA DE NIVEL DE EDUCACION - PRIMARIA - SECUNDARIA
-router.use("/educationlevel", educationLevel)
+//router.use("/educationlevel", educationLevel)
 
 //RUTA DE MATCHEO DE STUDENTSCHEDULE Y USERSCHEDULE
 router.use("/matching", matching)

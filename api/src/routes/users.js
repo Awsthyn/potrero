@@ -6,7 +6,6 @@ const {
   UserSchedule,
   Subject,
   AcademicLevel,
-  EducationLevel,
 } = require('../db.js');
 
 // TRAEMOS SEQUELIZE
@@ -109,14 +108,6 @@ server.get('/', (req, res) => {
             attributes: {
               exclude: ['createdAt', 'updatedAt', 'educationLevelId'],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ['createdAt', 'updatedAt'],
-                },
-              },
-            ],
           },
         ],
       },
@@ -168,14 +159,6 @@ server.get('/:id', (req, res) => {
             attributes: {
               exclude: ['createdAt', 'updatedAt', 'educationLevelId'],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ['createdAt', 'updatedAt'],
-                },
-              },
-            ],
           },
         ],
       },

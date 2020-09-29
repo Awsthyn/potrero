@@ -2,16 +2,17 @@ import { LOGIN, LOGOUT } from '../constants';
 import axios from 'axios';
 
 // ----------------- LOGIN --------
-export function sessionLogin(data){
+export function sessionLogin(){
 	return function (dispatch) {
 		return axios
-			.post(`http://localhost:3001/auth/login`, data , {withCredentials : true})
+			.post(`http://localhost:3001/auth/login`, {withCredentials : true})
 			.then(res =>{
 				if(res.data.error){
 					throw new Error(res.data.error)
 				}else{
 					dispatch({type: LOGIN , payload: res.data});
-				}
+                }
+                return res.data
 			})
 			.catch(err => {
 				throw new Error('Error al autenticar, verifique los datos ingresados')

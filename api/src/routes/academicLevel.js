@@ -19,12 +19,6 @@ server.get("/", (req, res) => {
           exclude: ["createdAt", "updatedAt", "academicLeveltXSubject"],
         },
       },
-      {
-        model: EducationLevel,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
-      },
     ],
   })
     .then((year) => {
@@ -50,12 +44,6 @@ server.get("/:id", (req, res) => {
     include: [
       {
         model: Subject,
-        attributes: {
-          exclude: ["createdAt", "updatedAt"],
-        },
-      },
-      {
-        model: EducationLevel,
         attributes: {
           exclude: ["createdAt", "updatedAt"],
         },

@@ -27,6 +27,7 @@ import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsD
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
 import DetalleClase from './components/admin/detalleClase/DetalleClase';
 
+import AdvisorFormMail from './components/admin/AdvisorFormMail';
 class App extends React.Component {
   render() {
     return (
@@ -43,7 +44,9 @@ class App extends React.Component {
             "/admin/estudiantes/detalles/:id",
             "/admin/detail",
             "/admin/estudiantes/listadematerias/:studentId",
-            "/admin/estudiantes/asignacion/:studentId/:subjectId"
+            "/admin/estudiantes/asignacion/:studentId/:subjectId",
+            "/admin/clases",
+
           ]}
           component={AdminNavBar}
         />
