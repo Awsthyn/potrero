@@ -11,8 +11,9 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import { sessionLogout } from '../../redux/actions/session';
 import Miembros from './MenuItemMiembros';
-import Clases from './MenuItemClases';
 import Gestion from './MenuItemGestion';
+import BookIcon from '@material-ui/icons/Book';
+import AssistantIcon from '@material-ui/icons/Assistant';
 
 
 const VIOLETA = '#492BC4'
@@ -119,14 +120,19 @@ const AdminNavBar = (props) => {
                                         </ListItemIcon>
                                         <ListItemText primary='Panel'/>
                                 </ListItem>
-                    </Link> 
+                        </Link> 
 
                     <ListItem className={classes.item} disableRipple>
                          <Miembros/>
                      </ListItem>
-                     <ListItem className={classes.item} disableRipple>
-                         <Clases/>
-                     </ListItem>
+                     <Link to= '/admin/clases' className={classes.link}>
+                                <ListItem className={classes.item}  disableRipple>
+                                    <ListItemIcon className={classes.icons}>
+                                            <BookIcon/>
+                                        </ListItemIcon>
+                                        <ListItemText primary='Clases'/>
+                                </ListItem>
+                        </Link> 
                      <ListItem className={classes.item} disableRipple>
                          <Gestion/>
                      </ListItem>

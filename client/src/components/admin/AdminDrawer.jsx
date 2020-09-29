@@ -301,7 +301,7 @@ function AdminDrawer(props) {
                   </ListItem>
 
 
-                  <ListItem onClick={() => history.push(`/admin/materias`)} button >
+                  <ListItem onClick={() => history.push(`/admin/clases`)} button >
                     <ListItemIcon className={`${classes.link}`}><BookIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Clases'} />
                   </ListItem>

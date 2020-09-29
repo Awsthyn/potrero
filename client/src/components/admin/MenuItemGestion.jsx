@@ -110,10 +110,10 @@ export default function MenuListComposition() {
   };
 
   const handleClose = (event,route) => {
-//   if(route === 'estudiantes'|| route === 'usuarios')  history.push(`/admin/${route}`)
-//     if (anchorRef.current && anchorRef.current.contains(event.target)) {
-//       return;
-//     }
+  if(route === 'materias' || route==='voluntarios')  history.push(`/admin/${route}`)
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
 
     setOpen(false);
   };
@@ -163,8 +163,8 @@ export default function MenuListComposition() {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'estudiantes')}><BookIcon/>  Materias</MenuItem>
-                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'usuarios')}><SupervisedUserCircleRoundedIcon/>  Tutorias</MenuItem>
+                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'materias')}><BookIcon/>  Materias</MenuItem>
+                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'voluntarios')}><AssistantIcon/>  Voluntarios</MenuItem>
 
                   </MenuList>
                 </ClickAwayListener>
