@@ -77,14 +77,6 @@ server.get("/", (req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
@@ -343,14 +335,6 @@ server.get("/subject/:id", (req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
