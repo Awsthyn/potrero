@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import Assist from "../stats/GeneralAssists.jsx";
@@ -6,6 +6,8 @@ import Advisers from "../stats/Advisers.jsx";
 import Qualifications from "../stats/Quafilications";
 import OfferWithDemand from "../stats/OffersWithDemand";
 import "./stats.css";
+import localStorage from 'local-storage';
+import { useHistory } from "react-router-dom";
 
 function imprimir() {
   let input = window.document.getElementById("graficas");
@@ -46,6 +48,13 @@ const useStyles = makeStyles({
 
 export default () => {
   const classes = useStyles();
+  const [userInfo, setUserInfo] = useState(JSON.parse(window.localStorage.getItem('sessionUser')) || "")
+
+  useEffect(()=> {
+    // window.localStorage.setItem("")
+  }, [])
+  console.log(userInfo)
+
   return (
     <div id="graficas">
       <div className={`titlePotrero oculto`}>

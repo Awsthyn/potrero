@@ -10,8 +10,8 @@ export default function sessionReducer (state = initialState, action) {
     switch (action.type) {
 
     case LOGIN:
-        console.log(action.payload)
-        localStorage.setItem('sessionUser', JSON.stringify(action.payload));
+        
+        window.localStorage.setItem('sessionUser', JSON.stringify(action.payload));
         return {
             ...state,
             sessionUser: action.payload
