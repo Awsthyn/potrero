@@ -56,7 +56,7 @@ const {
 //BelongsTo(...) -> Escribe el id referente en la entidad entre ()
 
 //CLASE
-Class.hasOne(DataSheet);
+Class.hasMany(DataSheet);
 Class.belongsTo(User);
 Class.belongsTo(Student);
 Class.belongsTo(Subject);

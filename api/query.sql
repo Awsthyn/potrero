@@ -1,13 +1,9 @@
 -- QUERY PARA USERS 
 
 INSERT INTO users
-<<<<<<< HEAD
 VALUES(DEFAULT, 'frank@gmail.com', null, 'Franco', 'Matus', 'Beraza', '11/04/2002', '1127300569', 'https://www.linedkin.com/in/franmatus6', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
 VALUES(DEFAULT, 'martinch@gmail.com', null, 'Lucca', 'Lipisky', 'Santiago', '25/05/2002', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-=======
-VALUES(DEFAULT, 'martinch@gmail.com', null, 'Lucca', 'Lipisky', 'Santiago', '25/05/1995', '1125235534', 'https://www.linkedin.com/in/luccalipisky', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
->>>>>>> master
 INSERT INTO users
 VALUES(DEFAULT, 'sanlorenzo10@gmail.com',null, 'Ane', 'Ruz', 'San Martin 1213', '11/04/1992', '11454300569', 'https://www.linedkin.com/in/elegonzalez', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
@@ -37,12 +33,8 @@ VALUES(DEFAULT, 'simon@gmail.com',null, 'Nacho', 'Simon', 'San Martin 1213', '11
 INSERT INTO users
 VALUES(DEFAULT, 'mellado@gmail.com', null, 'Zoe', 'Mellado', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO users
-<<<<<<< HEAD
 VALUES(DEFAULT, 'cfufcufcufcufcuc@gmail.com', null, 'xtdxdtdxt', 'xdtdttxdtdx', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'no tengo', 'nel', 'nelpastel', 'tampoco', 'pendiente', false, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-=======
-VALUES(DEFAULT, 'hernandez@gmail.com', null, 'Camila', 'Hernandez', 'Mendoza', '25/05/1990', '1125005534', 'https://www.linkedin.com/in/gustavo', 'todavia no', 'capaz', 'nelpastel', 'tampoco', 'aceptado', true, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
->>>>>>> master
 -- QUERY PARA SUBJECTS 
 
 INSERT INTO subjects
