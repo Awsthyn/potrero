@@ -111,6 +111,7 @@ INSERT INTO students
 VALUES(DEFAULT, 'Albert', 'Makinst', '1125252242', 'Albert@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
 INSERT INTO students
 VALUES(DEFAULT, 'Beive', 'Rekinat', '1125252242', 'Beive@gmail.com', 'Lamen', 'Shephin', '1125252242', 'ws4w4wz4aw4@gmail.com', 'Literatura', 'Matematicas', true, DEFAULT, DEFAULT);
+
 -- QUERY PARA TYPEOFDIFFICULTIES
 
 INSERT INTO "typeOfDifficulties"
@@ -208,75 +209,82 @@ VALUES(DEFAULT, '(13,15.5)', 'Miercoles', DEFAULT, DEFAULT, 16, 16, 2);
 -- QUERY PARA DATASHEET
 
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 1, 'justificada', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 1);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 1);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 2, 'no justificada', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 2);
+VALUES(DEFAULT, 3, 4, 5, 5, 'justificada', 4, 3, true, false, null, 'Sin comentarios', true, 3, 3, DEFAULT, DEFAULT, 2);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 3, 'justificada', 7, 1, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 3);
+VALUES(DEFAULT, 3, 4, 5, 5, 'no justificada', 4, 3, true, false, null, 'Sin comentarios', true, 4, 3, DEFAULT, DEFAULT, 3);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'tardanza', 8, 2, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 4);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 2, 3, DEFAULT, DEFAULT, 4);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'presente', 3, 5, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 5);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 5);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 6, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 6);
+VALUES(DEFAULT, 3, 4, 5, 5, 'justificada', 4, 3, true, false, null, 'Sin comentarios', true, 3, 3, DEFAULT, DEFAULT, 6);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 7, 'presente', 5, 3, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 7);
+VALUES(DEFAULT, 3, 4, 5, 5, 'no justificada', 4, 3, true, false, null, 'Sin comentarios', true, 3, 3, DEFAULT, DEFAULT, 7);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'justificada', 3, 1, false, null, 'Ha tenido un gran rendimiento en programacion', true, 6, '60', 9, DEFAULT, DEFAULT, 8);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 4, 3, DEFAULT, DEFAULT, 8);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'no justificada', 9, 8, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 10);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 9);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'justificada', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 11);
+VALUES(DEFAULT, 3, 4, 5, 5, 'justificada', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 10);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'no justificada', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 12);
+VALUES(DEFAULT, 3, 4, 5, 5, 'no justificada', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 11);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 13);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 2, 3, DEFAULT, DEFAULT, 12);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 1, 'justificada', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 14);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 13);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 2, 'tardanza', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 15);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 1, 3, DEFAULT, DEFAULT, 14);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 3, 'presente', 7, 1, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 16);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 15);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'tardanza', 8, 2, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 17);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 2, 3, DEFAULT, DEFAULT, 16);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'presente', 3, 5, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 18);
+VALUES(DEFAULT, 3, 4, 5, 5, 'no justificada', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 17);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 6, 'presente', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 19);
+VALUES(DEFAULT, 3, 4, 5, 5, 'justificada', 4, 3, true, false, null, 'Sin comentarios', true, 3, 3, DEFAULT, DEFAULT, 18);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 7, 'presente', 5, 3, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 20);
+VALUES(DEFAULT, 3, 4, 5, 5, 'justificada', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 19);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'presente', 3, 1, false, null, 'Ha tenido un gran rendimiento en programacion', true, 6, '60', 9, DEFAULT, DEFAULT, 21);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 4, 3, DEFAULT, DEFAULT, 20);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'justificada', 9, 8, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 22);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 21);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 23);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 2, 3, DEFAULT, DEFAULT, 22);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'no justificada', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 24);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 4, 3, DEFAULT, DEFAULT, 23);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 9, 'tardanza', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 25);
+VALUES(DEFAULT, 3, 4, 5, 5, 'justificada', 4, 3, true, false, null, 'Sin comentarios', true, 3, 3, DEFAULT, DEFAULT, 24);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 1, 'no justificada', 4, 2, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 26);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 1, 3, DEFAULT, DEFAULT, 25);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 2, 'tardanza', 8, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 27);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 26);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 3, 'presente', 7, 1, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 28);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 4, 3, DEFAULT, DEFAULT, 27);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'tardanza', 8, 2, false, null, 'Ha tenido un gran rendimiento en literatura', true, 6, '60', 9, DEFAULT, DEFAULT, 29);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 2, 3, DEFAULT, DEFAULT, 28);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'presente', 3, 5, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 30);
+VALUES(DEFAULT, 3, 4, 5, 5, 'tardanza', 4, 3, true, false, null, 'Sin comentarios', true, 4, 3, DEFAULT, DEFAULT, 29);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 6, 'presente', 3, 9, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 31);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 30);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 7, 'presente', 5, 3, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 32);
+VALUES(DEFAULT, 3, 4, 5, 5, 'presente', 4, 3, true, false, null, 'Sin comentarios', true, 2, 3, DEFAULT, DEFAULT, 31);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'justificada', 3, 1, false, null, 'Ha tenido un gran rendimiento en programacion', true, 6, '60', 9, DEFAULT, DEFAULT, 33);
+VALUES(DEFAULT, 3, 4, 5, 5, 'no justificada', 4, 3, true, false, null, 'Sin comentarios', true, 1, 3, DEFAULT, DEFAULT, 32);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 8, 'justificada', 9, 8, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 9, '60', 7, DEFAULT, DEFAULT, 34);
+VALUES(DEFAULT, 3, 4, 5, 5, 'no justificada', 4, 3, true, false, null, 'Sin comentarios', true, 4, 3, DEFAULT, DEFAULT, 33);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 5, 'tardanza', 6, 7, false, null, 'Ha tenido un gran rendimiento en literatura', true, 1, '60', 4, DEFAULT, DEFAULT, 35);
+VALUES(DEFAULT, 3, 4, 5, 5, 'no justificada', 4, 3, true, false, null, 'Sin comentarios', true, 3, 3, DEFAULT, DEFAULT, 33);
 INSERT INTO "dataSheets"
-VALUES(DEFAULT, 4, 'justificada', 5, 4, false, null, 'Ha tenido un gran rendimiento en matematicas', true, 3, '60', 4, DEFAULT, DEFAULT, 36);
+VALUES(DEFAULT, 3, 4, 5, 5, 'no justificada', 4, 3, true, false, null, 'Sin comentarios', true, 4, 3, DEFAULT, DEFAULT, 34);
+INSERT INTO "dataSheets"
+VALUES(DEFAULT, 3, 4, 5, 5, 'justificada', 4, 3, true, false, null, 'Sin comentarios', true, 5, 3, DEFAULT, DEFAULT, 35);
+INSERT INTO "dataSheets"
+VALUES(DEFAULT, 3, 4, 5, 5, 'justificada', 4, 3, true, false, null, 'Sin comentarios', true, 4, 3, DEFAULT, DEFAULT, 36);
+INSERT INTO "dataSheets"
+VALUES(DEFAULT, 3, 4, 5, 5, 'justificada', 4, 3, true, false, null, 'Sin comentarios', true, 3, 3, DEFAULT, DEFAULT, 37);
+
 
 -- QUERY PARA STUDENTSCHEDULE
 
