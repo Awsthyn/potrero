@@ -40,7 +40,7 @@ export default function Faltas() {
   };
   console.log(estado)
   return (
-    <div>
+    <div style={{display: "inline-block"}}>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Faltó
       </Button>

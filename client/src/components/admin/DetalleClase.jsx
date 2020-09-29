@@ -6,11 +6,13 @@ import Datasheet from "./dataSheet/DataSheet";
 
 export default function DetalleClase() {
     return(
-        <div className={style.integrantes}>
-            <div className={style}>
-                <div>Asesor</div>
-                <div>Alumno</div>    
-                <button>Asistió</button> <Faltas/>
+        <div className={style.contenedor}>
+            <div className={style.integrantes}>
+                <div>
+                    <div className={style.personas}>Asesor</div>
+                    <div className={style.personas}>Alumno</div>    
+                </div>
+                <button>Asistió</button> <Faltas className={style.botones}/>
             </div>
             <Datasheet/>
         </div>
