@@ -42,7 +42,9 @@ class App extends React.Component {
             "/admin/estudiantes/detalles/:id",
             "/admin/detail",
             "/admin/estudiantes/listadematerias/:studentId",
-            "/admin/estudiantes/asignacion/:studentId/:subjectId"
+            "/admin/estudiantes/asignacion/:studentId/:subjectId",
+            "/admin/clases",
+
           ]}
           component={AdminNavBar}
         />

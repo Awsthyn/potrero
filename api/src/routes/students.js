@@ -10,7 +10,6 @@ const {
   TODXStudent,
   SubjectXStudent,
   StudentSchedule,
-  EducationLevel,
   Class
 } = require("../db.js");
 
@@ -52,14 +51,6 @@ server.get("/", isAuthenticated, (req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
@@ -116,14 +107,6 @@ server.get("/:id", isAuthenticated,(req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
