@@ -11,7 +11,7 @@ const path = require('path');
 // const cors = require('cors');
 
 const {User} = require('./db.js');
-require('./db.js');
+// require('./db.js');
 const server = express();
 
 server.name = 'API';

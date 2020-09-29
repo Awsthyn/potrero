@@ -9,7 +9,9 @@ class OffersWithDemand extends React.Component {
   };
 
   async peticion() {
-    var peticion = await fetch("http://localhost:3001/stats/demandwithoffer");
+    var peticion = await fetch("http://localhost:3001/stats/demandwithoffer", {
+      withCredentials: true,
+    });
     var respuesta = await peticion.json();
 
     this.setState({
@@ -18,7 +20,7 @@ class OffersWithDemand extends React.Component {
       totalDemands: respuesta.totalDemands,
       totalOffers: respuesta.totalOffers,
       countOffers: respuesta.totalOffers,
-      countDemands: respuesta.totalDemands
+      countDemands: respuesta.totalDemands,
     });
   }
 

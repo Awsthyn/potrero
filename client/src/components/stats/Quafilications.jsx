@@ -6,7 +6,9 @@ class Offers extends React.Component {
     notas: [],
   };
   async peticion() {
-    var peticion = await fetch("http://localhost:3001/stats/qualification");
+    var peticion = await fetch("http://localhost:3001/stats/qualification", {
+      withCredentials: true,
+    });
     var notas = await peticion.json();
 
     let pro =

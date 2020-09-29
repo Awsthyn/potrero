@@ -8,12 +8,14 @@ const {
   AcademicLevel,
   EducationLevel,
 } = require("../db.js");
+const { isAuthenticated } = require("./authenticate.js");
 
 const isUserAdmin = require("./middlewares.js").isUserAdmin;
 const isAdmin = require("./middlewares.js").isAdmin;
 const isUserActive = require("./middlewares.js").isUserActive;
 
-server.get("/assistances", isUserActive, isUserAdmin, (req, res) => {
+server.get("/assistances", isAuthenticated, (req, res) => {
+  console.log("ASISTENCIAS");
   DataSheet.findAll({
     attributes: {
       exclude: [
@@ -344,6 +346,75 @@ server.get("/demandwithoffer", isUserActive, isUserAdmin, (req, res) => {
       sumasTotales(totalDemandAndOffer);
 
       res.json(totalDemandAndOffer);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+server.get("/datasheetstudent/:id", (req, res) => {
+  Student.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: {
+      exclude: [
+        "createdAt",
+        "updatedAt",
+        "phone",
+        "email",
+        "tutorFirstName",
+        "tutorLastName",
+        "tutorPhone",
+        "tutorEmail",
+        "interests",
+        "motivations",
+      ],
+    },
+    include: {
+      model: Class,
+      attributes: {
+        exclude: ["updatedAt", "createdAt", "userId", "studentId", "subjectId"],
+      },
+      include: {
+        model: DataSheet,
+        attributes: {
+          exclude: ["createdAt", "updatedAt"],
+        },
+      },
+    },
+  })
+    .then((subjectsWithDemandAndOffer) => {
+      res.json(subjectsWithDemandAndOffer);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+server.get("/datasheetsubject/:id", (req, res) => {
+  Subject.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: {
+      exclude: ["createdAt", "updatedAt"],
+    },
+    include: {
+      model: Class,
+      attributes: {
+        exclude: ["updatedAt", "createdAt", "userId", "studentId", "subjectId"],
+      },
+      include: {
+        model: DataSheet,
+        attributes: {
+          exclude: ["updatedAt", "createdAt"],
+        },
+      },
+    },
+  })
+    .then((subjectsWithDemandAndOffer) => {
+      res.json(subjectsWithDemandAndOffer);
     })
     .catch((err) => {
       res.json(err);

@@ -21,9 +21,11 @@ class generalAssists extends React.Component {
   };
 
   async peticion() {
-    let peticion = await fetch("http://localhost:3001/stats/assistances");
+    let peticion = await fetch("http://localhost:3001/stats/assistances", {
+      withCredentials: true,
+    });
     let respuesta = await peticion.json();
-    
+
     let dataAssistance = [];
     let dataNoJustificada = [];
     let dataJustificada = [];
@@ -149,7 +151,9 @@ class generalAssists extends React.Component {
             },
           }}
         ></Pie>
-        <Link to={enviarDetalles}><button className="btn btn-primary">Enviame</button></Link>
+        <Link to={enviarDetalles}>
+          <button className="btn btn-primary">Enviame</button>
+        </Link>
       </div>
     );
   }

@@ -1,8 +1,7 @@
 import React from "react";
-import { Doughnut} from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 class Advisers extends React.Component {
-
   state = {
     totalAdvisors: 0,
     totalAdvisorsActives: 0,
@@ -10,29 +9,36 @@ class Advisers extends React.Component {
     promedioActives: 0,
     promedioInactives: 0,
   };
-  
+
   async peticion() {
-    var peticion = await fetch("http://localhost:3001/stats/advisorstatus");
+    var peticion = await fetch("http://localhost:3001/stats/advisorstatus", {
+      withCredentials: true,
+    });
     var respuesta = await peticion.json();
     this.setState({
       totalAdvisors: respuesta.totalAdvisors,
       totalAdvisorsActives: respuesta.totalAdvisorsActives,
       totalAdvisorsInactives: respuesta.totalAdvisorsInactives,
     });
-    
-    this.state.promedioActives = this.state.totalAdvisorsActives / this.state.totalAdvisors;
-    this.state.promedioInactives =  this.state.totalAdvisorsInactives / this.state.totalAdvisors;
+
+    this.state.promedioActives =
+      this.state.totalAdvisorsActives / this.state.totalAdvisors;
+    this.state.promedioInactives =
+      this.state.totalAdvisorsInactives / this.state.totalAdvisors;
   }
 
   getChartData() {
     const datos = {
-      labels: ["Activos " + Math.round(this.state.promedioActives * 100) + "%", "Inactivos " + Math.round(this.state.promedioInactives * 100) + "%"],
+      labels: [
+        "Activos " + Math.round(this.state.promedioActives * 100) + "%",
+        "Inactivos " + Math.round(this.state.promedioInactives * 100) + "%",
+      ],
       datasets: [
         {
           label: "Asesores",
           data: [
             this.state.totalAdvisorsActives,
-            this.state.totalAdvisorsInactives
+            this.state.totalAdvisorsInactives,
           ],
           backgroundColor: [
             "rgba(73, 43, 196, 0.6)",
@@ -79,7 +85,7 @@ class Advisers extends React.Component {
             legend: {
               labels: {
                 fontColor: "black",
-                fontSize: 15
+                fontSize: 15,
               },
             },
           }}
