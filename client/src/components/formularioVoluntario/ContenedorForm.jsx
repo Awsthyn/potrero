@@ -67,7 +67,8 @@ export default function ContenedorForm({history, location}) {
 					</div>
 			<div className={style.formLogo} >
 				{location.pathname !== '/voluntarios/confirmacion' ?
-				<span> 
+				<div> 
+					<div style = {{display: 'flex', padding: '0', marginLeft: '-30px', alignItems: 'center'}}>
 						<img
 							id="comp-jgasx8rqimgimage"
 							// style={location.pathname === '/voluntarios/formulario' ? {top: '50px', marginBottom: '70px'} :null}
@@ -77,6 +78,11 @@ export default function ContenedorForm({history, location}) {
 							itemProp="image"
 							src={logo}
 						/>
+						<div className={style.frase}>  
+						<p style={{fontSize:'1.3rem', margin: '0px', fontFamily: 'Poppins'}} ><strong>Sumáte a nuestro equipo </strong></p>
+						<p style={{margin: '0', fontWeight: 100, color: 'gray', fontSize: '15px', fontFamily: 'Poppins'}} > Completá este formulario y nos pondremos en contacto con vos </p>
+						</div>
+						</div>
 						<div className={style.circles}>
 							<div id='uno' className={style.circleGray} onClick={(e) => goTo(e)} >1</div>
 							<div className={style.lineGray}></div> 
@@ -88,7 +94,7 @@ export default function ContenedorForm({history, location}) {
 							<div className={style.lineGray}></div>
 							<div id='cinco' className={style.circleGray} onClick={(e) => goTo(e)}>5</div>						
 						</div>
-				</span> :null }
+				</div> :null }
 						<Route exact path="/voluntarios/formulario" component={VolunteerForm} />
 						<Route exact path="/voluntarios/horarios" component={ContenedorCheckbox} />
 						<Route exact path="/voluntarios/niveles" component={Niveles} />
