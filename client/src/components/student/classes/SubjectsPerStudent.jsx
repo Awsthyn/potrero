@@ -5,14 +5,13 @@ import {getStudentDetail} from '../../../redux/actions/student'
 import {getMatchingSchedulesForAllSubjects} from '../../../redux/actions/class'
 import {useHistory} from 'react-router-dom'
 
-
-export const SubjectsPerStudent = ({getStudentDetail, getMatchingSchedulesForAllSubjects, studentDetail, matchingSchedule, match}) => {
+export const SubjectsPerStudent = ({getUsers, getStudentDetail, getMatchingSchedulesForAllSubjects, studentDetail, matchingSchedule, users, match}) => {
     const { params }  = match;
     const history = useHistory();
     useEffect(() => {
         getStudentDetail(params.studentId)
         getMatchingSchedulesForAllSubjects(params.studentId)
-    }, [getStudentDetail, getMatchingSchedulesForAllSubjects])
+    }, [getStudentDetail, getMatchingSchedulesForAllSubjects, getUsers])
     let assignedSubjects = studentDetail.id && studentDetail.subjects && studentDetail.subjects.length > 0 && studentDetail.subjects.filter(s => {
         let assigned = false
         for(let elem of studentDetail.classes){
@@ -26,10 +25,17 @@ export const SubjectsPerStudent = ({getStudentDetail, getMatchingSchedulesForAll
     return (
         <div style={{marginTop: "80px"}}>
             <h2>Clases de {studentDetail.firstName + " " + studentDetail.lastName}</h2>
-            <h3>Materias con clases asignadas</h3>
+            <h3 className="mb-3">Materias con clases asignadas</h3>
             {assignedSubjects && assignedSubjects.length > 0 ? assignedSubjects.map((s,i) => {
+                let user = users.find(e => e.id === studentDetail.classes[i].userId)
                 return (
-                <h4 key={"a"+i} className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw"}}>{s.name}</h4>
+                <div key={"a"+i} className="d-flex flex-row align-items-center justify-content-between text-left card shadow ml-4 mb-2 pt-2 pl-3" style={{width: "90vw"}}>
+                    <h5 style={{width:"20vw"}}>{s.name}</h5>
+                    <h5 style={{width:"15vw"}}>{user.firstName + ' ' + user.lastName}</h5>
+                    <h5 style={{width:"15vw"}}>{studentDetail.classes[i].nameWeekDay}</h5>
+                    <h5 style={{width:"15vw"}}>{studentDetail.classes[i].duration[0].value % 1 === 0 ? String(studentDetail.classes[i].duration[0].value) + ":00" : String(studentDetail.classes[i].duration[0].value).substring(0,2) + ":30"}  {' - '}
+                    {studentDetail.classes[i].duration[1].value % 1 === 0 ? String(studentDetail.classes[i].duration[1].value) + ":00" : String(studentDetail.classes[i].duration[1].value).substring(0,2) + ":30"}</h5>
+                    <span className="btn btn-danger mt-n2 mr-2" onClick={() => onDelete(studentDetail.classes[i].id) }>Eliminar</span></div>
                 )} ) : <h1>No hay datos</h1>}
             <h3 className="mt-4">Materias sin clases asignadas</h3>
             <p>Las materias en color <span style={{color: "#492BC4"}}>lila</span> indican que existe por lo menos un docente con un horario disponible para asignarle una clase a este alumno.</p>
@@ -44,7 +50,7 @@ export const SubjectsPerStudent = ({getStudentDetail, getMatchingSchedulesForAll
                 )}} ) : null}
             {studentDetail.id && studentDetail.subjects && studentDetail.subjects.length > 0 ? studentDetail.subjects.map((s,i) => {
                 if(possibleClasses && possibleClasses.length > 0 && !possibleClasses.includes(s.name)){return (
-                    <h4 className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw"}} key={"n"+i}>{s.name}</h4>
+                    <h5 className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw"}} key={"n"+i}>{s.name}</h5>
                     )}
                 }
                  ) : null}
@@ -61,6 +67,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
 	return {
         getStudentDetail: (studentId) => dispatch(getStudentDetail(studentId)),
+        getUsers: () => dispatch(getUsers()),
         getMatchingSchedulesForAllSubjects: (studentId) => dispatch(getMatchingSchedulesForAllSubjects(studentId))
 	};
 };

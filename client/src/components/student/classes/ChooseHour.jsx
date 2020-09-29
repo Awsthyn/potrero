@@ -39,8 +39,10 @@ export default function ChooseHour({friendlyData, nameWeekDay, userData, hours, 
         confirmButtonText: `Crear clase`,
         cancelButtonText: `Cancelar`,
       }).then((result) => {
-        postClass({subjectId: friendlyData.subject.id, studentId: friendlyData.student.id, duration: [start,end], userId: userData.id})
-        result.isConfirmed && Swal.fire('Clase creada', '', 'success')
+        result.isConfirmed && Swal.fire('Clase creada', '', 'success') && postClass({
+          subjectId: friendlyData.subject.id, 
+          studentId: friendlyData.student.id, 
+          duration: [start,end], userId: userData.id, nameWeekDay})
       })
     }
     else {

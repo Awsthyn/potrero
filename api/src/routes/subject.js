@@ -44,7 +44,7 @@ server.get("/", (req, res) => {
 // BUSCA UNA MATERIA EN ESPECÍFICO Y MUESTRA SUS DATOS.
 server.get("/:id", (req, res) => {
   // ACÁ BUSCA UNA MATERIA EN LA BASE DE DATOS
-  Subject.findOne({
+  Subject.findByPk(req.params.id, {
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
