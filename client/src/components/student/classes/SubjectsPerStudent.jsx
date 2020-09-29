@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { sessionLogin } from "../../../redux/actions/session.js";
 import {getStudentDetail} from '../../../redux/actions/student'
 import {getMatchingSchedulesForAllSubjects} from '../../../redux/actions/class'
-
+import {useHistory} from 'react-router-dom'
 
 
 export const SubjectsPerStudent = ({getStudentDetail, getMatchingSchedulesForAllSubjects, studentDetail, matchingSchedule, match}) => {
     const { params }  = match;
-    useEffect(() => {    
+    const history = useHistory();
+    useEffect(() => {
         getStudentDetail(params.studentId)
         getMatchingSchedulesForAllSubjects(params.studentId)
     }, [getStudentDetail, getMatchingSchedulesForAllSubjects])
@@ -35,16 +37,16 @@ export const SubjectsPerStudent = ({getStudentDetail, getMatchingSchedulesForAll
             {matchingSchedule && matchingSchedule.length > 0  ? matchingSchedule.map((e,i) => {
                 if(compareAssignedToPosible && compareAssignedToPosible.length > 0 && !compareAssignedToPosible.includes(e[0].user.subjects[0].name)){
                 return (
-                <h4 role="button" className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw", color: "#492BC4"}} 
-                onClick={(e)=> window.location = `/admin/estudiantes/asignacion/${params.studentId}/${e.target.getAttribute("subjectid")}`}
-                subjectid={e[0].user.subjects[0].id} 
+                <h4 role="button" className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw", color: "#492BC4"}}
+                onClick={(e)=> history.push(`/admin/estudiantes/asignacion/${params.studentId}/${e.target.getAttribute("subjectid")}`)}
+                subjectid={e[0].user.subjects[0].id}
                 key={"p"+i}>{e[0].user.subjects[0].name}</h4>
                 )}} ) : null}
             {studentDetail.id && studentDetail.subjects && studentDetail.subjects.length > 0 ? studentDetail.subjects.map((s,i) => {
                 if(possibleClasses && possibleClasses.length > 0 && !possibleClasses.includes(s.name)){return (
                     <h4 className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw"}} key={"n"+i}>{s.name}</h4>
                     )}
-                } 
+                }
                  ) : null}
         </div>
     )
@@ -52,7 +54,8 @@ export const SubjectsPerStudent = ({getStudentDetail, getMatchingSchedulesForAll
 
 const mapStateToProps = (state) => ({
     studentDetail: state.students.studentDetail,
-    matchingSchedule: state.students.matchingSchedule
+    matchingSchedule: state.students.matchingSchedule,
+    sessionUser: state.sessions.sessionUser
 });
 
 const mapDispatchToProps = (dispatch) => {
