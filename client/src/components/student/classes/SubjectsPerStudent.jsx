@@ -6,7 +6,7 @@ import {getUsers} from '../../../redux/actions/users'
 import Swal from 'sweetalert2'
 
 
-export const SubjectsPerStudent = ({getUsers, getStudentDetail, getMatchingSchedulesForAllSubjects, studentDetail, matchingSchedule, users, match}) => {
+export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, getMatchingSchedulesForAllSubjects, studentDetail, matchingSchedule, users, match}) => {
     const { params }  = match;
 
     const onDelete = (classId) => {
@@ -21,11 +21,12 @@ export const SubjectsPerStudent = ({getUsers, getStudentDetail, getMatchingSched
             cancelButtonText: `Cancelar`
           }).then((result) => {
             if (result.isConfirmed) {
-              deleteClass(classId) && Swal.fire(
+              deleteClass(classId)
+              .then(() =>Swal.fire(
                 'Clase eliminada',
                 'La clase ha sido borrada',
                 'success'
-              )
+              ))
             }
           })
     }
@@ -43,9 +44,8 @@ export const SubjectsPerStudent = ({getUsers, getStudentDetail, getMatchingSched
         }
         return assigned
     })
-    let compareAssignedToPosible = assignedSubjects && assignedSubjects.length > 0 && assignedSubjects.map(e => e.name)
+    let compareAssignedToPosible = assignedSubjects && assignedSubjects.map(e => e.name)
     let possibleClasses = matchingSchedule && matchingSchedule[0] && matchingSchedule.map(e => e[0].user.subjects[0].name)
-
     return (
         <div style={{marginTop: "80px"}}>
             <h2>Clases de {studentDetail.firstName + " " + studentDetail.lastName}</h2>
@@ -65,7 +65,7 @@ export const SubjectsPerStudent = ({getUsers, getStudentDetail, getMatchingSched
             <p>Las materias en color <span style={{color: "#492BC4"}}>lila</span> indican que existe por lo menos un docente con un horario disponible para asignarle una clase a este alumno.</p>
             <p className="mt-n3">En caso de querer asignar una clase, haga clic en la <span style={{color: "#492BC4"}}>materia</span> correspondiente.</p>
             {matchingSchedule && matchingSchedule.length > 0  ? matchingSchedule.map((e,i) => {
-                if(compareAssignedToPosible && compareAssignedToPosible.length > 0 && !compareAssignedToPosible.includes(e[0].user.subjects[0].name)){
+                if(compareAssignedToPosible && !compareAssignedToPosible.includes(e[0].user.subjects[0].name)){
                 return (
                 <h5 role="button" className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw", color: "#492BC4"}} 
                 onClick={(e)=> window.location = `/admin/estudiantes/asignacion/${params.studentId}/${e.target.getAttribute("subjectid")}`}
@@ -92,6 +92,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
         getStudentDetail: (studentId) => dispatch(getStudentDetail(studentId)),
         getUsers: () => dispatch(getUsers()),
+        deleteClass: (classId) => dispatch(deleteClass(classId)),
         getMatchingSchedulesForAllSubjects: (studentId) => dispatch(getMatchingSchedulesForAllSubjects(studentId))
 	};
 };

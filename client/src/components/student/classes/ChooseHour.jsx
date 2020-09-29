@@ -2,14 +2,13 @@ import React, {useState} from 'react'
 import moment from "moment"
 import { TimePicker } from '@material-ui/pickers'
 import Swal from 'sweetalert2'
-
 import {postClass} from '../../../redux/actions/class'
+import {useHistory} from "react-router-dom"
 
 
 export default function ChooseHour({friendlyData, nameWeekDay, userData, hours, id}) {
   const [start, setStart] = useState(hours[0])
   const [end, setEnd] = useState(hours[0]+ 0.5)
-  
   let startToHour = hours[0] % 1 === 0 ? String(hours[0]) + ":00" : String(hours[0]).substring(0,2) + ":30"
   let endToHour = hours[1] % 1 === 0 ? String(hours[1]) + ":00" : String(hours[1]).substring(0,2) + ":30"
   const handleTime = (hour, time) => {
@@ -38,11 +37,16 @@ export default function ChooseHour({friendlyData, nameWeekDay, userData, hours, 
         showCancelButton: true,
         confirmButtonText: `Crear clase`,
         cancelButtonText: `Cancelar`,
-      }).then((result) => {
-        result.isConfirmed && Swal.fire('Clase creada', '', 'success') && postClass({
+      })
+      .then((result) => {
+        if(result.isConfirmed) { 
+        Swal.fire('Clase creada', '', 'success')
+        let payload = {
           subjectId: friendlyData.subject.id, 
           studentId: friendlyData.student.id, 
-          duration: [start,end], userId: userData.id, nameWeekDay})
+          duration: [start,end], userId: userData.id, nameWeekDay}
+        postClass(payload)
+        }
       })
     }
     else {
