@@ -45,10 +45,18 @@ export const GET_ACADEMIC_LEVELS = 'GET_ACADEMIC_LEVELS';
 export const GET_USERS = "GET_USERS"
 export const FILTER_BY_LEVEL = "FILTER_BY_LEVEL"
 
+// Data sheet
+export const ADD_DATA_SHEET = 'ADD_DATA_SHEET'
 // Clases
 export const GET_MATCHING_SCHEDULES = "GET_MATCHING_SCHEDULES"
 export const DELETE_CLASS_FROM_STUDENT = "DELETE_CLASS_FROM_STUDENT"
 
+// Users
+
+export const GET_USER = "GET_USER";
+export const GET_USER_STUDENTS = "GET_USER_STUDENTS";
+export const GET_USER_CLASS = "GET_USER_CLASS";
+export const PUT_USER = "PUT_USER";
+
 // USER SCHEDULE
 export const GET_USER_SCHEDULE = 'GET_USER_SCHEDULE';
-

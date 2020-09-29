@@ -25,6 +25,8 @@ import ClassAssignation from "./components/student/classes/ClassAssignation";
 import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent";
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
+import DetalleClase from './components/admin/detalleClase/DetalleClase';
+
 import AdvisorFormMail from './components/admin/AdvisorFormMail';
 class App extends React.Component {
   render() {
@@ -79,32 +81,28 @@ class App extends React.Component {
             <StudentFile student={props.location.state.props} />
           )}
         />
+        <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
+        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
+
+
+
+        <Route exact path='/usuario/login' component={Login} />
+        <Route exact path='/usuario/perfil' component={MiPerfil} />
+        <Route exact path='/usuario/recuperar' component={PasswordRecovery} />
+        <Route exact path='/login/:token' component={ResetPassword} />
+
         <Route
-          exact
-          path="/admin/estudiantes/asignacion/:studentId/:subjectId"
-          component={ClassAssignation}
-        />
-        <Route
-          exact
-          path="/admin/estudiantes/listadematerias/:studentId"
-          component={SubjectsPerStudent}
-        />
+            path="/studentCard"
+            component = {StudentCard} />
 
-        <Route exact path="/usuario/login" component={Login} />
-        <Route exact path="/usuario/perfil" component={MiPerfil} />
-        <Route exact path="/usuario/recuperar" component={PasswordRecovery} />
-
-        <Route exact path="/login/:token" component={ResetPassword} />
-
-        <Route path="/studentCard" component={StudentCard} />
-
-        <Route path="/asesor/test" component={AsesorProfile} />
+        <Route exact path = "/asesores/:id" component = {AsesorProfile}/>
         <Route
           exact
           path="/admin/inassistances"
           component={DetailsOfInassistances}
         />
         <Route path="/admin/detail" component={GeneralAssistsDetail} />
+        <Route path="/admin/class/:classId" component={DetalleClase} />
       </div>
     );
   }
