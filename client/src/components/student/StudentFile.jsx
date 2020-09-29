@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import { getSubjects } from '../../redux/actions/subject';
 import { putStudent, getStudentDetail } from '../../redux/actions/student';
 import SubjectCheckbox from './SubjectCheckbox';
@@ -37,7 +37,7 @@ export class StudentFile extends Component {
     event.preventDefault();
     this.props
       .putStudent(this.state)
-      .then(() => (window.location = '/admin/estudiantes'));
+      .then(() => (this.props.history.push('/admin/estudiantes')))
   };
 
   onCheckboxClicked(subject, isChecked) {

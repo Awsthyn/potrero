@@ -25,14 +25,13 @@ import ClassAssignation from "./components/student/classes/ClassAssignation";
 import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent";
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
-
+import AdvisorFormMail from './components/admin/AdvisorFormMail';
 class App extends React.Component {
   render() {
     return (
       <div className="App">
         {/* PARA RENDERIZAR NAVBAR EN TODOS LOS COMPONENTES, EXCEPTO EN LOGIN. AGREGAR RUTAS AQUÍ.  */}
         <Route
-          exact
           path={[
             "/admin/voluntarios",
             "/admin/voluntarios/:id",
@@ -42,6 +41,8 @@ class App extends React.Component {
             "/admin/estudiantes/agregar",
             "/admin/estudiantes/detalles/:id",
             "/admin/detail",
+            "/admin/estudiantes/listadematerias/:studentId",
+            "/admin/estudiantes/asignacion/:studentId/:subjectId"
           ]}
           component={AdminNavBar}
         />

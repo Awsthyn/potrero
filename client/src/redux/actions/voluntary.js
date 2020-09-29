@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VOLUNTEER, ADD_SUBJECTS_VOLUNTEER} from '../constants';
-// Agrega un Voluntario --> Crea Calendario --> Envía Mail de Bienvenida 
+// Agrega un Voluntario --> Crea Calendario --> Envía Mail de Bienvenida
 export function postVoluntary(voluntary, subjects, schedule) {
 	console.log(voluntary)
 	return function (dispatch) {
@@ -109,4 +109,17 @@ export function mailAdmission(voluntary) {
 			})
 			.catch(err => console.error('mailAdmissionerror', err));
 	};
+}
+
+export function mailAdvisor(email,body){
+	return function(dispatch){
+		return axios
+			.post(`http://localhost:3001/mailAdvisor/advisor`, email, body, {withCredentials: true})
+			.then(res => {
+				return res;
+			})
+			.catch(err =>{
+				throw new Error('Error al enviar el mail, verifique los datos ingresados')
+			})
+	}
 }

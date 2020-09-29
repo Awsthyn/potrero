@@ -77,14 +77,6 @@ server.get("/", (req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
@@ -343,14 +335,6 @@ server.get("/subject/:id", (req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
@@ -370,6 +354,7 @@ server.get("/subject/:id", (req, res) => {
 // CREA UNA CLASE NUEVA.
 server.post("/", (req, res) => {
   // RECIBE TODA LA INFORMACIÓN POR BODY.
+  console.log(req.body)
   const newClass = req.body;
   Class.create(newClass)
     .then((createdClass) => {

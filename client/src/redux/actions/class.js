@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_MATCHING_SCHEDULES} from '../constants';
+import {GET_MATCHING_SCHEDULES, DELETE_CLASS_FROM_STUDENT} from '../constants';
 
 export function getMatchingSchedulesForAllSubjects(studentId) {
 	return function (dispatch) {
@@ -27,6 +27,15 @@ export function getMatchingSchedules(studentId, subjectId) {
 
 export function postClass(clase){
 		return axios
-			.post(`http://localhost:3001/class/`, clase, {withCredentials: true})
-	
+			.post(`http://localhost:3001/class`, clase, {withCredentials: true})
+			.then(() => window.location = `/admin/estudiantes/listadematerias/${clase.studentId}`)
+}
+
+export function deleteClass(classId){
+	return function (dispatch) {
+		return axios
+			.delete(`http://localhost:3001/class/${classId}`, {withCredentials: true})
+			.then(() => dispatch({type: DELETE_CLASS_FROM_STUDENT, payload: classId}))
+			.catch(err => console.log(err));
+	}
 }
