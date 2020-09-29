@@ -4,6 +4,7 @@ import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import styles from './VoluntarioForm.module.css';
 import { red } from '@material-ui/core/colors';
+import logo from '../VolunteerFormAssets/logorecortado.png';
 
 export default class VolunteerForm extends React.Component {
 	constructor(props) {
@@ -51,10 +52,7 @@ export default class VolunteerForm extends React.Component {
 		let años;
 		return (
 			<div>
-				<span className={styles.frase}>  
-				<p style={{fontSize:'1.3rem', margin: '0px', fontFamily: 'Poppins'}} ><strong>Sumáte a nuestro equipo </strong></p>
-				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px', fontFamily: 'Poppins'}} > Completá este formulario y nos pondremos en contacto con vos </span>
-				</span>
+				
 			<div className={styles.Formm} >
 				<form className={styles.formInput}>
 					<div className={styles.formgroup}>
