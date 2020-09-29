@@ -49,7 +49,6 @@ const {
   User,
   UserSchedule,
   AcademicLevel,
-  EducationLevel
 } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -76,10 +75,6 @@ Subject.belongsToMany(AcademicLevel, {
 
 //AÑO ACADEMICO - GRADO
 AcademicLevel.belongsToMany(Subject, { through: "academicLeveltXSubject" });
-AcademicLevel.belongsTo(EducationLevel)
-
-// NIVEL DE EDUCACIÓN - PRIMARIA - SECUNDARIA - TERCIARIO
-EducationLevel.hasMany(AcademicLevel)
 
 //ALUMNO
 Student.belongsToMany(TypeOfDifficulty, {

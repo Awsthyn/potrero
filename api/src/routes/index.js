@@ -57,7 +57,7 @@ const academicLevelXSubjectRouter = require("./academicLevelXSubject.js");
 // IMPORT DE LA RUTA DE HORARIOS DE UN VOLUNTARIO
 const userScheduleRoute = require("./userSchedule.js");
 //IMPORT DEL NIVEL EDUCATIVO - PRIMARIA - SECUNDARIA
-const educationLevel = require("./educationLevel.js")
+//const educationLevel = require("./educationLevel.js")
 
 //IMPORT DEL MATCHING ENTRE STUDENTSCHEDULE Y USERSCHEDULE
 const matching = require("./matching.js")
@@ -124,7 +124,7 @@ router.use("/academiclevelxsubject", academicLevelXSubjectRouter);
 // RUTA DE HORARIOS DE UN VOLUNTARIO
 router.use("/userSchedule", userScheduleRoute)
 //RUTA DE NIVEL DE EDUCACION - PRIMARIA - SECUNDARIA
-router.use("/educationlevel", educationLevel)
+//router.use("/educationlevel", educationLevel)
 
 //RUTA DE MATCHEO DE STUDENTSCHEDULE Y USERSCHEDULE
 router.use("/matching", matching)
