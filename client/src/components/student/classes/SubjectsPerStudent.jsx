@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { sessionLogin } from "../../../redux/actions/session.js";
 import {getStudentDetail} from '../../../redux/actions/student'
 import {getMatchingSchedulesForAllSubjects, deleteClass} from '../../../redux/actions/class'
+import {useHistory} from 'react-router-dom'
 import {getUsers} from '../../../redux/actions/users'
 import Swal from 'sweetalert2'
 
 
 export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, getMatchingSchedulesForAllSubjects, studentDetail, matchingSchedule, users, match}) => {
+
     const { params }  = match;
+    const history = useHistory();
 
     const onDelete = (classId) => {
         Swal.fire({
@@ -31,9 +35,7 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
           })
     }
 
-
-    useEffect(() => {    
-        getUsers()
+    useEffect(() => {
         getStudentDetail(params.studentId)
         getMatchingSchedulesForAllSubjects(params.studentId)
     }, [getStudentDetail, getMatchingSchedulesForAllSubjects, getUsers])
@@ -57,7 +59,7 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
                     <h5 style={{width:"20vw"}}>{s.name}</h5>
                     <h5 style={{width:"15vw"}}>{user.firstName + ' ' + user.lastName}</h5>
                     <h5 style={{width:"15vw"}}>{studentDetail.classes[i].nameWeekDay}</h5>
-                    <h5 style={{width:"15vw"}}>{studentDetail.classes[i].duration[0].value % 1 === 0 ? String(studentDetail.classes[i].duration[0].value) + ":00" : String(studentDetail.classes[i].duration[0].value).substring(0,2) + ":30"}  {' - '}  
+                    <h5 style={{width:"15vw"}}>{studentDetail.classes[i].duration[0].value % 1 === 0 ? String(studentDetail.classes[i].duration[0].value) + ":00" : String(studentDetail.classes[i].duration[0].value).substring(0,2) + ":30"}  {' - '}
                     {studentDetail.classes[i].duration[1].value % 1 === 0 ? String(studentDetail.classes[i].duration[1].value) + ":00" : String(studentDetail.classes[i].duration[1].value).substring(0,2) + ":30"}</h5>
                     <span className="btn btn-danger mt-n2 mr-2" onClick={() => onDelete(studentDetail.classes[i].id) }>Eliminar</span></div>
                 )} ) : <h1>No hay datos</h1>}
@@ -67,16 +69,16 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
             {matchingSchedule && matchingSchedule.length > 0  ? matchingSchedule.map((e,i) => {
                 if(compareAssignedToPosible && !compareAssignedToPosible.includes(e[0].user.subjects[0].name)){
                 return (
-                <h5 role="button" className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw", color: "#492BC4"}} 
-                onClick={(e)=> window.location = `/admin/estudiantes/asignacion/${params.studentId}/${e.target.getAttribute("subjectid")}`}
-                subjectid={e[0].user.subjects[0].id} 
-                key={"p"+i}>{e[0].user.subjects[0].name}</h5>
+                <h4 role="button" className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw", color: "#492BC4"}}
+                onClick={(e)=> history.push(`/admin/estudiantes/asignacion/${params.studentId}/${e.target.getAttribute("subjectid")}`)}
+                subjectid={e[0].user.subjects[0].id}
+                key={"p"+i}>{e[0].user.subjects[0].name}</h4>
                 )}} ) : null}
             {studentDetail.id && studentDetail.subjects && studentDetail.subjects.length > 0 ? studentDetail.subjects.map((s,i) => {
                 if(possibleClasses && possibleClasses.length > 0 && !possibleClasses.includes(s.name)){return (
                     <h5 className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw"}} key={"n"+i}>{s.name}</h5>
                     )}
-                } 
+                }
                  ) : null}
         </div>
     )
@@ -85,7 +87,7 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
 const mapStateToProps = (state) => ({
     studentDetail: state.students.studentDetail,
     matchingSchedule: state.students.matchingSchedule,
-    users: state.users.users
+    sessionUser: state.sessions.sessionUser
 });
 
 const mapDispatchToProps = (dispatch) => {
