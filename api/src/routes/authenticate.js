@@ -22,7 +22,8 @@ server.post("/login", passport.authenticate("local"), function (req,res,next) {
 
 server.get("/logout", function (req, res) {
   req.logout();
-  res.json({});
+  res.json("Cierro sesion")
+  // res.json({});
   console.log("cierre de sesion");
 });
 

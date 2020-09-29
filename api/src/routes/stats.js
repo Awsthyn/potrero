@@ -1,13 +1,7 @@
 const server = require("express").Router();
-const {
-  Class,
-  DataSheet,
-  Subject,
-  User,
-  Student,
-} = require("../db.js");
+const { Class, DataSheet, Subject, User, Student } = require("../db.js");
 
-
+const isAuthenticated = require("./authenticate").isAuthenticated;
 
 const isUserAdmin = require("./middlewares.js").isUserAdmin;
 const isAdmin = require("./middlewares.js").isAdmin;

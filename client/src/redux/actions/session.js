@@ -20,13 +20,14 @@ export function sessionLogin(data){
 }
 
 // ----------------- LOGOUT --------
-export function sessionLogout(data){
+export function sessionLogout(){
 	return function (dispatch) {
 		return axios
-			.get(`http://localhost:3001/auth/logout`, data , {withCredentials : true})
+			.get(`http://localhost:3001/auth/logout`, {withCredentials : true})
 			.then(res =>{
 				dispatch({type: LOGOUT });
-			})
+                return res
+            })
 			.catch(err => {
                 //swal('Error al desloguearse');
                 console.log(err)});

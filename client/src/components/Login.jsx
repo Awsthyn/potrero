@@ -88,7 +88,6 @@ class Login extends React.Component {
 
                 this.props.sessionLogin(this.state.loginData)
                     .then(() => {
-                        
                         this.resetState()
                         this.setState({ loading: false });
                         // uso replace para que no quede en el historial /login

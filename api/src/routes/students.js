@@ -13,14 +13,13 @@ const {
   Class,
 } = require("../db.js");
 
+
+const isAuthenticated = require('./authenticate.js').isAuthenticated
 const isUserAdmin = require("./middlewares.js").isUserAdmin;
 const isUserActive = require("./middlewares.js").isUserActive;
 const isAdmin = require("./middlewares.js").isAdmin;
 
-// TRAEMOS SEQUELIZE
-const Sequelize = require("sequelize");
-
-server.get("/", isUserActive, isUserAdmin, (req, res) => {
+server.get("/", isAuthenticated, (req, res) => {
   // BUSCA TODOS LOS STUDENTS Y LOS DEVUELVE COMO JSON (ARRAY DE OBJETOS)
   Student.findAll({
     attributes: {

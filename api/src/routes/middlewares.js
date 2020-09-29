@@ -1,7 +1,9 @@
+const isAuthenticated = require("./authenticate").isAuthenticated;
 const middlewares = {
   isAdmin: function (req, res, next) {
-    console.log("SOY ADMIN", req.user.state);
-    if (req.user.state === "admin") {
+    
+    console.log("SOY ADMIN", req.user);
+    if (req.user.state === "admin" && req.isAuthenticated()) {
       console.log("Estoy entrando para el ADMIN");
       next();
     } else {
@@ -10,7 +12,7 @@ const middlewares = {
   },
 
   isUserAdmin: function (req, res, next) {
-    console.log("SOY USERADMIN", req.user.state, "ADMIN", req.user.state);
+    console.log("SOY USERADMIN", req.user, "ADMIN", req.user.state);
     if (req.user.state === "aceptado" || req.user.state === "admin") {
       next();
     } else {
@@ -19,7 +21,7 @@ const middlewares = {
   },
 
   isUserActive: (req, res, next) => {
-    console.log("SOY USERACTIVE", req.user.isActive);
+    console.log("SOY USERACTIVE", req.user);
     if (req.user.isActive === true) {
       next();
     } else {

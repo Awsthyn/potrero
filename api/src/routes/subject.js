@@ -2,6 +2,7 @@ const server = require("express").Router();
 
 // TRAEMOS LAS MATERIAS DE LA BASE DE DATOS
 const { Subject, AcademicLevel, EducationLevel } = require("../db.js");
+const isAuthenticated = require("./authenticate").isAuthenticated;
 const isUserAdmin = require("./middlewares.js").isUserAdmin;
 const isAdmin = require("./middlewares.js").isAdmin;
 const isUserActive = require("./middlewares.js").isUserActive;
@@ -10,7 +11,7 @@ const isUserActive = require("./middlewares.js").isUserActive;
 const Sequelize = require("sequelize");
 
 //SOLO LISTA LAS MATERIAS
-server.get("/", isUserAdmin, isUserActive, (req, res) => {
+server.get("/", (req, res) => {
   Subject.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],
@@ -45,7 +46,7 @@ server.get("/", isUserAdmin, isUserActive, (req, res) => {
 });
 
 // BUSCA UNA MATERIA EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get("/:id", isUserAdmin, isUserActive, (req, res) => {
+server.get("/:id", (req, res) => {
   // ACÁ BUSCA UNA MATERIA EN LA BASE DE DATOS
   Subject.findOne({
     attributes: {

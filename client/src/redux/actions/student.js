@@ -10,6 +10,7 @@ export function getStudents() {
 			})
 			.catch(err => console.log(err));
 	};
+	// return ({type: GET_STUDENTS, payload: "res.data"})
 }
 
 export function getStudentDetail(studentId) {

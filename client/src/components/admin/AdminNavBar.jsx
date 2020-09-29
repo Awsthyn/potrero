@@ -102,8 +102,9 @@ const AdminNavBar = (props) => {
     const classes = useStyles()
 
     const handleLogout = () =>   {
-        props.sessionLogout(props.session);
-        console.log('seee');
+        props.sessionLogout().then(response =>{
+            console.log(response);
+        });
     }
 
     return(
@@ -130,13 +131,11 @@ const AdminNavBar = (props) => {
                                     <ListItemText primary={`${props.session.firstName} ${props.session.lastName}`}/>
                                 </ListItem>
                     </Link> 
-                    <Link to= '/' className={classes.link}>
                         <ListItem onClick={handleLogout} className={classes.grouplinks} button>
                             <ListItemIcon className={`${classes.icons} ${classes.logout}`} >
                                         <PowerSettingsNewIcon />
                                 </ListItemIcon>
                         </ListItem>
-                    </Link> 
                 </List>
 
                     </Toolbar>
