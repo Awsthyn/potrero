@@ -3,12 +3,36 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   const DataSheet = sequelize.define("dataSheet", {
-    concentration: {
+    relation: {
       type: DataTypes.INTEGER,
       allowNull: true,
       validate: {
         min: 1,
-        max: 10
+        max: 5
+      }
+    },
+    difference: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        min: 1,
+        max: 5
+      }
+    },
+    valued: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        min: 1,
+        max: 5
+      }
+    },
+    assesorMotivation: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        min: 1,
+        max: 5
       },
     },
     assistance: {
@@ -20,7 +44,7 @@ module.exports = (sequelize) => {
       allowNull: true,
       validate: {
         min: 1,
-        max: 10
+        max: 5
       },
     },
     performance: {
@@ -28,8 +52,12 @@ module.exports = (sequelize) => {
       allowNull: true,
       validate: {
         min: 1,
-        max: 10
+        max: 5
       },
+    },
+    stay: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
     },
     someoneAccompaniesHim: {
       type: DataTypes.BOOLEAN,
@@ -52,19 +80,15 @@ module.exports = (sequelize) => {
       allowNull: true,
       validate: {
         min: 1,
-        max: 10
+        max: 5
       },
-    },
-    duration: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
     attitude: {
       type: DataTypes.INTEGER,
       allowNull: true,
       validate: {
         min: 1,
-        max: 10
+        max: 5
       },
     },
     createdAt: {
