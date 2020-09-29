@@ -1,5 +1,6 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
+import { useHistory } from "react-router-dom";
 
 class Advisers extends React.Component {
   state = {
@@ -11,9 +12,12 @@ class Advisers extends React.Component {
   };
 
   async peticion() {
+    let usuarioInfo = JSON.parse(localStorage.getItem('sessionUser'));
+
     var peticion = await fetch("http://localhost:3001/stats/advisorstatus", {
       withCredentials: true,
     });
+
     var respuesta = await peticion.json();
     this.setState({
       totalAdvisors: respuesta.totalAdvisors,
@@ -76,6 +80,7 @@ class Advisers extends React.Component {
   render() {
     return (
       <div>
+      {!usuarioInfo.state === "admin" && !usuarioInfo.isActive === true ? history.push("/home") : (
         <h4>{"Asesores: " + this.state.totalAdvisors}</h4>
         <Doughnut
           data={this.state.datos}
@@ -90,7 +95,10 @@ class Advisers extends React.Component {
             },
           }}
         ></Doughnut>
+      )}
+      <h1>1231</h1>
       </div>
+
     );
   }
 }

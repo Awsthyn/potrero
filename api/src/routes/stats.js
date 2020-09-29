@@ -5,16 +5,15 @@ const {
   Subject,
   User,
   Student,
-  AcademicLevel,
-  EducationLevel,
 } = require("../db.js");
-const { isAuthenticated } = require("./authenticate.js");
+
+
 
 const isUserAdmin = require("./middlewares.js").isUserAdmin;
 const isAdmin = require("./middlewares.js").isAdmin;
 const isUserActive = require("./middlewares.js").isUserActive;
 
-server.get("/assistances", isAuthenticated, (req, res) => {
+server.get("/assistances", (req, res) => {
   console.log("ASISTENCIAS");
   DataSheet.findAll({
     attributes: {
@@ -105,7 +104,7 @@ server.get("/assistances", isAuthenticated, (req, res) => {
 });
 
 //A futuro USAR EXCLUDES CORRECTAMENTE
-server.get("/assistances/:id", isUserActive, isUserAdmin, (req, res) => {
+server.get("/assistances/:id", (req, res) => {
   Student.findOne({
     where: {
       id: req.params.id,
@@ -161,7 +160,7 @@ server.get("/assistances/:id", isUserActive, isUserAdmin, (req, res) => {
     });
 });
 
-server.get("/qualification", isUserActive, isUserAdmin, (req, res) => {
+server.get("/qualification", (req, res) => {
   DataSheet.findAll({
     attributes: {
       exclude: [
@@ -194,7 +193,7 @@ server.get("/qualification", isUserActive, isUserAdmin, (req, res) => {
     });
 });
 
-server.get("/advisorstatus", isUserActive, isUserAdmin, (req, res) => {
+server.get("/advisorstatus", (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
@@ -248,7 +247,7 @@ server.get("/advisorstatus", isUserActive, isUserAdmin, (req, res) => {
     });
 });
 
-server.get("/demandwithoffer", isUserActive, isUserAdmin, (req, res) => {
+server.get("/demandwithoffer", (req, res) => {
   Subject.findAll({
     attributes: {
       exclude: ["createdAt", "updatedAt"],

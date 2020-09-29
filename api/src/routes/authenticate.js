@@ -4,18 +4,19 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 
 server.get("/", function (req, res) {
-  console.log("user", req.user);
+  console.log("/ barra")
   res.json({ user: req.user });
 });
 
-server.post("/login", passport.authenticate("local"), function (
-  req,
-  res,
-  next
-) {
-  console.log(req.user.isActive);
+server.post("/login", passport.authenticate("local"), function (req,res,next) {
+  console.log("login")
+  let usuario = {
+    state: req.user.state,
+    isActive: req.user.isActive
+  }
+
   req.user.isActive
-    ? res.json(req.user)
+    ? res.json(usuario)
     : res.json({ error: "No tiene permiso para realizar esta operación" });
 });
 
