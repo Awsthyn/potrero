@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { getSubjects } from '../../redux/actions/subject';
 import { putStudent, getStudentDetail } from '../../redux/actions/student';
 import SubjectCheckbox from './SubjectCheckbox';
+import styles from './StudentFile.module.css';
 
 export class StudentFile extends Component {
   constructor(props) {
@@ -14,10 +15,13 @@ export class StudentFile extends Component {
       lastName: '',
       phone: '',
       email: '',
-      tutor: '',
-      difficulty: false,
+      tutorFirstName: '',
+      tutorLastName: '',
+      tutorPhone: '',
+      tutorEmail: '',
       interests: '',
-      motivations: ''
+      motivations: '',
+      subjectsId: [],
     };
     this.subjects = this.props.subjects;
     this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
@@ -56,124 +60,173 @@ export class StudentFile extends Component {
   render() {
     return (
       <div
-        style={{
-          width: `calc(100% - ${400}px)`,
-          marginTop: 100,
-          fontFamily: 'Poppins',
-          marginLeft: 300,
-          justifyContent: 'center',
-        }}
+        className={styles.editStudent}
       >
-        <h1 className='mb-3 mt-2'>Datos del alumno</h1>
         <form
-          className='card p-4 mx-auto'
-          style={{ width: '85vw' }}
+          className={styles.formStudent}
           onSubmit={this.submitHandler}
         >
-          <div className='mb-n1 d-flex flex-row form-group'>
-            <label>
-              Nombre del alumno
-              <input
-                style={{ width: '40vw' }}
-                className='form-control mr-4'
-                type='text'
-                name='firstName'
-                defaultValue={this.props.studentDetail.firstName}
-                onChange={this.onChangeHandler}
-              />
-            </label>
-            <label>
-              Apellido del alumno
-              <input
-                style={{ width: '40vw' }}
-                className='form-control'
-                type='text'
-                name='lastName'
-                defaultValue={this.props.studentDetail.lastName}
-                onChange={this.onChangeHandler}
-              />
-            </label>
-          </div>
-          <div
-            className='mb-4 d-flex flex-row form-group'
-            style={{ margin: '10px 0' }}
+          <div 
+            className={styles.container}
           >
-            <label>
-              Teléfono del alumno
-              <input
-                style={{ width: '40vw' }}
-                className='form-control mr-4'
-                type='text'
-                name='phone'
-                defaultValue={this.props.studentDetail.phone}
-                onChange={this.onChangeHandler}
-              />
-            </label>
-            <label>
-              Email del alumno
-              <input
-                style={{ width: '40vw' }}
-                className='form-control'
-                type='text'
-                name='email'
-                defaultValue={this.props.studentDetail.email}
-                onChange={this.onChangeHandler}
-              />
-            </label>
-          </div>
-          <div className='mb-n1 d-flex flex-row form-group'>
-            <label>
-              Nombre del tutor
-              <input
-                style={{ width: '40vw' }}
-                className='form-control mr-4'
-                type='text'
-                name='tutorFirstName'
-                defaultValue={this.props.studentDetail.tutorFirstName}
-                onChange={this.onChangeHandler}
-              />
-            </label>
-            <label>
-              Apellido del tutor
-              <input
-                style={{ width: '40vw' }}
-                className='form-control'
-                type='text'
-                name='tutorLastName'
-                defaultValue={this.props.studentDetail.tutorLastName}
-                onChange={this.onChangeHandler}
-              />
-            </label>
-          </div>
-          <div
-            className='mb-4 d-flex flex-row form-group'
-            style={{ margin: '10px 0' }}
-          >
-            <label>
-              Teléfono del tutor
-              <input
-                style={{ width: '40vw' }}
-                className='form-control mr-4'
-                type='text'
-                name='phone'
-                defaultValue={this.props.studentDetail.tutorPhone}
-                onChange={this.onChangeHandler}
-              />
-            </label>
-            <label>
-              Email del alumno
-              <input
-                style={{ width: '40vw' }}
-                className='form-control'
-                type='text'
-                name='email'
-                defaultValue={this.props.studentDetail.tutorEmail}
-                onChange={this.onChangeHandler}
-              />
-            </label>
-          </div>
+            <h1 className='mb-3 mt-2' style = {{fontWeight:'500', paddingBottom: '1%'}}>Formulario para editar alumno</h1>
+            <label className={styles.labelDatos}>Datos del Alumno</label>
+              <div className='d-flex flex-row form-group'>
+              <label className={styles.tag}>
+                Nombre
+                <input
+                  spellCheck="false"
+                  autoComplete="off"
+                  className={styles.input}
+                  type='text'
+                  name='firstName'
+                  defaultValue={this.props.studentDetail.firstName}
+                  onChange={this.onChangeHandler}
+                />
+                </label>
+                <label className={styles.tag}>
+                  Apellido
+                  <input
+                    spellCheck="false"
+                    autoComplete="off"
+                    className={styles.input}
+                    type='text'
+                    name='lastName'
+                    defaultValue={this.props.studentDetail.lastName}
+                    onChange={this.onChangeHandler}
+                  />
+                </label>
+              </div>
+              <div className='mt-n2 mb-4 d-flex flex-row form-group'>
+                <label className={styles.tag}>
+                  Teléfono
+                  <input
+                    spellCheck="false"
+                    autoComplete="off"
+                    className={styles.input}
+                    type='text'
+                    name='phone'
+                    defaultValue={this.props.studentDetail.phone}
+                    onChange={this.onChangeHandler}
+                  />
+                </label>
+                <label className={styles.tag}>
+                  E-mail
+                  <input
+                    spellCheck="false"
+                    autoComplete="off"
+                    className={styles.input}
+                    type='text'
+                    name='email'
+                    defaultValue={this.props.studentDetail.email}
+                    onChange={this.onChangeHandler}
+                  />
+                </label>
+              </div>
+            </div>
+            <div 
+              className={styles.container}
+            >
+              <label className={styles.labelDatos}>Datos del Tutor</label>
+              <div className='mb-n1 d-flex flex-row form-group'>
+                <label className={styles.tag}>
+                  Nombre
+                  <input
+                    spellCheck="false"
+                    autoComplete="off"
+                    className={styles.input}
+                    type='text'
+                    name='tutorFirstName'
+                    defaultValue={this.props.studentDetail.tutorFirstName}
+                    onChange={this.onChangeHandler}
+                  />
+                </label>
+                <label className={styles.tag}>
+                  Apellido
+                  <input
+                    spellCheck="false"
+                    autoComplete="off"
+                    className={styles.input}
+                    type='text'
+                    name='tutorLastName'
+                    defaultValue={this.props.studentDetail.tutorLastName}
+                    onChange={this.onChangeHandler}
+                  />
+                </label>
+              </div>
+              <div className='mb-4 d-flex flex-row form-group'>
+                <label className={styles.tag}>
+                  Teléfono
+                  <input
+                    spellCheck="false"
+                    autoComplete="off"
+                    className={styles.input}
+                    type='text'
+                    name='tutorPhone'
+                    defaultValue={this.props.studentDetail.tutorPhone}
+                    onChange={this.onChangeHandler}
+                  />
+                </label>
+                <label className={styles.tag}>
+                  E-mail
+                  <input
+                    spellCheck="false"
+                    autoComplete="off"
+                    className={styles.input}
+                    type='text'
+                    name='email'
+                    defaultValue={this.props.studentDetail.tutorEmail}
+                    onChange={this.onChangeHandler}
+                  />
+                </label>
+              </div>
+            </div>
+
+
+
+
+
+            <div className={styles.container}>
+              <div className='form-group'>
+                <label className={styles.extras}>
+                  Motivaciones del alumno
+                  <input
+                    spellCheck='false'
+                    autoComplete='off'
+                    className={styles.input}
+                    style={{ width: '95%' }}
+                    type='text'
+                    name='motivations'
+                    defaultValue={this.props.studentDetail.motivations}
+                    onChange={this.onChangeHandler}
+                  />
+                </label>
+              </div>
+              <div className='form-group'>
+                <label className={styles.extras}>
+                  Intereses del alumno
+                  <input
+                    spellCheck='false'
+                    autoComplete='off'
+                    className={styles.input}
+                    style={{ width: '80vw' }}
+                    type='text'
+                    name='interests'
+                    defaultValue={this.props.studentDetail.interests}
+                    placeholder='Intereses del alumno...'
+                    onChange={this.onChangeHandler}
+                  />
+                </label>
+              </div>
+            </div>
+          
+          
+            
+          
+            
+            
           <div className='form-group'>
-		  {console.log(this.props.studentDetail)}
+            {console.log(this.props.studentDetail)}
             <label style={{ fontSize: '1.7em' }} htmlFor='nivelEducativo'>
               Nivel educativo
             </label>
@@ -189,26 +242,25 @@ export class StudentFile extends Component {
             Materias que tiene que aprender
           </h3>
           <div
-            style={{ width: '80vw', display:'flex', justifyContent:'center' }}
+            style={{ width: '80vw', display: 'flex', justifyContent: 'center' }}
             className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
           >
-            {
-				this.props.studentDetail.subjects && this.props.studentDetail.subjects.map((subject) => {
-				return (
-					<SubjectCheckbox
-					key={subject.id}
-					initialState={
-						this.props.studentDetail.subjects.includes(subject.id)
-						? 'checked'
-						: false
-					}
-					subject={subject}
-					onChange={this.onCheckboxClicked}
-					required
-					/>
-				);
-				})
-			}
+            {this.props.studentDetail.subjects &&
+              this.props.studentDetail.subjects.map((subject) => {
+                return (
+                  <SubjectCheckbox
+                    key={subject.id}
+                    initialState={
+                      this.props.studentDetail.subjects.includes(subject.id)
+                        ? 'checked'
+                        : false
+                    }
+                    subject={subject}
+                    onChange={this.onCheckboxClicked}
+                    required
+                  />
+                );
+              })}
           </div>
           {/* <h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene FACILIDAD</h3>
 					<div style={{ minHeight: "150px", width: "80vw" }} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
@@ -252,19 +304,20 @@ export class StudentFile extends Component {
                 className='form-control'
                 type='text'
                 name='interests'
-				defaultValue={this.props.studentDetail.interests}
+                defaultValue={this.props.studentDetail.interests}
                 placeholder='Intereses del alumno...'
                 onChange={this.onChangeHandler}
               />
             </label>
           </div>
           <input
-            style={{
-              fontSize: '1.5em',
-              width: '300px',
-              backgroundColor: '#492BC4',
-            }}
-            className='align-self-center text-white btn btn-lg'
+            // style={{
+            //   fontSize: '1.5em',
+            //   width: '300px',
+            //   backgroundColor: '#492BC4',
+            // }}
+            // className='align-self-center text-white btn btn-lg'
+            className={styles.btnConfirmar}
             value='Confirmar cambios'
             type='submit'
           />

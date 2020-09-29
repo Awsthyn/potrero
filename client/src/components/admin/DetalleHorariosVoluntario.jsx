@@ -84,7 +84,7 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                             horarios[0].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[0].day.push(<div style={{border:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[0].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderColor:'2px 0', backgroundColor:'#8CC63F'}}></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[0].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
@@ -105,7 +105,7 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                             horarios[1].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[1].day.push(<div style={{border:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[1].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[1].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
@@ -126,7 +126,7 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                             horarios[2].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[2].day.push(<div style={{border:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[2].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[2].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
@@ -147,7 +147,7 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                             horarios[3].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[3].day.push(<div style={{border:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[3].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[3].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
@@ -168,7 +168,7 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                             horarios[4].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[4].day.push(<div style={{border:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[4].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[4].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
@@ -189,8 +189,8 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
         <div className={style.container}>
             <h3 className={style.title}>Horarios del voluntario</h3>
             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{border:'1px solid #8CC63F', alignSelf:'center', width:'30px', height:'15px', backgroundColor:'#8CC63F', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Horario seleccionado</span></div>
-                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{border:'1px solid whitesmoke', alignSelf:'center', width:'30px', height:'15px', backgroundColor:'whitesmoke', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Horario libre</span></div>
+                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{border:'1px solid #8CC63F', alignSelf:'center', width:'30px', height:'15px', backgroundColor:'#8CC63F', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Rango seleccionado</span></div>
+                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{border:'1px solid whitesmoke', alignSelf:'center', width:'30px', height:'15px', backgroundColor:'whitesmoke', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Rango libre</span></div>
                 <div></div>
             </div>
             { 
