@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { sessionLogin } from "../../redux/actions/session.js";
 import { Link, useHistory } from "react-router-dom"
 import { getStudents, putStudentIsActive } from '../../redux/actions/student'
 import { getSubjects } from '../../redux/actions/subject'
@@ -10,7 +11,7 @@ export const StudentCrud = ({ getStudents, getSubjects, putStudentIsActive, stud
   useEffect(() => {
     getStudents()
     getSubjects()
-  }, [getStudents])
+}, [getStudents, getSubjects])
 
   return (
     <div className='container' style={{ marginLeft: 250, marginTop: 50, marginBottom: 50, marginRight: 50 }}>
@@ -25,7 +26,7 @@ export const StudentCrud = ({ getStudents, getSubjects, putStudentIsActive, stud
             <th>Ver / Editar</th>
             <th>Estado</th>
             <th>Alta/Baja</th>
-            
+
           </tr>
         </thead>
         <tbody>
@@ -34,7 +35,7 @@ export const StudentCrud = ({ getStudents, getSubjects, putStudentIsActive, stud
               <th>{student.id}</th>
               <td>{student.firstName}</td>
               <td>{student.lastName}</td>
-              <td><button className="btn btn-info mt-n3 mb-n3" onClick={()=> window.location=`/admin/estudiantes/listadematerias/${student.id}`}>Clases</button></td>
+              <td><button className="btn btn-info mt-n3 mb-n3" onClick={()=> history.push(`/admin/estudiantes/listadematerias/${student.id}`)}>Clases</button></td>
               <td><Link
                 to={{ pathname: `/admin/estudiantes/detalles/${student.id}`, state: { props: student } }}>
                 <button className="btn btn-success mt-n3 mb-n3" >Detalles</button>
@@ -42,7 +43,7 @@ export const StudentCrud = ({ getStudents, getSubjects, putStudentIsActive, stud
               {student.isActive ? <td>Activo</td> : <td>Inactivo</td>}
               <td>{student.isActive ? <button className="btn btn-danger mt-n3 mb-n3" onClick={() => putStudentIsActive({ id: student.id, isActive: false }).then(() => alert("El alumno fue dado de baja"))}>Dar de baja</button> :
                 <button className="btn btn-success mt-n3 mb-n3" onClick={() => putStudentIsActive({ id: student.id, isActive: true }).then(() => alert("El alumno fue dado de baja"))}>Dar de alta</button>}</td>
-              
+
             </tr>
           ) : <tr><td className="text-center mt-4">No hay alumnos en la base de datos</td></tr>}
         </tbody>
@@ -53,7 +54,8 @@ export const StudentCrud = ({ getStudents, getSubjects, putStudentIsActive, stud
 }
 
 const mapStateToProps = (state) => ({
-  students: state.students.students
+  students: state.students.students,
+  sessionUser: state.sessions.sessionUser
 })
 
 const mapDispatchToProps = dispatch => {

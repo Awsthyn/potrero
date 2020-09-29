@@ -5,7 +5,6 @@ const { User } = require("../db.js");
 //cuando se crea un voluntario o cuando cambia el state a rejected se envía un mail con asunto
 //según el caso
 server.post('/mail', function(req, res, next) {
-    console.log('Mailllll ',req.body)
 User.findOne({ where: {email: req.body.email}})
 .then(volunteer => {
     const transporter = nodemailer.createTransport({
