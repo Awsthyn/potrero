@@ -2,12 +2,36 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { sessionLogin } from "../../../redux/actions/session.js";
 import {getStudentDetail} from '../../../redux/actions/student'
-import {getMatchingSchedulesForAllSubjects} from '../../../redux/actions/class'
+import {getMatchingSchedulesForAllSubjects, deleteClass} from '../../../redux/actions/class'
 import {useHistory} from 'react-router-dom'
+import {getUsers} from '../../../redux/actions/users'
+import Swal from 'sweetalert2'
 
 export const SubjectsPerStudent = ({getUsers, getStudentDetail, getMatchingSchedulesForAllSubjects, studentDetail, matchingSchedule, users, match}) => {
     const { params }  = match;
     const history = useHistory();
+
+    const onDelete = (classId) => {
+        Swal.fire({
+            title: 'Borrar clase',
+            text: "Este cambio es irreversible",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, borrar la clase',
+            cancelButtonText: `Cancelar`
+          }).then((result) => {
+            if (result.isConfirmed) {
+              deleteClass(classId) && Swal.fire(
+                'Clase eliminada',
+                'La clase ha sido borrada',
+                'success'
+              )
+            }
+          })
+    }
+
     useEffect(() => {
         getStudentDetail(params.studentId)
         getMatchingSchedulesForAllSubjects(params.studentId)
