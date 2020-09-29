@@ -1,7 +1,7 @@
 const server = require("express").Router();
 
 // TRAEMOS LAS MATERIAS DE LA BASE DE DATOS
-const { Subject, AcademicLevel, EducationLevel } = require("../db.js");
+const { Subject, AcademicLevel } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
@@ -18,14 +18,6 @@ server.get("/", (req, res) => {
         attributes: {
           exclude: ["createdAt", "updatedAt", "educationLevelId"],
         },
-        include: [
-          {
-            model: EducationLevel,
-            attributes: {
-              exclude: ["createdAt", "updatedAt"],
-            },
-          },
-        ],
       },
     ],
   })
@@ -44,7 +36,7 @@ server.get("/", (req, res) => {
 // BUSCA UNA MATERIA EN ESPECÍFICO Y MUESTRA SUS DATOS.
 server.get("/:id", (req, res) => {
   // ACÁ BUSCA UNA MATERIA EN LA BASE DE DATOS
-  Subject.findOne({
+  Subject.findByPk(req.params.id, {
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
@@ -54,14 +46,6 @@ server.get("/:id", (req, res) => {
         attributes: {
           exclude: ["createdAt", "updatedAt", "educationLevelId"],
         },
-        include: [
-          {
-            model: EducationLevel,
-            attributes: {
-              exclude: ["createdAt", "updatedAt"],
-            },
-          },
-        ],
       },
     ],
   })

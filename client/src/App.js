@@ -25,7 +25,7 @@ import ClassAssignation from "./components/student/classes/ClassAssignation";
 import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent";
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
-
+import AdvisorFormMail from './components/admin/AdvisorFormMail';
 class App extends React.Component {
   render() {
     return (
