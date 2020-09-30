@@ -36,6 +36,7 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
     }
 
     useEffect(() => {
+        getUsers()
         getStudentDetail(params.studentId)
         getMatchingSchedulesForAllSubjects(params.studentId)
     }, [getStudentDetail, getMatchingSchedulesForAllSubjects, getUsers])
@@ -53,7 +54,7 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
             <h2>Clases de {studentDetail.firstName + " " + studentDetail.lastName}</h2>
             <h3 className="mb-3">Materias con clases asignadas</h3>
             {assignedSubjects && assignedSubjects.length > 0 ? assignedSubjects.map((s,i) => {
-                let user = users.find(e => e.id === studentDetail.classes[i].userId)
+                let user = users.length > 0 && users.find(e => e.id === studentDetail.classes[i].userId)
                 return (
                 <div key={"a"+i} className="d-flex flex-row align-items-center justify-content-between text-left card shadow ml-4 mb-2 pt-2 pl-3" style={{width: "90vw"}}>
                     <h5 style={{width:"20vw"}}>{s.name}</h5>
@@ -87,7 +88,8 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
 const mapStateToProps = (state) => ({
     studentDetail: state.students.studentDetail,
     matchingSchedule: state.students.matchingSchedule,
-    sessionUser: state.sessions.sessionUser
+    sessionUser: state.sessions.sessionUser,
+    users: state.users.users
 });
 
 const mapDispatchToProps = (dispatch) => {
