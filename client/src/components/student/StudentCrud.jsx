@@ -49,6 +49,7 @@ import Edit from '@material-ui/icons/Edit';
 import FilterList from '@material-ui/icons/FilterList';
 import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
@@ -162,9 +163,9 @@ return (
                         <Button 
                         style={{margin:10}}
                         variant="contained"  
-                        color= {locked ? "secondary":"primary"}
-                         onClick={()=>setLocked(!locked)}>
-                            {locked ? <LockIcon/>:<LockOpenIcon/>}
+                        color= "primary"
+                         onClick={()=>history.push('/admin/estudiantes/agregar')}>
+                            <PersonAddIcon/>
                         </Button>
                      </div>
               </div>
@@ -193,7 +194,7 @@ return (
                })
                 .then((result) => {
                          if (result.isConfirmed) {
-                            // history.push('zarasa')
+                            history.push(`/admin/estudiantes/asignacion/${rowData.id}`)
                          }
                         })
             },

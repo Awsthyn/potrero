@@ -1,7 +1,7 @@
-/* input:checked ~ label {
+.subjectcheckbox input:checked ~ label {
     background: #492BC4;
     color: white;
-  } */
+  } 
 
 #strengthInput input:checked ~ label {
     background: #8CC63E;
