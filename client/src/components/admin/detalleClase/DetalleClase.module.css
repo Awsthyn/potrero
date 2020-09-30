@@ -1,0 +1,31 @@
+.contenedor {
+    display: flex;
+}
+
+.integrantes {
+    width: 40%;
+    border: 2px solid black;
+}
+
+.personas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    margin: 2%;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.circulos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.botones{
+    display: flex;
+    justify-content: center;
+}

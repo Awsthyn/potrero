@@ -10,7 +10,7 @@ server.get('/', function(req, res) {
 server.post('/login',
     passport.authenticate('local'),
     function(req, res, next) {
-        console.log(req.user.isActive)
+        console.log("Soy req.user.isActive ",req.user.isActive)
         req.user.isActive?
             res.json(req.user)
         :res.json({error: "No tiene permiso para realizar esta operación"})

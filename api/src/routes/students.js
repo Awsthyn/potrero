@@ -1,4 +1,5 @@
 const server = require("express").Router();
+const isAuthenticated = require('./authenticate').isAuthenticated
 
 // TRAEMOS LOS STUDENTS DE LA BASE DE DATOS
 const {
@@ -9,14 +10,13 @@ const {
   TODXStudent,
   SubjectXStudent,
   StudentSchedule,
-  EducationLevel,
   Class
 } = require("../db.js");
 
 // TRAEMOS SEQUELIZE
 const Sequelize = require("sequelize");
 
-server.get("/", (req, res) => {
+server.get("/", isAuthenticated, (req, res) => {
   // BUSCA TODOS LOS STUDENTS Y LOS DEVUELVE COMO JSON (ARRAY DE OBJETOS)
   Student.findAll({
     attributes: {
@@ -51,14 +51,6 @@ server.get("/", (req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
@@ -84,9 +76,9 @@ server.get("/", (req, res) => {
 });
 
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
-server.get("/:id", (req, res) => {
+server.get("/:id", isAuthenticated,(req, res) => {
   // BUSCA AL STUDENT.
-  
+
   Promise.all([Student.findOne({
     where: {
       id: req.params.id,
@@ -115,14 +107,6 @@ server.get("/:id", (req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
@@ -148,7 +132,7 @@ server.get("/:id", (req, res) => {
     });
 });
 
-server.post("/", (req, res) => {
+server.post("/", isAuthenticated,(req, res) => {
   // CREA UN STUDENT.
   // RECIBE POR BODY TODA LA INFORMACIÓN DEL STUDENT.
   const student = req.body;
@@ -188,9 +172,9 @@ server.post("/", (req, res) => {
         timeFrame: [e.startTime, e.endTime],
         nameWeekDay: e.nameWeekDay
       }
-    }))  
+    }))
 
-    return Promise.all([subjects, difficulties, schedule])  
+    return Promise.all([subjects, difficulties, schedule])
     })
     .then(() => {
       res.json("Alumno creado exitosamente");
@@ -203,7 +187,7 @@ server.post("/", (req, res) => {
 });
 
 
-server.put("/:id", (req, res) => {
+server.put("/:id", isAuthenticated, (req, res) => {
   const { subjectsId } = req.body;
   // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
   SubjectXStudent.destroy({ where: { studentId: req.params.id } })
@@ -243,7 +227,7 @@ server.put("/:id", (req, res) => {
 // En lugar de eliminar un estudiante lo que hacemos es cambiarle el status a false
 // Y así poder filtrar solamente por estudiantes activos y no perder la info por si
 // mas adelante vulelve a la fundación.
-server.put("/:id/changestatus", (req, res) => {
+server.put("/:id/changestatus", isAuthenticated,(req, res) => {
   Student.update(
     { isActive: req.body.isActive },
     { where: { id: req.params.id } }

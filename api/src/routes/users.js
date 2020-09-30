@@ -1,4 +1,6 @@
 const server = require('express').Router();
+const isAuthenticated = require('./authenticate').isAuthenticated
+const isUserActive = require("./middlewares.js").isUserActive;
 
 // TRAEMOS LOS USUARIOS DE LA BASE DE DATOS
 const {
@@ -6,7 +8,6 @@ const {
   UserSchedule,
   Subject,
   AcademicLevel,
-  EducationLevel,
 } = require('../db.js');
 
 // TRAEMOS SEQUELIZE
@@ -88,7 +89,7 @@ const upload = multer({
   },
 ]);
 
-server.get('/', (req, res) => {
+server.get('/',isAuthenticated, isUserActive, (req, res) => {
   User.findAll({
     attributes: {
       exclude: [
@@ -109,14 +110,6 @@ server.get('/', (req, res) => {
             attributes: {
               exclude: ['createdAt', 'updatedAt', 'educationLevelId'],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ['createdAt', 'updatedAt'],
-                },
-              },
-            ],
           },
         ],
       },
@@ -141,7 +134,7 @@ server.get('/', (req, res) => {
 });
 
 // BUSCA UN USUARIO EN ESPECÍFICO Y MUESTRA SUS DATOS.
-server.get('/:id', (req, res) => {
+server.get('/:id',(req, res) => {
   // ACÁ BUSCA UN USUARIO EN LA BASE DE DATOS
   User.findOne({
     where: {
@@ -168,14 +161,6 @@ server.get('/:id', (req, res) => {
             attributes: {
               exclude: ['createdAt', 'updatedAt', 'educationLevelId'],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ['createdAt', 'updatedAt'],
-                },
-              },
-            ],
           },
         ],
       },
@@ -262,7 +247,7 @@ server.post('/', upload, (req, res) => {
 
 
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put('/:id', (req, res) => {
+server.put('/:id', isAuthenticated, (req, res) => {
   if (req.body.disabled) {
     User.findByPk(req.params.id).then((user) => {
       user.state = 'rechazado';

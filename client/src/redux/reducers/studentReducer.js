@@ -1,4 +1,4 @@
-import {ADD_STUDENT, PUT_STUDENT, GET_STUDENTS, GET_STUDENT_DETAIL, GET_MATCHING_SCHEDULES} from '../constants';
+import {ADD_STUDENT, PUT_STUDENT, GET_STUDENTS, GET_STUDENT_DETAIL, GET_MATCHING_SCHEDULES, DELETE_CLASS_FROM_STUDENT} from '../constants';
 
 const initialState = {
 	students:[],
@@ -36,6 +36,12 @@ export default function studentReducer(state = initialState, action) {
 			return {
 				...state,
 				matchingSchedule: action.payload
+			}
+		case DELETE_CLASS_FROM_STUDENT:
+			return {
+				...state,
+				studentDetail: {...state.studentDetail,
+				classes: state.studentDetail.classes.filter(e => e.id !== action.payload)}
 			}
 		default:
 			return state;

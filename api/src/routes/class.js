@@ -15,6 +15,16 @@ const {
 const Sequelize = require("sequelize");
 
 /////////////EXCLUI LOS CREATEDAT, UPDATEDAT EN GRAL AGREGENLO SI ES NECESARIO/////////////////
+// BUSCA UNA CLASE EN PARTICULAR POR SU ID
+
+server.get('/:classId', (req, res) => {
+  Class.findOne({ 
+    where: {id: req.params.classId}, 
+    include: [{model: Subject}]
+  })
+  .then(clase => res.send(clase))
+  .catch(err => res.send(err))
+})
 
 server.get("/", (req, res) => {
   // BUSCA TODAS LAS CLASES Y LOS DEVUELVE COMO JSON (ARRAY DE OBJETOS)
@@ -77,14 +87,6 @@ server.get("/", (req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
@@ -173,7 +175,7 @@ server.get("/user/:id", (req, res) => {
 
 // BUSCA TODAS LAS CLASES DE UN ESTUDIANTE EN ESPECÍFICO Y ENVÍA SUS DATOS.
 server.get("/student/:id", (req, res) => {
-  Class.findOne({
+  Class.findAll({
     where: {
       studentId: req.params.id,
     },
@@ -343,14 +345,6 @@ server.get("/subject/:id", (req, res) => {
             attributes: {
               exclude: ["createdAt", "updatedAt", "educationLevelId"],
             },
-            include: [
-              {
-                model: EducationLevel,
-                attributes: {
-                  exclude: ["createdAt", "updatedAt"],
-                },
-              },
-            ],
           },
         ],
       },
@@ -370,6 +364,7 @@ server.get("/subject/:id", (req, res) => {
 // CREA UNA CLASE NUEVA.
 server.post("/", (req, res) => {
   // RECIBE TODA LA INFORMACIÓN POR BODY.
+  console.log(req.body)
   const newClass = req.body;
   Class.create(newClass)
     .then((createdClass) => {

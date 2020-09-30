@@ -49,7 +49,6 @@ const {
   User,
   UserSchedule,
   AcademicLevel,
-  EducationLevel
 } = sequelize.models;
 
 // Aca vendrian las relaciones
@@ -57,7 +56,7 @@ const {
 //BelongsTo(...) -> Escribe el id referente en la entidad entre ()
 
 //CLASE
-Class.hasOne(DataSheet);
+Class.hasMany(DataSheet);
 Class.belongsTo(User);
 Class.belongsTo(Student);
 Class.belongsTo(Subject);
@@ -76,10 +75,6 @@ Subject.belongsToMany(AcademicLevel, {
 
 //AÑO ACADEMICO - GRADO
 AcademicLevel.belongsToMany(Subject, { through: "academicLeveltXSubject" });
-AcademicLevel.belongsTo(EducationLevel)
-
-// NIVEL DE EDUCACIÓN - PRIMARIA - SECUNDARIA - TERCIARIO
-EducationLevel.hasMany(AcademicLevel)
 
 //ALUMNO
 Student.belongsToMany(TypeOfDifficulty, {

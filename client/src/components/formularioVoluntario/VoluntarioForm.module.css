@@ -167,14 +167,17 @@ input:focus {
 }
 
 .imgSize {
-	position: relative;
-	margin-top: 20px;
-	margin-bottom: 0px;
-	top: 11px;
-	right: 42%;
 	width: 130px; 
 	height: 103px; 
 }
+
+.frase{
+	margin: 0 auto;
+	margin-left: -10px;
+	text-align: left;
+	width: 300px;
+}
+
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -330,10 +333,3 @@ input[type=number] { -moz-appearance:textfield; }
 	background-color: white;
 }
 
-.frase{
-	text-align: left;
-	position: absolute;
-	top: 152px;
-	right: 24%;
-	width: 300px;
-}

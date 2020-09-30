@@ -1,0 +1,38 @@
+
+.contenedor{
+   display: flex;
+   flex-direction: column;
+   /* width: 100%; */
+   text-align: left;
+   margin-left: 8%;
+}
+.tituloPrincipal{
+   font-size: 2rem;
+   align-self: center;
+}
+
+.titulo{
+   font-size: 16px;
+   display: inline;
+}
+
+.comentarios{
+   align-self: center;
+   width: 350px;
+}
+
+.boton{
+   align-self: center;
+   font-size: 16px;
+   font-weight: 300;
+   margin-bottom: 18px;
+   width: 100px;
+   height: 40px;
+   background: none;
+   color: white;
+   text-align: center;
+   border: none;
+   outline: none;
+   border-radius: 15px;
+   background-color: #492BC4;
+}

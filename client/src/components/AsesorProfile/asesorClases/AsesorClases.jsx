@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import style from './AsesorClases.module.css';
-import axios from 'axios';
 
 export default function AsesorClases({clase}){
    const [horario, setHorario] = useState([])

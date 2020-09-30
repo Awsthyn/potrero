@@ -7,6 +7,7 @@ export function getStudents() {
 			.get(`http://localhost:3001/students`, {withCredentials: true})
 			.then(res => {
 				dispatch({type: GET_STUDENTS, payload: res.data});
+				return res.data;
 			})
 			.catch(err => console.log(err));
 	};

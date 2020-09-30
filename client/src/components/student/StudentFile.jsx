@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getSubjects } from '../../redux/actions/subject';
 import { putStudent, getStudentDetail } from '../../redux/actions/student';
+import { getAcademicLevels } from '../../redux/actions/academicLevel';
+import style from './CreateStudentForm.module.css';
+
 import SubjectCheckbox from './SubjectCheckbox';
 
 export class StudentFile extends Component {
@@ -10,14 +13,19 @@ export class StudentFile extends Component {
     super(props);
     this.state = {
       id: this.props.match.params.id,
-      firstName: '',
-      lastName: '',
-      phone: '',
-      email: '',
-      tutor: '',
-      difficulty: false,
-      interests: '',
-      motivations: ''
+      firstName: this.props.studentDetail.firstName,
+      lastName: this.props.studentDetail.lastName,
+      phone: this.props.studentDetail.phone,
+      email: this.props.studentDetail.email,
+			tutorFirstName: this.props.studentDetail.tutorFirstName,
+			tutorLastName: this.props.studentDetail.tutorLastName,
+			tutorEmail: this.props.studentDetail.tutorEmail,
+			tutorPhone: this.props.studentDetail.tutorPhone,
+      difficulty: this.props.studentDetail.difficulty,
+      educationLevel: this.props.studentDetail.educationLevel,
+      subjectsId: this.props.studentDetail.subjects && this.props.studentDetail.subjects.map(e => e.id),
+      interests: this.props.studentDetail.interests,
+      motivations: this.props.studentDetail.motivations
     };
     this.subjects = this.props.subjects;
     this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
@@ -33,7 +41,7 @@ export class StudentFile extends Component {
     event.preventDefault();
     this.props
       .putStudent(this.state)
-      .then(() => (window.location = '/admin/estudiantes'));
+      .then(() => (this.props.history.push('/admin/estudiantes')))
   };
 
   onCheckboxClicked(subject, isChecked) {
@@ -51,8 +59,8 @@ export class StudentFile extends Component {
   componentDidMount() {
     this.props.getStudentDetail(this.props.match.params.id);
     this.props.getSubjects();
+    this.props.getAcademicLevels();
   }
-
   render() {
     return (
       <div
@@ -78,7 +86,7 @@ export class StudentFile extends Component {
                 className='form-control mr-4'
                 type='text'
                 name='firstName'
-                defaultValue={this.props.studentDetail.firstName}
+                value={this.state.firstName}
                 onChange={this.onChangeHandler}
               />
             </label>
@@ -89,7 +97,7 @@ export class StudentFile extends Component {
                 className='form-control'
                 type='text'
                 name='lastName'
-                defaultValue={this.props.studentDetail.lastName}
+                value={this.state.lastName}
                 onChange={this.onChangeHandler}
               />
             </label>
@@ -105,7 +113,7 @@ export class StudentFile extends Component {
                 className='form-control mr-4'
                 type='text'
                 name='phone'
-                defaultValue={this.props.studentDetail.phone}
+                value={this.state.phone}
                 onChange={this.onChangeHandler}
               />
             </label>
@@ -116,7 +124,7 @@ export class StudentFile extends Component {
                 className='form-control'
                 type='text'
                 name='email'
-                defaultValue={this.props.studentDetail.email}
+                value={this.state.email}
                 onChange={this.onChangeHandler}
               />
             </label>
@@ -129,7 +137,7 @@ export class StudentFile extends Component {
                 className='form-control mr-4'
                 type='text'
                 name='tutorFirstName'
-                defaultValue={this.props.studentDetail.tutorFirstName}
+                value={this.state.tutorFirstName}
                 onChange={this.onChangeHandler}
               />
             </label>
@@ -140,7 +148,7 @@ export class StudentFile extends Component {
                 className='form-control'
                 type='text'
                 name='tutorLastName'
-                defaultValue={this.props.studentDetail.tutorLastName}
+                value={this.state.tutorLastName}
                 onChange={this.onChangeHandler}
               />
             </label>
@@ -156,33 +164,28 @@ export class StudentFile extends Component {
                 className='form-control mr-4'
                 type='text'
                 name='phone'
-                defaultValue={this.props.studentDetail.tutorPhone}
+                value={this.state.tutorPhone}
                 onChange={this.onChangeHandler}
               />
             </label>
             <label>
-              Email del alumno
+              Email del tutor
               <input
                 style={{ width: '40vw' }}
                 className='form-control'
                 type='text'
                 name='email'
-                defaultValue={this.props.studentDetail.tutorEmail}
+                value={this.state.tutorEmail}
                 onChange={this.onChangeHandler}
               />
             </label>
           </div>
           <div className='form-group'>
-		  {console.log(this.props.studentDetail)}
             <label style={{ fontSize: '1.7em' }} htmlFor='nivelEducativo'>
-              Nivel educativo
+             Grado alcanzado
             </label>
-            <select className='form-control' id='nivelEducativo'>
-              <option>1er grado</option>
-              <option>2do grado</option>
-              <option>3er grado</option>
-              <option>4to grado</option>
-              <option>5to grado</option>
+            <select className='form-control' id='nivelEducativo' onChange={e => this.setState({educationLevel: e.target.value})}>
+            {this.props.academicLevels.length > 0 && this.props.academicLevels.sort((a, b) => (a.numericLevel > b.numericLevel) ? 1 : -1).map(e => <option id={e.id} value={e.id} level={e.numericLevel}>{e.name}</option>)}
             </select>
           </div>
           <h3 className='text-center d-block mb-3'>
@@ -193,12 +196,12 @@ export class StudentFile extends Component {
             className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
           >
             {
-				this.props.studentDetail.subjects && this.props.studentDetail.subjects.map((subject) => {
+				this.props.studentDetail.subjects && this.props.subjects.map((subject) => {
 				return (
 					<SubjectCheckbox
 					key={subject.id}
 					initialState={
-						this.props.studentDetail.subjects.includes(subject.id)
+            this.state.subjectsId && this.state.subjectsId.includes(subject.id)
 						? 'checked'
 						: false
 					}
@@ -210,6 +213,7 @@ export class StudentFile extends Component {
 				})
 			}
           </div>
+          <h4 className="text-danger">Feature de modificación de horarios en construcción. Para hacer un cambio de esa temática, comunicarse con HENRY.</h4>
           {/* <h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene FACILIDAD</h3>
 					<div style={{ minHeight: "150px", width: "80vw" }} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
 						{Array.isArray(this.state.subjectsId) && this.state.subjectsId.length > 0 ? this.state.subjectsId.map(subject => {
@@ -239,7 +243,7 @@ export class StudentFile extends Component {
                 className='form-control'
                 type='text'
                 name='motivations'
-                defaultValue={this.props.studentDetail.motivations}
+                value={this.state.motivations}
                 onChange={this.onChangeHandler}
               />
             </label>
@@ -252,12 +256,21 @@ export class StudentFile extends Component {
                 className='form-control'
                 type='text'
                 name='interests'
-				defaultValue={this.props.studentDetail.interests}
+				        value={this.state.interests}
                 placeholder='Intereses del alumno...'
                 onChange={this.onChangeHandler}
               />
             </label>
           </div>
+          <div className='form-group' >
+								<textarea
+									name='observations'
+									onChange={this.onChangeHandler}
+									className={style.textArea}
+									style={{ width: '95%' }}
+									placeholder='Observaciones y/o comentarios...'
+								/>
+							</div>
           <input
             style={{
               fontSize: '1.5em',
@@ -277,12 +290,14 @@ export class StudentFile extends Component {
 const mapStateToProps = (state) => ({
   studentDetail: state.students.studentDetail,
   subjects: state.subjects.subjects,
+  academicLevels: state.academic.academicLevels
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getStudentDetail: (studentId) => dispatch(getStudentDetail(studentId)),
     getSubjects: () => dispatch(getSubjects()),
+    getAcademicLevels: () => dispatch(getAcademicLevels()),
     putStudent: (student) => dispatch(putStudent(student)),
   };
 };
