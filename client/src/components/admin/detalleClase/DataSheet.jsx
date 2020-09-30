@@ -85,6 +85,12 @@ function DataSheet({addDataSheet, classId, assistance}){
          </div>
          <div> 
             <h4 className={style.titulo}> ¿Te gustaría seguir trabajando con tu alumno? </h4>
+            <input style={{display: 'inline', marginLeft: "20px"}} type="checkbox" ref={si} value="true" name="stay" 
+               onChange={(e) => handleChecked(e, 'comp')}/>
+               <label htmlFor="true" style={{ marginRight: "20px"}}> Si </label>
+               <input style={{display: 'inline'}} type="checkbox"  ref={no} value="false" name="stay" 
+               onChange={(e) => handleChecked(e, 'comp')}/>
+               <label htmlFor="false"> No </label><br></br>
             
          </div>
          <div> 
@@ -113,9 +119,9 @@ function DataSheet({addDataSheet, classId, assistance}){
          </div>
          <div> 
             <h4 className={style.titulo}> Estaba acompañado </h4>
-               <input style={{display: 'inline'}} type="checkbox" ref={si} value="true" name="someoneAccompaniesHim" 
+               <input style={{display: 'inline', marginLeft: "20px"}} type="checkbox" ref={si} value="true" name="someoneAccompaniesHim" 
                onChange={(e) => handleChecked(e, 'comp')}/>
-               <label htmlFor="true"> Si </label>
+               <label htmlFor="true" style={{ marginRight: "20px"}}> Si </label>
                <input style={{display: 'inline'}} type="checkbox"  ref={no} value="false" name="someoneAccompaniesHim" 
                onChange={(e) => handleChecked(e, 'comp')}/>
                <label htmlFor="false"> No </label><br></br>
@@ -131,9 +137,9 @@ function DataSheet({addDataSheet, classId, assistance}){
          onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}/>
          <div> 
             <h4 className={style.titulo}> Tuvo examen </h4>
-               <input style={{display: 'inline'}} type="checkbox" ref={yes} value="true" name="hadExam" 
+               <input style={{display: 'inline', marginLeft: "20px"}} type="checkbox" ref={yes} value="true" name="hadExam" 
                onChange={(e) => handleChecked(e, 'exam')}/>
-               <label htmlFor="true"> Si </label>
+               <label htmlFor="true" style={{ marginRight: "20px"}}> Si </label>
                <input style={{display: 'inline'}} type="checkbox"  ref={nop} value="false" name="hadExam" 
                onChange={(e) => handleChecked(e, 'exam')}/>
                <label htmlFor="false"> No </label><br></br>
