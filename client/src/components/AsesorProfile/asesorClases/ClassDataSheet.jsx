@@ -2,22 +2,23 @@ import React, {useEffect, useState} from 'react'
 import style from '../asesorClases/AsesorClases.module.css';
 import axios from 'axios'
 
-export default function AsesorClases({userId}){
-   const [data, setData] = useState()
+export default function ClassDataSheet({data}){
+   // const [data, setData] = useState()
 
-   useEffect(() => {
-      axios.get(`http://localhost:3001/datasheet/${userId}`)
-      .then(res => setData(res.data))
-      .catch(error => console.log(error))
-   }, [])
+   // useEffect(() => {
+   //    axios.get(`http://localhost:3001/datasheet/${userId}`)
+   //    .then(res => setData(res.data))
+   //    .catch(error => console.log(error))
+   // }, [])
+   // console.log(clase)
    console.log(data)
    return (
-      <div className = {style.container}>
+      <div className={style.wrap} >
          {data?.map(s => 
-         <div key={s.id} >
+         <div className = {style.container} key={s.id} >
             <div className = {style.student}>
-               <h4 className = {style.name} >{s?.class.nameWeekDay}</h4>
-               <p className = {style.s}> {s.class.duration[0].value} hs</p>
+               {/* <h4 className = {style.name} >{s?.class.nameWeekDay}</h4> */}
+               {/* <p className = {style.s}> {s.class.duration[0].value} hs</p> */}
             </div>
             <div className = {style.info}>
                <p className = {style.data}>Asistencia: {s?.assistance}</p>

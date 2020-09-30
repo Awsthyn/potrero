@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {getUser, putUser} from '../../redux/actions/users';
 import axios from 'axios';
 import AsesorInfo from './AsesorInfo';
-import AsesorNotas from './asesorNotas/AsesorNotas';
+// import AsesorNotas from './asesorNotas/AsesorNotas';
 import EnviarEmail from './EnviarEmail';
 
 function AsesorProfile({history, getUser, putUser, user, match}) {
@@ -20,7 +20,8 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 	const [email, setEmail] = useState(false);
 	const [clases, setClases] = useState();
 	const [foto, setFoto] = useState(false);
-	const [info, setInfo] = useState(new FormData());
+    const [info, setInfo] = useState(new FormData());
+    const[estudiantes, setEstudiantes] = useState()
 
 	const handleOnFileChange = e => {
 		info.append('profilePicture', e.target.files[0]);
@@ -30,9 +31,13 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 		axios
 			.get(`http://localhost:3001/class/user/${match.params.id}`)
 			.then(res => setClases(res.data))
+            .catch(err => console.log(err));
+        axios
+			.get(`http://localhost:3001/students/user/${match.params.id}`)
+			.then(res => setEstudiantes(res.data))
 			.catch(err => console.log(err));
 	}, []);
-
+    console.log(clases)
 	function pestañas(e) {
 		let defaultToggle = {
 			students: false,
@@ -74,20 +79,20 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 							/>
 						</form>
 						<span className="material-icons"> photo_camera </span>
+                        </label>
 						{foto ? (
-							<span>
+							<div>
 								<button
+                                style={{display: 'inline'}}
 									onClick={() => {
 										putUser(user.id, info);
 										setFoto(false);
 									}}>
-									{' '}
-									Actualizar{' '}
+									Actualizar
 								</button>
-								<button onClick={() => setFoto(false)}> Cancelar </button>
-							</span>
+								<button style={{display: 'inline'}} onClick={() => setFoto(false)}> Cancelar </button>
+							</div>
 						) : null}
-					</label>
 					<h4 className={style.name}>
 						{' '}
 						{`${user.firstName} ${user.lastName}`}
@@ -188,13 +193,12 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 							</button>
 						</div>
 					</div>
-					{toggle.students ? <AsesorStudents students={clases?.map(c => c.student)}/> : null}
-					{toggle.classes ? clases.map(c => 
-                    <div  className={style.clases} > 
-                        <AsesorClases key={c.id} clase={c} /> 
-                    </div>)
+					{toggle.students ? <AsesorStudents students={estudiantes}/> : null}
+					{toggle.classes ? <div  className={style.clases} > {clases.map(c =>                  
+                        <AsesorClases key={c.id} clase={c} /> )}
+                    </div>
                         : null}
-                    {toggle.grades ? <AsesorNotas userId={user.id}/> : null}
+                    {/* {toggle.grades ? <AsesorNotas userId={user.id} clase={clases}/> : null} */}
 				</div>
 			</div>
 		</div>
