@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux';
 import "./App.css";
 import { Route } from "react-router-dom";
 import ContenedorForm from "./components/formularioVoluntario/ContenedorForm";
@@ -26,9 +27,15 @@ import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
 import DetalleClase from './components/admin/detalleClase/DetalleClase';
-
+import TablaClases from './components/admin/TablaClases';
+import {getCurrentUser} from './redux/actions/session'
 import AdvisorFormMail from './components/admin/AdvisorFormMail';
+
 class App extends React.Component {
+
+  componentDidMount(){
+      this.props.getCurrentUser()
+  }
   render() {
     return (
       <div className="App">
@@ -56,6 +63,8 @@ class App extends React.Component {
         <AdminRoute exact path="/admin" component={AdminDrawer} />
         <Route exact path="/admin" component={AdminPanel} />
         <Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
+        <Route exact path="/admin/clases" component={TablaClases} />
+
         <Route
           exact
           path="/admin/voluntarios/:id"
@@ -100,4 +109,14 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+	session: state.sessions.sessionUser
+});
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		getCurrentUser: () => dispatch(getCurrentUser()),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

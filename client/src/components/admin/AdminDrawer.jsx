@@ -242,11 +242,7 @@ function AdminDrawer(props) {
                                       </ListItemIcon>
                               </ListItem>
 
-
-                            <ListItem  >
-                                <ListItemText className={classes.grouplinks} primary={`${props.session.firstName} ${props.session.lastName}`}/>
-                            </ListItem>
-
+                      
                             <Link style={{alignSelf:'center'}} className={classes.link} to= '/'>
                                     <ListItem onClick={handleLogout} className={classes.grouplinks} button>
                                     <ListItemIcon className={`${classes.icons} ${classes.logout}`} >
