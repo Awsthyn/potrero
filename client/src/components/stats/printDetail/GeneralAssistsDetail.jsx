@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./detail.css";
 import GeneralAssists from "../GeneralAssists.jsx";
+import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
+//
 class GeneralAssistDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +46,17 @@ class GeneralAssistDetail extends React.Component {
 
   render() {
     return (
-      <div className="printDetail">
+      <div className="titlePotrero">
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div className={`titlePotrero ocultoimpresion row d-flex justify-content-center`}>
+       <h1>Fundación El Potrero</h1>
+     </div>
+      <button onClick={()=>window.print()} className="btn btn-primary ocultoimpresion">
+        Imprimir
+      </button>
         {this.state.info && this.armarDatos()}
         <br />
         <br />
@@ -53,11 +66,12 @@ class GeneralAssistDetail extends React.Component {
         <br />
         <br />
         <h1>Asistencia</h1>
-        <table class="table">
+        <table className="table ">
           <thead class="thead-dark">
             <tr>
               <th scope="col">Asistencia</th>
               <th scope="col">Nombre</th>
+
             </tr>
           </thead>
           <tbody>
@@ -66,6 +80,7 @@ class GeneralAssistDetail extends React.Component {
                 <tr>
                   <th scope="row">Presente</th>
                   <td>{e}</td>
+
                 </tr>
               ))}
           </tbody>
@@ -75,6 +90,7 @@ class GeneralAssistDetail extends React.Component {
                 <tr>
                   <th scope="row">Falta no justificada</th>
                   <td>{e}</td>
+
                 </tr>
               ))}
           </tbody>
@@ -84,6 +100,7 @@ class GeneralAssistDetail extends React.Component {
                 <tr>
                   <th scope="row">Falta justificada</th>
                   <td>{e}</td>
+
                 </tr>
               ))}
           </tbody>
@@ -93,6 +110,7 @@ class GeneralAssistDetail extends React.Component {
                 <tr>
                   <th scope="row">Tardanzas</th>
                   <td>{e}</td>
+
                 </tr>
               ))}
           </tbody>
