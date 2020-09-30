@@ -19,14 +19,15 @@ class Advisers extends React.Component {
       totalAdvisorsActives: respuesta.totalAdvisorsActives,
       totalAdvisorsInactives: respuesta.totalAdvisorsInactives,
     });
-    
+
     this.state.promedioActives = this.state.totalAdvisorsActives / this.state.totalAdvisors;
     this.state.promedioInactives =  this.state.totalAdvisorsInactives / this.state.totalAdvisors;
   }
 
   getChartData() {
     const datos = {
-      labels: ["Activos " + Math.round(this.state.promedioActives * 100) + "%", "Inactivos " + Math.round(this.state.promedioInactives * 100) + "%"],
+      labels: ["Activos " +(this.state.promedioActives > 0 ?  Math.round(this.state.promedioActives * 100) + "%" : "" ),
+      "Inactivos " + (this.state.promedioInactives > 0 ? Math.round(this.state.promedioInactives * 100) + "%": ""),],
       datasets: [
         {
           label: "Asesores",
