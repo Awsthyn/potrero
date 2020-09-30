@@ -4,7 +4,7 @@
 
 .integrantes {
     width: 40%;
-    border: 2px solid black;
+    border-right: 2px solid rgb(235, 235, 235);
 }
 
 .personas {
@@ -13,9 +13,10 @@
     justify-content: center;
     width: 100px;
     height: 100px;
-    margin: 2%;
-    border: 2px solid black;
+    margin: 15%;
+    border: 2px solid rgb(235, 235, 235);
     border-radius: 50%;
+    outline: none;
 }
 
 .circulos{
@@ -29,3 +30,12 @@
     display: flex;
     justify-content: center;
 }
+
+.photo {
+    height: 190px;
+    width: 190px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+

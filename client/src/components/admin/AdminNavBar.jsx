@@ -90,10 +90,14 @@ const useStyles = makeStyles({
 
     },
     logout:{
+        color: '#C2C2C2',
         '&:hover': {
-            backgroundColor:'red'
-
+            color:'white'
+            
          },
+    },
+    text: {
+        color: 'white'
     }
 
 
@@ -103,9 +107,8 @@ const useStyles = makeStyles({
 
 const AdminNavBar = (props) => {
     const classes = useStyles()
-
     const handleLogout = () =>   {
-        props.sessionLogout(props.session);
+        props.sessionLogout(props.session.user);
         console.log('seee');
     }
 
@@ -119,7 +122,7 @@ const AdminNavBar = (props) => {
                                     <ListItemIcon className={classes.icons}>
                                             <PieChartIcon/>
                                         </ListItemIcon>
-                                        <ListItemText primary='Panel'/>
+                                        <ListItemText className = {classes.text} primary='Panel'/>
                                 </ListItem>
                         </Link>
 
@@ -131,7 +134,7 @@ const AdminNavBar = (props) => {
                                     <ListItemIcon className={classes.icons}>
                                             <BookIcon/>
                                         </ListItemIcon>
-                                        <ListItemText primary='Clases'/>
+                                        <ListItemText className = {classes.text} primary='Clases'/>
                                 </ListItem>
                         </Link>
                      <ListItem className={classes.item} disableRipple>
@@ -141,7 +144,7 @@ const AdminNavBar = (props) => {
                 <List className={classes.grouplinks}>
                     <Link to= '/admin/usuarios' className={classes.link}>
                                 <ListItem className={classes.item} >
-                                    <ListItemText primary={`${props.session.firstName} ${props.session.lastName}`}/>
+                                    <ListItemText className = {classes.text} primary={`${props.session.user && props.session.user.firstName} ${props.session.user && props.session.user.lastName}`}/>
                                 </ListItem>
                     </Link>
                     <Link to= '/' className={classes.link}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux';
 import "./App.css";
 import { Route } from "react-router-dom";
 import ContenedorForm from "./components/formularioVoluntario/ContenedorForm";
@@ -29,7 +30,15 @@ import DetalleClase from './components/admin/detalleClase/DetalleClase';
 import DetalleAsesores from './components/admin/DetalleAsesores';
 import AdvisorFormMail from './components/admin/AdvisorFormMail';
 import OfWithDemDetail from './components/stats/printDetail/OfWithDemDetail';
+import TablaClases from './components/admin/TablaClases';
+import {getCurrentUser} from './redux/actions/session'
+import AdvisorFormMail from './components/admin/AdvisorFormMail';
+
 class App extends React.Component {
+
+  componentDidMount(){
+      this.props.getCurrentUser()
+  }
   render() {
     return (
       <div className="App">
@@ -58,6 +67,8 @@ class App extends React.Component {
         <AdminRoute exact path="/admin" component={AdminDrawer} />
         <Route exact path="/admin" component={AdminPanel} />
         <Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
+        <Route exact path="/admin/clases" component={TablaClases} />
+
         <Route
           exact
           path="/admin/voluntarios/:id"
@@ -76,17 +87,9 @@ class App extends React.Component {
           path="/admin/estudiantes/agregar"
           component={CreateStudentForm}
         />
-        <Route
-          exact
-          path="/admin/estudiantes/detalles/:id"
-          render={(props) => (
-            <StudentFile student={props.location.state.props} />
-          )}
-        />
-        <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
-        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
-
-
+        <Route exact path="/admin/estudiantes/detalles/:id"component={StudentFile}/>
+        <Route exact path='/admin/estudiantes/asignacion/:studentId/:subjectId' component={ClassAssignation} />
+        <Route exact path='/admin/estudiantes/asignacion/:studentId' component={SubjectsPerStudent} />
 
         <Route exact path='/usuario/login' component={Login} />
         <Route exact path='/usuario/perfil' component={MiPerfil} />
@@ -112,4 +115,14 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+	session: state.sessions.sessionUser
+});
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		getCurrentUser: () => dispatch(getCurrentUser()),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

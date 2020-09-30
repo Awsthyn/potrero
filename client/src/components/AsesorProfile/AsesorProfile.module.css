@@ -332,3 +332,15 @@
 .sendEmailFalse:hover {
     background-color: #c2c2c2;
 }
+
+#ocultar{
+    display:none;
+}
+.cargarImg{
+    cursor: pointer;
+}
+.clases{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 90px 140px;
+}
