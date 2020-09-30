@@ -59,6 +59,10 @@ export class StudentFile extends Component {
     }
   }
 
+  handleOnClick(){
+    
+  }
+
   componentDidMount() {
     this.props.getStudentDetail(this.props.match.params.id);
     this.props.getSubjects();
@@ -193,7 +197,6 @@ export class StudentFile extends Component {
                   spellCheck='false'
                   autoComplete='off'
                   className={styles.input}
-                  style={{ width: '95%' }}
                   type='text'
                   name='motivations'
                   defaultValue={this.props.studentDetail.motivations}
@@ -208,29 +211,29 @@ export class StudentFile extends Component {
                   spellCheck='false'
                   autoComplete='off'
                   className={styles.input}
-                  style={{ width: '80vw' }}
                   type='text'
                   name='interests'
                   defaultValue={this.props.studentDetail.interests}
-                  placeholder='Intereses del alumno...'
                   onChange={this.onChangeHandler}
                 />
               </label>
             </div>
           </div>
 
-          <div className='form-group'>
-            {console.log(this.props.studentDetail)}
+          <div className={styles.container}>
             <label style={{ fontSize: '1.7em' }} htmlFor='nivelEducativo'>
               Grado alcanzado
             </label>
             <select
-              className='form-control'
+              className={styles.select}
               id='nivelEducativo'
               onChange={(e) =>
                 this.setState({ educationLevel: e.target.value })
               }
             >
+              <option selected='selected' disabled='disabled'>
+                --Seleccione Grado--
+              </option>
               {this.props.academicLevels.length > 0 &&
                 this.props.academicLevels
                   .sort((a, b) => (a.numericLevel > b.numericLevel ? 1 : -1))
@@ -241,100 +244,45 @@ export class StudentFile extends Component {
                   ))}
             </select>
           </div>
-          <h3 className='text-center d-block mb-3'>
-            Materias que tiene que aprender
-          </h3>
-          <div
-            style={{ width: '80vw', display: 'flex', justifyContent: 'center' }}
-            className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
-          >
-            {this.props.studentDetail.subjects &&
-              this.props.subjects.map((subject) => {
-                return (
-                  <SubjectCheckbox
-                    key={subject.id}
-                    initialState={
-                      this.state.subjectsId &&
-                      this.state.subjectsId.includes(subject.id)
-                        ? 'checked'
-                        : false
-                    }
-                    subject={subject}
-                    onChange={this.onCheckboxClicked}
-                    required
-                  />
-                );
-              })}
+          <div className={styles.containerSubjects}>
+            <h3 className='text-center d-block mb-3'>
+              Materias que tiene que aprender
+            </h3>
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+              }}
+              className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
+            >
+              {this.props.studentDetail.subjects &&
+                this.props.subjects.map((subject) => {
+                  return (
+                    <SubjectCheckbox
+                      key={subject.id}
+                      initialState={
+                        this.state.subjectsId &&
+                        this.state.subjectsId.includes(subject.id)
+                          ? 'checked'
+                          : false
+                      }
+                      subject={subject}
+                      onChange={this.onCheckboxClicked}
+                      required
+                    />
+                  );
+                })}
+            </div>
           </div>
           <h4 className='text-danger'>
             Feature de modificación de horarios en construcción. Para hacer un
             cambio de esa temática, comunicarse con HENRY.
           </h4>
-          {/* <h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene FACILIDAD</h3>
-					<div style={{ minHeight: "150px", width: "80vw" }} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
-						{Array.isArray(this.state.subjectsId) && this.state.subjectsId.length > 0 ? this.state.subjectsId.map(subject => {
-							if (this.state.weakness.includes(subject) === false) return (
-								<StrengthCheckbox key={subject + 'strength'} initialState={this.state.strengths.includes(subject) ? "checked" : false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onStrengthCheckboxClicked} required />
-							)
-						}
-
-						) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}
-					</div> */}
-          {/* <h3 className="text-center d-block mt-3 mb-3">Materias para las que tiene DIFICULTAD</h3>
-					<div style={{ minHeight: "150px", width: "80vw" }} className="ml-auto mr-auto d-flex justify-content-center flex-wrap form-check form-check-inline">
-						{Array.isArray(this.state.subjectsId) && this.state.subjectsId.length > 0 ? this.state.subjectsId.map(subject => {
-							if (this.state.strengths.includes(subject) === false) return (
-								<WeakCheckbox key={subject + 'weak'} initialState={this.state.weakness.includes(subject) ? "checked" : false} subject={this.props.subjects.find(e => e.id === subject)} onChange={this.onWeakCheckboxClicked} required />
-							)
-							else return null
-						}
-
-						) : <h5 className="text-danger align-self-center">Seleccione materias para poder trabajar en este apartado</h5>}
-					</div> */}
-          <div className='form-group'>
-            <label>
-              Motivaciones del alumno
-              <input
-                style={{ width: '80vw' }}
-                className='form-control'
-                type='text'
-                name='motivations'
-                value={this.state.motivations}
-                onChange={this.onChangeHandler}
-              />
-            </label>
-          </div>
-          <div className='form-group'>
-            <label>
-              Intereses del alumno
-              <input
-                style={{ width: '80vw' }}
-                className='form-control'
-                type='text'
-                name='interests'
-                value={this.state.interests}
-                placeholder='Intereses del alumno...'
-                onChange={this.onChangeHandler}
-              />
-            </label>
-          </div>
-          <div className='form-group'>
-            <textarea
-              name='observations'
-              onChange={this.onChangeHandler}
-              className={style.textArea}
-              style={{ width: '95%' }}
-              placeholder='Observaciones y/o comentarios...'
-            />
-          </div>
           <input
-            // style={{
-            //   fontSize: '1.5em',
-            //   width: '300px',
-            //   backgroundColor: '#492BC4',
-            // }}
-            // className='align-self-center text-white btn btn-lg'
             className={styles.btnConfirmar}
+            onClick={handleOnClick}
             value='Confirmar cambios'
             type='submit'
           />

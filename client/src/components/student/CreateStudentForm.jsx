@@ -283,7 +283,7 @@ export class CreateStudentForm extends Component {
                   this.state.isLevelSelect === true ? (
                   <div style={{ color: 'red' }}>
                     Lo sentimos! No se encontraron materias para ese ciclo
-                    lectivo :( {console.log(':(', this.state.subjectsId.length)}
+                    lectivo :(
                   </div>
                 ) : (
                   <div style={{ color: 'red', fontSize: '14px' }}>

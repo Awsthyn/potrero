@@ -22,12 +22,6 @@
     flex-direction: column;
 }
 
-.containerLevel{
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-}
-
 .tag{
     padding-top: 10px;
     font-weight: 100;
@@ -56,7 +50,7 @@
 .extras{
     padding-top: 10px;
     font-weight: 100;
-    width: 100%;
+    width: 98%;
     margin: 10px 15px;
     text-align: start;
 }
@@ -66,29 +60,13 @@
     font-weight: 300;
 }
 
-.textArea{
-    
-    padding: 10px 10px;
-    width: 70%;
-    margin: 10px 100px 0 0px;
-    border: none;
-	border: 2px solid #3333331f;
+.containerSubjects{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.textArea:focus {
-    outline: none;
-    border: 2px solid #8bc63ebe;
-}
-
-.textArea::-webkit-input-placeholder {
-	font-weight: 100;
-    font-size: 14px;
-}
-/* div {
-    padding: 5px 5px 0 5px;
-} */
-
-select { 
+.select { 
     -webkit-appearance: none;  
     -moz-appearance: none;  
     appearance: none;  
@@ -97,28 +75,24 @@ select {
     height: 30px;
     text-align-last: center;
     background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-self: center;
 } 
 
-select:hover{
+.select:hover{
     cursor: pointer;
     border: 3px solid #8bc63ebe;
 }
 
-select:enabled{
+.select:enabled{
     outline: none;
     border: 3px solid #8bc63ebe;
 }
 
-.createStudent .formStudent .container{
+.editStudent .formStudent .container{
     position: relative;
     padding: 2% 5%;
-}
-
-.containerDays{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 .btnConfirmar {
