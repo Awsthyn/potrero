@@ -117,7 +117,6 @@ const TablaUsuarios = (props) => {
 
     },[])
     
-
             return (
             <div style={{marginTop:100}}>
                 {data && data.length ? 
@@ -139,7 +138,7 @@ const TablaUsuarios = (props) => {
                              </div>
                       </div>
                       ),
-                  }}
+                    }}
                 columns={[
                     { title: 'Avatar', field: 'imageUrl', render: rowData => <img src={rowData.imageUrl} style={{width: 40, borderRadius: '50%'}}/> },
                     { title: 'Nombre', field: 'firstName' },
@@ -151,7 +150,7 @@ const TablaUsuarios = (props) => {
                 ]}
                 data={data}
                 actions={[
-                      {
+                    {
                     icon: () => <LinkedInIcon color="primary" />,
                     tooltip: 'Visitar LinkedIn',
                     onClick: (event, rowData) => 
@@ -161,10 +160,10 @@ const TablaUsuarios = (props) => {
                         confirmButtonColor: VIOLETA,
                         showCancelButton: true,
                         cancelButtonColor: 'gray',
-                       })
-                        .then((result) => {
-                                 if (result.isConfirmed) {
-                                    window.open(rowData.linkedin, "_blank");
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            window.open(rowData.linkedin, "_blank");
                                  }
                                 })
                     },
@@ -181,7 +180,7 @@ const TablaUsuarios = (props) => {
                        })
                         .then((result) => {
                                  if (result.isConfirmed) {
-                                    history.push(`/admin/`)
+                                    history.push(`/asesores/${rowData.id}`)
                                     //voluntarios/${rowData.id}
                                  }
                                 })
