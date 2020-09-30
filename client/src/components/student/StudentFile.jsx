@@ -215,7 +215,7 @@ export class StudentFile extends Component {
             className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
           >
             {
-				this.props.subjects?.map((subject) => {
+				this.state.subjectsId !== null && this.props.subjects?.map((subject) => {
           console.log(this.state.subjectsId?.includes(subject.id))
 				return (
 					<SubjectCheckbox
