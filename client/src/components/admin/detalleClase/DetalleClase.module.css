@@ -13,7 +13,7 @@
     justify-content: center;
     width: 100px;
     height: 100px;
-    margin: 2%;
+    margin: 15%;
     border: 2px solid black;
     border-radius: 50%;
 }
@@ -28,4 +28,11 @@
 .botones{
     display: flex;
     justify-content: center;
+}
+
+.photo {
+    height: 190px;
+    width: 190px;
+    object-fit: cover;
+    border-radius: 50%;
 }

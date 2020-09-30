@@ -7,12 +7,13 @@ const SubjectCheckbox = ({ initialState, subject, onChange }) => {
     const [checked, setChecked] = useState(initialState);
 
     const onClick = (checked) => {
+        console.log(checked)
         setChecked(checked);
         onChange(subject, checked);
     }
 
     return (
-        <div className="form-group">
+        <div className="form-group subjectcheckbox">
             <input
                 type="checkbox"
                 className={style}

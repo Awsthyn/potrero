@@ -46,7 +46,7 @@ class GeneralAssistDetail extends React.Component {
 
   render() {
     return (
-      <div className="titlePotrero">
+      <div className="detailAssist">
       <br></br>
       <br></br>
       <br></br>
