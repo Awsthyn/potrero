@@ -84,8 +84,6 @@ class App extends React.Component {
         <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
         <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
 
-
-
         <Route exact path='/usuario/login' component={Login} />
         <Route exact path='/usuario/perfil' component={MiPerfil} />
         <Route exact path='/usuario/recuperar' component={PasswordRecovery} />

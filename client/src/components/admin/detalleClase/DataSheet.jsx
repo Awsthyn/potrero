@@ -127,7 +127,8 @@ function DataSheet({addDataSheet, classId, assistance}){
             : null }
          </div>
          <h4 className={style.titulo}> Comentarios </h4>
-         <textarea className={style.comentarios} name="comments" value={estado?.comments} onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}/>
+         <textarea className={style.comentarios} name="comments" value={estado?.comments} 
+         onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}/>
          <div> 
             <h4 className={style.titulo}> Tuvo examen </h4>
                <input style={{display: 'inline'}} type="checkbox" ref={yes} value="true" name="hadExam" 
