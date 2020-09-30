@@ -10,15 +10,18 @@ class OffersWithDemand extends React.Component {
   };
 
   async peticion() {
-    var peticion = await fetch("http://localhost:3001/stats/demandwithoffer");
+    var peticion = await fetch("http://localhost:3001/stats/demandwithoffer", {
+      withCredentials: true,
+    });
     var respuesta = await peticion.json();
+
     this.setState({
       demand: respuesta.allDemands,
       offers: respuesta.allOffer,
       totalDemands: respuesta.totalDemands,
       totalOffers: respuesta.totalOffers,
       countOffers: respuesta.totalOffers,
-      countDemands: respuesta.totalDemands
+      countDemands: respuesta.totalDemands,
     });
   }
 
@@ -29,18 +32,15 @@ class OffersWithDemand extends React.Component {
     const countNombreMatDem = [];
 
     //Pusheo los nombres de materias
-    this.state.offers && this.state.offers.forEach((e) => {
+    this.state.offers.forEach((e) => {
       let nombre = Object.keys(e);
       nombreMatOf.push(nombre[0]);
     });
 
     //Pusheo la longitud a los nombres de materias
-    if(this.state.offer){
-
-      for (let i = 0; i < this.state.offers.length; i++) {
-        for (const property in this.state.offers[i]) {
-          countNombreMatOf.push(this.state.offers[i][property].length);
-        }
+    for (let i = 0; i < this.state.offers.length; i++) {
+      for (const property in this.state.offers[i]) {
+        countNombreMatOf.push(this.state.offers[i][property].length);
       }
     }
 
