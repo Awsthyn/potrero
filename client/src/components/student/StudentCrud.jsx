@@ -53,6 +53,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -173,11 +174,11 @@ return (
         data={data}
         actions={[
               {
-            icon: () => <LinkedInIcon color="primary" />,
-            tooltip: 'Visitar LinkedIn',
+            icon: () => <SupervisedUserCircleIcon color="primary" />,
+            tooltip: 'Asignar Tutorías',
             onClick: (event, rowData) => 
             Swal.fire({
-                title:  `¿Deseas visitar el detalle de ${rowData.firstName} ${rowData.lastName}?`,
+                title:  `¿Deseas Asignar Tutorías a ${rowData.firstName} ${rowData.lastName}?`,
                 icon: "question",
                 confirmButtonColor: VIOLETA,
                 showCancelButton: true,
@@ -202,8 +203,7 @@ return (
                })
                 .then((result) => {
                          if (result.isConfirmed) {
-                            history.push(`/admin/`)
-                            //voluntarios/${rowData.id}
+                            history.push(`/admin/estudiantes/detalles/${rowData.id}`)
                          }
                         })
             },
