@@ -74,15 +74,9 @@ class App extends React.Component {
           path="/admin/estudiantes/agregar"
           component={CreateStudentForm}
         />
-        <Route
-          exact
-          path="/admin/estudiantes/detalles/:id"
-          render={(props) => (
-            <StudentFile student={props.location.state.props} />
-          )}
-        />
-        <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
-        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
+        <Route exact path="/admin/estudiantes/detalles/:id"component={StudentFile}/>
+        <Route exact path='/admin/estudiantes/asignacion/:studentId/:subjectId' component={ClassAssignation} />
+        <Route exact path='/admin/estudiantes/asignacion/:studentId' component={SubjectsPerStudent} />
 
         <Route exact path='/usuario/login' component={Login} />
         <Route exact path='/usuario/perfil' component={MiPerfil} />
@@ -99,7 +93,7 @@ class App extends React.Component {
           path="/admin/inassistances"
           component={DetailsOfInassistances}
         />
-        <Route path="/admin/detail" component={GeneralAssistsDetail} />
+        <Route exact path="/admin/detail" component={GeneralAssistsDetail} />
         <Route path="/admin/class/:classId" component={DetalleClase} />
       </div>
     );
