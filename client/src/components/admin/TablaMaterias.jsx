@@ -1,133 +1,237 @@
-import React from 'react'
+
+import React, {useState,useEffect} from 'react'
+import { forwardRef } from 'react';
 import { connect } from "react-redux";
+import {useHistory,Link} from 'react-router-dom';
+
+/////////////////////////////////////////////////
+
+// Estilos
+import {makeStyles} from '@material-ui/styles';
+import { createMuiTheme} from '@material-ui/core/styles';
+
+//Actions
 import { getSubjects,deleteSubject,postSubject,putSubject} from "../../redux/actions/subject"
+
+
+// Sweet Alerts
+import swal from 'sweetalert';
+import Swal from 'sweetalert2';
+
+
+// Moment
 import moment from 'moment';
 import 'moment/locale/es';
-import Swal from 'sweetalert2';
-import swal from 'sweetalert';
-import {Link} from 'react-router-dom'
+
+//Material-Table
+import MaterialTable, { MTableToolbar } from 'material-table';
+
+//Componentes 
+import Button from '@material-ui/core/Button'
+import Spinner from '../potrero-spinner/Spinner.jsx';
+
+
+// Iconos
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import BlockIcon from '@material-ui/icons/Block';
+import LockIcon from '@material-ui/icons/Lock';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import AddBox from '@material-ui/icons/AddBox';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import Check from '@material-ui/icons/Check';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import Clear from '@material-ui/icons/Clear';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import Edit from '@material-ui/icons/Edit';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Remove from '@material-ui/icons/Remove';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Search from '@material-ui/icons/Search';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+import EditIcon from '@material-ui/icons/Edit';
+import PostAddIcon from '@material-ui/icons/PostAdd';
+
+const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
+    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+};
+
+
+const VIOLETA = '#492BC4'
+const VERDE = '#8CC63E'
+const NEGRO = '#333333'
+
 moment.locale('es');
 
-class TablaMaterias extends React.Component {
-    constructor(props) {
-        super(props);
-          this.state = {}
-          this.handleAddition = this.handleAddition.bind(this) 
-          this.handleDeletion = this.handleDeletion.bind(this) 
-          this.handleRename =  this.handleRename.bind(this)
-    };
-    componentDidMount(){
-        this.props.getSubjects();
-    }
+const TablaMaterias = (props) => {
+    const history = useHistory();
+    const [selectedRow, setSelectedRow] = useState(null);
+    const [data, setData] = useState([]);
+    const [locked,setLocked] = useState(true)
 
-    handleDeletion(id){
-        swal({
-            title: "¡¡ Cuidado !!",
-            text: "Confirmando esta acción, eliminarás una materia para siempre",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-            this.props.deleteSubject(Number(id))
-              swal("El registro fue destruido con éxito", {
-                icon: "success",
-              });
-            } else {
-              swal("El registro fue conservado");
+    useEffect(()=>{
+
+       props.getSubjects()
+            .then((subjects)=>{
+                if(!subjects) {
+                    Swal.fire(
+                        'Conectar la BD',
+                        `Debes conectar la Base de Datos o agregar usuarios`,
+                        'warning'
+                        )
+                        history.push(`/admin`)    
+                        return 
+                    }
+             setData( subjects.map(subject => ({
+               
+                 id: subject.id,
+                nombre: subject.name, 
+                nivel:Math.floor(subject.academicLevels[0].numericLevel/100)===1 ? 'Primario': 'Secundario' ,
+                grados:subject.academicLevels.length+' '+ 'Grados',
+             })
+             )
+             )
+        
+                    }
+            )
+      
+
+    },[getSubjects])
+
+        async function handleAddition(){
+            const { value: materia } = await Swal.fire({
+              title: 'Ingresa el nombre de la Materia',
+              input: 'text',
+              inputPlaceholder: 'Por ejemplo: computación'
+            })
+            
+            if (materia) {
+              Swal.fire(`Se agregará a los registros la materia: ${materia}`)
+              props.postSubject({name: materia})
             }
-          });
+          }
     
-    }
-    async handleAddition(){
-      const { value: materia } = await Swal.fire({
-        title: 'Ingresa el nombre de la Materia',
-        input: 'text',
-        inputPlaceholder: 'Por ejemplo: computación'
-      })
-      
-      if (materia) {
-        Swal.fire(`Se agregará a los registros la materia: ${materia}`)
-        this.props.postSubject({name: materia})
-      }
-    }
+          async function handleRename(subject){
+            const { value: rename } = await Swal.fire({
+              title: 'Ingresa el nombre nuevo',
+              input: 'text',
+              inputPlaceholder: `Por ejemplo: ${subject.nombre}002`
+            })
+            
+            if (rename) {
+              Swal.fire(`Se reemplazará el nombre de ${subject.nombre} por  ${rename}`)
+              props.putSubject({id: subject.id, name:rename})
+              .then(info=>setData( data.map(datas=>
+                datas.id == info.id ? {...datas,nombre:info.name}:datas)))
 
-    async handleRename(subject){
-      const { value: rename } = await Swal.fire({
-        title: 'Ingresa el nombre nuevo',
-        input: 'text',
-        inputPlaceholder: `Por ejemplo: ${subject.name}002`
-      })
-      
-      if (rename) {
-        Swal.fire(`Se reemplazará el nombre de ${subject.name} por  ${rename}`)
-        this.props.putSubject({id: subject.id, name:rename})
-      }
-   
-  }
-  
-    render() { 
-        
-         return(   
-                <div className='container ' style={{ marginLeft:220, marginTop:30}} >
-                  <div>
-                  <button key={`AgregarMateria`} className="btn btn-success border" onClick={e => this.handleAddition()}>
-                  <i class="fa fa-plus-square" aria-hidden="true"> Agregar Materia</i>
-                                                                                  
-                   </button>
-                  </div>
-                      {this.props.subjects.length ? <table className="table table-striped border">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID Materia</th>
-                                    <th scope="col">Nombre</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                            {this.props.subjects.length && this.props.subjects.map(subject => 
-                                                 <tr key={subject.id}>
-                                                    <th scope="row">{subject.id}</th>
-                                                    <td>{subject.name}</td>
-                                                   
-                                                    <td>
-                                                           
-                                                        <div key={subject.id}>
-                                                           {/* Detalles de materias*/}
-                                                            <button key={`Renombrar${subject.id}`} className={`btn btn-warning border`}  onClick={() => this.handleRename(subject)}>
-                                                                 <i name={subject.id} disabled className={``}></i> 
-                                                                 Renombrar                                                                
-                                                            </button>
-                                                            <button key={`Eliminar${subject.id}`} name={subject.id} className="btn btn-danger border" onClick={() => this.handleDeletion(subject.id)}>
-                                                                 <i name={subject.id}  className="fa fa-trash" disabled></i>   
-                                                                 Eliminar                                                                
-                                                            </button>
-                                                            
-                                                            
-                                                        </div>
-                                                    </td>
-                                                
-                                                </tr>)}
-                            </tbody>
-                        </table> : <div className='container-flud'><p className='card-text'>En este momento no hay Materias </p> <Link to='/admin' type="button" className="btn btn-danger border"> Regresar al panel de Admin </Link> </div>}         
-                </div>
-                )
             }
-}
+         
+        }
 
-function mapStateToProps(state) {
-    return {
-        subjects:state.subjects.subjects,
-    };
-  }
-
-  function mapDispatchToProps(dispatch) {
-    return {
-        getSubjects:() => dispatch(getSubjects()),
-        deleteSubject:(subjectId) => dispatch(deleteSubject(subjectId)),
-        postSubject: (subject) => dispatch(postSubject(subject)),
-        putSubject: subject => dispatch(putSubject(subject))
-    };
-  }
-  export default connect(mapStateToProps, mapDispatchToProps)(TablaMaterias);
-        
+            return (
+            <div style={{marginTop:100}}>
+                {data && data.length ? 
+                <MaterialTable
+                icons={tableIcons}
+                title="Tabla de Materias"
+                components={{
+                    Toolbar: props => (
+                        <div style={{backgroundColor: '#e8eaf5'}}>
+                            <MTableToolbar {...props} />
+                            <Button 
+                              style={{margin:10}}
+                              variant="contained"  
+                              color= "primary"
+                               onClick={handleAddition}>
+                            <PostAddIcon/>
+                        </Button>
+                      </div>
+                      ),
+                  }}
+                columns={[
+                    { title: 'Nombre de la Materia', field: 'nombre' },
+                    { title: 'Nivel', field: 'nivel' },
+                    {title: 'Dictándose en', field:'grados'},
+                ]}
+                data={data}
+                actions={[
+                      {
+                    icon: () => <EditIcon color="primary" />,
+                    tooltip: 'Renombrar Materia',
+                    onClick: (event, rowData) => 
+                    Swal.fire({
+                        title:  `¿Deseas renombrar esta materia?`,
+                        icon: "question",
+                        confirmButtonColor: VIOLETA,
+                        showCancelButton: true,
+                        cancelButtonColor: 'gray',
+                       })
+                        .then((result) => {
+                                 if (result.isConfirmed) {
+                                      handleRename(rowData)
+                                 }
+                                })
+                    },
+                ]}
+                onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
+                options={{  
+                    headerStyle: { 
+                        position: 'sticky',
+                        color: VIOLETA
+                    },
+                    search: true,
+                    exportButton: true,
+                    actionsColumnIndex: -1,
+                    rowStyle: rowData => ({
+                        backgroundColor: (selectedRow === rowData.tableData.id) ? '#9ba6e2' : '#FFF',
+                      }),
+                      headerStyle: {
+                        backgroundColor: VIOLETA,
+                        color: 'white',
+                        '&:hover': {
+                            color:'white',
+                            textDecoration:'none',
+                         },
+                      }
+                }}
+               
+                 
+                />  : <Spinner/>}
+          </div>
+            )
+     
+    }
+    function mapStateToProps(state) {
+        return {
+            subjects:state.subjects.subjects,
+        };
+      }
+    
+      function mapDispatchToProps(dispatch) {
+        return {
+            getSubjects:() => dispatch(getSubjects()),
+            deleteSubject:(subjectId) => dispatch(deleteSubject(subjectId)),
+            postSubject: (subject) => dispatch(postSubject(subject)),
+            putSubject: subject => dispatch(putSubject(subject))
+        };
+      }
+      export default connect(mapStateToProps, mapDispatchToProps)(TablaMaterias);
