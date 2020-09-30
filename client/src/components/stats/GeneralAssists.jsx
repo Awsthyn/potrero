@@ -148,7 +148,7 @@ class generalAssists extends React.Component {
             },
           }}
         ></Pie>
-        <Link to={enviarDetalles}><button className="btn btn-primary">Enviame</button></Link>
+        <Link to={enviarDetalles}><button className="btn btn-primary ocultoimpresion">Enviame</button></Link>
       </div>
     );
   }

@@ -40,7 +40,7 @@ import logo from './assets/logo.png';
 import AssistantIcon from '@material-ui/icons/Assistant';
 import SettingsIcon from '@material-ui/icons/Settings';
 import BookIcon from '@material-ui/icons/Book';
-
+import Box from '@material-ui/core/Box';
 const drawerWidth = 240;
 
 const VIOLETA = '#492BC4'
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     // position:'fixed',
     // marginLeft: 0,
   },
- 
+
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
- 
+
 font:{
     maxWidth:'auto',
     fontFamily: 'Poppins',
@@ -129,6 +129,7 @@ profileBox:{
     justifyContent:'flex-end',
 },
 link:{
+    
     flexDirection:'row',
     textDecoration:'none',
     color:'gray',
@@ -138,7 +139,7 @@ link:{
      },
 },
 icons:{
-    color:'white',
+    color:'#C2C2C2',
     paddingTop:0,
     justifyContent:'center',
     maxWidth:30,
@@ -146,6 +147,8 @@ icons:{
 },
 toolbar:{
     display:'flex',
+    height: '7%'
+    
 },
 grouplinks:{
     marginLeft:'auto',
@@ -164,20 +167,19 @@ item:{
 settings:{
   '&:hover': {
       variant:'raised',
-      backgroundColor:'gray',
-      paddingTop:5,
+      color:'white',
+      
     },
-    
+
   },
 
 logout:{
   '&:hover': {
      variant:'raised',
-      backgroundColor:'red',
-      paddingTop:5,
-      paddingBottom:10,
+      color:'white',
+     
     },
-    
+
   },
 
 }));
@@ -204,7 +206,9 @@ function AdminDrawer(props) {
   }
 
   return (
+      <Box component="div" displayPrint="none">
     <div className={classes.root}>
+
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -224,29 +228,33 @@ function AdminDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Panel de Admin
+          <Typography style = {{fontWeight : '300'}} variant="h6" noWrap>
+            Panel de Administrador
           </Typography>
 
                         <List className={classes.grouplinks}>
+                            <ListItem  >
+                                <ListItemText className={classes.grouplinks} primary={`${props.session.firstName} ${props.session.lastName}`}/>
+                            </ListItem>
                               <ListItem onClick={''} className={classes.grouplinks} button>
                                    <ListItemIcon className={`${classes.icons} ${classes.settings}`} >
                                            <SettingsIcon/>
                                       </ListItemIcon>
                               </ListItem>
-                                
+
+
                             <ListItem  >
                                 <ListItemText className={classes.grouplinks} primary={`${props.session.firstName} ${props.session.lastName}`}/>
                             </ListItem>
-                                            
+
                             <Link style={{alignSelf:'center'}} className={classes.link} to= '/'>
                                     <ListItem onClick={handleLogout} className={classes.grouplinks} button>
                                     <ListItemIcon className={`${classes.icons} ${classes.logout}`} >
                                                     <PowerSettingsNewIcon />
                                             </ListItemIcon>
                                     </ListItem>
-                            </Link> 
-                                        
+                            </Link>
+
                         </List>
         </Toolbar>
       </AppBar>
@@ -279,13 +287,13 @@ function AdminDrawer(props) {
               </List>
         <Divider />
         <List>
-          
+
                  <ListItem onClick={() => history.push(`/admin`)} button >
                     <ListItemIcon className={classes.link} ><PieChartRoundedIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Panel'} />
                   </ListItem>
 
-                  <ListItem onClick={() => history.push(`/admin/voluntarios`)} button > 
+                  <ListItem onClick={() => history.push(`/admin/voluntarios`)} button >
                     <ListItemIcon className={classes.link}><AssistantIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Voluntarios'} />
                   </ListItem>
@@ -294,7 +302,7 @@ function AdminDrawer(props) {
                     <ListItemIcon className={classes.link}><LocalLibraryIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Estudiantes'} />
                   </ListItem>
-                  
+
                   <ListItem onClick={() => history.push(`/admin/usuarios`)} button >
                     <ListItemIcon className={classes.link}> <SupervisedUserCircleRoundedIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Asesores'} />
@@ -305,7 +313,7 @@ function AdminDrawer(props) {
                     <ListItemIcon className={`${classes.link}`}><BookIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Clases'} />
                   </ListItem>
-                  
+
                   <ListItem onClick={() => history.push(`/admin/materias`)} button >
                     <ListItemIcon className={`${classes.link}`}><SettingsApplicationsRoundedIcon/></ListItemIcon>
                     <ListItemText className={classes.link} primary={'Gestion'} />
@@ -317,6 +325,8 @@ function AdminDrawer(props) {
         <div className={classes.toolbar} />
       </main>
     </div>
+    </Box>
+
   );
 }
 

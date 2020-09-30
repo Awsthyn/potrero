@@ -7,14 +7,6 @@ import Qualifications from "../stats/Quafilications";
 import OfferWithDemand from "../stats/OffersWithDemand";
 import "./stats.css";
 
-function imprimir() {
-  let input = window.document.getElementById("graficas");
-  document.getElementsByClassName("makeStyles-root-1")[0].style.visibility =
-    "hidden";
-  window.print(input);
-  document.getElementsByClassName("makeStyles-root-1")[0].style.visibility =
-    "visible";
-}
 
 const useStyles = makeStyles({
   root: {
@@ -71,14 +63,14 @@ export default () => {
           <a href="#stats4" className="btn">
             Ofertas/Demandas
           </a>
-          <button onClick={imprimir} className="btn">
+          <button onClick={()=>window.print()} className="btn">
             Imprimir
           </button>
         </div>
-        <div className="stats">
+        <div className="stats" id="stats">
           <div id="stats1">
             <Assist />
-        <Link to="/admin/inassistances" className="btn btn-primary fixBtn">Ver detalles</Link>
+        <Link to="/admin/inassistances" className="btn btn-primary fixBtn ocultoimpresion">Ver detalles</Link>
           </div>
           <br></br>
           <br></br>

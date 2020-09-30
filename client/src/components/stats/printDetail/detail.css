@@ -1,7 +1,23 @@
-.printDetail{
-    margin-top:100px
+
+.printDetail {
+  margin-top: auto 100px;
 }
 
-.printDetail div a button{
-    display: none;
+.titlePotrero,
+titlePotrero * {
+  display: ruby !important;
+  font-size: 24px;
+  margin-bottom: 10px;
+  width: 100%;
 }
+
+.printDetail div a button {
+  display: none;
+}
+.titlePotrero {
+  display: ruby;
+}
+
+/* .titlePotrero img{
+  margin-top: -15px;
+} */

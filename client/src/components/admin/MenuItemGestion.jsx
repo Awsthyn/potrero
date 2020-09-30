@@ -81,7 +81,7 @@ menuitem:{
 
 
 item:{
-  color:'gray',
+  color:'white',
   padding:0,
   justifyContent:'center',
   width: 'fit-content',

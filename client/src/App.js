@@ -101,7 +101,7 @@ class App extends React.Component {
           path="/admin/inassistances"
           component={DetailsOfInassistances}
         />
-        <Route path="/admin/detail" component={GeneralAssistsDetail} />
+        <Route exact path="/admin/detail" component={GeneralAssistsDetail} />
         <Route path="/admin/class/:classId" component={DetalleClase} />
       </div>
     );
