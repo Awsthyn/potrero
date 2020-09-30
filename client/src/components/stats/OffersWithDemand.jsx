@@ -1,5 +1,6 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import { Link } from "react-router-dom";
 
 class OffersWithDemand extends React.Component {
   state = {
@@ -11,7 +12,6 @@ class OffersWithDemand extends React.Component {
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/demandwithoffer");
     var respuesta = await peticion.json();
-
     this.setState({
       demand: respuesta.allDemands,
       offers: respuesta.allOffer,
@@ -108,6 +108,11 @@ class OffersWithDemand extends React.Component {
   }
 
   render() {
+    const enviarDetalles = {
+      pathname: "/admin/detalle/materias",
+      demandas: this.state.demand,
+      ofertas: this.state.offers
+    };
     return (
       <div>
         <h4>Ofertas y demandas de materias</h4>
@@ -145,6 +150,7 @@ class OffersWithDemand extends React.Component {
             },
           }}
         ></Bar>
+         <Link to={enviarDetalles}><button className="btn btn-primary ocultoimpresion">Enviame</button></Link>
       </div>
     );
   }

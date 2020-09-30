@@ -103,6 +103,7 @@ class App extends React.Component {
           component={DetailsOfInassistances}
         />
         <Route exact path="/admin/detail" component={GeneralAssistsDetail} />
+        <Route exact path="/admin/detalle/materias" component={OfWithDemDetail} />
         <Route path="/admin/class/:classId" component={DetalleClase} />
         <Route exact path="/admin/detalleasesores" component={DetalleAsesores} />
       </div>
