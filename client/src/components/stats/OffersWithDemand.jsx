@@ -29,15 +29,18 @@ class OffersWithDemand extends React.Component {
     const countNombreMatDem = [];
 
     //Pusheo los nombres de materias
-    this.state.offers.forEach((e) => {
+    this.state.offers && this.state.offers.forEach((e) => {
       let nombre = Object.keys(e);
       nombreMatOf.push(nombre[0]);
     });
 
     //Pusheo la longitud a los nombres de materias
-    for (let i = 0; i < this.state.offers.length; i++) {
-      for (const property in this.state.offers[i]) {
-        countNombreMatOf.push(this.state.offers[i][property].length);
+    if(this.state.offer){
+
+      for (let i = 0; i < this.state.offers.length; i++) {
+        for (const property in this.state.offers[i]) {
+          countNombreMatOf.push(this.state.offers[i][property].length);
+        }
       }
     }
 
