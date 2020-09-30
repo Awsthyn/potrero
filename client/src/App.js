@@ -31,7 +31,8 @@ import DetalleAsesores from './components/admin/DetalleAsesores';
 import AdvisorFormMail from './components/admin/AdvisorFormMail';
 import OfWithDemDetail from './components/stats/printDetail/OfWithDemDetail';
 import TablaClases from './components/admin/TablaClases';
-import {getCurrentUser} from './redux/actions/session'
+import {getCurrentUser} from './redux/actions/session';
+import GeneralADClone from './components/stats/printDetail/GeneralADClone';
 
 class App extends React.Component {
 
@@ -56,7 +57,7 @@ class App extends React.Component {
             "/admin/estudiantes/listadematerias/:studentId",
             "/admin/estudiantes/asignacion/:studentId/:subjectId",
             "/admin/clases",
-
+            "/admin/estadistica/MaterialUA",
           ]}
           component={AdminNavBar}
         />
@@ -67,6 +68,8 @@ class App extends React.Component {
         <Route exact path="/admin" component={AdminPanel} />
         <Route exact path="/admin/voluntarios" component={TablaVoluntarios} />
         <Route exact path="/admin/clases" component={TablaClases} />
+
+        <Route exact path="/admin/estadistica/MaterialUA" component={GeneralADClone} />
 
         <Route
           exact
