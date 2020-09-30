@@ -26,6 +26,7 @@ import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
 import DetalleClase from './components/admin/detalleClase/DetalleClase';
+import OfWithDemDetail from './components/stats/printDetail/OfWithDemDetail.jsx'
 
 import AdvisorFormMail from './components/admin/AdvisorFormMail';
 class App extends React.Component {
@@ -102,8 +103,9 @@ class App extends React.Component {
           component={DetailsOfInassistances}
         />
         <Route exact path="/admin/detail" component={GeneralAssistsDetail} />
+        <Route exact path="/admin/detalle/materias" component={OfWithDemDetail} />
         <Route path="/admin/class/:classId" component={DetalleClase} />
-      </div>
+        </div>
     );
   }
 }
