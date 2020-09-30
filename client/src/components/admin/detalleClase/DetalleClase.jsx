@@ -9,7 +9,7 @@ export default function DetalleClase({match, history}) {
     const [clase, setClase] = useState()
     const [asistencia, setAsistencia] = useState()
 
-    function handleChange(name, value){
+    function handleChange(value){
         setAsistencia(value)
     }
     useEffect(() => {
@@ -36,7 +36,9 @@ export default function DetalleClase({match, history}) {
         <div className={style.contenedor}>
             <div className={style.integrantes}>
                 <div className={style.circulos}>
-                    <button className={style.personas} onClick={() => history.push(`/asesores/${clase.userId}`)}>Asesor</button>
+                    <button className={style.personas} onClick={() => history.push(`/asesores/${clase.userId}`)}> 
+                        <img className = {style.photo} src={`http://localhost:3001/uploads/perfil/${clase?.user.profilePicture}`} alt = ""/>
+                    </button>
                     <button className={style.personas}> Alumno </button>    
                 </div>
                 <p >{clase?.subject.name}</p>

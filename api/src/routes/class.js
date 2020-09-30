@@ -20,7 +20,7 @@ const Sequelize = require("sequelize");
 server.get('/:classId', (req, res) => {
   Class.findOne({ 
     where: {id: req.params.classId}, 
-    include: [{model: Subject}]
+    include: [{model: Subject}, {model: Student}, {model: User}]
   })
   .then(clase => res.send(clase))
   .catch(err => res.send(err))

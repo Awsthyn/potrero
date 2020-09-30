@@ -29,3 +29,10 @@
     display: flex;
     justify-content: center;
 }
+
+.photo {
+    height: 190px;
+    width: 190px;
+    object-fit: cover;
+    border-radius: 50%;
+}

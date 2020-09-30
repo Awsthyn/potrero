@@ -247,7 +247,9 @@ server.post('/', upload, (req, res) => {
 
 
 // BUSCA UN USUARIO Y MODIFICA LA INFORMACIÓN QUE LE HAYAN ENVIADO POR BODY
-server.put('/:id', isAuthenticated, (req, res) => {
+server.put('/:id', upload, isAuthenticated, (req, res) => {
+  let usuario;
+  console.log(req.body)
   if (req.body.disabled) {
     User.findByPk(req.params.id).then((user) => {
       user.state = 'rechazado';
@@ -255,8 +257,17 @@ server.put('/:id', isAuthenticated, (req, res) => {
       res.json(user);
     });
   }
+    if (!req.files) {
+      usuario = req.body;
+    }
+    else{
+      usuario = {
+        ...req.body,
+        profilePicture: `${req.files.profilePicture[0].filename}`,
+      }
+    }
   // BUSCA Y MODIFICA AL USUARIO ENCONTRADO.
-  User.update(req.body, {
+  User.update(usuario, {
     where: {
       id: req.params.id,
     },
