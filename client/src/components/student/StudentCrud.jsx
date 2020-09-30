@@ -159,6 +159,13 @@ return (
                          onClick={()=>setLocked(!locked)}>
                             {locked ? <LockIcon/>:<LockOpenIcon/>}
                         </Button>
+                        <Button 
+                        style={{margin:10}}
+                        variant="contained"  
+                        color= {locked ? "secondary":"primary"}
+                         onClick={()=>setLocked(!locked)}>
+                            {locked ? <LockIcon/>:<LockOpenIcon/>}
+                        </Button>
                      </div>
               </div>
               ),
@@ -186,7 +193,7 @@ return (
                })
                 .then((result) => {
                          if (result.isConfirmed) {
-                            // window.open(rowData.linkedin, "_blank");
+                            // history.push('zarasa')
                          }
                         })
             },
@@ -216,7 +223,7 @@ return (
                     Swal.fire({
                         title: `Inhabilitar a ${rowData.firstName} ${rowData.lastName}`,
                         text: `Confirmando esta acción, se le denegará el acceso a la plataforma pero
-                        se conservarán los datos relacionados a su labor.`,
+                        se conservarán los datos relacionados a su trayecto en el Potrero.`,
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: VERDE,
@@ -226,11 +233,11 @@ return (
                         preConfirm: () => {
                             console.log(rowData)
                             return 
-                            // props.banUser(rowData.id)
+                            // props. // inhabilitar StudentAction
                             // .then(response => {
                                
                             //     if (response.statusText !=='OK') {
-                            //       throw new Error('No se pudo che')
+                            //       throw new Error('No se pudo')
                             //     }
                             //     console.log(data)
                             //     setData(data.filter(activos =>activos.id!==rowData.id))
