@@ -32,7 +32,6 @@ import AdvisorFormMail from './components/admin/AdvisorFormMail';
 import OfWithDemDetail from './components/stats/printDetail/OfWithDemDetail';
 import TablaClases from './components/admin/TablaClases';
 import {getCurrentUser} from './redux/actions/session'
-import AdvisorFormMail from './components/admin/AdvisorFormMail';
 
 class App extends React.Component {
 
