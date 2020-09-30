@@ -168,7 +168,7 @@ class Login extends React.Component {
                                         <label className={style.label}>Ingresá tus datos</label>
                                         <div>
 
-                                            <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Tu email o usuario" className={style.input}
+                                            <input spellcheck="false" autocomplete="off" type="text" name="email" id="email" placeholder="Tu email" className={style.input}
 
                                                 onChange={this.handleInputChange}
                                                 value={this.state.loginData.email} />

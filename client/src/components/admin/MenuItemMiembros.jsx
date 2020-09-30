@@ -79,7 +79,7 @@ menuitem:{
 
 
 item:{
-  color:'gray',
+  color:'white',
   padding:0,
   justifyContent:'center',
   width: 'fit-content',
@@ -148,7 +148,7 @@ export default function MenuListComposition() {
                      <ListItemIcon  className={classes.icons}>
                          <SupervisedUserCircleRoundedIcon /> 
                                 </ListItemIcon >
-                         <ListItemText className={classes.font} primary='Miembros'/>
+                         <ListItemText className={classes.font}  primary='Miembros'/>
                  </ListItem>
         </Link >
 
