@@ -14,7 +14,7 @@ import Miembros from './MenuItemMiembros';
 import Gestion from './MenuItemGestion';
 import BookIcon from '@material-ui/icons/Book';
 import AssistantIcon from '@material-ui/icons/Assistant';
-
+import Box from '@material-ui/core/Box';
 
 const VIOLETA = '#492BC4'
 const VERDE = '#8CC63E'
@@ -87,16 +87,16 @@ const useStyles = makeStyles({
          },
          width:'fit-content',
          padding:0,
-         
+
     },
     logout:{
         '&:hover': {
             backgroundColor:'red'
-            
+
          },
     }
-   
-   
+
+
 
 })
 
@@ -110,6 +110,7 @@ const AdminNavBar = (props) => {
     }
 
     return(
+    <Box component="div" displayPrint="none">
         <div className={classes.root}>
                 <AppBar className={classes.app}>
                 <Toolbar style={{backgroundColor:VIOLETA}}>
@@ -120,7 +121,7 @@ const AdminNavBar = (props) => {
                                         </ListItemIcon>
                                         <ListItemText primary='Panel'/>
                                 </ListItem>
-                        </Link> 
+                        </Link>
 
                     <ListItem className={classes.item} disableRipple>
                          <Miembros/>
@@ -132,7 +133,7 @@ const AdminNavBar = (props) => {
                                         </ListItemIcon>
                                         <ListItemText primary='Clases'/>
                                 </ListItem>
-                        </Link> 
+                        </Link>
                      <ListItem className={classes.item} disableRipple>
                          <Gestion/>
                      </ListItem>
@@ -142,19 +143,20 @@ const AdminNavBar = (props) => {
                                 <ListItem className={classes.item} >
                                     <ListItemText primary={`${props.session.firstName} ${props.session.lastName}`}/>
                                 </ListItem>
-                    </Link> 
+                    </Link>
                     <Link to= '/' className={classes.link}>
                         <ListItem onClick={handleLogout} className={classes.grouplinks} button>
                             <ListItemIcon className={`${classes.icons} ${classes.logout}`} >
                                         <PowerSettingsNewIcon />
                                 </ListItemIcon>
                         </ListItem>
-                    </Link> 
+                    </Link>
                 </List>
 
                     </Toolbar>
                 </AppBar>
         </div>
+        </Box>
   )
 }
 
@@ -169,4 +171,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminNavBar);
-
