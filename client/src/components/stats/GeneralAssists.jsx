@@ -22,7 +22,7 @@ class generalAssists extends React.Component {
   async peticion() {
     let peticion = await fetch("http://localhost:3001/stats/assistances");
     let respuesta = await peticion.json();
-    
+
     let dataAssistance = [];
     let dataNoJustificada = [];
     let dataJustificada = [];
@@ -62,29 +62,29 @@ class generalAssists extends React.Component {
     const datos = {
       labels: [
         "Asistencias " +
-          this.state.dataAssistance +
+          (this.state.dataAssistance > 0 ? this.state.dataAssistance +
           " (" +
           Math.round(this.state.promedioAsistencias * 100) +
           "%" +
-          ")",
+          ")": ""),
         "Faltas justificadas " +
-          this.state.dataJustificada +
+           (this.state.dataJustificada > 0 ? this.state.dataJustificada +
           " (" +
           Math.round(this.state.promedioJustificadas * 100) +
           "%" +
-          ")",
+          ")": ""),
         "Faltas injustificadas " +
-          this.state.dataNoJustificada +
+          (this.state.dataNoJustificada > 0 ? this.state.dataNoJustificada +
           " (" +
           Math.round(this.state.promedioInjustificadas * 100) +
           "%" +
-          ")",
+          ")":""),
         "Tardanzas " +
-          this.state.dataDelay +
+          (this.state.dataDelay > 0 ? this.state.dataDelay +
           " (" +
           Math.round(this.state.promedioTardanzas * 100) +
           "%" +
-          ")",
+          ")": ""),
       ],
       datasets: [
         {
