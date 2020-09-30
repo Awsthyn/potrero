@@ -11,7 +11,7 @@ server.post("/:id/subjects", (req, res) => {
   var id = req.params.id;
   var materias = req.body.subjects;
   var user = User.findByPk(id);
-  console.log(materias)
+  console.log(materias);
   materias.map((m, i) => {
     var subject = Subject.findOne({
       where: {
