@@ -11,43 +11,58 @@ class OfWithDemDetail extends React.Component {
     this.state = {
       listaDemanda: [],
       listaOferta: [],
+      demand: [],
+      offers: []
     };
-    this.armarDatos = this.armarDatos.bind(this);
   }
 
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/demandwithoffer");
     var respuesta = await peticion.json();
+
     this.setState({
       demand: respuesta.allDemands,
       offers: respuesta.allOffer,
     });
-    // console.log(this.state);
   }
 
-  armarDatos() {
-    this.state.demand.forEach((element) => {
-      for (var key in element) {
-        this.state.listaDemanda.push(key);
+  async transformar(){
+    for (let i = 0; i < this.state.demand.length; i++) {
+      for (const property in this.state.demand[i]) {
+        this.state.listaDemanda.push(this.state.demand[i][property]);
       }
-    });
+    }
+    }
 
-    this.state.offers.forEach((element) => {
-      for (var key in element) {
-        this.state.listaOferta.push(key);
-      }
-    });
+  async conversor(arg){
+    let sum = [];
+    let totalConversions = [];
+    for (let j = 0; j < arg.length; j++) {
+
+      if(Array.isArray(arg[j])) sum.push(this.conversor(arg[j]))
+      else sum.push(arg[j])
+      
+    }
+    Promise.all(sum)
+    .then( respuesta => {
+      console.log(respuesta)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+    // return totalConversions;
   }
 
   async componentDidMount() {
     await this.peticion();
-    await this.armarDatos();
+    await this.transformar();
+    let result = await this.conversor(this.state.listaDemanda);
+    console.log(result)
   }
 
   render() {
     return (
       <div className="detailAssist">
-        {/* {console.log(this.state)} */}
         <br></br>
         <br></br>
         <br></br>
@@ -72,7 +87,8 @@ class OfWithDemDetail extends React.Component {
         <br />
         <br />
         <h1>Demandas y ofertas de materias</h1>
-        <table className="table ">
+       { 
+        (<table className="table ">
           <thead class="thead-dark">
             <tr>
               <th scope="col">Oferta/Demanda</th>
@@ -80,48 +96,35 @@ class OfWithDemDetail extends React.Component {
             </tr>
           </thead>
           <tbody>
-              {/* {console.log(typeof this.state.listaDemanda)} */}
-            {
-              
-
-            // this.state.listaDemanda.map(e =>
-            //   console.log({e})
-            //   // <tr>
-            //   // {console.log(e)}
-            //   //       <th scope="row">Demanda</th>
-            //   //       <td>{e}</td>
-            //   //     </tr>
-            // )
-            }
+           { this.state.listaDemanda &&
+           this.state.listaDemanda.forEach( element => {
+            element.map(e => {
+              console.log("Estoy en demanda ", e)
+             return <tr>
+              {console.log(e)}
+                 <th scope="row">Demanda</th>
+                <td>{e}</td>
+               </tr>
+            }) 
+          })
+          }
           </tbody>
           <tbody>
-            {this.state.listaOferta &&
-              this.state.listaOferta.map((e) => (
-                <tr>
+            {/* {this.state.offers &&
+              this.state.offers.map((e) => {
+               return <tr>
                   <th scope="row">Oferta</th>
                   <td>{e}</td>
                 </tr>
-              ))}
+              })} */}
           </tbody>
-          <tbody>
-            {this.state.justificada &&
-              this.state.justificada.map((e) => (
-                <tr>
-                  <th scope="row">Falta justificada</th>
-                  <td>{e}</td>
-                </tr>
-              ))}
-          </tbody>
-          <tbody>
-            {this.state.tardanzas &&
-              this.state.tardanzas.map((e) => (
-                <tr>
-                  <th scope="row">Tardanzas</th>
-                  <td>{e}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        </table>)
+        //  (
+        //   <div>
+        //     <h1>No hay demandas ni ofertas de materias.</h1>
+        //   </div>
+        // )
+        } 
       </div>
     );
   }
