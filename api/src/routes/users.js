@@ -1,6 +1,5 @@
 const server = require('express').Router();
 const isAuthenticated = require('./authenticate').isAuthenticated
-const isUserActive = require("./middlewares.js").isUserActive;
 
 // TRAEMOS LOS USUARIOS DE LA BASE DE DATOS
 const {
@@ -89,7 +88,7 @@ const upload = multer({
   },
 ]);
 
-server.get('/',isAuthenticated, isUserActive, (req, res) => {
+server.get('/',isAuthenticated,(req, res) => {
   User.findAll({
     attributes: {
       exclude: [
