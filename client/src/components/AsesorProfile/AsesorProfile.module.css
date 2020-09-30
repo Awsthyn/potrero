@@ -339,3 +339,8 @@
 .cargarImg{
     cursor: pointer;
 }
+.clases{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 90px 140px;
+}

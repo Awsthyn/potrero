@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {getUser, putUser} from '../../redux/actions/users';
 import axios from 'axios';
 import AsesorInfo from './AsesorInfo';
+import AsesorNotas from './asesorNotas/AsesorNotas';
 import EnviarEmail from './EnviarEmail';
 
 function AsesorProfile({history, getUser, putUser, user, match}) {
@@ -22,7 +23,6 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 	const [info, setInfo] = useState(new FormData());
 
 	const handleOnFileChange = e => {
-		console.log(e.target);
 		info.append('profilePicture', e.target.files[0]);
 	};
 	useEffect(() => {
@@ -32,8 +32,6 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 			.then(res => setClases(res.data))
 			.catch(err => console.log(err));
 	}, []);
-	console.log(user);
-	console.log(clases);
 
 	function pestañas(e) {
 		let defaultToggle = {
@@ -64,7 +62,8 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 						src={`http://localhost:3001/uploads/perfil/${user.profilePicture}`}
 						alt=""
 					/>
-					<label className={style.cargarImg} onClick={() => setFoto(true)}>
+                    <label className={style.cargarImg} 
+                    onClick={() => setTimeout(function(){setFoto(true);}, 2000)}>
 						<form id="profileForm">
 							<input
 								id={style.ocultar}
@@ -189,8 +188,13 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 							</button>
 						</div>
 					</div>
-					{toggle.students ? <AsesorStudents /> : null}
-					{toggle.classes ? clases.map(c => <AsesorClases key={c.id} clase={c} />) : null}
+					{toggle.students ? <AsesorStudents students={clases?.map(c => c.student)}/> : null}
+					{toggle.classes ? clases.map(c => 
+                    <div  className={style.clases} > 
+                        <AsesorClases key={c.id} clase={c} /> 
+                    </div>)
+                        : null}
+                    {toggle.grades ? <AsesorNotas userId={user.id}/> : null}
 				</div>
 			</div>
 		</div>
