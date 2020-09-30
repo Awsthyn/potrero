@@ -5,6 +5,7 @@
    /* width: 100%; */
    text-align: left;
    margin-left: 8%;
+   
 }
 .tituloPrincipal{
    font-size: 2rem;
@@ -17,7 +18,7 @@
 }
 
 .comentarios{
-   align-self: center;
+   align-self: left;
    width: 350px;
 }
 

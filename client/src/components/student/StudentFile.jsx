@@ -12,20 +12,20 @@ export class StudentFile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.match.params.id,
-      firstName: this.props.studentDetail.firstName,
-      lastName: this.props.studentDetail.lastName,
-      phone: this.props.studentDetail.phone,
-      email: this.props.studentDetail.email,
-			tutorFirstName: this.props.studentDetail.tutorFirstName,
-			tutorLastName: this.props.studentDetail.tutorLastName,
-			tutorEmail: this.props.studentDetail.tutorEmail,
-			tutorPhone: this.props.studentDetail.tutorPhone,
-      difficulty: this.props.studentDetail.difficulty,
-      educationLevel: this.props.studentDetail.educationLevel,
-      subjectsId: this.props.studentDetail.subjects && this.props.studentDetail.subjects.map(e => e.id),
-      interests: this.props.studentDetail.interests,
-      motivations: this.props.studentDetail.motivations
+      id: null,
+      firstName: null,
+      lastName: null,
+      phone: null,
+      email: null,
+			tutorFirstName: null,
+			tutorLastName: null,
+			tutorEmail: null,
+			tutorPhone: null,
+      difficulty: null,
+      educationLevel: null,
+      subjectsId: null,
+      interests: null,
+      motivations: null,
     };
     this.subjects = this.props.subjects;
     this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
@@ -57,7 +57,26 @@ export class StudentFile extends Component {
   }
 
   componentDidMount() {
-    this.props.getStudentDetail(this.props.match.params.id);
+    this.props.getStudentDetail(this.props.match.params.id)
+    .then((res) => {
+      let student = res.data
+      this.setState({
+        id: student.id,
+        firstName: student.firstName,
+        lastName: student.lastName,
+        phone: student.phone,
+        email: student.email,
+        tutorFirstName: student.tutorFirstName,
+        tutorLastName: student.tutorLastName,
+        tutorEmail: student.tutorEmail,
+        tutorPhone: student.tutorPhone,
+        difficulty: student.difficulty,
+        educationLevel: student.educationLevel,
+        subjectsId: student?.subjects?.map(e => e.id),
+        interests: student.interests,
+        motivations: student.motivations
+      })
+    })
     this.props.getSubjects();
     this.props.getAcademicLevels();
   }
@@ -185,7 +204,7 @@ export class StudentFile extends Component {
              Grado alcanzado
             </label>
             <select className='form-control' id='nivelEducativo' onChange={e => this.setState({educationLevel: e.target.value})}>
-            {this.props.academicLevels.length > 0 && this.props.academicLevels.sort((a, b) => (a.numericLevel > b.numericLevel) ? 1 : -1).map(e => <option id={e.id} value={e.id} level={e.numericLevel}>{e.name}</option>)}
+            {this.props.academicLevels.length > 0 && this.props.academicLevels.sort((a, b) => (a.numericLevel > b.numericLevel) ? 1 : -1).map(e => <option key={e.id+e.name} id={e.id} value={e.id} level={e.numericLevel}>{e.name}</option>)}
             </select>
           </div>
           <h3 className='text-center d-block mb-3'>
@@ -196,13 +215,14 @@ export class StudentFile extends Component {
             className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
           >
             {
-				this.props.studentDetail.subjects && this.props.subjects.map((subject) => {
+				this.state.subjectsId !== null && this.props.subjects?.map((subject) => {
+          console.log(this.state.subjectsId?.includes(subject.id))
 				return (
 					<SubjectCheckbox
 					key={subject.id}
 					initialState={
-            this.state.subjectsId && this.state.subjectsId.includes(subject.id)
-						? 'checked'
+            this.state.subjectsId?.includes(subject.id)
+						? true
 						: false
 					}
 					subject={subject}

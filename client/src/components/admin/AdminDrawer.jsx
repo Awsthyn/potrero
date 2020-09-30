@@ -129,6 +129,7 @@ profileBox:{
     justifyContent:'flex-end',
 },
 link:{
+    
     flexDirection:'row',
     textDecoration:'none',
     color:'gray',
@@ -138,7 +139,7 @@ link:{
      },
 },
 icons:{
-    color:'white',
+    color:'#C2C2C2',
     paddingTop:0,
     justifyContent:'center',
     maxWidth:30,
@@ -146,6 +147,8 @@ icons:{
 },
 toolbar:{
     display:'flex',
+    height: '7%'
+    
 },
 grouplinks:{
     marginLeft:'auto',
@@ -164,8 +167,8 @@ item:{
 settings:{
   '&:hover': {
       variant:'raised',
-      backgroundColor:'gray',
-      paddingTop:5,
+      color:'white',
+      
     },
 
   },
@@ -173,9 +176,8 @@ settings:{
 logout:{
   '&:hover': {
      variant:'raised',
-      backgroundColor:'red',
-      paddingTop:5,
-      paddingBottom:10,
+      color:'white',
+     
     },
 
   },
@@ -226,21 +228,21 @@ function AdminDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Panel de Admin
+          <Typography style = {{fontWeight : '300'}} variant="h6" noWrap>
+            Panel de Administrador
           </Typography>
 
                         <List className={classes.grouplinks}>
+                            <ListItem  >
+                                <ListItemText className={classes.grouplinks} primary={`${props.session.firstName} ${props.session.lastName}`}/>
+                            </ListItem>
                               <ListItem onClick={''} className={classes.grouplinks} button>
                                    <ListItemIcon className={`${classes.icons} ${classes.settings}`} >
                                            <SettingsIcon/>
                                       </ListItemIcon>
                               </ListItem>
 
-                            <ListItem  >
-                                <ListItemText className={classes.grouplinks} primary={`${props.session.firstName} ${props.session.lastName}`}/>
-                            </ListItem>
-
+                      
                             <Link style={{alignSelf:'center'}} className={classes.link} to= '/'>
                                     <ListItem onClick={handleLogout} className={classes.grouplinks} button>
                                     <ListItemIcon className={`${classes.icons} ${classes.logout}`} >

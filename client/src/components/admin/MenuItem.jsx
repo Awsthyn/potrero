@@ -7,15 +7,20 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
-import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import Link from '@material-ui/core/Link';
-import {Link as Linked,useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+
+
+// Algunos iconos sugeridos para las listas desplegables
+import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import AssistantIcon from '@material-ui/icons/Assistant';
 import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import SettingsApplicationsRoundedIcon from '@material-ui/icons/SettingsApplicationsRounded';
+import BookIcon from '@material-ui/icons/Book';
 
 
 
@@ -79,7 +84,7 @@ menuitem:{
 
 
 item:{
-  color:'white',
+  color:'gray',
   padding:0,
   justifyContent:'center',
   width: 'fit-content',
@@ -108,10 +113,10 @@ export default function MenuListComposition() {
   };
 
   const handleClose = (event,route) => {
-  if(route === 'estudiantes'|| route === 'usuarios')  history.push(`/admin/${route}`)
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
+//   if(route === 'estudiantes'|| route === 'usuarios')  history.push(`/admin/${route}`)
+//     if (anchorRef.current && anchorRef.current.contains(event.target)) {
+//       return;
+//     }
 
     setOpen(false);
   };
@@ -146,9 +151,9 @@ export default function MenuListComposition() {
           
                 <ListItem className={classes.item} >
                      <ListItemIcon  className={classes.icons}>
-                         <SupervisedUserCircleRoundedIcon /> 
+                         <BookIcon /> 
                                 </ListItemIcon >
-                         <ListItemText className={classes.font}  primary='Miembros'/>
+                         <ListItemText className={classes.font} primary='Clases'/>
                  </ListItem>
         </Link >
 
@@ -161,8 +166,8 @@ export default function MenuListComposition() {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'estudiantes')}><LocalLibraryIcon/>  Estudiantes</MenuItem>
-                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'usuarios')}><SupervisedUserCircleRoundedIcon/>  Asesores</MenuItem>
+                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'estudiantes')}><BookIcon/>  Asignadas</MenuItem>
+                    <MenuItem  className={classes.menuitem} onClick={e => handleClose(e,'usuarios')}><SettingsApplicationsRoundedIcon/>  Gestion</MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
