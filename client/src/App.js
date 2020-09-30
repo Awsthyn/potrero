@@ -26,7 +26,7 @@ import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
 import DetalleClase from './components/admin/detalleClase/DetalleClase';
-
+import DetalleAsesores from './components/admin/DetalleAsesores';
 import AdvisorFormMail from './components/admin/AdvisorFormMail';
 class App extends React.Component {
   render() {
@@ -43,6 +43,7 @@ class App extends React.Component {
             "/admin/estudiantes/agregar",
             "/admin/estudiantes/detalles/:id",
             "/admin/detail",
+            "/admin/detalleasesores",
             "/admin/estudiantes/listadematerias/:studentId",
             "/admin/estudiantes/asignacion/:studentId/:subjectId",
             "/admin/clases",
@@ -103,6 +104,7 @@ class App extends React.Component {
         />
         <Route exact path="/admin/detail" component={GeneralAssistsDetail} />
         <Route path="/admin/class/:classId" component={DetalleClase} />
+        <Route exact path="/admin/detalleasesores" component={DetalleAsesores} />
       </div>
     );
   }

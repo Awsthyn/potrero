@@ -1,9 +1,12 @@
 import React from "react";
 import { Doughnut} from "react-chartjs-2";
+import { Link } from 'react-router-dom';
+import DetalleAsesores from '../admin/DetalleAsesores';
 
 class Advisers extends React.Component {
 
   state = {
+    info: [],
     totalAdvisors: 0,
     totalAdvisorsActives: 0,
     totalAdvisorsInactives: 0,
@@ -14,7 +17,18 @@ class Advisers extends React.Component {
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/advisorstatus");
     var respuesta = await peticion.json();
+  
+    let advisorsTemp = [];
+
+    advisorsTemp = respuesta.advisorsActives;
+
+    respuesta.advisorsInactives.forEach(advisorsTotal => {
+      
+      advisorsTemp.push(advisorsTotal)
+    })
+
     this.setState({
+      info: advisorsTemp,
       totalAdvisors: respuesta.totalAdvisors,
       totalAdvisorsActives: respuesta.totalAdvisorsActives,
       totalAdvisorsInactives: respuesta.totalAdvisorsInactives,
@@ -68,9 +82,14 @@ class Advisers extends React.Component {
     await this.getChartData();
   }
   render() {
+    const EnviarDetallesAsistentes = {
+      pathname: "admin/detalleasesores",
+      probandoAdvisor: this.state.info,
+    }
     return (
       <div>
         <h4>{"Asesores: " + this.state.totalAdvisors}</h4>
+        <div>
         <Doughnut
           data={this.state.datos}
           options={{
@@ -84,6 +103,9 @@ class Advisers extends React.Component {
             },
           }}
         ></Doughnut>
+        </div>
+        <Link to={EnviarDetallesAsistentes}><button className="btn btn-primary ocultoimpresion">Enviame</button></Link>
+       
       </div>
     );
   }
