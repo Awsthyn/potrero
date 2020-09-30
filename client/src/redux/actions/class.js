@@ -28,7 +28,7 @@ export function getMatchingSchedules(studentId, subjectId) {
 export function postClass(clase){
 		return axios
 			.post(`http://localhost:3001/class`, clase, {withCredentials: true})
-			.then(() => window.location = `/admin/estudiantes/listadematerias/${clase.studentId}`)
+			.then(() => window.location = `/admin/estudiantes/asignacion/${clase.studentId}`)
 }
 
 export function deleteClass(classId){
