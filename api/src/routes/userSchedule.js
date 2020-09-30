@@ -81,7 +81,6 @@ server.get("/:id", (req, res) => {
 //AGREGA HORARIOS AL PROFESOR
 server.post('/:userId', (req, res) => {
     var {dias} = req.body
-    console.log(dias)
     UserSchedule.bulkCreate(dias.map(e => {return {
       nameWeekDay: e.nameWeekDay,
       timeFrame: [e.startTime, e.endTime],
