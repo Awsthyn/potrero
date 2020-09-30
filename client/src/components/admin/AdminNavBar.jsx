@@ -107,9 +107,8 @@ const useStyles = makeStyles({
 
 const AdminNavBar = (props) => {
     const classes = useStyles()
-
     const handleLogout = () =>   {
-        props.sessionLogout(props.session);
+        props.sessionLogout(props.session.user);
         console.log('seee');
     }
 
@@ -145,7 +144,7 @@ const AdminNavBar = (props) => {
                 <List className={classes.grouplinks}>
                     <Link to= '/admin/usuarios' className={classes.link}>
                                 <ListItem className={classes.item} >
-                                    <ListItemText className = {classes.text} primary={`${props.session.firstName} ${props.session.lastName}`}/>
+                                    <ListItemText className = {classes.text} primary={`${props.session.user && props.session.user.firstName} ${props.session.user && props.session.user.lastName}`}/>
                                 </ListItem>
                     </Link>
                     <Link to= '/' className={classes.link}>

@@ -60,3 +60,8 @@ export const PUT_USER = "PUT_USER";
 
 // USER SCHEDULE
 export const GET_USER_SCHEDULE = 'GET_USER_SCHEDULE';
+
+
+//CLASSES
+
+export const GET_CLASSES = 'GET_USER_SCHEDULE';
