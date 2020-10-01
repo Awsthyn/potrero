@@ -27,7 +27,7 @@ import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent"
 import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
 import DetalleClase from "./components/admin/detalleClase/DetalleClase";
-import DetalleAsesores from "./components/stats/DetalleAsesores.jsx";
+import DetalleAsesores from "./components/stats/printDetail/DetalleAsesores.jsx";
 import AdvisorFormMail from "./components/admin/AdvisorFormMail";
 import OfWithDemDetail from "./components/stats/printDetail/OfWithDemDetail";
 import TablaClases from "./components/admin/TablaClases";

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Advisers from "./Advisers";
+import Advisers from "../Advisers";
 import axios from "axios";
 
-export default function DetalleAsesores() {
+export default function DetalleAsesores(props) {
   const [advisors, setAdvisors] = useState({});
 
   useEffect(async () => {
