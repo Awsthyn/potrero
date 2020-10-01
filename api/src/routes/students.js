@@ -74,7 +74,18 @@ server.get("/", (req, res) => {
       res.json(err);
     });
 });
+//BUSCA TODOS LOS ESTUDIANTES RELACIONADOS CON UN ASESROR
 
+server.get('/user/:userId', (req, res) => {
+  Student.findAll({
+    include: [{
+      model: Class, 
+      where: {
+        userId: req.params.userId
+    }}]
+  }).then(students => res.send(students))
+  .catch(error => res.send(error))
+})
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
 server.get("/:id", (req, res) => {
   // BUSCA AL STUDENT.

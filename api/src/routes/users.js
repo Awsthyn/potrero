@@ -252,6 +252,7 @@ server.put('/:id', upload, isAuthenticated, (req, res) => {
         profilePicture: `${req.files.profilePicture[0].filename}`,
       }
     }
+    console.log(usuario)
   // BUSCA Y MODIFICA AL USUARIO ENCONTRADO.
   User.update(usuario, {
     where: {

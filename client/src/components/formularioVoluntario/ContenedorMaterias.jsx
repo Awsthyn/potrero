@@ -57,11 +57,6 @@ class ContenedorMaterias extends React.Component {
 		var control;
 		return (
 			<div className={styles.formInput} >
-				<span className={styles.frase} >  
-				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Materias </strong></p>
-				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Indicanos en que materias podés asistir a los chicos de la fundación. </span>
-				</span>
-
 				<h4 className={style1.title}>¿En qué áreas podrías asistir?</h4>
 				<div className={`${style1.contenedorMateria} ${styles.containerListNiveles}`}>
 					{ this.props.materiasPorNivel?.map((m,i) => <Materias materia={m.name} key={i} handleOnClick={this.handleOnClick} fondo={this.state.materia.filter(mat => mat === m.name)} />) }

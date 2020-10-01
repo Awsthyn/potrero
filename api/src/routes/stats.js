@@ -122,18 +122,25 @@ server.get("/assistances/:id", (req, res) => {
       let assistanceFromUser = [];
       let presenteFromUser = [];
       let tardanzaFromUser = [];
-      let ausenteFromUser = [];
+      let ausenteInjustificadoFromUser = [];
+      let ausenteJustificadoFromUser = [];
 
       allDataSheetFromUser.classes.forEach((element) => {
-        assistanceFromUser.push(element.dataSheet.assistance);
+        element.dataSheets.forEach(dataSheet => assistanceFromUser.push(dataSheet.assistance))
+        // console.log(element.dataSheets)
+        // console.log('ss')
+        // assistanceFromUser.push(element.dataSheets.assistance);
       });
-
+      console.log(assistanceFromUser)
       assistanceFromUser.forEach((assistence) => {
+        // console.log(assistence)
         if (assistence === "presente") {
           presenteFromUser.push(assistence);
-        } else if (assistence === "ausente") {
-          ausenteFromUser.push(assistence);
-        } else if (assistence === "tardanza") {
+        } else if (assistence === "no justificada") {
+          ausenteInjustificadoFromUser.push(assistence);
+        } else if (assistence === "justificada") {
+          ausenteJustificadoFromUser.push(assistence);
+        }else if (assistence === "tardanza") {
           tardanzaFromUser.push(assistence);
         }
       });
@@ -141,11 +148,13 @@ server.get("/assistances/:id", (req, res) => {
       let recorrerAsisstances = {
         presente: presenteFromUser.length,
         tardanza: tardanzaFromUser.length,
-        ausente: ausenteFromUser.length,
+        ausenteInjustificado: ausenteInjustificadoFromUser.length,
+        ausenteJustificado: ausenteJustificadoFromUser.length,
         total:
           presenteFromUser.length +
           tardanzaFromUser.length +
-          ausenteFromUser.length,
+          ausenteInjustificadoFromUser.length +
+          ausenteJustificadoFromUser.length,
       };
 
       res.json(recorrerAsisstances);
