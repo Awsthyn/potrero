@@ -12,6 +12,7 @@ class Advisers extends React.Component {
     totalAdvisorsInactives: 0,
     promedioActives: 0,
     promedioInactives: 0,
+    total: []
   };
 
   async peticion() {
@@ -27,6 +28,7 @@ class Advisers extends React.Component {
     });
 
     this.setState({
+      total: respuesta,
       info: advisorsTemp,
       totalAdvisors: respuesta.totalAdvisors,
       totalAdvisorsActives: respuesta.totalAdvisorsActives,
@@ -94,7 +96,7 @@ class Advisers extends React.Component {
   render() {
     const EnviarDetallesAsistentes = {
       pathname: "/admin/detalleasesores",
-      probandoAdvisor: this.state.info,
+      probandoAdvisor: this.state,
     };
     return (
       <div className="genAsist">

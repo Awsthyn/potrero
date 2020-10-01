@@ -338,9 +338,15 @@ server.get("/advisorstatus", (req, res) => {
           advisorStatus.hasAdvisor = true;
           advisorStatus.totalAdvisors = allAdvisors.length;
           if (advisor.isActive === true && advisor.state === "aceptado") {
-            advisorStatus.advisorsActives.push(advisor);
+            advisorStatus.advisorsActives.push({
+              nombre: advisor.firstName + " " + advisor.lastName,
+              state: advisor.isActive,
+            });
           } else {
-            advisorStatus.advisorsInactives.push(advisor);
+            advisorStatus.advisorsInactives.push({
+              nombre: advisor.firstName + " " + advisor.lastName,
+              state: advisor.isActive,
+            });
           }
         }
       });
