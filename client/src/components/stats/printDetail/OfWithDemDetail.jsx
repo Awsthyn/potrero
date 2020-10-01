@@ -12,55 +12,57 @@ class OfWithDemDetail extends React.Component {
       listaDemanda: [],
       listaOferta: [],
       demand: [],
-      offers: []
+      offers: [],
+      demandantes: [],
     };
   }
 
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/demandwithoffer");
     var respuesta = await peticion.json();
-
     this.setState({
       demand: respuesta.allDemands,
       offers: respuesta.allOffer,
     });
   }
-
+  
+  
   async transformar(){
+    let subjD = [];
     for (let i = 0; i < this.state.demand.length; i++) {
       for (const property in this.state.demand[i]) {
-        this.state.listaDemanda.push(this.state.demand[i][property]);
+        subjD.push(property)
       }
     }
+    this.setState({
+      listaDemanda: subjD,
+    })
     }
 
-  async conversor(arg){
-    let sum = [];
-    let totalConversions = [];
-    for (let j = 0; j < arg.length; j++) {
-
-      if(Array.isArray(arg[j])) sum.push(this.conversor(arg[j]))
-      else sum.push(arg[j])
-      
-    }
-    Promise.all(sum)
-    .then( respuesta => {
-      console.log(respuesta)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-    // return totalConversions;
-  }
 
   async componentDidMount() {
     await this.peticion();
     await this.transformar();
-    let result = await this.conversor(this.state.listaDemanda);
-    console.log(result)
   }
 
   render() {
+
+    let testeando = {
+      testing: [],
+      claramente: [],
+      probando: [],
+    }
+
+    this.state.demand.forEach( demandante => {
+      this.state.listaDemanda.forEach( element => {
+        if(demandante[element]){
+          testeando.claramente.push({[element] : demandante[element]})
+          testeando.probando.push(element)
+            testeando.testing = testeando.testing.concat(demandante[element])
+          }
+        })
+     })
+     let recorrer = [];
     return (
       <div className="detailAssist">
         <br></br>
@@ -86,45 +88,53 @@ class OfWithDemDetail extends React.Component {
         <br />
         <br />
         <br />
-        <h1>Demandas y ofertas de materias</h1>
+        
        { 
-        (<table className="table ">
-          <thead class="thead-dark">
+       this.state.demand.length > 0 ?
+        (<div>
+
+        
+        <h1>Demanda de materias</h1>
+        <table className="table">
+          <thead className="thead-dark">
             <tr>
-              <th scope="col">Oferta/Demanda</th>
-              <th scope="col">Materia</th>
+            <th scope="col">Estado</th>
+              <th scope="col">Materias</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
             </tr>
           </thead>
           <tbody>
-           { this.state.listaDemanda &&
-           this.state.listaDemanda.forEach( element => {
-            element.map(e => {
-              console.log("Estoy en demanda ", e)
-             return <tr>
-              {console.log(e)}
-                 <th scope="row">Demanda</th>
-                <td>{e}</td>
-               </tr>
-            }) 
+           {
+             
+             testeando.claramente.map( ola => {
+               for (const key in ola) {
+                 if (ola.hasOwnProperty(key)) {
+                   const element = ola[key];
+                   element.map( cadaDemandador => {
+                    recorrer.push(cadaDemandador)
+                  })
+
+                  return (<tr>
+                <th scope="row">Demanda</th>
+                <td>{key}</td>
+                <td>Franco</td>
+                <td>Matus</td>
+                </tr>)
+                 }
+               }
           })
-          }
-          </tbody>
-          <tbody>
-            {/* {this.state.offers &&
-              this.state.offers.map((e) => {
-               return <tr>
-                  <th scope="row">Oferta</th>
-                  <td>{e}</td>
-                </tr>
-              })} */}
-          </tbody>
-        </table>)
-        //  (
-        //   <div>
-        //     <h1>No hay demandas ni ofertas de materias.</h1>
-        //   </div>
-        // )
-        } 
+        }
+
+        </tbody>
+        </table>
+        </div>)
+      : (
+        <div>
+          <h3>No hay materias disponibles.</h3>
+        </div>
+      )  
+      } 
       </div>
     );
   }
