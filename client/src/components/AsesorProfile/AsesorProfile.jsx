@@ -60,6 +60,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					<img
 						className={style.photo}
 						src={`http://localhost:3001/uploads/perfil/${user.profilePicture}`}
+						
 						alt=""
 					/>
                     <label className={style.cargarImg} 
@@ -73,10 +74,11 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 								onChange={e => handleOnFileChange(e)}
 							/>
 						</form>
-						<span className="material-icons"> photo_camera </span>
+						<span className="material-icons" style ={{fontSize: '1.2em', color: 'white', backgroundColor: '#492bc4', borderRadius: '50%' , border: '3px solid white', padding: '1%', position: 'absolute', top: '88px', right: '205px'}}> photo_camera </span>
+					</label>
 						{foto ? (
-							<span>
-								<button
+							<div style = {{display: 'block', marginTop: '5%'}}>
+								<button className = {style.imgBtn}
 									onClick={() => {
 										putUser(user.id, info);
 										setFoto(false);
@@ -84,10 +86,9 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 									{' '}
 									Actualizar{' '}
 								</button>
-								<button onClick={() => setFoto(false)}> Cancelar </button>
-							</span>
+								<button className = {style.imgBtn} onClick={() => setFoto(false)}> Cancelar </button>
+							</div>
 						) : null}
-					</label>
 					<h4 className={style.name}>
 						{' '}
 						{`${user.firstName} ${user.lastName}`}

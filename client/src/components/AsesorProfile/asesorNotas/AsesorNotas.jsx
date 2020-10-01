@@ -16,7 +16,7 @@ export default function AsesorClases({userId}){
          {data?.map(s => 
          <div key={s.id} >
             <div className = {style.student}>
-               <h4 className = {style.name} >{s?.class.nameWeekDay}</h4>
+               <h4 className = {style.name} >{s.class.nameWeekDay}</h4>
                <p className = {style.s}> {s.class.duration[0].value} hs</p>
             </div>
             <div className = {style.info}>
