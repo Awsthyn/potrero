@@ -29,7 +29,7 @@ export default function AsesorClases({clase}){
                <p className = {style.data}>de: {horario[0]} hs a {horario[1]} hs</p>
                <p className = {style.data}>{clase.subject.name}</p>
                <p className = {style.data}>Hojas de datos: {clase.dataSheets.length}</p>
-               <DataSheets data={clase.dataSheets} />
+               <DataSheets data={clase.dataSheets} clase={clase}/>
             </div>
          </div>
    )
