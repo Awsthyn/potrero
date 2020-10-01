@@ -65,20 +65,23 @@ class GeneralAssistDetail extends React.Component {
         this.state.tardanzas.push(
           element.class.student.firstName + " " + element.class.student.lastName
         );
-        if (element.createdAt) {
-          // var s = element.createdAt;
-          // var date = parseISOString(s);
-
-          // console.log(isoFormatDMY(date)); // 03/11/2014
-          // this.state.fecha.push(date);
-        }
+       
       }
+
+      if (element.createdAt) {
+        var s = element.createdAt;
+        var date = this.parseISOString(s);
+
+        this.state.fecha.push(date);
+      }
+
     });
   }
 
   render() {
     return (
       <div className="detailAssist">
+        {console.log(this.state.info)}
         <br />
         <br />
         <br />
