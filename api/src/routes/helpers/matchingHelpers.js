@@ -35,13 +35,13 @@ function merge(arr) {
 //Tuve que traducir el código de la solución de página de abajo, que estaba en Python, C++ y Java.
 //https://www.geeksforgeeks.org/find-non-overlapping-intervals-among-a-given-set-of-intervals/
 function findFreeinterval(arr){
-    let disponible = []
+    let intervals = []
     for(let i = 1; i < arr.length; i++){
         prevEnd = arr[i - 1][1]
         currStart = arr[i][0] 
-        if (prevEnd < currStart) disponible.push([prevEnd, currStart])
+        if (prevEnd < currStart) intervals.push([prevEnd, currStart])
     }
-    return disponible
+    return intervals
 }
 
 //Ordenamos el resultado de lunes a viernes
@@ -53,10 +53,6 @@ const sorter = {
     "Viernes": 5,
   }
 function sortByDay(a, b) {
-    console.log(a.disponibleTime[0][0])
-  /*  let day1 = a.nameWeekDay
-    let day2 = b.nameWeekDay
-    return sorter[day1] - sorter[day2];*/
     if(sorter[a.nameWeekDay] < sorter[b.nameWeekDay]) return -1;
     if(sorter[a.nameWeekDay] > sorter[b.nameWeekDay]) return 1;
     if(a.disponibleTime[0][0] < b.disponibleTime[0][0]) return -1;
@@ -208,6 +204,7 @@ function matching(studentId, subjectId){
                     //Si esas cuatro comprobaciones son true, el horario ya estaría dentro del array, por lo que se descarta
                     truthArray.push(a === b) 
                     })
+                    console.log(disponible)
                     truthArray.includes(true) ? null : disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay})
                 }
 
