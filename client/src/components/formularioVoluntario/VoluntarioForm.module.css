@@ -345,6 +345,7 @@ input[type=number] { -moz-appearance:textfield; }
 	display: inline-flex;
 	align-self: flex-start;
 	color:#DADFE3;
+	margin-top: 5px;
 }
 
 .letras{
