@@ -116,7 +116,11 @@ server.get("/:id", (req, res) => {
         },
       ],
     }),
-    Class.findAll({ where: { studentId: req.params.id } }),
+    Class.findAll({ where: { studentId: req.params.id }, include:{
+      model: Subject,
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      }} }),
   ])
     .then((studentFound) => {
       // SI ENCUENTRA AL STUDENT, ENVÍA SUS DATOS. O SINO, ENVÍA UN MENSAJE DE ERROR.
