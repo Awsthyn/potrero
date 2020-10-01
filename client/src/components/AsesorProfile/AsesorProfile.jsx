@@ -8,6 +8,7 @@ import axios from 'axios';
 import AsesorInfo from './AsesorInfo';
 // import AsesorNotas from './asesorNotas/AsesorNotas';
 import EnviarEmail from './EnviarEmail';
+import profilePic from '../admin/assets/avatarPerfil.jpeg'
 
 function AsesorProfile({history, getUser, putUser, user, match}) {
 	const [edit, setEdit] = useState(false);
@@ -21,21 +22,24 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 	const [clases, setClases] = useState();
 	const [foto, setFoto] = useState(false);
     const [info, setInfo] = useState(new FormData());
-    const[estudiantes, setEstudiantes] = useState()
+	 const[estudiantes, setEstudiantes] = useState()
+	 const [fotoPerfil, setFotoPerfil] = useState();
 
 	const handleOnFileChange = e => {
 		info.append('profilePicture', e.target.files[0]);
 	};
 	useEffect(() => {
-		getUser(match.params.id);
+		getUser(match.params.id)
 		axios
 			.get(`http://localhost:3001/class/user/${match.params.id}`)
 			.then(res => setClases(res.data))
             .catch(err => console.log(err));
-        axios
+      axios
 			.get(`http://localhost:3001/students/user/${match.params.id}`)
 			.then(res => setEstudiantes(res.data))
 			.catch(err => console.log(err));
+
+		
 	}, []);
     console.log(clases)
 	function pestañas(e) {
@@ -46,7 +50,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 		};
 		setToggle({...defaultToggle, [e.target.name]: true});
 	}
-    console.log(history)
+    console.log(user)
 	return (
 		<div className={style.outer}>
 			<div className={style.container}>
@@ -64,7 +68,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					</svg>
 					<img
 						className={style.photo}
-						src={`http://localhost:3001/uploads/perfil/${user.profilePicture}`}
+						src={user.profilePicture === 'tampoco' ? profilePic : `http://localhost:3001/uploads/perfil/${user.profilePicture} `}
 						
 						alt=""
 					/>
@@ -84,7 +88,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 						{foto ? (
 							<div>
 								<button
-                                style={{display: 'inline'}}
+									style={{display: 'inline'}}
 									onClick={() => {
 										putUser(user.id, info);
 										setFoto(false);

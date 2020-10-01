@@ -4,10 +4,12 @@ import Datasheet from "./DataSheet";
 import axios from 'axios';
 import Falto from './Falto';
 import Asistio from './Asistio'
+import profilePic from '../assets/avatarPerfil.jpeg'
 
 export default function DetalleClase({match, history}) {
     const [clase, setClase] = useState()
-    const [asistencia, setAsistencia] = useState()
+    const [asistencia, setAsistencia] = useState() 
+    const [fotoPerfil, setFotoPerfil] = useState()
 
     function handleChange(value){
         setAsistencia(value)
@@ -26,12 +28,19 @@ export default function DetalleClase({match, history}) {
                     return (h.value - 0.5) + ':30'
                 }
             })
+            if(res.data.user.profilePicture && res.data.user.profilePicture === 'tampoco' )
+                setFotoPerfil(profilePic)
+                else{
+                    setFotoPerfil(`http://localhost:3001/uploads/perfil/${res.data.user.profilePicture} `)
+                }
             setClase(res.data)
         })
         .catch(error => console.log(error))
+        
     }, [])
 
     console.log(clase)
+
     return(
         <div className={style.contenedor}>
             <div className={style.integrantes}>
@@ -40,7 +49,7 @@ export default function DetalleClase({match, history}) {
                     onClick={() => history.push(`/asesores/${clase.userId}`)}> 
                     <div className = {style.imgContainer}>
                     <p> Asesor </p> 
-                        <img className = {style.photo} src={`http://localhost:3001/uploads/perfil/${clase?.user.profilePicture}`} alt = ""/>
+                        <img className = {style.photo} src={fotoPerfil} alt = ""/>
                         <div className={style.overlay}>
                             <div className= {style.text}>{clase?.user.firstName} {clase?.user.lastName}</div>
                         </div>
