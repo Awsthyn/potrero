@@ -69,7 +69,7 @@ const matching = require("./matching.js")
 
 const statsRouter = require('./stats.js');
 
-//IMPORT DE DATASHEET.JS 
+//IMPORT DE DATASHEET.JS
 
 const dataSheet = require('./dataSheet')
 
@@ -145,7 +145,7 @@ router.use("/matching", matching)
 // RUTA DE ESTADÍSTICAS
 router.use('/stats', statsRouter);
 
-// RUTA DATASHEET 
+// RUTA DATASHEET
 router.use('/datasheet', dataSheet)
 
 //Ruta de mail cuando el admin desea enviar un email especifico a un asesor
