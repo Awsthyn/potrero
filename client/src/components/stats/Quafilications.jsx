@@ -1,5 +1,7 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import { Link } from "react-router-dom";
+import "./style.css";
 
 class Offers extends React.Component {
   state = {
@@ -73,6 +75,10 @@ class Offers extends React.Component {
   }
 
   render() {
+    const enviarDetalles = {
+      pathname: "/admin/detalle/calificacion",
+      infoGrafico: this.state,
+    };
     return (
       <div className="genAsist">
         {isNaN(this.state.total) ? (
@@ -115,6 +121,11 @@ class Offers extends React.Component {
             },
           }}
         ></Bar>
+        <Link to={enviarDetalles}>
+          <button className="btn btn-primary ocultoimpresion">
+            Ver detalles
+          </button>
+        </Link>
       </div>
     );
   }

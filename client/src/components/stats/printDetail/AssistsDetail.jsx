@@ -25,8 +25,6 @@ class GeneralAssistDetail extends React.Component {
     this.setState({ info: this.props.location.infoGrafico });
   }
 
-
-  //Intento de parsear fecha rara a date
   isoFormatDMY(d) {
     function pad(n) {
       return (n < 10 ? "0" : "") + n;
@@ -45,33 +43,56 @@ class GeneralAssistDetail extends React.Component {
     return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
   }
 
-  //Cierro intento
-
   armarDatos() {
     this.state.info.forEach((element) => {
       if (element.assistance === "presente") {
-        this.state.presente.push(
-          element.class.student.firstName + " " + element.class.student.lastName
-        );
-      } else if (element.assistance === "no justificada") {
-        this.state.noJustificada.push(
-          element.class.student.firstName + " " + element.class.student.lastName
-        );
-      } else if (element.assistance === "justificada") {
-        this.state.justificada.push(
-          element.class.student.firstName + " " + element.class.student.lastName
-        );
-      } else if (element.assistance === "tardanza") {
-        this.state.tardanzas.push(
-          element.class.student.firstName + " " + element.class.student.lastName
-        );
-        if (element.createdAt) {
-          // var s = element.createdAt;
-          // var date = parseISOString(s);
+        let s = element.createdAt;
+        let date = this.parseISOString(s);
+        let converter1 = this.isoFormatDMY(date);
 
-          // console.log(isoFormatDMY(date)); // 03/11/2014
-          // this.state.fecha.push(date);
-        }
+        this.state.presente.push({
+          presente:
+            element.class.student.firstName +
+            " " +
+            element.class.student.lastName,
+          fecha: converter1,
+        });
+      } else if (element.assistance === "no justificada") {
+        let s = element.createdAt;
+        let date = this.parseISOString(s);
+        let converter2 = this.isoFormatDMY(date);
+
+        this.state.noJustificada.push({
+          noJustificada:
+            element.class.student.firstName +
+            " " +
+            element.class.student.lastName,
+          fecha: converter2,
+        });
+      } else if (element.assistance === "justificada") {
+        let s = element.createdAt;
+        let date = this.parseISOString(s);
+        let converter3 = this.isoFormatDMY(date);
+
+        this.state.justificada.push({
+          justificada:
+            element.class.student.firstName +
+            " " +
+            element.class.student.lastName,
+          fecha: converter3,
+        });
+      } else if (element.assistance === "tardanza") {
+        let s = element.createdAt;
+        let date = this.parseISOString(s);
+        let converter4 = this.isoFormatDMY(date);
+
+        this.state.tardanzas.push({
+          tardanza:
+            element.class.student.firstName +
+            " " +
+            element.class.student.lastName,
+          fecha: converter4,
+        });
       }
     });
   }
@@ -83,7 +104,7 @@ class GeneralAssistDetail extends React.Component {
         <br />
         <br />
         <div
-          className={`titlePotrero ocultoimpresion row d-flex justify-content-center`}
+          className={`titlePotrero row d-flex justify-content-center`}
         >
           <h1>Fundación El Potrero</h1>
           <img src="https://static.wixstatic.com/media/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png" />
@@ -102,6 +123,7 @@ class GeneralAssistDetail extends React.Component {
             <tr>
               <th scope="col">Asistencia</th>
               <th scope="col">Nombre</th>
+              <th scope="col">Fecha</th>
             </tr>
           </thead>
           <tbody>
@@ -109,7 +131,8 @@ class GeneralAssistDetail extends React.Component {
               this.state.presente.map((e) => (
                 <tr>
                   <th scope="row">Presente</th>
-                  <td>{e}</td>
+                  <td>{e.presente}</td>
+                  <td>{e.fecha}</td>
                 </tr>
               ))}
           </tbody>
@@ -118,7 +141,8 @@ class GeneralAssistDetail extends React.Component {
               this.state.noJustificada.map((e) => (
                 <tr>
                   <th scope="row">Falta no justificada</th>
-                  <td>{e}</td>
+                  <td>{e.noJustificada}</td>
+                  <td>{e.fecha}</td>
                 </tr>
               ))}
           </tbody>
@@ -127,7 +151,8 @@ class GeneralAssistDetail extends React.Component {
               this.state.justificada.map((e) => (
                 <tr>
                   <th scope="row">Falta justificada</th>
-                  <td>{e}</td>
+                  <td>{e.justificada}</td>
+                  <td>{e.fecha}</td>
                 </tr>
               ))}
           </tbody>
@@ -136,7 +161,8 @@ class GeneralAssistDetail extends React.Component {
               this.state.tardanzas.map((e) => (
                 <tr>
                   <th scope="row">Tardanzas</th>
-                  <td>{e}</td>
+                  <td>{e.tardanza}</td>
+                  <td>{e.fecha}</td>
                 </tr>
               ))}
           </tbody>

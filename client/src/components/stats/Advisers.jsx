@@ -1,7 +1,7 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Link } from "react-router-dom";
-import DetalleAsesores from "../admin/DetalleAsesores";
+import DetalleAsesores from "./printDetail/DetalleAsesores";
 import "./style.css";
 
 class Advisers extends React.Component {
@@ -12,6 +12,7 @@ class Advisers extends React.Component {
     totalAdvisorsInactives: 0,
     promedioActives: 0,
     promedioInactives: 0,
+    total: []
   };
 
   async peticion() {
@@ -27,6 +28,7 @@ class Advisers extends React.Component {
     });
 
     this.setState({
+      total: respuesta,
       info: advisorsTemp,
       totalAdvisors: respuesta.totalAdvisors,
       totalAdvisorsActives: respuesta.totalAdvisorsActives,
@@ -93,8 +95,8 @@ class Advisers extends React.Component {
   }
   render() {
     const EnviarDetallesAsistentes = {
-      pathname: "admin/detalleasesores",
-      probandoAdvisor: this.state.info,
+      pathname: "/admin/detalle/asesores",
+      probandoAdvisor: this.state,
     };
     return (
       <div className="genAsist">

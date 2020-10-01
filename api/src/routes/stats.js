@@ -171,6 +171,15 @@ server.get("/qualification", (req, res) => {
         "attitude",
       ],
     },
+    include: [
+      {
+        model: Class,
+        include: [
+          {
+              model: Student,
+          }
+      ]
+  }],
   })
     .then((allClasses) => {
       let countQualification = [];
@@ -178,11 +187,14 @@ server.get("/qualification", (req, res) => {
         if (element.hadExam == true) {
           let num = parseInt(element.qualification);
           let multiplo = num * 2;
-          countQualification.push(multiplo);
-        }
-      });
-      res.json(countQualification);
-    })
+          console.log(element.class.student.firstName);
+          countQualification.push({
+              nota: multiplo,
+              fullname: `${element.class.student.firstName} ${element.class.student.lastName}`,
+        })}
+  })
+   res.json(countQualification);
+  })
     .catch((err) => {
       console.log(err);
     });
@@ -338,9 +350,15 @@ server.get("/advisorstatus", (req, res) => {
           advisorStatus.hasAdvisor = true;
           advisorStatus.totalAdvisors = allAdvisors.length;
           if (advisor.isActive === true && advisor.state === "aceptado") {
-            advisorStatus.advisorsActives.push(advisor);
+            advisorStatus.advisorsActives.push({
+              nombre: advisor.firstName + " " + advisor.lastName,
+              state: advisor.isActive,
+            });
           } else {
-            advisorStatus.advisorsInactives.push(advisor);
+            advisorStatus.advisorsInactives.push({
+              nombre: advisor.firstName + " " + advisor.lastName,
+              state: advisor.isActive,
+            });
           }
         }
       });
