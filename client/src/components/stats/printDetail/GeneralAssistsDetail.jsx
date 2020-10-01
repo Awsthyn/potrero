@@ -48,31 +48,51 @@ class GeneralAssistDetail extends React.Component {
       if (element.assistance === "presente") {
         let s = element.createdAt;
         let date = this.parseISOString(s);
-        let converter = this.isoFormatDMY(date);
+        let converter1 = this.isoFormatDMY(date);
 
-        this.state.presente.push(
-          element.class.student.firstName + " " + element.class.student.lastName
-        );
+        this.state.presente.push({
+          presente:
+            element.class.student.firstName +
+            " " +
+            element.class.student.lastName,
+          fecha: converter1,
+        });
       } else if (element.assistance === "no justificada") {
-        this.state.noJustificada.push(
-          element.class.student.firstName + " " + element.class.student.lastName
-        );
+        let s = element.createdAt;
+        let date = this.parseISOString(s);
+        let converter2 = this.isoFormatDMY(date);
+
+        this.state.noJustificada.push({
+          noJustificada:
+            element.class.student.firstName +
+            " " +
+            element.class.student.lastName,
+          fecha: converter2,
+        });
       } else if (element.assistance === "justificada") {
-        this.state.justificada.push(
-          element.class.student.firstName + " " + element.class.student.lastName
-        );
+        let s = element.createdAt;
+        let date = this.parseISOString(s);
+        let converter3 = this.isoFormatDMY(date);
+
+        this.state.justificada.push({
+          justificada:
+            element.class.student.firstName +
+            " " +
+            element.class.student.lastName,
+          fecha: converter3,
+        });
       } else if (element.assistance === "tardanza") {
-        this.state.tardanzas.push(
-          element.class.student.firstName + " " + element.class.student.lastName
-        );
-      }
+        let s = element.createdAt;
+        let date = this.parseISOString(s);
+        let converter4 = this.isoFormatDMY(date);
 
-      let s = element.createdAt;
-      let date = this.parseISOString(s);
-      let converter = this.isoFormatDMY(date);
-
-      if (element.createdAt) {
-        this.state.fecha.push(converter);
+        this.state.tardanzas.push({
+          tardanza:
+            element.class.student.firstName +
+            " " +
+            element.class.student.lastName,
+          fecha: converter4,
+        });
       }
     });
   }
@@ -80,7 +100,6 @@ class GeneralAssistDetail extends React.Component {
   render() {
     return (
       <div className="detailAssist">
-        {console.log(this.state)}
         <br />
         <br />
         <br />
@@ -112,8 +131,8 @@ class GeneralAssistDetail extends React.Component {
               this.state.presente.map((e) => (
                 <tr>
                   <th scope="row">Presente</th>
-                  <td>{e}</td>
-                  <td>{this.state.fecha[0]}</td>
+                  <td>{e.presente}</td>
+                  <td>{e.fecha}</td>
                 </tr>
               ))}
           </tbody>
@@ -122,7 +141,8 @@ class GeneralAssistDetail extends React.Component {
               this.state.noJustificada.map((e) => (
                 <tr>
                   <th scope="row">Falta no justificada</th>
-                  <td>{e}</td>
+                  <td>{e.noJustificada}</td>
+                  <td>{e.fecha}</td>
                 </tr>
               ))}
           </tbody>
@@ -131,7 +151,8 @@ class GeneralAssistDetail extends React.Component {
               this.state.justificada.map((e) => (
                 <tr>
                   <th scope="row">Falta justificada</th>
-                  <td>{e}</td>
+                  <td>{e.justificada}</td>
+                  <td>{e.fecha}</td>
                 </tr>
               ))}
           </tbody>
@@ -140,7 +161,8 @@ class GeneralAssistDetail extends React.Component {
               this.state.tardanzas.map((e) => (
                 <tr>
                   <th scope="row">Tardanzas</th>
-                  <td>{e}</td>
+                  <td>{e.tardanza}</td>
+                  <td>{e.fecha}</td>
                 </tr>
               ))}
           </tbody>
