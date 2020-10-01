@@ -77,8 +77,8 @@ class App extends React.Component {
         <Route
           exact
           path="/admin/estudiantes/detalles/:id"
-          render={(props) => (
-            <StudentFile student={props.location.state.props} />
+          render={({ match }) => (
+            <StudentFile id={match.params.id} />
           )}
         />
         <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />

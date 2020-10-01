@@ -46,10 +46,12 @@ import Edit from '@material-ui/icons/Edit';
 import FilterList from '@material-ui/icons/FilterList';
 import FirstPage from '@material-ui/icons/FirstPage';
 import LastPage from '@material-ui/icons/LastPage';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -95,7 +97,6 @@ export const StudentCrud = ({
   useEffect(() => {
     getSubjects();
     getStudents().then((students) => {
-      console.log('"""""""""""', students);
       if (!students) {
         Swal.fire(
           'Conectar la BD',
@@ -142,6 +143,14 @@ export const StudentCrud = ({
                   >
                     {locked ? <LockIcon /> : <LockOpenIcon />}
                   </Button>
+                  <Button
+                    style={{ margin: 10 }}
+                    variant='contained'
+                    color='primary'
+                    onClick={() => history.push('/admin/estudiantes/agregar')}
+                  >
+                    <PersonAddIcon />
+                  </Button>
                 </div>
               </div>
             ),
@@ -166,18 +175,18 @@ export const StudentCrud = ({
           data={data}
           actions={[
             {
-              icon: () => <LinkedInIcon color='primary' />,
-              tooltip: 'Visitar LinkedIn',
+              icon: () => <SupervisedUserCircleIcon color='primary' />,
+              tooltip: 'Asignar Tutorías',
               onClick: (event, rowData) =>
                 Swal.fire({
-                  title: `¿Deseas visitar el detalle de ${rowData.firstName} ${rowData.lastName}?`,
+                  title: `¿Deseas Asignar Tutorías a ${rowData.firstName} ${rowData.lastName}?`,
                   icon: 'question',
                   confirmButtonColor: VIOLETA,
                   showCancelButton: true,
                   cancelButtonColor: 'gray',
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    // window.open(rowData.linkedin, "_blank");
+                    history.push(`/admin/estudiantes/asignacion/${rowData.id}`);
                   }
                 }),
             },
@@ -193,8 +202,7 @@ export const StudentCrud = ({
                   cancelButtonColor: 'gray',
                 }).then((result) => {
                   if (result.isConfirmed) {
-                    history.push(`/admin/`);
-                    //voluntarios/${rowData.id}
+                    history.push(`/admin/estudiantes/detalles/${rowData.id}`);
                   }
                 }),
             },
@@ -207,7 +215,7 @@ export const StudentCrud = ({
                 Swal.fire({
                   title: `Inhabilitar a ${rowData.firstName} ${rowData.lastName}`,
                   text: `Confirmando esta acción, se le denegará el acceso a la plataforma pero
-                        se conservarán los datos relacionados a su labor.`,
+                        se conservarán los datos relacionados a su trayecto en el Potrero.`,
                   icon: 'warning',
                   showCancelButton: true,
                   confirmButtonColor: VERDE,
@@ -217,11 +225,11 @@ export const StudentCrud = ({
                   preConfirm: () => {
                     console.log(rowData);
                     return;
-                    // props.banUser(rowData.id)
+                    // props. // inhabilitar StudentAction
                     // .then(response => {
 
                     //     if (response.statusText !=='OK') {
-                    //       throw new Error('No se pudo che')
+                    //       throw new Error('No se pudo')
                     //     }
                     //     console.log(data)
                     //     setData(data.filter(activos =>activos.id!==rowData.id))

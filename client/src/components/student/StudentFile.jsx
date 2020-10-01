@@ -4,33 +4,33 @@ import { withRouter } from 'react-router-dom';
 import { getSubjects } from '../../redux/actions/subject';
 import { putStudent, getStudentDetail } from '../../redux/actions/student';
 import { getAcademicLevels } from '../../redux/actions/academicLevel';
-import style from './CreateStudentForm.module.css';
-
+import { getDifficulties } from '../../redux/actions/difficulty.js';
 import SubjectCheckbox from './SubjectCheckbox';
+import TypeOfDifficultyCheckbox from './TypeOfDifficulty';
 import styles from './StudentFile.module.css';
 
 export class StudentFile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.match.params.id,
-      firstName: this.props.studentDetail.firstName,
-      lastName: this.props.studentDetail.lastName,
-      phone: this.props.studentDetail.phone,
-      email: this.props.studentDetail.email,
-      tutorFirstName: this.props.studentDetail.tutorFirstName,
-      tutorLastName: this.props.studentDetail.tutorLastName,
-      tutorEmail: this.props.studentDetail.tutorEmail,
-      tutorPhone: this.props.studentDetail.tutorPhone,
-      difficulty: this.props.studentDetail.difficulty,
-      educationLevel: this.props.studentDetail.educationLevel,
-      subjectsId:
-        this.props.studentDetail.subjects &&
-        this.props.studentDetail.subjects.map((e) => e.id),
-      interests: this.props.studentDetail.interests,
-      motivations: this.props.studentDetail.motivations,
+      id: null,
+      firstName: null,
+      lastName: null,
+      phone: null,
+      email: null,
+			tutorFirstName: null,
+			tutorLastName: null,
+			tutorEmail: null,
+			tutorPhone: null,
+      educationLevel: null,
+      subjects: null,
+      subjectsId: null,
+      interests: null,
+      motivations: null,
+      todXStudent: null,
+      erroremail: null,
+      errortutorEmail: null
     };
-    this.subjects = this.props.subjects;
     this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
@@ -38,6 +38,15 @@ export class StudentFile extends Component {
   onChangeHandler = (event) => {
     let name = event.target.name;
     let value = event.target.value;
+    const prop = `error${name}`;
+
+    if(!(/\S+@\S+\.\S+/.test(value))) {
+      console.log([prop]);
+      this.setState({ [prop]: 'Ingrese un e-mail válido'});
+    } else {
+        this.setState({ [prop]: null});
+      }
+
     this.setState({ [name]: value });
   };
   submitHandler = (event) => {
@@ -59,15 +68,47 @@ export class StudentFile extends Component {
     }
   }
 
-  handleOnClick(){
-    
-  }
+  // validateEmail(email){
+	// 	if(!/\S+@\S+\.\S+/.test(email)) {
+	// 		this.setState({error: 'Ingrese un e-mail válido'});
+	// 	} else {
+	// 		this.setState({error: null});
+	// 	}
+	// }
 
   componentDidMount() {
-    this.props.getStudentDetail(this.props.match.params.id);
+    this.props.getStudentDetail(this.props.id)
+    .then((res) => {
+      let student = res.data;
+      this.setState({
+        id: student.id,
+        firstName: student.firstName,
+        lastName: student.lastName,
+        phone: student.phone,
+        email: student.email,
+        tutorFirstName: student.tutorFirstName,
+        tutorLastName: student.tutorLastName,
+        tutorEmail: student.tutorEmail,
+        tutorPhone: student.tutorPhone,
+        educationLevel: student.educationLevel,
+        subjectsId: student?.subjects?.map(e => e.id),
+        interests: student.interests,
+        motivations: student.motivations,
+        todXStudent: student?.typeOfDifficulties?.map(e => e.id)
+      })
+    });
+
     this.props.getSubjects();
     this.props.getAcademicLevels();
+    this.props.getDifficulties();
   }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.subjects !== this.props.subjects){
+      this.setState({subjects: this.props.subjects})
+    }
+  }
+
   render() {
     return (
       <div className={styles.editStudent}>
@@ -128,8 +169,11 @@ export class StudentFile extends Component {
                   type='text'
                   name='email'
                   defaultValue={this.props.studentDetail.email}
-                  onChange={this.onChangeHandler}
-                />
+                  onChange={(event) => {this.onChangeHandler(event)}}
+                /> 
+                  {
+                    this.state.email && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.erroremail}</p>)
+                  }
               </label>
             </div>
           </div>
@@ -181,10 +225,13 @@ export class StudentFile extends Component {
                   autoComplete='off'
                   className={styles.input}
                   type='text'
-                  name='email'
+                  name='tutorEmail'
                   defaultValue={this.props.studentDetail.tutorEmail}
-                  onChange={this.onChangeHandler}
+                  onChange={(event) => {this.onChangeHandler(event)}}
                 />
+                  {
+                    this.state.tutorEmail && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorEmail}</p>)
+                  }
               </label>
             </div>
           </div>
@@ -257,35 +304,67 @@ export class StudentFile extends Component {
               }}
               className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
             >
-              {this.props.studentDetail.subjects &&
-                this.props.subjects.map((subject) => {
+              {
+                this.props.subjects?.map((subject) => {
                   return (
                     <SubjectCheckbox
                       key={subject.id}
                       initialState={
-                        this.state.subjectsId &&
-                        this.state.subjectsId.includes(subject.id)
-                          ? 'checked'
-                          : false
+                        this.state.subjectsId?.includes(subject.id)
                       }
                       subject={subject}
                       onChange={this.onCheckboxClicked}
                       required
                     />
                   );
-                })}
+                })
+              }
+            </div>
+          </div>
+          <div className={styles.containerSubjects}>
+            <h3 className='text-center d-block mb-3'>
+              Tipos de dificultades que presenta
+            </h3>
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+              }}
+              className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
+            >
+              {
+                this.props.difficulties?.map((difficulty) => {
+                  return (
+                    <TypeOfDifficultyCheckbox
+                      key={difficulty.id}
+                      initialState={
+                        this.state.todXStudent?.includes(difficulty.id)
+                      }
+                      subject={difficulty}
+                      onChange={this.onCheckboxClicked}
+                      required
+                    />
+                  );
+                })
+              }
             </div>
           </div>
           <h4 className='text-danger'>
             Feature de modificación de horarios en construcción. Para hacer un
             cambio de esa temática, comunicarse con HENRY.
           </h4>
-          <input
-            className={styles.btnConfirmar}
-            onClick={handleOnClick}
-            value='Confirmar cambios'
-            type='submit'
-          />
+          <div className={styles.containerBtns}>
+            <svg onClick={() => window.history.go(-1)} viewBox="0 0 10 10" class="VoluntarioForm_leftArrow__1ya4q" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+            </svg>
+            <input
+              className={styles.btnConfirmar}
+              value='Confirmar cambios'
+              type='submit'
+            />
+          </div>
         </form>
       </div>
     );
@@ -295,13 +374,15 @@ export class StudentFile extends Component {
 const mapStateToProps = (state) => ({
   studentDetail: state.students.studentDetail,
   subjects: state.subjects.subjects,
+  difficulties: state.difficulty.difficulties,
   academicLevels: state.academic.academicLevels,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getStudentDetail: (studentId) => dispatch(getStudentDetail(studentId)),
+    getStudentDetail: (id) => dispatch(getStudentDetail(id)),
     getSubjects: () => dispatch(getSubjects()),
+    getDifficulties: () => dispatch(getDifficulties()),
     getAcademicLevels: () => dispatch(getAcademicLevels()),
     putStudent: (student) => dispatch(putStudent(student)),
   };

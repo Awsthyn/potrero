@@ -8,7 +8,7 @@ import style from './DetalleHV.module.css';
 function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
     const days = ['GTM-3', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
     const timetable = ['08:00', '09:00', '10:00', '11:00', '12:00','13:00', 
-    '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
+    '14:00', '15:00', '16:00', '17:00', '18:00', '19:00']
     let horarios = [{day:[], gridRow: ''}, {day:[], gridRow: ''},
     {day:[], gridRow: ''}, {day:[], gridRow: ''}, {day:[], gridRow: ''}];
     let horarioAux = Number(timetable[0].split(':')[0]);

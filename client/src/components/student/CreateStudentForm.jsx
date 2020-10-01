@@ -5,9 +5,9 @@ import 'moment/locale/es';
 import { postStudent } from '../../redux/actions/student';
 import { getEducationLevel } from '../../redux/actions/educationLevel';
 import SubjectCheckbox from './SubjectCheckbox';
-import StrengthCheckbox from './StrengthCheckbox';
+// import StrengthCheckbox from './StrengthCheckbox';
 import LevelEducation from './LevelEducation';
-import WeakCheckbox from './WeaknessCheckbox';
+import TypeOfDifficultyCheckbox from './TypeOfDifficulty';
 import DaysContainer from './DaysContainer';
 import style from './CreateStudentForm.module.css';
 moment.locale('es');
@@ -24,8 +24,6 @@ export class CreateStudentForm extends Component {
       tutorLastName: null,
       tutorEmail: null,
       tutorPhone: null,
-      difficulty: false,
-      weakness: [],
       interests: 'lorem ipsum',
       motivations: 'lorem ipsum',
       observations: null,

@@ -6,7 +6,7 @@ export function getStudents() {
 		return axios
 			.get(`http://localhost:3001/students`, {withCredentials: true})
 			.then(res => {
-				console.log(res.data)
+				console.log('lalalaalalal',res.data)
 				dispatch({type: GET_STUDENTS, payload: res.data});
 				return res.data;
 			})
@@ -19,7 +19,8 @@ export function getStudentDetail(studentId) {
 		return axios
 			.get(`http://localhost:3001/students/${studentId}`, {withCredentials: true})
 			.then(res => {
-				dispatch({type: GET_STUDENT_DETAIL, payload: res.data});
+				dispatch({type: GET_STUDENT_DETAIL, payload: res.data})
+				return res;
 			})
 			.catch(err => console.log(err));
 	};

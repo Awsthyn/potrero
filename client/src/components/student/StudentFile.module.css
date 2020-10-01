@@ -60,6 +60,11 @@
     font-weight: 300;
 }
 
+.span{
+    font-weight: 100;
+    margin-bottom: 10px;
+}
+
 .containerSubjects{
     display: flex;
     justify-content: center;
@@ -95,8 +100,30 @@
     padding: 2% 5%;
 }
 
+.containerBtns{
+    margin: 3% 6%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftArrow {
+    position: absolute;
+    top: 45px;
+    left: 75px;
+    width: 80px;
+    fill: #492BC4;
+}
+
+.leftArrow:hover {
+    position: absolute;
+    top: 45px;
+    left: 75px;
+    width: 80px;
+    fill: #492BC4;
+    cursor: pointer;
+}
+
 .btnConfirmar {
-    margin: 0 auto;
     font-size: 16px;
     font-weight: 500;
     width: 210px;
@@ -108,7 +135,7 @@
     border: none;
     border-radius: 25px;
     background-color: #492BC4;
-    margin: 30px 0px;
+    margin-top: 30px;
     align-self: center;
 }
 

@@ -71,7 +71,7 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
                 if(compareAssignedToPosible && !compareAssignedToPosible.includes(e[0].user.subjects[0].name)){
                 return (
                 <h4 role="button" className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw", color: "#492BC4"}}
-                onClick={(e)=> history.push(`/admin/estudiantes/asignacion/${params.studentId}/${e.target.getAttribute("subjectid")}`)}
+                onClick={(e)=> window.location = `/admin/estudiantes/asignacion/${params.studentId}/${e.target.getAttribute("subjectid")}`}
                 subjectid={e[0].user.subjects[0].id}
                 key={"p"+i}>{e[0].user.subjects[0].name}</h4>
                 )}} ) : null}

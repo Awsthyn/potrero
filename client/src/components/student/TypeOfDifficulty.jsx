@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import style from './SubjectCheckbox.modules.css';
 
-const SubjectCheckbox = ({ initialState, subject, onChange }) => {
+const TypeOfDifficultyCheckbox = ({ initialState, subject, onChange }) => {
     const [checked, setChecked] = useState(initialState);
 
     const onClick = (checked) => {
@@ -26,4 +26,4 @@ const SubjectCheckbox = ({ initialState, subject, onChange }) => {
     )
 };
 
-export default SubjectCheckbox;
+export default TypeOfDifficultyCheckbox;
