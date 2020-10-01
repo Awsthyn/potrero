@@ -156,7 +156,7 @@ server.get("/user/:id", (req, res) => {
       },
       {
         model: DataSheet,
-        attributes: { exclude: ["createdAt", "updatedAt"] },
+        attributes: { exclude: ["updatedAt"] },
       },
     {
       model: Student

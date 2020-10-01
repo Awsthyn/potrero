@@ -40,17 +40,16 @@ export default function DetalleClase({match, history}) {
         .catch(error => console.log(error))
         
     }, [])
-    useEffect(() => {
-        console.log(asistencia)
-        if(asistencia === 'no justificada'){
-            // axios.get(`http://localhost:3001/students/${clase.student.id}`)
-            axios.get(`http://localhost:3001/stats/assistances/${clase.student.id}`)
-            .then(student => {
-                console.log(student.data)
-                if(student.data.ausente === 2) setAdvertencia(true)})
-            .catch(error => console.log(error))
-        }
-    }, [asistencia])
+    // useEffect(() => {
+    //     console.log(asistencia)
+    //     if(asistencia === 'no justificada'){
+    //         axios.get(`http://localhost:3001/stats/assistances/${clase.student.id}`)
+    //         .then(student => {
+    //             console.log(student.data)
+    //             if(student.data.ausente === 2) setAdvertencia(true)})
+    //         .catch(error => console.log(error))
+    //     }
+    // }, [asistencia])
     console.log(clase)
 
     return(
@@ -89,7 +88,7 @@ export default function DetalleClase({match, history}) {
                 </div>
                 {advertencia ? <p> PELIGRO!!! </p> : null }
             </div>
-            <Datasheet classId={match.params.classId} assistance={asistencia}/>
+            <Datasheet classId={match.params.classId} assistance={asistencia} studentId={clase?.student.id} email={clase?.student.email} />
         </div>
         
     )

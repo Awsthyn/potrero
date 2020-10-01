@@ -5,8 +5,10 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import {addDataSheet} from '../../../redux/actions/users'
 import {connect} from 'react-redux'
 import style from './DataSheet.module.css'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
-function DataSheet({addDataSheet, classId, assistance}){
+function DataSheet({addDataSheet, classId, assistance, studentId, email}){
    const [estado, setEstado] = useState({classId})
    let si = useRef(null); let no = useRef(null)
    let yes = useRef(null); let nop = useRef(null)
@@ -34,12 +36,64 @@ function DataSheet({addDataSheet, classId, assistance}){
                s.current.checked = false
             }
          }
-
       }else{
          setEstado({...estado, [e.target.name]: null})
       }
    }
 
+   const handleEnviar = () => {
+      // SI AL CREAR EL DATASHEET HAY UNA FALTA INJUSTIFICADA SE HACE UNA PETICION PARA SABER LA CANTIDAD DE FALTAS
+         if(assistance === 'no justificada'){
+            axios.get(`http://localhost:3001/stats/assistances/${studentId}`)
+            .then(student => {
+               // SI HAY MAS DE 2 INJUSTIFICADAS APARECE EL CARTEL PREGUNTANDO SI QUERES MANDAR UN EMAIL, APARAECE TODAS LAS VECES QUE SE COMPLETA EL DATASHEET SI UN ALUMNO TIENE >= 2 INJUSTIICADAS
+               if(student.data.ausenteInjustificado >= 2) {
+                  Swal.fire({
+                     title: 'Atención',
+                     text: `El alumno tiene ${student.data.ausenteInjustificado} faltas injustificadas y ${student.data.ausenteJustificado} faltas justificadas. ¿Te gustaría enviar un email de advertencia? `,
+                     icon: 'warning',
+                     showCancelButton: true,
+                     confirmButtonColor: '#3085d6',
+                     cancelButtonColor: '#d33',
+                     cancelButtonText: 'Cancelar',
+                     confirmButtonText: 'Enviar mail'
+                  }).then((result) => {
+                     // SI QUIERE ENVIAR UN EMAIL APARECE UN TEXTAREA PARA ESCRIBIR EL MSJ
+                  if (result.isConfirmed) {
+                     Swal.fire({
+                        input: 'textarea',
+                        inputPlaceholder: 'Type your message here...',
+                        inputAttributes: {
+                           'aria-label': 'Type your message here'
+                        },
+                        showCancelButton: true
+                        }).then(text =>{
+                           // SI SE CONFIRMA SE ENVIA EL MAIL AL ALUMNO
+                           if(text.isConfirmed){
+                              axios.post(`http://localhost:3001/mailPersonal/studentEmail`, {email, asunto: 'Advertencia faltas', mensaje: text.value })
+                              .then(resp => console.log(resp))
+                              .catch(error => console.log(error))
+                              Swal.fire(
+                                 'EXCELENTE',
+                                 '¡Email y formulario enviados exitosamente!',
+                                 'success'
+                               )
+                           }
+                        })
+                  }
+                })}
+            })
+            .catch(error => console.log(error))
+         }
+         let newEstado = {...estado, assistance}
+         addDataSheet(newEstado)
+         Swal.fire(
+            'EXCELENTE',
+            '¡Formulario completado exitosamente!',
+            'success'
+          )
+         
+   }
    return (
       <div className={style.contenedor}>
          <h1 className={style.tituloPrincipal} > Datos de la clase </h1>
@@ -169,7 +223,7 @@ function DataSheet({addDataSheet, classId, assistance}){
                      <Rating
                         name="qualification"
                         defaultValue={0}
-                        precision={1}
+                        precision={0.5}
                         emptyIcon={<StarBorderIcon fontSize="inherit" />}
                         onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}
                      />
@@ -189,11 +243,7 @@ function DataSheet({addDataSheet, classId, assistance}){
             </Box>
          </div>
          <button className={style.boton} 
-         onClick={() => {
-            let newEstado = {...estado, assistance}
-            console.log(newEstado)
-            addDataSheet(newEstado)
-            }} > Enviar </button> 
+         onClick={() => handleEnviar() } > Enviar </button> 
             </div>
       </div> 
    )

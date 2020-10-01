@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import {getUser, putUser} from '../../redux/actions/users';
 import axios from 'axios';
 import AsesorInfo from './AsesorInfo';
-// import AsesorNotas from './asesorNotas/AsesorNotas';
 import EnviarEmail from './EnviarEmail';
 import profilePic from '../admin/assets/avatarPerfil.jpeg'
 
@@ -84,23 +83,21 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 								onChange={e => handleOnFileChange(e)}
 							/>
 						</form>
-						<span className="material-icons"> photo_camera </span>
-                        </label>
+						<span className="material-icons" style ={{fontSize: '1.2em', color: 'white', backgroundColor: '#492bc4', borderRadius: '50%' , border: '3px solid white', padding: '1%', position: 'absolute', top: '88px', right: '205px'}}> photo_camera </span>
+					</label>
 						{state.foto ? (
-							<div>
-								<button
-									style={{display: 'inline'}}
+							<div style = {{display: 'block', marginTop: '5%'}}>
+								<button className = {style.imgBtn}
 									onClick={() => {
 										putUser(user.id, info);
 										setState({...state, foto: false});
 									}}>
 									Actualizar
 								</button>
-								<button style={{display: 'inline'}} onClick={() => setState({...state, foto: false})}> Cancelar </button>
+								<button style={{display: 'inline'}} className = {style.imgBtn} onClick={() => setState({...state, foto: false})}> Cancelar </button>
 							</div>
 						) : null}
 					<h4 className={style.name}>
-						{' '}
 						{`${user.firstName} ${user.lastName}`}
 						<svg
 							onClick={() => {
@@ -143,14 +140,14 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 							onClick={() => {
 								setState({...state, email: false, perfil: !state.perfil, edit: false});
 							}}></i>
-						<i className={`far fa-calendar-alt ${style.actions}`}></i>
-						<i className={`fab fa-wpforms ${style.actions}`}></i>
+						{/* <i className={`far fa-calendar-alt ${style.actions}`}></i>
+						<i className={`fab fa-wpforms ${style.actions}`}></i> */}
 						<i
 							className={`fas fa-envelope ${style.actions}`}
 							onClick={() => {
 								setState({...state, email: !state.email, perfil: false, edit: false});
 							}}></i>
-						<i className={`fas fa-plus ${style.actions}`}></i>
+						{/* <i className={`fas fa-plus ${style.actions}`}></i> */}
 					</div>
 					{state.edit ? (
 						<AsesorInfo putUser={putUser} user={user} />
@@ -185,20 +182,19 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 								className={toggle.classes ? style.itemOn : style.item}>
 								Clases
 							</button>
-							<button
+							{/* <button
 								onClick={e => pestañas(e)}
 								name="grades"
 								className={toggle.grades ? style.itemOn : style.item}>
 								Notas
-							</button>
+							</button> */}
 						</div>
 					</div>
 					{toggle.students ? <AsesorStudents students={estudiantes}/> : null}
 					{toggle.classes ? <div  className={style.clases} > {clases.map(c =>                  
                         <AsesorClases key={c.id} clase={c} /> )}
-                    </div>
+                  	</div>
                         : null}
-                    {/* {toggle.grades ? <AsesorNotas userId={user.id} clase={clases}/> : null} */}
 				</div>
 			</div>
 		</div>
