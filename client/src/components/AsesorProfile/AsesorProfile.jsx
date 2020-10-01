@@ -192,7 +192,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					{toggle.students ? <AsesorStudents students={clases?.map(c => c.student)}/> : null}
 					{toggle.classes ? clases.map(c => 
                     <div  className={style.clases} > 
-                        <AsesorClases key={c.id} clase={c} /> 
+                        <AsesorClases className = {style.classFlex} key={c.id} clase={c} /> 
                     </div>)
                         : null}
                     {toggle.grades ? <AsesorNotas userId={user.id}/> : null}
