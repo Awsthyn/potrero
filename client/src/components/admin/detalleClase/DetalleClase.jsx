@@ -39,9 +39,10 @@ export default function DetalleClase({match, history}) {
                     <div style={{outline: 'none'}} className={style.personas} 
                     onClick={() => history.push(`/asesores/${clase.userId}`)}> 
                     <div className = {style.imgContainer}>
+                    <p> Asesor </p> 
                         <img className = {style.photo} src={`http://localhost:3001/uploads/perfil/${clase?.user.profilePicture}`} alt = ""/>
                         <div className={style.overlay}>
-                         <div className= {style.text}>{clase?.user.firstName} {clase?.user.lastName}</div>
+                            <div className= {style.text}>{clase?.user.firstName} {clase?.user.lastName}</div>
                         </div>
                         </div>
                     </div>
@@ -50,9 +51,12 @@ export default function DetalleClase({match, history}) {
                     <div style={{outline: 'none'}} className={style.personas}
                     onClick={() => history.push(`/admin/estudiantes/detalles/${clase.student.id}`)}>
                         <div className = {style.imgContainer}>
-                        <img className = {style.photo} src={`https://api.adorable.io/avatars/285/${clase?.student.firstName}@adorable.png`} alt = ""/>
+                        <span className={style.alinear} >  
+                            <p> Alumno </p> 
+                            <img className = {style.photo} src={`https://api.adorable.io/avatars/285/${clase?.student.firstName}@adorable.png`} alt = ""/>
+                        </span>
                         <div className={style.overlay}>
-                         <div className= {style.text}>{clase?.student.firstName} {clase?.student.lastName}</div>
+                            <div className= {style.text}>{clase?.student.firstName} {clase?.student.lastName}</div>
                         </div>
                         </div> 
                         </div>    

@@ -18,9 +18,8 @@
 }
 
   .overlay {
-   
     position: absolute;
-    top: 0;
+    top: 40px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -77,7 +76,6 @@
 
 
 .botones{
-   
     display: flex;
     justify-content: center;
 }
@@ -86,7 +84,7 @@
 
 
 .lineGray {
-    position:absolute;
+  position:absolute;
 	background-color: #CAD2D9;
 	width: 15%;
 	height: 3px;

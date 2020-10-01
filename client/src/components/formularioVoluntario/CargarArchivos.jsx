@@ -70,10 +70,12 @@ class CargarArchivos extends Component {
 		return (
 			<div className={styles.formInput}>
 				<label className={styles.cargarArchivos}>
-					<span className="material-icons" id={styles.icon}>
-						add_to_photos
+					<span className={styles.zarasa} > 
+						<span className="material-icons" id={styles.icon}>
+							add_to_photos
+						</span>
+						<small className={styles.letras}>CV (Formato .pdf)</small>
 					</span>
-					<small className={styles.letras}>CV (Formato .pdf)</small>
 					<input
 						style={{display: 'none'}}
 						className={styles.input}
@@ -88,10 +90,12 @@ class CargarArchivos extends Component {
 				</label>
 				<br></br>
 				<label className={styles.cargarArchivos}>
-					<span className="material-icons" id={styles.icon}>
-						add_to_photos
+					<span className={styles.zarasa} > 
+						<span className="material-icons" id={styles.icon}>
+							add_to_photos
+						</span>
+						<small className={styles.letras}>Frente del DNI </small>
 					</span>
-					<small className={styles.letras}>Frente del DNI (Formato .png, .jpg o .jpeg)</small>
 					<input
 						style={{display: 'none'}}
 						className={styles.input}
@@ -106,12 +110,15 @@ class CargarArchivos extends Component {
 					/>
 				</label >
 				<span style={{color: '#c2c2c2'}}> * </span>
+					<small> Formato .png, .jpg o .jpeg </small> 
 				<br></br>
 				<label className={styles.cargarArchivos}>
-					<span className="material-icons" id={styles.icon}>
-						add_to_photos
+					<span className={styles.zarasa} > 
+						<span className="material-icons" id={styles.icon}>
+							add_to_photos
+						</span>
+						<small className={styles.letras}>Reverso del DNI </small>
 					</span>
-					<small className={styles.letras}>Reverso del DNI (Formato .png, .jpg o .jpeg)</small>
 					<input
 						style={{display: 'none'}}
 						className={styles.input}
@@ -125,6 +132,7 @@ class CargarArchivos extends Component {
 					/>
 				</label>{' '}
 				<span style={{color: '#c2c2c2'}}> * </span>
+					<small> Formato .png, .jpg o .jpeg </small>
 				<br></br>
 				<small style={{display: 'block'}}>Linkedin</small>
 				<input
@@ -139,7 +147,6 @@ class CargarArchivos extends Component {
 						this.setState({validate: {...this.state.validate, [e.target.name]: e.target.value}});
 					}}
 				/>
-				<span style={{color: '#c2c2c2'}}> * </span>
 				<p style={{color: '#c2c2c2', fontSize: '13px', marginTop: '15px'}}> obligatorio * </p>
 				<br></br>
 				<input
@@ -148,7 +155,6 @@ class CargarArchivos extends Component {
 					value="terminos"
 					onClick={e => this.handleCheked(e)}
 				/>
-				{/* <label for="terminos"> Acepto los términos y condiciones</label> */}
 				<TerminosYcondiciones />
 				<div style={{display: 'flex', alignItems: 'center'}}>
 					<div onClick={() => this.props.history.push('/voluntarios/materias')}>
