@@ -46,7 +46,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 		};
 		setToggle({...defaultToggle, [e.target.name]: true});
 	}
-
+    console.log(history)
 	return (
 		<div className={style.outer}>
 			<div className={style.container}>
@@ -54,7 +54,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					<svg
 						viewBox="0 0 16 16"
 						className={style.leftArrow}
-						onClick={() => history.push('/')}
+						onClick={() => history.goBack()}
 						fill="currentColor"
 						xmlns="http://www.w3.org/2000/svg">
 						<path
