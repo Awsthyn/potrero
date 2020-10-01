@@ -129,7 +129,7 @@ class generalAssists extends React.Component {
   }
   render() {
     const enviarDetalles = {
-      pathname: "/admin/estadistica/MaterialUA",
+      pathname: "/admin/detail",
       infoGrafico: this.state.info,
     };
     return (
