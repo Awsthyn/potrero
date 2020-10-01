@@ -10,16 +10,18 @@ import AsesorInfo from './AsesorInfo';
 import EnviarEmail from './EnviarEmail';
 
 function AsesorProfile({history, getUser, putUser, user, match}) {
-	const [edit, setEdit] = useState(false);
 	const [toggle, setToggle] = useState({
 		students: true,
 		classes: false,
 		grades: false,
 	});
-	const [perfil, setPerfil] = useState(false);
-	const [email, setEmail] = useState(false);
+	const [state, setState] = useState({
+		edit: false,
+		perfil: false,
+		email: false,
+		foto: false,
+	});
 	const [clases, setClases] = useState();
-	const [foto, setFoto] = useState(false);
     const [info, setInfo] = useState(new FormData());
     const[estudiantes, setEstudiantes] = useState()
 
@@ -69,7 +71,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 						alt=""
 					/>
                     <label className={style.cargarImg} 
-                    onClick={() => setTimeout(function(){setFoto(true);}, 2000)}>
+                    onClick={() => setTimeout(function(){setState({...state, foto: true});}, 2000)}>
 						<form id="profileForm">
 							<input
 								id={style.ocultar}
@@ -81,17 +83,17 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 						</form>
 						<span className="material-icons"> photo_camera </span>
                         </label>
-						{foto ? (
+						{state.foto ? (
 							<div>
 								<button
                                 style={{display: 'inline'}}
 									onClick={() => {
 										putUser(user.id, info);
-										setFoto(false);
+										setState({...state, foto: false});
 									}}>
 									Actualizar
 								</button>
-								<button style={{display: 'inline'}} onClick={() => setFoto(false)}> Cancelar </button>
+								<button style={{display: 'inline'}} onClick={() => setState({...state, foto: false})}> Cancelar </button>
 							</div>
 						) : null}
 					<h4 className={style.name}>
@@ -99,9 +101,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 						{`${user.firstName} ${user.lastName}`}
 						<svg
 							onClick={() => {
-								setEdit(!edit);
-								setEmail(false);
-								setPerfil(false);
+								setState({...state, email: false, perfil: false, edit: !state.edit});
 							}}
 							width="0.9em"
 							height="0.9em"
@@ -138,22 +138,18 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 						<i
 							className={`fas fa-user ${style.actions}`}
 							onClick={() => {
-								setPerfil(!perfil);
-								setEmail(false);
-								setEdit(false);
+								setState({...state, email: false, perfil: !state.perfil, edit: false});
 							}}></i>
 						<i className={`far fa-calendar-alt ${style.actions}`}></i>
 						<i className={`fab fa-wpforms ${style.actions}`}></i>
 						<i
 							className={`fas fa-envelope ${style.actions}`}
 							onClick={() => {
-								setEmail(!email);
-								setPerfil(false);
-								setEdit(false);
+								setState({...state, email: !state.email, perfil: false, edit: false});
 							}}></i>
 						<i className={`fas fa-plus ${style.actions}`}></i>
 					</div>
-					{edit ? (
+					{state.edit ? (
 						<AsesorInfo putUser={putUser} user={user} />
 					) : (
 						<div>
@@ -167,8 +163,8 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 							</div>
 						</div>
 					)}
-					{perfil ? <AsesorInfo user={user} /> : null}
-					{email ? <EnviarEmail user={user} /> : null}
+					{state.perfil ? <AsesorInfo user={user} /> : null}
+					{state.email ? <EnviarEmail user={user} /> : null}
 				</div>
 
 				<div className={style.cards}>
