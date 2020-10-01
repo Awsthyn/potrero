@@ -36,18 +36,30 @@ export default function DetalleClase({match, history}) {
         <div className={style.contenedor}>
             <div className={style.integrantes}>
                 <div className={style.circulos}>
-                    <button style={{outline: 'none'}} className={style.personas} 
+                    <div style={{outline: 'none'}} className={style.personas} 
                     onClick={() => history.push(`/asesores/${clase.userId}`)}> 
+                    <div className = {style.imgContainer}>
                         <img className = {style.photo} src={`http://localhost:3001/uploads/perfil/${clase?.user.profilePicture}`} alt = ""/>
-                    </button>
-                    <button style={{outline: 'none'}} className={style.personas}
-                    onClick={() => history.push(`/admin/estudiantes/detalles/${clase.student.id}`)}> 
-                        <img className = {style.photo} src={`https://api.adorable.io/avatars/285/${clase?.student.firstName}@adorable.png`} alt = ""/> </button>    
+                        <div className={style.overlay}>
+                         <div className= {style.text}>{clase?.user.firstName} {clase?.user.lastName}</div>
+                        </div>
+                        </div>
+                    </div>
+                    <div className= {style.lineGray}></div>
+
+                    <div style={{outline: 'none'}} className={style.personas}
+                    onClick={() => history.push(`/admin/estudiantes/detalles/${clase.student.id}`)}>
+                        <div className = {style.imgContainer}>
+                        <img className = {style.photo} src={`https://api.adorable.io/avatars/285/${clase?.student.firstName}@adorable.png`} alt = ""/>
+                        <div className={style.overlay}>
+                         <div className= {style.text}>{clase?.student.firstName} {clase?.student.lastName}</div>
+                        </div>
+                        </div> 
+                        </div>    
                 </div>
-                <p >{clase?.subject.name}</p>
-                <p >{clase?.nameWeekDay}</p>
-                <p > {clase?.duration[0]} hs - {clase?.duration[1]} hs</p>
-                <div className={style.botones}> 
+                <p style = {{color: '#333333'}}>Materia: <strong>{clase?.subject.name}</strong></p>
+                <p style = {{color: '#333333'}}>Fecha y horario: <strong>{clase?.nameWeekDay}  {clase?.duration[0]} hs - {clase?.duration[1]} hs</strong></p>
+                <div className={style.botones} style = {{marginTop: '3%'}}> 
                     <Asistio handleChange={handleChange} /> <Falto handleChange={handleChange} />
                 </div>
             </div>

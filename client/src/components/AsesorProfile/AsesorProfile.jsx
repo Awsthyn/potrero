@@ -65,6 +65,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					<img
 						className={style.photo}
 						src={`http://localhost:3001/uploads/perfil/${user.profilePicture}`}
+						
 						alt=""
 					/>
                     <label className={style.cargarImg} 
