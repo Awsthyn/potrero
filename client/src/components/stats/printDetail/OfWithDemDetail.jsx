@@ -79,8 +79,6 @@ class OfWithDemDetail extends React.Component {
     return (
       <div className="detailAssist">
         {console.log(this.state)}
-        <br></br>
-        <br>
         <div
           className={`titlePotrero ocultoimpresion row d-flex justify-content-center`}
         >
@@ -93,56 +91,58 @@ class OfWithDemDetail extends React.Component {
         >
           Imprimir
         </button>
-        <br />
-        <br />
-        <br />
         <OffersWithDemand />
-        <br />
-        <br />
-        <br />
-
-        {/* {this.state.demand.length > 0 ? (
-          <div>
-            <h1>Demanda de materias</h1>
-            <table className="table">
-              <thead className="thead-dark">
+        <h1>Demanda de materias</h1>
+        <table className="table">
+          <thead className="thead-dark">
+            <tr>
+              <th scope="col">Estado</th>
+              <th scope="col">Materias</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.listaDemanda &&
+              this.state.listaDemanda.map((e) => (
                 <tr>
-                  <th scope="col">Estado</th>
-                  <th scope="col">Materias</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Apellido</th>
+                  <th scope="row">Demanda</th>
+                  <td>{e}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {testeando.claramente.map((ola) => {
-                  for (const key in ola) {
-                    if (ola.hasOwnProperty(key)) {
-                      const element = ola[key];
-                      element.map((cadaDemandador) => {
-                        recorrer.push(cadaDemandador);
-                      });
-
-                      return (
-                        <tr>
-                          <th scope="row">Demanda</th>
-                          <td>{key}</td>
-                          <td>Franco</td>
-                          <td>Matus</td>
-                        </tr>
-                      );
-                    }
-                  }
-                })}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <div>
-            <h3>No hay materias disponibles.</h3>
-          </div>
-        )} */}
+              ))}
+            {this.state.listaOferta &&
+              this.state.listaOferta.map((e) => (
+                <tr>
+                  <th scope="row">Oferta</th>
+                  <td>{e}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     );
   }
 }
 export default OfWithDemDetail;
+
+{
+  /* <tbody>
+{testeando.claramente.map((ola) => {
+  for (const key in ola) {
+    if (ola.hasOwnProperty(key)) {
+      const element = ola[key];
+      element.map((cadaDemandador) => {
+        recorrer.push(cadaDemandador);
+      });
+
+      return (
+        <tr>
+          <th scope="row">Demanda</th>
+          <td>{key}</td>
+          <td>Franco</td>
+          <td>Matus</td>
+        </tr>
+      );
+    }
+  }
+})}
+</tbody> */
+}
