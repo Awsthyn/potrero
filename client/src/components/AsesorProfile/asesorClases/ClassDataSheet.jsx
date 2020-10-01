@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import style from '../asesorClases/AsesorClases.module.css';
 import axios from 'axios'
 
-export default function ClassDataSheet({data}){
+export default function ClassDataSheet({data, clase}){
    // const [data, setData] = useState()
 
    // useEffect(() => {
@@ -13,21 +13,24 @@ export default function ClassDataSheet({data}){
    // console.log(clase)
    console.log(data)
    return (
+      <div>
+      <h3 style={{fontFamily: "Poppins", textAlign:"center", marginTop:"30px"}}>Clases de el día {clase.nameWeekDay} a {clase.student.firstName} {clase.student.lastName}</h3>
       <div className={style.wrap} >
-         {data?.map(s => 
-         <div className = {style.container} key={s.id} >
-            <div className = {style.student}>
-               {/* <h4 className = {style.name} >{s?.class.nameWeekDay}</h4> */}
-               {/* <p className = {style.s}> {s.class.duration[0].value} hs</p> */}
-            </div>
+         {data?.map(s =>  
+         <div className = {style.containerData} key={s.id} >
             <div className = {style.info}>
+               <p className = {style.data}>Relación con alumno: {s?.relation}</p>
+               <p className = {style.data}>Repercucion: {s?.difference}/5</p>
+               <p className = {style.data}>Valoracion: {s?.valued}/5</p>
+               <p className = {style.data}>Seguir trabajando: {s?.stay ? "si" : "no"}</p>
+               <p className = {style.data}>Desempeño: {s?.performance}/5</p>
                <p className = {style.data}>Asistencia: {s?.assistance}</p>
                <p className = {style.data}>Actitud del alumno: {s?.attitude}/5</p>
-               <p className = {style.data}>Desempeño: {s?.performance}/5</p>
-               <p className = {style.data}>Comentarios: {s?.comments}</p>
+               <p className = {style.data}>Comentarios: {s?.comments ? s?.comments : "Sin comentarios"}</p>
                <p className = {style.data}>Calificación último examen: {s?.qualification || 'no'} </p>
             </div>
          </div> )}
+      </div>
       </div>
    )
 }

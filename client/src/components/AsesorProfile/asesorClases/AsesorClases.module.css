@@ -21,6 +21,18 @@
 .classIcon {
    width: 55%;
 }
+.containerData {
+   width: 310px;
+   height: 400px;
+   margin: 20px;
+   padding-top: 30px;
+   background-color: white;
+   border-radius: 6px;
+   -webkit-box-shadow: 0px 3px 12px -7px rgba(0, 0, 0, 0.65);
+   -moz-box-shadow: 0px 3px 12px -7px rgba(0, 0, 0, 0.65);
+   box-shadow: 0px 3px 12px -7px rgba(0, 0, 0, 0.65);
+   margin-top: 12%;
+}
 
 
 .student {

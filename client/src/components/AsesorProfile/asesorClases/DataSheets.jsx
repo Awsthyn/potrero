@@ -29,7 +29,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DataSheets({data}) {
+export default function DataSheets({data, clase}) {
    const classes = useStyles();
    const [open, setOpen] = React.useState(false);
 
@@ -61,7 +61,7 @@ export default function DataSheets({data}) {
             </Toolbar>
          </AppBar>
          <List>
-            <ClassDataSheet data={data}/>
+            <ClassDataSheet data={data} clase={clase}/>
             {/* <ListItem button>
             <ListItemText primary="Phone ringtone" secondary="Titania" />
             </ListItem>
