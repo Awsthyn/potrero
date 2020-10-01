@@ -10,6 +10,7 @@ function DataSheet({addDataSheet, classId, assistance}){
    const [estado, setEstado] = useState({classId})
    let si = useRef(null); let no = useRef(null)
    let yes = useRef(null); let nop = useRef(null)
+   let s = useRef(null); let n = useRef(null)
 
    const handleChecked = (e, type) => {
       if(e.target.checked){
@@ -20,13 +21,20 @@ function DataSheet({addDataSheet, classId, assistance}){
             }else{
                si.current.checked = false
             }
-         }else{
+         }else if(type === 'exam'){
             if(e.target.value === 'true'){
                nop.current.checked = false
             }else{
                yes.current.checked = false
             }
+         }else {
+            if(e.target.value === 'true'){
+               n.current.checked = false
+            }else{
+               s.current.checked = false
+            }
          }
+
       }else{
          setEstado({...estado, [e.target.name]: null})
       }
@@ -86,11 +94,11 @@ function DataSheet({addDataSheet, classId, assistance}){
          <div> 
             <h4 className={style.titulo}> ¿Te gustaría seguir trabajando con tu alumno? </h4>
             <div style={{marginTop: '1%'}}>
-            <input type="checkbox" ref={si} value="true" name="stay" 
-               onChange={(e) => handleChecked(e, 'comp')}/>
+            <input type="checkbox" ref={s} value="true" name="stay" 
+               onChange={(e) => handleChecked(e, 'seguir')}/>
                <label htmlFor="true" style={{ marginRight: "20px", marginLeft: "5px"}}> Si </label>
-               <input type="checkbox"  ref={no} value="false" name="stay" 
-               onChange={(e) => handleChecked(e, 'comp')}/>
+               <input type="checkbox"  ref={n} value="false" name="stay" 
+               onChange={(e) => handleChecked(e, 'seguir')}/>
                <label htmlFor="false" style={{ marginRight: "20px", marginLeft: "5px"}}> No </label><br></br>
                </div>
          </div>
