@@ -10,10 +10,8 @@ export default function DetalleClase({match, history}) {
     const [clase, setClase] = useState()
     const [asistencia, setAsistencia] = useState() 
     const [fotoPerfil, setFotoPerfil] = useState()
-    const [advertencia, setAdvertencia] = useState(false)
 
     function handleChange(value){
-        console.log(value)
         setAsistencia(value)
     }
     useEffect(() => {
@@ -40,17 +38,6 @@ export default function DetalleClase({match, history}) {
         .catch(error => console.log(error))
         
     }, [])
-    // useEffect(() => {
-    //     console.log(asistencia)
-    //     if(asistencia === 'no justificada'){
-    //         axios.get(`http://localhost:3001/stats/assistances/${clase.student.id}`)
-    //         .then(student => {
-    //             console.log(student.data)
-    //             if(student.data.ausente === 2) setAdvertencia(true)})
-    //         .catch(error => console.log(error))
-    //     }
-    // }, [asistencia])
-    console.log(clase)
 
     return(
         <div className={style.contenedor}>
@@ -59,20 +46,19 @@ export default function DetalleClase({match, history}) {
                     <div style={{outline: 'none'}} className={style.personas} 
                     onClick={() => history.push(`/asesores/${clase.userId}`)}> 
                     <div className = {style.imgContainer}>
-                    <p> Asesor </p> 
+                    <p style={{marginLeft: '60px'}}> Asesor </p> 
                         <img className = {style.photo} src={fotoPerfil} alt = ""/>
                         <div className={style.overlay}>
                             <div className= {style.text}>{clase?.user.firstName} {clase?.user.lastName}</div>
                         </div>
                         </div>
                     </div>
-                    <div className= {style.lineGray}></div>
 
                     <div style={{outline: 'none'}} className={style.personas}
                     onClick={() => history.push(`/admin/estudiantes/detalles/${clase.student.id}`)}>
                         <div className = {style.imgContainer}>
                         <span className={style.alinear} >  
-                            <p> Alumno </p> 
+                            <p style={{marginLeft: '60px'}}> Alumno </p> 
                             <img className = {style.photo} src={`https://api.adorable.io/avatars/285/${clase?.student.firstName}@adorable.png`} alt = ""/>
                         </span>
                         <div className={style.overlay}>
@@ -86,7 +72,6 @@ export default function DetalleClase({match, history}) {
                 <div className={style.botones} style = {{marginTop: '3%'}}> 
                     <Asistio handleChange={handleChange} /> <Falto handleChange={handleChange} />
                 </div>
-                {advertencia ? <p> PELIGRO!!! </p> : null }
             </div>
             <Datasheet classId={match.params.classId} assistance={asistencia} studentId={clase?.student.id} email={clase?.student.email} />
         </div>

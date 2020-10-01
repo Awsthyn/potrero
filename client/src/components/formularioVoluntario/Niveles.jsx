@@ -13,7 +13,6 @@ function Niveles({getAcademicLevels, academicLevels, history}) {
    const [redirect, setRedirect] = useState(false);
    
    const handlePrimario = () => {
-      getAcademicLevels()
       if (!primario) {
             setPrimario(true)
             setSecundario(false)
@@ -24,7 +23,6 @@ function Niveles({getAcademicLevels, academicLevels, history}) {
    }
    
    const handleSecundario = () => {
-      getAcademicLevels()
       if (!secundario) {
             setSecundario(true)
             setPrimario(false)
@@ -58,12 +56,8 @@ function Niveles({getAcademicLevels, academicLevels, history}) {
 		return (
          
 			<div>
-            <span className={styles.frase}>  
-				<p style={{fontSize:'1.3rem', margin: '0px', marginRight: '24%'}} ><strong> Nivel Educativo </strong></p>
-				<span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > ¿Cuál es el nivel educativo en el que podrías brindar asistencia? </span>
-				</span>
             <div className={styles.formInput}>
-               <h4 style={{fontSize: '1rem', marginTop: '15px'}} > Escoge el máximo nivel educativo en el cual podrías ayudar </h4>
+               <h4 style={{fontSize: '0.8rem', marginTop: '15px'}} > Escoge el máximo nivel educativo en el cual podrías ayudar </h4>
                <div style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
                	{ !secundario ? 
                         <div className={style.btnVolver}
@@ -75,35 +69,35 @@ function Niveles({getAcademicLevels, academicLevels, history}) {
                   }
                   { !primario ?
                         <div
-                            className={style.btnVolver}
-                            onClick={() => handleSecundario()}>
-                            {
-                            !secundario ? <span className={style.botonPyS}>Secundario</span> : <span className={styles.testButton} id={style.back}>Volver</span> 
-                            }
+                           className={style.btnVolver}
+                           onClick={() => handleSecundario()}>
+                           {
+                           !secundario ? <span className={style.botonPyS}>Secundario</span> : <span className={styles.testButton} id={style.back}>Volver</span> 
+                           }
                         </div> : null
-                    }  
-                    {
+                  }  
+                  {
                         primario && !secundario ? 
-                        <div><h4 style={{fontSize: '1.2rem'}} >Niveles de primaria</h4></div> 
+                        <div><h4 style={{fontSize: '1rem'}} >Niveles de primaria</h4></div> 
                         : null
-                    }  
-                    {
+                  }  
+                  {
                         secundario && !primario ? 
                         <div><h4 style={{fontSize: '1.2rem'}}>Niveles de secundaria</h4></div>
                         : null
-                    }   
-                </div>
-                <div className={styles.containerListNiveles}>
-                {
-                    primario && !secundario ?  
-                    academicLevels.map((n, i) => { if(n.educationLevel?.name === "Primaria"){
-                    return <div id={n.name} className={style.botonMateria} key={n.name} onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n.name ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n.name}</div>
-                    }})
-                    : null 
-                } 
+                  }   
+               </div>
+               <div className={styles.containerListNiveles}>
+               {
+                  primario && !secundario ?  
+                  academicLevels.map((n, i) => { if(n.numericLevel < 200){
+                  return <div id={n.name} className={style.botonMateria} key={n.name} onClick={(e) => handleOnClick(e,"Primaria")} style={state.Primaria === n.name ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n.name}</div>
+                  }})
+                  : null 
+               } 
                 {
                     secundario && !primario ? 
-                    academicLevels.map((n, i) => { if(n.educationLevel?.name === "Secundaria"){
+                    academicLevels.map((n, i) => { if(n.numericLevel > 200){
                         return <div id={n.name} className={style.botonMateria} key={n.name} onClick={(e) => handleOnClick(e,"Secundaria")} style={state.Secundaria === n.name ? {backgroundColor: 'rgb(140, 198, 62)', margin:'10px'} : {backgroundColor: 'white', margin:'10px'} }>{n.name}</div>
                         }})
                         : null                    

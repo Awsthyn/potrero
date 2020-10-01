@@ -19,13 +19,13 @@ export default function ClassDataSheet({data, clase}){
          {data?.map(s =>  
          <div className = {style.containerData} key={s.id} >
             <div className = {style.info}>
-               <p className = {style.data}>Relación con alumno: {s?.relation}</p>
-               <p className = {style.data}>Repercucion: {s?.difference}/5</p>
-               <p className = {style.data}>Valoracion: {s?.valued}/5</p>
+               <p className = {style.data}>Relación con alumno: {s?.relation}{s?.relation ?'/5' :' '}</p>
+               <p className = {style.data}>Repercucion: {s?.difference}{s?.difference ?'/5' :' '}</p>
+               <p className = {style.data}>Valoracion: {s?.valued}{s?.valued ?'/5' :' '}</p>
                <p className = {style.data}>Seguir trabajando: {s?.stay ? "si" : "no"}</p>
-               <p className = {style.data}>Desempeño: {s?.performance}/5</p>
+               <p className = {style.data}>Desempeño: {s?.performance}{ s?.performance ?'/5' :' '}</p>
                <p className = {style.data}>Asistencia: {s?.assistance}</p>
-               <p className = {style.data}>Actitud del alumno: {s?.attitude}/5</p>
+               <p className = {style.data}>Actitud del alumno: {s?.attitude}{s?.attitude ?'/5' :' '} </p>
                <p className = {style.data}>Comentarios: {s?.comments ? s?.comments : "Sin comentarios"}</p>
                <p className = {style.data}>Calificación último examen: {s?.qualification || 'no'} </p>
             </div>

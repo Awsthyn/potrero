@@ -53,7 +53,7 @@ export default function Falto({handleChange}) {
             <label htmlFor="no justificada"> No </label><br></br>
 				</DialogContentText>
 				{
-					estado.justify === "si" ? 
+					estado.assistance === "justificada" ? 
 				
 				<TextField
 					autoFocus

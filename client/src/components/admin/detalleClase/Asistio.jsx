@@ -60,10 +60,10 @@ export default function Asistio({handleChange}) {
          </DialogContent>
          <DialogActions>
             <Button style={{outline: 'none'}} onClick={handleClose} color="primary">
-               Aceptar
+               Cancelar
             </Button>
             <Button style={{outline: 'none'}} onClick={handleClose} color="primary" autoFocus>
-               Cancelar
+               Aceptar
             </Button>
          </DialogActions>
          </Dialog>

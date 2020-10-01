@@ -45,8 +45,6 @@ server.post('/asesorEmail', (req, res) => {
         });
         
         // Definimos el email
-        console.log(req.body.email)
-        console.log(req.body.mensaje)
         var mailOptions = {
             from: "El Potrero",
             to: req.body.email,

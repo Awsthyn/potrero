@@ -92,7 +92,7 @@ input:focus {
 	margin-left: 55%;
 	text-transform: capitalize;
 	padding: 5px;
-	width:195px;
+	width:200px;
 	height: 50px;
 	font-size: 15px;
 	font-family: 'Poppins';
@@ -103,7 +103,7 @@ input:focus {
 } */
 
 .testButton{
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
 .circles {
@@ -270,7 +270,7 @@ input[type=number] { -moz-appearance:textfield; }
 
 .containerListNiveles{
 	width:100%;
-	margin:15px;
+	margin:5px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -334,9 +334,11 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .cargarArchivos{
-	display: block;
+	display: flex;
+	justify-content: flex-start;
 	width: 200px;
 	height: 40px;
+	margin: 15px;
 	border: 2px solid #DADFE3;
 	border-radius: 20px;
 }

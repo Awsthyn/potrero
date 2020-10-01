@@ -88,7 +88,7 @@ class CargarArchivos extends Component {
 						}}
 					/>
 				</label>
-				<br></br>
+
 				<label className={styles.cargarArchivos}>
 					<span className={styles.zarasa} > 
 						<span className="material-icons" id={styles.icon}>
@@ -108,10 +108,10 @@ class CargarArchivos extends Component {
 							this.setState({validate: {...this.state.validate, [e.target.name]: e.target.value}});
 						}}
 					/>
+				<span style={{color: '#c2c2c2', marginLeft: '50px', marginTop: '7px'}}> * </span>
 				</label >
-				<span style={{color: '#c2c2c2'}}> * </span>
-					<small> Formato .png, .jpg o .jpeg </small> 
-				<br></br>
+					{/* <small> Formato .png, .jpg o .jpeg </small>  */}
+				
 				<label className={styles.cargarArchivos}>
 					<span className={styles.zarasa} > 
 						<span className="material-icons" id={styles.icon}>
@@ -130,16 +130,16 @@ class CargarArchivos extends Component {
 							this.setState({validate: {...this.state.validate, [e.target.name]: e.target.value}});
 						}}
 					/>
-				</label>{' '}
-				<span style={{color: '#c2c2c2'}}> * </span>
-					<small> Formato .png, .jpg o .jpeg </small>
-				<br></br>
+				<span style={{color: '#c2c2c2', marginLeft: '40px', marginTop: '7px'}}> * </span>
+				</label>
+					{/* <small> Formato .png, .jpg o .jpeg </small> */}
+				
 				<small style={{display: 'block'}}>Linkedin</small>
 				<input
-					style={{width: '80%', marginTop: '1%', display: 'inline'}}
+					style={{width: '80%', marginTop: '1%', display: 'inline', fontFamily: 'Poppins'}}
 					className={styles.input}
 					name="linkedin"
-					placeholder="ej: www.linkedin.com/tu_cuenta/"
+					placeholder="Ej: www.linkedin.com/tu_cuenta/"
 					type="text"
 					id="standard-basic6"
 					onChange={e => {
@@ -148,7 +148,6 @@ class CargarArchivos extends Component {
 					}}
 				/>
 				<p style={{color: '#c2c2c2', fontSize: '13px', marginTop: '15px'}}> obligatorio * </p>
-				<br></br>
 				<input
 					type="checkbox"
 					name="terminos"
