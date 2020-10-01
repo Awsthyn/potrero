@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./detail.css";
 import GeneralAssists from "../GeneralAssists.jsx";
-import {Link} from 'react-router-dom';
-import {useHistory} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 //
 class GeneralAssistDetail extends React.Component {
@@ -14,13 +14,38 @@ class GeneralAssistDetail extends React.Component {
       noJustificada: [],
       justificada: [],
       tardanzas: [],
+      fecha: [],
     };
     this.armarDatos = this.armarDatos.bind(this);
+    this.isoFormatDMY = this.isoFormatDMY.bind(this);
+    this.parseISOString = this.parseISOString.bind(this);
   }
 
   componentDidMount() {
     this.setState({ info: this.props.location.infoGrafico });
   }
+
+
+  //Intento de parsear fecha rara a date
+  isoFormatDMY(d) {
+    function pad(n) {
+      return (n < 10 ? "0" : "") + n;
+    }
+    return (
+      pad(d.getUTCDate()) +
+      "/" +
+      pad(d.getUTCMonth() + 1) +
+      "/" +
+      d.getUTCFullYear()
+    );
+  }
+
+  parseISOString(s) {
+    var b = s.split(/\D+/);
+    return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
+  }
+
+  //Cierro intento
 
   armarDatos() {
     this.state.info.forEach((element) => {
@@ -40,38 +65,46 @@ class GeneralAssistDetail extends React.Component {
         this.state.tardanzas.push(
           element.class.student.firstName + " " + element.class.student.lastName
         );
+       
       }
+
+      if (element.createdAt) {
+        var s = element.createdAt;
+        var date = this.parseISOString(s);
+
+        this.state.fecha.push(date);
+      }
+
     });
   }
 
   render() {
     return (
       <div className="detailAssist">
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <div className={`titlePotrero ocultoimpresion row d-flex justify-content-center`}>
-       <h1>Fundación El Potrero</h1>
-     </div>
-      <button onClick={()=>window.print()} className="btn btn-primary ocultoimpresion">
-        Imprimir
-      </button>
+        {console.log(this.state.info)}
+        <br />
+        <br />
+        <br />
+        <div
+          className={`titlePotrero ocultoimpresion row d-flex justify-content-center`}
+        >
+          <h1>Fundación El Potrero</h1>
+          <img src="https://static.wixstatic.com/media/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png" />
+        </div>
+        <button
+          onClick={() => window.print()}
+          className="btn btn-primary ocultoimpresion"
+        >
+          Imprimir
+        </button>
         {this.state.info && this.armarDatos()}
-        <br />
-        <br />
-        <br />
         <GeneralAssists />
-        <br />
-        <br />
-        <br />
         <h1>Asistencia</h1>
         <table className="table ">
           <thead class="thead-dark">
             <tr>
               <th scope="col">Asistencia</th>
               <th scope="col">Nombre</th>
-
             </tr>
           </thead>
           <tbody>
@@ -80,7 +113,6 @@ class GeneralAssistDetail extends React.Component {
                 <tr>
                   <th scope="row">Presente</th>
                   <td>{e}</td>
-
                 </tr>
               ))}
           </tbody>
@@ -90,7 +122,6 @@ class GeneralAssistDetail extends React.Component {
                 <tr>
                   <th scope="row">Falta no justificada</th>
                   <td>{e}</td>
-
                 </tr>
               ))}
           </tbody>
@@ -100,7 +131,6 @@ class GeneralAssistDetail extends React.Component {
                 <tr>
                   <th scope="row">Falta justificada</th>
                   <td>{e}</td>
-
                 </tr>
               ))}
           </tbody>
@@ -110,7 +140,6 @@ class GeneralAssistDetail extends React.Component {
                 <tr>
                   <th scope="row">Tardanzas</th>
                   <td>{e}</td>
-
                 </tr>
               ))}
           </tbody>
