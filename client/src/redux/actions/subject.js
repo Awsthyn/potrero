@@ -34,6 +34,12 @@ export function postSubject(subject) {
 			.catch(err => console.log(err));
 	};
 }
+export function academiclevelxsubject({subjectsId,idAcademicLevel}) {
+		return axios
+			.post(`http://localhost:3001/academiclevelxsubject/:${idAcademicLevel}`, {subjectsId}, {withCredentials: true})
+			.catch(err => console.log(err));
+	
+}
 
 export function putSubject(subject) {
 	return function (dispatch) {

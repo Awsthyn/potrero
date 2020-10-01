@@ -12,6 +12,8 @@ import { createMuiTheme} from '@material-ui/core/styles';
 
 //Actions
 import { getSubjects,deleteSubject,postSubject,putSubject} from "../../redux/actions/subject"
+import {getAcademicLevels} from "../../redux/actions/academicLevel"
+
 
 
 // Sweet Alerts
@@ -54,6 +56,13 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import EditIcon from '@material-ui/icons/Edit';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -82,17 +91,24 @@ const NEGRO = '#333333'
 
 moment.locale('es');
 
+
+
+
 const TablaMaterias = (props) => {
     const history = useHistory();
     const [selectedRow, setSelectedRow] = useState(null);
     const [data, setData] = useState([]);
     const [locked,setLocked] = useState(true)
 
-    useEffect(()=>{
 
+
+
+
+    useEffect(()=>{
+      props.getAcademicLevels()
        props.getSubjects()
             .then((subjects)=>{
-                if(!subjects) {
+                if(!subjects.length) {
                     Swal.fire(
                         'Conectar la BD',
                         `Debes conectar la Base de Datos o agregar usuarios`,
@@ -105,47 +121,28 @@ const TablaMaterias = (props) => {
                
                  id: subject.id,
                 nombre: subject.name, 
-                nivel:Math.floor(subject.academicLevels[0].numericLevel/100)===1 ? 'Primario': 'Secundario' ,
+                nivel:subject.academicLevels[0] ? Math.floor(subject.academicLevels[0].numericLevel/100)===1 ? 'Primario': 'Secundario': 'Indefinido' ,
                 grados:subject.academicLevels.length+' '+ 'Grados',
              })
              )
              )
+         }
+       )
+    },[getSubjects,getAcademicLevels])
+
+    
+         
         
-                    }
-            )
       
 
-    },[getSubjects])
 
-        async function handleAddition(){
-            const { value: materia } = await Swal.fire({
-              title: 'Ingresa el nombre de la Materia',
-              input: 'text',
-              inputPlaceholder: 'Por ejemplo: computación'
-            })
-            
-            if (materia) {
-              Swal.fire(`Se agregará a los registros la materia: ${materia}`)
-              props.postSubject({name: materia})
-            }
-          }
-    
-          async function handleRename(subject){
-            const { value: rename } = await Swal.fire({
-              title: 'Ingresa el nombre nuevo',
-              input: 'text',
-              inputPlaceholder: `Por ejemplo: ${subject.nombre}002`
-            })
-            
-            if (rename) {
-              Swal.fire(`Se reemplazará el nombre de ${subject.nombre} por  ${rename}`)
-              props.putSubject({id: subject.id, name:rename})
-              .then(info=>setData( data.map(datas=>
-                datas.id == info.id ? {...datas,nombre:info.name}:datas)))
 
-            }
-         
-        }
+
+
+
+
+
+
 
             return (
             <div style={{marginTop:100}}>
@@ -161,7 +158,7 @@ const TablaMaterias = (props) => {
                               style={{margin:10}}
                               variant="contained"  
                               color= "primary"
-                               onClick={handleAddition}>
+                               onClick={()=> history.push('/admin/materias/agregar')}>
                             <PostAddIcon/>
                         </Button>
                       </div>
@@ -177,20 +174,8 @@ const TablaMaterias = (props) => {
                       {
                     icon: () => <EditIcon color="primary" />,
                     tooltip: 'Renombrar Materia',
-                    onClick: (event, rowData) => 
-                    Swal.fire({
-                        title:  `¿Deseas renombrar esta materia?`,
-                        icon: "question",
-                        confirmButtonColor: VIOLETA,
-                        showCancelButton: true,
-                        cancelButtonColor: 'gray',
-                       })
-                        .then((result) => {
-                                 if (result.isConfirmed) {
-                                      handleRename(rowData)
-                                 }
-                                })
-                    },
+                    onClick: (event, rowData) => history.push('/admin/materia/modificar/:id')
+                      },
                 ]}
                 onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
                 options={{  
@@ -223,6 +208,7 @@ const TablaMaterias = (props) => {
     function mapStateToProps(state) {
         return {
             subjects:state.subjects.subjects,
+            academicLevels:state.academic.academicLevels
         };
       }
     
@@ -231,7 +217,8 @@ const TablaMaterias = (props) => {
             getSubjects:() => dispatch(getSubjects()),
             deleteSubject:(subjectId) => dispatch(deleteSubject(subjectId)),
             postSubject: (subject) => dispatch(postSubject(subject)),
-            putSubject: subject => dispatch(putSubject(subject))
+            putSubject: subject => dispatch(putSubject(subject)),
+            getAcademicLevels: () => dispatch(getAcademicLevels())
         };
       }
       export default connect(mapStateToProps, mapDispatchToProps)(TablaMaterias);
