@@ -3,7 +3,6 @@
    display: flex;
    flex-wrap: wrap;
    margin: 90px 140px;
-    
 }
 .container {
    width: 310px;
@@ -35,6 +34,9 @@
 
 .info {
    margin-top: 17px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 
 .data {
