@@ -7,6 +7,7 @@ export function getSubjects() {
 			.get(`http://localhost:3001/subjects`, {withCredentials: true})
 			.then(res => {
 				dispatch({type: GET_SUBJECTS, payload: res.data});
+				return res.data
 			})
 			.catch(err => console.log(err));
 	};
@@ -41,6 +42,9 @@ export function putSubject(subject) {
 			.then(res => {
 				
 				dispatch({type: PUT_SUBJECT, payload: res.data})
+				dispatch(getSubjects())
+
+					return res.data
 			})
 			.catch(err => console.log(err));
 	};

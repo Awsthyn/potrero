@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import style from './SubjectCheckbox.modules.css';
 
-const TypeOfDifficultyCheckbox = ({ initialState, subject, onChange }) => {
+const TypeOfDifficultyCheckbox = ({ initialState, difficulty, onChange }) => {
     const [checked, setChecked] = useState(initialState);
 
     const onClick = (checked) => {
         setChecked(checked);
-        onChange(subject, checked);
+        onChange(difficulty, checked);
     }
 
     return (
-        <div id="weaknessInput" className="form-group">
+        <div id="difficultyInput" className="form-group">
             <input
                 type="checkbox"
                 className={style}
                 onClick={e => onClick(e.target.checked)}
                 defaultChecked={checked}
                 hidden
-                id={`checkboxWeakness${subject.id}`}
+                id={`checkboxDifficulty${difficulty.id}`}
             />
-            <label style={{ height: "50px", width: "200px" }} htmlFor={`checkboxWeakness${subject.id}`} className="d-flex flex-column justify-content-center rounded shadow form-check-label mr-3" >
-                {subject.name}
+            <label style={{ height: "50px", width: "200px" }} htmlFor={`checkboxDifficulty${difficulty.id}`} className="d-flex flex-column justify-content-center rounded shadow form-check-label mr-3" >
+                {difficulty.name}
             </label>
         </div>
     )

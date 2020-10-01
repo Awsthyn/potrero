@@ -35,9 +35,9 @@ function DataSheet({addDataSheet, classId, assistance}){
    return (
       <div className={style.contenedor}>
          <h1 className={style.tituloPrincipal} > Datos de la clase </h1>
-         <div> 
+         <div className = {style.form}> 
             <h4 className={style.titulo}> ¿Cómo es tu relación con tu alumno? </h4>
-            <Box style={{display: 'inline'}} component="fieldset" mb={3} borderColor="transparent">
+            <Box style={{marginTop: '1%'}} component="fieldset" mb={3} borderColor="transparent">
             <Rating
                name="relation"
                defaultValue={0}
@@ -46,10 +46,10 @@ function DataSheet({addDataSheet, classId, assistance}){
                onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}
             />
             </Box>
-         </div>
+         
          <div> 
             <h4 className={style.titulo}> ¿Qué tan motivado estás para seguir brindando apoyo escolar? </h4>
-            <Box style={{display: 'inline'}} component="fieldset" mb={3} borderColor="transparent">
+            <Box style={{marginTop: '1%'}} component="fieldset" mb={3} borderColor="transparent">
             <Rating
                name="assesorMotivation"
                defaultValue={0}
@@ -61,7 +61,7 @@ function DataSheet({addDataSheet, classId, assistance}){
          </div>
          <div> 
             <h4 className={style.titulo}> ¿Consideras que estás haciendo una diferencia a tu tutoreado? </h4>
-            <Box style={{display: 'inline'}} component="fieldset" mb={3} borderColor="transparent">
+            <Box style={{marginTop: '1%'}} component="fieldset" mb={3} borderColor="transparent">
             <Rating
                name="difference"
                defaultValue={0}
@@ -73,7 +73,7 @@ function DataSheet({addDataSheet, classId, assistance}){
          </div>
          <div> 
             <h4 className={style.titulo}> ¿Sentís que tu trabajo está siendo valorado? </h4>
-            <Box style={{display: 'inline'}} component="fieldset" mb={3} borderColor="transparent">
+            <Box style={{marginTop: '1%'}} component="fieldset" mb={3} borderColor="transparent">
             <Rating
                name="valued"
                defaultValue={0}
@@ -85,11 +85,18 @@ function DataSheet({addDataSheet, classId, assistance}){
          </div>
          <div> 
             <h4 className={style.titulo}> ¿Te gustaría seguir trabajando con tu alumno? </h4>
-            
+            <div style={{marginTop: '1%'}}>
+            <input type="checkbox" ref={si} value="true" name="stay" 
+               onChange={(e) => handleChecked(e, 'comp')}/>
+               <label htmlFor="true" style={{ marginRight: "20px", marginLeft: "5px"}}> Si </label>
+               <input type="checkbox"  ref={no} value="false" name="stay" 
+               onChange={(e) => handleChecked(e, 'comp')}/>
+               <label htmlFor="false" style={{ marginRight: "20px", marginLeft: "5px"}}> No </label><br></br>
+               </div>
          </div>
-         <div> 
-            <h4 className={style.titulo}> Conexion a internet </h4>
-            <Box style={{display: 'inline'}} component="fieldset" mb={3} borderColor="transparent">
+         <div style={{marginTop: '3%'}}> 
+            <h4 className={style.titulo}> Conexión a internet </h4>
+            <Box style={{marginTop: '1%'}} component="fieldset" mb={3} borderColor="transparent">
                <Rating
                   name="internetConnection"
                   defaultValue={0}
@@ -100,8 +107,8 @@ function DataSheet({addDataSheet, classId, assistance}){
             </Box>
          </div>
          <div> 
-            <h4 className={style.titulo}> ¿Notaste difucultades en su desempeño? </h4>
-            <Box style={{display: 'inline'}} component="fieldset" mb={3} borderColor="transparent">
+            <h4 className={style.titulo}> ¿Notaste dificultades en su desempeño? </h4>
+            <Box style={{marginTop: '1%'}} component="fieldset" mb={3} borderColor="transparent">
                <Rating
                   name="performance"
                   defaultValue={0}
@@ -112,34 +119,45 @@ function DataSheet({addDataSheet, classId, assistance}){
             </Box>
          </div>
          <div> 
-            <h4 className={style.titulo}> Estaba acompañado </h4>
-               <input style={{display: 'inline'}} type="checkbox" ref={si} value="true" name="someoneAccompaniesHim" 
+            <h4 className={style.titulo}> ¿Estaba acompañado? </h4>
+            <div style={{marginTop: '1%'}}>
+               <input type="checkbox" ref={si} value="true" name="someoneAccompaniesHim" 
                onChange={(e) => handleChecked(e, 'comp')}/>
-               <label htmlFor="true"> Si </label>
-               <input style={{display: 'inline'}} type="checkbox"  ref={no} value="false" name="someoneAccompaniesHim" 
+               <label htmlFor="true" style={{ marginRight: "20px", marginLeft: "5px"}}> Si </label>
+               <input type="checkbox"  ref={no} value="false" name="someoneAccompaniesHim" 
                onChange={(e) => handleChecked(e, 'comp')}/>
-               <label htmlFor="false"> No </label><br></br>
+               <label style={{ marginRight: "20px", marginLeft: "5px"}} htmlFor="false"> No </label><br></br>
+               </div>
             {estado.someoneAccompaniesHim === 'true' ? 
             <div> 
-               <h4 className={style.titulo}> Quien lo acopañaba </h4>
+               <h4 className={style.titulo}> ¿Quién lo acompañaba? </h4>
+               <div style={{marginTop: '1%'}}>
                <input name="companionName" value={estado?.companionName} onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}/>
+               </div>
             </div>
             : null }
          </div>
-         <h4 className={style.titulo}> Comentarios </h4>
-         <textarea className={style.comentarios} name="comments" value={estado?.comments} onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}/>
-         <div> 
-            <h4 className={style.titulo}> Tuvo examen </h4>
-               <input style={{display: 'inline'}} type="checkbox" ref={yes} value="true" name="hadExam" 
+         <div style={{marginTop: '3%'}}>
+         <h4 className={style.titulo}> Comentarios adicionales</h4>
+         <div style={{marginTop: '1%'}}>
+         <textarea style = {{display: 'block'}} className={style.comentarios} name="comments" value={estado?.comments} 
+         onChange={(e) => setEstado({...estado, [e.target.name]: e.target.value})}/>
+         </div>
+         </div>
+         <div style={{marginTop: '5%'}}> 
+            <h4 className={style.titulo}> ¿Tuvo examen? </h4>
+            <div style={{marginTop: '1%'}}>
+               <input type="checkbox" ref={yes} value="true" name="hadExam" 
                onChange={(e) => handleChecked(e, 'exam')}/>
-               <label htmlFor="true"> Si </label>
-               <input style={{display: 'inline'}} type="checkbox"  ref={nop} value="false" name="hadExam" 
+               <label htmlFor="true" style={{ marginRight: "20px", marginLeft: "5px"}}> Si </label>
+               <input type="checkbox"  ref={nop} value="false" name="hadExam" 
                onChange={(e) => handleChecked(e, 'exam')}/>
-               <label htmlFor="false"> No </label><br></br>
+               <label htmlFor="false" style={{ marginRight: "20px", marginLeft: "5px"}}> No </label><br></br>
+               </div>
             { estado.hadExam === 'true' ?
-            <div>  
-               <h4 className={style.titulo}> Calificacion </h4>
-                  <Box component="fieldset" mb={3} borderColor="transparent">
+            <div style={{marginTop: '3%'}}>  
+               <h4 className={style.titulo}> Calificación </h4>
+                  <Box style={{marginTop: '1%'}} component="fieldset" mb={3} borderColor="transparent">
                      <Rating
                         name="qualification"
                         defaultValue={0}
@@ -150,9 +168,9 @@ function DataSheet({addDataSheet, classId, assistance}){
                   </Box>
                </div> : null}
          </div>
-         <div> 
+         <div style = {{marginTop: '1%'}}> 
             <h4 className={style.titulo}> Actitud </h4> 
-            <Box style={{display: 'inline'}} component="fieldset" mb={3} borderColor="transparent">
+            <Box style={{marginTop: '1%'}} component="fieldset" mb={3} borderColor="transparent">
                <Rating
                   name="attitude"
                   defaultValue={0}
@@ -167,6 +185,7 @@ function DataSheet({addDataSheet, classId, assistance}){
             let newEstado = {...estado, assistance}
             addDataSheet(newEstado)
             }} > Enviar </button> 
+            </div>
       </div> 
    )
 }

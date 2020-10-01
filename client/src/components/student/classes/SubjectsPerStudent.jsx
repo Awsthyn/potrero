@@ -63,17 +63,17 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
                     <h5 style={{width:"15vw"}}>{studentDetail.classes[i].duration[0].value % 1 === 0 ? String(studentDetail.classes[i].duration[0].value) + ":00" : String(studentDetail.classes[i].duration[0].value).substring(0,2) + ":30"}  {' - '}
                     {studentDetail.classes[i].duration[1].value % 1 === 0 ? String(studentDetail.classes[i].duration[1].value) + ":00" : String(studentDetail.classes[i].duration[1].value).substring(0,2) + ":30"}</h5>
                     <span className="btn btn-danger mt-n2 mr-2" onClick={() => onDelete(studentDetail.classes[i].id) }>Eliminar</span></div>
-                )} ) : <h1>No hay datos</h1>}
+                )} ) : <h2>No hay clases asignadas</h2>}
             <h3 className="mt-4">Materias sin clases asignadas</h3>
             <p>Las materias en color <span style={{color: "#492BC4"}}>lila</span> indican que existe por lo menos un docente con un horario disponible para asignarle una clase a este alumno.</p>
             <p className="mt-n3">En caso de querer asignar una clase, haga clic en la <span style={{color: "#492BC4"}}>materia</span> correspondiente.</p>
             {matchingSchedule && matchingSchedule.length > 0  ? matchingSchedule.map((e,i) => {
                 if(compareAssignedToPosible && !compareAssignedToPosible.includes(e[0].user.subjects[0].name)){
                 return (
-                <h4 role="button" className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw", color: "#492BC4"}}
+                <h5 role="button" className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw", color: "#492BC4"}}
                 onClick={(e)=> window.location = `/admin/estudiantes/asignacion/${params.studentId}/${e.target.getAttribute("subjectid")}`}
                 subjectid={e[0].user.subjects[0].id}
-                key={"p"+i}>{e[0].user.subjects[0].name}</h4>
+                key={"p"+i}>{e[0].user.subjects[0].name}</h5>
                 )}} ) : null}
             {studentDetail.id && studentDetail.subjects && studentDetail.subjects.length > 0 ? studentDetail.subjects.map((s,i) => {
                 if(possibleClasses && possibleClasses.length > 0 && !possibleClasses.includes(s.name)){return (

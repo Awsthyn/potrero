@@ -9,6 +9,8 @@ import educationLevelReducer from './educationLevelReducer';
 import academicReducer from "./academicReducer";
 import userScheduleReducer from './userScheduleReducer';
 import difficultyReducer from './difficultyReducer';
+import classesReducer from './classesReducer';
+
 
 export default combineReducers({
     volunteers: volunteersReducer,
@@ -20,5 +22,6 @@ export default combineReducers({
     educationLevel: educationLevelReducer,
     academic: academicReducer,
     userSchedule: userScheduleReducer,
-    difficulty: difficultyReducer
+    difficulty: difficultyReducer,
+    classes:classesReducer
 });

@@ -6,10 +6,7 @@ const SubjectCheckbox = ({ initialState, subject, onChange }) => {
 
     const [checked, setChecked] = useState(initialState);
 
-    console.log('jjjjjj',initialState)
-
     const onClick = (checked) => {
-        console.log('vvvvv',checked)
         setChecked(checked);
         onChange(subject, checked);
     }

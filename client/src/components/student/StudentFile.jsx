@@ -23,13 +23,20 @@ export class StudentFile extends Component {
 			tutorEmail: null,
 			tutorPhone: null,
       educationLevel: null,
-      subjects: null,
       subjectsId: null,
       interests: null,
       motivations: null,
       todXStudent: null,
+      errorfirstName: null,
+      errorlastName: null,
       erroremail: null,
-      errortutorEmail: null
+      errortutorFirstName: null,
+      errortutorLastName: null,
+      errortutorEmail: null,
+      errorphone: null,
+      errortutorPhone: null,
+      errorinterests: null,
+      errormotivations: null
     };
     this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -40,16 +47,33 @@ export class StudentFile extends Component {
     let value = event.target.value;
     const prop = `error${name}`;
 
-    if(!(/\S+@\S+\.\S+/.test(value))) {
-      console.log([prop]);
-      this.setState({ [prop]: 'Ingrese un e-mail válido'});
-    } else {
+    if(name === 'email' || name === 'tutorEmail'){
+      (!(/\S+@\S+\.\S+/.test(value))) ?
+        this.setState({ [prop]: 'Ingrese un e-mail válido'})
+        :
         this.setState({ [prop]: null});
-      }
+    }
 
+    else if(name === 'phone' || name === 'tutorPhone'){
+      value.length < 10 ?
+      this.setState({ [prop]: 'El número debe tener como mínimo 10 dígitos'})
+      :
+      this.setState({ [prop]: null});
+    }
+    else{
+      !value ?
+      this.setState({ [prop]: 'Campo Obligatorio'})
+      :
+      this.setState({ [prop]: null});
+    }
+
+
+    
     this.setState({ [name]: value });
-  };
+  }
+
   submitHandler = (event) => {
+    console.log(Object.values(this.state))
     event.preventDefault();
     this.props
       .putStudent(this.state)
@@ -68,18 +92,16 @@ export class StudentFile extends Component {
     }
   }
 
-  // validateEmail(email){
-	// 	if(!/\S+@\S+\.\S+/.test(email)) {
-	// 		this.setState({error: 'Ingrese un e-mail válido'});
-	// 	} else {
-	// 		this.setState({error: null});
-	// 	}
-	// }
-
   componentDidMount() {
-    this.props.getStudentDetail(this.props.id)
-    .then((res) => {
-      let student = res.data;
+    this.props.getStudentDetail(this.props.id);
+    this.props.getSubjects();
+    this.props.getAcademicLevels();
+    this.props.getDifficulties();
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.studentDetail !== this.props.studentDetail){
+      let student = this.props.studentDetail;
       this.setState({
         id: student.id,
         firstName: student.firstName,
@@ -96,16 +118,6 @@ export class StudentFile extends Component {
         motivations: student.motivations,
         todXStudent: student?.typeOfDifficulties?.map(e => e.id)
       })
-    });
-
-    this.props.getSubjects();
-    this.props.getAcademicLevels();
-    this.props.getDifficulties();
-  }
-
-  componentDidUpdate(prevProps){
-    if(prevProps.subjects !== this.props.subjects){
-      this.setState({subjects: this.props.subjects})
     }
   }
 
@@ -130,9 +142,13 @@ export class StudentFile extends Component {
                   className={styles.input}
                   type='text'
                   name='firstName'
-                  defaultValue={this.props.studentDetail.firstName}
-                  onChange={this.onChangeHandler}
+                  defaultValue={this.state.firstName}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={this.onChangeHandler}
                 />
+                {
+                  !this.state.firstName && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorfirstName}</p>)
+                }
               </label>
               <label className={styles.tag}>
                 Apellido
@@ -142,9 +158,13 @@ export class StudentFile extends Component {
                   className={styles.input}
                   type='text'
                   name='lastName'
-                  defaultValue={this.props.studentDetail.lastName}
-                  onChange={this.onChangeHandler}
+                  defaultValue={this.state.lastName}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={this.onChangeHandler}
                 />
+                {
+                  !this.state.lastName && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorlastName}</p>)
+                }
               </label>
             </div>
             <div className='mt-n2 mb-4 d-flex flex-row form-group'>
@@ -154,11 +174,15 @@ export class StudentFile extends Component {
                   spellCheck='false'
                   autoComplete='off'
                   className={styles.input}
-                  type='text'
+                  type='number'
                   name='phone'
-                  defaultValue={this.props.studentDetail.phone}
-                  onChange={this.onChangeHandler}
+                  defaultValue={this.state.phone}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={this.onChangeHandler}
                 />
+                {
+                  this.state.phone && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorphone}</p>)
+                }
               </label>
               <label className={styles.tag}>
                 E-mail
@@ -168,8 +192,9 @@ export class StudentFile extends Component {
                   className={styles.input}
                   type='text'
                   name='email'
-                  defaultValue={this.props.studentDetail.email}
-                  onChange={(event) => {this.onChangeHandler(event)}}
+                  defaultValue={this.state.email}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={(event) => {this.onChangeHandler(event)}}
                 /> 
                   {
                     this.state.email && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.erroremail}</p>)
@@ -188,9 +213,13 @@ export class StudentFile extends Component {
                   className={styles.input}
                   type='text'
                   name='tutorFirstName'
-                  defaultValue={this.props.studentDetail.tutorFirstName}
-                  onChange={this.onChangeHandler}
+                  defaultValue={this.state.tutorFirstName}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={this.onChangeHandler}
                 />
+                {
+                  !this.state.tutorFirstName && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorFirstName}</p>)
+                }
               </label>
               <label className={styles.tag}>
                 Apellido
@@ -200,9 +229,14 @@ export class StudentFile extends Component {
                   className={styles.input}
                   type='text'
                   name='tutorLastName'
-                  defaultValue={this.props.studentDetail.tutorLastName}
-                  onChange={this.onChangeHandler}
+                  onKeyUp={this.onChangeHandler}
+                  defaultValue={this.state.tutorLastName}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={this.onChangeHandler}
                 />
+                {
+                  !this.state.tutorLastName && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorLastName}</p>)
+                }
               </label>
             </div>
             <div className='mb-4 d-flex flex-row form-group'>
@@ -212,11 +246,15 @@ export class StudentFile extends Component {
                   spellCheck='false'
                   autoComplete='off'
                   className={styles.input}
-                  type='text'
+                  type='number'
                   name='tutorPhone'
-                  defaultValue={this.props.studentDetail.tutorPhone}
-                  onChange={this.onChangeHandler}
+                  defaultValue={this.state.tutorPhone}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={this.onChangeHandler}
                 />
+                {
+                  this.state.tutorPhone && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorPhone}</p>)
+                }
               </label>
               <label className={styles.tag}>
                 E-mail
@@ -226,8 +264,9 @@ export class StudentFile extends Component {
                   className={styles.input}
                   type='text'
                   name='tutorEmail'
-                  defaultValue={this.props.studentDetail.tutorEmail}
-                  onChange={(event) => {this.onChangeHandler(event)}}
+                  defaultValue={this.state.tutorEmail}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={(event) => {this.onChangeHandler(event)}}
                 />
                   {
                     this.state.tutorEmail && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorEmail}</p>)
@@ -246,9 +285,13 @@ export class StudentFile extends Component {
                   className={styles.input}
                   type='text'
                   name='motivations'
-                  defaultValue={this.props.studentDetail.motivations}
-                  onChange={this.onChangeHandler}
+                  defaultValue={this.state.motivations}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={this.onChangeHandler}
                 />
+                {
+                  !this.state.motivations && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errormotivations}</p>)
+                }
               </label>
             </div>
             <div className='form-group'>
@@ -260,9 +303,13 @@ export class StudentFile extends Component {
                   className={styles.input}
                   type='text'
                   name='interests'
-                  defaultValue={this.props.studentDetail.interests}
-                  onChange={this.onChangeHandler}
+                  defaultValue={this.state.interests}
+                  onKeyUp={this.onChangeHandler}
+                  // onChange={this.onChangeHandler}
                 />
+                {
+                  !this.state.interests && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorinterests}</p>)
+                }
               </label>
             </div>
           </div>
@@ -342,7 +389,7 @@ export class StudentFile extends Component {
                       initialState={
                         this.state.todXStudent?.includes(difficulty.id)
                       }
-                      subject={difficulty}
+                      difficulty={difficulty}
                       onChange={this.onCheckboxClicked}
                       required
                     />

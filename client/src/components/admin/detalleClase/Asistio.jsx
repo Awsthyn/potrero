@@ -14,7 +14,7 @@ export default function Asistio({handleChange}) {
 	const handleChecked = (e) => {
       if(e.target.checked){
          setEstado({...estado, [e.target.name]: e.target.value})
-         handleChange(e.target.name, e.target.value)
+         handleChange(e.target.value)
             let asistencia = [presente, tardanza]
             asistencia.map(a => {
             	if(a.current.value !== e.target.value){
@@ -36,7 +36,7 @@ export default function Asistio({handleChange}) {
 
    return (
       <div>
-         <Button  style={{backgroundColor: '#8bc63ebe', border: '0px', color: 'white', 
+         <Button  style={{backgroundColor: '#8cc63e', border: '0px', color: 'white', 
             borderRadius: '10px', textTransform: 'capitalize',width: '100px', height: '40px', fontFamily: 'Poppins', fontSize: '1.1rem', marginRight: '20px', outline: 'none'}} variant="outlined" color="primary" 
             onClick={handleClickOpen}>
          Asistió

@@ -8,7 +8,7 @@
     color: white;
   }
 
-#weaknessInput input:checked ~ label {
+#difficultyInput input:checked ~ label {
     background: #c63e3e;
     color: white;
   }
