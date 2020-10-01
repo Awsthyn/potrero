@@ -1,9 +1,58 @@
 .contenedor {
     display: flex;
+    
 }
 
+.imgContainer {
+    position: relative;
+    width: 100%;
+  }
+  
+
+  .photo {
+    display: block;
+    height: 190px;
+    width: 190px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+  .overlay {
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 190px;
+    width: 190px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #492bc4;
+  }
+  
+  .imgContainer:hover .overlay {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  
+  .text {
+    color: white;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
 .integrantes {
+    margin-top: 30px;
+    padding: 0 4.3%;
     width: 40%;
+    height: 100vh;
     border-right: 2px solid rgb(235, 235, 235);
 }
 
@@ -13,13 +62,13 @@
     justify-content: center;
     width: 100px;
     height: 100px;
-    margin: 15%;
-    border: 2px solid rgb(235, 235, 235);
+    margin: 15% 16%;
     border-radius: 50%;
-    outline: none;
+    z-index: 1;
 }
 
 .circulos{
+    margin-left: -15%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,11 +80,13 @@
     justify-content: center;
 }
 
-.photo {
-    height: 190px;
-    width: 190px;
-    object-fit: cover;
-    border-radius: 50%;
+
+
+
+.lineGray {
+  position:absolute;
+	background-color: #CAD2D9;
+	width: 15%;
+	height: 3px;
+	align-self: center; 
 }
-
-

@@ -74,7 +74,18 @@ server.get("/", (req, res) => {
       res.json(err);
     });
 });
+//BUSCA TODOS LOS ESTUDIANTES RELACIONADOS CON UN ASESROR
 
+server.get('/user/:userId', (req, res) => {
+  Student.findAll({
+    include: [{
+      model: Class, 
+      where: {
+        userId: req.params.userId
+    }}]
+  }).then(students => res.send(students))
+  .catch(error => res.send(error))
+})
 // BUSCA UN STUDENT EN ESPECÍFICO Y ENVÍA SUS DATOS.
 server.get("/:id", (req, res) => {
   // BUSCA AL STUDENT.
@@ -116,7 +127,11 @@ server.get("/:id", (req, res) => {
         },
       ],
     }),
-    Class.findAll({ where: { studentId: req.params.id } }),
+    Class.findAll({ where: { studentId: req.params.id }, include:{
+      model: Subject,
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      }} }),
   ])
     .then((studentFound) => {
       // SI ENCUENTRA AL STUDENT, ENVÍA SUS DATOS. O SINO, ENVÍA UN MENSAJE DE ERROR.

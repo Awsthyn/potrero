@@ -22,7 +22,7 @@ export default function TerminosYCondiciones() {
    };
 
    return (
-      <div style={{display: 'inline'}} > 
+      <div style={{display: 'inline', marginTop: '0px'}} > 
          <Button variant="outlined" color="primary" onClick={handleClickOpen}
             style={{border: 'none', outline: 'none'}}
          >

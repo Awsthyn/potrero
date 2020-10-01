@@ -5,28 +5,38 @@
    /* width: 100%; */
    text-align: left;
    margin-left: 8%;
+   margin-top: 4%;
+   
    
 }
 .tituloPrincipal{
+   padding-bottom: 10px;
    font-size: 2rem;
-   align-self: center;
+   align-self: left;
+   border-bottom: 2px solid rgb(235, 235, 235);
 }
 
 .titulo{
    font-size: 16px;
    display: inline;
+   
+}
+
+.form {
+   margin-top: 5%;
 }
 
 .comentarios{
    align-self: left;
    width: 350px;
+   height: 80px;
 }
 
 .boton{
-   align-self: center;
+   align-self: left;
    font-size: 16px;
    font-weight: 300;
-   margin-bottom: 18px;
+   margin: 0px 0px 25px 0px;
    width: 100px;
    height: 40px;
    background: none;
@@ -34,6 +44,7 @@
    text-align: center;
    border: none;
    outline: none;
-   border-radius: 15px;
+   border-radius: 22px;
    background-color: #492BC4;
 }
+

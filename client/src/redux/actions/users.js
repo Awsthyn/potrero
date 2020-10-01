@@ -37,6 +37,7 @@ export function getUser(userId) {
 		return axios
 			.get(`http://localhost:3001/users/${userId}`, {withCredentials: true})
 			.then(res => {
+				console.log(res.data)
 				dispatch({type: GET_USER, payload: res.data});
 			})
 			.catch(err => console.log(err));
