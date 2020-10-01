@@ -13,7 +13,6 @@ server.get("/assistances", (req, res) => {
   DataSheet.findAll({
     attributes: {
       exclude: [
-        "createdAt",
         "updatedAt",
         "concentration",
         "companionName",
@@ -179,17 +178,70 @@ server.get("/qualification", (req, res) => {
         "comments",
         "duration",
         "attitude",
+        "relation",
+        "difference",
+        "valued",
+        "assesorMotivation",
+        "assistance",
+        "stay",
+        "classId",
       ],
     },
+    include: [
+      {
+        model: Class,
+        attributes: {
+          exclude: [
+            "updatedAt",
+            "createdAt",
+            "userId",
+            "studentId",
+            "subjectId",
+          ],
+        },
+        include: [
+          {
+            model: Student,
+            attributes: {
+              exclude: [
+                "createdAt",
+                "updatedAt",
+                "phone",
+                "email",
+                "tutorFirstName",
+                "tutorLastName",
+                "tutorPhone",
+                "tutorEmail",
+                "interests",
+                "motivations",
+                "isActive",
+              ],
+            },
+          },
+          {
+            model: Subject,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
+      },
+    ],
   })
     .then((allClasses) => {
       let countQualification = [];
       allClasses.forEach((element) => {
         if (element.hadExam == true) {
           let num = parseInt(element.qualification);
-          countQualification.push(num);
+          let multiplo = num * 2;
+          countQualification.push({
+            nota: multiplo,
+            fullname: `${element.class.student.firstName} ${element.class.student.lastName}`,
+            materia: element.class.subject.name
+          });
         }
       });
+      console.log(countQualification)
       res.json(countQualification);
     })
     .catch((err) => {
@@ -347,9 +399,15 @@ server.get("/advisorstatus", (req, res) => {
           advisorStatus.hasAdvisor = true;
           advisorStatus.totalAdvisors = allAdvisors.length;
           if (advisor.isActive === true && advisor.state === "aceptado") {
-            advisorStatus.advisorsActives.push(advisor);
+            advisorStatus.advisorsActives.push({
+              nombre: advisor.firstName + " " + advisor.lastName,
+              state: advisor.isActive,
+            });
           } else {
-            advisorStatus.advisorsInactives.push(advisor);
+            advisorStatus.advisorsInactives.push({
+              nombre: advisor.firstName + " " + advisor.lastName,
+              state: advisor.isActive,
+            });
           }
         }
       });

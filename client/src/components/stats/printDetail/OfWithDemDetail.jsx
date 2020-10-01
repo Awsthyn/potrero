@@ -12,65 +12,78 @@ class OfWithDemDetail extends React.Component {
       listaDemanda: [],
       listaOferta: [],
       demand: [],
-      offers: []
+      offers: [],
+      demandantes: [],
     };
   }
 
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/demandwithoffer");
     var respuesta = await peticion.json();
-
     this.setState({
       demand: respuesta.allDemands,
       offers: respuesta.allOffer,
     });
   }
 
-  async transformar(){
+  async transformar() {
+    let materiasDemanda = [];
+    let materiasOferta = [];
+
     for (let i = 0; i < this.state.demand.length; i++) {
       for (const property in this.state.demand[i]) {
-        this.state.listaDemanda.push(this.state.demand[i][property]);
+        materiasDemanda.push(property);
       }
     }
+
+    for (let i = 0; i < this.state.offers.length; i++) {
+      for (const property in this.state.offers[i]) {
+        materiasOferta.push(property);
+      }
     }
 
-  async conversor(arg){
-    let sum = [];
-    let totalConversions = [];
-    for (let j = 0; j < arg.length; j++) {
-
-      if(Array.isArray(arg[j])) sum.push(this.conversor(arg[j]))
-      else sum.push(arg[j])
-      
-    }
-    Promise.all(sum)
-    .then( respuesta => {
-      console.log(respuesta)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-    // return totalConversions;
+    this.setState({
+      listaDemanda: materiasDemanda,
+      listaOferta: materiasOferta,
+    });
   }
 
   async componentDidMount() {
     await this.peticion();
     await this.transformar();
-    let result = await this.conversor(this.state.listaDemanda);
-    console.log(result)
+    this.setState({
+      demand: this.props.location.demandas,
+      offers: this.props.location.ofertas,
+    });
+    console.log(this.props.location);
   }
 
   render() {
+    let testeando = {
+      testing: [],
+      claramente: [],
+      probando: [],
+    };
+    if (this.state.demand) {
+      this.state.demand.forEach((demandante) => {
+        this.state.listaDemanda.forEach((element) => {
+          if (demandante[element]) {
+            testeando.claramente.push({ [element]: demandante[element] });
+            testeando.probando.push(element);
+            testeando.testing = testeando.testing.concat(demandante[element]);
+          }
+        });
+      });
+    }
+    let recorrer = [];
     return (
       <div className="detailAssist">
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+        {console.log(this.state)}
         <div
           className={`titlePotrero ocultoimpresion row d-flex justify-content-center`}
         >
           <h1>Fundación El Potrero</h1>
+          <img src="https://static.wixstatic.com/media/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png" />
         </div>
         <button
           onClick={() => window.print()}
@@ -78,55 +91,58 @@ class OfWithDemDetail extends React.Component {
         >
           Imprimir
         </button>
-        {this.state.info && this.armarDatos()}
-        <br />
-        <br />
-        <br />
         <OffersWithDemand />
-        <br />
-        <br />
-        <br />
-        <h1>Demandas y ofertas de materias</h1>
-       { 
-        (<table className="table ">
-          <thead class="thead-dark">
+        <h1>Demanda de materias</h1>
+        <table className="table">
+          <thead className="thead-dark">
             <tr>
-              <th scope="col">Oferta/Demanda</th>
-              <th scope="col">Materia</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Materias</th>
             </tr>
           </thead>
           <tbody>
-           { this.state.listaDemanda &&
-           this.state.listaDemanda.forEach( element => {
-            element.map(e => {
-              console.log("Estoy en demanda ", e)
-             return <tr>
-              {console.log(e)}
-                 <th scope="row">Demanda</th>
-                <td>{e}</td>
-               </tr>
-            }) 
-          })
-          }
-          </tbody>
-          <tbody>
-            {/* {this.state.offers &&
-              this.state.offers.map((e) => {
-               return <tr>
+            {this.state.listaDemanda &&
+              this.state.listaDemanda.map((e) => (
+                <tr>
+                  <th scope="row">Demanda</th>
+                  <td>{e}</td> 
+                </tr>
+              ))}
+            {this.state.listaOferta &&
+              this.state.listaOferta.map((e) => (
+                <tr>
                   <th scope="row">Oferta</th>
                   <td>{e}</td>
                 </tr>
-              })} */}
+              ))}
           </tbody>
-        </table>)
-        //  (
-        //   <div>
-        //     <h1>No hay demandas ni ofertas de materias.</h1>
-        //   </div>
-        // )
-        } 
+        </table>
       </div>
     );
   }
 }
 export default OfWithDemDetail;
+
+{
+  /* <tbody>
+{testeando.claramente.map((ola) => {
+  for (const key in ola) {
+    if (ola.hasOwnProperty(key)) {
+      const element = ola[key];
+      element.map((cadaDemandador) => {
+        recorrer.push(cadaDemandador);
+      });
+
+      return (
+        <tr>
+          <th scope="row">Demanda</th>
+          <td>{key}</td>
+          <td>Franco</td>
+          <td>Matus</td>
+        </tr>
+      );
+    }
+  }
+})}
+</tbody> */
+}

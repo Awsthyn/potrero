@@ -1,10 +1,10 @@
 import React from "react";
-import { Doughnut} from "react-chartjs-2";
-import { Link } from 'react-router-dom';
-import DetalleAsesores from '../admin/DetalleAsesores';
+import { Doughnut } from "react-chartjs-2";
+import { Link } from "react-router-dom";
+import DetalleAsesores from "./printDetail/DetalleAsesores";
+import "./style.css";
 
 class Advisers extends React.Component {
-
   state = {
     info: [],
     totalAdvisors: 0,
@@ -12,42 +12,53 @@ class Advisers extends React.Component {
     totalAdvisorsInactives: 0,
     promedioActives: 0,
     promedioInactives: 0,
+    total: []
   };
-  
+
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/advisorstatus");
     var respuesta = await peticion.json();
-  
+
     let advisorsTemp = [];
 
     advisorsTemp = respuesta.advisorsActives;
 
-    respuesta.advisorsInactives.forEach(advisorsTotal => {
-      
-      advisorsTemp.push(advisorsTotal)
-    })
+    respuesta.advisorsInactives.forEach((advisorsTotal) => {
+      advisorsTemp.push(advisorsTotal);
+    });
 
     this.setState({
+      total: respuesta,
       info: advisorsTemp,
       totalAdvisors: respuesta.totalAdvisors,
       totalAdvisorsActives: respuesta.totalAdvisorsActives,
       totalAdvisorsInactives: respuesta.totalAdvisorsInactives,
     });
 
-    this.state.promedioActives = this.state.totalAdvisorsActives / this.state.totalAdvisors;
-    this.state.promedioInactives =  this.state.totalAdvisorsInactives / this.state.totalAdvisors;
+    this.state.promedioActives =
+      this.state.totalAdvisorsActives / this.state.totalAdvisors;
+    this.state.promedioInactives =
+      this.state.totalAdvisorsInactives / this.state.totalAdvisors;
   }
 
   getChartData() {
     const datos = {
-      labels: ["Activos " +(this.state.promedioActives > 0 ?  Math.round(this.state.promedioActives * 100) + "%" : "" ),
-      "Inactivos " + (this.state.promedioInactives > 0 ? Math.round(this.state.promedioInactives * 100) + "%": ""),],
+      labels: [
+        "Activos " +
+          (this.state.promedioActives > 0
+            ? Math.round(this.state.promedioActives * 100) + "%"
+            : ""),
+        "Inactivos " +
+          (this.state.promedioInactives > 0
+            ? Math.round(this.state.promedioInactives * 100) + "%"
+            : ""),
+      ],
       datasets: [
         {
           label: "Asesores",
           data: [
             this.state.totalAdvisorsActives,
-            this.state.totalAdvisorsInactives
+            this.state.totalAdvisorsInactives,
           ],
           backgroundColor: [
             "rgba(73, 43, 196, 0.6)",
@@ -84,13 +95,12 @@ class Advisers extends React.Component {
   }
   render() {
     const EnviarDetallesAsistentes = {
-      pathname: "admin/detalleasesores",
-      probandoAdvisor: this.state.info,
-    }
+      pathname: "/admin/detalle/asesores",
+      probandoAdvisor: this.state,
+    };
     return (
-      <div>
+      <div className="genAsist">
         <h4>{"Asesores: " + this.state.totalAdvisors}</h4>
-        <div>
         <Doughnut
           data={this.state.datos}
           options={{
@@ -99,14 +109,16 @@ class Advisers extends React.Component {
             legend: {
               labels: {
                 fontColor: "black",
-                fontSize: 15
+                fontSize: 15,
               },
             },
           }}
         ></Doughnut>
-        </div>
-        <Link to={EnviarDetallesAsistentes}><button className="btn btn-primary ocultoimpresion">Enviame</button></Link>
-       
+        <Link to={EnviarDetallesAsistentes}>
+          <button className="btn btn-primary ocultoimpresion">
+            Ver detalles
+          </button>
+        </Link>
       </div>
     );
   }

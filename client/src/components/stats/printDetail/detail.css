@@ -1,3 +1,18 @@
+@media print {
+  .ocultoimpresion,
+  .ocultoimpresion * {
+    display: none !important;
+  }
+  .titlePotrero,
+  titlePotrero * {
+    display: block ruby !important;
+    font-size: 24px;
+    width: 100%;
+  }
+  canvas {
+    margin: auto -10%;
+  }
+}
 
 .printDetail {
   margin-top: auto 100px;
@@ -5,28 +20,93 @@
 
 .titlePotrero,
 titlePotrero * {
-  display: ruby !important;
+  display: block ruby !important;
   font-size: 24px;
   margin-bottom: 10px;
   width: 100%;
+}
+
+.detailAssist button {
+  margin-bottom: 15px !important;
+}
+
+.detailAssist .genAsist a button {
+  display: none;
+}
+
+.detailAssist .table .thead-dark tr th {
+  border: black 1px solid;
+  background-color: #492bc4 !important;
+}
+
+.detailAssist .table tbody tr th {
+  border: black 1px solid;
+  font-weight: lighter;
+}
+
+.detailAssist .table tbody tr td {
+  border: black 1px solid;
+}
+
+.detailAssist .table {
+  color: #212529;
+  margin: auto;
+  width: 70%;
+}
+
+.detailAssist .table tbody th {
+  font-weight: normal;
+  border: black 1px solid;
+}
+
+.detailAssist .table tbody th tr{
+  font-weight: normal;
+  display: block;
+  justify-content: center;
+}
+
+.detailAssist h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.detailAssist button {
+  background-color: #492bc4 !important;
+}
+
+.detailAssist button:hover {
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white !important;
+  color: #492bc4;
+}
+
+.detailAssist a {
+  background-color: #492bc4;
+  color: white;
+}
+
+.detailAssist a:hover {
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white;
 }
 
 .printDetail div a button {
   display: none;
 }
 .titlePotrero {
-  display: ruby;
+  display: block ruby !important;
 }
 
-/* .titlePotrero img{
-  margin-top: -15px;
-} */
+.titlePotrero img {
+  margin-top: -12px;
+}
 
-.marginAlto{
+.marginAlto {
   margin-top: 70px;
 }
 
-.marginTop{
+.marginTop {
   margin-top: 50px;
 }
-

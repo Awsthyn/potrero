@@ -1,0 +1,41 @@
+.genAsist {
+  width: 77%;
+  margin: auto;
+}
+
+.genAsist a {
+  background-color: #492bc4;
+  color: white;
+}
+
+.genAsist button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #492bc4;
+  color: white;
+}
+
+.genAsist a:hover {
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white;
+  color: #492bc4;
+}
+
+.genAsist button:hover {
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white;
+  color: #492bc4;
+}
+
+.genAsist h4{
+  font-weight: bolder;
+}
+
+/* Esto es el graficador problematico */
+.genAsist canvas.chartjs-render-monitor{
+  max-height: 250px !important;
+  width: auto !important;
+  margin-left: 1;
+}
