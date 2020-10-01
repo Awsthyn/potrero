@@ -6,16 +6,31 @@ import "./style.css";
 class Offers extends React.Component {
   state = {
     notas: [],
+    nombres: [],
+    materias: [],
   };
   async peticion() {
     var peticion = await fetch("http://localhost:3001/stats/qualification");
     var notas = await peticion.json();
+    let notaspro = [];
+    let nombrespro = [];
+    let materiaspro = [];
+
+    notas.map((e) => {
+      notaspro.push(e.nota);
+      nombrespro.push(e.fullname);
+      materiaspro.push(e.materia);
+    });
 
     let pro =
-      notas.length > 0 ? notas.reduce((acc, currValue) => acc + currValue) : 0;
+      this.state.notas.length > 0
+        ? this.state.notas.reduce((acc, currValue) => acc + currValue)
+        : 0;
 
     this.setState({
-      notas: notas,
+      notas: notaspro,
+      nombres: nombrespro,
+      materias: materiaspro,
       total: Math.round(pro / notas.length),
     });
   }
@@ -77,8 +92,11 @@ class Offers extends React.Component {
   render() {
     const enviarDetalles = {
       pathname: "/admin/detalle/calificacion",
-      infoGrafico: this.state,
+      nombres: this.state.nombres,
+      notas: this.state.notas,
+      materias: this.state.materias,
     };
+
     return (
       <div className="genAsist">
         {isNaN(this.state.total) ? (

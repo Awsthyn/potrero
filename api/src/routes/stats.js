@@ -169,17 +169,55 @@ server.get("/qualification", (req, res) => {
         "comments",
         "duration",
         "attitude",
+        "relation",
+        "difference",
+        "valued",
+        "assesorMotivation",
+        "assistance",
+        "stay",
+        "classId",
       ],
     },
     include: [
       {
         model: Class,
+        attributes: {
+          exclude: [
+            "updatedAt",
+            "createdAt",
+            "userId",
+            "studentId",
+            "subjectId",
+          ],
+        },
         include: [
           {
-              model: Student,
-          }
-      ]
-  }],
+            model: Student,
+            attributes: {
+              exclude: [
+                "createdAt",
+                "updatedAt",
+                "phone",
+                "email",
+                "tutorFirstName",
+                "tutorLastName",
+                "tutorPhone",
+                "tutorEmail",
+                "interests",
+                "motivations",
+                "isActive",
+              ],
+            },
+          },
+          {
+            model: Subject,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
+      },
+    ],
   })
     .then((allClasses) => {
       let countQualification = [];
@@ -187,14 +225,16 @@ server.get("/qualification", (req, res) => {
         if (element.hadExam == true) {
           let num = parseInt(element.qualification);
           let multiplo = num * 2;
-          console.log(element.class.student.firstName);
           countQualification.push({
-              nota: multiplo,
-              fullname: `${element.class.student.firstName} ${element.class.student.lastName}`,
-        })}
-  })
-   res.json(countQualification);
-  })
+            nota: multiplo,
+            fullname: `${element.class.student.firstName} ${element.class.student.lastName}`,
+            materia: element.class.subject.name
+          });
+        }
+      });
+      console.log(countQualification)
+      res.json(countQualification);
+    })
     .catch((err) => {
       console.log(err);
     });

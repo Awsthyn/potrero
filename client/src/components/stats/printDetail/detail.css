@@ -9,8 +9,8 @@
     font-size: 24px;
     width: 100%;
   }
-  canvas{
-      margin: auto -10%;
+  canvas {
+    margin: auto -10%;
   }
 }
 
@@ -54,16 +54,27 @@ titlePotrero * {
   width: 70%;
 }
 
+.detailAssist .table tbody th {
+  font-weight: normal;
+  border: black 1px solid;
+}
+
+.detailAssist .table tbody th tr{
+  font-weight: normal;
+  display: block;
+  justify-content: center;
+}
+
 .detailAssist h1 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
 .detailAssist button {
-  background-color:  #492bc4 !important;
+  background-color: #492bc4 !important;
 }
 
-.detailAssist button:hover{
+.detailAssist button:hover {
   border-color: #492bc4;
   border-width: 2px;
   background-color: white !important;
@@ -75,7 +86,7 @@ titlePotrero * {
   color: white;
 }
 
-.detailAssist a:hover{
+.detailAssist a:hover {
   border-color: #492bc4;
   border-width: 2px;
   background-color: white;
@@ -89,7 +100,7 @@ titlePotrero * {
 }
 
 .titlePotrero img {
-  margin-top: -12px; 
+  margin-top: -12px;
 }
 
 .marginAlto {
