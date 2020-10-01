@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import style from './AsesorClases.module.css';
+import logo from '../../VolunteerFormAssets/classIcon.png'
 
 export default function AsesorClases({clase}){
    const [horario, setHorario] = useState([])
@@ -19,12 +20,13 @@ export default function AsesorClases({clase}){
 
    return (
          <div className = {style.container}>
+            <img className = {style.classIcon} alt = "" src = {logo}/>
             <div className = {style.student}>
                <h4 className = {style.name} >{clase.firstName}</h4>
             </div>
             <div className = {style.info}>
                <p className = {style.data}>{clase.nameWeekDay}</p>
-               <p className = {style.data}>de: {horario[0]} hs a {horario[1]} hs</p>
+               <p className = {style.data}>{horario[0]} hs a {horario[1]} hs</p>
                <p className = {style.data}>{clase.subject.name}</p>
             </div>
          </div>

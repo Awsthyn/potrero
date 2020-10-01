@@ -213,6 +213,10 @@
         background-color: #80bb33;
     }
 
+    .classFlex {
+        display: flex;
+    }
+
 
     .button:hover {
         
@@ -353,7 +357,9 @@
     cursor: pointer;
 }
 .clases{
-    display: flex;
-    flex-wrap: wrap;
-    margin: 90px 140px;
+    
+        display: flex;
+        flex-wrap: wrap;
+        margin: 90px 140px;
+        
 }
