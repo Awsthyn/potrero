@@ -11,7 +11,6 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
     '14:00', '15:00', '16:00', '17:00', '18:00', '19:00']
     let horarios = [{day:[], gridRow: ''}, {day:[], gridRow: ''},
     {day:[], gridRow: ''}, {day:[], gridRow: ''}, {day:[], gridRow: ''}];
-    let horarioAux = Number(timetable[0].split(':')[0]);
     let intervalsAmount = [{day: 'Lunes', interval: 0}, 
         {day: 'Martes', interval: 0}, {day: 'Miercoles', interval: 0}, 
         {day: 'Jueves', interval: 0}, {day: 'Viernes', interval: 0}];
@@ -46,6 +45,7 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
         });
 
         intervalsAmount.forEach(int => {
+            let horarioAux = Number(timetable[0].split(':')[0]);
             if(int.interval === 0 && int.day === 'Lunes'){
                 horarios[0].gridRow = '1fr';
                 horarios[0].day.push(<div style={{backgroundColor:'whitesmoke'}}></div>)
@@ -78,13 +78,16 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                 
                 if(int.day === 'Lunes'){
                     for (const interval of currentDay) {
+                        const horaInicio = interval[0].value.split('.')[0] + ':' + (interval[0].value.split('.')[1] ? '30' : '00');
+                        const horaFin = interval[1].value.split('.')[0] + ':' + (interval[1].value.split('.')[1] ? '30' : '00');
+
                         if((Number(interval[0].value) - horarioAux) > 0){
                             horarios[0].day.push(<div style={{backgroundColor:'whitesmoke'}}></div>)
                             rangoHorario = (Number(interval[0].value) - horarioAux) * 2;
                             horarios[0].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[0].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderColor:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[0].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderColor:'2px 0', backgroundColor:'#8CC63F', display:'flex', justifyContent:'center'}}><div style={{alignSelf:'center'}}>{horaInicio} - {horaFin}</div></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[0].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
@@ -99,13 +102,16 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                 }
                 else if(int.day === 'Martes'){
                     for (const interval of currentDay) {
+                        const horaInicio = interval[0].value.split('.')[0] + ':' + (interval[0].value.split('.')[1] ? '30' : '00');
+                        const horaFin = interval[1].value.split('.')[0] + ':' + (interval[1].value.split('.')[1] ? '30' : '00');
+                        
                         if((Number(interval[0].value) - horarioAux) > 0){
                             horarios[1].day.push(<div style={{backgroundColor:'whitesmoke'}}></div>)
                             rangoHorario = (Number(interval[0].value) - horarioAux) * 2;
                             horarios[1].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[1].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[1].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F', display:'flex', justifyContent:'center'}}><div style={{alignSelf:'center'}}>{horaInicio} - {horaFin}</div></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[1].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
@@ -120,13 +126,16 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                 }
                 else if(int.day === 'Miercoles'){
                     for (const interval of currentDay) {
+                        const horaInicio = interval[0].value.split('.')[0] + ':' + (interval[0].value.split('.')[1] ? '30' : '00');
+                        const horaFin = interval[1].value.split('.')[0] + ':' + (interval[1].value.split('.')[1] ? '30' : '00');
+
                         if((Number(interval[0].value) - horarioAux) > 0){
-                            horarios[1].day.push(<div style={{backgroundColor:'whitesmoke'}}></div>)
+                            horarios[2].day.push(<div style={{backgroundColor:'whitesmoke'}}></div>)
                             rangoHorario = (Number(interval[0].value) - horarioAux) * 2;
                             horarios[2].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[2].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[2].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F', display:'flex', justifyContent:'center'}}><div style={{alignSelf:'center'}}>{horaInicio} - {horaFin}</div></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[2].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
@@ -141,13 +150,16 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                 }
                 else if(int.day === 'Jueves'){
                     for (const interval of currentDay) {
+                        const horaInicio = interval[0].value.split('.')[0] + ':' + (interval[0].value.split('.')[1] ? '30' : '00');
+                        const horaFin = interval[1].value.split('.')[0] + ':' + (interval[1].value.split('.')[1] ? '30' : '00');
+
                         if((Number(interval[0].value) - horarioAux) > 0){
                             horarios[3].day.push(<div style={{backgroundColor:'whitesmoke'}}></div>)
                             rangoHorario = (Number(interval[0].value) - horarioAux) * 2;
                             horarios[3].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[3].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[3].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F', display:'flex', justifyContent:'center'}}><div style={{alignSelf:'center'}}>{horaInicio} - {horaFin}</div></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[3].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
@@ -162,13 +174,16 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
                 }
                 else if(int.day === 'Viernes'){
                     for (const interval of currentDay) {
+                        const horaInicio = interval[0].value.split('.')[0] + ':' + (interval[0].value.split('.')[1] ? '30' : '00');
+                        const horaFin = interval[1].value.split('.')[0] + ':' + (interval[1].value.split('.')[1] ? '30' : '00');
+
                         if((Number(interval[0].value) - horarioAux) > 0){
                             horarios[4].day.push(<div style={{backgroundColor:'whitesmoke'}}></div>)
                             rangoHorario = (Number(interval[0].value) - horarioAux) * 2;
                             horarios[4].gridRow += `${rangoHorario}fr `;
                         }
             
-                        horarios[4].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F'}}></div>)
+                        horarios[4].day.push(<div style={{borderBottom:'1px solid whitesmoke', borderWidth:'2px 0', backgroundColor:'#8CC63F', display:'flex', justifyContent:'center'}}><div style={{alignSelf:'center'}}>{horaInicio} - {horaFin}</div></div>)
                         rangoHorario = (Number(interval[1].value) - Number(interval[0].value)) * 2;
                         horarios[4].gridRow += `${rangoHorario}fr `;
                         horarioAux = Number(interval[1].value);
