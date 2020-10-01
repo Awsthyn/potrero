@@ -24,7 +24,7 @@ import StudentCard from "./components/student/StudentCard/StudentCard";
 import AsesorProfile from "./components/AsesorProfile/AsesorProfile";
 import ClassAssignation from "./components/student/classes/ClassAssignation";
 import SubjectsPerStudent from "./components/student/classes/SubjectsPerStudent";
-import GeneralAssistsDetail from "./components/stats/printDetail/GeneralAssistsDetail.jsx";
+import GeneralAssistsDetail from "./components/stats/printDetail/AssistsDetail.jsx";
 import DetailsOfInassistances from "./components/stats/DetailsOfInassistances";
 import DetalleClase from "./components/admin/detalleClase/DetalleClase";
 import DetalleAsesores from "./components/stats/printDetail/DetalleAsesores.jsx";
@@ -32,6 +32,7 @@ import AdvisorFormMail from "./components/admin/AdvisorFormMail";
 import OfWithDemDetail from "./components/stats/printDetail/OfWithDemDetail";
 import TablaClases from "./components/admin/TablaClases";
 import { getCurrentUser } from "./redux/actions/session";
+import DetailQualification from "./components/stats/printDetail/DetailQualification";
 
 class App extends React.Component {
   componentDidMount() {
@@ -50,12 +51,13 @@ class App extends React.Component {
             "/admin/estudiantes",
             "/admin/estudiantes/agregar",
             "/admin/estudiantes/detalles/:id",
-            "/admin/detail",
-            "/admin/detalleasesores",
+            "/admin/detalle/asistencia",
+            "/admin/detalle/asesores",
             "/admin/estudiantes/listadematerias/:studentId",
             "/admin/estudiantes/asignacion/:studentId/:subjectId",
             "/admin/clases",
             "/admin/detalle/materias",
+            "/admin/detalle/calificacion",
           ]}
           component={AdminNavBar}
         />
@@ -116,16 +118,25 @@ class App extends React.Component {
           path="/admin/inassistances"
           component={DetailsOfInassistances}
         />
-        <Route exact path="/admin/detail" component={GeneralAssistsDetail} />
+        <Route
+          exact
+          path="/admin/detalle/asistencia"
+          component={GeneralAssistsDetail}
+        />
         <Route
           exact
           path="/admin/detalle/materias"
           component={OfWithDemDetail}
         />
+        <Route
+          exact
+          path="/admin/detalle/calificacion"
+          component={DetailQualification}
+        />
         <Route path="/admin/class/:classId" component={DetalleClase} />
         <Route
           exact
-          path="/admin/detalleasesores"
+          path="/admin/detalle/asesores"
           component={DetalleAsesores}
         />
       </div>

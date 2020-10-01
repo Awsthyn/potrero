@@ -1,7 +1,6 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Link } from "react-router-dom";
-import GenAsDet from "./printDetail/GeneralAssistsDetail.jsx";
 import "./style.css";
 
 class generalAssists extends React.Component {
@@ -131,8 +130,7 @@ class generalAssists extends React.Component {
   }
   render() {
     const enviarDetalles = {
-      // pathname: "/admin/estadistica/MaterialUA",
-      pathname: "/admin/detail",
+      pathname: "/admin/detalle/asistencia",
       infoGrafico: this.state.info,
     };
     return (

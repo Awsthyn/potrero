@@ -95,7 +95,7 @@ class Advisers extends React.Component {
   }
   render() {
     const EnviarDetallesAsistentes = {
-      pathname: "/admin/detalleasesores",
+      pathname: "/admin/detalle/asesores",
       probandoAdvisor: this.state,
     };
     return (
