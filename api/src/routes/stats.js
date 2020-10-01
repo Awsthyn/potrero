@@ -123,15 +123,18 @@ server.get("/assistances/:id", (req, res) => {
       let presenteFromUser = [];
       let tardanzaFromUser = [];
       let ausenteFromUser = [];
-
       allDataSheetFromUser.classes.forEach((element) => {
-        assistanceFromUser.push(element.dataSheet.assistance);
+        element.dataSheets.forEach(dataSheet => assistanceFromUser.push(dataSheet.assistance))
+        // console.log(element.dataSheets)
+        // console.log('ss')
+        // assistanceFromUser.push(element.dataSheets.assistance);
       });
-
+      console.log(assistanceFromUser)
       assistanceFromUser.forEach((assistence) => {
+        // console.log(assistence)
         if (assistence === "presente") {
           presenteFromUser.push(assistence);
-        } else if (assistence === "ausente") {
+        } else if (assistence === "no justificada") {
           ausenteFromUser.push(assistence);
         } else if (assistence === "tardanza") {
           tardanzaFromUser.push(assistence);

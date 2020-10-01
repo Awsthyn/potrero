@@ -35,7 +35,7 @@ export default function Falto({handleChange}) {
 	const handleClose = () => {
 		setOpen(false);
 	};
-	console.log(estado)
+
 	return (
    <div style={{display: "inline-block"}} >
       <Button style={{backgroundColor: 'red', border:' 0px', color:' white', borderRadius: '10px', width: '100px', height:' 40px', textTransform: 'capitalize', fontSize: '1.1rem', fontFamily: 'Poppins', outline: 'none'}} variant="outlined" color="primary" onClick={handleClickOpen}>

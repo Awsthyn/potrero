@@ -23,9 +23,8 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 		foto: false,
 	});
 	const [clases, setClases] = useState();
-    const [info, setInfo] = useState(new FormData());
-	 const[estudiantes, setEstudiantes] = useState()
-	 const [fotoPerfil, setFotoPerfil] = useState();
+   const [info, setInfo] = useState(new FormData());
+	const[estudiantes, setEstudiantes] = useState()
 
 	const handleOnFileChange = e => {
 		info.append('profilePicture', e.target.files[0]);

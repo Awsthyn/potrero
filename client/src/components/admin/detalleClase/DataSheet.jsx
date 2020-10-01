@@ -191,6 +191,7 @@ function DataSheet({addDataSheet, classId, assistance}){
          <button className={style.boton} 
          onClick={() => {
             let newEstado = {...estado, assistance}
+            console.log(newEstado)
             addDataSheet(newEstado)
             }} > Enviar </button> 
             </div>

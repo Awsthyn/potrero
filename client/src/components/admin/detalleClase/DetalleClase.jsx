@@ -10,8 +10,10 @@ export default function DetalleClase({match, history}) {
     const [clase, setClase] = useState()
     const [asistencia, setAsistencia] = useState() 
     const [fotoPerfil, setFotoPerfil] = useState()
+    const [advertencia, setAdvertencia] = useState(false)
 
     function handleChange(value){
+        console.log(value)
         setAsistencia(value)
     }
     useEffect(() => {
@@ -38,7 +40,17 @@ export default function DetalleClase({match, history}) {
         .catch(error => console.log(error))
         
     }, [])
-
+    useEffect(() => {
+        console.log(asistencia)
+        if(asistencia === 'no justificada'){
+            // axios.get(`http://localhost:3001/students/${clase.student.id}`)
+            axios.get(`http://localhost:3001/stats/assistances/${clase.student.id}`)
+            .then(student => {
+                console.log(student.data)
+                if(student.data.ausente === 2) setAdvertencia(true)})
+            .catch(error => console.log(error))
+        }
+    }, [asistencia])
     console.log(clase)
 
     return(
@@ -75,6 +87,7 @@ export default function DetalleClase({match, history}) {
                 <div className={style.botones} style = {{marginTop: '3%'}}> 
                     <Asistio handleChange={handleChange} /> <Falto handleChange={handleChange} />
                 </div>
+                {advertencia ? <p> PELIGRO!!! </p> : null }
             </div>
             <Datasheet classId={match.params.classId} assistance={asistencia}/>
         </div>
