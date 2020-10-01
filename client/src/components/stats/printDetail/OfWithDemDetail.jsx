@@ -105,7 +105,7 @@ class OfWithDemDetail extends React.Component {
               this.state.listaDemanda.map((e) => (
                 <tr>
                   <th scope="row">Demanda</th>
-                  <td>{e}</td>
+                  <td>{e}</td> 
                 </tr>
               ))}
             {this.state.listaOferta &&
