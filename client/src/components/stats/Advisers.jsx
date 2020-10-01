@@ -1,7 +1,7 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Link } from "react-router-dom";
-import DetalleAsesores from "../admin/DetalleAsesores";
+import DetalleAsesores from "./DetalleAsesores";
 import "./style.css";
 
 class Advisers extends React.Component {

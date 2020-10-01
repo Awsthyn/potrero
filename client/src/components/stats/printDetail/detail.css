@@ -59,6 +59,28 @@ titlePotrero * {
   margin-bottom: 10px;
 }
 
+.detailAssist button {
+  background-color:  #492bc4 !important;
+}
+
+.detailAssist button:hover{
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white !important;
+  color: #492bc4;
+}
+
+.detailAssist a {
+  background-color: #492bc4;
+  color: white;
+}
+
+.detailAssist a:hover{
+  border-color: #492bc4;
+  border-width: 2px;
+  background-color: white;
+}
+
 .printDetail div a button {
   display: none;
 }

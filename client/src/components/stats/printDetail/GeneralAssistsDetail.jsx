@@ -25,8 +25,6 @@ class GeneralAssistDetail extends React.Component {
     this.setState({ info: this.props.location.infoGrafico });
   }
 
-
-  //Intento de parsear fecha rara a date
   isoFormatDMY(d) {
     function pad(n) {
       return (n < 10 ? "0" : "") + n;
@@ -45,11 +43,13 @@ class GeneralAssistDetail extends React.Component {
     return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
   }
 
-  //Cierro intento
-
   armarDatos() {
     this.state.info.forEach((element) => {
       if (element.assistance === "presente") {
+        let s = element.createdAt;
+        let date = this.parseISOString(s);
+        let converter = this.isoFormatDMY(date);
+
         this.state.presente.push(
           element.class.student.firstName + " " + element.class.student.lastName
         );
@@ -65,23 +65,22 @@ class GeneralAssistDetail extends React.Component {
         this.state.tardanzas.push(
           element.class.student.firstName + " " + element.class.student.lastName
         );
-       
       }
+
+      let s = element.createdAt;
+      let date = this.parseISOString(s);
+      let converter = this.isoFormatDMY(date);
 
       if (element.createdAt) {
-        var s = element.createdAt;
-        var date = this.parseISOString(s);
-
-        this.state.fecha.push(date);
+        this.state.fecha.push(converter);
       }
-
     });
   }
 
   render() {
     return (
       <div className="detailAssist">
-        {console.log(this.state.info)}
+        {console.log(this.state)}
         <br />
         <br />
         <br />
@@ -105,6 +104,7 @@ class GeneralAssistDetail extends React.Component {
             <tr>
               <th scope="col">Asistencia</th>
               <th scope="col">Nombre</th>
+              <th scope="col">Fecha</th>
             </tr>
           </thead>
           <tbody>
@@ -113,6 +113,7 @@ class GeneralAssistDetail extends React.Component {
                 <tr>
                   <th scope="row">Presente</th>
                   <td>{e}</td>
+                  <td>{this.state.fecha[0]}</td>
                 </tr>
               ))}
           </tbody>
