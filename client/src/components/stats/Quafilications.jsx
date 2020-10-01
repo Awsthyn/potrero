@@ -74,7 +74,7 @@ class Offers extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="genAsist">
         {isNaN(this.state.total) ? (
           <h4>Promedio notas: No existen notas</h4>
         ) : (

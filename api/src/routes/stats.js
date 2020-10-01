@@ -13,7 +13,6 @@ server.get("/assistances", (req, res) => {
   DataSheet.findAll({
     attributes: {
       exclude: [
-        "createdAt",
         "updatedAt",
         "concentration",
         "companionName",
@@ -178,7 +177,8 @@ server.get("/qualification", (req, res) => {
       allClasses.forEach((element) => {
         if (element.hadExam == true) {
           let num = parseInt(element.qualification);
-          countQualification.push(num);
+          let multiplo = num * 2;
+          countQualification.push(multiplo);
         }
       });
       res.json(countQualification);

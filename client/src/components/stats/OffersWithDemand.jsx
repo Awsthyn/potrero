@@ -32,30 +32,34 @@ class OffersWithDemand extends React.Component {
     const countNombreMatDem = [];
 
     //Pusheo los nombres de materias
-    this.state.offers.forEach((e) => {
-      let nombre = Object.keys(e);
-      nombreMatOf.push(nombre[0]);
-    });
+    if (this.state.offers) {
+      this.state.offers.forEach((e) => {
+        let nombre = Object.keys(e);
+        nombreMatOf.push(nombre[0]);
+      });
 
-    //Pusheo la longitud a los nombres de materias
-    for (let i = 0; i < this.state.offers.length; i++) {
-      for (const property in this.state.offers[i]) {
-        countNombreMatOf.push(this.state.offers[i][property].length);
+      //Pusheo la longitud a los nombres de materias
+      for (let i = 0; i < this.state.offers.length; i++) {
+        for (const property in this.state.offers[i]) {
+          countNombreMatOf.push(this.state.offers[i][property].length);
+        }
       }
     }
 
-    //Pusheo los nombres de materias
-    this.state.demand &&
-      this.state.demand.forEach((e) => {
-        let nombre = Object.keys(e);
-        nombreMatDem.push(nombre[0]);
-      });
+    if (this.state.demand) {
+      //Pusheo los nombres de materias
+      this.state.demand &&
+        this.state.demand.forEach((e) => {
+          let nombre = Object.keys(e);
+          nombreMatDem.push(nombre[0]);
+        });
 
-    //Pusheo la longitud a los nombres de materias
-    if (this.state.demand.length > 0) {
-      for (let i = 0; i < this.state.demand.length; i++) {
-        for (const property in this.state.demand[i]) {
-          countNombreMatDem.push(this.state.demand[i][property].length);
+      //Pusheo la longitud a los nombres de materias
+      if (this.state.demand.length > 0) {
+        for (let i = 0; i < this.state.demand.length; i++) {
+          for (const property in this.state.demand[i]) {
+            countNombreMatDem.push(this.state.demand[i][property].length);
+          }
         }
       }
     }
@@ -114,10 +118,10 @@ class OffersWithDemand extends React.Component {
     const enviarDetalles = {
       pathname: "/admin/detalle/materias",
       demandas: this.state.demand,
-      ofertas: this.state.offers
+      ofertas: this.state.offers,
     };
     return (
-      <div>
+      <div className="genAsist">
         <h4>Ofertas y demandas de materias</h4>
         <Bar
           type
@@ -153,7 +157,11 @@ class OffersWithDemand extends React.Component {
             },
           }}
         ></Bar>
-         <Link to={enviarDetalles}><button className="btn btn-primary ocultoimpresion">Enviame</button></Link>
+        <Link to={enviarDetalles}>
+          <button className="btn btn-primary ocultoimpresion">
+            Ver detalles
+          </button>
+        </Link>
       </div>
     );
   }
