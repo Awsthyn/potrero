@@ -1,14 +1,18 @@
 .subjectcheckbox input:checked ~ label {
-    background: #492BC4;
-    color: white;
-  } 
+  background: #492BC4;
+  color: white;
+}
+
+.subjectcheckbox{
+  cursor: pointer;
+}
 
 #strengthInput input:checked ~ label {
-    background: #8CC63E;
-    color: white;
-  }
+  background: #8CC63E;
+  color: white;
+}
 
 #difficultyInput input:checked ~ label {
-    background: #c63e3e;
-    color: white;
-  }
+  background: #c63e3e;
+  color: white;
+}

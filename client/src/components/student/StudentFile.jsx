@@ -36,7 +36,8 @@ export class StudentFile extends Component {
       errorphone: null,
       errortutorPhone: null,
       errorinterests: null,
-      errormotivations: null
+      errormotivations: null,
+      validar: 0 // Declaro el state validar para habilitar o desabilitar el boton de Confirmar cambios
     };
     this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -49,31 +50,28 @@ export class StudentFile extends Component {
 
     if(name === 'email' || name === 'tutorEmail'){
       (!(/\S+@\S+\.\S+/.test(value))) ?
-        this.setState({ [prop]: 'Ingrese un e-mail válido'})
+        this.setState({ validar: !this.state[prop] ? this.state.validar + 1 : this.state.validar, [prop]: 'Ingrese un e-mail válido' })
         :
-        this.setState({ [prop]: null});
+        this.setState({ validar: this.state[prop] ? this.state.validar - 1 : this.state.validar, [prop]: null});
     }
 
     else if(name === 'phone' || name === 'tutorPhone'){
       value.length < 10 ?
-      this.setState({ [prop]: 'El número debe tener como mínimo 10 dígitos'})
-      :
-      this.setState({ [prop]: null});
+      this.setState({ validar: !this.state[prop] ? this.state.validar + 1 : this.state.validar, [prop]: 'El número debe tener como mínimo 10 dígitos'})
+      : // Si se genera un error en alguno de los campos de entrada y ese error todavia es null a validar le sumo 1 y seteo el error a la propiedad
+      this.setState({ validar: this.state[prop] ? this.state.validar - 1 : this.state.validar, [prop]: null});
     }
     else{
       !value ?
-      this.setState({ [prop]: 'Campo Obligatorio'})
+      this.setState({ validar: !this.state[prop] ? this.state.validar + 1 : this.state.validar, [prop]: 'Campo Obligatorio'})
       :
-      this.setState({ [prop]: null});
+      this.setState({ validar: this.state[prop] ? this.state.validar - 1 : this.state.validar, [prop]: null});
     }
-
-
     
     this.setState({ [name]: value });
   }
 
   submitHandler = (event) => {
-    console.log(Object.values(this.state))
     event.preventDefault();
     this.props
       .putStudent(this.state)
@@ -144,7 +142,6 @@ export class StudentFile extends Component {
                   name='firstName'
                   defaultValue={this.state.firstName}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={this.onChangeHandler}
                 />
                 {
                   !this.state.firstName && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorfirstName}</p>)
@@ -160,7 +157,6 @@ export class StudentFile extends Component {
                   name='lastName'
                   defaultValue={this.state.lastName}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={this.onChangeHandler}
                 />
                 {
                   !this.state.lastName && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorlastName}</p>)
@@ -178,7 +174,6 @@ export class StudentFile extends Component {
                   name='phone'
                   defaultValue={this.state.phone}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={this.onChangeHandler}
                 />
                 {
                   this.state.phone && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorphone}</p>)
@@ -194,7 +189,6 @@ export class StudentFile extends Component {
                   name='email'
                   defaultValue={this.state.email}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={(event) => {this.onChangeHandler(event)}}
                 /> 
                   {
                     this.state.email && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.erroremail}</p>)
@@ -215,7 +209,6 @@ export class StudentFile extends Component {
                   name='tutorFirstName'
                   defaultValue={this.state.tutorFirstName}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={this.onChangeHandler}
                 />
                 {
                   !this.state.tutorFirstName && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorFirstName}</p>)
@@ -232,7 +225,6 @@ export class StudentFile extends Component {
                   onKeyUp={this.onChangeHandler}
                   defaultValue={this.state.tutorLastName}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={this.onChangeHandler}
                 />
                 {
                   !this.state.tutorLastName && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorLastName}</p>)
@@ -250,7 +242,6 @@ export class StudentFile extends Component {
                   name='tutorPhone'
                   defaultValue={this.state.tutorPhone}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={this.onChangeHandler}
                 />
                 {
                   this.state.tutorPhone && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorPhone}</p>)
@@ -266,7 +257,6 @@ export class StudentFile extends Component {
                   name='tutorEmail'
                   defaultValue={this.state.tutorEmail}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={(event) => {this.onChangeHandler(event)}}
                 />
                   {
                     this.state.tutorEmail && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorEmail}</p>)
@@ -287,7 +277,6 @@ export class StudentFile extends Component {
                   name='motivations'
                   defaultValue={this.state.motivations}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={this.onChangeHandler}
                 />
                 {
                   !this.state.motivations && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errormotivations}</p>)
@@ -305,7 +294,6 @@ export class StudentFile extends Component {
                   name='interests'
                   defaultValue={this.state.interests}
                   onKeyUp={this.onChangeHandler}
-                  // onChange={this.onChangeHandler}
                 />
                 {
                   !this.state.interests && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorinterests}</p>)
@@ -406,11 +394,10 @@ export class StudentFile extends Component {
             <svg onClick={() => window.history.go(-1)} viewBox="0 0 10 10" class="VoluntarioForm_leftArrow__1ya4q" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
             </svg>
-            <input
+            <button
+              disabled={this.state.validar > 0 ? true : false}
               className={styles.btnConfirmar}
-              value='Confirmar cambios'
-              type='submit'
-            />
+            >Confirmar cambios</button>
           </div>
         </form>
       </div>

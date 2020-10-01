@@ -19,7 +19,7 @@ const TypeOfDifficultyCheckbox = ({ initialState, difficulty, onChange }) => {
                 hidden
                 id={`checkboxDifficulty${difficulty.id}`}
             />
-            <label style={{ height: "50px", width: "200px" }} htmlFor={`checkboxDifficulty${difficulty.id}`} className="d-flex flex-column justify-content-center rounded shadow form-check-label mr-3" >
+            <label style={{ cursor:'pointer', height: "50px", width: "200px" }} htmlFor={`checkboxDifficulty${difficulty.id}`} className="d-flex flex-column justify-content-center rounded shadow form-check-label mr-3" >
                 {difficulty.name}
             </label>
         </div>

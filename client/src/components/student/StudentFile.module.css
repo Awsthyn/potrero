@@ -26,7 +26,7 @@
     padding-top: 10px;
     font-weight: 100;
     width: 50%;
-    margin: 5px 15px 0 15px;
+    margin: 20px 15px 0 15px;
     text-align: start;
 }
 
@@ -139,3 +139,27 @@
     align-self: center;
 }
 
+.btnConfirmar:disabled {
+    font-size: 16px;
+    font-weight: 500;
+    width: 210px;
+    height: 50px;
+    background: none;
+    color: white;
+    text-align: center;
+    padding: 0px 20px 0px 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: gray;
+    margin-top: 30px;
+    align-self: center;
+}
+
+/* .btnConfirmar:active{
+    outline: none;
+    border: none;
+} */
+
+.btnConfirmar:focus{
+    outline: 0;
+}
