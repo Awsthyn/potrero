@@ -51,7 +51,10 @@ export class CreateStudentForm extends Component {
 	};
 	submitHandler = (event) => {
 		event.preventDefault();
-		this.props.postStudent(this.state);
+		let dataToSend = this.state
+		dataToSend.scheduleStudent = this.props.schedule
+		console.log(dataToSend)
+		this.props.postStudent(dataToSend);
 	};
 
 	showGrade(levels, isChecked) {
@@ -216,8 +219,8 @@ export class CreateStudentForm extends Component {
 							<div
 								className={style.containerLevel}
 							>
-								{this.state.educationLevel
-									? this.state.educationLevel.map((level) => (
+								{
+									 [{id: 1, name: "Primaria"},{id:2,name:"Secundaria"}].map((level) => (
 										<LevelEducation
 											initialState={false}
 											className={style.levelSelected}
@@ -226,7 +229,7 @@ export class CreateStudentForm extends Component {
 											required
 										/>
 									))
-									: 'No se encontraron niveles educativos'}
+								}
 							</div>
 							{
 								this.state.academicLevels ?
@@ -373,6 +376,7 @@ export class CreateStudentForm extends Component {
 
 const mapStateToProps = (state) => ({
 	educationLevel: state.educationLevel.educationLevel,
+	schedule: state.studentForm
 });
 
 const mapDispatchToProps = (dispatch) => {
