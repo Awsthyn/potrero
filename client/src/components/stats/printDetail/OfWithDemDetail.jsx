@@ -12,7 +12,8 @@ class OfWithDemDetail extends React.Component {
       listaDemanda: [],
       listaOferta: [],
       demand: [],
-      offers: []
+      offers: [],
+      demandantes: [],
     };
   }
 
@@ -36,28 +37,45 @@ class OfWithDemDetail extends React.Component {
 
   async conversor(arg){
     let sum = [];
-    let totalConversions = [];
+    let cache = [];
+    
     for (let j = 0; j < arg.length; j++) {
-
+      if(arg[j] instanceof Promise){
+        Promise.resolve(arg[j])
+        .then( respuest => {
+          if(respuest !== undefined) {
+            if(respuest instanceof Array) sum.push(this.conversor(respuest))
+            else sum.push(respuest)
+        } else {
+          cache.push(respuest)
+        }
+        })
+        .catch( err => {
+          console.log("Soy un error ", err)
+        })
+      }
       if(Array.isArray(arg[j])) sum.push(this.conversor(arg[j]))
       else sum.push(arg[j])
-      
     }
-    Promise.all(sum)
-    .then( respuesta => {
-      console.log(respuesta)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-    // return totalConversions;
+    
+  let totalResult =  Promise.all(sum)
+  totalResult.then( final => {
+    if(final === undefined){
+      cache.push(final)
+    }
+})
+.catch( err =>{
+  console.log( err )
+})
+
+  // return newArg;
   }
 
   async componentDidMount() {
     await this.peticion();
     await this.transformar();
     let result = await this.conversor(this.state.listaDemanda);
-    console.log(result)
+    console.log("Soy el resultado ", result)
   }
 
   render() {
@@ -96,6 +114,7 @@ class OfWithDemDetail extends React.Component {
             </tr>
           </thead>
           <tbody>
+            {this.state.listaDemanda}
            { this.state.listaDemanda &&
            this.state.listaDemanda.forEach( element => {
             element.map(e => {
