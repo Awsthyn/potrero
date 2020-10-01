@@ -54,7 +54,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					<svg
 						viewBox="0 0 16 16"
 						className={style.leftArrow}
-						onClick={() => history.push('/')}
+						onClick={() => history.goBack()}
 						fill="currentColor"
 						xmlns="http://www.w3.org/2000/svg">
 						<path
@@ -65,6 +65,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					<img
 						className={style.photo}
 						src={`http://localhost:3001/uploads/perfil/${user.profilePicture}`}
+						
 						alt=""
 					/>
                     <label className={style.cargarImg} 
@@ -78,19 +79,18 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 								onChange={e => handleOnFileChange(e)}
 							/>
 						</form>
-						<span className="material-icons"> photo_camera </span>
-                        </label>
+						<span className="material-icons" style ={{fontSize: '1.2em', color: 'white', backgroundColor: '#492bc4', borderRadius: '50%' , border: '3px solid white', padding: '1%', position: 'absolute', top: '88px', right: '205px'}}> photo_camera </span>
+					</label>
 						{foto ? (
-							<div>
-								<button
-                                style={{display: 'inline'}}
+							<div style = {{display: 'block', marginTop: '5%'}}>
+								<button className = {style.imgBtn}
 									onClick={() => {
 										putUser(user.id, info);
 										setFoto(false);
 									}}>
 									Actualizar
 								</button>
-								<button style={{display: 'inline'}} onClick={() => setFoto(false)}> Cancelar </button>
+								<button className = {style.imgBtn} style={{display: 'inline'}} onClick={() => setFoto(false)}> Cancelar </button>
 							</div>
 						) : null}
 					<h4 className={style.name}>
@@ -196,7 +196,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					{toggle.students ? <AsesorStudents students={estudiantes}/> : null}
 					{toggle.classes ? <div  className={style.clases} > {clases.map(c =>                  
                         <AsesorClases key={c.id} clase={c} /> )}
-                    </div>
+                  	</div>
                         : null}
                     {/* {toggle.grades ? <AsesorNotas userId={user.id} clase={clases}/> : null} */}
 				</div>
