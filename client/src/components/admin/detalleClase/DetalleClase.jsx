@@ -72,6 +72,7 @@ export default function DetalleClase({match, history}) {
                 <div className={style.botones} style = {{marginTop: '3%'}}> 
                     <Asistio handleChange={handleChange} /> <Falto handleChange={handleChange} />
                 </div>
+                {asistencia ? <span className="material-icons" style={{marginTop: '25px', marginLeft: '120px', color: '#8bc63ebe'}}> check_circle_outline_icon </span> :null}
             </div>
             <Datasheet classId={match.params.classId} assistance={asistencia} studentId={clase?.student.id} email={clase?.student.email} />
         </div>
