@@ -189,7 +189,7 @@ const TablaVoluntarios = (props) => {
                                 })
                     },
                     {
-                        icon: () => <CheckCircleIcon style={{background:VERDE}} />,
+                        icon: () => <CheckCircleIcon style={{color:VERDE}} />,
                         tooltip: 'Aceptar Voluntario',
                         onClick: (event, rowData) =>
                         Swal.fire({
