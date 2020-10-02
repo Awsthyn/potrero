@@ -222,7 +222,6 @@ export const StudentCrud = ({
                   confirmButtonText: 'Inhabilitar',
                   showLoaderOnConfirm: true,
                   preConfirm: () => {
-                    console.log(rowData);
                     return;
                     // props. // inhabilitar StudentAction
                     // .then(response => {
@@ -230,7 +229,6 @@ export const StudentCrud = ({
                     //     if (response.statusText !=='OK') {
                     //       throw new Error('No se pudo')
                     //     }
-                    //     console.log(data)
                     //     setData(data.filter(activos =>activos.id!==rowData.id))
                     //     return response.data
                     // })

@@ -41,7 +41,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 
 		
 	}, []);
-    console.log(clases)
+
 	function pestañas(e) {
 		let defaultToggle = {
 			students: false,
@@ -50,7 +50,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 		};
 		setToggle({...defaultToggle, [e.target.name]: true});
 	}
-    console.log(user)
+	
 	return (
 		<div className={style.outer}>
 			<div className={style.container}>

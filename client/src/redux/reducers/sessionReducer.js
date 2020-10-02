@@ -23,7 +23,6 @@ export default function sessionReducer (state = initialState, action) {
         }
 
     /*case GET_FORGOTTEN_USER:
-        console.log("GET_FORGOTTEN_USER")
         return {
             ...state,
             forgottenUser: action.payload

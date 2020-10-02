@@ -6,7 +6,6 @@ export function getStudents() {
 		return axios
 			.get(`http://localhost:3001/students`, {withCredentials: true})
 			.then(res => {
-				console.log('lalalaalalal',res.data)
 				dispatch({type: GET_STUDENTS, payload: res.data});
 				return res.data;
 			})
@@ -42,9 +41,7 @@ export function postStudent(student) {
 }
 
 export function putStudent(student) {
-	console.log('put', student)
 	return function (dispatch) {
-		console.log(student)
 		return axios
 			.put(`http://localhost:3001/students/${student.id}`, student, {withCredentials: true})
 			.then(res => {
@@ -56,7 +53,6 @@ export function putStudent(student) {
 
 export function putStudentIsActive(student) {
 	return function (dispatch) {
-		console.log(student)
 		return axios
 			.put(`http://localhost:3001/students/${student.id}/changestatus`, student, {withCredentials: true})
 			.then(res => {

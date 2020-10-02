@@ -12,7 +12,6 @@ server.post('/forgot', function(req, res, next) {
         token = buf.toString('hex');
         return token
     })
-console.log('BODY', req.body)
         User.findOne({ where: {email: req.body.email}})
         .then(usuario => {
             usuario.update({resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000 })
@@ -52,11 +51,9 @@ console.log('BODY', req.body)
 //---------- Crea token, lo setea al usuario, y se lo envia por email -------
 server.get('/reset/:token', function(req, res, next) {
     var token = req.params.token
-    console.log('TOKEN', token)
     User.findOne({where: {resetPasswordToken: token} })
     .then(usuario => {
         res.json(usuario)
-        console.log(usuario)
     })
     .catch(err => console.log(err))
 })

@@ -12,7 +12,6 @@ export function getEducationLevel() {
     return axios
       .get(`http://localhost:3001/educationlevel`, { withCredentials: true })
       .then((res) => {
-        console.log('NAAAAAAAAAAAAAAAAAAAAAAAAA',res);
         dispatch({ type: GET_EDUCATION_LEVELS, payload: res.data });
       })
       .catch((err) => console.log(err));

@@ -1,6 +1,6 @@
 const server = require("express").Router();
 const nodemailer = require("nodemailer");
-const {Student} = require("../db.js");
+const { Student } = require("../db.js");
 
 
 server.post('/email', function(req, res){
@@ -46,4 +46,4 @@ server.post('/email', function(req, res){
         .catch(err => console.log(err));
     })
 
-    module.exports = server;
+module.exports = server;
