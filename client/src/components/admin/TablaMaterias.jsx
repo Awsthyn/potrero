@@ -29,6 +29,8 @@ import MaterialTable, { MTableToolbar } from 'material-table';
 //Componentes 
 import Button from '@material-ui/core/Button'
 import Spinner from '../potrero-spinner/Spinner.jsx';
+import Typography from '@material-ui/core/Typography';
+
 
 
 // Iconos
@@ -140,7 +142,13 @@ const TablaMaterias = (props) => {
                 {data && data.length ? 
                 <MaterialTable
                 icons={tableIcons}
-                title="Tabla de Materias"
+                title= { 
+                    <div >
+                            <Typography style = {{fontSize: 60,fontFamily:'Poppins',color:VIOLETA}} variant="h6" noWrap>
+                                     Tabla de Materias
+                            </Typography>
+                      
+                     </div>}
                 components={{
                     Toolbar: props => (
                         <div style={{backgroundColor: '#e8eaf5'}}>

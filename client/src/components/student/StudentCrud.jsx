@@ -28,6 +28,8 @@ import MaterialTable, { MTableToolbar } from 'material-table';
 //Componentes
 import Button from '@material-ui/core/Button';
 import Spinner from '../potrero-spinner/Spinner.jsx';
+import Typography from '@material-ui/core/Typography';
+
 
 // Iconos
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -128,7 +130,12 @@ export const StudentCrud = ({
       {data && data.length ? (
         <MaterialTable
           icons={tableIcons}
-          title='Tabla de Estudiantes Activos'
+          title= { 
+            <div >
+                    <Typography style = {{fontSize: 60,fontFamily:'Poppins',color:VIOLETA}} variant="h6" noWrap>
+                             Tabla de Estudiantes
+                    </Typography>
+             </div>}
           components={{
             Toolbar: (props) => (
               <div style={{ backgroundColor: '#e8eaf5' }}>
