@@ -8,6 +8,7 @@ import statsReducer from './statsReducer';
 import educationLevelReducer from './educationLevelReducer';
 import academicReducer from "./academicReducer";
 import userScheduleReducer from './userScheduleReducer';
+import difficultyReducer from './difficultyReducer';
 import classesReducer from './classesReducer';
 import studentFormReducer from "./studentForm"
 

@@ -14,6 +14,7 @@ import CreateStudentForm from "./components/student/CreateStudentForm";
 import StudentFile from "./components/student/StudentFile";
 import ResetPassword from "./components/formularioVoluntario/PasswordForgot";
 import TablaMaterias from "./components/admin/TablaMaterias";
+import AgregarMateria from "./components/admin/FormularioMaterias/AgregarMateria";
 import AdminNavBar from "./components/admin/AdminNavBar";
 import AdminDrawer from "./components/admin/AdminDrawer";
 import PasswordRecovery from "./components/PasswordRecovery";
@@ -33,6 +34,7 @@ import OfWithDemDetail from "./components/stats/printDetail/OfWithDemDetail";
 import TablaClases from "./components/admin/TablaClases";
 import { getCurrentUser } from "./redux/actions/session";
 import DetailQualification from "./components/stats/printDetail/DetailQualification";
+
 
 class App extends React.Component {
   componentDidMount() {
@@ -62,6 +64,7 @@ class App extends React.Component {
           ]}
           component={AdminNavBar}
         />
+         
         <Route exact path="/" component={Home} />
         <Route path="/voluntarios" component={ContenedorForm} />
         {/* <Route path="/admin" component={AdminDrawer} /> */}
@@ -84,6 +87,7 @@ class App extends React.Component {
         />
         <Route exact path="/admin/usuarios" component={TablaUsuarios} />
         <Route exact path="/admin/materias" component={TablaMaterias} />
+        <Route exact path="/admin/materias/agregar" component={AgregarMateria} />
         <Route exact path="/admin/estudiantes" component={StudentCrud} />
         <Route
           exact
@@ -105,6 +109,15 @@ class App extends React.Component {
           path="/admin/estudiantes/asignacion/:studentId"
           component={SubjectsPerStudent}
         />
+        <Route
+          exact
+          path="/admin/estudiantes/detalles/:id"
+          render={({ match }) => (
+            <StudentFile id={match.params.id} />
+          )}
+        />
+        <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
+        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
 
         <Route exact path="/usuario/login" component={Login} />
         <Route exact path="/usuario/perfil" component={MiPerfil} />

@@ -7,6 +7,7 @@ export function getAcademicLevels() {
 			.get(`http://localhost:3001/academiclevel`, {withCredentials: true})
 			.then(res => {
 				dispatch({type: GET_ACADEMIC_LEVELS, payload: res.data});
+				return res.data;
 			})
 			.catch(err => console.log(err));
 	};

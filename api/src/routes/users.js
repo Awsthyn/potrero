@@ -239,6 +239,7 @@ server.put('/:id', upload, isAuthenticated, (req, res) => {
   if (req.body.disabled) {
     User.findByPk(req.params.id).then((user) => {
       user.state = "rechazado";
+      user.isActive = false;
       user.save();
       res.json(user);
     });

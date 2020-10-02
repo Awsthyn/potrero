@@ -1,0 +1,162 @@
+.editStudent {
+    display: flex;
+    justify-content: center;
+    margin: 5% auto;
+}
+
+.formStudent{
+    width: 65vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 45px;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 3px 3px rgba(219, 216, 216, 0.623);
+	border-radius: 20px;
+}
+
+.box{
+    padding: 0 3% 0 3%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tag{
+    padding-top: 10px;
+    font-weight: 100;
+    width: 50%;
+    margin: 20px 15px 0 15px;
+    text-align: start;
+}
+
+.input{
+    padding-top: 10px;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #3333331f;
+}
+
+.input:focus {
+    outline: none;
+    border-bottom: 2px solid #8bc63ebe;
+}
+
+.input::-webkit-input-placeholder {
+	font-weight: 100;
+    font-size: 14px;
+}
+
+.extras{
+    /* padding-top: 10px; */
+    font-weight: 100;
+    width: 98%;
+    /* margin: 10px 15px; */
+    text-align: start;
+}
+
+.labelDatos{
+    font-size: 1.5rem; 
+    font-weight: 300;
+    margin: 0 auto;
+}
+
+.span{
+    font-weight: 100;
+    margin-bottom: 10px;
+}
+
+.containerSubjects{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.select { 
+    -webkit-appearance: none;  
+    -moz-appearance: none;  
+    appearance: none;  
+    cursor: pointer;
+    width: 200px;
+    height: 30px;
+    text-align-last: center;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-bottom: 15px;
+} 
+
+.select:hover{
+    cursor: pointer;
+    border: 3px solid #8bc63ebe;
+}
+
+.select:enabled{
+    outline: none;
+    border: 3px solid #8bc63ebe;
+}
+
+.editStudent .formStudent .container{
+    position: relative;
+    padding: 2% 5%;
+}
+
+.containerBtns{
+    margin: 3% 6%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftArrow {
+    position: absolute;
+    top: 45px;
+    left: 75px;
+    width: 80px;
+    fill: #492BC4;
+}
+
+.leftArrow:hover {
+    position: absolute;
+    top: 45px;
+    left: 75px;
+    width: 80px;
+    fill: #492BC4;
+    cursor: pointer;
+}
+
+.btnConfirmar {
+    font-size: 16px;
+    font-weight: 500;
+    width: 210px;
+    height: 50px;
+    background: none;
+    color: white;
+    text-align: center;
+    padding: 0px 20px 0px 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: #492BC4;
+    margin-top: 30px;
+    align-self: center;
+}
+
+.btnConfirmar:disabled {
+    font-size: 16px;
+    font-weight: 500;
+    width: 210px;
+    height: 50px;
+    background: none;
+    color: white;
+    text-align: center;
+    padding: 0px 20px 0px 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: gray;
+    margin-top: 30px;
+    align-self: center;
+}
+
+.btnConfirmar:focus{
+    outline: 0;
+}

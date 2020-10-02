@@ -99,7 +99,7 @@ const TablaUsuarios = (props) => {
                     }
              setData( users.filter(user=>user.isActive).map(asesor => ({
                  id: asesor.id,
-                imageUrl:`https://api.adorable.io/avatars/285/${asesor.firstName}@adorable.png`,
+                imageUrl:`https://ui-avatars.com/api/?length=1&&name=${asesor.lastName}+${asesor.firstName}&background=492BC4&color=fff`,
                 firstName: asesor.firstName, 
                 lastName: asesor.lastName,
                 email:asesor.email, 

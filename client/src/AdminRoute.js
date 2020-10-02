@@ -8,10 +8,11 @@ import { Route, Redirect } from "react-router-dom";
         return(
             <Route {...rest} render={( props ) => {
                 return(
-                    sessionUser && (sessionUser.state === 'admin')
-                    ? <Component {...props} />
-                    : <Component {...props} />)
-                    // <Redirect to = '/' />)
+                    sessionUser && (sessionUser.state === 'admin') ? 
+                    <Component {...props} />:(sessionUser.state === 'aceptado') ?
+                    <Redirect to = {`/asesores/${sessionUser.id}`} />: <Redirect to = '/' />
+                    )
+                   // : <Redirect to = '/' />)
                 }
             }/>)
     }

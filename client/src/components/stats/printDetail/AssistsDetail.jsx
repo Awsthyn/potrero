@@ -104,7 +104,7 @@ class GeneralAssistDetail extends React.Component {
         <br />
         <br />
         <div
-          className={`titlePotrero row d-flex justify-content-center`}
+          className={`titlePotrero row justify-content-center`}
         >
           <h1>Fundación El Potrero</h1>
           <img src={logo} />

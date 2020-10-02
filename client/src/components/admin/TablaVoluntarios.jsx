@@ -1,45 +1,78 @@
-// React, HOOK de estado y efecto y REDUX
+
 import React, {useState,useEffect} from 'react'
+import { forwardRef } from 'react';
 import { connect } from "react-redux";
+import {useHistory,Link} from 'react-router-dom';
+
+/////////////////////////////////////////////////
+
 // Estilos
-import {makeStyles } from '@material-ui/styles';
-import { createMuiTheme, ThemeProvider,useTheme } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+import {makeStyles} from '@material-ui/styles';
+import { createMuiTheme} from '@material-ui/core/styles';
+
 //Actions
 import { getVolunteers, deleteVolunteer, acceptVolunteer} from "../../redux/actions/voluntary"
+
+// Sweet Alerts
+import swal from 'sweetalert';
+import Swal from 'sweetalert2';
+
+
 // Moment
 import moment from 'moment';
 import 'moment/locale/es';
-// Sweet Alerts
-import swal from 'sweetalert';
-import {useHistory} from 'react-router-dom'
 
+//Material-Table
+import MaterialTable, { MTableToolbar } from 'material-table';
 
-//Material-UI Components
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import ButtonGroup from '@material-ui/core/ButtonGroup'
+//Componentes 
 import Button from '@material-ui/core/Button'
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import Spinner from '../potrero-spinner/Spinner.jsx';
+
+
+// Iconos
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import BlockIcon from '@material-ui/icons/Block';
+import LockIcon from '@material-ui/icons/Lock';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import AddBox from '@material-ui/icons/AddBox';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import Check from '@material-ui/icons/Check';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import Clear from '@material-ui/icons/Clear';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import Edit from '@material-ui/icons/Edit';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Remove from '@material-ui/icons/Remove';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Search from '@material-ui/icons/Search';
+import ViewColumn from '@material-ui/icons/ViewColumn';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import FaceIcon from '@material-ui/icons/Face';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
-import Paper from '@material-ui/core/Paper';
-import SearchIcon from '@material-ui/icons/Search';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableHead from '@material-ui/core/TableHead'
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TextField from '@material-ui/core/TextField';
+
+
+const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
+    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+};
 
 
 const VIOLETA = '#492BC4'
@@ -48,338 +81,186 @@ const NEGRO = '#333333'
 
 moment.locale('es');
 
-const useStyles1 = makeStyles((theme) => ({
-  root: {
-    flexShrink: 0,
-    marginLeft: 20,
-  },
-  margin: {
-    margin: 20,
-  },
-
-}));
-
-function TablePaginationActions(props) {
-
-  const theme = useTheme();
-  const classes = useStyles1();
-  const { count, page, rowsPerPage, onChangePage } = props;
-
-  const handleFirstPageButtonClick = (event) => {
-    onChangePage(event, 0);
-  };
-
-  const handleBackButtonClick = (event) => {
-    onChangePage(event, page - 1);
-  };
-
-  const handleNextButtonClick = (event) => {
-    onChangePage(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (event) => {
-    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <div className={classes.root}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-      </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-      </IconButton>
-    </div>
-  );
-}
-
-TablePaginationActions.propTypes = {
-  count: PropTypes.number.isRequired,
-  onChangePage: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-};
-
-
-
-
-
-
-
-
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 500,
-    borderCollapse:'separate',
-    borderSpacing:'0px 10px',
-  },
-  root: {
-    marginTop: 100,
-    justifyContent:'center'
-  },
- form:{
-  //  margin: 30,
- },
- filterpanel:{
-   padding:20,
-   display:'flex',
-   justifyContent:'center',
-   width: 'fit-content',
-   elevation:10,
-   alignItems:'center',
-   margin:'auto'
- }
-});
-
-
-
-
 const TablaVoluntarios = (props) => {
-
-    const classes = useStyles();
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [filtered,setFiltered] = useState([]);
-    const [inputSearch,setInputSearch] = useState('');
     const history = useHistory();
-    const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-    };
-    
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
-    };    
+    const [selectedRow, setSelectedRow] = useState(null);
+    const [data, setData] = useState([]);
+    const [locked,setLocked] = useState(true)
 
-    function handleDeletion(id){
-        swal({
-            title: "¡¡ Cuidado !!",
-            text: "Si continúa, estará inhabilitando la solicitud... La información seguirá disponible en la sección rechazados",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-             return  props.deleteVolunteer(Number(id))
-            } 
-            else {
-              swal("El registro fue conservado");
-            }
-          })
-          .then(()=>{
-            setFiltered(filtered.filter(vol=>vol.id !== id))
-            swal("El postulante fue rechazado", {
-              icon: "success",
-            });
-         })
-            
-    
-    }
-
-    function handleStatusChange(volunteer){
-      swal({
-        title: `Estás por dar de alta a ${volunteer.firstName} ${volunteer.lastName} como voluntario.`,
-        text: "¿Está seguro? Si confirma esta acción, se convertirá al postulante voluntario en miembro asesor.",
-        icon: "warning",
-        buttons: true,
-        dangerMode: false,
-      })
-      .then((confirm) => {
-        if (confirm) {
-        props.acceptVolunteer(volunteer)
-        .then(()=>{
-          props.getVolunteers()
-          .then((pendientes)=>{
-             setFiltered(pendientes);
-            })
-        })
-          swal(`Se ha dado de alta a: ${volunteer.firstName} con éxito`, {
-            icon: "success",
-          });
-        } else {
-          swal("El Voluntario no ha sido dado de alta");
-        }
-      });
-      
-  }
-
-
-    // Me traigo los Voluntarios de la DB y sincronizo al Redux
-        useEffect(()=>{
+    useEffect(()=>{
             props.getVolunteers()
-            .then((pendientes)=>{
-               setFiltered(pendientes);
-              })
-        },[])
+            .then((voluntarios)=>{
+                if(!voluntarios.length) {
+                    Swal.fire(
+                        'Conectar la BD',
+                        `Debes conectar la Base de Datos o agregar usuarios`,
+                        'warning'
+                        )
+                        history.push(`/admin`)    
+                        return 
+                    }
 
+             setData( voluntarios.filter(voluntario=>voluntario.state==='pendiente').map(voluntario => ({
+                 id: voluntario.id,
+                 imageUrl:`https://ui-avatars.com/api/?length=1&name=${voluntario.lastName}+${voluntario.firstName}&background=492BC4&color=fff`,
+                firstName: voluntario.firstName, 
+                lastName: voluntario.lastName,
+                email:voluntario.email, 
+                edad:moment(voluntario.birthday).get('year') ,
+                fecha:moment(voluntario.createdAt).format('L')+'hs',
+                nivel:'Building',
+                grado:'Building',
+                linkedin:voluntario.linkedin
+             })
+             )
+             )
+        
+                    }
+            )
       
-    function handleFilter(e){
-      switch (e){
-        case 'LIN':
-          setFiltered(props.volunteers.filter(voluntario => voluntario.linkedin !== null));
-          break;
-        case 'CV':
-          setFiltered(props.volunteers.filter(voluntario => voluntario.cv !== null));
-          break;
-        case 'TODOS':
-          setFiltered(props.volunteers)
-          break;
-          case 'NOMBRE':
-          setFiltered(props.volunteers.filter(voluntario => voluntario.firstName.toLowerCase().includes(inputSearch.toLowerCase() ) || voluntario.lastName.toLowerCase().includes(inputSearch.toLowerCase()) ))
-          break;
-     } 
-    }
 
-
-    return (
-      <div  className={classes.root}>
-
-                  <Paper className={classes.filterpanel}>
-                                    <ButtonGroup variant="contained" alignItems="center"  aria-label="contained button group">
-                                                   <Button disableRipple  name="TODOS" key="TODOS" style={{ background:"lightgreen",color:'white'}} onClick={()=>handleFilter('TODOS')}>
-                                                   <CheckCircleOutlineIcon/> Todos 
-                                                    </Button>
-                                                    <Button disableRipple  name="CV"  key="CV" style={{ background:"lightblue",color:'white'}} onClick={()=>handleFilter('CV')}>
-                                                    <CheckCircleOutlineIcon/> CV   
-                                                    </Button>
-                                                    <Button disableRipple  name="LINKEDIN"  key="LINKEDIN" style={{ background:"pink",color:'white'}} onClick={()=>handleFilter('LIN')}>
-                                                    <CheckCircleOutlineIcon/> Linkedin   
-                                                    </Button>
-                                        </ButtonGroup>
-
-                                           <form className={classes.form} onSubmit={e=>{e.preventDefault()}}>
-
-                                              <ButtonGroup style={{ marginLeft:50}} variant="contained"  aria-label="contained button group">
-                                                    <div className={classes.margin}>
-                                                      <Grid container spacing={1} alignItems="center">
-                                                        <Grid item>
-                                                          <AccountCircle />
-                                                        </Grid>
-                                                 
-                                                        <Grid item>
-                                                          <TextField id="input-with-icon-grid" label="Buscar Nombre o Apellido" value={inputSearch} onChange={(e)=>setInputSearch(e.target.value)} />
-                                                        </Grid>
-                                                      </Grid>
-                                                    </div>
-                                                    <Button type="submit" name="NOMBRE"  key="NOMBRE" style={{ background:VIOLETA,color:'white'}} onClick={()=>
-                                                      {
-                                                      handleFilter('NOMBRE');
-                                                      setInputSearch('');
-                                                      }}>
-                                                          <SearchIcon />
-                                                    </Button>
-                                                  
-                                              </ButtonGroup>
-                                            </form>
-                      </Paper>
-      
-        <TableContainer component={Paper} style={{margin:50, width:`calc(100% - ${100}px)`}}>
-         { filtered ? 
-              <Table style={{
-                minWidth: 500,
-                borderCollapse:'separate',
-                borderSpacing:'0px 10px',
-              }} className={classes.table} aria-label="custom pagination table">
-                    <TableHead >
-                        <TableRow >
-                            <TableCell align="right">Nombre</TableCell>
-                            <TableCell align="right">Apellido</TableCell>
-                            <TableCell align="right">E-mail</TableCell>
-                            <TableCell align="right">Fecha de postulación</TableCell>
-                            <TableCell align="right">Acciones</TableCell>
-                        </TableRow>
-                    </TableHead>
-
-                    <TableBody>
-
-                    {(rowsPerPage > 0
-                          ?  filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                           : filtered
-                        ).map((voluntario) => (
-                          <TableRow  key={voluntario.id} style={{borderRadius:10}}>
-                            <TableCell  component="th" scope="voluntario">
-                              {voluntario.firstName}
-                            </TableCell>
-                            <TableCell style={{ width: 100 }} align="right">
-                              {voluntario.lastName}
-                            </TableCell>
-                            <TableCell style={{ width: 100 }} align="right">
-                              {voluntario.email}
-                            </TableCell>
-                            <TableCell style={{ width: 300 }} align="right">
-                              {moment(voluntario.createdAt).format('LLL')+'hs'}
-                            </TableCell>
-                            <TableCell align="right">
-                                        {
-                                        <ButtonGroup variant="contained"  aria-label="contained button group" key={`detalles${voluntario.id}`}>
-                                                   
-                                                   <Button style={{ textTransform: 'none',background:"lightgreen",color:'white',}} key={`aceptar${voluntario.id}`}  onClick={() => handleStatusChange(voluntario)}>
-                                                                <CheckCircleIcon/>  
-                                                    </Button>
-                                                    <Button  style={{textTransform: 'none', background:"lightblue",color:'white'}} key={`detalles${voluntario.id}`}  onClick={() => history.push(`/admin/voluntarios/${voluntario.id}`)}>
-                                                            <FaceIcon/> Detalles   
-                                                    </Button>
-                                                   
-                                                    <Button style={{textTransform: 'none', background:"pink",color:'white'}}  key={`rechazar${voluntario.id}`}  onClick={() => handleDeletion(voluntario.id)}>
-                                                                <DeleteForeverIcon/> 
-                                                    </Button>
-                                                   
-                                        </ButtonGroup>
+    },[])
+    
+            return (
+            <div style={{marginTop:100}}>
+                {data && data.length ? 
+                <MaterialTable
+                icons={tableIcons}
+                title="Tabla de Asesores Activos"
+                components={{
+                    Toolbar: props => (
+                        <div style={{backgroundColor: '#e8eaf5'}}>
+                            <MTableToolbar {...props} />
+                                <div style={{  textAlign: "center",fontFamily:'Poppins' }}>
+                                <Button 
+                                style={{margin:10}}
+                                variant="contained"  
+                                color= {locked ? "secondary":"primary"}
+                                 onClick={()=>setLocked(!locked)}>
+                                    {locked ? <LockIcon/>:<LockOpenIcon/>}
+                                </Button>
+                             </div>
+                      </div>
+                      ),
+                    }}
+                columns={[
+                    { title: 'Avatar', field: 'imageUrl', render: rowData => <img src={rowData.imageUrl} style={{width: 40, borderRadius: '50%'}}/> },
+                    { title: 'Nombre', field: 'firstName' },
+                    { title: 'Apellido', field: 'lastName' },
+                    {title: 'Contacto', field:'email'},
+                    {title: 'Fecha de Postulación', field:'fecha'},
+                    { title: 'Fecha de Nacimiento', field: 'edad', type: 'numeric'},
+                 
+                ]}
+                data={data}
+                actions={[
+                    {
+                    icon: () => <LinkedInIcon color="primary" />,
+                    tooltip: 'Visitar LinkedIn',
+                    onClick: (event, rowData) => 
+                    Swal.fire({
+                        title:  `¿Deseas visitar el detalle de ${rowData.firstName} ${rowData.lastName}?`,
+                        icon: "question",
+                        confirmButtonColor: VIOLETA,
+                        showCancelButton: true,
+                        cancelButtonColor: 'gray',
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            window.open(rowData.linkedin, "_blank");
+                                 }
+                                })
+                    },
+                    {
+                    icon: () => <ListAltIcon color='primary'/>,
+                    tooltip: 'Detalle del Voluntario',
+                    onClick: (event, rowData) =>
+                    Swal.fire({
+                        title:  `¿Deseas visitar el detalle de ${rowData.firstName} ${rowData.lastName}?`,
+                        icon: "question",
+                        confirmButtonColor: VIOLETA,
+                        showCancelButton: true,
+                        cancelButtonColor: 'gray',
+                       })
+                        .then((result) => {
+                                 if (result.isConfirmed) {
+                                    history.push(`/admin/voluntarios/${rowData.id}`)
+                                 }
+                                })
+                    },
+                    
+                    rowData => ({
+                        icon: () => <DeleteForeverIcon color="secondary" />,
+                        disabled: locked,
+                        tooltip: 'Rechazar Asesor',
+                        onClick: (event, rowData) =>
+                            Swal.fire({
+                                title: `Rechazar a ${rowData.firstName} ${rowData.lastName}`,
+                                text: `Podrás reconsiderar la decisión en Gestión Educativa`,
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: VERDE,
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Rechazar',
+                                showLoaderOnConfirm: true,
+                                preConfirm: () => {
+                                    console.log(rowData)
+                                    return props.deleteVolunteer(rowData.id)
+                                    .then(response => {
+                                       
+                                        if (response.statusText !=='OK') {
+                                          throw new Error('No se pudo che')
                                         }
-                                        </TableCell>
-                          </TableRow>
-                        ))}
-                    </TableBody>
-                    <TableFooter>
-                  <TableRow>
-                    <TablePagination
-                      rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                      colSpan={6}
-                      count={filtered.length}
-                      rowsPerPage={rowsPerPage}
-                      page={page}
-                      SelectProps={{
-                        inputProps: { 'aria-label': 'rows per page' },
-                        native: true,
-                      }}
-                      onChangePage={handleChangePage}
-                      onChangeRowsPerPage={handleChangeRowsPerPage}
-                      ActionsComponent={TablePaginationActions}
-                    />
-                  </TableRow>
-                </TableFooter>
-                </Table>:'No hay voluntarios en este momento'}
+                                        console.log(data)
+                                        setData(data.filter(activos =>activos.id!==rowData.id))
+                                        return response.data
+                                    })
+                                  },
+                                allowOutsideClick: () => !Swal.isLoading()
+                                })
+                                .then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire(
+                                    'Listo',
+                                    `La operación fue completada con éxito.`,
+                                    'success'
+                                    )
+                                }
+                                })
+
+                       
+                    })
+                ]}
+                onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
+                options={{  
+                    headerStyle: { 
+                        position: 'sticky',
+                        color: VIOLETA
+                    },
+                    search: true,
+                    exportButton: true,
+                    actionsColumnIndex: -1,
+                    rowStyle: rowData => ({
+                        backgroundColor: (selectedRow === rowData.tableData.id) ? '#9ba6e2' : '#FFF',
+                      }),
+                      headerStyle: {
+                        backgroundColor: VIOLETA,
+                        color: 'white',
+                        '&:hover': {
+                            color:'white',
+                            textDecoration:'none',
+                         },
+                        
+                      }
+                }}
+               
+                 
+                />  : <Spinner/>}
+          </div>
+            )
      
-      </TableContainer>
-    </div>
-    )
-}
-
-
-
-
-
-const mapStateToProps = (state) => ({
+    }
+    const mapStateToProps = (state) => ({
         volunteers:state.volunteers.volunteers,
 })
 
