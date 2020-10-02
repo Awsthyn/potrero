@@ -26,6 +26,7 @@ import 'moment/locale/es';
 import styles from './DetalleVoluntario.module.css';
 import moment from 'moment';
 import DetalleHorariosVoluntario from './DetalleHorariosVoluntario';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
 moment.locale('es');
 
 const VIOLETA = '#492BC4';
@@ -54,6 +55,9 @@ const useStyles = makeStyles({
   pepereff: {
     // margin: 'inherit',
     elevation: 5,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   typo: {
     // margin: 10,
@@ -67,17 +71,16 @@ function DetalleVoluntario(props) {
     var {
       firstName,
       lastName,
+      email,
+      birthday,
       createdAt,
       state,
-      email,
       id,
-      isActive,
       linkedin,
       cv,
       frontDNI,
       backDNI,
-      phone,
-      birthday,
+      phone
     } = props.voluntarios.filter((v) => v.id == props.id)[0];
 
 
@@ -143,136 +146,128 @@ function DetalleVoluntario(props) {
   return (
     <div className={styles.contenedor}>
       {props.voluntarios.length ? (
-        <div className={classes.papereff} >
-          <Grid container spacing={4}>
-            <svg viewBox="0 0 16 16" class={styles.leftArrow} onClick={()=> window.history.go(-1)} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <div>
+          <button className={styles.btnRegresar} onClick={()=> window.history.go(-1)}>
+            <svg viewBox="0 0 16 16" class={styles.leftArrow} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
             </svg>
-            <Grid item xs={12}>
+            Regresar
+          </button>
+          <h1 className="mb-3 mt-2" style={{ fontWeight: '500', paddingBottom: '10px', fontFamily:'Poppins, sans-serif'}}>
+            Detalles del voluntario
+          </h1>
+          <div>
+            <div>
               <div className={styles.containerGrids}>
-                <Grid container justify='center' spacing={2}>
-                  <Typography
-                    className={styles.typography}
-                    component='h2'
-                    gutterBottom
-                  >
+                  <div className={styles.containerLabels}>
                     <label className={styles.label}>
                       Nombre:
-                      <input className={styles.data} readOnly type="text" value={`${firstName} ${lastName}`}/>
+                      <input className={styles.data} readOnly type="text" value={firstName}/>
                     </label> 
-                  </Typography>
-                </Grid>
-                <Grid container justify='center' spacing={2}>
-                  <Typography
-                    className={styles.typography}
-                    component='h2'
-                    gutterBottom
-                  >
+                  </div>
+                  <div className={styles.containerLabels}>
                     <label className={styles.label}>
-                      Email:
-                      <input className={styles.data} readOnly type="text" value={email}/>
+                      Apellido:
+                      <input className={styles.data} readOnly type="text" value={lastName}/>
                     </label> 
-                  </Typography>
-                </Grid>
+                  </div>
               </div>
-              <Grid container justify='center' spacing={2}>
-                <Typography
-                  className={styles.typography}
-                  component='h2'
-                  gutterBottom
-                >
-                      <label className={styles.label}>
-                        LinkedIn:
-                        <div><a className={styles.link} href={linkedin} target='_blank'> Ver Perfil de LinkedIn </a></div>
-                      </label>
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid item xs={12}>
-              <Grid container justify='center' spacing={2}>
-                <Typography
-                  className={styles.typography}
-                  component='h2'
-                  gutterBottom
-                >
-                  <label className={styles.label}>
-                    Fecha de Postulación:
-                    <input className={styles.data} readOnly type="text" value={`${moment(createdAt).format('L')}`}/>
-                  </label>
-                </Typography>
-              </Grid>
-              <Grid container justify='center' spacing={2}>
-                <Typography
-                  className={styles.typography}
-                  component='h2'
-                  gutterBottom
-                >
-                  <label className={styles.label}>
-                    Edad:
-                    <input className={styles.data} readOnly type="text" value={`${Number(moment().get('year')) - Number(moment(birthday).get('year'))} años`}/>
-                  </label>
-                </Typography>
-              </Grid>
-              <Grid container justify='center' spacing={2}>
-                <Typography
-                  className={styles.typography}
-                  component='h2'
-                  gutterBottom
-                >
+              <div className={styles.containerGrids}>
+              <div className={styles.containerLabels} >
                   <label className={styles.label}>
                     Teléfono:
                     <input className={styles.data} readOnly type="text" value={phone}/>
                   </label>
-                </Typography>
-              </Grid>
-              <Grid
-                container
-                justify='center'
-                spacing={2}
+                </div>
+                <div className={styles.containerLabels}>
+                  <label className={styles.label}>
+                    Email:
+                    <input className={styles.data} readOnly type="text" value={email}/>
+                  </label> 
+                </div>
+              </div>
+              <div className={styles.containerGrids}>
+                <div className={styles.containerLabels}>
+                  <label className={styles.label}>
+                    Fecha Nacimiento:
+                    <input className={styles.data} readOnly type="text" value={`${moment(birthday).format('L')}`}/>
+                  </label>
+                </div>
+                <div className={styles.containerLabels}>
+                  <label className={styles.label}>
+                    Edad:
+                    <input className={styles.data} readOnly type="text" value={`${Number(moment().get('year')) - Number(moment(birthday).get('year'))} años`}/>
+                  </label>
+                </div>
+              </div>
+              <div className={styles.containerGrids}>
+                <div className={styles.containerLabels}>
+                  <label className={styles.label}>
+                    Fecha Postulación:
+                    <input className={styles.data} readOnly type="text" value={`${moment(createdAt).format('L')}`}/>
+                  </label>
+                </div>
+                <div className={styles.containerLabels}>
+                  <label className={styles.label}>
+                    LinkedIn:
+                    <div><a className={styles.link} href={linkedin} target='_blank'> Ver Perfil de LinkedIn </a></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                {
+                    (!cv || !cv.split('.')[1]) ? 
+                    <h5 style={{marginBottom: '20px', marginTop: '20px', textAlign:'center', color:'red'}}>No se encontró el CV</h5> 
+                  :
+                    (
+                      <div style={{display:'flex', justifyContent:'center', marginTop:'0'}}>
+                      {
+                        viewCV ?
+                          <div className={styles.hideFiles} style={{width:'100%'}}>
+                            <button className={styles.btnFiles} onClick={() => mostrarCV()}>
+                              <AccordionSummary className={styles.summary} expandIcon={<span className="material-icons" style={{alignItems:'center'}}>expand_less</span>}>
+                                Ocultar CV 
+                              </AccordionSummary>
+                              </button>
+                            <object
+                              data={`http://localhost:3001/uploads/cv/${cv}`}
+                              type='application/pdf'
+                              width='750px'
+                              height='700px'
+                            />
+                          </div>
+                        : 
+                          <div className={styles.viewFiles}>
+                            <button className={styles.btnFiles} onClick={() => mostrarCV()} style={{marginTop:'15px'}}>
+                              <AccordionSummary className={styles.summary} expandIcon={<span className="material-icons">expand_more</span>}>
+                                Ver CV
+                              </AccordionSummary>
+                            </button>
+                          </div>
+                      } 
+                      </div>
+                    ) 
+                }
+              </div>
+              <div
               >
-                <label className={styles.labelFile} style={{marginBottom:'0', paddingBottom:'0'}}>
-                  Curriculum:
-                </label>
-                  {
-                      (!cv || !cv.split('.')[1]) ? 
-                      <h5 style={{marginBottom: '10px', marginTop: '5px', textAlign:'center'}}>No se encontro el CV</h5> 
-                    :
-                      (
-                        <div style={{display:'flex', justifyContent:'center', marginTop:'0'}}>
-                        {
-                          viewCV ?
-                            <div className={styles.hideFiles} style={{width:'100%'}}>
-                              <button className={styles.btnFiles} onClick={() => mostrarCV()}>Ocultar CV</button>
-                              <object
-                                data={`http://localhost:3001/uploads/cv/${cv}`}
-                                type='application/pdf'
-                                width='800px'
-                                height='700px'
-                              />
-                            </div>
-                          : 
-                            <div className={styles.viewFiles}><button className={styles.btnFiles} onClick={() => mostrarCV()}>Ver CV</button></div>
-                        } 
-                        </div>
-                      ) 
-                  }
-              </Grid>
-              <Grid
-                container
-                justify='center'
-                spacing={2}
-              >
-                <label className={styles.labelFile} style={{marginBottom:'0', paddingBottom:'0'}}>Foto del DNI:</label>
                 {
                   (!frontDNI || !frontDNI.split('.')[1] || !backDNI || !backDNI.split('.')[1]) ? 
-                    <h5 style={{marginBottom: '10px', marginTop: '5px', textAlign:'center'}}>No se encontro la imagen de DNI</h5>
+                    <h5 style={{marginBottom: '30px', marginTop: '10px', textAlign:'center', color:'red'}}>No se encontro la imagen del DNI</h5>
                    : 
                    (
                       <div style={{display:'flex', justifyContent:'center', marginTop:'0'}}>
                         {
                           viewDNI ?
                             <div className={styles.hideFiles} style={{width:'100%'}}>
-                              <button className={styles.btnFiles} onClick={() => mostrarDNI()}>Ocultar Foto del DNI</button>
+                              <button className={styles.btnFiles} onClick={() => mostrarDNI()}>
+                                <AccordionSummary className={styles.summary} expandIcon={<span className="material-icons" style={{alignItems:'center'}}>expand_less</span>}>
+                                  Ocultar DNI
+                                </AccordionSummary>
+                                
+                                </button>
                               <div className={styles.divImg} style={{width:'100%', margin:'10px', display:'flex', justifyContent:'space-around'}}>
                                 <img
                                   className={styles.dni}
@@ -289,29 +284,23 @@ function DetalleVoluntario(props) {
                               </div>
                             </div>
                           : 
-                            <div className={styles.viewFiles}><button className={styles.btnFiles} onClick={() => mostrarDNI()}>Ver Foto del DNI</button></div>
+                            <div className={styles.viewFiles}>
+                              <button className={styles.btnFiles} onClick={() => mostrarDNI()}>
+                                <AccordionSummary className={styles.summary} expandIcon={<span className="material-icons">expand_more</span>}>
+                                  Ver DNI
+                                </AccordionSummary>
+                              </button>
+                            </div>
                         }
                       </div>
                   )
                 }
-              </Grid>
-              <Grid
-                container
-                justify='center'
-                spacing={2}
-              >
-                {/* <Link to={`/admin/voluntarios/detalleHorarios/${id}`}><h4>Ver detalle de los horarios seleccionados</h4></Link> */}
+              </div>
+              <div className={styles.containerdetalleHorarios}>
                 <h4>Detalle de los horarios seleccionados por el voluntario</h4>
                 <DetalleHorariosVoluntario schedule={props.schedule} />
-              </Grid>
-
-
-              <Grid
-                className={classes.typo}
-                container
-                justify='center'
-                spacing={2}
-              >
+              </div>
+              <div className={styles.divAcciones}>
                 <button
                   key={`aceptar${id}`}
                   className={`${
@@ -340,9 +329,9 @@ function DetalleVoluntario(props) {
                     Rechazar
                   </i>
                 </button>
-              </Grid>
-            </Grid>
-          </Grid>
+              </div>
+            </div>
+          </div>
         </div>
       ) : (
           'Loading'

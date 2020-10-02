@@ -64,7 +64,7 @@ class App extends React.Component {
         />
          
         <Route exact path="/" component={Home} />
-        <Route path="/voluntarios" component={ContenedorForm} />
+        <Route exact path="/voluntarios" component={ContenedorForm} />
         {/* <Route path="/admin" component={AdminDrawer} /> */}
         <AdminRoute exact path="/admin" component={AdminDrawer} />
         <Route exact path="/admin" component={AdminPanel} />
@@ -91,11 +91,11 @@ class App extends React.Component {
           path="/admin/estudiantes/agregar"
           component={CreateStudentForm}
         />
-        <Route
+        {/* <Route
           exact
           path="/admin/estudiantes/detalles/:id"
           component={StudentFile}
-        />
+        /> */}
         <Route
           exact
           path="/admin/estudiantes/asignacion/:studentId/:subjectId"

@@ -185,7 +185,7 @@ const TablaVoluntarios = (props) => {
                        })
                         .then((result) => {
                                  if (result.isConfirmed) {
-                                    history.push(`/voluntarios/${rowData.id}`)
+                                    history.push(`/admin/voluntarios/${rowData.id}`)
                                  }
                                 })
                     },
