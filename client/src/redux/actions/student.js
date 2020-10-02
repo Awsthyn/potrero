@@ -40,6 +40,7 @@ export function postStudent(student) {
 }
 
 export function putStudent(student) {
+	console.log('put', student)
 	return function (dispatch) {
 		console.log(student)
 		return axios

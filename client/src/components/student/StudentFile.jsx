@@ -49,7 +49,7 @@ export class StudentFile extends Component {
     const prop = `error${name}`;
 
     if(name === 'email' || name === 'tutorEmail'){
-      (!(/\S+@\S+\.\S+/.test(value))) ?
+      (!(/\S+@\S+\.\S+/.test(value)) || !value) ?
         this.setState({ validar: !this.state[prop] ? this.state.validar + 1 : this.state.validar, [prop]: 'Ingrese un e-mail válido' })
         :
         this.setState({ validar: this.state[prop] ? this.state.validar - 1 : this.state.validar, [prop]: null});
@@ -117,19 +117,21 @@ export class StudentFile extends Component {
         todXStudent: student?.typeOfDifficulties?.map(e => e.id)
       })
     }
+
+    console.log(this.state.validar)
   }
 
   render() {
     return (
       <div className={styles.editStudent}>
         <form className={styles.formStudent} onSubmit={this.submitHandler}>
-          <div className={styles.container}>
             <h1
               className='mb-3 mt-2'
-              style={{ fontWeight: '500', paddingBottom: '1%' }}
+              style={{ fontWeight: '500' }}
             >
               Formulario para editar alumno
             </h1>
+          <div className={styles.box}>
             <label className={styles.labelDatos}>Datos del Alumno</label>
             <div className='d-flex flex-row form-group'>
               <label className={styles.tag}>
@@ -176,7 +178,7 @@ export class StudentFile extends Component {
                   onKeyUp={this.onChangeHandler}
                 />
                 {
-                  this.state.phone && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorphone}</p>)
+                  (this.state.phone || !this.state.phone) && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errorphone}</p>)
                 }
               </label>
               <label className={styles.tag}>
@@ -191,12 +193,12 @@ export class StudentFile extends Component {
                   onKeyUp={this.onChangeHandler}
                 /> 
                   {
-                    this.state.email && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.erroremail}</p>)
+                    (this.state.email || !this.state.email) && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.erroremail}</p>)
                   }
               </label>
             </div>
           </div>
-          <div className={styles.container}>
+          <div className={styles.box}>
             <label className={styles.labelDatos}>Datos del Tutor</label>
             <div className='mb-n1 d-flex flex-row form-group'>
               <label className={styles.tag}>
@@ -224,7 +226,6 @@ export class StudentFile extends Component {
                   name='tutorLastName'
                   onKeyUp={this.onChangeHandler}
                   defaultValue={this.state.tutorLastName}
-                  onKeyUp={this.onChangeHandler}
                 />
                 {
                   !this.state.tutorLastName && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorLastName}</p>)
@@ -244,7 +245,7 @@ export class StudentFile extends Component {
                   onKeyUp={this.onChangeHandler}
                 />
                 {
-                  this.state.tutorPhone && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorPhone}</p>)
+                  (this.state.tutorPhone || !this.state.tutorPhone) && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorPhone}</p>)
                 }
               </label>
               <label className={styles.tag}>
@@ -259,13 +260,13 @@ export class StudentFile extends Component {
                   onKeyUp={this.onChangeHandler}
                 />
                   {
-                    this.state.tutorEmail && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorEmail}</p>)
+                    (this.state.tutorEmail || !this.state.tutorEmail) && (<p style={{fontSize: "15px", textAlign: 'left', position: 'absolute', color: 'red'}}>{this.state.errortutorEmail}</p>)
                   }
               </label>
             </div>
           </div>
 
-          <div className={styles.container}>
+          <div className={styles.box}>
             <div className='form-group'>
               <label className={styles.extras}>
                 Motivaciones del alumno
@@ -302,8 +303,8 @@ export class StudentFile extends Component {
             </div>
           </div>
 
-          <div className={styles.container}>
-            <label style={{ fontSize: '1.7em' }} htmlFor='nivelEducativo'>
+          <div className={styles.box}>
+            <label style={{ fontSize: '1.7em', marginBottom:'10px', marginTop:'0' }} htmlFor='nivelEducativo'>
               Grado alcanzado
             </label>
             <select
@@ -327,8 +328,8 @@ export class StudentFile extends Component {
             </select>
           </div>
           <div className={styles.containerSubjects}>
-            <h3 className='text-center d-block mb-3'>
-              Materias que tiene que aprender
+            <h3 style={{margin: '1% auto 3% auto'}}>
+              Materias en las que necesita asistencia
             </h3>
             <div
               style={{
@@ -356,40 +357,12 @@ export class StudentFile extends Component {
               }
             </div>
           </div>
-          <div className={styles.containerSubjects}>
-            <h3 className='text-center d-block mb-3'>
-              Tipos de dificultades que presenta
-            </h3>
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                flexWrap: 'wrap',
-              }}
-              className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
-            >
-              {
-                this.props.difficulties?.map((difficulty) => {
-                  return (
-                    <TypeOfDifficultyCheckbox
-                      key={difficulty.id}
-                      initialState={
-                        this.state.todXStudent?.includes(difficulty.id)
-                      }
-                      difficulty={difficulty}
-                      onChange={this.onCheckboxClicked}
-                      required
-                    />
-                  );
-                })
-              }
-            </div>
+          <div style={{margin: '5% 3% 1% 3%'}}>
+            <h4 className='text-danger'>
+              Feature de modificación de horarios en construcción. Para hacer un
+              cambio de esa temática, comunicarse con HENRY.
+            </h4>
           </div>
-          <h4 className='text-danger'>
-            Feature de modificación de horarios en construcción. Para hacer un
-            cambio de esa temática, comunicarse con HENRY.
-          </h4>
           <div className={styles.containerBtns}>
             <svg onClick={() => window.history.go(-1)} viewBox="0 0 10 10" class="VoluntarioForm_leftArrow__1ya4q" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>

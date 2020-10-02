@@ -194,13 +194,15 @@ server.post("/", (req, res) => {
 });
 
 server.put("/:id", (req, res) => {
+  console.log(req.body)
   const { subjectsId } = req.body;
   // BUSCA Y MODIFICA AL STUDENT ENCONTRADO.
   SubjectXStudent.destroy({ where: { studentId: req.params.id } })
     .then(() =>
       SubjectXStudent.bulkCreate(
         subjectsId.map((s) => {
-          return { subjectId: s, studentId: req.params.id };
+          console.log('ssss',s)
+          return { subjectId: s, studentId: req.body.id };
         })
       )
     )

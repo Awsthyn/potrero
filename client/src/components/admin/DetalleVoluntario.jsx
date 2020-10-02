@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
@@ -18,9 +18,10 @@ import {
 } from '../../redux/actions/voluntary';
 import Grid from '@material-ui/core/Grid';
 import Collapse from '@material-ui/core/Collapse';
-import moment from 'moment';
 import swal from 'sweetalert';
 import 'moment/locale/es';
+import styles from './DetalleVoluntario.module.css';
+import moment from 'moment';
 moment.locale('es');
 
 const VIOLETA = '#492BC4';
@@ -46,7 +47,7 @@ const useStyles = makeStyles({
     height: 140,
   },
   pepereff: {
-    margin: 'inherit',
+    // margin: 'inherit',
     elevation: 5,
   },
   typo: {
@@ -71,6 +72,10 @@ function DetalleVoluntario(props) {
       phone,
       birthday,
     } = props.voluntarios.filter((v) => v.id == props.id)[0];
+
+    useEffect(() => {
+      props.getVolunteers()
+    }, []);
 
   const [viewCV, setViewCV] = useState(false);
   const [viewDNI, setViewDNI] = useState(false);
@@ -134,50 +139,76 @@ function DetalleVoluntario(props) {
             <Grid item xs={12}>
               <Grid container justify='center' spacing={2}>
                 <Typography
-                  className={classes.typo}
+                  className={styles.typography}
                   component='h2'
                   gutterBottom
                 >
-                  <b>Postulante:</b> {firstName} {lastName}
+                  <label className={styles.label}>
+                    Postulante:
+                    <input className={styles.data} readOnly type="text" value={`${firstName} ${lastName}`}/>
+                  </label> 
                 </Typography>
               </Grid>
               <Grid container justify='center' spacing={2}>
                 <Typography
-                  className={classes.typo}
+                  className={styles.typography}
                   component='h2'
                   gutterBottom
                 >
-                  <b> Email:</b> {email}
+                  <label className={styles.label}>
+                    Email:
+                    <input className={styles.data} readOnly type="text" value={email}/>
+                  </label> 
                 </Typography>
               </Grid>
               <Grid container justify='center' spacing={2}>
                 <Typography
-                  className={classes.typo}
+                  className={styles.typography}
                   component='h2'
                   gutterBottom
                 >
-                  <b> LinkedIn:</b><a href={linkedin} target='_blank'>LinkedIn</a>
+                      <label className={styles.label}>
+                        LinkedIn:
+                        <div><a className={styles.link} href={linkedin} target='_blank'> Ver Perfil de LinkedIn </a></div>
+                      </label>
                 </Typography>
               </Grid>
             </Grid>
             <Grid item xs={12}>
               <Grid container justify='center' spacing={2}>
                 <Typography
-                  className={classes.typo}
+                  className={styles.typography}
                   component='h2'
                   gutterBottom
                 >
-                  <b>Fecha de Postulación:</b> {moment(createdAt).format('LLL')}
-                  hs
+                  <label className={styles.label}>
+                    Fecha de Postulación:
+                    <input className={styles.data} readOnly type="text" value={`${moment(createdAt).format('L')}`}/>
+                  </label>
                 </Typography>
               </Grid>
               <Grid container justify='center' spacing={2}>
                 <Typography
-                  className={classes.typo}
+                  className={styles.typography}
                   component='h2'
                   gutterBottom
                 >
-                  <b>Teléfono:</b> {phone}
+                  <label className={styles.label}>
+                    Edad:
+                    <input className={styles.data} readOnly type="text" value={`${Number(moment().get('year')) - Number(moment(birthday).get('year'))} años`}/>
+                  </label>
+                </Typography>
+              </Grid>
+              <Grid container justify='center' spacing={2}>
+                <Typography
+                  className={styles.typography}
+                  component='h2'
+                  gutterBottom
+                >
+                  <label className={styles.label}>
+                    Teléfono:
+                    <input className={styles.data} readOnly type="text" value={phone}/>
+                  </label>
                 </Typography>
               </Grid>
               <Grid
@@ -186,12 +217,14 @@ function DetalleVoluntario(props) {
                 justify='center'
                 spacing={2}
               >
-                <b>Curriculum:</b>
-                {!cv ? 'Sin CV' : ''}
+                <label className={styles.label}>
+                  Curriculum:
+                  {!cv.split('.')[1] ? <h5>Sin CV</h5> : ''}
+                </label>
                 <br />
-                {cv ? (
+                {cv.split('.')[1] ? (
                   <div>
-                    <button onClick={() => mostrarCV()}>View CV</button>
+                    <button onClick={() => mostrarCV()}>Ocultar CV</button>
                     {
                       viewCV ?
                         <div style={{width:'1000px'}}>
@@ -305,6 +338,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getVolunteers: () => dispatch(getVolunteers()),
     deleteVolunteer: (id) => dispatch(deleteVolunteer(id)),
     acceptVolunteer: (id) => dispatch(acceptVolunteer(id)),
   };
