@@ -6,7 +6,7 @@ import Advisers from "../stats/Advisers.jsx";
 import Qualifications from "../stats/Quafilications";
 import OfferWithDemand from "../stats/OffersWithDemand";
 import "./stats.css";
-import logo from '../admin/assets/logo.png'
+import logo from "../admin/assets/logo.png";
 
 const useStyles = makeStyles({
   root: {
@@ -69,16 +69,19 @@ export default () => {
             {/* <Link to="/admin/inassistances" className="btn btn-primary fixBtn ocultoimpresion">Ver detalles</Link> */}
           </div>
           <br></br>
+          <hr width="70%" />
           <br></br>
           <div id="stats2">
             <Advisers />
           </div>
           <br></br>
+          <hr width="70%" />
           <br></br>
           <div id="stats3">
             <Qualifications />
           </div>
           <br></br>
+          <hr width="70%" />
           <br></br>
           <div id="stats4">
             <OfferWithDemand />
