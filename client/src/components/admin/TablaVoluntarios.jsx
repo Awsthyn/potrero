@@ -189,7 +189,7 @@ const TablaVoluntarios = (props) => {
                                 })
                     },
                     {
-                        icon: () => <CheckCircleIcon color='primary'/>,
+                        icon: () => <CheckCircleIcon style={{background:VERDE}} />,
                         tooltip: 'Aceptar Voluntario',
                         onClick: (event, rowData) =>
                         Swal.fire({
@@ -202,6 +202,7 @@ const TablaVoluntarios = (props) => {
                             .then((result) => {
                                      if (result.isConfirmed) {
                                         props.acceptVolunteer(rowData)
+                                        .then((voluntario)=>setData(data.filter(pendientes =>pendientes.id!==voluntario.id)))
                                      }
                                     })
                         },
