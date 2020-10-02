@@ -106,6 +106,15 @@ class App extends React.Component {
           path="/admin/estudiantes/asignacion/:studentId"
           component={SubjectsPerStudent}
         />
+        <Route
+          exact
+          path="/admin/estudiantes/detalles/:id"
+          render={({ match }) => (
+            <StudentFile id={match.params.id} />
+          )}
+        />
+        <Route exact path='/admin/estudiantes/asignacion/:id' component={ClassAssignation} />
+        <Route exact path='/admin/estudiantes/listadematerias/:id' component={SubjectsPerStudent} />
 
         <Route exact path="/usuario/login" component={Login} />
         <Route exact path="/usuario/perfil" component={MiPerfil} />

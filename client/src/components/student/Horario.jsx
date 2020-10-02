@@ -5,11 +5,11 @@ import  {TimePicker}  from "@material-ui/pickers/"
 import {deleteSchedule, editSchedule } from '../../redux/actions/student';
 import moment from 'moment';
 import 'moment/locale/es';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export const Horario = ({onDelete, deleteSchedule, editSchedule, nameWeekDay}) => {
-    const [start, setStart] = useState(12)
-    const [end, setEnd] = useState(13)
+    const [start, setStart] = useState(12);
+    const [end, setEnd] = useState(13);
     
     const deleteFromRenderAndRedux = () => {
         onDelete()
@@ -39,12 +39,14 @@ export const Horario = ({onDelete, deleteSchedule, editSchedule, nameWeekDay}) =
     const handleTime = (hour, time) => {
       let hours = moment(hour).format('LT')
       if(time == "start") {
-        setStart(moment.duration(hours).asHours())}      
-        else setEnd(moment.duration(hours).asHours())   
+        setStart(moment.duration(hours).asHours())
+      }      
+      else setEnd(moment.duration(hours).asHours())   
     }
     useEffect(()=>{
         verification()
-    }, [start, end])
+    }, [start, end]);
+    
     return(
       <div style={{width: "300px"}} className="ml-auto mr-auto">
       <h6 className="mb-n4">Desde: </h6>  
