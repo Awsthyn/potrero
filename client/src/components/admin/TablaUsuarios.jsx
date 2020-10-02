@@ -145,8 +145,7 @@ const TablaUsuarios = (props) => {
                     { title: 'Apellido', field: 'lastName' },
                     {title: 'Contacto', field:'email'},
                     { title: 'Año de Nacimiento', field: 'birthday', type: 'numeric'},
-                    { title: 'Nivel máximo', field: 'nivel'},
-                    { title: 'Grado máximo', field: 'grado'},
+                  
                 ]}
                 data={data}
                 actions={[
