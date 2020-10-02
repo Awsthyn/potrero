@@ -3,8 +3,8 @@ import "./detail.css";
 import OffersWithDemand from "../OffersWithDemand";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import logo from "../../admin/assets/logo.png";
 
-//
 class OfWithDemDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -55,7 +55,6 @@ class OfWithDemDetail extends React.Component {
       demand: this.props.location.demandas,
       offers: this.props.location.ofertas,
     });
-    console.log(this.props.location);
   }
 
   render() {
@@ -78,12 +77,14 @@ class OfWithDemDetail extends React.Component {
     let recorrer = [];
     return (
       <div className="detailAssist">
-        {console.log(this.state)}
+        <br />
+        <br />
+        <br />
         <div
           className={`titlePotrero ocultoimpresion row d-flex justify-content-center`}
         >
           <h1>Fundación El Potrero</h1>
-          <img src="https://static.wixstatic.com/media/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/a54840_a2385331f0da4e698b63580c4db7ef02%7Emv2.png" />
+          <img src={logo} />
         </div>
         <button
           onClick={() => window.print()}
@@ -105,7 +106,7 @@ class OfWithDemDetail extends React.Component {
               this.state.listaDemanda.map((e) => (
                 <tr>
                   <th scope="row">Demanda</th>
-                  <td>{e}</td> 
+                  <td>{e}</td>
                 </tr>
               ))}
             {this.state.listaOferta &&

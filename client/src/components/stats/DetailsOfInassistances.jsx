@@ -32,9 +32,7 @@ return(
                     <h3 className="card-title">Datos de los estudiantes</h3>
                     <div class="row row-cols-1 row-cols-md-2">
                {
-                //    console.log(mostrar)
                    mostrar.length > 0 ? mostrar.map( student => {
-                       console.log(student)
                        return( 
                         <div>
                             <li key={student.id} className="noListStyle">
