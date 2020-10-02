@@ -31,9 +31,11 @@ export function postStudent(student) {
 		return axios
 			.post(`http://localhost:3001/students`, student, {withCredentials: true})
 			.then(res => {
+				dispatch(mailTutor(res.data))
+				.then(() =>
 				dispatch({type: ADD_STUDENT, payload: res.data})
 				// window.location= "/admin/student"
-			})
+			)})
 			.then(() => window.history.go(-1))
 			.catch(err => console.log(err));
 	};
@@ -83,5 +85,16 @@ export function deleteSchedule(data) {
 	};
 }
 
-
-
+export function mailTutor(data){
+	return function(dispatch){
+		return axios
+			.post(`http://localhost:3001/termsAndConditions/email`, data, {withCredentials: true})
+			.then(res => {
+				console.log("envio mail",res)
+				return res;
+			})
+			.catch(err =>{
+				throw new Error('Error al enviar el mail, verifique los datos ingresados')
+			})
+	}
+}
