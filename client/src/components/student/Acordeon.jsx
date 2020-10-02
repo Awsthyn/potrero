@@ -47,7 +47,7 @@ export default function Acordeon({ dia, expandedAll, handleChange, render }) {
         <Typography>
           {expandedAll ? (
             <span>
-              {typeof days == "string" ?  <Button onClick={onCreate}>Agregar horario</Button> : <Horario nameWeekDay={dia} onDelete={onDelete} /> }
+              {typeof days == "string" ?  <div style={{width: "300px"}} className="ml-auto mr-auto"><Button style={{backgroundColor: '#492BC4', color: "white"}} onClick={onCreate}>Agregar horario</Button></div> : <Horario nameWeekDay={dia} onDelete={onDelete} /> }
             </span>
           ) : null}
         </Typography>
