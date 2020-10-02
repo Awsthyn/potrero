@@ -11,6 +11,7 @@ import LevelEducation from './LevelEducation';
 import TypeOfDifficultyCheckbox from './TypeOfDifficulty';
 import DaysContainer from './DaysContainer';
 import style from './CreateStudentForm.module.css';
+import { styles } from '@material-ui/pickers/views/Calendar/Calendar';
 moment.locale('es');
 
 export class CreateStudentForm extends Component {
@@ -174,16 +175,18 @@ export class CreateStudentForm extends Component {
 							/>
 						</div>
 					</div>
-					<div className="form-group">
+					<div className="form-group" style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
 						<label style={{ fontSize: '1.7em', width: '65vw' }} htmlFor="nivelEducativo">
 							Grado alcanzado
 						</label>
 						<select
-							style={{ width: '65vw' }}
-							className="form-control"
+							className={style.select}
 							id="nivelEducativo"
 							onChange={(e) => this.setState({ academicLevel: e.target.value })}
 						>
+							<option selected='selected' disabled='disabled'>
+								--Seleccione Grado--
+							</option>
 							{this.props.academicLevels.length > 0 &&
 								this.props.academicLevels
 									.sort((a, b) => (a.numericLevel > b.numericLevel ? 1 : -1))

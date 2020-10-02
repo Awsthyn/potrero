@@ -64,7 +64,7 @@ class App extends React.Component {
         />
          
         <Route exact path="/" component={Home} />
-        <Route exact path="/voluntarios" component={ContenedorForm} />
+        <Route path="/voluntarios" component={ContenedorForm} />
         {/* <Route path="/admin" component={AdminDrawer} /> */}
         <AdminRoute exact path="/admin" component={AdminDrawer} />
         <Route exact path="/admin" component={AdminPanel} />
