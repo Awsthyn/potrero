@@ -126,13 +126,9 @@ server.get("/assistances/:id", (req, res) => {
 
       allDataSheetFromUser.classes.forEach((element) => {
         element.dataSheets.forEach(dataSheet => assistanceFromUser.push(dataSheet.assistance))
-        // console.log(element.dataSheets)
-        // console.log('ss')
         // assistanceFromUser.push(element.dataSheets.assistance);
       });
-      console.log(assistanceFromUser)
       assistanceFromUser.forEach((assistence) => {
-        // console.log(assistence)
         if (assistence === "presente") {
           presenteFromUser.push(assistence);
         } else if (assistence === "no justificada") {
@@ -241,7 +237,6 @@ server.get("/qualification", (req, res) => {
           });
         }
       });
-      console.log(countQualification)
       res.json(countQualification);
     })
     .catch((err) => {

@@ -110,3 +110,8 @@ titlePotrero * {
 .marginTop {
   margin-top: 50px;
 }
+
+.App .detailAssist .titlePotrero img{
+  height: 40px;
+  width: auto;
+}
