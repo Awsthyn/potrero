@@ -44,7 +44,6 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
     let compareAssignedToPosible = assignedSubjects?.map(e => e.name)
     let possibleClasses = matchingSchedule && matchingSchedule[0] && matchingSchedule.map(e => e[0].user.subjects[0].name)
     if(possibleClasses === undefined) possibleClasses = []
-    console.log(compareAssignedToPosible)
     return (
         <div style={{marginTop: "80px"}}>
             <h1>Clases de {studentDetail.firstName + " " + studentDetail.lastName}</h1>

@@ -1,6 +1,5 @@
 const middlewares = {
   isAdmin: function (req, res, next) {
-    console.log("SOY ADMIN", req.user);
     if (req.user.state === "admin") {
       console.log("Estoy entrando para el ADMIN");
       next();
@@ -10,7 +9,6 @@ const middlewares = {
   },
 
   isUserAdmin: function (req, res, next) {
-    console.log("SOY USERADMIN", req.user, "ADMIN", req.user.state);
     if (req.user.state === "aceptado" || req.user.state === "admin") {
       next();
     } else {
@@ -19,7 +17,6 @@ const middlewares = {
   },
 
   isUserActive: (req, res, next) => {
-    console.log("SOY USERACTIVE", req.user);
     if (req.user.isActive === true) {
       next();
     } else {

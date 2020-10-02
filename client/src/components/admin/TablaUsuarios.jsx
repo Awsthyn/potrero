@@ -145,8 +145,7 @@ const TablaUsuarios = (props) => {
                     { title: 'Apellido', field: 'lastName' },
                     {title: 'Contacto', field:'email'},
                     { title: 'Año de Nacimiento', field: 'birthday', type: 'numeric'},
-                    { title: 'Nivel máximo', field: 'nivel'},
-                    { title: 'Grado máximo', field: 'grado'},
+                  
                 ]}
                 data={data}
                 actions={[
@@ -202,14 +201,12 @@ const TablaUsuarios = (props) => {
                                 confirmButtonText: 'Inhabilitar',
                                 showLoaderOnConfirm: true,
                                 preConfirm: () => {
-                                    console.log(rowData)
                                     return props.banUser(rowData.id)
                                     .then(response => {
                                        
                                         if (response.statusText !=='OK') {
                                           throw new Error('No se pudo che')
                                         }
-                                        console.log(data)
                                         setData(data.filter(activos =>activos.id!==rowData.id))
                                         return response.data
                                     })

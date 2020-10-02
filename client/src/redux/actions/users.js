@@ -32,12 +32,10 @@ export function banUser(id) {
 }
 
 export function getUser(userId) {
-	console.log(userId)
 	return function (dispatch) {
 		return axios
 			.get(`http://localhost:3001/users/${userId}`, {withCredentials: true})
 			.then(res => {
-				console.log(res.data)
 				dispatch({type: GET_USER, payload: res.data});
 			})
 			.catch(err => console.log(err));

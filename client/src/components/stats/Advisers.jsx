@@ -22,7 +22,7 @@ class Advisers extends React.Component {
     let advisorsTemp = [];
 
     advisorsTemp = respuesta.advisorsActives;
-
+    //Pusheamos los asesores a ese let
     respuesta.advisorsInactives.forEach((advisorsTotal) => {
       advisorsTemp.push(advisorsTotal);
     });
@@ -34,7 +34,7 @@ class Advisers extends React.Component {
       totalAdvisorsActives: respuesta.totalAdvisorsActives,
       totalAdvisorsInactives: respuesta.totalAdvisorsInactives,
     });
-
+    //Hacemos el calculo de promedios activos e inactivos
     this.state.promedioActives =
       this.state.totalAdvisorsActives / this.state.totalAdvisors;
     this.state.promedioInactives =
@@ -42,7 +42,9 @@ class Advisers extends React.Component {
   }
 
   getChartData() {
+    //Se configuran los datos
     const datos = {
+      //Labels va la descripción de los campos por cada , vas agregando mas colores a la gráfica, asegurate de que los colores no sean estaticos, si no que se repliquen por cada cantidad de label que vas a mostrar
       labels: [
         "Activos " +
           (this.state.promedioActives > 0
@@ -55,7 +57,9 @@ class Advisers extends React.Component {
       ],
       datasets: [
         {
+          //Titulo del label
           label: "Asesores",
+          //Este campo muestra los datos en la gráfica 
           data: [
             this.state.totalAdvisorsActives,
             this.state.totalAdvisorsInactives,
@@ -69,6 +73,7 @@ class Advisers extends React.Component {
       ],
     };
 
+    //Se configuran las opciones
     const opciones = {
       responsive: true,
       maintainAspectRatio: false,
@@ -83,6 +88,7 @@ class Advisers extends React.Component {
         },
       },
     };
+    //Seteamos datos y opciones
     this.setState({
       datos: datos,
       opciones: opciones,
@@ -94,6 +100,7 @@ class Advisers extends React.Component {
     await this.getChartData();
   }
   render() {
+    //Preparamos un objeto con la ruta de dirección y su contenido asi lo pasamos por params
     const EnviarDetallesAsistentes = {
       pathname: "/admin/detalle/asesores",
       probandoAdvisor: this.state,
@@ -102,6 +109,7 @@ class Advisers extends React.Component {
       <div className="genAsist">
         <h4>{"Asesores: " + this.state.totalAdvisors}</h4>
         <Doughnut
+        //Renderizamos los datos guardados
           data={this.state.datos}
           options={{
             responsive: true,
@@ -114,6 +122,7 @@ class Advisers extends React.Component {
             },
           }}
         ></Doughnut>
+        {/* Mediante to enviamos el objeto que declaramos EnviarDetalesAsistentes, tené en cuenta que el próximo archivo (AssistsDetail) lo recibe por props */}
         <Link to={EnviarDetallesAsistentes}>
           <button className="btn btn-primary ocultoimpresion">
             Ver detalles
@@ -125,3 +134,5 @@ class Advisers extends React.Component {
 }
 
 export default Advisers;
+
+//SE REPLICA LO MISMO PARA LAS OTRAS GRÁFICAS, HAY VECES QUE SE PREPARAN MAS LAS FUNCIONES PERO SIEMPRE SE RENDERIZAN MEDIANTE LABELS Y DATA

@@ -92,7 +92,6 @@ export const StudentCrud = ({ getClasses }) => {
 
 
   function parseTime(string){
-    console.log(string)
     if(string.includes('.')){
     const arr = string.split('.');
     return (arr[0]+':'+'30'+'hs');
@@ -105,7 +104,6 @@ export const StudentCrud = ({ getClasses }) => {
       
 
     getClasses().then((classes)=>{
-        console.log(classes)
         if(!classes) {
             Swal.fire(
                 'Conectar la BD',

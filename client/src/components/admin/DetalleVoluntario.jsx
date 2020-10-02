@@ -113,7 +113,6 @@ function DetalleVoluntario(props) {
     }).then((willDelete) => {
       if (willDelete) {
         props.deleteVolunteer(Number(id));
-        console.log(id);
         swal('El registro fue destruido con éxito', {
           icon: 'success',
         });
@@ -133,6 +132,7 @@ function DetalleVoluntario(props) {
       dangerMode: false,
     }).then((confirm) => {
       if (confirm) {
+        console.log(volunteer)
         props.acceptVolunteer(volunteer);
         swal('El usuario se convirtió en asesor.', {
           icon: 'success',
@@ -302,12 +302,14 @@ function DetalleVoluntario(props) {
               </div>
               <div className={styles.divAcciones}>
                 <button
+                style={{margin:10}}
+
                   key={`aceptar${id}`}
                   className={`${
-                    state === 'pendiente' ? 'btn-warning' : 'btn-success '
+                    state === 'pendiente' ? 'btn-primary' : 'btn-success '
                     } btn border`}
                   onClick={() =>
-                    handleStatusChange({ id, firstName, lastName })
+                    handleStatusChange({ id, firstName, lastName,email })
                   }
                 >
                   <i
@@ -320,9 +322,10 @@ function DetalleVoluntario(props) {
                   {state === 'pendiente' ? 'Aceptar' : 'Activo'}
                 </button>
                 <button
+                style={{margin:10}}
                   key={`rechazar${id}`}
                   name={Number(id)}
-                  className='btn btn-danger border'
+                  className='btn btn-danger '
                   onClick={(e) => handleDeletion(id)}
                 >
                   <i name={id} className='fa fa-trash'>

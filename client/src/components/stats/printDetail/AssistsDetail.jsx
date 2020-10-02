@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import logo from '../../admin/assets/logo.png'
 
 class GeneralAssistDetail extends React.Component {
+  //Recibe los valores por props
   constructor(props) {
     super(props);
     this.state = {
@@ -20,11 +21,12 @@ class GeneralAssistDetail extends React.Component {
     this.isoFormatDMY = this.isoFormatDMY.bind(this);
     this.parseISOString = this.parseISOString.bind(this);
   }
-
+  //Seteamos props
   componentDidMount() {
     this.setState({ info: this.props.location.infoGrafico });
   }
 
+  //Estas dos funciones sirven para parsear el formato de date que tenemos en la db
   isoFormatDMY(d) {
     function pad(n) {
       return (n < 10 ? "0" : "") + n;
@@ -46,6 +48,7 @@ class GeneralAssistDetail extends React.Component {
   armarDatos() {
     this.state.info.forEach((element) => {
       if (element.assistance === "presente") {
+        //Usamos las funciones de parseo
         let s = element.createdAt;
         let date = this.parseISOString(s);
         let converter1 = this.isoFormatDMY(date);
@@ -98,6 +101,7 @@ class GeneralAssistDetail extends React.Component {
   }
 
   render() {
+    //Renderizamos otod lo preparado mediante tables 
     return (
       <div className="detailAssist">
         <br />
@@ -172,3 +176,5 @@ class GeneralAssistDetail extends React.Component {
   }
 }
 export default GeneralAssistDetail;
+
+//Estos cuatros archivos tienen la misma estructura de dom así se usa más facil el css.
