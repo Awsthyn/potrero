@@ -31,9 +31,10 @@
 }
 
 .input{
-    padding: 10px 0px;
+    /* padding: 10px 0px; */
     width: 70%;
-    margin: 10px 100px 0 0px;
+    margin: 10px 100px 0 0;
+    /* text-align: left; */
     border: none;
 	border-bottom: 2px solid #3333331f;
 }
@@ -56,7 +57,6 @@
 }
 
 .textArea{
-    
     padding: 10px 10px;
     width: 70%;
     margin: 10px 100px 0 0px;
@@ -77,7 +77,7 @@
     padding: 5px 5px 0 5px;
 } */
 
-select { 
+.select { 
     -webkit-appearance: none;  
     -moz-appearance: none;  
     appearance: none;  
@@ -86,14 +86,18 @@ select {
     height: 30px;
     text-align-last: center;
     background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-bottom: 15px;
 } 
 
-select:hover{
+.select:hover{
     cursor: pointer;
     border: 3px solid #8bc63ebe;
 }
 
-select:enabled{
+.select:enabled{
     outline: none;
     border: 3px solid #8bc63ebe;
 }
@@ -108,6 +112,29 @@ select:enabled{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.containerBtn{
+    margin: 4% 8%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.leftArrow {
+    position: absolute;
+    top: 45px;
+    left: 75px;
+    width: 80px;
+    fill: white;
+}
+
+.leftArrow:hover {
+    position: absolute;
+    top: 45px;
+    left: 75px;
+    width: 80px;
+    fill: #492BC4;
+    cursor: pointer;
 }
 
 .btnAgregar {
@@ -125,5 +152,26 @@ select:enabled{
     background-color: #492BC4;
     margin: 30px 0px;
     align-self: center;
+}
+
+.btnAgregar:disabled {
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: 500;
+    width: 210px;
+    height: 50px;
+    background: none;
+    color: white;
+    text-align: center;
+    padding: 0px 20px 0px 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: gray;
+    margin: 30px 0px;
+    align-self: center;
+}
+
+.btnAgregar:focus{
+    outline: 0;
 }
 

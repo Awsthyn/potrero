@@ -130,13 +130,6 @@ export const StudentCrud = ({ getClasses }) => {
     )
 }, [getClasses])
 
-
-
-
-
-
-
-
 return (
     <div style={{marginTop:100}}>
         {data && data.length ? 

@@ -37,11 +37,13 @@ export class StudentFile extends Component {
       errortutorPhone: null,
       errorinterests: null,
       errormotivations: null,
-      validar: 0 // Declaro el state validar para habilitar o desabilitar el boton de Confirmar cambios
+      validar: 0, // Declaro el state validar para habilitar o desabilitar el boton de Confirmar cambios
+      isLevelSelect: false,
     };
     this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    this.selectedGrade = this.selectedGrade.bind(this);
   }
   onChangeHandler = (event) => {
     let name = event.target.name;
@@ -90,11 +92,15 @@ export class StudentFile extends Component {
     }
   }
 
+  selectedGrade() {
+		this.setState({ isLevelSelect: true });
+	}
+
+
   componentDidMount() {
     this.props.getStudentDetail(this.props.id);
     this.props.getSubjects();
     this.props.getAcademicLevels();
-    this.props.getDifficulties();
   }
 
   componentDidUpdate(prevProps){
@@ -304,13 +310,15 @@ export class StudentFile extends Component {
 
           <div className={styles.box}>
             <label style={{ fontSize: '1.7em', marginBottom:'10px', marginTop:'0' }} htmlFor='nivelEducativo'>
-              Grado alcanzado
+              Grado Academico
             </label>
             <select
               className={styles.select}
               id='nivelEducativo'
-              onChange={(e) =>
-                this.setState({ educationLevel: e.target.value })
+              onChange={(e) =>{
+                this.setState({ educationLevel: e.target.value });
+                this.selectedGrade(e.target.value);
+              }
               }
             >
               <option selected='selected' disabled='disabled'>
@@ -326,45 +334,56 @@ export class StudentFile extends Component {
                   ))}
             </select>
           </div>
-          <div className={styles.containerSubjects}>
-            <h3 style={{margin: '1% auto 3% auto'}}>
-              Materias en las que necesita asistencia
-            </h3>
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                flexWrap: 'wrap',
-              }}
-              className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
-            >
-              {
-                this.props.subjects?.map((subject) => {
-                  return (
-                    <SubjectCheckbox
-                      key={subject.id}
-                      initialState={
-                        this.state.subjectsId?.includes(subject.id)
-                      }
-                      subject={subject}
-                      onChange={this.onCheckboxClicked}
-                      required
-                    />
-                  );
-                })
-              }
+          {
+            this.state.isLevelSelect ?
+            (
+                  <div className={styles.containerSubjects}>
+                <h3 style={{margin: '1% auto 3% auto'}}>
+                  Materias en las que necesita asistencia
+                </h3>
+                <span>Las materias en color violeta son en las que ya se esta inscripto el alumno</span>
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    flexWrap: 'wrap',
+                  }}
+                  className='ml-auto mr-auto d-flex flex-wrap form-check form-check-inline'
+                >
+                  {
+                    this.props.subjects?.map((subject) => {
+                      return (
+                        <SubjectCheckbox
+                          key={subject.id}
+                          initialState={
+                            this.state.subjectsId?.includes(subject.id)
+                          }
+                          subject={subject}
+                          onChange={this.onCheckboxClicked}
+                          required
+                        />
+                      );
+                    })
+                  }
+                </div>
+                <div className={styles.containerBtns}>
+                <svg onClick={() => window.history.go(-1)} viewBox="0 0 10 10" class="VoluntarioForm_leftArrow__1ya4q" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+                </svg>
+                <button
+                  disabled={this.state.validar > 0 ? true : false}
+                  className={styles.btnConfirmar}
+                >Confirmar cambios</button>
+              </div>
+              </div>
+            )
+            :
+            <div style={{color:'red', fontSize:'1.5em'}}>
+              Para poder seleccionar las materias en las que se brindará apoyo al alumno, 
+              es necesario que primero seleccione un grado academico.
             </div>
-          </div>
-          <div className={styles.containerBtns}>
-            <svg onClick={() => window.history.go(-1)} viewBox="0 0 10 10" class="VoluntarioForm_leftArrow__1ya4q" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
-            </svg>
-            <button
-              disabled={this.state.validar > 0 ? true : false}
-              className={styles.btnConfirmar}
-            >Confirmar cambios</button>
-          </div>
+          }
         </form>
       </div>
     );
@@ -374,7 +393,6 @@ export class StudentFile extends Component {
 const mapStateToProps = (state) => ({
   studentDetail: state.students.studentDetail,
   subjects: state.subjects.subjects,
-  difficulties: state.difficulty.difficulties,
   academicLevels: state.academic.academicLevels,
 });
 
@@ -382,7 +400,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getStudentDetail: (id) => dispatch(getStudentDetail(id)),
     getSubjects: () => dispatch(getSubjects()),
-    getDifficulties: () => dispatch(getDifficulties()),
     getAcademicLevels: () => dispatch(getAcademicLevels()),
     putStudent: (student) => dispatch(putStudent(student)),
   };

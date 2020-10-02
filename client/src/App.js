@@ -94,11 +94,11 @@ class App extends React.Component {
           path="/admin/estudiantes/agregar"
           component={CreateStudentForm}
         />
-        <Route
+        {/* <Route
           exact
           path="/admin/estudiantes/detalles/:id"
           component={StudentFile}
-        />
+        /> */}
         <Route
           exact
           path="/admin/estudiantes/asignacion/:studentId/:subjectId"
