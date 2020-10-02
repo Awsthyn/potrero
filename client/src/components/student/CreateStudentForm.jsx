@@ -61,14 +61,14 @@ export class CreateStudentForm extends Component {
 				this.setState({ validar: !this.state[prop] ? this.state.validar - 1 : this.state.validar, [prop]: null })
 		}
 
-		(!this.state.firstName || !this.state.lastName ||
-		!this.state.email || ! this.state.phone ||
-		!this.state.tutorFirstName || !this.state.tutorLastName ||
-		!this.state.tutorEmail || !this.state.tutorPhone ||
-		!this.state.interests || !this.state.motivations) ?
-		this.setState({validar: false})
-		:
-		this.setState({validar: true})
+		// (!this.state.firstName || !this.state.lastName ||
+		// !this.state.email || ! this.state.phone ||
+		// !this.state.tutorFirstName || !this.state.tutorLastName ||
+		// !this.state.tutorEmail || !this.state.tutorPhone ||
+		// !this.state.interests || !this.state.motivations) ?
+		// this.setState({validar: false})
+		// :
+		// this.setState({validar: true})
 	
 		this.setState({ [name]: value });
 	};
@@ -306,7 +306,7 @@ export class CreateStudentForm extends Component {
 							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
 						</svg>
 						<button
-						disabled={this.state.validar}
+						// disabled={this.state.validar}
 						className={style.btnAgregar}
 						>Agregar Alumno</button>
               		</div>
