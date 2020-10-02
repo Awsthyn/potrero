@@ -117,19 +117,7 @@ const TablaMaterias = (props) => {
 
     },[getSubjects])
 
-        async function handleAddition(){
-            const { value: materia } = await Swal.fire({
-              title: 'Ingresa el nombre de la Materia',
-              input: 'text',
-              inputPlaceholder: 'Por ejemplo: computación'
-            })
-            
-            if (materia) {
-              Swal.fire(`Se agregará a los registros la materia: ${materia}`)
-              props.postSubject({name: materia})
-            }
-          }
-    
+
           async function handleRename(subject){
             const { value: rename } = await Swal.fire({
               title: 'Ingresa el nombre nuevo',
@@ -161,7 +149,7 @@ const TablaMaterias = (props) => {
                               style={{margin:10}}
                               variant="contained"  
                               color= "primary"
-                               onClick={handleAddition}>
+                               onClick={()=>history.push('/admin/materias/agregar')}>
                             <PostAddIcon/>
                         </Button>
                       </div>

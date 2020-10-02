@@ -29,7 +29,9 @@ export function postSubject(subject) {
 		return axios
 			.post(`http://localhost:3001/subjects`, subject, {withCredentials: true})
 			.then(res => {
+				console.log(res.data)
 				dispatch({type: ADD_SUBJECT, payload: res.data})
+				return res.data
 			})
 			.catch(err => console.log(err));
 	};
