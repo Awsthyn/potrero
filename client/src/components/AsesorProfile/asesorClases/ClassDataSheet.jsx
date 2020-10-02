@@ -10,8 +10,6 @@ export default function ClassDataSheet({data, clase}){
    //    .then(res => setData(res.data))
    //    .catch(error => console.log(error))
    // }, [])
-   // console.log(clase)
-   console.log(data)
    return (
       <div>
       <h3 style={{fontFamily: "Poppins", textAlign:"center", marginTop:"30px"}}>Clases de el día {clase.nameWeekDay} a {clase.student.firstName} {clase.student.lastName}</h3>

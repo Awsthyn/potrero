@@ -15,7 +15,6 @@ export default function Falto({handleChange, setAsistencia}) {
 	const handleChecked = (e) => {
       if(e.target.checked){
 			setEstado({...estado, [e.target.name]: e.target.value})
-			console.log(e.target.value)
 			handleChange(e.target.value)
             let asistencia = [ injustificada, justificada]
             asistencia.map(a => {

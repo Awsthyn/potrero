@@ -78,8 +78,6 @@ server.get("/:id", (req, res) => {
 server.post("/:id", (req, res) => {
   //Se espera una propiedad 'schedules'
   var dias = req.body.schedules.split("-");
-  console.log(req.body);
-  console.log(dias);
   var numero = 1;
   var obj = {};
   for (let i = 0; i < dias.length; i++) {
@@ -92,7 +90,6 @@ server.post("/:id", (req, res) => {
     } else if (numero === 3) {
       obj.nameWeekDay = dias[i];
       obj.studentId = req.params.id;
-      console.log(obj);
       numero = 1;
       StudentSchedule.create(obj)
         .then((reso) => res.json(reso))
@@ -119,7 +116,6 @@ server.delete("/:id", (req, res) => {
     } else if (numero === 3) {
       obj.nameWeekDay = dias[i];
       obj.studentId = req.params.id;
-      console.log(obj);
       numero = 1;
       StudentSchedule.destroy({
         where: obj,

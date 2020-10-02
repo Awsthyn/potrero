@@ -110,7 +110,6 @@ function DetalleVoluntario(props) {
     }).then((willDelete) => {
       if (willDelete) {
         props.deleteVolunteer(Number(id));
-        console.log(id);
         swal('El registro fue destruido con éxito', {
           icon: 'success',
         });

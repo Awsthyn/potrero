@@ -14,7 +14,6 @@ export default function DetalleClase({match, history}) {
     function handleChange(value){
         setAsistencia(value)
     }
-    console.log(asistencia)
     useEffect(() => {
         axios.get(`http://localhost:3001/class/${match.params.classId}`, {withCredentials: true})
         .then(res => {

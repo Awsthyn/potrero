@@ -204,14 +204,12 @@ const TablaVoluntarios = (props) => {
                                 confirmButtonText: 'Rechazar',
                                 showLoaderOnConfirm: true,
                                 preConfirm: () => {
-                                    console.log(rowData)
                                     return props.deleteVolunteer(rowData.id)
                                     .then(response => {
                                        
                                         if (response.statusText !=='OK') {
                                           throw new Error('No se pudo che')
                                         }
-                                        console.log(data)
                                         setData(data.filter(activos =>activos.id!==rowData.id))
                                         return response.data
                                     })

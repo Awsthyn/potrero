@@ -118,7 +118,6 @@ export class StudentFile extends Component {
       })
     }
 
-    console.log(this.state.validar)
   }
 
   render() {

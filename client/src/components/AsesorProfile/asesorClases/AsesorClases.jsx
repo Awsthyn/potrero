@@ -19,7 +19,7 @@ export default function AsesorClases({clase}){
          }
       }))
    }, [])
-   console.log(clase)
+   
    return (
          <div className = {style.container}>
             <img className = {style.classIcon} alt = "" src = {logo}/>

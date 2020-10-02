@@ -40,7 +40,6 @@ function Niveles({getAcademicLevels, academicLevels, history}) {
       getAcademicLevels()
       if(!state.Primaria && !state.Secundaria){
             let newState = JSON.parse(localStorage.getItem('nivel'))
-            console.log(newState)
                if(newState) {
                   setState(newState)
                   if(newState.Primaria) setPrimario(true)
@@ -48,7 +47,7 @@ function Niveles({getAcademicLevels, academicLevels, history}) {
                }
             }
     }, [])
-    console.log(academicLevels)
+    
     if (redirect) {
       return <Redirect to="/voluntarios/materias" />;
     }
