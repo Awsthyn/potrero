@@ -149,9 +149,8 @@ const TablaVoluntarios = (props) => {
                     { title: 'Apellido', field: 'lastName' },
                     {title: 'Contacto', field:'email'},
                     {title: 'Fecha de Postulación', field:'fecha'},
-                    { title: 'Edad', field: 'edad', type: 'numeric'},
-                    { title: 'Nivel máximo', field: 'nivel'},
-                    { title: 'Grado máximo', field: 'grado'},
+                    { title: 'Fecha de Nacimiento', field: 'edad', type: 'numeric'},
+                 
                 ]}
                 data={data}
                 actions={[
