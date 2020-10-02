@@ -80,3 +80,8 @@
   flex-direction: row;
   justify-content: center;
 }
+
+.App #graficas .titlePotrero img{
+  height: 40px;
+  width: auto;
+}

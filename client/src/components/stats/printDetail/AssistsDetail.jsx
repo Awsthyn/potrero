@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import logo from '../../admin/assets/logo.png'
 
-//
 class GeneralAssistDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -108,7 +107,7 @@ class GeneralAssistDetail extends React.Component {
           className={`titlePotrero row justify-content-center`}
         >
           <h1>Fundación El Potrero</h1>
-          <img style={{width:'80px', marginLeft:'10px', marginTop:'5px'}} src={logo} />
+          <img src={logo} />
         </div>
         <button
           onClick={() => window.print()}
