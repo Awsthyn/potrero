@@ -117,3 +117,11 @@
     color: #8bc63ebe;
     text-decoration: none;
 }
+
+.leftArrow {
+    position: relative;
+    top: 45px;
+    left: 50px;
+    width: 35px;
+    fill: #492BC4;
+}
