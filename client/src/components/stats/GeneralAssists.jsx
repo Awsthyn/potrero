@@ -1,7 +1,7 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 import { Link } from "react-router-dom";
-import GenAsDet from "./printDetail/GeneralAssistsDetail.jsx";
+import "./style.css";
 
 class generalAssists extends React.Component {
   state = {
@@ -62,29 +62,30 @@ class generalAssists extends React.Component {
     const datos = {
       labels: [
         "Asistencias " +
-          (this.state.dataAssistance > 0 ? this.state.dataAssistance +
-          " (" +
-          Math.round(this.state.promedioAsistencias * 100) +
-          "%" +
-          ")": ""),
+          (this.state.dataAssistance > 0
+            ? " (" +
+              Math.round(this.state.promedioAsistencias * 100) +
+              "%" +
+              ")"
+            : ""),
         "Faltas justificadas " +
-           (this.state.dataJustificada > 0 ? this.state.dataJustificada +
-          " (" +
-          Math.round(this.state.promedioJustificadas * 100) +
-          "%" +
-          ")": ""),
+          (this.state.dataJustificada > 0
+            ? " (" +
+              Math.round(this.state.promedioJustificadas * 100) +
+              "%" +
+              ")"
+            : ""),
         "Faltas injustificadas " +
-          (this.state.dataNoJustificada > 0 ? this.state.dataNoJustificada +
-          " (" +
-          Math.round(this.state.promedioInjustificadas * 100) +
-          "%" +
-          ")":""),
+          (this.state.dataNoJustificada > 0
+            ? " (" +
+              Math.round(this.state.promedioInjustificadas * 100) +
+              "%" +
+              ")"
+            : ""),
         "Tardanzas " +
-          (this.state.dataDelay > 0 ? this.state.dataDelay +
-          " (" +
-          Math.round(this.state.promedioTardanzas * 100) +
-          "%" +
-          ")": ""),
+          (this.state.dataDelay > 0
+            ? " (" + Math.round(this.state.promedioTardanzas * 100) + "%" + ")"
+            : ""),
       ],
       datasets: [
         {
@@ -107,7 +108,7 @@ class generalAssists extends React.Component {
 
     const opciones = {
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       legendPosition: "bottom",
       location: "Asistencias totales",
       legend: {
@@ -129,12 +130,12 @@ class generalAssists extends React.Component {
   }
   render() {
     const enviarDetalles = {
-      pathname: "/admin/detail",
+      pathname: "/admin/detalle/asistencia",
       infoGrafico: this.state.info,
     };
     return (
-      <div>
-        <h4>{"Asistencias generales: " + this.state.total}</h4>
+      <div className="genAsist">
+        <h4>{"Asistencias generales (Total: " + this.state.total + ")"}</h4>
         <Pie
           data={this.state.datos}
           options={{
@@ -148,7 +149,11 @@ class generalAssists extends React.Component {
             },
           }}
         ></Pie>
-        <Link to={enviarDetalles}><button className="btn btn-primary ocultoimpresion">Enviame</button></Link>
+        <Link to={enviarDetalles}>
+          <button className="btn btn-primary ocultoimpresion">
+            Ver detalles
+          </button>
+        </Link>
       </div>
     );
   }

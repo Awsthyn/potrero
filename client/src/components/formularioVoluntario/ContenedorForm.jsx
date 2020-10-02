@@ -79,8 +79,46 @@ export default function ContenedorForm({history, location}) {
 							src={logo}
 						/>
 						<div className={style.frase}>  
-						<p style={{fontSize:'1.3rem', margin: '0px', fontFamily: 'Poppins'}} ><strong>Sumáte a nuestro equipo </strong></p>
-						<p style={{margin: '0', fontWeight: 100, color: 'gray', fontSize: '15px', fontFamily: 'Poppins'}} > Completá este formulario y nos pondremos en contacto con vos </p>
+						{ location.pathname === "/voluntarios/formulario" ?
+						<div>
+						 <span className={style.frase}>  	
+						 <p style={{fontSize:'1.3rem', margin: '0px', fontFamily: 'Poppins'}} ><strong>Sumáte a nuestro equipo </strong></p>
+						 <p style={{margin: '0', fontWeight: 100, color: 'gray', fontSize: '15px', fontFamily: 'Poppins'}} > Completá este formulario y nos pondremos en contacto con vos </p>
+						 </span>
+						 </div> : null
+                        }
+						{ location.pathname === "/voluntarios/horarios" ?
+						<div>
+						 <span className={style.frase}>  
+						 <p style={{fontSize:'1.3rem', margin: '0px', marginRight: '24%', fontFamily: 'Poppins'}} ><strong>Tu Disponibilidad </strong></p>
+						 <span style={{fontWeight: 100, color: 'gray', fontSize: '15px',fontFamily: 'Poppins'}} > ¿Cuales son los días y horarios que podrías colaborar con nosotros? </span>
+						 </span>
+						 </div>: null
+                        }
+						{ location.pathname === "/voluntarios/niveles" ?
+						<div>
+						 <span className={style.frase}>	
+						 <p style={{fontSize:'1.3rem', margin: '0px', marginRight: '24%'}} ><strong> Nivel Educativo </strong></p>
+						 <span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > ¿Cuál es el nivel educativo en el que podrías brindar asistencia? </span> 
+						 </span>
+						 </div> : null
+                        }
+						{ location.pathname === "/voluntarios/materias" ?
+						<div>
+						 <span className={style.frase} >  
+						 <p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Materias </strong></p>
+						 <span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Indicanos en que materias podés asistir a los chicos de la fundación. </span>
+						 </span> 
+						 </div> : null
+                        }
+						{ location.pathname === "/voluntarios/cargararchivos" ?
+						<div>
+						 <span className={style.frase} >  
+						 <p style={{fontSize:'1.3rem', margin: '0px', marginRight: '56%'}} ><strong> Por último... </strong></p>
+						 <span style={{fontWeight: 100, color: 'gray', fontSize: '15px'}} > Necesitamos algunos datos extras para poder validar tu identidad. </span>
+						 </span>
+						 </div> : null
+                        }
 						</div>
 						</div>
 						<div className={style.circles}>

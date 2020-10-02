@@ -13,7 +13,6 @@ server.get("/assistances", (req, res) => {
   DataSheet.findAll({
     attributes: {
       exclude: [
-        "createdAt",
         "updatedAt",
         "concentration",
         "companionName",
@@ -122,18 +121,25 @@ server.get("/assistances/:id", (req, res) => {
       let assistanceFromUser = [];
       let presenteFromUser = [];
       let tardanzaFromUser = [];
-      let ausenteFromUser = [];
+      let ausenteInjustificadoFromUser = [];
+      let ausenteJustificadoFromUser = [];
 
       allDataSheetFromUser.classes.forEach((element) => {
-        assistanceFromUser.push(element.dataSheet.assistance);
+        element.dataSheets.forEach(dataSheet => assistanceFromUser.push(dataSheet.assistance))
+        // console.log(element.dataSheets)
+        // console.log('ss')
+        // assistanceFromUser.push(element.dataSheets.assistance);
       });
-
+      console.log(assistanceFromUser)
       assistanceFromUser.forEach((assistence) => {
+        // console.log(assistence)
         if (assistence === "presente") {
           presenteFromUser.push(assistence);
-        } else if (assistence === "ausente") {
-          ausenteFromUser.push(assistence);
-        } else if (assistence === "tardanza") {
+        } else if (assistence === "no justificada") {
+          ausenteInjustificadoFromUser.push(assistence);
+        } else if (assistence === "justificada") {
+          ausenteJustificadoFromUser.push(assistence);
+        }else if (assistence === "tardanza") {
           tardanzaFromUser.push(assistence);
         }
       });
@@ -141,11 +147,13 @@ server.get("/assistances/:id", (req, res) => {
       let recorrerAsisstances = {
         presente: presenteFromUser.length,
         tardanza: tardanzaFromUser.length,
-        ausente: ausenteFromUser.length,
+        ausenteInjustificado: ausenteInjustificadoFromUser.length,
+        ausenteJustificado: ausenteJustificadoFromUser.length,
         total:
           presenteFromUser.length +
           tardanzaFromUser.length +
-          ausenteFromUser.length,
+          ausenteInjustificadoFromUser.length +
+          ausenteJustificadoFromUser.length,
       };
 
       res.json(recorrerAsisstances);
@@ -170,17 +178,70 @@ server.get("/qualification", (req, res) => {
         "comments",
         "duration",
         "attitude",
+        "relation",
+        "difference",
+        "valued",
+        "assesorMotivation",
+        "assistance",
+        "stay",
+        "classId",
       ],
     },
+    include: [
+      {
+        model: Class,
+        attributes: {
+          exclude: [
+            "updatedAt",
+            "createdAt",
+            "userId",
+            "studentId",
+            "subjectId",
+          ],
+        },
+        include: [
+          {
+            model: Student,
+            attributes: {
+              exclude: [
+                "createdAt",
+                "updatedAt",
+                "phone",
+                "email",
+                "tutorFirstName",
+                "tutorLastName",
+                "tutorPhone",
+                "tutorEmail",
+                "interests",
+                "motivations",
+                "isActive",
+              ],
+            },
+          },
+          {
+            model: Subject,
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
+      },
+    ],
   })
     .then((allClasses) => {
       let countQualification = [];
       allClasses.forEach((element) => {
         if (element.hadExam == true) {
           let num = parseInt(element.qualification);
-          countQualification.push(num);
+          let multiplo = num * 2;
+          countQualification.push({
+            nota: multiplo,
+            fullname: `${element.class.student.firstName} ${element.class.student.lastName}`,
+            materia: element.class.subject.name
+          });
         }
       });
+      console.log(countQualification)
       res.json(countQualification);
     })
     .catch((err) => {
@@ -338,9 +399,15 @@ server.get("/advisorstatus", (req, res) => {
           advisorStatus.hasAdvisor = true;
           advisorStatus.totalAdvisors = allAdvisors.length;
           if (advisor.isActive === true && advisor.state === "aceptado") {
-            advisorStatus.advisorsActives.push(advisor);
+            advisorStatus.advisorsActives.push({
+              nombre: advisor.firstName + " " + advisor.lastName,
+              state: advisor.isActive,
+            });
           } else {
-            advisorStatus.advisorsInactives.push(advisor);
+            advisorStatus.advisorsInactives.push({
+              nombre: advisor.firstName + " " + advisor.lastName,
+              state: advisor.isActive,
+            });
           }
         }
       });

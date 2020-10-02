@@ -40,19 +40,15 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
         getStudentDetail(params.studentId)
         getMatchingSchedulesForAllSubjects(params.studentId)
     }, [getStudentDetail, getMatchingSchedulesForAllSubjects, getUsers])
-    let assignedSubjects = studentDetail.id && studentDetail.subjects && studentDetail.subjects.length > 0 && studentDetail.subjects.filter(s => {
-        let assigned = false
-        for(let elem of studentDetail.classes){
-            if(elem.subjectId === s.id) assigned = true
-        }
-        return assigned
-    })
-    let compareAssignedToPosible = assignedSubjects && assignedSubjects.map(e => e.name)
+    let assignedSubjects = studentDetail?.classes?.map(e => e.subject)
+    let compareAssignedToPosible = assignedSubjects?.map(e => e.name)
     let possibleClasses = matchingSchedule && matchingSchedule[0] && matchingSchedule.map(e => e[0].user.subjects[0].name)
+    if(possibleClasses === undefined) possibleClasses = []
+    console.log(compareAssignedToPosible)
     return (
         <div style={{marginTop: "80px"}}>
-            <h2>Clases de {studentDetail.firstName + " " + studentDetail.lastName}</h2>
-            <h3 className="mb-3">Materias con clases asignadas</h3>
+            <h1>Clases de {studentDetail.firstName + " " + studentDetail.lastName}</h1>
+            <h3 className="mt-4 mb-3">Materias con clases asignadas</h3>
             {assignedSubjects && assignedSubjects.length > 0 ? assignedSubjects.map((s,i) => {
                 let user = users.length > 0 && users.find(e => e.id === studentDetail.classes[i].userId)
                 return (
@@ -63,7 +59,7 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
                     <h5 style={{width:"15vw"}}>{studentDetail.classes[i].duration[0].value % 1 === 0 ? String(studentDetail.classes[i].duration[0].value) + ":00" : String(studentDetail.classes[i].duration[0].value).substring(0,2) + ":30"}  {' - '}
                     {studentDetail.classes[i].duration[1].value % 1 === 0 ? String(studentDetail.classes[i].duration[1].value) + ":00" : String(studentDetail.classes[i].duration[1].value).substring(0,2) + ":30"}</h5>
                     <span className="btn btn-danger mt-n2 mr-2" onClick={() => onDelete(studentDetail.classes[i].id) }>Eliminar</span></div>
-                )} ) : <h2>No hay clases asignadas</h2>}
+                )} ) : <h5 className="text-danger">No hay clases asignadas</h5>}
             <h3 className="mt-4">Materias sin clases asignadas</h3>
             <p>Las materias en color <span style={{color: "#492BC4"}}>lila</span> indican que existe por lo menos un docente con un horario disponible para asignarle una clase a este alumno.</p>
             <p className="mt-n3">En caso de querer asignar una clase, haga clic en la <span style={{color: "#492BC4"}}>materia</span> correspondiente.</p>
@@ -76,7 +72,7 @@ export const SubjectsPerStudent = ({getUsers, deleteClass, getStudentDetail, get
                 key={"p"+i}>{e[0].user.subjects[0].name}</h5>
                 )}} ) : null}
             {studentDetail.id && studentDetail.subjects && studentDetail.subjects.length > 0 ? studentDetail.subjects.map((s,i) => {
-                if(possibleClasses && possibleClasses.length > 0 && !possibleClasses.includes(s.name)){return (
+                if(possibleClasses && !possibleClasses.includes(s.name) && !compareAssignedToPosible?.includes(s.name)){return (
                     <h5 className="text-left card shadow ml-4 pl-3 pt-2 pb-2" style={{width: "90vw"}} key={"n"+i}>{s.name}</h5>
                     )}
                 }

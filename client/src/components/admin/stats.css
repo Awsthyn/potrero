@@ -5,13 +5,11 @@
   }
   .titlePotrero,
   titlePotrero * {
-    display: ruby !important;
+    display: block ruby !important;
     font-size: 24px;
-    margin-bottom: 10px;
     width: 100%;
   }
   canvas{
-
       margin: auto -10%;
   }
 }
@@ -19,10 +17,10 @@
 .linkGraficos {
   display: flex;
   justify-content: space-between;
-  width: 77%;
+  width: 70%;
   margin: auto;
   margin-left: 16%;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
 }
 
 .linkGraficos a {
@@ -57,11 +55,12 @@
 }
 
 .titlePotrero{
-  display: ruby;
+  display: block ruby !important;
+
 }
 
 .titlePotrero img{
-  margin-top: -15px;
+  margin-top: -12px;
 }
 
 .fixBtn{

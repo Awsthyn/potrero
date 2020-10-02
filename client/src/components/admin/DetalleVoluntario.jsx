@@ -16,12 +16,16 @@ import {
   deleteVolunteer,
   acceptVolunteer,
 } from '../../redux/actions/voluntary';
+import {
+  getUserSchedule
+} from '../../redux/actions/userSchedule.js';
 import Grid from '@material-ui/core/Grid';
 import Collapse from '@material-ui/core/Collapse';
 import swal from 'sweetalert';
 import 'moment/locale/es';
 import styles from './DetalleVoluntario.module.css';
 import moment from 'moment';
+import DetalleHorariosVoluntario from './DetalleHorariosVoluntario';
 moment.locale('es');
 
 const VIOLETA = '#492BC4';
@@ -30,11 +34,12 @@ const NEGRO = '#333333';
 
 const useStyles = makeStyles({
   root: {
-    width: `calc(100% - ${400}px)`,
-    marginTop: 100,
-    fontFamily: 'Poppins',
-    marginLeft: 300,
-    justifyContent: 'center',
+    // width: `calc(100% - ${400}px)`,
+    // marginTop: 100,
+    // fontFamily: 'Poppins',
+    // // marginLeft: 300,
+    // display: 'flex',
+    // justifyContent: 'center',
   },
   font: {
     fontFamily: 'Poppins',
@@ -51,7 +56,9 @@ const useStyles = makeStyles({
     elevation: 5,
   },
   typo: {
-    margin: 10,
+    // margin: 10,
+    display: 'flex',
+    justifyContent: 'center'
   },
 });
 
@@ -74,7 +81,8 @@ function DetalleVoluntario(props) {
     } = props.voluntarios.filter((v) => v.id == props.id)[0];
 
     useEffect(() => {
-      props.getVolunteers()
+      props.getVolunteers();
+      props.getUserSchedule(props.id);
     }, []);
 
   const [viewCV, setViewCV] = useState(false);
@@ -132,7 +140,7 @@ function DetalleVoluntario(props) {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={styles.contenedor}>
       {props.voluntarios.length ? (
         <Paper className={classes.papereff} elevation={10}>
           <Grid container spacing={4}>
@@ -212,78 +220,83 @@ function DetalleVoluntario(props) {
                 </Typography>
               </Grid>
               <Grid
-                className={classes.typo}
                 container
                 justify='center'
                 spacing={2}
               >
-                <label className={styles.label}>
+                <label className={styles.labelFile} style={{marginBottom:'0', paddingBottom:'0'}}>
                   Curriculum:
-                  {!cv.split('.')[1] ? <h5>Sin CV</h5> : ''}
                 </label>
-                <br />
-                {cv.split('.')[1] ? (
-                  <div>
-                    <button onClick={() => mostrarCV()}>Ocultar CV</button>
-                    {
-                      viewCV ?
-                        <div style={{width:'1000px'}}>
-                          <br />
-                          <object
-                            data={`http://localhost:3001/uploads/cv/${cv}`}
-                            type='application/pdf'
-                            width='100%'
-                            height='500px'
-                          />
+                  {
+                      (!cv || !cv.split('.')[1]) ? 
+                      <h5 style={{marginBottom: '10px', marginTop: '5px', textAlign:'center'}}>No se encontro el CV</h5> 
+                    :
+                      (
+                        <div style={{display:'flex', justifyContent:'center', marginTop:'0'}}>
+                        {
+                          viewCV ?
+                            <div className={styles.hideFiles} style={{width:'100%'}}>
+                              <button className={styles.btnFiles} onClick={() => mostrarCV()}>Ocultar CV</button>
+                              <object
+                                data={`http://localhost:3001/uploads/cv/${cv}`}
+                                type='application/pdf'
+                                width='800px'
+                                height='700px'
+                              />
+                            </div>
+                          : 
+                            <div className={styles.viewFiles}><button className={styles.btnFiles} onClick={() => mostrarCV()}>Ver CV</button></div>
+                        } 
                         </div>
-                      : 
-                        <div></div>
-                    }
-                  </div>
-                ) : (
-                    ''
-                  )}
+                      ) 
+                  }
               </Grid>
-
               <Grid
-                className={classes.typo}
                 container
                 justify='center'
                 spacing={2}
               >
-                <b>Foto del DNI:</b>
-                {!frontDNI || !backDNI ? 'Sin imagen de DNI' : ''}
-                <br />
-                {frontDNI && backDNI ? (
-                  <div>
-                    {
-                      viewDNI ?
-                        <div>
-                          <button onClick={() => mostrarDNI()}>Ocultar Foto del DNI</button>
-                          <div style={{width:'100%', margin:'10px', display:'flex', justifyContent:'space-around'}}>
-                            <br />
-                            <img
-                              src={`http://localhost:3001/uploads/dni/${frontDNI}`}
-                              width='48%'
-                              height='40%'
-                            />
-                            <img
-                              src={`http://localhost:3001/uploads/dni/${backDNI}`}
-                              width='48%'
-                              height='40%'
-                            />
-                          </div>
-                        </div>
-                      : 
-                        <div><button onClick={() => mostrarDNI()}>Ver Foto del DNI</button></div>
-                    }
-                  </div>
-                ) : (
-                    ''
-                  )}
+                <label className={styles.labelFile} style={{marginBottom:'0', paddingBottom:'0'}}>Foto del DNI:</label>
+                {
+                  (!frontDNI || !frontDNI.split('.')[1] || !backDNI || !backDNI.split('.')[1]) ? 
+                    <h5 style={{marginBottom: '10px', marginTop: '5px', textAlign:'center'}}>No se encontro la imagen de DNI</h5>
+                   : 
+                   (
+                      <div style={{display:'flex', justifyContent:'center', marginTop:'0'}}>
+                        {
+                          viewDNI ?
+                            <div className={styles.hideFiles} style={{width:'100%'}}>
+                              <button className={styles.btnFiles} onClick={() => mostrarDNI()}>Ocultar Foto del DNI</button>
+                              <div className={styles.divImg} style={{width:'100%', margin:'10px', display:'flex', justifyContent:'space-around'}}>
+                                <img
+                                  className={styles.dni}
+                                  src={`http://localhost:3001/uploads/dni/${frontDNI}`}
+                                  width='48%'
+                                  height='40%'
+                                />
+                                <img
+                                  className={styles.dni}
+                                  src={`http://localhost:3001/uploads/dni/${backDNI}`}
+                                  width='48%'
+                                  height='40%'
+                                />
+                              </div>
+                            </div>
+                          : 
+                            <div className={styles.viewFiles}><button className={styles.btnFiles} onClick={() => mostrarDNI()}>Ver Foto del DNI</button></div>
+                        }
+                      </div>
+                  )
+                }
               </Grid>
-              <Grid>
-              <Link to={`/admin/voluntarios/detalleHorarios/${id}`}><h4>Ver detalle de los horarios seleccionados</h4></Link>
+              <Grid
+                container
+                justify='center'
+                spacing={2}
+              >
+                {/* <Link to={`/admin/voluntarios/detalleHorarios/${id}`}><h4>Ver detalle de los horarios seleccionados</h4></Link> */}
+                <h4>Detalle de los horarios seleccionados por el voluntario</h4>
+                <DetalleHorariosVoluntario schedule={props.schedule} />
               </Grid>
 
 
@@ -334,6 +347,7 @@ function DetalleVoluntario(props) {
 
 const mapStateToProps = (state) => ({
   voluntarios: state.volunteers.volunteers,
+  schedule: state.userSchedule.schedule
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -341,6 +355,7 @@ const mapDispatchToProps = (dispatch) => {
     getVolunteers: () => dispatch(getVolunteers()),
     deleteVolunteer: (id) => dispatch(deleteVolunteer(id)),
     acceptVolunteer: (id) => dispatch(acceptVolunteer(id)),
+    getUserSchedule: (id) => dispatch(getUserSchedule(id))
   };
 };
 

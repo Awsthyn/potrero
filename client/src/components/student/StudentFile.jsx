@@ -357,12 +357,6 @@ export class StudentFile extends Component {
               }
             </div>
           </div>
-          <div style={{margin: '5% 3% 1% 3%'}}>
-            <h4 className='text-danger'>
-              Feature de modificación de horarios en construcción. Para hacer un
-              cambio de esa temática, comunicarse con HENRY.
-            </h4>
-          </div>
           <div className={styles.containerBtns}>
             <svg onClick={() => window.history.go(-1)} viewBox="0 0 10 10" class="VoluntarioForm_leftArrow__1ya4q" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>

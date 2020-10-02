@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_STUDENTS, GET_STUDENT_DETAIL, ADD_STUDENT, PUT_STUDENT} from '../constants';
+import {GET_STUDENTS, GET_STUDENT_DETAIL, ADD_STUDENT, PUT_STUDENT, ADD_STUDENT_SCHEDULE, EDIT_STUDENT_SCHEDULE, DELETE_STUDENT_SCHEDULE} from '../constants';
 
 export function getStudents() {
 	return function (dispatch) {
@@ -63,3 +63,25 @@ export function putStudentIsActive(student) {
 			.catch(err => console.log(err));
 	};
 }
+
+export function addSchedule(data) {
+	return function (dispatch) {
+		dispatch({type: ADD_STUDENT_SCHEDULE, payload: data})
+
+	};
+}
+export function editSchedule(data) {
+	return function (dispatch) {
+		dispatch({type: EDIT_STUDENT_SCHEDULE, payload: data})
+
+	};
+}
+export function deleteSchedule(data) {
+	return function (dispatch) {
+		dispatch({type: DELETE_STUDENT_SCHEDULE, payload: data})
+
+	};
+}
+
+
+

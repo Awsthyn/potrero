@@ -6,33 +6,42 @@ import {connect} from 'react-redux';
 import {getUser, putUser} from '../../redux/actions/users';
 import axios from 'axios';
 import AsesorInfo from './AsesorInfo';
-import AsesorNotas from './asesorNotas/AsesorNotas';
 import EnviarEmail from './EnviarEmail';
+import profilePic from '../admin/assets/avatarPerfil.jpeg'
 
 function AsesorProfile({history, getUser, putUser, user, match}) {
-	const [edit, setEdit] = useState(false);
 	const [toggle, setToggle] = useState({
 		students: true,
 		classes: false,
 		grades: false,
 	});
-	const [perfil, setPerfil] = useState(false);
-	const [email, setEmail] = useState(false);
+	const [state, setState] = useState({
+		edit: false,
+		perfil: false,
+		email: false,
+		foto: false,
+	});
 	const [clases, setClases] = useState();
-	const [foto, setFoto] = useState(false);
-	const [info, setInfo] = useState(new FormData());
+   const [info, setInfo] = useState(new FormData());
+	const[estudiantes, setEstudiantes] = useState()
 
 	const handleOnFileChange = e => {
 		info.append('profilePicture', e.target.files[0]);
 	};
 	useEffect(() => {
-		getUser(match.params.id);
+		getUser(match.params.id)
 		axios
 			.get(`http://localhost:3001/class/user/${match.params.id}`)
 			.then(res => setClases(res.data))
+            .catch(err => console.log(err));
+      axios
+			.get(`http://localhost:3001/students/user/${match.params.id}`)
+			.then(res => setEstudiantes(res.data))
 			.catch(err => console.log(err));
-	}, []);
 
+		
+	}, []);
+    console.log(clases)
 	function pestañas(e) {
 		let defaultToggle = {
 			students: false,
@@ -41,7 +50,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 		};
 		setToggle({...defaultToggle, [e.target.name]: true});
 	}
-
+    console.log(user)
 	return (
 		<div className={style.outer}>
 			<div className={style.container}>
@@ -49,7 +58,7 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					<svg
 						viewBox="0 0 16 16"
 						className={style.leftArrow}
-						onClick={() => history.push('/')}
+						onClick={() => history.goBack()}
 						fill="currentColor"
 						xmlns="http://www.w3.org/2000/svg">
 						<path
@@ -59,12 +68,12 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 					</svg>
 					<img
 						className={style.photo}
-						src={`http://localhost:3001/uploads/perfil/${user.profilePicture}`}
+						src={user.profilePicture === 'tampoco' ? profilePic : `http://localhost:3001/uploads/perfil/${user.profilePicture} `}
 						
 						alt=""
 					/>
                     <label className={style.cargarImg} 
-                    onClick={() => setTimeout(function(){setFoto(true);}, 2000)}>
+                    onClick={() => setTimeout(function(){setState({...state, foto: true});}, 2000)}>
 						<form id="profileForm">
 							<input
 								id={style.ocultar}
@@ -76,27 +85,23 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 						</form>
 						<span className="material-icons" style ={{fontSize: '1.2em', color: 'white', backgroundColor: '#492bc4', borderRadius: '50%' , border: '3px solid white', padding: '1%', position: 'absolute', top: '88px', right: '205px'}}> photo_camera </span>
 					</label>
-						{foto ? (
+						{state.foto ? (
 							<div style = {{display: 'block', marginTop: '5%'}}>
 								<button className = {style.imgBtn}
 									onClick={() => {
 										putUser(user.id, info);
-										setFoto(false);
+										setState({...state, foto: false});
 									}}>
-									{' '}
-									Actualizar{' '}
+									Actualizar
 								</button>
-								<button className = {style.imgBtn} onClick={() => setFoto(false)}> Cancelar </button>
+								<button style={{display: 'inline'}} className = {style.imgBtn} onClick={() => setState({...state, foto: false})}> Cancelar </button>
 							</div>
 						) : null}
 					<h4 className={style.name}>
-						{' '}
 						{`${user.firstName} ${user.lastName}`}
 						<svg
 							onClick={() => {
-								setEdit(!edit);
-								setEmail(false);
-								setPerfil(false);
+								setState({...state, email: false, perfil: false, edit: !state.edit});
 							}}
 							width="0.9em"
 							height="0.9em"
@@ -133,22 +138,18 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 						<i
 							className={`fas fa-user ${style.actions}`}
 							onClick={() => {
-								setPerfil(!perfil);
-								setEmail(false);
-								setEdit(false);
+								setState({...state, email: false, perfil: !state.perfil, edit: false});
 							}}></i>
-						<i className={`far fa-calendar-alt ${style.actions}`}></i>
-						<i className={`fab fa-wpforms ${style.actions}`}></i>
+						{/* <i className={`far fa-calendar-alt ${style.actions}`}></i>
+						<i className={`fab fa-wpforms ${style.actions}`}></i> */}
 						<i
 							className={`fas fa-envelope ${style.actions}`}
 							onClick={() => {
-								setEmail(!email);
-								setPerfil(false);
-								setEdit(false);
+								setState({...state, email: !state.email, perfil: false, edit: false});
 							}}></i>
-						<i className={`fas fa-plus ${style.actions}`}></i>
+						{/* <i className={`fas fa-plus ${style.actions}`}></i> */}
 					</div>
-					{edit ? (
+					{state.edit ? (
 						<AsesorInfo putUser={putUser} user={user} />
 					) : (
 						<div>
@@ -162,8 +163,8 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 							</div>
 						</div>
 					)}
-					{perfil ? <AsesorInfo user={user} /> : null}
-					{email ? <EnviarEmail user={user} /> : null}
+					{state.perfil ? <AsesorInfo user={user} /> : null}
+					{state.email ? <EnviarEmail user={user} /> : null}
 				</div>
 
 				<div className={style.cards}>
@@ -181,21 +182,19 @@ function AsesorProfile({history, getUser, putUser, user, match}) {
 								className={toggle.classes ? style.itemOn : style.item}>
 								Clases
 							</button>
-							<button
+							{/* <button
 								onClick={e => pestañas(e)}
 								name="grades"
 								className={toggle.grades ? style.itemOn : style.item}>
 								Notas
-							</button>
+							</button> */}
 						</div>
 					</div>
-					{toggle.students ? <AsesorStudents students={clases?.map(c => c.student)}/> : null}
-					{toggle.classes ? clases.map(c => 
-                    <div  className={style.clases} > 
-                        <AsesorClases key={c.id} clase={c} /> 
-                    </div>)
+					{toggle.students ? <AsesorStudents students={estudiantes}/> : null}
+					{toggle.classes ? <div  className={style.clases} > {clases.map(c =>                  
+                        <AsesorClases key={c.id} clase={c} /> )}
+                  	</div>
                         : null}
-                    {toggle.grades ? <AsesorNotas userId={user.id}/> : null}
 				</div>
 			</div>
 		</div>

@@ -135,10 +135,10 @@
 }
 
 .btnVolver{
-    align-self: center;
+	align-self: center;
 }
 .btnVolver:hover{
-    cursor: pointer;
+   cursor: pointer;
 }
 
 #back {

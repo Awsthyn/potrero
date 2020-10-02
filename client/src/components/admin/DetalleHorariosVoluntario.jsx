@@ -1,8 +1,4 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import {
-    getUserSchedule
-} from '../../redux/actions/userSchedule.js';
+import React from 'react';
 import style from './DetalleHV.module.css';
 
 function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
@@ -14,33 +10,23 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
     let intervalsAmount = [{day: 'Lunes', interval: 0}, 
         {day: 'Martes', interval: 0}, {day: 'Miercoles', interval: 0}, 
         {day: 'Jueves', interval: 0}, {day: 'Viernes', interval: 0}];
-    let inter = 0;
-
-    useEffect(() => {
-        getUserSchedule(id)
-    }, []);
 
     if ( schedule && schedule.userSchedules){
         schedule.userSchedules.forEach(prop => {
             if (prop.nameWeekDay === 'Lunes'){
-                inter += 1;
                 intervalsAmount[0].interval += 1;
             }
             else if (prop.nameWeekDay === 'Martes'){
-                inter += 1;
-                intervalsAmount[1] = {day: prop.nameWeekDay, interval: inter};
+                intervalsAmount[1].interval += 1;
             }
             else if (prop.nameWeekDay === 'Miercoles'){
-                inter += 1;
-                intervalsAmount[2] = {day: prop.nameWeekDay, interval: inter};
+                intervalsAmount[2].interval += 1;
             }
             else if (prop.nameWeekDay === 'Jueves'){
-                inter += 1;
-                intervalsAmount[3] = {day: prop.nameWeekDay, interval: inter};
+                intervalsAmount[3].interval += 1;
             }
             else if (prop.nameWeekDay === 'Viernes'){
-                inter += 1;
-                intervalsAmount[4] = {day: prop.nameWeekDay, interval: inter};
+                intervalsAmount[4].interval += 1;
             }
         });
 
@@ -202,10 +188,11 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
 
     return (
         <div className={style.container}>
-            <h3 className={style.title}>Horarios del voluntario</h3>
             <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{border:'1px solid #8CC63F', alignSelf:'center', width:'30px', height:'15px', backgroundColor:'#8CC63F', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Rango seleccionado</span></div>
-                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}><div style={{border:'1px solid whitesmoke', alignSelf:'center', width:'30px', height:'15px', backgroundColor:'whitesmoke', display:'inline-block'}}></div><span style={{marginLeft:'5px'}}>Rango libre</span></div>
+                <div style={{display:'flex', justifyContent:'flex-start', width:'250px'}}>
+                    <div style={{border:'1px solid #8CC63F', alignSelf:'center', width:'30px', height:'15px', backgroundColor:'#8CC63F', display:'inline-block'}}></div>
+                    <span style={{marginLeft:'5px'}}>Rango elegido</span>
+                </div>
                 <div></div>
             </div>
             { 
@@ -239,17 +226,19 @@ function DetalleHorariosVoluntario( { id, schedule, getUserSchedule } ) {
     )
 }
 
-const mapStateToProps = (state) => ({
-    schedule: state.userSchedule.schedule,
-});
+export default DetalleHorariosVoluntario;
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getUserSchedule: (id) => dispatch(getUserSchedule(id)),
-    };
-};
+// const mapStateToProps = (state) => ({
+//     schedule: state.userSchedule.schedule,
+// });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(DetalleHorariosVoluntario);
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         getUserSchedule: (id) => dispatch(getUserSchedule(id)),
+//     };
+// };
+
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(DetalleHorariosVoluntario);
