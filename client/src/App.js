@@ -56,6 +56,7 @@ class App extends React.Component {
             "/admin/estudiantes/listadematerias/:studentId",
             "/admin/estudiantes/asignacion/:studentId/:subjectId",
             "/admin/clases",
+            "/admin/class/:id",
             "/admin/detalle/materias",
             "/admin/detalle/calificacion",
           ]}
