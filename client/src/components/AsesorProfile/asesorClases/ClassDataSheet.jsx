@@ -28,6 +28,7 @@ export default function ClassDataSheet({data, clase}){
                <p className = {style.data}>Actitud del alumno: {s?.attitude}{s?.attitude ?'/5' :' '} </p>
                <p className = {style.data}>Comentarios: {s?.comments ? s?.comments : "Sin comentarios"}</p>
                <p className = {style.data}>Calificación último examen: {s?.qualification || 'no'} </p>
+               <p className = {style.data}>Formulario creado el: {s?.createdAt.slice(8,10) + "/" + s?.createdAt.slice(5,7) + "/" + s?.createdAt.slice(0,4)} </p>
             </div>
          </div> )}
       </div>

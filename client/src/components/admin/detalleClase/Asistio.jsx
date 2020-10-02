@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function Asistio({handleChange}) {
+export default function Asistio({handleChange, setAsistencia}) {
    const [open, setOpen] = React.useState(false);
    const [estado, setEstado] = useState({})
 	let presente = useRef(null); let tardanza = useRef(null); 
@@ -14,6 +14,7 @@ export default function Asistio({handleChange}) {
 	const handleChecked = (e) => {
       if(e.target.checked){
          setEstado({...estado, [e.target.name]: e.target.value})
+         console.log(e.target.value)
          handleChange(e.target.value)
             let asistencia = [presente, tardanza]
             asistencia.map(a => {
@@ -30,7 +31,11 @@ export default function Asistio({handleChange}) {
       setOpen(true);
    };
 
-   const handleClose = () => {
+   const handleClose = (name) => {
+      console.log(name)
+      if(name === "cancelar") {
+         setAsistencia()
+      }
       setOpen(false);
    };
 
@@ -59,10 +64,10 @@ export default function Asistio({handleChange}) {
 				</DialogContentText>
          </DialogContent>
          <DialogActions>
-            <Button style={{outline: 'none'}} onClick={handleClose} color="primary">
+            <Button style={{outline: 'none'}} onClick={() => handleClose("cancelar")} color="primary">
                Cancelar
             </Button>
-            <Button style={{outline: 'none'}} onClick={handleClose} color="primary" autoFocus>
+            <Button style={{outline: 'none'}} onClick={() => handleClose("aceptar")} color="primary" autoFocus>
                Aceptar
             </Button>
          </DialogActions>
