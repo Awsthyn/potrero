@@ -130,6 +130,7 @@ function DetalleVoluntario(props) {
       dangerMode: false,
     }).then((confirm) => {
       if (confirm) {
+        console.log(volunteer)
         props.acceptVolunteer(volunteer);
         swal('El usuario se convirtió en asesor.', {
           icon: 'success',
@@ -318,7 +319,7 @@ function DetalleVoluntario(props) {
                     state === 'pendiente' ? 'btn-primary' : 'btn-success '
                     } btn border`}
                   onClick={() =>
-                    handleStatusChange({ id, firstName, lastName })
+                    handleStatusChange({ id, firstName, lastName,email })
                   }
                 >
                   <i
