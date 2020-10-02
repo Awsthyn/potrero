@@ -311,9 +311,11 @@ function DetalleVoluntario(props) {
                 spacing={2}
               >
                 <button
+                style={{margin:10}}
+
                   key={`aceptar${id}`}
                   className={`${
-                    state === 'pendiente' ? 'btn-warning' : 'btn-success '
+                    state === 'pendiente' ? 'btn-primary' : 'btn-success '
                     } btn border`}
                   onClick={() =>
                     handleStatusChange({ id, firstName, lastName })
@@ -329,9 +331,10 @@ function DetalleVoluntario(props) {
                   {state === 'pendiente' ? 'Aceptar' : 'Activo'}
                 </button>
                 <button
+                style={{margin:10}}
                   key={`rechazar${id}`}
                   name={Number(id)}
-                  className='btn btn-danger border'
+                  className='btn btn-danger '
                   onClick={(e) => handleDeletion(id)}
                 >
                   <i name={id} className='fa fa-trash'>

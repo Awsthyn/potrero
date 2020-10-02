@@ -126,7 +126,7 @@ const TablaVoluntarios = (props) => {
                 {data && data.length ? 
                 <MaterialTable
                 icons={tableIcons}
-                title="Tabla de Asesores Activos"
+                title="Tabla de Voluntarios "
                 components={{
                     Toolbar: props => (
                         <div style={{backgroundColor: '#e8eaf5'}}>

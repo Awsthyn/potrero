@@ -108,7 +108,6 @@ export const StudentCrud = ({
       }
       setData(
         students
-          .filter((student) => student.isActive)
           .map((student) => ({
             id: student.id,
             firstName: student.firstName,

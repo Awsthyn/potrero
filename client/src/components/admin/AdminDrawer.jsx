@@ -234,7 +234,7 @@ function AdminDrawer(props) {
 
                         <List className={classes.grouplinks}>
                             <ListItem  >
-                                <ListItemText className={classes.grouplinks} primary={`${props.session.firstName} ${props.session.lastName}`}/>
+                                <ListItemText className={classes.grouplinks} primary={`Administrador`}/>
                             </ListItem>
                               <ListItem onClick={''} className={classes.grouplinks} button>
                                    <ListItemIcon className={`${classes.icons} ${classes.settings}`} >
