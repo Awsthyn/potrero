@@ -28,7 +28,8 @@ import MaterialTable, { MTableToolbar } from 'material-table';
 //Componentes 
 import Button from '@material-ui/core/Button'
 import Spinner from '../potrero-spinner/Spinner.jsx';
-
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 
 // Iconos
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -102,7 +103,7 @@ const TablaVoluntarios = (props) => {
 
              setData( voluntarios.filter(voluntario=>voluntario.state==='pendiente').map(voluntario => ({
                  id: voluntario.id,
-                 imageUrl:`https://ui-avatars.com/api/?length=1&name=${voluntario.lastName}+${voluntario.firstName}&background=492BC4&color=fff`,
+                  imageUrl:`${voluntario.lastName[0]}${voluntario.firstName[0]}`,
                 firstName: voluntario.firstName, 
                 lastName: voluntario.lastName,
                 email:voluntario.email, 
@@ -126,7 +127,13 @@ const TablaVoluntarios = (props) => {
                 {data && data.length ? 
                 <MaterialTable
                 icons={tableIcons}
-                title="Tabla de Voluntarios "
+                title= { 
+                    <div >
+                            <Typography style = {{fontSize: 60,fontFamily:'Poppins',color:VIOLETA}} variant="h6" noWrap>
+                                     Tabla de Voluntarios
+                            </Typography>
+                      
+                     </div>}
                 components={{
                     Toolbar: props => (
                         <div style={{backgroundColor: '#e8eaf5'}}>
@@ -144,7 +151,7 @@ const TablaVoluntarios = (props) => {
                       ),
                     }}
                 columns={[
-                    { title: 'Avatar', field: 'imageUrl', render: rowData => <img src={rowData.imageUrl} style={{width: 40, borderRadius: '50%'}}/> },
+                    { title: 'Avatar', field: 'imageUrl', render: rowData => <Avatar style={{background:VIOLETA}}>{rowData.imageUrl}</Avatar> },
                     { title: 'Nombre', field: 'firstName' },
                     { title: 'Apellido', field: 'lastName' },
                     {title: 'Contacto', field:'email'},

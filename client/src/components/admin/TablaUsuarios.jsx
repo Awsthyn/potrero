@@ -23,14 +23,18 @@ import moment from 'moment';
 import 'moment/locale/es';
 
 //Material-Table
-import MaterialTable, { MTableToolbar } from 'material-table';
+import MaterialTable, { MTableToolbar,MTableBodyRow } from 'material-table';
 
 //Componentes 
 import Button from '@material-ui/core/Button'
 import Spinner from '../potrero-spinner/Spinner.jsx';
+import Typography from '@material-ui/core/Typography';
+
 
 
 // Iconos
+
+import SupervisedUserCircleRoundedIcon from '@material-ui/icons/SupervisedUserCircleRounded';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import BlockIcon from '@material-ui/icons/Block';
@@ -51,6 +55,10 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+
+
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -99,7 +107,7 @@ const TablaUsuarios = (props) => {
                     }
              setData( users.filter(user=>user.isActive).map(asesor => ({
                  id: asesor.id,
-                imageUrl:`https://ui-avatars.com/api/?length=1&&name=${asesor.lastName}+${asesor.firstName}&background=492BC4&color=fff`,
+                imageUrl:`${asesor.lastName[0]}${asesor.firstName[0]}`,
                 firstName: asesor.firstName, 
                 lastName: asesor.lastName,
                 email:asesor.email, 
@@ -118,29 +126,35 @@ const TablaUsuarios = (props) => {
     },[])
     
             return (
-            <div style={{marginTop:100}}>
+            <div style={{marginTop:100,justifyContent:'center'}}>
                 {data && data.length ? 
                 <MaterialTable
                 icons={tableIcons}
-                title="Tabla de Asesores Activos"
+                title= { 
+                        <div >
+                                <Typography style = {{fontSize: 60,fontFamily:'Poppins',color:VIOLETA}} variant="h6" noWrap>
+                                         Tabla de Asesores
+                                </Typography>
+                          
+                         </div>}
                 components={{
                     Toolbar: props => (
                         <div style={{backgroundColor: '#e8eaf5'}}>
                             <MTableToolbar {...props} />
                                 <div style={{  textAlign: "center",fontFamily:'Poppins' }}>
-                                <Button 
-                                style={{margin:10}}
-                                variant="contained"  
-                                color= {locked ? "secondary":"primary"}
-                                 onClick={()=>setLocked(!locked)}>
-                                    {locked ? <LockIcon/>:<LockOpenIcon/>}
-                                </Button>
+                                        <Button 
+                                        style={{margin:10}}
+                                        variant="contained"  
+                                        color= {locked ? "secondary":"primary"}
+                                        onClick={()=>setLocked(!locked)}>
+                                            {locked ? <LockIcon/>:<LockOpenIcon/>}
+                                        </Button>
                              </div>
                       </div>
                       ),
                     }}
                 columns={[
-                    { title: 'Avatar', field: 'imageUrl', render: rowData => <img src={rowData.imageUrl} style={{width: 40, borderRadius: '50%'}}/> },
+                    { title: 'Avatar', field: 'imageUrl', render: rowData => <Avatar style={{background:VIOLETA}}>{rowData.imageUrl}</Avatar>  },
                     { title: 'Nombre', field: 'firstName' },
                     { title: 'Apellido', field: 'lastName' },
                     {title: 'Contacto', field:'email'},
