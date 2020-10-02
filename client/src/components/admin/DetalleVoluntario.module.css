@@ -8,6 +8,12 @@
     align-items: center;
 }
 
+.containerGrids{
+    display: flex;
+    justify-content: center;
+    /* width: 90%; */
+}
+
 .typography{
     width: 40%;
     padding-top: 1%;
@@ -15,12 +21,11 @@
 
 .label{
     text-align: center;
+    align-items: center;
     padding-top: 5px;
     font-weight: 900;
     width: 50%;
     display: flex;
-    justify-content: center;
-    /* margin: 0 5px 0 0; */
 }
 
 .labelFile{
@@ -120,7 +125,7 @@
 
 .leftArrow {
     position: relative;
-    top: 45px;
+    top: 55px;
     left: 50px;
     width: 35px;
     fill: #492BC4;

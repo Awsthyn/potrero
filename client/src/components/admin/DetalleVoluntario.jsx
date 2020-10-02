@@ -143,36 +143,38 @@ function DetalleVoluntario(props) {
   return (
     <div className={styles.contenedor}>
       {props.voluntarios.length ? (
-        <Paper className={classes.papereff} elevation={10}>
+        <div className={classes.papereff} >
           <Grid container spacing={4}>
             <svg viewBox="0 0 16 16" class={styles.leftArrow} onClick={()=> window.history.go(-1)} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
             </svg>
             <Grid item xs={12}>
-              <Grid container justify='center' spacing={2}>
-                <Typography
-                  className={styles.typography}
-                  component='h2'
-                  gutterBottom
-                >
-                  <label className={styles.label}>
-                    Postulante:
-                    <input className={styles.data} readOnly type="text" value={`${firstName} ${lastName}`}/>
-                  </label> 
-                </Typography>
-              </Grid>
-              <Grid container justify='center' spacing={2}>
-                <Typography
-                  className={styles.typography}
-                  component='h2'
-                  gutterBottom
-                >
-                  <label className={styles.label}>
-                    Email:
-                    <input className={styles.data} readOnly type="text" value={email}/>
-                  </label> 
-                </Typography>
-              </Grid>
+              <div className={styles.containerGrids}>
+                <Grid container justify='center' spacing={2}>
+                  <Typography
+                    className={styles.typography}
+                    component='h2'
+                    gutterBottom
+                  >
+                    <label className={styles.label}>
+                      Nombre:
+                      <input className={styles.data} readOnly type="text" value={`${firstName} ${lastName}`}/>
+                    </label> 
+                  </Typography>
+                </Grid>
+                <Grid container justify='center' spacing={2}>
+                  <Typography
+                    className={styles.typography}
+                    component='h2'
+                    gutterBottom
+                  >
+                    <label className={styles.label}>
+                      Email:
+                      <input className={styles.data} readOnly type="text" value={email}/>
+                    </label> 
+                  </Typography>
+                </Grid>
+              </div>
               <Grid container justify='center' spacing={2}>
                 <Typography
                   className={styles.typography}
@@ -341,7 +343,7 @@ function DetalleVoluntario(props) {
               </Grid>
             </Grid>
           </Grid>
-        </Paper>
+        </div>
       ) : (
           'Loading'
         )}
