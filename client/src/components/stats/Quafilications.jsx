@@ -15,24 +15,30 @@ class Offers extends React.Component {
     let notaspro = [];
     let nombrespro = [];
     let materiaspro = [];
+    let suma = 0;
 
     notas.map((e) => {
       notaspro.push(e.nota);
       nombrespro.push(e.fullname);
       materiaspro.push(e.materia);
     });
-
-    let pro =
-      this.state.notas.length > 0
-        ? this.state.notas.reduce((acc, currValue) => acc + currValue)
-        : 0;
-
+    
     this.setState({
       notas: notaspro,
       nombres: nombrespro,
       materias: materiaspro,
-      total: Math.round(pro / notas.length),
+      
     });
+
+    let pro =
+    this.state.notas.length > 0
+    ? this.state.notas.map(e => (
+      suma = suma + e
+    ))
+    : 0;
+    this.setState({
+      total: Math.round(suma / this.state.notas.length),
+    })
   }
 
   getChartData() {
