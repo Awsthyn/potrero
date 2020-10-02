@@ -243,8 +243,14 @@ function DataSheet({addDataSheet, classId, assistance, studentId, email}){
             </Box>
          </div>
          <button className={style.boton} 
+         style={!assistance ? {backgroundColor: "#c2c2c2", marginTop: '0px'} : {marginTop: '0px'}}
+         disabled = {!assistance ? true : false}
          onClick={() => handleEnviar() } > Enviar </button> 
-            </div>
+         {
+				!assistance ? <p style={{fontSize: "12px", textAlign: 'left', marginLeft: '10px', position: 'absolute', color: 'red'}}>Para enviar el cuestionario debes indicar si el alumno asistió o no a la clase</p> : null
+			}
+         </div>
+
       </div> 
    )
 }

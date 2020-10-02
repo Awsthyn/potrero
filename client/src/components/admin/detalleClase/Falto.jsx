@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function Falto({handleChange}) {
+export default function Falto({handleChange, setAsistencia}) {
 	const [open, setOpen] = React.useState(false);
 	const [estado, setEstado] = useState({})
 	let injustificada = useRef(null); let justificada = useRef(null); 
@@ -15,6 +15,7 @@ export default function Falto({handleChange}) {
 	const handleChecked = (e) => {
       if(e.target.checked){
 			setEstado({...estado, [e.target.name]: e.target.value})
+			console.log(e.target.value)
 			handleChange(e.target.value)
             let asistencia = [ injustificada, justificada]
             asistencia.map(a => {
@@ -32,7 +33,10 @@ export default function Falto({handleChange}) {
     setOpen(true);
   };
 
-	const handleClose = () => {
+	const handleClose = (name) => {
+		if(name === "cancelar") {
+			setAsistencia()
+		}
 		setOpen(false);
 	};
 
@@ -69,10 +73,10 @@ export default function Falto({handleChange}) {
 				}
 			</DialogContent>
 			<DialogActions>
-				<Button style={{outline: 'none'}} onClick={handleClose} color="primary">
+				<Button style={{outline: 'none'}} onClick={() => handleClose("cancelar")} color="primary">
 					Cancelar
 				</Button>
-				<Button style={{outline: 'none'}} onClick={handleClose} color="primary">
+				<Button style={{outline: 'none'}} onClick={() => handleClose("aceptar")} color="primary">
 					Aceptar
 				</Button>
 			</DialogActions>
