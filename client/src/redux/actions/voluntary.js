@@ -68,6 +68,7 @@ export function acceptVolunteer(volunteer) {
 				console.info('acceptVolunteer.then', res)
 				dispatch(mailAdmission(volunteer));
 				dispatch({type: ACCEPT_VOLUNTEER, accepted: res.data});
+				return res.data
 			})
 			.catch(err => console.log(err));
 	};
