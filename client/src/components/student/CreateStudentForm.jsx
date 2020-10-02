@@ -18,7 +18,7 @@ export class CreateStudentForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			firstName: '',
+			firstName: null,
 			lastName: null,
 			phone: null,
 			email: null,
@@ -32,16 +32,44 @@ export class CreateStudentForm extends Component {
 			scheduleStudent: null,
 			subjectsId: [],
 			academicLevel: null,
+			isLevelSelect: false,
+			validar: false,
 		};
 		this.subjects = null;
 		this.onCheckboxClicked = this.onCheckboxClicked.bind(this);
 		this.onChangeSchedule = this.onChangeSchedule.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.submitHandler = this.submitHandler.bind(this);
+		this.selectedGrade = this.selectedGrade.bind(this);
 	}
 	onChangeHandler = (event) => {
 		let name = event.target.name;
 		let value = event.target.value;
+		const prop = `error${name}`;
+
+		if(name === 'email' || name === 'tutorEmail'){
+			(!(/\S+@\S+\.\S+/.test(value)) || !value) ?
+				this.setState({ validar: this.state[prop] ? this.state.validar + 1 : this.state.validar, [prop]: 'Ingrese un e-mail válido' })
+			:
+				this.setState({ validar: !this.state[prop] ? this.state.validar - 1 : this.state.validar, [prop]: null })
+		}
+
+		else if(name === 'phone' || name === 'tutorPhone'){
+			value.length < 10 ?
+				this.setState({ validar: this.state[prop] ? this.state.validar + 1 : this.state.validar, [prop]: 'El número debe tener como mínimo 10 dígitos' })
+			: // Si se genera un error en alguno de los campos de entrada y ese error todavia es null a validar le sumo 1 y seteo el error a la propiedad
+				this.setState({ validar: !this.state[prop] ? this.state.validar - 1 : this.state.validar, [prop]: null })
+		}
+
+		(!this.state.firstName || !this.state.lastName ||
+		!this.state.email || ! this.state.phone ||
+		!this.state.tutorFirstName || !this.state.tutorLastName ||
+		!this.state.tutorEmail || !this.state.tutorPhone ||
+		!this.state.interests || !this.state.motivations) ?
+		this.setState({validar: false})
+		:
+		this.setState({validar: true})
+	
 		this.setState({ [name]: value });
 	};
 	submitHandler = (event) => {
@@ -50,6 +78,10 @@ export class CreateStudentForm extends Component {
 		dataToSend.scheduleStudent = this.props.schedule;
 		this.props.postStudent(dataToSend);
 	};
+
+	selectedGrade() {
+		this.setState({ isLevelSelect: true });
+	}
 
 	onCheckboxClicked(subjects, isChecked) {
 		if (isChecked) {
@@ -89,7 +121,8 @@ export class CreateStudentForm extends Component {
 							Formulario para alta de alumno
 						</h1>
 						<label className={style.labelDatos}>Datos del Alumno</label>
-						<div className="d-flex flex-row form-group">
+						<div className="d-flex flex-row form-group" style={{}}>
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span>
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -97,8 +130,9 @@ export class CreateStudentForm extends Component {
 								type="text"
 								name="firstName"
 								placeholder="Nombre del alumno..."
-								onChange={this.onChangeHandler}
+								onKeyUp={this.onChangeHandler}
 							/>
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span>
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -110,6 +144,7 @@ export class CreateStudentForm extends Component {
 							/>
 						</div>
 						<div className="mt-n2 mb-4 d-flex flex-row form-group">
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span> 
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -118,7 +153,8 @@ export class CreateStudentForm extends Component {
 								name="phone"
 								placeholder="Teléfono del alumno..."
 								onChange={this.onChangeHandler}
-							/>
+							/> 
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span> 
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -127,13 +163,14 @@ export class CreateStudentForm extends Component {
 								name="email"
 								placeholder="Email del alumno..."
 								onChange={this.onChangeHandler}
-							/>
+							/> 
 						</div>
 					</div>
 
 					<div className={style.container}>
 						<label className={style.labelDatos}>Datos del Tutor</label>
 						<div className="d-flex flex-row form-group">
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span> 
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -143,6 +180,7 @@ export class CreateStudentForm extends Component {
 								placeholder="Nombre del tutor..."
 								onChange={this.onChangeHandler}
 							/>
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span> 
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -153,8 +191,8 @@ export class CreateStudentForm extends Component {
 								onChange={this.onChangeHandler}
 							/>
 						</div>
-
 						<div className="mt-n2 mb-4 d-flex flex-row form-group">
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span> 
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -164,6 +202,7 @@ export class CreateStudentForm extends Component {
 								placeholder="Teléfono del tutor"
 								onChange={this.onChangeHandler}
 							/>
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span> 
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -182,7 +221,10 @@ export class CreateStudentForm extends Component {
 						<select
 							className={style.select}
 							id="nivelEducativo"
-							onChange={(e) => this.setState({ academicLevel: e.target.value })}
+							onChange={(e) => {
+								this.setState({ academicLevel: e.target.value });
+								this.selectedGrade(e.target.value)
+							}}
 						>
 							<option selected='selected' disabled='disabled'>
 								--Seleccione Grado--
@@ -197,7 +239,11 @@ export class CreateStudentForm extends Component {
 									))}
 						</select>
 					</div>
-					<h3 className="text-center d-block mb-3">Materias que tiene que aprender</h3>
+					{
+						this.state.isLevelSelect ?
+						(
+							<div>
+							<h3 className="text-center d-block mb-3">Materias que tiene que aprender</h3>
 					<div
 						style={{ width: '65vw', display: 'flex', justifyContent: 'center' }}
 						className="ml-auto mr-auto d-flex flex-wrap form-check form-check-inline"
@@ -220,6 +266,7 @@ export class CreateStudentForm extends Component {
 					</div>
 					<div className={style.container}>
 						<div className="form-group">
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span> 
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -232,6 +279,7 @@ export class CreateStudentForm extends Component {
 							/>
 						</div>
 						<div className="form-group">
+							<span style={{color: "#c2c2c2", paddingTop:'15px', paddingRight:'5px'}} > * </span> 
 							<input
 								spellCheck="false"
 								autoComplete="off"
@@ -243,26 +291,25 @@ export class CreateStudentForm extends Component {
 								onChange={this.onChangeHandler}
 							/>
 						</div>
-						<div className="form-group">
-							<textarea
-								name="observations"
-								onChange={this.onChangeHandler}
-								className={style.textArea}
-								style={{ width: '95%' }}
-								placeholder="Observaciones y/o comentarios..."
-							/>
 						</div>
-					</div>
-					<input
-							style={{
-								fontSize: '1.2em',
-								width: '200px',
-								backgroundColor: '#492BC4',
-							}}
-							className={style.btnAgregar}
-							value="Agregar Alumno"
-							type="submit"
-						/>
+							<p style={{color: "#c2c2c2", fontSize: '13px', marginTop: '15px'}}> obligatorio * </p> 
+						</div>
+						)
+						:
+						<div style={{color:'red', fontSize:'1.5em'}}>
+							Para poder continuar es necesario que seleccione el grado academico del alumno.
+							
+						</div>
+					}
+					<div className={style.containerBtn}>
+						<svg onClick={() => window.history.go(-1)} viewBox="0 0 10 10" class="VoluntarioForm_leftArrow__1ya4q" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+						</svg>
+						<button
+						disabled={this.state.validar}
+						className={style.btnAgregar}
+						>Agregar Alumno</button>
+              		</div>
 				</form>
 			</div>
 		);
