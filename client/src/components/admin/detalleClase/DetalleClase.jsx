@@ -14,6 +14,7 @@ export default function DetalleClase({match, history}) {
     function handleChange(value){
         setAsistencia(value)
     }
+    console.log(asistencia)
     useEffect(() => {
         axios.get(`http://localhost:3001/class/${match.params.classId}`, {withCredentials: true})
         .then(res => {
@@ -70,7 +71,7 @@ export default function DetalleClase({match, history}) {
                 <p style = {{color: '#333333'}}>Materia: <strong>{clase?.subject.name}</strong></p>
                 <p style = {{color: '#333333'}}>Fecha y horario: <strong>{clase?.nameWeekDay}  {clase?.duration[0]} hs - {clase?.duration[1]} hs</strong></p>
                 <div className={style.botones} style = {{marginTop: '3%'}}> 
-                    <Asistio handleChange={handleChange} /> <Falto handleChange={handleChange} />
+                    <Asistio handleChange={handleChange} setAsistencia={setAsistencia}/> <Falto handleChange={handleChange} setAsistencia={setAsistencia} />
                 </div>
                 {asistencia ? <span className="material-icons" style={{marginTop: '25px', marginLeft: '120px', color: '#8bc63ebe'}}> check_circle_outline_icon </span> :null}
             </div>
