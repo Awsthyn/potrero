@@ -22,7 +22,7 @@ const NEGRO = '#333333'
 
 const useStyles = makeStyles({
     root:{
-        zIndex: 1,
+        zIndex: 10,
         position:'fixed',
         marginLeft: 0,
         padding:0,

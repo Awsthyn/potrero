@@ -25,7 +25,7 @@ export function getVolunteers() {
 		return axios
 			.get(`http://localhost:3001/users`, {withCredentials: true})
 			.then(res => {
-				const pendientes = res.data.filter(e=> e.state === "pendiente")
+				const pendientes = res.data
 				dispatch({type: GET_VOLUNTEERS, volunteers:pendientes});
 					return pendientes;
 			})
@@ -38,8 +38,9 @@ export function deleteVolunteer(id) {
 	return function (dispatch) {
 		return axios
 			.put(`http://localhost:3001/users/${id}`,{disabled:true} ,{withCredentials: true})
-			.then(() => {
+			.then((res) => {
 				dispatch(getVolunteers());
+				return res
 			})
 			.catch(err => console.log(err));
 	};
@@ -62,7 +63,7 @@ export function addSchedule(schedules, userId) {
 export function acceptVolunteer(volunteer) {
 	return function (dispatch) {
 		return axios
-			.put(`http://localhost:3001/users/${volunteer.id}`, {state: 'aceptado'}, {withCredentials: true})
+			.put(`http://localhost:3001/users/${volunteer.id}`, {state: 'aceptado',isActive:true}, {withCredentials: true})
 			.then(res => {
 				console.info('acceptVolunteer.then', res)
 				dispatch(mailAdmission(volunteer));

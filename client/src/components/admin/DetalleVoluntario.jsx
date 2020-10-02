@@ -80,6 +80,7 @@ function DetalleVoluntario(props) {
       birthday,
     } = props.voluntarios.filter((v) => v.id == props.id)[0];
 
+
     useEffect(() => {
       props.getVolunteers();
       props.getUserSchedule(props.id);
@@ -355,7 +356,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getVolunteers: () => dispatch(getVolunteers()),
+    getVolunteers:() => dispatch(getVolunteers()),
     deleteVolunteer: (id) => dispatch(deleteVolunteer(id)),
     acceptVolunteer: (id) => dispatch(acceptVolunteer(id)),
     getUserSchedule: (id) => dispatch(getUserSchedule(id))
