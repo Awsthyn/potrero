@@ -71,6 +71,7 @@ function DetalleVoluntario(props) {
       phone,
       birthday,
     } = props.voluntarios.filter((v) => v.id == props.id)[0];
+else props.getVolunteers()
 
   const [viewCV, setViewCV] = useState(false);
   const [viewDNI, setViewDNI] = useState(false);
@@ -305,6 +306,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getVolunteers:() => dispatch(getVolunteers()),
     deleteVolunteer: (id) => dispatch(deleteVolunteer(id)),
     acceptVolunteer: (id) => dispatch(acceptVolunteer(id)),
   };

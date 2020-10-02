@@ -101,7 +101,7 @@ const TablaMaterias = (props) => {
                         history.push(`/admin`)    
                         return 
                     }
-             setData( subjects.map(subject => ({
+             setData( subjects && subjects.map(subject => ({
                
                  id: subject.id,
                 nombre: subject.name, 
