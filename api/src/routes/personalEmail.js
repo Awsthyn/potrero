@@ -6,7 +6,6 @@ const nodemailer = require("nodemailer");
 
 server.post('/asesorEmail', (req, res) => {
 	// Definimos el transporter
-    console.log(req.body);
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth:{

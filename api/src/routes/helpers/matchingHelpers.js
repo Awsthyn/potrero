@@ -188,7 +188,6 @@ function matching(studentId, subjectId){
                 m[1].map(h => array.push([Number(h.duration[0].value), Number(h.duration[1].value)]))
                 //El último elemento de array es [endTime, 23].. necesario para detectar intervalos de tiempos libres
                 array.push([Number(m[0].endTime), 23])
-                //console.log(array)
                 array = merge(array)
                 let freeIntervalStore = findFreeinterval(array)
                 if(disponible.length > 0){
@@ -204,7 +203,6 @@ function matching(studentId, subjectId){
                     //Si esas cuatro comprobaciones son true, el horario ya estaría dentro del array, por lo que se descarta
                     truthArray.push(a === b) 
                     })
-                    console.log(disponible)
                     truthArray.includes(true) ? null : disponible.push({disponibleTime: freeIntervalStore, user: m[0].user, nameWeekDay: m[0].nameWeekDay})
                 }
 

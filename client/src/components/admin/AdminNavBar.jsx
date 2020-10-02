@@ -109,7 +109,6 @@ const AdminNavBar = (props) => {
     const classes = useStyles()
     const handleLogout = () =>   {
         props.sessionLogout(props.session.user);
-        console.log('seee');
     }
 
     return(

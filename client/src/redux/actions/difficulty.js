@@ -39,7 +39,6 @@ export function putDifficulty(difficulty) {
 		return axios
 			.put(`http://localhost:3001/typeofdifficulty/${difficulty.id}`, difficulty, {withCredentials: true})
 			.then(res => {
-				console.log(res)
 				dispatch({type: PUT_DIFFICULTY, payload: res.data})
 			})
 			.catch(err => console.log(err));

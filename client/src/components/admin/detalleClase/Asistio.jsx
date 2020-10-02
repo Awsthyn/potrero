@@ -14,7 +14,6 @@ export default function Asistio({handleChange, setAsistencia}) {
 	const handleChecked = (e) => {
       if(e.target.checked){
          setEstado({...estado, [e.target.name]: e.target.value})
-         console.log(e.target.value)
          handleChange(e.target.value)
             let asistencia = [presente, tardanza]
             asistencia.map(a => {
@@ -32,7 +31,6 @@ export default function Asistio({handleChange, setAsistencia}) {
    };
 
    const handleClose = (name) => {
-      console.log(name)
       if(name === "cancelar") {
          setAsistencia()
       }

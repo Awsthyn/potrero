@@ -2,7 +2,6 @@ import axios from 'axios';
 import {ADD_VOLUNTARY, ADD_SCHEDULE, GET_VOLUNTEERS, DELETE_VOLUNTEER, ACCEPT_VOLUNTEER, ADD_SUBJECTS_VOLUNTEER} from '../constants';
 // Agrega un Voluntario --> Crea Calendario --> Envía Mail de Bienvenida
 export function postVoluntary(voluntary, subjects, schedule) {
-	console.log(voluntary)
 	return function (dispatch) {
 		return axios
 			.post(`http://localhost:3001/users`, voluntary, {withCredentials: true})
@@ -48,7 +47,6 @@ export function deleteVolunteer(id) {
 
 // Agrega Calendario(disponibilidad)
 export function addSchedule(schedules, userId) {
-	console.log(schedules)
 	return function (dispatch) {
 		return axios
 			.post(`http://localhost:3001/userSchedule/${userId}`, {dias: schedules}, {withCredentials: true})
@@ -76,7 +74,6 @@ export function acceptVolunteer(volunteer) {
 
 // Crea relación entre Materia y Voluntario
 export function postSubjectVoluntary(subjects, userId) {
-	console.log(subjects)
 	return function (dispatch) {
 		return axios
 			.post(`http://localhost:3001/subjectxuser/${userId}/subjects`, {subjects}, {withCredentials: true})
