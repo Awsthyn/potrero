@@ -102,7 +102,7 @@ const TablaVoluntarios = (props) => {
 
              setData( voluntarios.filter(voluntario=>voluntario.state==='pendiente').map(voluntario => ({
                  id: voluntario.id,
-                imageUrl:`https://api.adorable.io/avatars/285/${voluntario.firstName}@adorable.png`,
+                 imageUrl:`https://ui-avatars.com/api/?length=1&name=${voluntario.lastName}+${voluntario.firstName}&background=492BC4&color=fff`,
                 firstName: voluntario.firstName, 
                 lastName: voluntario.lastName,
                 email:voluntario.email, 
@@ -149,9 +149,8 @@ const TablaVoluntarios = (props) => {
                     { title: 'Apellido', field: 'lastName' },
                     {title: 'Contacto', field:'email'},
                     {title: 'Fecha de Postulación', field:'fecha'},
-                    { title: 'Edad', field: 'edad', type: 'numeric'},
-                    { title: 'Nivel máximo', field: 'nivel'},
-                    { title: 'Grado máximo', field: 'grado'},
+                    { title: 'Fecha de Nacimiento', field: 'edad', type: 'numeric'},
+                 
                 ]}
                 data={data}
                 actions={[

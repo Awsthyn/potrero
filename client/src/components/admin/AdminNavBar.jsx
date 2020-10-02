@@ -144,7 +144,7 @@ const AdminNavBar = (props) => {
                 <List className={classes.grouplinks}>
                     <Link to= '/admin/usuarios' className={classes.link}>
                                 <ListItem className={classes.item} >
-                                    <ListItemText className = {classes.text} primary={`${props.session.user && props.session.user.firstName} ${props.session.user && props.session.user.lastName}`}/>
+                                    <ListItemText className = {classes.text} primary={`Administrador`}/>
                                 </ListItem>
                     </Link>
                     <Link to= '/' className={classes.link}>
