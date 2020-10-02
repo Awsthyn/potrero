@@ -52,7 +52,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -188,6 +188,24 @@ const TablaVoluntarios = (props) => {
                                  }
                                 })
                     },
+                    {
+                        icon: () => <CheckCircleIcon color='primary'/>,
+                        tooltip: 'Aceptar Voluntario',
+                        onClick: (event, rowData) =>
+                        Swal.fire({
+                            title:  `¿Deseas dar de alta a ${rowData.firstName} ${rowData.lastName}?`,
+                            icon: "question",
+                            confirmButtonColor: VERDE,
+                            showCancelButton: true,
+                            cancelButtonColor: 'gray',
+                           })
+                            .then((result) => {
+                                     if (result.isConfirmed) {
+                                        props.acceptVolunteer(rowData)
+                                     }
+                                    })
+                        },
+                    
                     
                     rowData => ({
                         icon: () => <DeleteForeverIcon color="secondary" />,
